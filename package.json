@@ -1,27 +1,26 @@
 {
-  "name": "patient-file",
+  "name": "ptfile",
   "version": "1.0.0",
-  "description": "* Be atleast as good as paper * Maintain eye contact with patient     [Go out of the way of patient doctor relationship](https://khn.org/news/death-by-a-thousand-clicks/) * Correlate",
+  "description": "![eye contact](./docs/images/maintain-eye-contact-with-patient.png)",
   "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vuepress dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/savantcare/ptfile.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/savantcare/ptfile/issues"
+  },
+  "homepage": "https://github.com/savantcare/ptfile#readme",
   "dependencies": {
     "nodemon": "^2.0.4",
     "vue-tabs-component": "^1.5.0",
-    "vuepress": "^1.5.0",
+    "vuepress": "^1.5.2",
     "vuepress-plugin-tabs": "^0.3.0"
-  },
-  "devDependencies": {
-    "vuepress-plugin-table-of-contents": "^1.1.6"
-  },
-  "resolutions": {
-    "watchpack": "1.6.1"
-  },
-  "scripts": {
-    "preinstall": "npx npm-force-resolutions",
-    "_comment": "Preinstall needed to make hot reload work. Ref: https://github.com/vuejs/vuepress/issues/221#issuecomment-635510914",
-    "dev": "vuepress dev",
-    "build": "vuepress build"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  }
 }
