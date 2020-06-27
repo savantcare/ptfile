@@ -1,4 +1,8 @@
 module.exports = {
-  title: 'Patient file documentation',
-  description: 'Just playing around'
-}
+  title: "Patient file",
+  description: "Big picture, server side and client side doc",
+  patterns: ["!**/**/node_modules", "**/*.md", "**/*.vue"],
+  themeConfig: {
+    sidebar: ["/", "/docs/"],
+  },
+};
