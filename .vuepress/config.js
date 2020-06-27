@@ -12,7 +12,7 @@ module.exports = {
       },
       {
         title: "Big picture", // required
-        path: "/docs/", // optional, link of the title, which should be an absolute path and must exist
+        path: "/big-picture/", // optional, link of the title, which should be an absolute path and must exist
         collapsable: true, // optional, defaults to true
         sidebarDepth: 1, // optional, defaults to 1
       },
