@@ -1,0 +1,1 @@
+create database DB_SC_Pharmacy_CT_V20

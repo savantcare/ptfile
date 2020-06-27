@@ -1,0 +1,1 @@
+create database DB_SC_Symptoms_CT_V20

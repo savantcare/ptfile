@@ -1,0 +1,1 @@
+create database DB_SC_ProcessNotes_CT_V20

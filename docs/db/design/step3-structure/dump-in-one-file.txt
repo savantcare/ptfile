@@ -1,0 +1,3 @@
+mysqldump --all-databases --no-data -p
+
+ref: https://stackoverflow.com/questions/15802514/how-to-get-database-script-for-mysql
