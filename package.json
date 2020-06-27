@@ -1,16 +1,19 @@
 {
   "name": "ptfile",
   "version": "1.0.0",
-  "description": "![eye contact](./docs/images/maintain-eye-contact-with-patient.png)",
+  "description": "Be atleast as good as paper",
   "main": "index.js",
   "resolutions": {
-    "watchpack": "1.6.1"
+    "watchpack": "1.6.1",
+    "_comment": "watchpack 1.6.1 needed to make hot reload work. Ref: https://github.com/vuejs/vuepress/issues/221#issuecomment-635510914"
   },
   "scripts": {
     "preinstall": "npx npm-force-resolutions",
     "_comment": "Preinstall needed to make hot reload work. Ref: https://github.com/vuejs/vuepress/issues/221#issuecomment-635510914",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "vuepress dev"
+    "dev": "vuepress dev",
+    "build": "vuepress build",
+    "start": "nodemon --ext md,vue --watch .vuepress --watch . --exec vuepress dev --host localhost"
   },
   "repository": {
     "type": "git",
@@ -26,6 +29,7 @@
     "nodemon": "^2.0.4",
     "vue-tabs-component": "^1.5.0",
     "vuepress": "^1.5.2",
+    "vuepress-plugin-table-of-contents": "^1.1.6",
     "vuepress-plugin-tabs": "^0.3.0"
   }
 }
