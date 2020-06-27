@@ -1,5 +1,5 @@
 {
-  "name": "Patient file",
+  "name": "patient-file",
   "version": "1.0.0",
   "description": "* Be atleast as good as paper * Maintain eye contact with patient     [Go out of the way of patient doctor relationship](https://khn.org/news/death-by-a-thousand-clicks/) * Correlate",
   "main": "index.js",
