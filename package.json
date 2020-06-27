@@ -11,9 +11,9 @@
     "preinstall": "npx npm-force-resolutions",
     "_comment": "Preinstall needed to make hot reload work. Ref: https://github.com/vuejs/vuepress/issues/221#issuecomment-635510914",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "vuepress dev",
-    "build": "vuepress build",
-    "start": "nodemon --ext md,vue --watch .vuepress --watch . --exec vuepress dev --host localhost"
+    "docs-in-dev-mode": "vuepress dev",
+    "docs-build": "vuepress build",
+    "docs-start-using-nodemon": "nodemon --ext md,vue --watch .vuepress --watch . --exec vuepress dev --host localhost"
   },
   "repository": {
     "type": "git",
