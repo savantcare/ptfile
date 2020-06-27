@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "description": "![eye contact](./docs/images/maintain-eye-contact-with-patient.png)",
   "main": "index.js",
+  "resolutions": {
+    "watchpack": "1.6.1"
+  },
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
+    "_comment": "Preinstall needed to make hot reload work. Ref: https://github.com/vuejs/vuepress/issues/221#issuecomment-635510914",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vuepress dev"
   },
