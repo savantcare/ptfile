@@ -1,1 +1,4 @@
+Server side
+
 express
+sequalize
