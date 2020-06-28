@@ -3,6 +3,7 @@ terms:
   pt: "Patient"
   ct: "Component"
   fn: "Function"
+  pf: "Patient file"
   multiStateDisplayArea: "This has components that can show either the current state or historical state"
   timeOfStateSelectedInHeader: "This gives the time for which :multiStateDisplayArea: should be rendered"
   multiStateDisplayAreaHeader: "This has the slider to choose :timeOfStateSelectedInHeader:"
