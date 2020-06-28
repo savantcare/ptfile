@@ -87,6 +87,12 @@ module.exports = {
           {
             path: "/ptclient/components/",
             title: "Components",
+            children: [
+              {
+                path: "/ptclient/components/recommendations/",
+                title: "Recommendations",
+              },
+            ],
           },
         ],
       },
