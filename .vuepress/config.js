@@ -2,6 +2,8 @@ module.exports = {
   title: "Patient file",
   description: "Big picture, server side and client side doc",
 
+  evergreen: true, // Only support latest browser Ref: https://vuepress.vuejs.org/config/#evergreen
+
   /* Two consecutive asterisks ** in patterns matched against full pathname may have special meaning:
       A leading ** followed by a slash means match in all directories. For example, **slashfoo matches file or directory foo anywhere, the same as pattern foo. **slashfoo/bar matches file or directory bar anywhere that is directly under directory foo.
     A trailing /** matches everything inside. For example, abc/** matches all files inside directory abc, relative to the location of the .gitignore file, with infinite depth.
@@ -19,8 +21,9 @@ module.exports = {
       {
         title: "Big picture", // required
         path: "/big-picture/", // optional, link of the title, which should be an absolute path and must exist
-        collapsable: true, // optional, defaults to true
-        sidebarDepth: 1, // optional, defaults to 1
+        collapsable: false, // optional, defaults to true
+        sidebarDepth: 2, // optional, defaults to 1
+        children: [["/big-picture/ui/", "UI"]],
       },
       {
         title: "Server", // required

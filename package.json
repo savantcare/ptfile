@@ -13,7 +13,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs-in-dev-mode": "vuepress dev",
     "docs-build": "vuepress build",
-    "docs-start-using-nodemon": "nodemon --ext md,vue --watch .vuepress --watch . --exec vuepress dev --host localhost"
+    "docs-start-using-nodemon": "nodemon --ext md,vue --watch .vuepress --watch . --exec vuepress dev --host localhost",
+    "docs-info": "npx vuepress info"
   },
   "repository": {
     "type": "git",
