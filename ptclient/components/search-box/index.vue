@@ -1,5 +1,5 @@
 <template>
   <div>
-    <input type="text" id="fname" name="fname" />
+    <input id="fname" type="text" name="fname" />
   </div>
 </template>
