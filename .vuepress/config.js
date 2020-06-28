@@ -32,6 +32,10 @@ module.exports = {
                 path: "/big-picture/ui/why",
                 title: "Why",
               },
+              {
+                path: "/big-picture/ui/what",
+                title: "What",
+              },
             ],
           },
         ],
