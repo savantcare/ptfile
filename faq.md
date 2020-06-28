@@ -16,4 +16,8 @@ vuepress cannot refer to files in parent folders. This vuepress will be used to 
 
 ## Q) How to start all dev servers?
 
-tmuxinator start all-dev-servers-in-tmux
+```bash
+> pwd
+/Users/vk-tech/gt/sc-prog-repos/ptfile
+> tmuxinator start all-dev-servers-in-tmux
+```
