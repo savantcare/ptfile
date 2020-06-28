@@ -27,6 +27,12 @@ module.exports = {
           {
             path: "/big-picture/ui/",
             title: "UI",
+            children: [
+              {
+                path: "/big-picture/ui/",
+                title: "UI",
+              },
+            ],
           },
         ],
       },
