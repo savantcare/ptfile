@@ -15,14 +15,14 @@ terms:
   obAge: "Object called Age"
   ctAge: "Age is a :ct:"
   ormAge: "Age is ORM created with vuex-orm"
-  psAge: "Age is prop of type string in the :ct:"
-  pnAge: "Age is prop of type number in the :ct:"
-  paAge: "Age is prop of type array in the :ct:"
-  poAge: "Age is prop of type object in the :ct:"
-  dsAge: "Age is data of type string in the :ct:"
-  dnAge: "Age is data of type number in the :ct:"
-  daAge: "Age is data of type array in the :ct:"
-  doAge: "Age is data of type object in the :ct:"
+  psAge: "prop of type string called age in :ct:"
+  pnAge: "prop of type number called age in the :ct:"
+  paAge: "prop of type array called age in the :ct:"
+  poAge: "prop of type object called age in the :ct:"
+  dsAge: "data of type string called age in the :ct:"
+  dnAge: "data of type number called age in the :ct:"
+  daAge: "data of type array called age in the :ct:"
+  doAge: "data of type object called age in the :ct:"
 ---
 
 # Glossary
