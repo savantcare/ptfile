@@ -21,8 +21,9 @@ module.exports = {
       {
         title: "Big picture", // required
         path: "/big-picture/", // optional, link of the title, which should be an absolute path and must exist
-        collapsable: false, // optional, defaults to true
+        collapsable: true, // optional, defaults to true
         sidebarDepth: 2, // optional, defaults to 1
+        // How to do nested sidebar? https://github.com/vuejs/vuepress/issues/287#issuecomment-480805333
         children: [
           {
             path: "/big-picture/ui/",
