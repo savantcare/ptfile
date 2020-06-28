@@ -9,7 +9,13 @@ module.exports = {
     A trailing /** matches everything inside. For example, abc/** matches all files inside directory abc, relative to the location of the .gitignore file, with infinite depth.
     Ref: https://stackoverflow.com/questions/29820791/git-ignore-node-modules-folder-everywhere
   */
-  patterns: ["!(**/node_modules/**)", "**/*.md", "**/*.vue"],
+  patterns: [
+    "!(**/node_modules/**)",
+    "**/*.md",
+    "**/*.vue",
+    "!.vuepress",
+    "!node_modules",
+  ],
   themeConfig: {
     sidebar: [
       {
@@ -35,6 +41,20 @@ module.exports = {
               },
               {
                 path: "/big-picture/ui/what",
+                title: "What",
+              },
+            ],
+          },
+          {
+            path: "/big-picture/tech/",
+            title: "Tech",
+            children: [
+              {
+                path: "/big-picture/tech/why",
+                title: "Why",
+              },
+              {
+                path: "/big-picture/tech/what",
                 title: "What",
               },
             ],
