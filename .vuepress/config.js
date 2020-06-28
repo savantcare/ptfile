@@ -83,6 +83,12 @@ module.exports = {
         path: "/ptclient/",
         collapsable: true,
         sidebarDepth: 1,
+        children: [
+          {
+            path: "/ptclient/components/",
+            title: "Components",
+          },
+        ],
       },
     ],
   },
