@@ -1,6 +1,6 @@
 # ./.tmuxinator.yml
 
-name: start-dev-servers-in-tmux
+name: all-dev-servers-in-tmux
 root: ./
 
 # Optional tmux socket
