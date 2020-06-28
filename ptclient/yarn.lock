@@ -9873,6 +9873,11 @@ split-string@^3.0.1, split-string@^3.0.2:
   dependencies:
     extend-shallow "^3.0.0"
 
+split.js@^1.3.5:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/split.js/-/split.js-1.6.1.tgz#3bbe3bdd5ce9efa818bd1fa5264dd3b0590fae8e"
+  integrity sha512-xKeoVFzHvFE71Kyc1/hYZo0nWvxpnWFU045UGt+t7cBpbseJz3JAhcOI3+b4cwa/Earhpr3wplycePMYeHLxdA==
+
 sprintf-js@~1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
@@ -11077,6 +11082,13 @@ vue-server-renderer@^2.6.11:
     resolve "^1.2.0"
     serialize-javascript "^2.1.2"
     source-map "0.5.6"
+
+vue-split-panel@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/vue-split-panel/-/vue-split-panel-1.0.4.tgz#77b75399236bb7610e053598cc33c4988573ad6b"
+  integrity sha512-OGR+2vIHGcXjpXMh7Pv6uG0t6ihL8o8wmHLeKfvArNPJs/Z0GYLplDcUdTg7Z/Et+IsYVlR13f83oiuRVLYOkw==
+  dependencies:
+    split.js "^1.3.5"
 
 vue-style-loader@^4.1.0:
   version "4.1.2"

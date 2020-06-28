@@ -13,9 +13,8 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import VueSplit from 'vue-split-panel'
 Vue.use(VueSplit)
-export default {
-    
-}
+export default {}
 </script>
