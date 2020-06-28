@@ -15,6 +15,7 @@ module.exports = {
     "**/*.vue",
     "!.vuepress",
     "!node_modules",
+    "!.*",
   ],
   themeConfig: {
     sidebar: [
