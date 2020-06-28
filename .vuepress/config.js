@@ -23,7 +23,12 @@ module.exports = {
         path: "/big-picture/", // optional, link of the title, which should be an absolute path and must exist
         collapsable: false, // optional, defaults to true
         sidebarDepth: 2, // optional, defaults to 1
-        children: [["/big-picture/ui/", "UI"]],
+        children: [
+          {
+            path: "/big-picture/ui/",
+            title: "UI",
+          },
+        ],
       },
       {
         title: "Server", // required
