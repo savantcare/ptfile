@@ -1,4 +1,4 @@
-```bash
+```asciidoc
 Core 1/6. Page design
 =====================
 
