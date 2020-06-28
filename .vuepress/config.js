@@ -32,10 +32,10 @@ module.exports = {
         ],
       },
       {
-        title: "Big picture", // required
-        path: "/big-picture/", // optional, link of the title, which should be an absolute path and must exist
-        collapsable: true, // optional, defaults to true
-        sidebarDepth: 2, // optional, defaults to 1
+        title: "Big picture",
+        path: "/big-picture/",
+        collapsable: true,
+        sidebarDepth: 2,
         // How to do nested sidebar? https://github.com/vuejs/vuepress/issues/287#issuecomment-480805333
         children: [
           {
@@ -64,21 +64,25 @@ module.exports = {
                 path: "/big-picture/tech/what",
                 title: "What",
               },
+              {
+                path: "/big-picture/tech/how",
+                title: "How",
+              },
             ],
           },
         ],
       },
       {
-        title: "Server", // required
-        path: "/ptserver/", // optional, link of the title, which should be an absolute path and must exist
-        collapsable: true, // optional, defaults to true
-        sidebarDepth: 1, // optional, defaults to 1
+        title: "Server",
+        path: "/ptserver/",
+        collapsable: true,
+        sidebarDepth: 1,
       },
       {
-        title: "Client", // required
-        path: "/ptclient/", // optional, link of the title, which should be an absolute path and must exist
-        collapsable: true, // optional, defaults to true
-        sidebarDepth: 1, // optional, defaults to 1
+        title: "Client",
+        path: "/ptclient/",
+        collapsable: true,
+        sidebarDepth: 1,
       },
     ],
   },
