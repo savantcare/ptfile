@@ -1,9 +1,14 @@
 # How was documentation system installed?
 
+```bash
 yarn init
+
 yarn add -D vuepress
+
 echo '# Hello VuePress' > README.md
+
 yarn docs:dev
+```
 
 # Why is vue-press in parent folder of ptclient and ptserver?
 
