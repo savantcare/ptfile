@@ -29,8 +29,8 @@ module.exports = {
             title: "UI",
             children: [
               {
-                path: "/big-picture/ui/",
-                title: "UI",
+                path: "/big-picture/ui/why",
+                title: "Why",
               },
             ],
           },
