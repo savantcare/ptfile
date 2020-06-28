@@ -101,6 +101,10 @@ module.exports = {
           },
         ],
       },
+      {
+        title: "Glossary",
+        path: "/GLOSSARY",
+      },
     ],
   },
 };
