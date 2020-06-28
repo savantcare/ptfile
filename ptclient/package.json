@@ -17,7 +17,9 @@
     "@nuxtjs/axios": "^5.11.0",
     "@nuxtjs/pwa": "^3.0.0-beta.20",
     "element-ui": "^2.13.2",
-    "nuxt": "^2.13.2"
+    "nuxt": "^2.13.2",
+    "postcss-preset-env": "^6.7.0",
+    "vue-split-panel": "^1.0.4"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^3.0.0",
