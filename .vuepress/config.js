@@ -92,6 +92,10 @@ module.exports = {
                 path: "/ptclient/components/recommendations/",
                 title: "Recommendations",
               },
+              {
+                path: "/ptclient/components/psych-review-of-systems/",
+                title: "Psych review of systems",
+              },
             ],
           },
         ],
