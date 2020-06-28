@@ -24,6 +24,15 @@ terms:
   dnAge: "data of type number called age in the :ct:"
   daAge: "data of type array called age in the :ct:"
   doAge: "data of type object called age in the :ct:"
+  rex: "Recommendations"
+  rem: "Reminder"
+  shx: "Social history"
+  mse: "Mental status exam"
+  dob: "Date of birth"
+  pros: "Psych review of systems"
+  hx: "History"
+  Layer1: "L1"
+  Layer2: "L2"
 ---
 
 # Glossary
