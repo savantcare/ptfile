@@ -86,12 +86,4 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    [
-      "component-docgen",
-      {
-        rootDir: "/Users/vk-tech/gt/sc-prog-repos/ptfile/ptclient/components/",
-      },
-    ],
-  ],
 };
