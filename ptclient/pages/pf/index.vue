@@ -1,12 +1,12 @@
 <template>
   <div>
-    Jai kali ma
-    <Split style="height: 500px;">
-      <SplitArea :size="25">
+    <Split style="height: 900px; width: 1400px;" :gutterSize="5">
+      <SplitArea :size="75">
         panel left
       </SplitArea>
-      <SplitArea :size="75">
+      <SplitArea :size="25">
         panel right
+        <ctSearchBox></ctSearchBox>
       </SplitArea>
     </Split>
   </div>
@@ -15,6 +15,12 @@
 <script>
 import Vue from 'vue'
 import VueSplit from 'vue-split-panel'
+import ctSearchBox from '@/components/search-box'
+
 Vue.use(VueSplit)
-export default {}
+export default {
+  components: {
+    ctSearchBox,
+  },
+}
 </script>
