@@ -16,7 +16,7 @@
       <el-table :data="gTable" style="width: 100%;">
         <el-table-column prop="description" label="Description" width="180">
         </el-table-column>
-        <el-table-column prop="createdAt" label="Created At" width="180">
+        <el-table-column prop="score" label="Score" width="180">
         </el-table-column>
       </el-table>
     </el-card>
@@ -54,14 +54,14 @@ export default {
               )
 
             // console.log('goalEvalList - ' + goalEvalList.ok)
-            let arGoalEvalList = null
+            // let arGoalEvalList = null
             if (goalEvalList.ok) {
-              arGoalEvalList = await goalEvalList.json()
-              this.gTable = arGoalEvalList
-              console.log('goal==== ' + JSON.stringify(arGoalEvalList, null, 4))
+              // console.log('goal==== ' + JSON.stringify(arGoalEvalList, null, 4))
             }
             // await ormGoal.api().get(GOAL_API_URL)
             console.log('Number of goal in model =>', ormGoal.query().count())
+            const arGoalEvalList = ormGoal.query().get()
+            this.gTable = arGoalEvalList
           }
           this.oneQueryIsRunningGate = false
         }
