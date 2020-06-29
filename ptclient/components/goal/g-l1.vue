@@ -13,7 +13,7 @@
           >M</el-button
         >
       </div>
-      <el-table :data="daTable" style="width: 100%;">
+      <el-table :data="gTable" style="width: 100%;">
         <el-table-column prop="description" label="Description" width="180">
         </el-table-column>
         <el-table-column prop="createdAt" label="Created At" width="180">
@@ -25,20 +25,12 @@
 
 <script>
 import ormGoal from '@/models/Goal'
-const { GOAL_API_URL } = 'http://localhost:8000/goals'
+// const { GOAL_API_URL } = 'http://localhost:8000/goals'
 export default {
   data() {
     return {
-      daTable: [
-        {
-          createdAt: '2016-05-03',
-          description: 'Test goal 1',
-        },
-        {
-          createdAt: '2016-05-02',
-          description: 'Test goal 2',
-        },
-      ],
+      // gTable: ormGoal.query().get(),
+      gTable: [],
       oneQueryIsRunningGate: false,
     }
   },
@@ -47,20 +39,36 @@ export default {
   },
   methods: {
     async dbGetGoals() {
-      if (!this.oneQueryIsRunningGate) {
-        this.oneQueryIsRunningGate = true
-        console.log('Testing kkkkk')
-        const countGoal = await ormGoal.query().count()
+      try {
+        if (!this.oneQueryIsRunningGate) {
+          this.oneQueryIsRunningGate = true
+          console.log('Testing kkkkk')
+          const countGoal = await ormGoal.query().count()
 
-        console.log('Number of recs before query =>', countGoal)
-        if (countGoal === 0) {
-          await ormGoal.api().get(GOAL_API_URL)
-          console.log('Number of goal in model =>', ormGoal.query().count())
+          console.log('Number of recs before query =>', countGoal)
+          if (countGoal === 0) {
+            const goalEvalList = await ormGoal
+              .api()
+              .get(
+                'http://localhost:8000/goals?patientUUID=bfe041fa-073b-4223-8c69-0540ee678ff8'
+              )
+
+            // console.log('goalEvalList - ' + goalEvalList.ok)
+            let arGoalEvalList = null
+            if (goalEvalList.ok) {
+              arGoalEvalList = await goalEvalList.json()
+              this.gTable = arGoalEvalList
+              console.log('goal==== ' + JSON.stringify(arGoalEvalList, null, 4))
+            }
+            // await ormGoal.api().get(GOAL_API_URL)
+            console.log('Number of goal in model =>', ormGoal.query().count())
+          }
+          this.oneQueryIsRunningGate = false
         }
-        this.oneQueryIsRunningGate = false
+      } catch (ex) {
+        console.log('failed')
       }
     },
   },
-  getters: {},
 }
 </script>
