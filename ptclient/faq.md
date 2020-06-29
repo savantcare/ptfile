@@ -15,11 +15,11 @@ $ yarn start
 
 ```
 
-Q) How was the app generated?
+## Q) How was the app generated?
 
 yarn create nuxt-app ptclient
 
-Q) What is the basic knowledge assumed?
+## Q) What is the basic knowledge assumed?
 
 [vue guide](https://vuejs.org/v2/guide/)
 
@@ -30,3 +30,11 @@ Q) What is the basic knowledge assumed?
 [vuex-orm](https://vuex-orm.org/)
 
 [element.io](https://element.eleme.io/#/en-US/component/layout)
+
+## Q) What to do if it says nuxt not recognized?
+
+yard add nuxt
+
+If you dont have yarn then:
+
+npm install nuxt
