@@ -23,6 +23,7 @@ yarn docs:dev
 ## Q) How to install tmuxinator?
 
 On mac -> brew install tmuxinator
+on ubuntu -> apt install tmuxinator
 
 # Why
 
