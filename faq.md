@@ -25,6 +25,13 @@ yarn docs:dev
 On mac -> brew install tmuxinator
 on ubuntu -> apt install tmuxinator
 
+## Q) What are the vs code settings?
+
+auto format on save
+default formatter: prettier
+
+![Formatter setting](./big-picture/images/misc/default-formatter.png)
+
 # Why
 
 ## Q) Why is vue-press in parent folder of ptclient and ptserver?
