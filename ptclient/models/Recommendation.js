@@ -1,7 +1,7 @@
 import { Model } from '@vuex-orm/core'
 import Patient from './Patient'
 
-export default class Todo extends Model {
+export default class Recommendation extends Model {
   static entity = 'recommendations'
 
   static fields() {
