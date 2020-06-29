@@ -14,4 +14,7 @@ windows:
         - Client:
             - cd ptclient
             - yarn dev
+        - Server:
+            - cd ptserver
+            - npm run start
         - Terminal:
