@@ -14,9 +14,17 @@
         >
       </div>
       <el-table :data="daTable" style="width: 100%;">
-        <el-table-column prop="description" label="Description" width="180">
+        <el-table-column
+          prop="diagnosisName"
+          label="Diagnosis name"
+          width="180"
+        >
         </el-table-column>
-        <el-table-column prop="createdAt" label="CreatedAt" width="180">
+        <el-table-column
+          prop="diagnosedOnDate"
+          label="Diagnosed on"
+          width="180"
+        >
         </el-table-column>
       </el-table>
     </el-card>
@@ -39,33 +47,35 @@ export default {
   props: {},
   data() {
     return {
-      selectedRows: [],
-      columns: [],
-      selectedColumns: ['diagnosisName'], // The user can select there own columns. The user selected columns are saved in the local storage.
+      daTable: ormDx.query().get(),
     }
   },
-  methods: {},
+  computed: {},
   mounted() {
-    this.daTable()
+    this.fnFetchDxFromApi()
   },
-  computed: {
-    daTable() {
-      const dxEvalList = ormDx
-        .api()
-        .get(
-          `http://localhost:8000/diagnosis/?patientId=bfe041fa-073b-4223-8c69-0540ee678ff8`
-        )
-
-      console.log('######', dxEvalList)
-
-      const dxList = this.$store.state.diagnosis.diagnosisList
-      // console.log(dxList);
-      return {
-        label: 'Yours',
-        tableData: dxList,
-        rowActions: ['C', 'D'],
-        selectedColumn: ['diagnosisName'],
+  methods: {
+    async fnFetchDxFromApi() {
+      const countDxCountFromORM = ormDx.query().count()
+      if (countDxCountFromORM === 0) {
+        const dxEvalList = await ormDx
+          .api()
+          .get(
+            `http://localhost:8000/diagnosis/?patientId=bfe041fa-073b-4223-8c69-0540ee678ff8`
+          )
+        let arDxEvalList = null
+        if (dxEvalList.ok) {
+          arDxEvalList = dxEvalList.json()
+          this.daTable = arDxEvalList
+          console.log('====' + JSON.stringify(arDxEvalList, null, 4))
+        }
+        // ormDx.query('').get()
+        console.log('######', arDxEvalList)
+      } else {
+        this.daTable = ormDx.query().get()
       }
+
+      // console.log(dxList);
     },
   },
 }

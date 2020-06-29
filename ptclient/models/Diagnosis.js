@@ -7,12 +7,11 @@ export default class Diagnosis extends Model {
   static fields() {
     return {
       uuid: this.uid(),
-      uid: this.belongsTo(Patient, 'uid'),
-      name: this.string(''),
+      diagnosisName: this.string(''),
       icd10Code: this.string(null).nullable(),
-      notes: this.string(null).nullable(),
-      agree: this.string(null).nullable(),
-      startDate: this.string(null).nullable(),
+      diagnosisDiscontinueNotes: this.string(null).nullable(),
+      diagnosedOnDate: this.string(null).nullable(),
+      patientUUId: this.belongsTo(Patient, 'uid'),
       recordChangedByUUID: this.attr(null),
       recordChangedFromIPAddress: this.attr(null),
       // Why store time as a number? Since vuex-orm does not understand dates.
