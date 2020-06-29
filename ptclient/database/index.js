@@ -5,6 +5,7 @@ import Patient from '@/models/patient'
 import Rex from '@/models/Recommendation'
 import Dx from '@/models/Diagnosis'
 import Goal from '@/models/Goal'
+import Scr from '@/models/Screening'
 
 const database = new Database()
 
@@ -14,5 +15,6 @@ database.register(Patient)
 database.register(Rex)
 database.register(Dx)
 database.register(Goal)
+database.register(Scr)
 
 export default database
