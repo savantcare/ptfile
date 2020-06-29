@@ -86,6 +86,10 @@ module.exports = {
         sidebarDepth: 1,
         children: [
           {
+            path: '/ptclient/store/',
+            title: 'vuex-orm',
+          },
+          {
             path: '/ptclient/components/',
             title: 'Components',
             children: [
