@@ -1,8 +1,8 @@
 import { Model } from '@vuex-orm/core'
-import Patient from './patient'
+import Patient from './Patient'
 
 export default class Todo extends Model {
-  static entity = 'rex'
+  static entity = 'recommendations'
 
   static fields() {
     return {

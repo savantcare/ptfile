@@ -1,5 +1,5 @@
 import { Model } from '@vuex-orm/core'
-import Rex from './rex'
+import Recommendation from './Recommendation'
 
 export default class Patient extends Model {
   static entity = 'patients'
@@ -8,7 +8,7 @@ export default class Patient extends Model {
     return {
       id: this.uid(),
       name: this.string(''),
-      rex: this.hasMany(Rex, 'user_id'),
+      recommendation: this.hasMany(Recommendation, 'user_id'),
     }
   }
 }
