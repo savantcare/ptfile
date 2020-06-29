@@ -6,6 +6,7 @@
         <ctRemL1> </ctRemL1>
         <ctBML1> </ctBML1>
         <ctDXL1> </ctDXL1>
+        <ctGL1> </ctGL1>
       </SplitArea>
       <SplitArea :size="25">
         <ctRexL1> </ctRexL1>
@@ -23,6 +24,7 @@ import ctRexL1 from '@/components/rex/rex-l1'
 import ctRemL1 from '@/components/rem/rem-l1'
 import ctBML1 from '@/components/bm/bm-l1'
 import ctDXL1 from '@/components/dx/dx-l1'
+import ctGL1 from '@/components/goal/g-l1'
 
 Vue.use(VueSplit)
 export default {
@@ -32,6 +34,7 @@ export default {
     ctRemL1,
     ctBML1,
     ctDXL1,
+    ctGL1,
   },
 }
 </script>
