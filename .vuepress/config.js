@@ -12,7 +12,6 @@ module.exports = {
   patterns: [
     '!(**/node_modules/**)',
     '**/*.md',
-    '**/*.vue',
     '!.vuepress',
     '!node_modules',
     '!.*',
