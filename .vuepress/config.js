@@ -103,6 +103,10 @@ module.exports = {
               },
             ],
           },
+          {
+            path: '/ptclient/faq',
+            title: 'FAQ',
+          },
         ],
       },
       {
