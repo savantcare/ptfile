@@ -1,34 +1,15 @@
 <template>
   <div>
-    <Split style="height: 900px; width: 1400px;" :gutterSize="5">
-      <SplitArea :size="75">
-        <ctRexL1> </ctRexL1>
-        <ctRemL1> </ctRemL1>
-        <ctBML1> </ctBML1>
-      </SplitArea>
-      <SplitArea :size="25">
-        <ctRexL1> </ctRexL1>
-        <ctSearchBox></ctSearchBox>
-      </SplitArea>
-    </Split>
+    Choose a patient TP1: <br />
+    <br />
+    <a href="/pf/abcd">TP1: Test patient 1</a>
+    <br /><br />
+    <a href="/pf/efgh">TP2: Test patient 1</a>
   </div>
 </template>
 
 <script>
-import Vue from 'vue'
-import VueSplit from 'vue-split-panel'
-import ctSearchBox from '@/components/search-box'
-import ctRexL1 from '@/components/rex/rex-l1'
-import ctRemL1 from '@/components/rem/rem-l1'
-import ctBML1 from '@/components/bm/bm-l1'
-
-Vue.use(VueSplit)
 export default {
-  components: {
-    ctSearchBox,
-    ctRexL1,
-    ctRemL1,
-    ctBML1,
-  },
+  components: {},
 }
 </script>
