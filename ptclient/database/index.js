@@ -1,8 +1,8 @@
 import { Database } from '@vuex-orm/core'
-import User from '@/models/User.js'
-import Todo from '@/models/Todo.js'
-import Patient from '@/models/Patient.js'
-import Rex from '@/models/Recommendation.js'
+import User from '../models/User.js'
+import Todo from '../models/Todo.js'
+import Patient from '../models/Patient.js'
+import Rex from '../models/Recommendation.js'
 
 const database = new Database()
 
