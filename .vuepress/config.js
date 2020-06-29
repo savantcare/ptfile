@@ -93,12 +93,54 @@ module.exports = {
             title: 'Components',
             children: [
               {
+                path: '/ptclient/components/allergies/design/design',
+                title: 'Allergies',
+              },
+              {
+                path: '/ptclient/components/body-measurements/',
+                title: 'Body measurements',
+                children: [
+                  {
+                    path: '/ptclient/components/body-measurements/design/design',
+                    title: 'Design',
+                  },
+                ],
+              },
+              {
+                path: '/ptclient/components/contacts/design/design',
+                title: 'Contacts',
+              },
+              {
+                path: '/ptclient/components/documents/design/design',
+                title: 'Documents',
+              },
+              {
+                path: '/ptclient/components/family-history/design/design',
+                title: 'Family history',
+              },
+              {
+                path: '/ptclient/components/medications/design/design',
+                title: 'Medication',
+              },
+              {
+                path: '/ptclient/components/mental-status-exam/design/design',
+                title: 'Mental status exam',
+              },
+              {
+                path: '/ptclient/components/pharmacy/design/design',
+                title: 'Pharmacy',
+              },
+              {
+                path: '/ptclient/components/psych-review-of-systems/design/design',
+                title: 'Psych review of systems',
+              },
+              {
                 path: '/ptclient/components/rex/',
                 title: 'Recommendations',
               },
               {
-                path: '/ptclient/components/psych-review-of-systems/',
-                title: 'Psych review of systems',
+                path: '/ptclient/components/screening/design/design',
+                title: 'Screening',
               },
             ],
           },
