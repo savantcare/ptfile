@@ -2,7 +2,7 @@
   <div>
     <el-card class="box-card">
       <div slot="header" class="clearfix">
-        <span>Reminder</span>
+        <span>Body measurement</span>
         <el-button style="float: right; padding: 3px 0;" type="text"
           >X</el-button
         >

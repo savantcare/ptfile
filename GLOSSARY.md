@@ -24,6 +24,7 @@ terms:
   dnAge: "data of type number called age in the :ct:"
   daAge: "data of type array called age in the :ct:"
   doAge: "data of type object called age in the :ct:"
+  bm: "Body measurement"
   rex: "Recommendations"
   rem: "Reminder"
   shx: "Social history"
@@ -33,6 +34,7 @@ terms:
   hx: "History"
   Layer1: "L1"
   Layer2: "L2"
+  KIL: "Keep it local. Do not convert to functions without giving a good reason. Since 1. Each function call makes code hard to read 2. vue vuex-orm element.io all are giving lot of functions"
 ---
 
 # Glossary

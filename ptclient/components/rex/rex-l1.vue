@@ -13,7 +13,7 @@
           >M</el-button
         >
       </div>
-      <el-table :data="tableData" style="width: 100%;">
+      <el-table :data="daTable" style="width: 100%;">
         <el-table-column prop="description" label="Description" width="180">
         </el-table-column>
         <el-table-column prop="createdAt" label="CreatedAt" width="180">
@@ -27,7 +27,7 @@
 export default {
   data() {
     return {
-      tableData: [
+      daTable: [
         {
           createdAt: '2016-05-03',
           description: 'Walk 10 mins everday',
