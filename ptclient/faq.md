@@ -33,8 +33,10 @@ yarn create nuxt-app ptclient
 
 ## Q) What to do if it says nuxt not recognized?
 
-yard add nuxt
+cd ptclient
+
+> yard add nuxt
 
 If you dont have yarn then:
 
-npm install nuxt
+> npm install nuxt

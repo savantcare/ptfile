@@ -7,10 +7,14 @@
 3. [store](../store/)
 4. [data](../data/)
 
-The sequence is:
+#### The sequence is:
+
 Step 1: Make the models
+
 Step 2: Register them to database
+
 Step 3: Register the DB to the store.
+
 Step 4: Import the models where you want to use them.
 
 ## Q) What is the pattern being followed for vuex-orm?
