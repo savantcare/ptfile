@@ -7,7 +7,7 @@
 $ yarn install or npm install
 
 # serve with hot reload at localhost:3000
-$ yarn dev or npm dev
+$ yarn dev or npm run dev
 
 # build for production and launch server
 $ yarn build or npm build
