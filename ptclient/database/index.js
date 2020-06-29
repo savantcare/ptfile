@@ -1,10 +1,10 @@
 import { Database } from '@vuex-orm/core'
-import User from '../models/User.js'
-import Todo from '../models/Todo.js'
-import Patient from '../models/Patient.js'
-import Rex from '../models/Recommendation.js'
-import Dx from '../models/Diagnosis.js'
-import Goal from '../models/Goal.js'
+import User from '@/models/user'
+import Todo from '@/models/Todo'
+import Patient from '@/models/patient'
+import Rex from '@/models/Recommendation'
+import Dx from '@/models/Diagnosis'
+import Goal from '@/models/Goal'
 
 const database = new Database()
 

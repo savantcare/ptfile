@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import ormGoal from '@/models/goal'
+import ormGoal from '@/models/Goal'
 const { GOAL_API_URL } = 'http://localhost:8000/goals'
 export default {
   data() {

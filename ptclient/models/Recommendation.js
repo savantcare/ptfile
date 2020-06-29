@@ -1,5 +1,5 @@
 import { Model } from '@vuex-orm/core'
-import Patient from './Patient'
+import Patient from './patient'
 
 export default class Recommendation extends Model {
   static entity = 'recommendations'

@@ -1,5 +1,5 @@
 import { Model } from '@vuex-orm/core'
-import User from './User'
+import User from './user'
 
 export default class Todo extends Model {
   static entity = 'todos'
