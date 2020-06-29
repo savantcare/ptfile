@@ -2,10 +2,16 @@
 
 ## Q) What folders are used to make vuex-orm work?
 
-1. [data](../data/)
+1. [models](../models/)
 2. [database](../database/)
-3. [models](../models/)
-4. [store](../store/)
+3. [store](../store/)
+4. [data](../data/)
+
+The sequence is:
+Step 1: Make the models
+Step 2: Register them to database
+Step 3: Register the DB to the store.
+Step 4: Import the models where you want to use them.
 
 ## Q) What is the pattern being followed for vuex-orm?
 
