@@ -29,8 +29,8 @@ import ormGoal from '@/models/Goal'
 export default {
   data() {
     return {
-      // gTable: ormGoal.query().get(),
-      gTable: [],
+      gTable: ormGoal.query().get(),
+      // gTable: [],
       oneQueryIsRunningGate: false,
     }
   },
@@ -42,7 +42,6 @@ export default {
       try {
         if (!this.oneQueryIsRunningGate) {
           this.oneQueryIsRunningGate = true
-          console.log('Testing kkkkk')
           const countGoal = await ormGoal.query().count()
 
           console.log('Number of recs before query =>', countGoal)
