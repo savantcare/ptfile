@@ -1,6 +1,6 @@
 # ptclient
 
-## Build Setup
+## Q) How to install and run in dev and prod mode?
 
 ```bash
 # install dependencies
