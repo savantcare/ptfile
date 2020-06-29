@@ -1,6 +1,18 @@
 # STORE
 
-**This directory is not required, you can delete it if you don't want to use it.**
+## Q) What folders are used to make vuex-orm work?
+
+1. data
+2. database
+3. models
+4. store
+
+## Q) What is the pattern being followed for vuex-store?
+
+This file is structured based on:
+https://github.com/vuex-orm/vuex-orm-examples-nuxt/tree/master/store
+
+## Q) What is this folder used for?
 
 This directory contains your Vuex Store files.
 Vuex Store option is implemented in the Nuxt.js framework.
