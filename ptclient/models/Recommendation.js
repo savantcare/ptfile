@@ -9,7 +9,6 @@ export default class Todo extends Model {
       id: this.uid(),
       user_id: this.string(null).nullable(),
       title: this.string(''),
-      done: this.boolean(false),
       assignee: this.belongsTo(Patient, 'user_id'),
     }
   }
