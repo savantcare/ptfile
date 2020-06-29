@@ -29,8 +29,16 @@ export default {
     return {
       daTable: [
         {
-          createdAt: '2016-05-03',
-          description: 'TSH test in 3 months',
+          createdAt: '190 lbs',
+          description: 'Weight',
+        },
+        {
+          createdAt: '5\' 8"',
+          description: 'Height',
+        },
+        {
+          createdAt: '40 inches',
+          description: 'Waist circumference',
         },
       ],
     }
