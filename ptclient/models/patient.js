@@ -1,5 +1,5 @@
 import { Model } from '@vuex-orm/core'
-import Todo from './Todo'
+import Rex from './rex'
 
 export default class Patient extends Model {
   static entity = 'patients'
@@ -8,7 +8,7 @@ export default class Patient extends Model {
     return {
       id: this.uid(),
       name: this.string(''),
-      todos: this.hasMany(Todo, 'user_id'),
+      rex: this.hasMany(Rex, 'user_id'),
     }
   }
 }

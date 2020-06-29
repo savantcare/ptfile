@@ -2,7 +2,7 @@ import { Model } from '@vuex-orm/core'
 import Patient from './patient'
 
 export default class Todo extends Model {
-  static entity = 'todos'
+  static entity = 'rex'
 
   static fields() {
     return {
@@ -10,7 +10,7 @@ export default class Todo extends Model {
       user_id: this.string(null).nullable(),
       title: this.string(''),
       done: this.boolean(false),
-      assignee: this.belongsTo(User, 'user_id'),
+      assignee: this.belongsTo(Patient, 'user_id'),
     }
   }
 }
