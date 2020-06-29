@@ -11,10 +11,10 @@ module.exports = {
   */
   patterns: [
     '!(**/node_modules/**)',
-    '!node_modules',
-    '!**/node_modules',
-    '!.vuepress',
     '**/*.md',
+    '!.vuepress',
+    '!node_modules',
+    '!.*',
   ],
   plugins: ['vuepress-plugin-glossary'],
   themeConfig: {
