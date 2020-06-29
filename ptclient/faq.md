@@ -1,6 +1,6 @@
 # ptclient
 
-## Q) How to install and run in dev and prod mode?
+## Q1) How to install and run in dev and prod mode?
 
 ```bash
 # install dependencies
@@ -15,11 +15,11 @@ $ yarn start
 
 ```
 
-## Q) How was the app generated?
+## Q2) How was the app generated?
 
 yarn create nuxt-app ptclient
 
-## Q) What is the basic knowledge assumed?
+## Q3) What is the basic knowledge assumed?
 
 [vue guide](https://vuejs.org/v2/guide/)
 
@@ -31,7 +31,7 @@ yarn create nuxt-app ptclient
 
 [element.io](https://element.eleme.io/#/en-US/component/layout)
 
-## Q) What to do if it says nuxt not recognized?
+## Q4) What to do if it says nuxt not recognized?
 
 cd ptclient
 
