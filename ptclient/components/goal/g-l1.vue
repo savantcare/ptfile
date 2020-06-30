@@ -13,7 +13,7 @@
           >M</el-button
         >
       </div>
-      <el-table :data="gTable" style="width: 100%;">
+      <el-table :data="daGTable" style="width: 100%;">
         <el-table-column prop="description" label="Description" width="180">
         </el-table-column>
         <el-table-column prop="score" label="Score" width="180">
@@ -29,9 +29,9 @@ import ormGoal from '@/models/Goal'
 export default {
   data() {
     return {
-      gTable: ormGoal.query().get(),
-      // gTable: [],
-      oneQueryIsRunningGate: false,
+      daGTable: ormGoal.query().get(),
+      // daGTable: [],
+      dblOneQueryIsRunningGate: false,
     }
   },
   mounted() {
@@ -40,8 +40,8 @@ export default {
   methods: {
     async dbGetGoals() {
       try {
-        if (!this.oneQueryIsRunningGate) {
-          this.oneQueryIsRunningGate = true
+        if (!this.dblOneQueryIsRunningGate) {
+          this.dblOneQueryIsRunningGate = true
           const countGoal = await ormGoal.query().count()
 
           console.log('Number of recs before query =>', countGoal)
@@ -60,9 +60,9 @@ export default {
             // await ormGoal.api().get(GOAL_API_URL)
             console.log('Number of goal in model =>', ormGoal.query().count())
             const arGoalEvalList = ormGoal.query().get()
-            this.gTable = arGoalEvalList
+            this.daGTable = arGoalEvalList
           }
-          this.oneQueryIsRunningGate = false
+          this.dblOneQueryIsRunningGate = false
         }
       } catch (ex) {
         console.log('failed')
