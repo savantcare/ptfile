@@ -26,7 +26,7 @@ import ctRemL1 from '@/components/rem/rem-l1'
 import ctBML1 from '@/components/bm/bm-l1'
 import ctDXL1 from '@/components/dx/dx-l1'
 import ctGL1 from '@/components/goal/g-l1'
-import ctScrL1 from '@/components/Scr/scr-l1.vue'
+import ctScrL1 from '@/components/scr/scr-l1.vue'
 
 Vue.use(VueSplit)
 export default {
