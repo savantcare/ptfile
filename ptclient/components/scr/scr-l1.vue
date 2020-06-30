@@ -3,10 +3,16 @@
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <span>Screening</span>
-        <el-button style="float: right; padding: 0 3px;" type="text"
+        <el-button
+          style="float: right; padding: 0 3px;"
+          @click="fnShowAllScrGraphInL2()"
+          type="text"
           >G</el-button
         >
-        <el-button style="float: right; padding: 0 3px;" type="text"
+        <el-button
+          style="float: right; padding: 0 3px;"
+          @click="fnAddScrInL2()"
+          type="text"
           >A</el-button
         >
       </div>
@@ -19,9 +25,12 @@
         </el-table-column>
         <el-table-column>
           <template slot-scope="scope">
-            <el-button type="text" size="mini" @click="fnTakeScrL2(scope.row)"
+            <el-button type="text" size="mini" @click="fnTakeScrInL2(scope.row)"
               >T</el-button
-            ><el-button type="text" size="mini" @click="fnAddScrL2(scope.row)"
+            ><el-button
+              type="text"
+              size="mini"
+              @click="fnScrGraphInL2(scope.row)"
               >G</el-button
             >
           </template>
@@ -51,11 +60,17 @@ export default {
     this.dbGetScreenings()
   },
   methods: {
-    fnTakeScrL2(data) {
+    fnShowAllScrGraphInL2() {
+      console.log('show all screen graph popup')
+    },
+    fnAddScrInL2() {
+      console.log('show ad screen graph in popup')
+    },
+    fnTakeScrInL2(data) {
       console.log('show take a screen dialog', data)
       // this.$store.commit("showTakeAScreenTabInLayer2", data);
     },
-    fnAddScrL2(data) {
+    fnScrGraphInL2(data) {
       console.log('show screen graph dialog', data)
     },
     async dbGetScreenings() {
