@@ -1,8 +1,8 @@
-use sc_mental_status_exam
+use sc_mental_status_exam;
 
 CREATE TABLE `affect`
 (
-  `patientUUID` varchar
+  `patientUUID` char
 (36) NOT NULL,
   `euthymic` ENUM
 ('yes','no') NOT NULL DEFAULT 'no',
@@ -41,7 +41,7 @@ CREATE TABLE `affect`
   `other` text NOT NULL,
   `dysthymic` ENUM
 ('yes','no') NOT NULL DEFAULT 'no',
-  `recordChangedByUUID` varchar
+  `recordChangedByUUID` char
 (36) NOT NULL,
   `recordChangedFromIPAddress` varchar
 (20) NOT NULL,
@@ -59,7 +59,7 @@ WITH SYSTEM VERSIONING;
 
 CREATE TABLE `appearence`
 (
-  `patientUUID` varchar
+  `patientUUID` char
 (36) NOT NULL,
   `good-grooming-and-hygiene` ENUM
 ('yes','no') NOT NULL DEFAULT 'no',
@@ -82,7 +82,7 @@ CREATE TABLE `appearence`
   `malodorus` ENUM
 ('yes','no') NOT NULL DEFAULT 'no',
   `others` text NOT NULL,
-  `recordChangedByUUID` varchar
+  `recordChangedByUUID` char
 (36) NOT NULL,
   `recordChangedFromIPAddress` varchar
 (20) NOT NULL,
@@ -100,7 +100,7 @@ WITH SYSTEM VERSIONING;
 
 CREATE TABLE `attitude`
 (
-  `patientUUID` varchar
+  `patientUUID` char
 (36) NOT NULL,
   `pleasant-and-cooperative` ENUM
 ('yes','no') NOT NULL DEFAULT 'no',
@@ -117,7 +117,7 @@ CREATE TABLE `attitude`
   `disorganized-behavior` ENUM
 ('yes','no') NOT NULL DEFAULT 'no',
   `other` text NOT NULL,
-  `recordChangedByUUID` varchar
+  `recordChangedByUUID` char
 (36) NOT NULL,
   `recordChangedFromIPAddress` varchar
 (20) NOT NULL,
@@ -135,7 +135,7 @@ WITH SYSTEM VERSIONING;
 
 CREATE TABLE `cognition`
 (
-  `patientUUID` varchar
+  `patientUUID` char
 (36) NOT NULL,
   `grossly-intact-no-memory-impairment-adequate-fund-of-knowledge-n` ENUM
 ('yes','no') NOT NULL DEFAULT 'no',
@@ -144,7 +144,7 @@ CREATE TABLE `cognition`
   `fluctuating` ENUM
 ('yes','no') NOT NULL DEFAULT 'no',
   `other` text NOT NULL,
-  `recordChangedByUUID` varchar
+  `recordChangedByUUID` char
 (36) NOT NULL,
   `recordChangedFromIPAddress` varchar
 (20) NOT NULL,
@@ -162,12 +162,12 @@ WITH SYSTEM VERSIONING;
 
 CREATE TABLE `constitutional`
 (
-  `patientUUID` varchar
+  `patientUUID` char
 (36) NOT NULL,
   `vitals-signs-stable` ENUM
 ('yes','no') NOT NULL DEFAULT 'no',
   `other` text NOT NULL,
-  `recordChangedByUUID` varchar
+  `recordChangedByUUID` char
 (36) NOT NULL,
   `recordChangedFromIPAddress` varchar
 (20) NOT NULL,
@@ -185,7 +185,7 @@ WITH SYSTEM VERSIONING;
 
 CREATE TABLE `eye-contact`
 (
-  `patientUUID` varchar
+  `patientUUID` char
 (36) NOT NULL,
   `appropriate` ENUM
 ('yes','no') NOT NULL DEFAULT 'no',
@@ -196,7 +196,7 @@ CREATE TABLE `eye-contact`
   `fleeting` ENUM
 ('yes','no') NOT NULL DEFAULT 'no',
   `other` text NOT NULL,
-  `recordChangedByUUID` varchar
+  `recordChangedByUUID` char
 (36) NOT NULL,
   `recordChangedFromIPAddress` varchar
 (20) NOT NULL,
@@ -214,7 +214,7 @@ WITH SYSTEM VERSIONING;
 
 CREATE TABLE `impulse-control`
 (
-  `patientUUID` varchar
+  `patientUUID` char
 (36) NOT NULL,
   `good` ENUM
 ('yes','no') NOT NULL DEFAULT 'no',
@@ -229,7 +229,7 @@ CREATE TABLE `impulse-control`
   `limited` ENUM
 ('yes','no') NOT NULL DEFAULT 'no',
   `other` text NOT NULL,
-  `recordChangedByUUID` varchar
+  `recordChangedByUUID` char
 (36) NOT NULL,
   `recordChangedFromIPAddress` varchar
 (20) NOT NULL,
@@ -247,7 +247,7 @@ WITH SYSTEM VERSIONING;
 
 CREATE TABLE `insight`
 (
-  `patientUUID` varchar
+  `patientUUID` char
 (36) NOT NULL,
   `good` ENUM
 ('yes','no') NOT NULL DEFAULT 'no',
@@ -262,7 +262,7 @@ CREATE TABLE `insight`
   `limited` ENUM
 ('yes','no') NOT NULL DEFAULT 'no',
   `other` text NOT NULL,
-  `recordChangedByUUID` varchar
+  `recordChangedByUUID` char
 (36) NOT NULL,
   `recordChangedFromIPAddress` varchar
 (20) NOT NULL,
@@ -280,7 +280,7 @@ WITH SYSTEM VERSIONING;
 
 CREATE TABLE `judgement`
 (
-  `patientUUID` varchar
+  `patientUUID` char
 (36) NOT NULL,
   `good` ENUM
 ('yes','no') NOT NULL DEFAULT 'no',
@@ -295,7 +295,7 @@ CREATE TABLE `judgement`
   `limited` ENUM
 ('yes','no') NOT NULL DEFAULT 'no',
   `other` text NOT NULL,
-  `recordChangedByUUID` varchar
+  `recordChangedByUUID` char
 (36) NOT NULL,
   `recordChangedFromIPAddress` varchar
 (20) NOT NULL,
@@ -313,14 +313,14 @@ WITH SYSTEM VERSIONING;
 
 CREATE TABLE `neurological`
 (
-  `patientUUID` varchar
+  `patientUUID` char
 (36) NOT NULL,
   `gait-and-station-normal` ENUM
 ('yes','no') NOT NULL DEFAULT 'no',
   `gait-and-station-abnormal` ENUM
 ('yes','no') NOT NULL DEFAULT 'no',
   `other` text NOT NULL,
-  `recordChangedByUUID` varchar
+  `recordChangedByUUID` char
 (36) NOT NULL,
   `recordChangedFromIPAddress` varchar
 (20) NOT NULL,
@@ -338,7 +338,7 @@ WITH SYSTEM VERSIONING;
 
 CREATE TABLE `perception`
 (
-  `patientUUID` varchar
+  `patientUUID` char
 (36) NOT NULL,
   `no-avh` ENUM
 ('yes','no') NOT NULL DEFAULT 'no',
@@ -349,7 +349,7 @@ CREATE TABLE `perception`
   `vh` ENUM
 ('yes','no') NOT NULL DEFAULT 'no',
   `other` text NOT NULL,
-  `recordChangedByUUID` varchar
+  `recordChangedByUUID` char
 (36) NOT NULL,
   `recordChangedFromIPAddress` varchar
 (20) NOT NULL,
@@ -367,7 +367,7 @@ WITH SYSTEM VERSIONING;
 
 CREATE TABLE `psychomotor`
 (
-  `patientUUID` varchar
+  `patientUUID` char
 (36) NOT NULL,
   `normal` ENUM
 ('yes','no') NOT NULL DEFAULT 'no',
@@ -376,7 +376,7 @@ CREATE TABLE `psychomotor`
   `retarded` ENUM
 ('yes','no') NOT NULL DEFAULT 'no',
   `other` text NOT NULL,
-  `recordChangedByUUID` varchar
+  `recordChangedByUUID` char
 (36) NOT NULL,
   `recordChangedFromIPAddress` varchar
 (20) NOT NULL,
@@ -394,7 +394,7 @@ WITH SYSTEM VERSIONING;
 
 CREATE TABLE `speech`
 (
-  `patientUUID` varchar
+  `patientUUID` char
 (36) NOT NULL,
   `regular-rate-and-rhythm` ENUM
 ('yes','no') NOT NULL DEFAULT 'no',
@@ -409,7 +409,7 @@ CREATE TABLE `speech`
   `mumbling` ENUM
 ('yes','no') NOT NULL DEFAULT 'no',
   `other` text NOT NULL,
-  `recordChangedByUUID` varchar
+  `recordChangedByUUID` char
 (36) NOT NULL,
   `recordChangedFromIPAddress` varchar
 (20) NOT NULL,
@@ -427,7 +427,7 @@ WITH SYSTEM VERSIONING;
 
 CREATE TABLE `thought-content`
 (
-  `patientUUID` varchar
+  `patientUUID` char
 (36) NOT NULL,
   `no-si-intent-or-plan` ENUM
 ('yes','no') NOT NULL DEFAULT 'no',
@@ -456,7 +456,7 @@ CREATE TABLE `thought-content`
   `passive-death-wish` ENUM
 ('yes','no') NOT NULL DEFAULT 'no',
   `other` text NOT NULL,
-  `recordChangedByUUID` varchar
+  `recordChangedByUUID` char
 (36) NOT NULL,
   `recordChangedFromIPAddress` varchar
 (20) NOT NULL,
@@ -474,7 +474,7 @@ WITH SYSTEM VERSIONING;
 
 CREATE TABLE `thought-process`
 (
-  `patientUUID` varchar
+  `patientUUID` char
 (36) NOT NULL,
   `linear-logical-and-goal-directed` ENUM
 ('yes','no') NOT NULL DEFAULT 'no',
@@ -491,7 +491,7 @@ CREATE TABLE `thought-process`
   `poverty-of-thought` ENUM
 ('yes','no') NOT NULL DEFAULT 'no',
   `other` text NOT NULL,
-  `recordChangedByUUID` varchar
+  `recordChangedByUUID` char
 (36) NOT NULL,
   `recordChangedFromIPAddress` varchar
 (20) NOT NULL,
