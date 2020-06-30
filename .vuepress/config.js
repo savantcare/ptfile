@@ -187,11 +187,11 @@ module.exports = {
                 title: 'Recommendations',
               },
               {
-                path: '/ptclient/components/Scr/',
+                path: '/ptclient/components/scr/',
                 title: 'Screening',
                 children: [
                   {
-                    path: '/ptclient/components/Scr/design/design',
+                    path: '/ptclient/components/scr/design/design',
                     title: 'Design',
                   },
                 ],
