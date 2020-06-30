@@ -103,11 +103,11 @@ module.exports = {
                 ]
               },
               {
-                path: '/ptclient/components/body-measurements/',
+                path: '/ptclient/components/bm/',
                 title: 'Body measurements',
                 children: [
                   {
-                    path: '/ptclient/components/body-measurements/design/design',
+                    path: '/ptclient/components/bm/design/design',
                     title: 'Design',
                   },
                 ],
