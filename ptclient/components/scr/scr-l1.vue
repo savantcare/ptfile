@@ -13,7 +13,7 @@
       <el-table :data="daScrTable" style="width: 100%;">
         <el-table-column
           prop="scientificName"
-          label="Scientific ame"
+          label="Scientific name"
           width="150"
         >
         </el-table-column>
@@ -63,7 +63,6 @@ export default {
         if (!this.dblOneQueryIsRunningGate) {
           this.dblOneQueryIsRunningGate = true
           const countScr = await ormScr.query().count()
-
           console.log('Number of recs before query =>', countScr)
           if (countScr === 0) {
             const scrEvalList = await ormScr
@@ -72,12 +71,9 @@ export default {
                 'http://localhost:8000/screening?patientUUID=bfe041fa-073b-4223-8c69-0540ee678ff8'
               )
 
-            // console.log('sctEvalList - ' + scrEvalList.ok)
-            // let arScrEvalList = null
             if (scrEvalList.ok) {
               // console.log('screen==== ' + JSON.stringify(arScrEvalList, null, 4))
             }
-            // await ormScr.api().get(GOAL_API_URL)
             console.log('Number of screen in model =>', ormScr.query().count())
             const arScrEvalList = ormScr.query().get()
             this.daScrTable = arScrEvalList
