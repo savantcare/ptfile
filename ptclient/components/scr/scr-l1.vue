@@ -3,19 +3,28 @@
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <span>Screening</span>
-        <el-button style="float: right; padding: 3px 0;" type="text"
+        <el-button style="float: right; padding: 0 3px;" type="text"
           >G</el-button
         >
-        <el-button style="float: right; padding: 3px 0;" type="text"
+        <el-button style="float: right; padding: 0 3px;" type="text"
           >A</el-button
         >
       </div>
       <el-table :data="daScrTable" style="width: 100%;">
         <el-table-column
           prop="scientificName"
-          label="scientificName"
+          label="Scientific ame"
           width="150"
         >
+        </el-table-column>
+        <el-table-column>
+          <template slot-scope="scope">
+            <el-button type="text" size="mini" @click="fnTakeScrL2(scope.row)"
+              >T</el-button
+            ><el-button type="text" size="mini" @click="fnAddScrL2(scope.row)"
+              >G</el-button
+            >
+          </template>
         </el-table-column>
       </el-table>
     </el-card>
@@ -42,6 +51,13 @@ export default {
     this.dbGetScreenings()
   },
   methods: {
+    fnTakeScrL2(data) {
+      console.log('show take a screen dialog', data)
+      // this.$store.commit("showTakeAScreenTabInLayer2", data);
+    },
+    fnAddScrL2(data) {
+      console.log('show screen graph dialog', data)
+    },
     async dbGetScreenings() {
       try {
         if (!this.dblOneQueryIsRunningGate) {
