@@ -3,25 +3,27 @@ const db = require('../models')
 const screensListMaster = db.screeningDB.screensListMaster
 const screensAssignedToPatient = db.screeningDB.screensAssignedToPatient
 const phq9PatientResponse = db.screeningDB.phq9PatientResponse
-const User = db.userDB.users
-const { Op } = require("sequelize")
+// const User = db.userDB.users
+// const { Op } = require("sequelize")
 
 //Screening
 
 module.exports = (io) => {
 
-  router.post('/getPatientScreenList', async (req, res) => {
+  //  get the patient assigned screen list 
+  router.get('/', async (req, res) => {
     try {
-      const { patientId, userId, date } = req.body
+      //const { patientId, userId, date } = req.body
+      const { patientUUID } = req.query
 
       const queryResult = await screensListMaster.sequelize.query('SELECT * FROM screensAssignedToPatients LEFT JOIN  screensListMasters ON screensAssignedToPatients.screenUUID = screensListMasters.uuid where screensAssignedToPatients.patientUUID=:patientUUID', {
-        replacements: { patientUUID: patientId },
+        replacements: { patientUUID: patientUUID },
         type: screensListMaster.sequelize.QueryTypes.SELECT
       })
       res.send(queryResult)
     } catch (err) {
       res.status(500).send({
-        message: err.message || "Some error occured while fetching the Recommendation"
+        message: err.message || "Some error occured while fetching the Screening data"
       })
     }
   })
@@ -38,7 +40,7 @@ module.exports = (io) => {
       res.send(queryResult)
     } catch (err) {
       res.status(500).send({
-        message: err.message || "Some error occured while fetching the Recommendation"
+        message: err.message || "Some error occured while fetching the Screening"
       })
     }
   })
