@@ -123,6 +123,16 @@ module.exports = {
                 ],
               },
               {
+                path: '/ptclient/components/dx/',
+                title: 'Diagnosis',
+                children: [
+                  {
+                    path: '/ptclient/components/dx/design/design',
+                    title: 'Design',
+                  },
+                ],
+              },
+              {
                 path: '/ptclient/components/documents/',
                 title: 'Documents',
                 children: [
