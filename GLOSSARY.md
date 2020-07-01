@@ -20,7 +20,7 @@ terms:
   pnAge: 'prop of type number called age in the :ct:'
   paAge: 'prop of type array called age in the :ct:'
   poAge: 'prop of type object called age in the :ct:'
-  dbAge: 'data of type boolean called age in the :ct:'
+  dblAge: 'data of type boolean called age in the :ct:'
   dsAge: 'data of type string called age in the :ct:. Data is local variable'
   dnAge: 'data of type number called age in the :ct:'
   daAge: 'data of type array called age in the :ct:'
