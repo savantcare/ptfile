@@ -14,6 +14,8 @@
         <ctSearchBox></ctSearchBox>
       </SplitArea>
     </Split>
+    <!-- tab-dialog is present in patientFile.vue but in hidden state -->
+    <layer-2-multi-tab-dialog></layer-2-multi-tab-dialog>
   </div>
 </template>
 
@@ -27,10 +29,12 @@ import ctBML1 from '@/components/bm/bm-l1'
 import ctDXL1 from '@/components/dx/dx-l1'
 import ctGL1 from '@/components/goal/g-l1'
 import ctScrL1 from '@/components/scr/scr-l1.vue'
+const Layer2MultiTabDialog = () => import('@/components/2l-tab-manager/')
 
 Vue.use(VueSplit)
 export default {
   components: {
+    Layer2MultiTabDialog,
     ctSearchBox,
     ctRexL1,
     ctRemL1,
@@ -38,6 +42,9 @@ export default {
     ctDXL1,
     ctGL1,
     ctScrL1,
+  },
+  mounted() {
+    this.$store.commit('setTabDialogVisibility', false)
   },
 }
 </script>

@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import addGoal from './layer-2/addGoal.vue'
+// import addGoal from './layer-2/addGoal.vue'
 import ormGoal from '@/models/Goal'
 
 // const { GOAL_API_URL } = 'http://localhost:8000/goals'
@@ -74,7 +74,8 @@ export default {
       }
     },
     openAGDialog() {
-      addGoal.$emit('dialog', true) // emit the event to the bus
+      console.log('show add dialog')
+      this.$store.commit('showAddGoalTabInLayer2')
     },
   },
 }
