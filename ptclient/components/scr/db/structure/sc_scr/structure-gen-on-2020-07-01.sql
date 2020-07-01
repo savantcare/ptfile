@@ -1,25 +1,8 @@
-USE `sc_screen`;
--- phpMyAdmin SQL Dump
--- version 5.0.2
--- https://www.phpmyadmin.net/
---
--- Host: mariadb
--- Generation Time: Jun 26, 2020 at 12:52 PM
--- Server version: 10.4.13-MariaDB-1:10.4.13+maria~bionic
--- PHP Version: 7.4.5
+USE `sc_scr`;
 
---
--- Database: `sc_screen`
---
 
--- --------------------------------------------------------
-
---
--- Table structure for table `phq9PatientResponses`
---
-
-CREATE TABLE `phq9PatientResponses` (
-  `patientUUID` char(36) NOT NULL,
+CREATE TABLE `phq9PtResponses` (
+  `ptUUID` char(36) NOT NULL,
   `question1` enum('0','1','2','3') DEFAULT NULL,
   `question2` enum('0','1','2','3') DEFAULT NULL,
   `question3` enum('0','1','2','3') DEFAULT NULL,
@@ -32,34 +15,26 @@ CREATE TABLE `phq9PatientResponses` (
   `question10` enum('0','1','2','3') DEFAULT NULL,
   `recordChangedByUUID` char(36) DEFAULT NULL,
   `recordChangedFromIPAddress` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`patientUUID`)
+  PRIMARY KEY (`ptUUID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `screensAssignedToPatients`
---
 
-CREATE TABLE `screensAssignedToPatients` (
+CREATE TABLE `scrAssignedToPts` (
   `uuid` char(36) NOT NULL,
-  `screenUUID` char(36) DEFAULT NULL,
-  `patientUUID` char(36) DEFAULT NULL,
+  `scrUUID` char(36) DEFAULT NULL,
+  `ptUUID` char(36) DEFAULT NULL,
   `notes` text DEFAULT NULL,
   `recordChangedByUUID` char(36) DEFAULT NULL,
   `recordChangedFromIPAddress` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `screensListMasters`
---
 
-CREATE TABLE `screensListMasters` (
+CREATE TABLE `scrListMasters` (
   `uuid` char(36) NOT NULL,
-  `screenName` varchar(255) DEFAULT NULL,
+  `scrName` varchar(255) DEFAULT NULL,
   `scientificName` varchar(255) DEFAULT NULL,
   `clinicalStudies` text DEFAULT NULL,
   PRIMARY KEY (`uuid`)
