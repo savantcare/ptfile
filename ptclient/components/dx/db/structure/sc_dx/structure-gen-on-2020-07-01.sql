@@ -1,9 +1,9 @@
-USE `DB_SC_Diagnosis_CT_V20`;
+USE `sc_dx`;
 
 
-DROP TABLE IF EXISTS `diagnosis`;
+DROP TABLE IF EXISTS `dx`;
 
-CREATE TABLE `diagnosis` (
+CREATE TABLE `dx` (
   `uuid` char(36) NOT NULL,
   `uid` char(36) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
@@ -18,11 +18,11 @@ CREATE TABLE `diagnosis` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
 
-DROP TABLE IF EXISTS `diagnosisAssessment`;
+DROP TABLE IF EXISTS `dxa`;
 
-CREATE TABLE `diagnosisAssessment` (
+CREATE TABLE `dxa` (
   `uuid` char(36) NOT NULL,
-  `diagnosisId` int(11) NOT NULL,
+  `dxId` int(11) NOT NULL,
   `uid` char(36) NOT NULL,
   `assessment` text DEFAULT NULL,
   `recordChangedByUUID` char(36) NOT NULL,
@@ -67,18 +67,14 @@ CREATE TABLE `icd10MasterCodes` (
   PRIMARY KEY (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `patientReportedDiagnosis`
---
 
-DROP TABLE IF EXISTS `patientReportedDiagnosis`;
+DROP TABLE IF EXISTS `ptReportedDx`;
 
-CREATE TABLE `patientReportedDiagnosis` (
+CREATE TABLE `ptReportedDx` (
   `uuid` char(36) NOT NULL,
   `uid` char(36) NOT NULL,
-  `diagnosisName` varchar(255) NOT NULL,
+  `dxName` varchar(255) NOT NULL,
   `whenHappened` datetime DEFAULT NULL,
   `status` enum('Patient reported','Other provider confirmed') NOT NULL DEFAULT 'Patient reported',
   `startDate` date DEFAULT NULL,
@@ -90,36 +86,27 @@ CREATE TABLE `patientReportedDiagnosis` (
   PRIMARY KEY (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `patientReportedDiagnosisNote`
---
+DROP TABLE IF EXISTS `ptReportedDxNote`;
 
-DROP TABLE IF EXISTS `patientReportedDiagnosisNote`;
-
-CREATE TABLE `patientReportedDiagnosisNote` (
+CREATE TABLE `ptReportedDxNote` (
   `uuid` char(36) NOT NULL,
-  `diagnosisReportedId` char(36) NOT NULL,
+  `dxReportedId` char(36) NOT NULL,
   `note` text NOT NULL,
   `recordChangedByUUID` char(36) NOT NULL,
   `recordChangedFromIPAddress` varchar(20) NOT NULL,
   PRIMARY KEY (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `ruledOutDiagnosis`
---
 
-DROP TABLE IF EXISTS `ruledOutDiagnosis`;
+DROP TABLE IF EXISTS `ruledOutDx`;
 
-CREATE TABLE `ruledOutDiagnosis` (
+CREATE TABLE `ruledOutDx` (
   `uuid` char(36) NOT NULL,
   `uid` char(36) NOT NULL,
-  `diagnosisId` int(11) NOT NULL,
-  `diagnosisName` varchar(255) NOT NULL,
+  `dxId` int(11) NOT NULL,
+  `dxName` varchar(255) NOT NULL,
   `icd10Code` varchar(50) DEFAULT NULL,
   `notes` varchar(255) DEFAULT NULL,
   `createdAt` datetime DEFAULT current_timestamp(),
@@ -131,11 +118,7 @@ CREATE TABLE `ruledOutDiagnosis` (
   PRIMARY KEY (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `ruledOutNotes`
---
 
 DROP TABLE IF EXISTS `ruledOutNotes`;
 
@@ -144,7 +127,6 @@ CREATE TABLE `ruledOutNotes` (
   `ruledOutId` char(36) NOT NULL,
   `note` text DEFAULT NULL,
   `recordChangedByUUID` char(36) NOT NULL,
-  `recordChangedOnDateTime` datetime NOT NULL DEFAULT current_timestamp(),
   `recordChangedFromIPAddress` varchar(20) NOT NULL,
   PRIMARY KEY (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
