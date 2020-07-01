@@ -41,7 +41,7 @@ terms:
   recs: 'Recommendations'
   rem: 'Reminder'
   rems: 'Reminders'
-  sh: 'Social history'. This is both plural and singular.
+  sh: 'Social history. This is both plural and singular.'
   mse: 'Mental status exam'
   dob: 'Date of birth'
   pros: 'Psych review of systems'
