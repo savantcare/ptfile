@@ -1,16 +1,16 @@
 import { Model } from '@vuex-orm/core'
 import Patient from './patient'
 
-export default class Diagnosis extends Model {
+export default class Dx extends Model {
   static entity = 'diagnoses'
 
   static fields() {
     return {
       uuid: this.uid(),
-      diagnosisName: this.string(''),
+      dxName: this.string(''),
       icd10Code: this.string(null).nullable(),
-      diagnosisDiscontinueNotes: this.string(null).nullable(),
-      diagnosedOnDate: this.string(null).nullable(),
+      dxDiscontinueNotes: this.string(null).nullable(),
+      dxOnDate: this.string(null).nullable(),
       patientUUId: this.belongsTo(Patient, 'uid'),
       recordChangedByUUID: this.attr(null),
       recordChangedFromIPAddress: this.attr(null),

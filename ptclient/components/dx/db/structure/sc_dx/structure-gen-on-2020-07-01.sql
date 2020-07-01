@@ -5,13 +5,11 @@ DROP TABLE IF EXISTS `dx`;
 
 CREATE TABLE `dx` (
   `uuid` char(36) NOT NULL,
-  `uid` char(36) NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
+  `patientUUId` char(36) NOT NULL,
+  `dxName` varchar(255) DEFAULT NULL,
   `icd10Code` varchar(50) DEFAULT NULL,
-  `notes` varchar(255) DEFAULT NULL,
-  `agree` varchar(255) DEFAULT NULL,
-  `assessment` varchar(255) DEFAULT NULL,
-  `startDate` datetime DEFAULT NULL,
+  `dxDiscontinueNotes` varchar(255) DEFAULT NULL,
+  `dxOnDate` datetime DEFAULT NULL,
   `recordChangedByUUID` char(36) NOT NULL,
   `recordChangedFromIPAddress` varchar(20) NOT NULL,
   PRIMARY KEY (`uuid`)

@@ -3,7 +3,7 @@ import User from '@/models/user'
 import Todo from '@/models/Todo'
 import Patient from '@/models/patient'
 import Rex from '@/models/Recommendation'
-import Dx from '@/models/Diagnosis'
+import Dx from '@/models/Dx'
 import Goal from '@/models/Goal'
 import Scr from '@/models/Screening'
 

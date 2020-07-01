@@ -27,11 +27,11 @@ diagnosisDB.sequelize = diagnosisSequelize;
 
 //diagnosisDB.diagnosis = require('../diagnosis.model.js')(diagnosisSequelize, Sequelize) //This is for test only
 
-diagnosisDB.diagnosis = require("../diagnosis/diagnosis.model.js")(
+diagnosisDB.diagnosis = require("../dx/dx.model.js")(
   diagnosisSequelize,
   Sequelize
 );
-diagnosisDB.diagnosisAssessment = require("../diagnosis/diagnosisAssessment.model.js")(
+diagnosisDB.diagnosisAssessment = require("../dx/dxa.model.js")(
   diagnosisSequelize,
   Sequelize
 );

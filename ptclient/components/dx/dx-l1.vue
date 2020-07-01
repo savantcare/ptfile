@@ -13,18 +13,10 @@
           >M</el-button
         >
       </div>
-      <el-table :data="daTable" style="width: 100%;">
-        <el-table-column
-          prop="diagnosisName"
-          label="Diagnosis name"
-          width="180"
-        >
+      <el-table :data="daDxTable" style="width: 100%;">
+        <el-table-column prop="dxName" label="Diagnosis name" width="180">
         </el-table-column>
-        <el-table-column
-          prop="diagnosedOnDate"
-          label="Diagnosed on"
-          width="180"
-        >
+        <el-table-column prop="dxOnDate" label="Diagnosed on" width="180">
         </el-table-column>
       </el-table>
     </el-card>
@@ -32,7 +24,7 @@
 </template>
 
 <script>
-import ormDx from '@/models/Diagnosis'
+import ormDx from '@/models/Dx'
 
 /* export default {
   async asyncData({ params }) {
@@ -43,37 +35,40 @@ import ormDx from '@/models/Diagnosis'
   },
 } */
 export default {
-  components: {},
-  props: {},
   data() {
     return {
-      daTable: ormDx.query().get(),
+      daDxTable: ormDx.query().get(),
+      dblOneDxQueryIsRunningGate: false,
     }
   },
-  computed: {},
   mounted() {
     this.fnFetchDxFromApi()
   },
   methods: {
     async fnFetchDxFromApi() {
-      const countDxCountFromORM = ormDx.query().count()
-      if (countDxCountFromORM === 0) {
-        const dxEvalList = await ormDx
-          .api()
-          .get(
-            `http://localhost:8000/diagnosis/?patientId=bfe041fa-073b-4223-8c69-0540ee678ff8`
-          )
-        let arDxEvalList = null
-        if (dxEvalList.ok) {
-          arDxEvalList = dxEvalList.json()
-          this.daTable = arDxEvalList
-          console.log('====' + JSON.stringify(arDxEvalList, null, 4))
+      try {
+        if (!this.dblOneDxQueryIsRunningGate) {
+          this.dblOneDxQueryIsRunningGate = true
+          const countDxCountFromORM = ormDx.query().count()
+          console.log('Number of dx before query =>', countDxCountFromORM)
+          if (countDxCountFromORM === 0) {
+            const dxEvalList = await ormDx
+              .api()
+              .get(
+                `http://localhost:8000/diagnosis/?patientId=bfe041fa-073b-4223-8c69-0540ee678ff8`
+              )
+
+            if (dxEvalList.ok) {
+            }
+            this.daDxTable = ormDx.query().get()
+            // ormDx.query('').get()
+            console.log('Number of dx in model =>', ormDx.query().count())
+          } else {
+            this.daDxTable = ormDx.query().get()
+          }
+          this.dblOneDxQueryIsRunningGate = false
         }
-        // ormDx.query('').get()
-        console.log('######', arDxEvalList)
-      } else {
-        this.daTable = ormDx.query().get()
-      }
+      } catch (e) {}
 
       // console.log(dxList);
     },
