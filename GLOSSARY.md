@@ -32,7 +32,9 @@ terms:
   dxa: 'Diagnosis assessment'
   g: goal
   cs: 'currrent state'
+  csda: 'currrent state display area'
   ms: 'multi state'
+  msda: 'multi state display area'
   bm: 'Body measurement'
   rex: 'Recommendations'
   rem: 'Reminder'
