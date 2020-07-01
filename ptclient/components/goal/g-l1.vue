@@ -9,8 +9,11 @@
         <el-button style="float: right; padding: 3px 0;" type="text"
           >D</el-button
         >
-        <el-button style="float: right; padding: 3px 0;" type="text"
-          >M</el-button
+        <el-button
+          @click.prevent="openAGDialog()"
+          style="float: right; padding: 3px 0;"
+          type="text"
+          >A</el-button
         >
       </div>
       <el-table :data="daGTable" style="width: 100%;">
@@ -24,7 +27,9 @@
 </template>
 
 <script>
+import addGoal from './layer-2/addGoal.vue'
 import ormGoal from '@/models/Goal'
+
 // const { GOAL_API_URL } = 'http://localhost:8000/goals'
 export default {
   data() {
@@ -67,6 +72,9 @@ export default {
       } catch (ex) {
         console.log('failed')
       }
+    },
+    openAGDialog() {
+      addGoal.$emit('dialog', true) // emit the event to the bus
     },
   },
 }
