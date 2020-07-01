@@ -1,6 +1,7 @@
 ---
 terms:
   pt: 'Patient'
+  pts: 'Patients'
   ct: 'Component'
   fn: 'Function'
   pf: 'Patient file'
@@ -36,13 +37,16 @@ terms:
   ms: 'multi state'
   msda: 'multi state display area'
   bm: 'Body measurement'
-  rex: 'Recommendations'
+  rec: 'Recommendation'
+  recs: 'Recommendations'
   rem: 'Reminder'
-  shx: 'Social history'
+  rems: 'Reminders'
+  sh: 'Social history'. This is both plural and singular.
   mse: 'Mental status exam'
   dob: 'Date of birth'
   pros: 'Psych review of systems'
   hx: 'History'
+  scr: 'screening'
 ---
 
 # Glossary
