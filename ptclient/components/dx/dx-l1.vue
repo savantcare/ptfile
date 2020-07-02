@@ -97,7 +97,7 @@ export default {
         ctInsideTab: require('@/components/goal/layer-2/ctAddGoal.vue').default,
         name: 'tab-add-dx',
       }
-      this.$store.commit('mtfShowNewTabInL2', tab)
+      this.$store.commit('mtfShowNewFirstTabInL2', tab)
     },
   },
 }

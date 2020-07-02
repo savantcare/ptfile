@@ -101,7 +101,7 @@ export default {
         name: 'tab-add-goal',
       }
 
-      this.$store.commit('mtfShowNewTabInL2', tab)
+      this.$store.commit('mtfShowNewFirstTabInL2', tab)
     },
   },
 }

@@ -25,7 +25,7 @@ export default {
     mtfSetArTabs(state, value) {
       state.arTabs = value
     },
-    mtfShowNewTabInL2(state, pTab) {
+    mtfShowNewFirstTabInL2(state, pTab) {
       state.arTabs = [pTab]
       state.vblMultiTabDialogInL2Visibility = true
       state.vsActiveTabName = pTab.name
