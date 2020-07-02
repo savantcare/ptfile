@@ -4,7 +4,7 @@
       class="inline-input"
       v-model="keyword"
       :fetch-suggestions="mfQuerySearch"
-      :trigger-on-focus="false"
+      :trigger-on-focus="true"
       placeholder="Please Input"
       prefix-icon="el-icon-search"
       @select="mfHandleSelect"
@@ -35,6 +35,7 @@ export default {
       const { key } = item
       if (key === ADD_GOAL) {
         const doAddGTab = {
+          // Why is this called doAddGTab. Should it be objAddGTab ?
           nameToShowUser: 'Add goal',
           ctInsideTab: require('../goal/layer-2/ctAddGoal.vue').default,
           name: 'tab-add-goal',
