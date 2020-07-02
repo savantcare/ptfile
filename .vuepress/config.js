@@ -16,7 +16,7 @@ module.exports = {
     '!node_modules',
     '!.*',
   ],
-  plugins: ['vuepress-plugin-glossary', 'tabs'],
+  plugins: ['tabs'],
   themeConfig: {
     sidebar: [
       {
