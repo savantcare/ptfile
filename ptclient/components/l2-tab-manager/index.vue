@@ -47,6 +47,7 @@ export default {
       },
     },
     vsActiveTabName: {
+      // TODO: this should have cf in its name
       get() {
         return this.$store.state.multiTabDialogLayer2.vsActiveTabName
       },
@@ -55,9 +56,10 @@ export default {
       },
     },
     vblMultiTabDialogInL2Visibility: {
+      // TODO: this should have cf in its name
       get() {
         return this.$store.state.multiTabDialogLayer2
-          .vblMultiTabDialogInL2Visibility // TODO: as per GLOSSARY this will be L2
+          .vblMultiTabDialogInL2Visibility
       },
       set(value) {
         this.$store.commit('mtfSetTabDialogVisibility', value)
