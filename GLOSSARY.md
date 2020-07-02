@@ -47,7 +47,7 @@ In the following examples age is a function inside a component
 - dx: [Diagnosis](/ptclient/components/dx/)
 - dxa: Diagnosis assessment
 - g: goal
-- bm: Body measurement
+- bm: [Body measurement](/ptclient/components/bm/)
 - rec: Recommendation
 - recs: Recommendations
 - rem: Reminder
