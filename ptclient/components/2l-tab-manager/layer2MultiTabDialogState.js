@@ -9,7 +9,7 @@ export default {
       // why is a tab setting the visibility of the dialog.
       state.vblTabVisibility = value
     },
-    mtfAddNewTab(state, newTab) {
+    mtfAddAdditionalTab(state, newTab) {
       const { name } = newTab
       const checkArray = state.arTabs.filter((tab) => {
         // AG: Why not use https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
@@ -26,7 +26,7 @@ export default {
     mtfSetArTabs(state, value) {
       state.arTabs = value
     },
-    mtfShowTabInL2(state, pTab) {
+    mtfShowNewTabInL2(state, pTab) {
       state.arTabs = [pTab]
       state.vblTabVisibility = true
       state.vsTabName = pTab.name

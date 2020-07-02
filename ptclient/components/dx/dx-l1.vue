@@ -85,7 +85,7 @@ export default {
         value: require('@/components/goal/layer-2/addGoal.vue').default,
         name: 'tab-add-dx',
       }
-      this.$store.commit('mtfShowTabInL2', tab)
+      this.$store.commit('mtfShowNewTabInL2', tab)
     },
   },
 }

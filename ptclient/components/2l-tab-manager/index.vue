@@ -79,7 +79,7 @@ export default {
           value: require('./AddNewTab').default,
           name: dsNewTabName,
         }
-        this.$store.commit('mtfAddNewTab', doNewTab)
+        this.$store.commit('mtfAddAdditionalTab', doNewTab)
       }
       if (action === 'remove') {
         const daNewList = this.cfArTabs.filter((tab) => {
