@@ -14,31 +14,31 @@
 - vbl: bool
 - arAge: Array called Age
 - obAge: Object called Age
-- ctAge: Age is a : ct:
-- cfAge: computed : fn: age of : ct:
+- ctAge: Age is a component
+- cfAge: computed function age of component
 - pAge: Age is a parameter to a function
 - ormAge: Age is ORM created with vuex-orm
 
 ## Start of component functions (similar to class functions)
 
-- mfAge: method : fn: age of : ct:
-- wfAge: watch : fn: age of : ct:
-- mtfAge: Mutation : fn: age
+- mfAge: method function age of component
+- wfAge: watch function age of component
+- mtfAge: Mutation function age
 
 ## Start of prop (similar to function parameters) part of a component
 
-- psAge: prop of type string called age in : ct: . Prop is function paramter
-- pnAge: prop of type number called age in the : ct:
-- paAge: prop of type array called age in the : ct:
-- poAge: prop of type object called age in the : ct:
+- psAge: prop of type string called age in component . Prop is function paramter
+- pnAge: prop of type number called age in the component
+- paAge: prop of type array called age in the component
+- poAge: prop of type object called age in the component
 
 ## Start of Data (similar to local variables) part of a component
 
-- dblAge: data of type boolean called age in the : ct:
-- dsAge: data of type string called age in the : ct: . Data is local variable\
-- dnAge: data of type number called age in the : ct:
-- daAge: data of type array called age in the : ct:
-- doAge: data of type object called age in the : ct:
+- dblAge: data of type boolean called age in the component
+- dsAge: data of type string called age in the component.
+- dnAge: data of type number called age in the component
+- daAge: data of type array called age in the component
+- doAge: data of type object called age in the component
 
 ## Start of Component short forms
 
