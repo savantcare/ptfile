@@ -2,7 +2,7 @@ export default {
   state: {
     vblMultiTabDialogInL2Visibility: false,
     arTabs: [], // Template has a for loop running on this.
-    vsActiveTabName: '', // TODO: Why is there a name outside. In the array each tab has a name
+    vsActiveTabName: '', // arTabs might have 10 tabs. Out of those which tab is active needs to be stored outside the array of 10 tabs
   },
   mutations: {
     mtfSetTabDialogVisibility(state, value) {
