@@ -2,7 +2,7 @@ export default {
   state: {
     vblTabVisibility: false, // TODO: This is realted to dialog and not tab. Need to refactor.
     arTabs: [], // Template has a for loop running on this. TODO: This should be called arTabs
-    vsTabName: '',
+    vsTabName: '', // TODO: Why is there a name outside. In the array each tab has a name
   },
   mutations: {
     mtfSetTabDialogVisibility(state, value) {
@@ -33,29 +33,5 @@ export default {
 
       console.log('state-> ', state)
     },
-    /* showMultiChangeGoalTabInLayer2(state) {
-      const tab = {
-        label: 'Multi rate goal',
-        value: require('@/components/patient/goal/layer2/MultiChangeGoal.vue')
-          .default,
-        name: 'tab-multi-change-goal',
-      }
-      state.arTabs = [tab]
-      state.goalTabType = MULTIPLE_RATE_GOAL
-      state.vblTabVisibility = true
-      state.vsTabName = tab.name
-    },
-    showChangeGoalsTabInLayer2(state, data) {
-      const tab = {
-        label: 'Rate goal',
-        value: require('@/components/patient/goal/layer2/RateGoal.vue').default,
-        name: 'tab-rate-goal',
-      }
-      state.arTabs = [tab]
-      state.vblTabVisibility = true
-      state.goalTabType = RATE_GOAL
-      state.goalData = data
-      state.vsTabName = tab.name
-    }, */
   },
 }
