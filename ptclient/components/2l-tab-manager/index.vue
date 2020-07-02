@@ -83,14 +83,14 @@ export default {
         this.$store.commit('mtfAddAdditionalTab', doNewTab)
       }
       if (action === 'remove') {
-        const daNewList = this.cfArTabs.filter((tab) => {
+        const arNewList = this.cfArTabs.filter((tab) => {
           return tab.name !== targetName
         })
 
-        this.$store.commit('setcfTabList', daNewList)
-        if (daNewList.length > 0) {
+        this.$store.commit('setcfTabList', arNewList)
+        if (arNewList.length > 0) {
           // this.vsActiveTabName = newList[0]['name']
-          console.log('newList=> ', daNewList)
+          console.log('newList=> ', arNewList)
         }
       }
     },
