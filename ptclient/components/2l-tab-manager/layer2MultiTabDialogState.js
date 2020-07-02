@@ -3,11 +3,9 @@ import {
 } from '../../static/others.js'
 export default {
   state: {
-    cfTabVisibility: false,
-    cfTabList: [], // Template has a for loop running on this.
-    goalTabType: '',
-    goalData: null,
-    cfTabValue: 0,
+    cfTabVisibility: false, // TODO: this is not cf. This should be vblTabVisibility
+    cfTabList: [], // Template has a for loop running on this. // TODO: this is not cf. This should be arTabList
+    cfTabValue: 0, // TODO: This should be vsTabName
   },
   mutations: {
     mtfSetTabDialogVisibility(state, value) {

@@ -11,6 +11,7 @@ terms:
   multiStateDisplayAreaHeader: 'This has the slider to choose :timeOfStateSelectedInHeader:'
   vsAge: 'variable of type string called Age'
   vnAge: 'variable of type int called Age'
+  vbl: bool
   arAge: 'Array called Age'
   obAge: 'Object called Age'
   ctAge: 'Age is a :ct:'
