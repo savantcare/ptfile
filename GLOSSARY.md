@@ -1,4 +1,4 @@
-# Glossary
+### Glossary
 
 - pt: Patient
 - pts: Patients
@@ -6,33 +6,35 @@
 - cts: Components
 - fn: Function
 - pf: Patient file
-- multiStateDisplayArea: This has components that can show either the current state or historical state
-- timeOfStateSelectedInHeader: This gives the time for which : multiStateDisplayArea: should be rendered
-- multiStateDisplayAreaHeader: This has the slider to choose : timeOfStateSelectedInHeader:
-- vsAge: variable of type string called Age
-- vnAge: variable of type int called Age
-- vbl: bool
-- arAge: Array called Age
-- obAge: Object called Age
 - ctAge: Age is a component
-- cfAge: computed function age of component
 - pAge: Age is a parameter to a function
 - ormAge: Age is ORM created with vuex-orm
 
-## Start of component functions (similar to class functions)
+### Data types
 
-- mfAge: method function age of component
-- wfAge: watch function age of component
-- mtfAge: Mutation function age
+- vsAge: variable of type string called Age
+- viAge: variable of type int called Age
+- vbl: variable of type bool called Age
+- arAge: Array called Age
+- obAge: Object called Age
 
-## Start of prop (similar to function parameters) part of a component
+### Component functions (similar to class functions)
 
-- psAge: prop of type string called age in component . Prop is function paramter
+In the following examples age is a function inside a component
+
+- mfAge: method function
+- wfAge: watch function
+- cfAge: computed function
+- mtfAge: Mutation function
+
+### Component Prop (similar to function parameters)
+
+- psAge: prop of type string called age in component.
 - pnAge: prop of type number called age in the component
 - paAge: prop of type array called age in the component
 - poAge: prop of type object called age in the component
 
-## Start of Data (similar to local variables) part of a component
+### Component Data (similar to local variables)
 
 - dblAge: data of type boolean called age in the component
 - dsAge: data of type string called age in the component.
@@ -40,7 +42,7 @@
 - daAge: data of type array called age in the component
 - doAge: data of type object called age in the component
 
-## Start of Component short forms
+### Component short forms
 
 - dx: [Diagnosis](/ptclient/components/dx/)
 - dxa: Diagnosis assessment
@@ -57,7 +59,7 @@
 - hx: History
 - scr: screening
 
-## Others
+### Others
 
 - L1: Layer1
 - L2: Layer2
@@ -66,3 +68,6 @@
 - csda: currrent state display area
 - ms: multi state
 - msda: multi state display area
+- multiStateDisplayArea: This has components that can show either the current state or historical state
+- timeOfStateSelectedInHeader: This gives the time for which : multiStateDisplayArea: should be rendered
+- multiStateDisplayAreaHeader: This has the slider to choose : timeOfStateSelectedInHeader:
