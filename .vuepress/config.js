@@ -82,7 +82,7 @@ module.exports = {
         title: 'Client',
         path: '/ptclient/',
         collapsable: true,
-        sidebarDepth: 1,
+        sidebarDepth: 0,
         children: [
           {
             path: '/ptclient/store/',
@@ -213,6 +213,7 @@ module.exports = {
           {
             path: '/ptclient/faq',
             title: 'FAQ',
+            sidebarDepth: 0,
           },
         ],
       },
