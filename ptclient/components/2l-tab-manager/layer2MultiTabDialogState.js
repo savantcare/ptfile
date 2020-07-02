@@ -30,16 +30,11 @@ export default {
     mtfSetArTabs(state, value) {
       state.arTabs = value
     },
-    mtfShowAGTabInL2(state) {
-      const tab = {
-        label: 'Add goal',
-        value: require('@/components/goal/layer-2/addGoal.vue').default,
-        name: 'tab-add-goal',
-      }
-      state.arTabs = [tab]
+    mtfShowAGTabInL2(state, pTab) {
+      state.arTabs = [pTab]
       state.goalTabType = ADD_GOAL
       state.vblTabVisibility = true
-      state.vsTabName = tab.name
+      state.vsTabName = pTab.name
 
       console.log('state-> ', state)
     },

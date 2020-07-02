@@ -69,7 +69,12 @@ export default {
     },
     mfOpenAGDialog() {
       console.log('show add dialog')
-      this.$store.commit('mtfShowAGTabInL2')
+      const tab = {
+        label: 'Add goal',
+        value: require('@/components/goal/layer-2/addGoal.vue').default,
+        name: 'tab-add-goal',
+      }
+      this.$store.commit('mtfShowAGTabInL2', tab)
     },
   },
 }
