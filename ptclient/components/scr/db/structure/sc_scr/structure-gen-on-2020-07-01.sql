@@ -1,6 +1,7 @@
 USE `sc_scr`;
 
 
+DROP TABLE IF EXISTS `phq9PtResponses`;
 CREATE TABLE `phq9PtResponses` (
   `ptUUID` char(36) NOT NULL,
   `question1` enum('0','1','2','3') DEFAULT NULL,
@@ -19,7 +20,7 @@ CREATE TABLE `phq9PtResponses` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
 
-
+DROP TABLE IF EXISTS `scrAssignedToPts`;
 CREATE TABLE `scrAssignedToPts` (
   `uuid` char(36) NOT NULL,
   `scrUUID` char(36) DEFAULT NULL,
@@ -31,7 +32,7 @@ CREATE TABLE `scrAssignedToPts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
 
-
+DROP TABLE IF EXISTS `scrListMasters`;
 CREATE TABLE `scrListMasters` (
   `uuid` char(36) NOT NULL,
   `scrName` varchar(255) DEFAULT NULL,
