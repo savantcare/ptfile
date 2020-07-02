@@ -41,7 +41,7 @@ export default {
         results = []
       }
 
-      const arCtGoalInSearch = ormCtSearch.query().search(queryString).get()
+      const arCtGoalInSearch = ormCtSearch.query().search(queryString).get() // TODO: Why is this ormCtSearch and not ormSearch
 
       console.log('search result from orm model', arCtGoalInSearch)
 

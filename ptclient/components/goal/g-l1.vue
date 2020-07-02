@@ -64,6 +64,7 @@ export default {
             this.daGTable = arGoalEvalList
 
             const obCtGoalInSearch = {
+              // TODO: This is not a object this is array. The names can be improved
               ctName: 'Add goal',
               ctAbbr: 'addg',
               value: 'Add goal',
@@ -72,6 +73,18 @@ export default {
 
             ormCtSearch.insert({
               data: obCtGoalInSearch,
+            })
+
+            const obMcGoalInSearch = {
+              // This did not get added
+              ctName: 'Multichange goal',
+              ctAbbr: 'mcg',
+              value: 'Multichange goal',
+              key: 2,
+            }
+
+            ormCtSearch.insert({
+              data: obMcGoalInSearch,
             })
           }
           this.dblOneQueryIsRunningGate = false
