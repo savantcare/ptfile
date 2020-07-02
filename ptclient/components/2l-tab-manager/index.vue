@@ -5,15 +5,15 @@ Layer2MultiTabDialog is not expected to be accessed by a URL. */
 
 <template>
   <el-dialog
-    :visible.sync="cfTabVisibility"
+    :visible.sync="vblTabVisibility"
     custom-class="multi-tab-dialog"
     width="90%"
     top="5vh"
   >
     <!-- By passing editable we tell element.io to give add and close option Red: https://element.eleme.io/#/en-US/component/tabs#tabs-attributes -->
-    <el-tabs v-model="cfTabValue" type="card" editable @edit="mfHandleTabsEdit">
+    <el-tabs v-model="vsTabName" type="card" editable @edit="mfHandleTabsEdit">
       <el-tab-pane
-        v-for="tab in cfTabList"
+        v-for="tab in arTabList"
         :key="tab.name"
         :label="tab.label"
         :name="tab.name"
@@ -32,42 +32,42 @@ export default {
     }
   },
   computed: {
-    cfTabList: {
-      // return this.$store.state.multiTabDialogLayer2.cfTabList
+    arTabList: {
+      // return this.$store.state.multiTabDialogLayer2.arTabList
       get() {
-        return this.$store.state.multiTabDialogLayer2.cfTabList
+        return this.$store.state.multiTabDialogLayer2.arTabList
       },
       set(value) {
         this.$store.commit('setcfTabList', value)
       },
     },
-    cfTabValue: {
+    vsTabName: {
       get() {
-        return this.$store.state.multiTabDialogLayer2.cfTabValue
+        return this.$store.state.multiTabDialogLayer2.vsTabName
       },
       set(value) {
         this.$store.commit('setcfTabValue', value)
       },
     },
-    cfTabVisibility: {
+    vblTabVisibility: {
       get() {
         console.log(
-          'get cfTabVisibility- ',
-          this.$store.state.multiTabDialogLayer2.cfTabVisibility
+          'get vblTabVisibility- ',
+          this.$store.state.multiTabDialogLayer2.vblTabVisibility
         )
-        return this.$store.state.multiTabDialogLayer2.cfTabVisibility
+        return this.$store.state.multiTabDialogLayer2.vblTabVisibility
       },
       set(value) {
-        console.log('set cfTabVisibility- ', value)
+        console.log('set vblTabVisibility- ', value)
         this.$store.commit('mtfSetTabDialogVisibility', value)
       },
     },
   },
   mounted() {
-    this.dnTabIndex = this.cfTabList.length
-    this.cfTabVisibility = false
-    this.cfTabList = [] // Template has a for loop running on this.
-    this.cfTabValue = 0
+    this.dnTabIndex = this.arTabList.length
+    this.vblTabVisibility = false
+    this.arTabList = [] // Template has a for loop running on this.
+    this.vsTabName = ''
   },
   methods: {
     mfHandleTabsEdit(targetName, action) {
@@ -81,13 +81,13 @@ export default {
         this.$store.commit('mtfAddNewTab', doNewTab)
       }
       if (action === 'remove') {
-        const daNewList = this.cfTabList.filter((tab) => {
+        const daNewList = this.arTabList.filter((tab) => {
           return tab.name !== targetName
         })
 
         this.$store.commit('setcfTabList', daNewList)
         if (daNewList.length > 0) {
-          // this.cfTabValue = newList[0]['name']
+          // this.vsTabName = newList[0]['name']
           console.log('newList=> ', daNewList)
         }
       }

@@ -3,29 +3,29 @@ import {
 } from '../../static/others.js'
 export default {
   state: {
-    cfTabVisibility: false, // TODO: this is not cf. This should be vblTabVisibility
-    cfTabList: [], // Template has a for loop running on this. // TODO: this is not cf. This should be arTabList
-    cfTabValue: 0, // TODO: This should be vsTabName
+    vblTabVisibility: false, // TODO: this is not cf. This should be vblTabVisibility
+    arTabList: [], // Template has a for loop running on this. // TODO: this is not cf. This should be arTabList
+    vsTabName: '', // TODO: This should be vsTabName
   },
   mutations: {
     mtfSetTabDialogVisibility(state, value) {
-      state.cfTabVisibility = value
+      state.vblTabVisibility = value
     },
     mtfAddNewTab(state, newTab) {
       const { name } = newTab
-      const checkArray = state.cfTabList.filter((tab) => {
+      const checkArray = state.arTabList.filter((tab) => {
         return tab.name === name
       })
       if (checkArray.length === 0) {
-        state.cfTabList.push(newTab)
+        state.arTabList.push(newTab)
       }
-      state.cfTabValue = name
+      state.vsTabName = name
     },
     setcfTabValue(state, value) {
-      state.cfTabValue = value
+      state.vsTabName = value
     },
     setcfTabList(state, value) {
-      state.cfTabList = value
+      state.arTabList = value
     },
     mtfShowAGTabInL2(state) {
       const tab = {
@@ -33,10 +33,10 @@ export default {
         value: require('@/components/goal/layer-2/addGoal.vue').default,
         name: 'tab-add-goal',
       }
-      state.cfTabList = [tab]
+      state.arTabList = [tab]
       state.goalTabType = ADD_GOAL
-      state.cfTabVisibility = true
-      state.cfTabValue = tab.name
+      state.vblTabVisibility = true
+      state.vsTabName = tab.name
 
       console.log('state-> ', state)
     },
@@ -47,10 +47,10 @@ export default {
           .default,
         name: 'tab-multi-change-goal',
       }
-      state.cfTabList = [tab]
+      state.arTabList = [tab]
       state.goalTabType = MULTIPLE_RATE_GOAL
-      state.cfTabVisibility = true
-      state.cfTabValue = tab.name
+      state.vblTabVisibility = true
+      state.vsTabName = tab.name
     },
     showChangeGoalsTabInLayer2(state, data) {
       const tab = {
@@ -58,11 +58,11 @@ export default {
         value: require('@/components/patient/goal/layer2/RateGoal.vue').default,
         name: 'tab-rate-goal',
       }
-      state.cfTabList = [tab]
-      state.cfTabVisibility = true
+      state.arTabList = [tab]
+      state.vblTabVisibility = true
       state.goalTabType = RATE_GOAL
       state.goalData = data
-      state.cfTabValue = tab.name
+      state.vsTabName = tab.name
     }, */
   },
 }
