@@ -77,7 +77,7 @@ export default {
         const dsNewTabName = `tab-${++this.dnTabIndex}`
         const doNewTab = {
           label: 'New tab',
-          value: require('./AddNewTab').default,
+          value: require('./ctAddNewTab').default,
           name: dsNewTabName,
         }
         this.$store.commit('mtfAddAdditionalTab', doNewTab)
