@@ -1,7 +1,9 @@
 # COMPONENTS
 
-**This directory is not required, you can delete it if you don't want to use it.**
+## Health components
 
-The components directory contains your Vue.js Components.
+- [Recommendations](./rex)
+- Reminders
+- Diagnosis
 
-_Nuxt.js doesn't supercharge these components._
+## Other componenets
