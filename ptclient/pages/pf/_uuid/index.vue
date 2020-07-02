@@ -44,7 +44,7 @@ export default {
     ctScrL1,
   },
   mounted() {
-    this.$store.commit('setTabDialogVisibility', false)
+    this.$store.commit('mtfSetTabDialogVisibility', false)
   },
 }
 </script>

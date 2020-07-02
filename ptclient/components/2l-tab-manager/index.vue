@@ -5,13 +5,13 @@ Layer2MultiTabDialog is not expected to be accessed by a URL. */
 
 <template>
   <el-dialog
-    :visible.sync="visibility"
+    :visible.sync="cfTabVisibility"
     custom-class="multi-tab-dialog"
     width="90%"
     top="5vh"
   >
     <!-- By passing editable we tell element.io to give add and close option Red: https://element.eleme.io/#/en-US/component/tabs#tabs-attributes -->
-    <el-tabs v-model="cfTabValue" type="card" editable @edit="handleTabsEdit">
+    <el-tabs v-model="cfTabValue" type="card" editable @edit="mfHandleTabsEdit">
       <el-tab-pane
         v-for="tab in cfTabList"
         :key="tab.name"
@@ -28,7 +28,7 @@ Layer2MultiTabDialog is not expected to be accessed by a URL. */
 export default {
   data() {
     return {
-      tabIndex: 0,
+      dnTabIndex: 0,
     }
   },
   computed: {
@@ -49,46 +49,46 @@ export default {
         this.$store.commit('setcfTabValue', value)
       },
     },
-    visibility: {
+    cfTabVisibility: {
       get() {
         console.log(
-          'get visibility- ',
-          this.$store.state.multiTabDialogLayer2.visibility
+          'get cfTabVisibility- ',
+          this.$store.state.multiTabDialogLayer2.cfTabVisibility
         )
-        return this.$store.state.multiTabDialogLayer2.visibility
+        return this.$store.state.multiTabDialogLayer2.cfTabVisibility
       },
       set(value) {
-        console.log('set visibility- ', value)
-        this.$store.commit('setTabDialogVisibility', value)
+        console.log('set cfTabVisibility- ', value)
+        this.$store.commit('mtfSetTabDialogVisibility', value)
       },
     },
   },
   mounted() {
-    this.tabIndex = this.cfTabList.length
-    this.visibility = false
+    this.dnTabIndex = this.cfTabList.length
+    this.cfTabVisibility = false
     this.cfTabList = [] // Template has a for loop running on this.
     this.cfTabValue = 0
   },
   methods: {
-    handleTabsEdit(targetName, action) {
+    mfHandleTabsEdit(targetName, action) {
       if (action === 'add') {
-        const newTabName = `tab-${++this.tabIndex}`
-        const newTab = {
+        const dsNewTabName = `tab-${++this.dnTabIndex}`
+        const doNewTab = {
           label: 'New tab',
           value: require('./AddNewTab').default,
-          name: newTabName,
+          name: dsNewTabName,
         }
-        this.$store.commit('addNewTab', newTab)
+        this.$store.commit('mtfAddNewTab', doNewTab)
       }
       if (action === 'remove') {
-        const newList = this.cfTabList.filter((tab) => {
+        const daNewList = this.cfTabList.filter((tab) => {
           return tab.name !== targetName
         })
 
-        this.$store.commit('setcfTabList', newList)
-        if (newList.length > 0) {
+        this.$store.commit('setcfTabList', daNewList)
+        if (daNewList.length > 0) {
           // this.cfTabValue = newList[0]['name']
-          console.log('newList=> ', newList)
+          console.log('newList=> ', daNewList)
         }
       }
     },

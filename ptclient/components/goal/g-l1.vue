@@ -10,7 +10,7 @@
           >D</el-button
         >
         <el-button
-          @click.prevent="openAGDialog()"
+          @click.prevent="mfOpenAGDialog()"
           style="float: right; padding: 3px 0;"
           type="text"
           >A</el-button
@@ -40,29 +40,23 @@ export default {
     }
   },
   mounted() {
-    this.dbGetGoals()
+    this.mfdaGetG()
   },
   methods: {
-    async dbGetGoals() {
+    async mfdaGetG() {
       try {
         if (!this.dblOneQueryIsRunningGate) {
           this.dblOneQueryIsRunningGate = true
-          const countGoal = await ormGoal.query().count()
+          const dnCountG = await ormGoal.query().count()
 
-          console.log('Number of recs before query =>', countGoal)
-          if (countGoal === 0) {
-            const goalEvalList = await ormGoal
+          console.log('Number of recs before query =>', dnCountG)
+          if (dnCountG === 0) {
+            await ormGoal
               .api()
               .get(
                 'http://localhost:8000/goals?patientUUID=bfe041fa-073b-4223-8c69-0540ee678ff8'
               )
 
-            // console.log('goalEvalList - ' + goalEvalList.ok)
-            // let arGoalEvalList = null
-            if (goalEvalList.ok) {
-              // console.log('goal==== ' + JSON.stringify(arGoalEvalList, null, 4))
-            }
-            // await ormGoal.api().get(GOAL_API_URL)
             console.log('Number of goal in model =>', ormGoal.query().count())
             const arGoalEvalList = ormGoal.query().get()
             this.daGTable = arGoalEvalList
@@ -73,9 +67,9 @@ export default {
         console.log('failed')
       }
     },
-    openAGDialog() {
+    mfOpenAGDialog() {
       console.log('show add dialog')
-      this.$store.commit('showAddGoalTabInLayer2')
+      this.$store.commit('mtfShowAGTabInL2')
     },
   },
 }

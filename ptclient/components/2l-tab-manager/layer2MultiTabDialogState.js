@@ -3,17 +3,17 @@ import {
 } from '../../static/others.js'
 export default {
   state: {
-    visibility: false,
+    cfTabVisibility: false,
     cfTabList: [], // Template has a for loop running on this.
     goalTabType: '',
     goalData: null,
     cfTabValue: 0,
   },
   mutations: {
-    setTabDialogVisibility(state, value) {
-      state.visibility = value
+    mtfSetTabDialogVisibility(state, value) {
+      state.cfTabVisibility = value
     },
-    addNewTab(state, newTab) {
+    mtfAddNewTab(state, newTab) {
       const { name } = newTab
       const checkArray = state.cfTabList.filter((tab) => {
         return tab.name === name
@@ -29,7 +29,7 @@ export default {
     setcfTabList(state, value) {
       state.cfTabList = value
     },
-    showAddGoalTabInLayer2(state) {
+    mtfShowAGTabInL2(state) {
       const tab = {
         label: 'Add goal',
         value: require('@/components/goal/layer-2/addGoal.vue').default,
@@ -37,7 +37,7 @@ export default {
       }
       state.cfTabList = [tab]
       state.goalTabType = ADD_GOAL
-      state.visibility = true
+      state.cfTabVisibility = true
       state.cfTabValue = tab.name
 
       console.log('state-> ', state)
@@ -51,7 +51,7 @@ export default {
       }
       state.cfTabList = [tab]
       state.goalTabType = MULTIPLE_RATE_GOAL
-      state.visibility = true
+      state.cfTabVisibility = true
       state.cfTabValue = tab.name
     },
     showChangeGoalsTabInLayer2(state, data) {
@@ -61,7 +61,7 @@ export default {
         name: 'tab-rate-goal',
       }
       state.cfTabList = [tab]
-      state.visibility = true
+      state.cfTabVisibility = true
       state.goalTabType = RATE_GOAL
       state.goalData = data
       state.cfTabValue = tab.name

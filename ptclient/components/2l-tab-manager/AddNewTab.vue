@@ -3,11 +3,11 @@
     <el-autocomplete
       class="inline-input"
       v-model="keyword"
-      :fetch-suggestions="querySearch"
+      :fetch-suggestions="mfQuerySearch"
       :trigger-on-focus="false"
       placeholder="Please Input"
       prefix-icon="el-icon-search"
-      @select="handleSelect"
+      @select="mfHandleSelect"
       clearable
     ></el-autocomplete>
   </div>
@@ -33,7 +33,7 @@ export default {
   },
   mounted() {},
   methods: {
-    querySearch(queryString, cb) {
+    mfQuerySearch(queryString, cb) {
       let results = []
       if (queryString.length === 0) {
         results = []
@@ -45,22 +45,22 @@ export default {
 
       cb(results)
     },
-    handleSelect(item) {
+    mfHandleSelect(item) {
       const { key } = item
       if (key === ADD_GOAL) {
-        const addGoalTab = {
+        const doAddGTab = {
           label: 'Add goal',
           value: require('../goal/layer-2/addGoal.vue').default,
           name: 'tab-add-goal',
         }
-        this.$store.commit('addNewTab', addGoalTab)
+        this.$store.commit('mtfAddNewTab', doAddGTab)
       } /* else if (key == MULTIPLE_RATE_GOAL) {
         const multiChangeGoalTab = {
           label: 'Multi rate goal',
           value: require('../patient/goal/layer2/MultiChangeGoal').default,
           name: 'tab-multi-change-goal',
         }
-        this.$store.commit('addNewTab', multiChangeGoalTab)
+        this.$store.commit('mtfAddNewTab', multiChangeGoalTab)
       } */
     },
   },
