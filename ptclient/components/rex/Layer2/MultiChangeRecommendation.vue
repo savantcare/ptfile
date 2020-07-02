@@ -99,7 +99,8 @@ export default {
       return result
     },
     tabDialogVisibility() {
-      return this.$store.state.multiTabDialogLayer2.vblMultiTabDialogIn2LVisibility
+      return this.$store.state.multiTabDialogLayer2
+        .vblMultiTabDialogInL2Visibility
     },
   },
   mounted() {

@@ -1,12 +1,12 @@
 export default {
   state: {
-    vblMultiTabDialogIn2LVisibility: false, // TODO: as per GLOSSARY it should be L2
+    vblMultiTabDialogInL2Visibility: false, // TODO: as per GLOSSARY it should be L2
     arTabs: [], // Template has a for loop running on this. TODO: This should be called arTabs
     vsActiveTabName: '', // TODO: Why is there a name outside. In the array each tab has a name
   },
   mutations: {
     mtfSetTabDialogVisibility(state, value) {
-      state.vblMultiTabDialogIn2LVisibility = value
+      state.vblMultiTabDialogInL2Visibility = value
     },
     mtfAddAdditionalTab(state, newTab) {
       const { name } = newTab
@@ -27,7 +27,7 @@ export default {
     },
     mtfShowNewTabInL2(state, pTab) {
       state.arTabs = [pTab]
-      state.vblMultiTabDialogIn2LVisibility = true
+      state.vblMultiTabDialogInL2Visibility = true
       state.vsActiveTabName = pTab.name
 
       console.log('state-> ', state)
