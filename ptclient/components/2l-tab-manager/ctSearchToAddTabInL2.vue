@@ -36,19 +36,11 @@ export default {
   mounted() {},
   methods: {
     mfQuerySearch(queryString, cb) {
-      let results = []
-      if (queryString.length === 0) {
-        results = []
-      }
-
       const arCtGoalInSearch = ormCtSearch.query().search(queryString).get() // TODO: Why is this ormCtSearch and not ormSearch
 
       console.log('search result from orm model', arCtGoalInSearch)
 
-      results = this.arCtsForSearchDuringAdd.filter((item) => {
-        return item.value.toLowerCase().search(queryString) > -1
-      })
-      console.log(arCtGoalInSearch, results)
+      console.log(arCtGoalInSearch)
       cb(arCtGoalInSearch)
     },
     mfHandleSelect(item) {
