@@ -1,12 +1,11 @@
 export default {
   state: {
-    vblMultiTabDialogIn2LVisibility: false, // TODO: This is realted to dialog and not tab. Need to refactor.
+    vblMultiTabDialogIn2LVisibility: false,
     arTabs: [], // Template has a for loop running on this. TODO: This should be called arTabs
     vsTabName: '', // TODO: Why is there a name outside. In the array each tab has a name
   },
   mutations: {
     mtfSetTabDialogVisibility(state, value) {
-      // why is a tab setting the visibility of the dialog.
       state.vblMultiTabDialogIn2LVisibility = value
     },
     mtfAddAdditionalTab(state, newTab) {
