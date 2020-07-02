@@ -38,7 +38,7 @@ export default {
         return this.$store.state.multiTabDialogLayer2.arTabList
       },
       set(value) {
-        this.$store.commit('setcfTabList', value)
+        this.$store.commit('mtfSetArTabList', value)
       },
     },
     vsTabName: {
@@ -46,7 +46,7 @@ export default {
         return this.$store.state.multiTabDialogLayer2.vsTabName
       },
       set(value) {
-        this.$store.commit('setcfTabValue', value)
+        this.$store.commit('mtfSetVsTabName', value)
       },
     },
     vblTabVisibility: {

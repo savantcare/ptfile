@@ -21,10 +21,10 @@ export default {
       }
       state.vsTabName = name
     },
-    setcfTabValue(state, value) {
+    mtfSetVsTabName(state, value) {
       state.vsTabName = value
     },
-    setcfTabList(state, value) {
+    mtfSetArTabList(state, value) {
       state.arTabList = value
     },
     mtfShowAGTabInL2(state) {
