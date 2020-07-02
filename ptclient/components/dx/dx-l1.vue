@@ -82,7 +82,7 @@ export default {
       console.log('show add dialog')
       const tab = {
         label: 'Add Dx',
-        value: require('@/components/goal/layer-2/addGoal.vue').default,
+        value: require('@/components/goal/layer-2/ctAddGoal.vue').default,
         name: 'tab-add-dx',
       }
       this.$store.commit('mtfShowNewTabInL2', tab)
