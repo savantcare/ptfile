@@ -4,7 +4,7 @@
 
 ### Core components
 
-- [Second layer tab manager](./2l-tab-manager/design.html)
+- [Second layer tab manager](./l2-tab-manager/design.html)
 - Search
 
 ### Health components
