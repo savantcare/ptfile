@@ -51,7 +51,7 @@ export default {
         return this.$store.state.multiTabDialogLayer2.vsActiveTabName
       },
       set(value) {
-        this.$store.commit('mtfSetVsTabName', value)
+        this.$store.commit('mtfSetVsActiveTabName', value)
       },
     },
     vblMultiTabDialogInL2Visibility: {

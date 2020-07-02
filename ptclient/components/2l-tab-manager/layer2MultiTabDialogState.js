@@ -19,7 +19,7 @@ export default {
       }
       state.vsActiveTabName = name
     },
-    mtfSetVsTabName(state, value) {
+    mtfSetVsActiveTabName(state, value) {
       state.vsActiveTabName = value
     },
     mtfSetArTabs(state, value) {
