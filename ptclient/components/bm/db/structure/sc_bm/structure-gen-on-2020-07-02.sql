@@ -1,5 +1,6 @@
 use sc_bm;
 
+DROP TABLE IF EXISTS `bloodPressure`;
 CREATE TABLE `bloodPressure` (
   `ptUUID` char(36) NOT NULL,
   `systolicValue` int(11) NOT NULL COMMENT 'mm Hg',
@@ -11,6 +12,7 @@ CREATE TABLE `bloodPressure` (
   PRIMARY KEY (`ptUUID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
+DROP TABLE IF EXISTS `bloodSugar`;
 CREATE TABLE `bloodSugar` (
   `ptUUID` char(36) NOT NULL,
   `bloodSugar` int(11) NOT NULL,
@@ -22,6 +24,7 @@ CREATE TABLE `bloodSugar` (
    PRIMARY KEY (`ptUUID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
+DROP TABLE IF EXISTS `BMI`;
 CREATE TABLE `BMI` (
   `ptUUID` char(36) NOT NULL,
   `bmiValue` decimal(10,2) NOT NULL,
@@ -32,6 +35,7 @@ CREATE TABLE `BMI` (
   PRIMARY KEY (`ptUUID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
+DROP TABLE IF EXISTS `height`;
 
 CREATE TABLE `height` (
   `ptUUID` char(36) NOT NULL,
@@ -43,6 +47,7 @@ CREATE TABLE `height` (
   PRIMARY KEY (`ptUUID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
+DROP TABLE IF EXISTS `oxygenSaturation`;
 
 CREATE TABLE `oxygenSaturation` (
   `ptUUID` char(36) NULL,
@@ -55,6 +60,7 @@ CREATE TABLE `oxygenSaturation` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
 
+DROP TABLE IF EXISTS `pulse`;
 CREATE TABLE `pulse` (
   `ptUUID` char(36) NOT NULL,
   `beatsPerMinuteValue` int(4) NOT NULL,
@@ -66,6 +72,7 @@ CREATE TABLE `pulse` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
 
+DROP TABLE IF EXISTS `temperature`;
 CREATE TABLE `temperature` (
   `ptUUID` char(36) DEFAULT NULL,
   `temperatureInFarehnite` decimal(10,0) NOT NULL,
@@ -77,6 +84,7 @@ CREATE TABLE `temperature` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
 
+DROP TABLE IF EXISTS `waistCircumference`;
 CREATE TABLE `waistCircumference` (
   `ptUUID` char(36) NOT NULL,
   `waistCircumferenceInInches` decimal(10,2) NOT NULL,
@@ -88,6 +96,7 @@ CREATE TABLE `waistCircumference` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 WITH SYSTEM VERSIONING;
 
 
+DROP TABLE IF EXISTS `weight`;
 CREATE TABLE `weight` (
   `ptUUID` char(36) NOT NULL,
   `weightInPounds` decimal(10,2) NOT NULL,
