@@ -1,19 +1,22 @@
 import {
-  ADD_GOAL /* , MULTIPLE_RATE_GOAL, RATE_GOAL */,
+  ADD_GOAL, // TODO: Why is this needed?
 } from '../../static/others.js'
+
 export default {
   state: {
-    vblTabVisibility: false, // TODO: this is not cf. This should be vblTabVisibility
-    arTabList: [], // Template has a for loop running on this. // TODO: this is not cf. This should be arTabList
-    vsTabName: '', // TODO: This should be vsTabName
+    vblTabVisibility: false, // TODO: This is realted to dialog and not tab. Need to refactor.
+    arTabList: [], // Template has a for loop running on this. TODO: This should be called arTabs
+    vsTabName: '',
   },
   mutations: {
     mtfSetTabDialogVisibility(state, value) {
+      // why is a tab setting the visibility of the dialog.
       state.vblTabVisibility = value
     },
     mtfAddNewTab(state, newTab) {
       const { name } = newTab
       const checkArray = state.arTabList.filter((tab) => {
+        // AG: Why not use https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
         return tab.name === name
       })
       if (checkArray.length === 0) {
