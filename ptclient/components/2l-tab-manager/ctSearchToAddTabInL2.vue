@@ -40,14 +40,7 @@ export default {
           name: 'tab-add-goal',
         }
         this.$store.commit('mtfAddAdditionalTab', doAddGTab)
-      } /* else if (key == MULTIPLE_RATE_GOAL) {
-        const multiChangeGoalTab = {
-          label: 'Multi rate goal',
-          value: require('../patient/goal/layer2/MultiChangeGoal').default,
-          name: 'tab-multi-change-goal',
-        }
-        this.$store.commit('mtfAddAdditionalTab', multiChangeGoalTab)
-      } */
+      }
     },
   },
 }
