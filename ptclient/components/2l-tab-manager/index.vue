@@ -23,7 +23,7 @@ Layer2MultiTabDialog is not expected to be accessed by a URL. */
         :label="tab.label"
         :name="tab.name"
       >
-        <component :is="tab.value" />
+        <component :is="tab.ctInsideTab" />
       </el-tab-pane>
     </el-tabs>
   </el-dialog>
