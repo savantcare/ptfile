@@ -13,7 +13,7 @@ Layer2MultiTabDialog is not expected to be accessed by a URL. */
     <!-- By passing editable we tell element.io to give add and close option Red: https://element.eleme.io/#/en-US/component/tabs#tabs-attributes -->
     <el-tabs v-model="tabValue" type="card" editable @edit="handleTabsEdit">
       <el-tab-pane
-        v-for="tab in tabList"
+        v-for="tab in cfTabList"
         :key="tab.name"
         :label="tab.label"
         :name="tab.name"
@@ -32,13 +32,13 @@ export default {
     }
   },
   computed: {
-    tabList: {
-      // return this.$store.state.multiTabDialogLayer2.tabList
+    cfTabList: {
+      // return this.$store.state.multiTabDialogLayer2.cfTabList
       get() {
-        return this.$store.state.multiTabDialogLayer2.tabList
+        return this.$store.state.multiTabDialogLayer2.cfTabList
       },
       set(value) {
-        this.$store.commit('setTabList', value)
+        this.$store.commit('setcfTabList', value)
       },
     },
     tabValue: {
@@ -64,9 +64,9 @@ export default {
     },
   },
   mounted() {
-    this.tabIndex = this.tabList.length
+    this.tabIndex = this.cfTabList.length
     this.visibility = false
-    this.tabList = [] // Template has a for loop running on this.
+    this.cfTabList = [] // Template has a for loop running on this.
     this.tabValue = 0
   },
   methods: {
@@ -81,11 +81,11 @@ export default {
         this.$store.commit('addNewTab', newTab)
       }
       if (action === 'remove') {
-        const newList = this.tabList.filter((tab) => {
+        const newList = this.cfTabList.filter((tab) => {
           return tab.name !== targetName
         })
 
-        this.$store.commit('setTabList', newList)
+        this.$store.commit('setcfTabList', newList)
         if (newList.length > 0) {
           // this.tabValue = newList[0]['name']
           console.log('newList=> ', newList)

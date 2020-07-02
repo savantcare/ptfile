@@ -4,7 +4,7 @@ import {
 export default {
   state: {
     visibility: false,
-    tabList: [], // Template has a for loop running on this.
+    cfTabList: [], // Template has a for loop running on this.
     goalTabType: '',
     goalData: null,
     tabValue: 0,
@@ -15,19 +15,19 @@ export default {
     },
     addNewTab(state, newTab) {
       const { name } = newTab
-      const checkArray = state.tabList.filter((tab) => {
+      const checkArray = state.cfTabList.filter((tab) => {
         return tab.name === name
       })
       if (checkArray.length === 0) {
-        state.tabList.push(newTab)
+        state.cfTabList.push(newTab)
       }
       state.tabValue = name
     },
     setTabValue(state, value) {
       state.tabValue = value
     },
-    setTabList(state, value) {
-      state.tabList = value
+    setcfTabList(state, value) {
+      state.cfTabList = value
     },
     showAddGoalTabInLayer2(state) {
       const tab = {
@@ -35,7 +35,7 @@ export default {
         value: require('@/components/goal/layer-2/addGoal.vue').default,
         name: 'tab-add-goal',
       }
-      state.tabList = [tab]
+      state.cfTabList = [tab]
       state.goalTabType = ADD_GOAL
       state.visibility = true
       state.tabValue = tab.name
@@ -49,7 +49,7 @@ export default {
           .default,
         name: 'tab-multi-change-goal',
       }
-      state.tabList = [tab]
+      state.cfTabList = [tab]
       state.goalTabType = MULTIPLE_RATE_GOAL
       state.visibility = true
       state.tabValue = tab.name
@@ -60,7 +60,7 @@ export default {
         value: require('@/components/patient/goal/layer2/RateGoal.vue').default,
         name: 'tab-rate-goal',
       }
-      state.tabList = [tab]
+      state.cfTabList = [tab]
       state.visibility = true
       state.goalTabType = RATE_GOAL
       state.goalData = data
