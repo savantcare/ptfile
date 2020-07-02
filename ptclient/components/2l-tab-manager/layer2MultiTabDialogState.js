@@ -26,7 +26,7 @@ export default {
     mtfSetArTabs(state, value) {
       state.arTabs = value
     },
-    mtfShowAGTabInL2(state, pTab) {
+    mtfShowTabInL2(state, pTab) {
       state.arTabs = [pTab]
       state.vblTabVisibility = true
       state.vsTabName = pTab.name
