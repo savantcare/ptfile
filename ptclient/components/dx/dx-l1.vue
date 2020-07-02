@@ -12,6 +12,12 @@
         <el-button style="float: right; padding: 3px 0;" type="text"
           >M</el-button
         >
+        <el-button
+          @click.prevent="mfOpenADialog()"
+          style="float: right; padding: 3px 0;"
+          type="text"
+          >A</el-button
+        >
       </div>
       <el-table :data="daDxTable" style="width: 100%;">
         <el-table-column prop="dxName" label="Diagnosis name" width="180">
@@ -71,6 +77,15 @@ export default {
       } catch (e) {}
 
       // console.log(dxList);
+    },
+    mfOpenADialog() {
+      console.log('show add dialog')
+      const tab = {
+        label: 'Add Dx',
+        value: require('@/components/goal/layer-2/addGoal.vue').default,
+        name: 'tab-add-dx',
+      }
+      this.$store.commit('mtfShowTabInL2', tab)
     },
   },
 }

@@ -10,11 +10,11 @@
           >D</el-button
         >
         <el-button
-          @click.prevent="mfOpenAGDialog()"
+          @click.prevent="mfOpenADialog()"
           style="float: right; padding: 3px 0;"
           type="text"
-          >A</el-button
-        >
+          >A
+        </el-button>
       </div>
       <el-table :data="daGTable" style="width: 100%;">
         <el-table-column prop="description" label="Description" width="180">
@@ -67,7 +67,7 @@ export default {
         console.log('failed')
       }
     },
-    mfOpenAGDialog() {
+    mfOpenADialog() {
       console.log('show add dialog')
       const tab = {
         label: 'Add goal',
