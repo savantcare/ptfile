@@ -19,7 +19,7 @@ export default {
   data() {
     return {
       keyword: '',
-      componentList: [
+      arCtsForSearchDuringAdd: [
         {
           value: 'Add goal',
           key: ADD_GOAL,
@@ -39,7 +39,7 @@ export default {
         results = []
       }
 
-      results = this.componentList.filter((item) => {
+      results = this.arCtsForSearchDuringAdd.filter((item) => {
         return item.value.toLowerCase().search(queryString) > -1
       })
 
