@@ -11,7 +11,7 @@ Layer2MultiTabDialog is not expected to be accessed by a URL. */
     top="5vh"
   >
     <!-- By passing editable we tell element.io to give add and close option Red: https://element.eleme.io/#/en-US/component/tabs#tabs-attributes -->
-    <el-tabs v-model="tabValue" type="card" editable @edit="handleTabsEdit">
+    <el-tabs v-model="cfTabValue" type="card" editable @edit="handleTabsEdit">
       <el-tab-pane
         v-for="tab in cfTabList"
         :key="tab.name"
@@ -41,12 +41,12 @@ export default {
         this.$store.commit('setcfTabList', value)
       },
     },
-    tabValue: {
+    cfTabValue: {
       get() {
-        return this.$store.state.multiTabDialogLayer2.tabValue
+        return this.$store.state.multiTabDialogLayer2.cfTabValue
       },
       set(value) {
-        this.$store.commit('setTabValue', value)
+        this.$store.commit('setcfTabValue', value)
       },
     },
     visibility: {
@@ -67,7 +67,7 @@ export default {
     this.tabIndex = this.cfTabList.length
     this.visibility = false
     this.cfTabList = [] // Template has a for loop running on this.
-    this.tabValue = 0
+    this.cfTabValue = 0
   },
   methods: {
     handleTabsEdit(targetName, action) {
@@ -87,7 +87,7 @@ export default {
 
         this.$store.commit('setcfTabList', newList)
         if (newList.length > 0) {
-          // this.tabValue = newList[0]['name']
+          // this.cfTabValue = newList[0]['name']
           console.log('newList=> ', newList)
         }
       }

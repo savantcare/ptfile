@@ -7,7 +7,7 @@ export default {
     cfTabList: [], // Template has a for loop running on this.
     goalTabType: '',
     goalData: null,
-    tabValue: 0,
+    cfTabValue: 0,
   },
   mutations: {
     setTabDialogVisibility(state, value) {
@@ -21,10 +21,10 @@ export default {
       if (checkArray.length === 0) {
         state.cfTabList.push(newTab)
       }
-      state.tabValue = name
+      state.cfTabValue = name
     },
-    setTabValue(state, value) {
-      state.tabValue = value
+    setcfTabValue(state, value) {
+      state.cfTabValue = value
     },
     setcfTabList(state, value) {
       state.cfTabList = value
@@ -38,7 +38,7 @@ export default {
       state.cfTabList = [tab]
       state.goalTabType = ADD_GOAL
       state.visibility = true
-      state.tabValue = tab.name
+      state.cfTabValue = tab.name
 
       console.log('state-> ', state)
     },
@@ -52,7 +52,7 @@ export default {
       state.cfTabList = [tab]
       state.goalTabType = MULTIPLE_RATE_GOAL
       state.visibility = true
-      state.tabValue = tab.name
+      state.cfTabValue = tab.name
     },
     showChangeGoalsTabInLayer2(state, data) {
       const tab = {
@@ -64,7 +64,7 @@ export default {
       state.visibility = true
       state.goalTabType = RATE_GOAL
       state.goalData = data
-      state.tabValue = tab.name
+      state.cfTabValue = tab.name
     }, */
   },
 }
