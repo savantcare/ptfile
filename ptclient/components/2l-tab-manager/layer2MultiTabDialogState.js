@@ -1,6 +1,6 @@
 export default {
   state: {
-    vblMultiTabDialogIn2LVisibility: false,
+    vblMultiTabDialogIn2LVisibility: false, // TODO: as per GLOSSARY it should be L2
     arTabs: [], // Template has a for loop running on this. TODO: This should be called arTabs
     vsActiveTabName: '', // TODO: Why is there a name outside. In the array each tab has a name
   },

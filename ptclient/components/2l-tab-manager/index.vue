@@ -39,7 +39,6 @@ export default {
   computed: {
     cfArTabs: {
       // this object has get and set methods
-      // return this.$store.state.multiTabDialogLayer2.arTabs
       get() {
         return this.$store.state.multiTabDialogLayer2.arTabs
       },
@@ -58,7 +57,7 @@ export default {
     vblMultiTabDialogIn2LVisibility: {
       get() {
         return this.$store.state.multiTabDialogLayer2
-          .vblMultiTabDialogIn2LVisibility
+          .vblMultiTabDialogIn2LVisibility                // TODO: as per GLOSSARY this will be L2
       },
       set(value) {
         this.$store.commit('mtfSetTabDialogVisibility', value)
