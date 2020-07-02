@@ -28,7 +28,9 @@
 
 <script>
 // import addGoal from './layer-2/addGoal.vue'
+import ormCtSearch from '../../models/CtSearchInL2'
 import ormGoal from '@/models/Goal'
+import { ADD_GOAL } from '@/static/others.js'
 
 // const { GOAL_API_URL } = 'http://localhost:8000/goals'
 export default {
@@ -60,6 +62,17 @@ export default {
             console.log('Number of goal in model =>', ormGoal.query().count())
             const arGoalEvalList = ormGoal.query().get()
             this.daGTable = arGoalEvalList
+
+            const obCtGoalInSearch = {
+              ctName: 'Add goal',
+              ctAbbr: 'addg',
+              value: 'Add goal',
+              key: ADD_GOAL,
+            }
+
+            ormCtSearch.insert({
+              data: obCtGoalInSearch,
+            })
           }
           this.dblOneQueryIsRunningGate = false
         }
@@ -74,6 +87,7 @@ export default {
         ctInsideTab: require('@/components/goal/layer-2/ctAddGoal.vue').default,
         name: 'tab-add-goal',
       }
+
       this.$store.commit('mtfShowNewTabInL2', tab)
     },
   },

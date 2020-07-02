@@ -14,7 +14,9 @@
 </template>
 
 <script>
+import ormCtSearch from '../../models/CtSearchInL2'
 import { ADD_GOAL /*, MULTIPLE_RATE_GOAL */ } from '@/static/others.js'
+
 export default {
   data() {
     return {
@@ -39,11 +41,15 @@ export default {
         results = []
       }
 
+      const arCtGoalInSearch = ormCtSearch.query().search(queryString).get()
+
+      console.log('search result from orm model', arCtGoalInSearch)
+
       results = this.arCtsForSearchDuringAdd.filter((item) => {
         return item.value.toLowerCase().search(queryString) > -1
       })
-
-      cb(results)
+      console.log(arCtGoalInSearch, results)
+      cb(arCtGoalInSearch)
     },
     mfHandleSelect(item) {
       const { key } = item

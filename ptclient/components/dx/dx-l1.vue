@@ -30,7 +30,9 @@
 </template>
 
 <script>
+import ormCtSearch from '../../models/CtSearchInL2'
 import ormDx from '@/models/Dx'
+import { ADD_DIAGNOSIS } from '@/static/others.js'
 
 /* export default {
   async asyncData({ params }) {
@@ -69,6 +71,16 @@ export default {
             this.daDxTable = ormDx.query().get()
             // ormDx.query('').get()
             console.log('Number of dx in model =>', ormDx.query().count())
+
+            const obCtDxInSearch = {
+              ctName: 'Add diagnosis',
+              ctAbbr: 'adddx',
+              value: 'Add diagnosis',
+              key: ADD_DIAGNOSIS,
+            }
+            ormCtSearch.insert({
+              data: obCtDxInSearch,
+            })
           } else {
             this.daDxTable = ormDx.query().get()
           }
