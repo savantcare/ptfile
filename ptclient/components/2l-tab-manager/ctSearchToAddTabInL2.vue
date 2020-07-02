@@ -19,19 +19,7 @@ import { ADD_GOAL /*, MULTIPLE_RATE_GOAL */ } from '@/static/others.js'
 
 export default {
   data() {
-    return {
-      keyword: '',
-      arCtsForSearchDuringAdd: [
-        {
-          value: 'Add goal',
-          key: ADD_GOAL,
-        },
-        /* {
-          value: 'Multi rate goals',
-          key: MULTIPLE_RATE_GOAL,
-        }, */
-      ],
-    }
+    return {}
   },
   mounted() {},
   methods: {
