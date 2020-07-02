@@ -16,7 +16,7 @@ module.exports = {
     '!node_modules',
     '!.*',
   ],
-  plugins: ['vuepress-plugin-glossary'],
+  plugins: ['vuepress-plugin-glossary', 'tabs'],
   themeConfig: {
     sidebar: [
       {
@@ -99,8 +99,8 @@ module.exports = {
                   {
                     path: '/ptclient/components/allergies/design/design',
                     title: 'Design',
-                  }
-                ]
+                  },
+                ],
               },
               {
                 path: '/ptclient/components/bm/',
@@ -167,7 +167,8 @@ module.exports = {
                 title: 'Mental status exam',
                 children: [
                   {
-                    path: '/ptclient/components/mental-status-exam/design/design',
+                    path:
+                      '/ptclient/components/mental-status-exam/design/design',
                     title: 'Design',
                   },
                 ],
@@ -187,7 +188,8 @@ module.exports = {
                 title: 'Psych review of systems',
                 children: [
                   {
-                    path: '/ptclient/components/psych-review-of-systems/design/design',
+                    path:
+                      '/ptclient/components/psych-review-of-systems/design/design',
                     title: 'Design',
                   },
                 ],
