@@ -5,7 +5,7 @@ Layer2MultiTabDialog is not expected to be accessed by a URL. */
 
 <template>
   <el-dialog
-    :visible.sync="vblTabVisibility"
+    :visible.sync="vblMultiTabDialogIn2LVisibility"
     custom-class="multi-tab-dialog"
     width="90%"
     top="5vh"
@@ -50,23 +50,19 @@ export default {
         this.$store.commit('mtfSetVsTabName', value)
       },
     },
-    vblTabVisibility: {
+    vblMultiTabDialogIn2LVisibility: {
       get() {
-        console.log(
-          'get vblTabVisibility- ',
-          this.$store.state.multiTabDialogLayer2.vblTabVisibility
-        )
-        return this.$store.state.multiTabDialogLayer2.vblTabVisibility
+        return this.$store.state.multiTabDialogLayer2
+          .vblMultiTabDialogIn2LVisibility
       },
       set(value) {
-        console.log('set vblTabVisibility- ', value)
         this.$store.commit('mtfSetTabDialogVisibility', value)
       },
     },
   },
   mounted() {
     this.dnTabIndex = this.cfArTabs.length
-    this.vblTabVisibility = false
+    this.vblMultiTabDialogIn2LVisibility = false
     this.cfArTabs = [] // Template has a for loop running on this.
     this.vsTabName = ''
   },
