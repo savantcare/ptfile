@@ -20,7 +20,7 @@ Layer2MultiTabDialog is not expected to be accessed by a URL. */
       <el-tab-pane
         v-for="tab in cfArTabs"
         :key="tab.name"
-        :label="tab.label"
+        :label="tab.nameToShowUser"
         :name="tab.name"
       >
         <component :is="tab.ctInsideTab" />
@@ -76,8 +76,8 @@ export default {
       if (action === 'add') {
         const dsNewTabName = `tab-${++this.dnTabIndex}`
         const doNewTab = {
-          label: 'New tab',
-          value: require('./ctSearchToAddTabInL2').default,
+          nameToShowUser: 'New tab',
+          ctInsideTab: require('./ctSearchToAddTabInL2').default,
           name: dsNewTabName,
         }
         this.$store.commit('mtfAddAdditionalTab', doNewTab)

@@ -49,8 +49,8 @@ export default {
       const { key } = item
       if (key === ADD_GOAL) {
         const doAddGTab = {
-          label: 'Add goal',
-          value: require('../goal/layer-2/ctAddGoal.vue').default,
+          nameToShowUser: 'Add goal',
+          ctInsideTab: require('../goal/layer-2/ctAddGoal.vue').default,
           name: 'tab-add-goal',
         }
         this.$store.commit('mtfAddAdditionalTab', doAddGTab)

@@ -81,7 +81,7 @@ export default {
     mfOpenADialog() {
       console.log('show add dialog')
       const tab = {
-        label: 'Add Dx',
+        nameToShowUser: 'Add Dx',
         ctInsideTab: require('@/components/goal/layer-2/ctAddGoal.vue').default,
         name: 'tab-add-dx',
       }
