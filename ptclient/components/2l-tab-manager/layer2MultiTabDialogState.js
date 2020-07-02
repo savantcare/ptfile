@@ -27,7 +27,7 @@ export default {
     mtfSetVsTabName(state, value) {
       state.vsTabName = value
     },
-    mtfSetArTabList(state, value) {
+    mtfSetArTabs(state, value) {
       state.arTabs = value
     },
     mtfShowAGTabInL2(state) {

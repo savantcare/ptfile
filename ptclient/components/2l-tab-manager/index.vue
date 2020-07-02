@@ -38,7 +38,7 @@ export default {
         return this.$store.state.multiTabDialogLayer2.arTabs
       },
       set(value) {
-        this.$store.commit('mtfSetArTabList', value)
+        this.$store.commit('mtfSetArTabs', value)
       },
     },
     vsTabName: {
