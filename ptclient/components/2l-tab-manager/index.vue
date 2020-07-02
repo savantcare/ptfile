@@ -13,7 +13,7 @@ Layer2MultiTabDialog is not expected to be accessed by a URL. */
     <!-- By passing editable we tell element.io to give add and close option Red: https://element.eleme.io/#/en-US/component/tabs#tabs-attributes -->
     <el-tabs v-model="vsTabName" type="card" editable @edit="mfHandleTabsEdit">
       <el-tab-pane
-        v-for="tab in arTabList"
+        v-for="tab in arTabs"
         :key="tab.name"
         :label="tab.label"
         :name="tab.name"
@@ -32,10 +32,10 @@ export default {
     }
   },
   computed: {
-    arTabList: {
-      // return this.$store.state.multiTabDialogLayer2.arTabList
+    arTabs: {
+      // return this.$store.state.multiTabDialogLayer2.arTabs
       get() {
-        return this.$store.state.multiTabDialogLayer2.arTabList
+        return this.$store.state.multiTabDialogLayer2.arTabs
       },
       set(value) {
         this.$store.commit('mtfSetArTabList', value)
@@ -64,9 +64,9 @@ export default {
     },
   },
   mounted() {
-    this.dnTabIndex = this.arTabList.length
+    this.dnTabIndex = this.arTabs.length
     this.vblTabVisibility = false
-    this.arTabList = [] // Template has a for loop running on this.
+    this.arTabs = [] // Template has a for loop running on this.
     this.vsTabName = ''
   },
   methods: {
@@ -81,7 +81,7 @@ export default {
         this.$store.commit('mtfAddNewTab', doNewTab)
       }
       if (action === 'remove') {
-        const daNewList = this.arTabList.filter((tab) => {
+        const daNewList = this.arTabs.filter((tab) => {
           return tab.name !== targetName
         })
 

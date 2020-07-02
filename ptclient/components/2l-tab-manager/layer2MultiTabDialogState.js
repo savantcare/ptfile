@@ -5,7 +5,7 @@ import {
 export default {
   state: {
     vblTabVisibility: false, // TODO: This is realted to dialog and not tab. Need to refactor.
-    arTabList: [], // Template has a for loop running on this. TODO: This should be called arTabs
+    arTabs: [], // Template has a for loop running on this. TODO: This should be called arTabs
     vsTabName: '',
   },
   mutations: {
@@ -15,12 +15,12 @@ export default {
     },
     mtfAddNewTab(state, newTab) {
       const { name } = newTab
-      const checkArray = state.arTabList.filter((tab) => {
+      const checkArray = state.arTabs.filter((tab) => {
         // AG: Why not use https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
         return tab.name === name
       })
       if (checkArray.length === 0) {
-        state.arTabList.push(newTab)
+        state.arTabs.push(newTab)
       }
       state.vsTabName = name
     },
@@ -28,7 +28,7 @@ export default {
       state.vsTabName = value
     },
     mtfSetArTabList(state, value) {
-      state.arTabList = value
+      state.arTabs = value
     },
     mtfShowAGTabInL2(state) {
       const tab = {
@@ -36,7 +36,7 @@ export default {
         value: require('@/components/goal/layer-2/addGoal.vue').default,
         name: 'tab-add-goal',
       }
-      state.arTabList = [tab]
+      state.arTabs = [tab]
       state.goalTabType = ADD_GOAL
       state.vblTabVisibility = true
       state.vsTabName = tab.name
@@ -50,7 +50,7 @@ export default {
           .default,
         name: 'tab-multi-change-goal',
       }
-      state.arTabList = [tab]
+      state.arTabs = [tab]
       state.goalTabType = MULTIPLE_RATE_GOAL
       state.vblTabVisibility = true
       state.vsTabName = tab.name
@@ -61,7 +61,7 @@ export default {
         value: require('@/components/patient/goal/layer2/RateGoal.vue').default,
         name: 'tab-rate-goal',
       }
-      state.arTabList = [tab]
+      state.arTabs = [tab]
       state.vblTabVisibility = true
       state.goalTabType = RATE_GOAL
       state.goalData = data
