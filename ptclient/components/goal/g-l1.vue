@@ -76,7 +76,7 @@ export default {
             })
 
             const obMcGoalInSearch = {
-              // This did not get added
+              // TODO: This did not get added to search list
               ctName: 'Multichange goal',
               ctAbbr: 'mcg',
               value: 'Multichange goal',
