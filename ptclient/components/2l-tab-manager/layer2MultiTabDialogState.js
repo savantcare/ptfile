@@ -1,7 +1,3 @@
-import {
-  ADD_GOAL, // TODO: Why is this needed?
-} from '../../static/others.js'
-
 export default {
   state: {
     vblTabVisibility: false, // TODO: This is realted to dialog and not tab. Need to refactor.
@@ -32,7 +28,6 @@ export default {
     },
     mtfShowAGTabInL2(state, pTab) {
       state.arTabs = [pTab]
-      state.goalTabType = ADD_GOAL
       state.vblTabVisibility = true
       state.vsTabName = pTab.name
 
