@@ -6,13 +6,13 @@
         <el-card class="box-card">
           <el-form
             label-position="top"
-            :model="goalForm"
-            ref="goalForm"
+            :model="daGoalForm"
+            ref="daGoalForm"
             class="demo-dynamic"
           >
             <el-card
               class="box-card"
-              v-for="(domain, index) in goalForm.goals"
+              v-for="(domain, index) in daGoalForm.goals"
               :key="index"
               style="margin-bottom: 20px;"
             >
@@ -81,7 +81,7 @@
             <el-form-item>
               <el-button
                 type="success"
-                @click="submitForm('goalForm')"
+                @click="submitForm('daGoalForm')"
                 size="small"
                 >Save</el-button
               >
@@ -107,7 +107,7 @@ export default {
   data() {
     return {
       id: this.$route.query.patient_id,
-      goalForm: { goals: [{ description: '', startDate: '', score: '' }] },
+      daGoalForm: { goals: [{ description: '', startDate: '', score: 0 }] },
       pickerOptions: {
         shortcuts: [
           {
@@ -138,16 +138,16 @@ export default {
   },
   methods: {
     addDomain() {
-      this.goalForm.goals.push({
+      this.daGoalForm.goals.push({
         description: '',
         startDate: '',
         score: '',
       })
     },
     removeDomain(item) {
-      const index = this.goalForm.goals.indexOf(item)
+      const index = this.daGoalForm.goals.indexOf(item)
       if (index !== -1) {
-        this.goalForm.goals.splice(index, 1)
+        this.daGoalForm.goals.splice(index, 1)
       }
     },
     submitForm(formName) {
@@ -155,9 +155,9 @@ export default {
       this.$refs[formName].validate(async (valid) => {
         if (valid) {
           if (this.type === RATE_GOAL) {
-            this.updateData.description = this.goalForm.goals[0].description
-            this.updateData.startDate = this.goalForm.goals[0].startDate
-            this.updateData.score = this.goalForm.goals[0].score
+            this.updateData.description = this.daGoalForm.goals[0].description
+            this.updateData.startDate = this.daGoalForm.goals[0].startDate
+            this.updateData.score = this.daGoalForm.goals[0].score
             this.updateData.discontinuedByUserId = this.userId
             this.updateData.recordChangedByUUID = this.userId
             this.$store.dispatch('updateGoal', {
@@ -167,7 +167,7 @@ export default {
           } else {
             // Add
             const goalList = []
-            this.goalForm.goals.forEach((item) => {
+            this.daGoalForm.goals.forEach((item) => {
               goalList.push({
                 description: item.description,
                 startDate: item.startDate,
@@ -186,7 +186,7 @@ export default {
               patientUUID: this.id,
               notify: this.$notify,
             })
-            this.goalForm = {
+            this.daGoalForm = {
               goals: [{ description: '', startDate: '', score: '' }],
             }
           }
@@ -213,7 +213,7 @@ export default {
   },
   mounted() {
     if (this.type === RATE_GOAL) {
-      this.goalForm = {
+      this.daGoalForm = {
         goals: [
           {
             description: this.updateData.description,
@@ -226,7 +226,7 @@ export default {
   },
   watch: {
     updateData() {
-      this.goalForm = {
+      this.daGoalForm = {
         goals: [
           {
             description: this.updateData.description,
