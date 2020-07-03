@@ -73,8 +73,8 @@ export default {
     this.vsActiveTabName = ''
   },
   methods: {
-    mfHandleTabsEdit(targetName, action) {
-      if (action === 'add') {
+    mfHandleTabsEdit(targetName, pAction) {
+      if (pAction === 'add') {
         const dsNewTabName = `tab-${++this.dnTabIndex}`
         const doNewTab = {
           nameToShowUser: 'New tab',
@@ -83,7 +83,7 @@ export default {
         }
         this.$store.commit('mtfAddAdditionalTab', doNewTab)
       }
-      if (action === 'remove') {
+      if (pAction === 'remove') {
         const arNewList = this.cfArTabs.filter((tab) => {
           return tab.name !== targetName
         })
