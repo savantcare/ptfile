@@ -14,7 +14,6 @@
 
 <script>
 import ormSearch from '../../models/CtSearchInL2'
-import { ADD_GOAL /*, MULTIPLE_RATE_GOAL */ } from '@/static/others.js'
 
 export default {
   data() {
@@ -28,15 +27,13 @@ export default {
       pCallBack(resultSet)
     },
     mfHandleSuggestionSelectedByUser(pSelectedSuggestion) {
-      const { key } = pSelectedSuggestion
-      if (key === ADD_GOAL) {
-        const objAddGTab = {
-          nameToShowUser: 'Add goal',
-          ctInsideTab: require('../goal/layer-2/ctAddGoal.vue').default,
-          name: 'tab-add-goal',
-        }
-        this.$store.commit('mtfAddAdditionalTab', objAddGTab)
+      console.log('Selected suggestion is', pSelectedSuggestion)
+      const objAddTab = {
+        nameToShowUser: pSelectedSuggestion.ctName,
+        ctInsideTab: require('../goal/layer-2/ctAddGoal.vue').default,
+        name: 'tab-add-goal',
       }
+      this.$store.commit('mtfAddAdditionalTab', objAddTab)
     },
   },
 }
