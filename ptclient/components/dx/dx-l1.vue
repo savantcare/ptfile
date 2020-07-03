@@ -54,14 +54,13 @@ export default {
       data: {
         value: 'Add diagnosis',
         ctAbbr: 'adddx',
-        ctToShowInsideTab:
-          '/Users/vk-tech/gt/sc-prog-repos/ptfile/ptclient/components/goal/layer-2/ctAddGoal.vue',
+        ctToShowInsideTab: 'dx/layer-2/ctAddDx.vue',
       },
     })
-    this.fnFetchDxFromApi()
+    this.mfdaGetDx()
   },
   methods: {
-    async fnFetchDxFromApi() {
+    async mfdaGetDx() {
       try {
         if (!this.dblOneDxQueryIsRunningGate) {
           this.dblOneDxQueryIsRunningGate = true
@@ -92,7 +91,7 @@ export default {
       console.log('show add dialog')
       const tab = {
         label: 'Add Dx',
-        ctToShowInsideTab: require('@/components/goal/layer-2/ctAddGoal.vue')
+        ctToShowInsideTab: require('@/components/dx/layer-2/ctAddDx.vue')
           .default,
         id: 'tab-add-dx',
       }
