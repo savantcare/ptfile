@@ -23,7 +23,7 @@ Layer2MultiTabDialog is not expected to be accessed by a URL. */
         :label="tab.nameToShowUser"
         :name="tab.id"
       >
-        <component :is="tab.ctToShowInsideTab" />
+        <component v-bind:is="tab.ctToShowInsideTab"></component>
       </el-tab-pane>
     </el-tabs>
   </el-dialog>
@@ -83,6 +83,7 @@ export default {
         this.$store.commit('mtfAddAdditionalTab', doNewTab)
       }
       if (pAction === 'remove') {
+        // console.log(pTargetId)
         const arNewTabs = this.cfArTabs.filter((tab) => {
           return tab.id !== pTargetId
         })
