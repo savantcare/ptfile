@@ -2,12 +2,11 @@
   <div style="text-align: center;">
     <el-autocomplete
       class="inline-input"
-      v-model="keyword"
-      :fetch-suggestions="mfQuerySearch"
+      :fetch-suggestions="mfQuerySearchTerms"
       :trigger-on-focus="true"
       placeholder="Please Input"
       prefix-icon="el-icon-search"
-      @select="mfHandleSelect"
+      @select="mfHandleSuggestionSelectedByUser"
       clearable
     ></el-autocomplete>
   </div>
@@ -23,13 +22,13 @@ export default {
   },
   mounted() {},
   methods: {
-    mfQuerySearch(pQueryString, pCallBack) {
+    mfQuerySearchTerms(pQueryString, pCallBack) {
       const resultSet = ormSearch.query().search(pQueryString).get()
       console.log('search result from orm model', resultSet)
       pCallBack(resultSet)
     },
-    mfHandleSelect(item) {
-      const { key } = item
+    mfHandleSuggestionSelectedByUser(pSelectedSuggestion) {
+      const { key } = pSelectedSuggestion
       if (key === ADD_GOAL) {
         const objAddGTab = {
           nameToShowUser: 'Add goal',
