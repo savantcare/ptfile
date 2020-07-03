@@ -1,5 +1,5 @@
 <template>
   <div>
-      Multi change goal
-   </div>
+    Multi change goal
+  </div>
 </template>
