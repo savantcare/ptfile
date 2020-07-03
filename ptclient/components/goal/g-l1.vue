@@ -42,8 +42,7 @@ export default {
     }
   },
   mounted() {
-    const obCtGoalInSearch = {
-      // TODO: This is not a object this is array. The names can be improved
+    let obSearchInterfaceToThisCt = {
       ctName: 'Add goal',
       ctAbbr: 'addg',
       value: 'Add goal',
@@ -52,11 +51,10 @@ export default {
     }
 
     ormSearch.insert({
-      data: obCtGoalInSearch,
+      data: obSearchInterfaceToThisCt,
     })
 
-    const obMcGoalInSearch = {
-      // TODO: This did not get added to search list
+    obSearchInterfaceToThisCt = {
       ctName: 'Multichange goal',
       ctAbbr: 'mcg',
       value: 'Multichange goal',
@@ -66,7 +64,7 @@ export default {
     }
 
     ormSearch.insert({
-      data: obMcGoalInSearch,
+      data: obSearchInterfaceToThisCt,
     })
     this.mfdaGetG()
   },
