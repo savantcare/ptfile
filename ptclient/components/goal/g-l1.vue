@@ -42,29 +42,25 @@ export default {
     }
   },
   mounted() {
-    let obSearchInterfaceToThisCt = {
-      ctName: 'Add goal',
-      ctAbbr: 'addg',
-      value: 'Add goal',
-      key: ADD_GOAL,
-      ctInsideTab: 'layer-2/ctAddGoal.vue',
-    }
-
     ormSearch.insert({
-      data: obSearchInterfaceToThisCt,
+      data: {
+        ctName: 'Add goal',
+        ctAbbr: 'addg',
+        value: 'Add goal',
+        key: ADD_GOAL,
+        ctInsideTab: 'layer-2/ctAddGoal.vue',
+      },
     })
 
-    obSearchInterfaceToThisCt = {
-      ctName: 'Multichange goal',
-      ctAbbr: 'mcg',
-      value: 'Multichange goal',
-      key: 2,
-      ctInsideTab:
-        '/Users/vk-tech/gt/sc-prog-repos/ptfile/ptclient/components/goal/layer-2/ctAddGoal.vue',
-    }
-
     ormSearch.insert({
-      data: obSearchInterfaceToThisCt,
+      data: {
+        ctName: 'Multichange goal',
+        ctAbbr: 'mcg',
+        value: 'Multichange goal',
+        key: 2,
+        ctInsideTab:
+          '/Users/vk-tech/gt/sc-prog-repos/ptfile/ptclient/components/goal/layer-2/ctAddGoal.vue',
+      },
     })
     this.mfdaGetG()
   },
