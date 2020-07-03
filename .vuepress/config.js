@@ -1,3 +1,5 @@
+const vuese = require('markdown-it-vuese') // Ref: https://github.com/BuptStEve/markdown-it-vuese/blob/master/docs/.vuepress/config.js
+
 module.exports = {
   title: 'Patient file',
   description: 'Big picture, server side and client side doc',
@@ -230,9 +232,7 @@ module.exports = {
         return `<a href="https://www.savantcare.com">${match[1]}</a>`
       })
       md.use(termLinker)
-      md.use(require('markdown-it-vuese'), {
-        /* options */
-      })
+      md.use(vuese) // Ref: https://github.com/BuptStEve/markdown-it-vuese/blob/master/docs/.vuepress/config.js#L30
     },
   },
 }
