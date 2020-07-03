@@ -23,6 +23,7 @@ Layer2MultiTabDialog is not expected to be accessed by a URL. */
         :label="tab.nameToShowUser"
         :name="tab.id"
       >
+        <!-- Using https://vuejs.org/v2/guide/components.html#Dynamic-Components -->
         <component v-bind:is="tab.ctToShowInsideTab"></component>
       </el-tab-pane>
     </el-tabs>
