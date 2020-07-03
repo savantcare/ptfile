@@ -42,6 +42,32 @@ export default {
     }
   },
   mounted() {
+    const obCtGoalInSearch = {
+      // TODO: This is not a object this is array. The names can be improved
+      ctName: 'Add goal',
+      ctAbbr: 'addg',
+      value: 'Add goal',
+      key: ADD_GOAL,
+      ctInsideTab: require('@/components/goal/layer-2/ctAddGoal.vue').default,
+    }
+
+    ormSearch.insert({
+      data: obCtGoalInSearch,
+    })
+
+    const obMcGoalInSearch = {
+      // TODO: This did not get added to search list
+      ctName: 'Multichange goal',
+      ctAbbr: 'mcg',
+      value: 'Multichange goal',
+      key: 2,
+      ctInsideTab:
+        '/Users/vk-tech/gt/sc-prog-repos/ptfile/ptclient/components/goal/layer-2/ctAddGoal.vue',
+    }
+
+    ormSearch.insert({
+      data: obMcGoalInSearch,
+    })
     this.mfdaGetG()
   },
   methods: {
@@ -51,7 +77,7 @@ export default {
           this.dblOneQueryIsRunningGate = true
           const dnCountG = await ormGoal.query().count()
 
-          console.log('Number of recs before query =>', dnCountG)
+          console.log('Number of goals before query =>', dnCountG)
           if (dnCountG === 0) {
             await ormGoal
               .api()
@@ -62,30 +88,6 @@ export default {
             console.log('Number of goal in model =>', ormGoal.query().count())
             const arGoalEvalList = ormGoal.query().get()
             this.daGTable = arGoalEvalList
-
-            const obCtGoalInSearch = {
-              // TODO: This is not a object this is array. The names can be improved
-              ctName: 'Add goal',
-              ctAbbr: 'addg',
-              value: 'Add goal',
-              key: ADD_GOAL,
-            }
-
-            ormSearch.insert({
-              data: obCtGoalInSearch,
-            })
-
-            const obMcGoalInSearch = {
-              // TODO: This did not get added to search list
-              ctName: 'Multichange goal',
-              ctAbbr: 'mcg',
-              value: 'Multichange goal',
-              key: 2,
-            }
-
-            ormSearch.insert({
-              data: obMcGoalInSearch,
-            })
           }
           this.dblOneQueryIsRunningGate = false
         }
@@ -95,6 +97,7 @@ export default {
     },
     mfOpenADialog() {
       console.log('show add dialog')
+      // TODO: Use object from search array instead of creating new
       const tab = {
         nameToShowUser: 'Add goal',
         ctInsideTab: require('@/components/goal/layer-2/ctAddGoal.vue').default,
