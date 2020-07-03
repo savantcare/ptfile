@@ -94,7 +94,7 @@ export default {
         nameToShowUser: 'Add Dx',
         ctToShowInsideTab: require('@/components/goal/layer-2/ctAddGoal.vue')
           .default,
-        name: 'tab-add-dx',
+        id: 'tab-add-dx',
       }
       this.$store.commit('mtfShowNewFirstTabInL2', tab)
     },

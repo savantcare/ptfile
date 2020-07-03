@@ -32,7 +32,7 @@ export default {
         nameToShowUser: pSelectedSuggestion.value,
         ctToShowInsideTab: require('../goal/' +
           pSelectedSuggestion.ctToShowInsideTab).default,
-        name: pSelectedSuggestion.id,
+        id: pSelectedSuggestion.id,
       }
       this.$store.commit('mtfAddAdditionalTab', objAddTab)
     },

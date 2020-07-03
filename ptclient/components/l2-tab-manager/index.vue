@@ -12,7 +12,7 @@ Layer2MultiTabDialog is not expected to be accessed by a URL. */
   >
     <!-- By passing editable we tell element.io to give add and close option Red: https://element.eleme.io/#/en-US/component/tabs#tabs-attributes -->
     <el-tabs
-      v-model="vsSelectedTabName"
+      v-model="vsSelectedTabId"
       type="card"
       editable
       @edit="mfHandleTabsEdit"
@@ -46,13 +46,13 @@ export default {
         this.$store.commit('mtfSetArTabs', value)
       },
     },
-    vsSelectedTabName: {
+    vsSelectedTabId: {
       // TODO: this should have cf in its name
       get() {
-        return this.$store.state.multiTabDialogLayer2.vsSelectedTabName
+        return this.$store.state.multiTabDialogLayer2.vsSelectedTabId
       },
       set(value) {
-        this.$store.commit('mtfSetVsSelectedTabName', value)
+        this.$store.commit('mtfSetvsSelectedTabId', value)
       },
     },
     vblMultiTabDialogInL2Visibility: {
@@ -70,16 +70,15 @@ export default {
     this.dnTabIndex = this.cfArTabs.length
     this.vblMultiTabDialogInL2Visibility = false
     this.cfArTabs = [] // Template has a for loop running on this.
-    this.vsSelectedTabName = ''
+    this.vsSelectedTabId = ''
   },
   methods: {
     mfHandleTabsEdit(pTargetName, pAction) {
       if (pAction === 'add') {
-        const dsNewTabName = `tab-${++this.dnTabIndex}`
         const doNewTab = {
           nameToShowUser: 'New tab',
           ctToShowInsideTab: require('./ctSearchToAddTabInL2').default,
-          name: dsNewTabName,
+          id: 0,
         }
         this.$store.commit('mtfAddAdditionalTab', doNewTab)
       }

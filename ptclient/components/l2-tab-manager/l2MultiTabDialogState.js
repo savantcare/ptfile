@@ -2,25 +2,25 @@ export default {
   state: {
     vblMultiTabDialogInL2Visibility: false,
     arTabs: [], // Template has a for loop running on this.
-    vsSelectedTabName: '', // arTabs might have 10 tabs. Out of those which tab is active needs to be stored outside the array of 10 tabs
+    vsSelectedTabId: '', // arTabs might have 10 tabs. Out of those which tab is active needs to be stored outside the array of 10 tabs
   },
   mutations: {
     mtfSetTabDialogVisibility(state, value) {
       state.vblMultiTabDialogInL2Visibility = value
     },
     mtfAddAdditionalTab(state, newTab) {
-      const { name } = newTab
+      const { id } = newTab
       const checkArray = state.arTabs.filter((tab) => {
         // AG: Why not use https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
-        return tab.name === name
+        return tab.id === id
       })
       if (checkArray.length === 0) {
         state.arTabs.push(newTab)
       }
-      state.vsSelectedTabName = name
+      state.vsSelectedTabId = id
     },
-    mtfSetVsSelectedTabName(state, value) {
-      state.vsSelectedTabName = value
+    mtfSetvsSelectedTabId(state, value) {
+      state.vsSelectedTabId = value
     },
     mtfSetArTabs(state, value) {
       state.arTabs = value
@@ -28,7 +28,7 @@ export default {
     mtfShowNewFirstTabInL2(state, pTab) {
       state.arTabs = [pTab]
       state.vblMultiTabDialogInL2Visibility = true
-      state.vsSelectedTabName = pTab.name
+      state.vsSelectedTabId = pTab.id
 
       console.log('state-> ', state)
     },
