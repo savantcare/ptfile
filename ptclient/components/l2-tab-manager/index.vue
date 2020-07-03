@@ -88,7 +88,7 @@ export default {
           return tab.name !== pTargetName
         })
 
-        this.$store.commit('setcfTabList', arNewList)
+        this.$store.commit('mtfSetArTabs', arNewList)
         if (arNewList.length > 0) {
           // this.vsActiveTabName = newList[0]['name']
           console.log('newList=> ', arNewList)
