@@ -45,9 +45,8 @@ export default {
     // Search interfaces to this component
     ormSearch.insert({
       data: {
-        nameToShowUser: 'Add goal',
-        ctAbbr: 'addg',
         value: 'Add goal',
+        ctAbbr: 'addg',
         key: ADD_GOAL,
         ctToShowInsideTab: 'layer-2/ctAddGoal.vue',
       },
@@ -55,9 +54,8 @@ export default {
 
     ormSearch.insert({
       data: {
-        nameToShowUser: 'Multichange goal',
-        ctAbbr: 'mcg',
         value: 'Multichange goal',
+        ctAbbr: 'mcg',
         key: 2,
         ctToShowInsideTab: 'layer-2/ctMultiChangeGoal.vue',
       },
