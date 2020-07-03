@@ -1,33 +1,44 @@
-```asciidoc                                                               
-                                                                               ┌───────────────┐
-                                                                 ─────────────▶│ Prop: visible │
-                                                                 │             └───────────────┘
+```asciidoc                                                                       ┌───────────────┐
+                                                                 ────────────────▶│ Prop: visible │
+                                                                 │                └───────────────┘
                                                                  │
                                                            ┌─────┴─────┐
-                         ┌─────────────────────────────────┤ el-Dialog ├───────────────────────────┐
-                         │                                 └───────────┘                           │
-┌────────┐               │ ┌───────┐┌───────┐┌───────┐┌───────┐                                    │
-│arTabs[]│◀────────────  │ │ Tab 1 ││ Tab 2 ││ Tab 3 ││ Tab 4 │                                    │
-└────────┘               │ └────┬──┘└───────┘└───────┘└───────┘                                    │
-                         │      │                                                                  │
-                         │      │                                                                  │
-┌──────────┐             │      │                                                                  │
-│vsTabName │◀────────────┼──────                                                                   │
-└──────────┘             │                                                                         │
-                         │                                                                         │
-                         └─────────────────────────────────────────────────────────────────────────┘
+                         ┌─────────────────────────────────┤ el-Dialog ├──────────────────────────────────┐
+                         │                                 └───────────┘                                  │
+                         │                                                                                │
+                         │                                                                                │
+┌────────┐               │ ┌───────┐┌───────┐┌───────┐┌───────┐                                           │
+│arTabs[]│◀────────────  │ │ Tab 1 ││ Tab 2 ││ Tab 3 ││ Tab 4 │                                           │
+└────────┘               │ └────┬──┘└───────┘└───────┘└───────┘                                           │
+                         │      │                                                                         │
+                         │      │                                                                         │
+┌──────────┐             │      │                                                                         │
+│vsTabName │◀────────────┼──────                                                                          │
+└──────────┘             │                                                                                │
+                         │                                                                                │
+                         └────────────────────────────────────────────────────────────────────────────────┘
+
+
 ```
 
 Source is at: [https://github.com/savantcare/ptfile/tree/master/ptclient/components/l2-tab-manager](https://github.com/savantcare/ptfile/tree/master/ptclient/components/l2-tab-manager)
 
 The goal is:
 
-<<< @/ptclient/components/l2-tab-manager/index.vue#goal{1}
+Create a tree strucrure that looks like:
 
-To achieve the above goal the code is:
+==> :el:
+
+=======> :dialog:
+
+================> :tabs:
+
+=======================> :tab-pane:
+
+=================================> :Component:
+
+To achive the above goal the code is:
 
 <<< @/ptclient/components/l2-tab-manager/index.vue#template{1}
 
 <[vuese](@/ptclient/components/l2-tab-manager/index.vue)
-
-From the team at :savantcare:

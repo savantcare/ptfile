@@ -1,9 +1,9 @@
 <!-- Is L2TabManager a component or a view? View is actually intended to be
 accessed by navigation url Ref:
 https://stackoverflow.com/questions/50865828/what-is-the-difference-between-the-views-and-components-folders-in-a-vue-project
-L2TabManager is not expected to be accessed by a URL. 
+Layer2MultiTabDialog is not expected to be accessed by a URL. */
 
-
+/*
 //#region goal
 Create a tree strucrure that looks like:
 
@@ -12,10 +12,10 @@ dialog
    --- tabpane
       ---- Component
 //#endregion goal
-
+*/
 -->
-
 //#region template
+
 <template>
   <el-dialog
     :visible.sync="vblMultiTabDialogInL2Visibility"
@@ -45,13 +45,18 @@ dialog
 //#endregion template
 
 <script>
+// Component items:
 export default {
+  name: 'L2-Dialog-Manager',
   data() {
     return {}
   },
+
   computed: {
+    // @vuese
+    // Returns List of tabs from store
+    // @type Array
     cfArTabs: {
-      // this object has get and set methods
       get() {
         return this.$store.state.multiTabDialogLayer2.arTabs
       },
@@ -59,8 +64,10 @@ export default {
         this.$store.commit('mtfSetArTabs', value)
       },
     },
+    // @vuese
+    // Returns selected tab id for L2 from store
+    // @type String
     vsSelectedTabId: {
-      // TODO: this should have cf in its name
       get() {
         return this.$store.state.multiTabDialogLayer2.vsSelectedTabId
       },
@@ -68,8 +75,10 @@ export default {
         this.$store.commit('mtfSetvsSelectedTabId', value)
       },
     },
+    // @vuese
+    // Returns L2 dialog visibility from store
+    // @type Boolean
     vblMultiTabDialogInL2Visibility: {
-      // TODO: this should have cf in its name
       get() {
         return this.$store.state.multiTabDialogLayer2
           .vblMultiTabDialogInL2Visibility
@@ -85,22 +94,30 @@ export default {
     this.vsSelectedTabId = ''
   },
   methods: {
+    // @vuese
+    // Add or remove tabs
+    // @arg pTargetId - tab id
+    // @arg pAction - add/remove
+
     mfHandleTabsEdit(pTargetId, pAction) {
-      console.log(pTargetId, pAction)
       if (pAction === 'add') {
         const objNewTab = {
           label: 'New tab',
           ctToShowInsideTab: require('./ctSearchToAddTabInL2').default,
           id: '0',
         }
+
+        // Fire when L2 dialog in open state and add additional tab
+        // @arg The argument is a object list of tabs
         this.$store.commit('mtfAddAdditionalTab', objNewTab)
       }
       if (pAction === 'remove') {
-        // console.log(pTargetId)
         const arNewTabs = this.cfArTabs.filter((tab) => {
           return tab.id !== pTargetId
         })
 
+        // Fire when L2 dialog open first time
+        // @arg The argument is a array list of tabs
         this.$store.commit('mtfSetArTabs', arNewTabs)
 
         // If there are no more tabs in the diaglog then hide the dialog
