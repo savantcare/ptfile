@@ -33,9 +33,7 @@ Layer2MultiTabDialog is not expected to be accessed by a URL. */
 <script>
 export default {
   data() {
-    return {
-      dnTabIndex: 0,
-    }
+    return {}
   },
   computed: {
     cfArTabs: {
@@ -68,7 +66,6 @@ export default {
     },
   },
   mounted() {
-    this.dnTabIndex = this.cfArTabs.length
     this.vblMultiTabDialogInL2Visibility = false
     this.cfArTabs = [] // Template has a for loop running on this.
     this.vsSelectedTabId = ''
