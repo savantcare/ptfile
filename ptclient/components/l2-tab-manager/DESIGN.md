@@ -23,6 +23,10 @@
 
 Source is at: [https://github.com/savantcare/ptfile/tree/master/ptclient/components/l2-tab-manager](https://github.com/savantcare/ptfile/tree/master/ptclient/components/l2-tab-manager)
 
+:jaikalima:
+
+:jaidurgama:
+
 The goal is:
 
 <<< @/ptclient/components/l2-tab-manager/index.vue#goal{1}

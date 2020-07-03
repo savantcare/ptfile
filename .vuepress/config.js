@@ -223,4 +223,13 @@ module.exports = {
       },
     ],
   },
+  markdown: {
+    extendMarkdown: (md) => {
+      var Plugin = require('markdown-it-regexp')
+      const termLinker = Plugin(/:([\w+]*):/, (match, utils) => {
+        return `<a href="${match[1]}"/>`
+      })
+      md.use(termLinker)
+    },
+  },
 }
