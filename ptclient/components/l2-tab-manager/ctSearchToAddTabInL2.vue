@@ -30,8 +30,8 @@ export default {
       console.log('Selected suggestion is', pSelectedSuggestion)
       const objAddTab = {
         nameToShowUser: pSelectedSuggestion.nameToShowUser,
-        ctInsideTab: require('../goal/' + pSelectedSuggestion.ctInsideTab)
-          .default,
+        ctToShowInsideTab: require('../goal/' +
+          pSelectedSuggestion.ctToShowInsideTab).default,
         name: 'tab-add-goal',
       }
       this.$store.commit('mtfAddAdditionalTab', objAddTab)

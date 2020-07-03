@@ -57,7 +57,7 @@ export default {
         ctAbbr: 'adddx',
         value: 'Add diagnosis',
         key: ADD_DIAGNOSIS,
-        ctInsideTab:
+        ctToShowInsideTab:
           '/Users/vk-tech/gt/sc-prog-repos/ptfile/ptclient/components/goal/layer-2/ctAddGoal.vue',
       },
     })
@@ -95,7 +95,8 @@ export default {
       console.log('show add dialog')
       const tab = {
         nameToShowUser: 'Add Dx',
-        ctInsideTab: require('@/components/goal/layer-2/ctAddGoal.vue').default,
+        ctToShowInsideTab: require('@/components/goal/layer-2/ctAddGoal.vue')
+          .default,
         name: 'tab-add-dx',
       }
       this.$store.commit('mtfShowNewFirstTabInL2', tab)

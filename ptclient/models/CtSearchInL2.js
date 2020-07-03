@@ -10,7 +10,7 @@ export default class CtSearchInL2 extends Model {
       ctAbbr: this.string(''),
       key: this.number(),
       value: this.string(''),
-      ctInsideTab: this.string(''),
+      ctToShowInsideTab: this.string(''),
     }
   }
 }

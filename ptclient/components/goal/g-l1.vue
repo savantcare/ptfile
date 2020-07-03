@@ -49,7 +49,7 @@ export default {
         ctAbbr: 'addg',
         value: 'Add goal',
         key: ADD_GOAL,
-        ctInsideTab: 'layer-2/ctAddGoal.vue',
+        ctToShowInsideTab: 'layer-2/ctAddGoal.vue',
       },
     })
 
@@ -59,7 +59,7 @@ export default {
         ctAbbr: 'mcg',
         value: 'Multichange goal',
         key: 2,
-        ctInsideTab: 'layer-2/ctMultiChangeGoal.vue',
+        ctToShowInsideTab: 'layer-2/ctMultiChangeGoal.vue',
       },
     })
     this.mfdaGetG()
@@ -95,7 +95,8 @@ export default {
       // TODO: Use object from search array instead of creating new
       const tab = {
         nameToShowUser: 'Add goal',
-        ctInsideTab: require('@/components/goal/layer-2/ctAddGoal.vue').default,
+        ctToShowInsideTab: require('@/components/goal/layer-2/ctAddGoal.vue')
+          .default,
         name: 'tab-add-goal',
       }
 
