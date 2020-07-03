@@ -42,6 +42,7 @@ export default {
     }
   },
   mounted() {
+    // Search interfaces to this component
     ormSearch.insert({
       data: {
         ctName: 'Add goal',

@@ -50,6 +50,17 @@ export default {
     }
   },
   mounted() {
+    // Search interfaces to this component
+    ormSearch.insert({
+      data: {
+        ctName: 'Add diagnosis',
+        ctAbbr: 'adddx',
+        value: 'Add diagnosis',
+        key: ADD_DIAGNOSIS,
+        ctInsideTab:
+          '/Users/vk-tech/gt/sc-prog-repos/ptfile/ptclient/components/goal/layer-2/ctAddGoal.vue',
+      },
+    })
     this.fnFetchDxFromApi()
   },
   methods: {
@@ -71,16 +82,6 @@ export default {
             this.daDxTable = ormDx.query().get()
             // ormDx.query('').get()
             console.log('Number of dx in model =>', ormDx.query().count())
-
-            const obCtDxInSearch = {
-              ctName: 'Add diagnosis',
-              ctAbbr: 'adddx',
-              value: 'Add diagnosis',
-              key: ADD_DIAGNOSIS,
-            }
-            ormSearch.insert({
-              data: obCtDxInSearch,
-            })
           } else {
             this.daDxTable = ormDx.query().get()
           }
