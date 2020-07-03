@@ -35,7 +35,7 @@ export default {
         // Once the components folder is cleared up then the code will be
         // ctToShowInsideTab: require('../' +
 
-        ctToShowInsideTab: require('../' +
+        ctToShowInsideTab: require('@/components/' +
           pSelectedSuggestion.ctToShowInsideTab).default,
         id: pSelectedSuggestion.id,
       }

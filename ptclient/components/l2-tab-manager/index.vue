@@ -72,6 +72,7 @@ export default {
   },
   methods: {
     mfHandleTabsEdit(pTargetId, pAction) {
+      console.log(pTargetId, pAction)
       if (pAction === 'add') {
         const objNewTab = {
           label: 'New tab',

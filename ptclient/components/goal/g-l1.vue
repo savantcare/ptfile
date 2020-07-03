@@ -87,24 +87,15 @@ export default {
     },
     mfOpenADialog() {
       console.log('show add dialog')
-      /* 
-      Option1: Create a new object and do a store mutation with that object
-      
+      const resultSet = ormSearch.query().search('Add goal').get()
+      const resultData = resultSet[0]
       const tab = {
-        nameToShowUser: 'Add goal',
-        ctToShowInsideTab: require('@/components/goal/layer-2/ctAddGoal.vue')
-          .default,
-        id: 'tab-add-goal',
+        label: resultData.value,
+        ctToShowInsideTab: require('@/components/' +
+          resultData.ctToShowInsideTab).default,
+        ctAbbr: resultData.ctAbbr,
       }
       this.$store.commit('mtfShowNewFirstTabInL2', tab)
-      
-      Problems with this approach:
-      1. In line 45 ormSerch.insert gave a id. This id needs to be same. Otherwise duplicate tabs will get created.     
-      */
-
-      const resultSet = ormSearch.query().search('Add goal').get()
-      console.log(resultSet)
-      this.$store.commit('mtfShowNewFirstTabInL2', resultSet[0])
     },
   },
 }
