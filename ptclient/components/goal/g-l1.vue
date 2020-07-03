@@ -48,7 +48,7 @@ export default {
       ctAbbr: 'addg',
       value: 'Add goal',
       key: ADD_GOAL,
-      ctInsideTab: require('@/components/goal/layer-2/ctAddGoal.vue').default,
+      ctInsideTab: 'layer-2/ctAddGoal.vue',
     }
 
     ormSearch.insert({

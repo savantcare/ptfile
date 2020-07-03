@@ -30,9 +30,8 @@ export default {
       console.log('Selected suggestion is', pSelectedSuggestion)
       const objAddTab = {
         nameToShowUser: pSelectedSuggestion.ctName,
-        // ctInsideTab: require('@/components/goal/layer-2/ctAddGoal.vue').default,
-        // ctInsideTab: require(pSelectedSuggestion.ctInsideTab).default,
-        ctInsideTab: pSelectedSuggestion.ctInsideTab,
+        ctInsideTab: require('../goal/' + pSelectedSuggestion.ctInsideTab)
+          .default,
         name: 'tab-add-goal',
       }
       this.$store.commit('mtfAddAdditionalTab', objAddTab)
