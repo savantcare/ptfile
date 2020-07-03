@@ -226,8 +226,8 @@ module.exports = {
   markdown: {
     extendMarkdown: (md) => {
       var Plugin = require('markdown-it-regexp')
-      const termLinker = Plugin(/:([\w+]*):/, (match, utils) => {
-        return `<a href="${match[1]}"/>`
+      const termLinker = Plugin(/:(savantcare):/, (match, utils) => {
+        return `<a href="https://www.savantcare.com">${match[1]}</a>`
       })
       md.use(termLinker)
       md.use(require('markdown-it-vuese'), {
