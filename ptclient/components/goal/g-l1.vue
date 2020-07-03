@@ -30,7 +30,6 @@
 // import addGoal from './layer-2/addGoal.vue'
 import ormSearch from '../../models/CtSearchInL2'
 import ormGoal from '@/models/Goal'
-import { ADD_GOAL } from '@/static/others.js'
 
 // const { GOAL_API_URL } = 'http://localhost:8000/goals'
 export default {
@@ -47,7 +46,6 @@ export default {
       data: {
         value: 'Add goal',
         ctAbbr: 'addg',
-        key: ADD_GOAL,
         ctToShowInsideTab: 'layer-2/ctAddGoal.vue',
       },
     })
@@ -56,7 +54,6 @@ export default {
       data: {
         value: 'Multichange goal',
         ctAbbr: 'mcg',
-        key: 2,
         ctToShowInsideTab: 'layer-2/ctMultiChangeGoal.vue',
       },
     })

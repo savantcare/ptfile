@@ -32,7 +32,6 @@
 <script>
 import ormSearch from '../../models/CtSearchInL2'
 import ormDx from '@/models/Dx'
-import { ADD_DIAGNOSIS } from '@/static/others.js'
 
 /* export default {
   async asyncData({ params }) {
@@ -55,7 +54,6 @@ export default {
       data: {
         value: 'Add diagnosis',
         ctAbbr: 'adddx',
-        key: ADD_DIAGNOSIS,
         ctToShowInsideTab:
           '/Users/vk-tech/gt/sc-prog-repos/ptfile/ptclient/components/goal/layer-2/ctAddGoal.vue',
       },
