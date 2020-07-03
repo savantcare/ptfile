@@ -88,14 +88,19 @@ export default {
     mfOpenADialog() {
       console.log('show add dialog')
       // TODO: Use object from search array instead of creating new
+      /*
       const tab = {
         nameToShowUser: 'Add goal',
         ctToShowInsideTab: require('@/components/goal/layer-2/ctAddGoal.vue')
           .default,
         id: 'tab-add-goal',
       }
-
       this.$store.commit('mtfShowNewFirstTabInL2', tab)
+      */
+
+      const resultSet = ormSearch.query().search('Add goal').get()
+      console.log(resultSet)
+      this.$store.commit('mtfShowNewFirstTabInL2', resultSet[0])
     },
   },
 }
