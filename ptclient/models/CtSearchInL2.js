@@ -6,7 +6,7 @@ export default class CtSearchInL2 extends Model {
   static fields() {
     return {
       id: this.uid(),
-      ctName: this.string(''),
+      nameToShowUser: this.string(''),
       ctAbbr: this.string(''),
       key: this.number(),
       value: this.string(''),

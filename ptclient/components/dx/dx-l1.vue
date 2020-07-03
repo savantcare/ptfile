@@ -53,7 +53,7 @@ export default {
     // Search interfaces to this component
     ormSearch.insert({
       data: {
-        ctName: 'Add diagnosis',
+        nameToShowUser: 'Add diagnosis',
         ctAbbr: 'adddx',
         value: 'Add diagnosis',
         key: ADD_DIAGNOSIS,

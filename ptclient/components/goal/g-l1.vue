@@ -45,7 +45,7 @@ export default {
     // Search interfaces to this component
     ormSearch.insert({
       data: {
-        ctName: 'Add goal',
+        nameToShowUser: 'Add goal',
         ctAbbr: 'addg',
         value: 'Add goal',
         key: ADD_GOAL,
@@ -55,7 +55,7 @@ export default {
 
     ormSearch.insert({
       data: {
-        ctName: 'Multichange goal',
+        nameToShowUser: 'Multichange goal',
         ctAbbr: 'mcg',
         value: 'Multichange goal',
         key: 2,

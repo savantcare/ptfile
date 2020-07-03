@@ -29,7 +29,7 @@ export default {
     mfHandleSuggestionSelectedByUser(pSelectedSuggestion) {
       console.log('Selected suggestion is', pSelectedSuggestion)
       const objAddTab = {
-        nameToShowUser: pSelectedSuggestion.ctName,
+        nameToShowUser: pSelectedSuggestion.nameToShowUser,
         ctInsideTab: require('../goal/' + pSelectedSuggestion.ctInsideTab)
           .default,
         name: 'tab-add-goal',
