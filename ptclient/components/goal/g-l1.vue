@@ -59,14 +59,14 @@ export default {
         ctAbbr: 'mcg',
         value: 'Multichange goal',
         key: 2,
-        ctInsideTab:
-          '/Users/vk-tech/gt/sc-prog-repos/ptfile/ptclient/components/goal/layer-2/ctAddGoal.vue',
+        ctInsideTab: 'layer-2/ctMultiChangeGoal.vue',
       },
     })
     this.mfdaGetG()
   },
   methods: {
     async mfdaGetG() {
+      // TODO: what does da in the name indicate?
       try {
         if (!this.dblOneQueryIsRunningGate) {
           this.dblOneQueryIsRunningGate = true
