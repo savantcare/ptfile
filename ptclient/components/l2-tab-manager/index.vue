@@ -3,6 +3,18 @@ accessed by navigation url Ref:
 https://stackoverflow.com/questions/50865828/what-is-the-difference-between-the-views-and-components-folders-in-a-vue-project
 Layer2MultiTabDialog is not expected to be accessed by a URL. */
 
+/*
+//#region goal
+
+Create a tree strucrure that looks like:
+
+dialog
+ -- tabs
+   --- tabpane
+      ---- Component
+//#endregion goal
+*/
+
 //#region template
 <template>
   <el-dialog
