@@ -31,13 +31,12 @@ export default {
     mfHandleSelect(item) {
       const { key } = item
       if (key === ADD_GOAL) {
-        const doAddGTab = {
-          // Why is this called doAddGTab. Should it be objAddGTab ?
+        const objAddGTab = {
           nameToShowUser: 'Add goal',
           ctInsideTab: require('../goal/layer-2/ctAddGoal.vue').default,
           name: 'tab-add-goal',
         }
-        this.$store.commit('mtfAddAdditionalTab', doAddGTab)
+        this.$store.commit('mtfAddAdditionalTab', objAddGTab)
       }
     },
   },
