@@ -78,7 +78,7 @@ export default {
         const doNewTab = {
           nameToShowUser: 'New tab',
           ctToShowInsideTab: require('./ctSearchToAddTabInL2').default,
-          id: 0,
+          id: '0',
         }
         this.$store.commit('mtfAddAdditionalTab', doNewTab)
       }
