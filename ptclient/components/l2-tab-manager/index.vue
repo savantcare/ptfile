@@ -84,14 +84,15 @@ export default {
         this.$store.commit('mtfAddAdditionalTab', doNewTab)
       }
       if (pAction === 'remove') {
-        const arNewList = this.cfArTabs.filter((tab) => {
+        const arNewTabs = this.cfArTabs.filter((tab) => {
           return tab.name !== pTargetName
         })
 
-        this.$store.commit('mtfSetArTabs', arNewList)
-        if (arNewList.length > 0) {
-          // this.vsActiveTabName = newList[0]['name']
-          console.log('newList=> ', arNewList)
+        this.$store.commit('mtfSetArTabs', arNewTabs)
+
+        // If there are no more tabs in the diaglog then hide the dialog
+        if (arNewTabs.length === 0) {
+          this.vblMultiTabDialogInL2Visibility = false
         }
       }
     },
