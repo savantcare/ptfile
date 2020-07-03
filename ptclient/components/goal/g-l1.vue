@@ -94,6 +94,7 @@ export default {
         ctToShowInsideTab: require('@/components/' +
           resultData.ctToShowInsideTab).default,
         ctAbbr: resultData.ctAbbr,
+        id: resultData.id,
       }
       this.$store.commit('mtfShowNewFirstTabInL2', tab)
     },
