@@ -92,7 +92,7 @@ export default {
         nameToShowUser: 'Add goal',
         ctToShowInsideTab: require('@/components/goal/layer-2/ctAddGoal.vue')
           .default,
-        name: 'tab-add-goal',
+        id: 'tab-add-goal',
       }
 
       this.$store.commit('mtfShowNewFirstTabInL2', tab)
