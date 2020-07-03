@@ -30,6 +30,8 @@ export default {
       console.log('Selected suggestion is', pSelectedSuggestion)
       const objAddTab = {
         nameToShowUser: pSelectedSuggestion.value,
+        // Here I have to use a variable otherwise webpack gives error. https://stackoverflow.com/questions/57349167/vue-js-dynamic-image-src-with-webpack-require-not-working
+        // I have given ../goal/ since if I give @components/ it gives error since other components have non compilable code
         ctToShowInsideTab: require('../goal/' +
           pSelectedSuggestion.ctToShowInsideTab).default,
         id: pSelectedSuggestion.id,
