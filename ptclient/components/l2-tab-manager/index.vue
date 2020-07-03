@@ -1,9 +1,9 @@
 <!-- Is L2TabManager a component or a view? View is actually intended to be
 accessed by navigation url Ref:
 https://stackoverflow.com/questions/50865828/what-is-the-difference-between-the-views-and-components-folders-in-a-vue-project
-Layer2MultiTabDialog is not expected to be accessed by a URL. */
+L2TabManager is not expected to be accessed by a URL. 
 
-/*
+
 //#region goal
 Create a tree strucrure that looks like:
 
@@ -12,10 +12,10 @@ dialog
    --- tabpane
       ---- Component
 //#endregion goal
-*/
+
+-->
 
 //#region template
--->
 <template>
   <el-dialog
     :visible.sync="vblMultiTabDialogInL2Visibility"
