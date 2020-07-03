@@ -52,9 +52,9 @@ export default {
 
     ormSearch.insert({
       data: {
-        value: 'Multichange goal',
+        value: 'Multi rate goal',
         ctAbbr: 'mcg',
-        ctToShowInsideTab: 'goal/layer-2/ctMultiChangeGoal.vue',
+        ctToShowInsideTab: 'goal/layer-2/ctMultiRateGoal.vue',
       },
     })
     this.mfdaGetG()

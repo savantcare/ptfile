@@ -2,6 +2,7 @@
   <div style="text-align: center;">
     <el-autocomplete
       class="inline-input"
+      v-model="keyword"
       :fetch-suggestions="mfQuerySearchTerms"
       :trigger-on-focus="true"
       placeholder="Please Input"
@@ -17,13 +18,13 @@ import ormSearch from '../../models/CtSearchInL2'
 
 export default {
   data() {
-    return {}
+    return { keyword: '' }
   },
   mounted() {},
   methods: {
     mfQuerySearchTerms(pQueryString, pCallBack) {
       const resultSet = ormSearch.query().search(pQueryString).get()
-      console.log('search result from orm model', resultSet)
+      console.log('search result from orm model', pQueryString, resultSet)
       pCallBack(resultSet)
     },
     mfHandleSuggestionSelectedByUser(pSelectedSuggestion) {

@@ -74,6 +74,9 @@
                 <el-slider
                   v-model="domain.score"
                   :format-tooltip="formatTooltip"
+                  show-input
+                  :max="10"
+                  show-stops
                 ></el-slider>
               </el-form-item>
             </el-card>
