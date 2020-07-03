@@ -2,7 +2,7 @@ export default {
   state: {
     vblMultiTabDialogInL2Visibility: false,
     arTabs: [], // Template has a for loop running on this.
-    vsActiveTabName: '', // arTabs might have 10 tabs. Out of those which tab is active needs to be stored outside the array of 10 tabs
+    vsSelectedTabName: '', // arTabs might have 10 tabs. Out of those which tab is active needs to be stored outside the array of 10 tabs
   },
   mutations: {
     mtfSetTabDialogVisibility(state, value) {
@@ -17,10 +17,10 @@ export default {
       if (checkArray.length === 0) {
         state.arTabs.push(newTab)
       }
-      state.vsActiveTabName = name
+      state.vsSelectedTabName = name
     },
-    mtfSetVsActiveTabName(state, value) {
-      state.vsActiveTabName = value
+    mtfSetVsSelectedTabName(state, value) {
+      state.vsSelectedTabName = value
     },
     mtfSetArTabs(state, value) {
       state.arTabs = value
@@ -28,7 +28,7 @@ export default {
     mtfShowNewFirstTabInL2(state, pTab) {
       state.arTabs = [pTab]
       state.vblMultiTabDialogInL2Visibility = true
-      state.vsActiveTabName = pTab.name
+      state.vsSelectedTabName = pTab.name
 
       console.log('state-> ', state)
     },
