@@ -20,3 +20,7 @@
 
 
 ```
+
+Source is at: [https://github.com/savantcare/ptfile/tree/master/ptclient/components/l2-tab-manager](https://github.com/savantcare/ptfile/tree/master/ptclient/components/l2-tab-manager)
+
+<<< @/ptclient/components/l2-tab-manager/index.vue{2}
