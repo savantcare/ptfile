@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import ormCtSearch from '../../models/CtSearchInL2'
+import ormSearch from '../../models/CtSearchInL2'
 import { ADD_GOAL /*, MULTIPLE_RATE_GOAL */ } from '@/static/others.js'
 
 export default {
@@ -24,11 +24,8 @@ export default {
   mounted() {},
   methods: {
     mfQuerySearch(pQueryString, pCallBack) {
-      const resultSet = ormCtSearch.query().search(pQueryString).get() // TODO: Why is this ormCtSearch and not ormSearch
-
+      const resultSet = ormSearch.query().search(pQueryString).get()
       console.log('search result from orm model', resultSet)
-
-      console.log(resultSet)
       pCallBack(resultSet)
     },
     mfHandleSelect(item) {

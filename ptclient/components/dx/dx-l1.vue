@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import ormCtSearch from '../../models/CtSearchInL2'
+import ormSearch from '../../models/CtSearchInL2'
 import ormDx from '@/models/Dx'
 import { ADD_DIAGNOSIS } from '@/static/others.js'
 
@@ -78,7 +78,7 @@ export default {
               value: 'Add diagnosis',
               key: ADD_DIAGNOSIS,
             }
-            ormCtSearch.insert({
+            ormSearch.insert({
               data: obCtDxInSearch,
             })
           } else {

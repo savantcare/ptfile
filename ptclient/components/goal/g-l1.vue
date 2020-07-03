@@ -28,7 +28,7 @@
 
 <script>
 // import addGoal from './layer-2/addGoal.vue'
-import ormCtSearch from '../../models/CtSearchInL2'
+import ormSearch from '../../models/CtSearchInL2'
 import ormGoal from '@/models/Goal'
 import { ADD_GOAL } from '@/static/others.js'
 
@@ -71,7 +71,7 @@ export default {
               key: ADD_GOAL,
             }
 
-            ormCtSearch.insert({
+            ormSearch.insert({
               data: obCtGoalInSearch,
             })
 
@@ -83,7 +83,7 @@ export default {
               key: 2,
             }
 
-            ormCtSearch.insert({
+            ormSearch.insert({
               data: obMcGoalInSearch,
             })
           }
