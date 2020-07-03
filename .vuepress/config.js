@@ -240,7 +240,7 @@ module.exports = {
         return `<a href="https://element.eleme.io/#/en-US/component/tabs#tabs" target="_blank">${match[1]}</a>`;
       });
       const ctLinker = Plugin(/:(Component):/, (match, utils) => {
-        return `<a href="/index.vue" target="_blank">${match[1]}</a>`;
+        return `<a href="https://vuejs.org/v2/guide/components.html#Dynamic-Components" target="_blank">${match[1]}</a>`;
       });
       md.use(elLinker);
       md.use(dialogLinker);

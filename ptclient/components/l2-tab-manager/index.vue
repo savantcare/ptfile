@@ -54,7 +54,7 @@ export default {
 
   computed: {
     // @vuese
-    // Returns List of tabs from store
+    // Returns List of tabs From store
     // @type Array
     cfArTabs: {
       get() {
