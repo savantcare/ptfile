@@ -23,13 +23,13 @@ export default {
   },
   mounted() {},
   methods: {
-    mfQuerySearch(queryString, cb) {
-      const arCtGoalInSearch = ormCtSearch.query().search(queryString).get() // TODO: Why is this ormCtSearch and not ormSearch
+    mfQuerySearch(pQueryString, pCallBack) {
+      const resultSet = ormCtSearch.query().search(pQueryString).get() // TODO: Why is this ormCtSearch and not ormSearch
 
-      console.log('search result from orm model', arCtGoalInSearch)
+      console.log('search result from orm model', resultSet)
 
-      console.log(arCtGoalInSearch)
-      cb(arCtGoalInSearch)
+      console.log(resultSet)
+      pCallBack(resultSet)
     },
     mfHandleSelect(item) {
       const { key } = item
