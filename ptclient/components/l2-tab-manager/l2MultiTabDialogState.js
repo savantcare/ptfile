@@ -9,16 +9,28 @@ export default {
       state.vblMultiTabDialogInL2Visibility = value
     },
     mtfAddAdditionalTab(state, newTab) {
+      /* Two cases are possible:
+      1. Tab already exisits: In this case make that tab active.
+      2. Tab does not exist: In this case create a new tab
+      */
+
       const { id } = newTab
+
+      // Case 1 has happaned hence an existing tab needs to be activated
       const checkArray = state.arTabs.filter((tab) => {
         // AG: Why not use https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
         return tab.id === id
       })
+
+      // Case 2 has happened hence a new tab needs to be added
       if (checkArray.length === 0) {
         state.arTabs.push(newTab)
       }
+
+      // Deciding which tab to make active
       state.vsSelectedTabId = id
     },
+
     mtfSetvsSelectedTabId(state, value) {
       state.vsSelectedTabId = value
     },
