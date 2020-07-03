@@ -73,12 +73,12 @@ export default {
   methods: {
     mfHandleTabsEdit(pTargetId, pAction) {
       if (pAction === 'add') {
-        const doNewTab = {
+        const objNewTab = {
           nameToShowUser: 'New tab',
           ctToShowInsideTab: require('./ctSearchToAddTabInL2').default,
           id: '0',
         }
-        this.$store.commit('mtfAddAdditionalTab', doNewTab)
+        this.$store.commit('mtfAddAdditionalTab', objNewTab)
       }
       if (pAction === 'remove') {
         // console.log(pTargetId)
