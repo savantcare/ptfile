@@ -20,7 +20,7 @@ Layer2MultiTabDialog is not expected to be accessed by a URL. */
       <el-tab-pane
         v-for="tab in cfArTabs"
         :key="tab.id"
-        :label="tab.nameToShowUser"
+        :label="tab.label"
         :name="tab.id"
       >
         <!-- Using https://vuejs.org/v2/guide/components.html#Dynamic-Components -->
@@ -74,7 +74,7 @@ export default {
     mfHandleTabsEdit(pTargetId, pAction) {
       if (pAction === 'add') {
         const objNewTab = {
-          nameToShowUser: 'New tab',
+          label: 'New tab',
           ctToShowInsideTab: require('./ctSearchToAddTabInL2').default,
           id: '0',
         }
