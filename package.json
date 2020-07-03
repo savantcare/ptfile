@@ -27,6 +27,8 @@
   },
   "homepage": "https://github.com/savantcare/ptfile#readme",
   "dependencies": {
+    "markdown-it-regexp": "^0.4.0",
+    "markdown-it-vuese": "^0.4.0",
     "nodemon": "^2.0.4",
     "vue-tabs-component": "^1.5.0",
     "vuepress": "^1.5.2",

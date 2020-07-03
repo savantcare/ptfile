@@ -1110,6 +1110,16 @@
     vuepress-plugin-container "^2.0.2"
     vuepress-plugin-smooth-scroll "^0.0.3"
 
+"@vuese/markdown-render@^2.1.0":
+  version "2.10.1"
+  resolved "https://registry.yarnpkg.com/@vuese/markdown-render/-/markdown-render-2.10.1.tgz#42542aee2d27fc36fb9452a8709624391a6d467f"
+  integrity sha512-NbDciF+AzLJsIf39j9+7xp8rEEYbpzPm44JbG/LUKsR+qG1zSU2lfk5HP+gcZd9rZ/f9rYS7fAiMMN/vmqjDQQ==
+
+"@vuese/parser@^2.0.2":
+  version "2.9.1"
+  resolved "https://registry.yarnpkg.com/@vuese/parser/-/parser-2.9.1.tgz#c66bfbfe46f5e7877e5646c7b8828434a1d316b2"
+  integrity sha512-5XVgmg9TviosbQEzo0Et1n/WX6s+fmK2l3DKEX8tGaPJLKN+Qh5GEosjHVYw1E4nZllPv2kDa7HqKwqR+0QUUw==
+
 "@webassemblyjs/ast@1.9.0":
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/@webassemblyjs/ast/-/ast-1.9.0.tgz#bd850604b4042459a5a41cd7d338cbed695ed964"
@@ -4728,6 +4738,14 @@ markdown-it-table-of-contents@^0.4.0:
   resolved "https://registry.yarnpkg.com/markdown-it-table-of-contents/-/markdown-it-table-of-contents-0.4.4.tgz#3dc7ce8b8fc17e5981c77cc398d1782319f37fbc"
   integrity sha512-TAIHTHPwa9+ltKvKPWulm/beozQU41Ab+FIefRaQV1NRnpzwcV9QOe6wXQS5WLivm5Q/nlo0rl6laGkMDZE7Gw==
 
+markdown-it-vuese@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/markdown-it-vuese/-/markdown-it-vuese-0.4.0.tgz#7828a137849499c4e28a2918176999b06b400f29"
+  integrity sha512-gfcHn2Xsd9jFKA3sVbqqO+hgFhNeyO3eqHQlmvjyqno1Epve0Ix99DW0WFSNQ9VP0K98OWS/Lu1jc5kILpgLKw==
+  dependencies:
+    "@vuese/markdown-render" "^2.1.0"
+    "@vuese/parser" "^2.0.2"
+
 markdown-it@^8.4.1:
   version "8.4.2"
   resolved "https://registry.yarnpkg.com/markdown-it/-/markdown-it-8.4.2.tgz#386f98998dc15a37722aa7722084f4020bdd9b54"
@@ -7494,13 +7512,6 @@ vuepress-plugin-container@^2.0.2:
   integrity sha512-l+EkeL+rC6DJch1wAZUFIkNDaz2TNOg4NQTHa3yMAsYkC+QaSRubGdN6YwOSmfjxVmM9s9D3gwBWw0O7OBhqRg==
   dependencies:
     markdown-it-container "^2.0.0"
-
-vuepress-plugin-glossary@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/vuepress-plugin-glossary/-/vuepress-plugin-glossary-1.0.2.tgz#621b2913857a68a93310a8f7a3b6343c082b5acd"
-  integrity sha512-hyP5UV2vBj9rsFK8GeVYjS+jEGFqOjFEAns0EG95pKqimZJMKzKn0RZ3hfcx4Ty1BhUW9//00KIRbqjxK6DweA==
-  dependencies:
-    markdown-it-regexp "^0.4.0"
 
 vuepress-plugin-smooth-scroll@^0.0.3:
   version "0.0.3"

@@ -5,7 +5,6 @@ Layer2MultiTabDialog is not expected to be accessed by a URL. */
 
 /*
 //#region goal
-
 Create a tree strucrure that looks like:
 
 dialog

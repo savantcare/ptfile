@@ -34,3 +34,5 @@ The goal is:
 To achive the above goal the code is:
 
 <<< @/ptclient/components/l2-tab-manager/index.vue#template{1}
+
+<[vuese](@/ptclient/components/l2-tab-manager/index.vue)

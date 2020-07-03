@@ -230,6 +230,9 @@ module.exports = {
         return `<a href="${match[1]}"/>`
       })
       md.use(termLinker)
+      md.use(require('markdown-it-vuese'), {
+        /* options */
+      })
     },
   },
 }
