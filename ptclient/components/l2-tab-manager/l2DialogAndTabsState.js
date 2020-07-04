@@ -46,7 +46,7 @@ export default {
 
       const objNewTab = {
         label: '+',
-        closable: 'false',
+        closable: false,
         ctToShowInsideTab: require('./ctSearchToAddTabInL2').default,
         id: '0',
       }
