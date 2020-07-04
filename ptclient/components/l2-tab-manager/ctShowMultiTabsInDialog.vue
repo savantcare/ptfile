@@ -96,11 +96,11 @@ export default {
   },
   methods: {
     // @vuese
-    // Add or remove tabs
+    // Add tab
     // @arg pTargetId - tab id
     // @arg pAction - add/remove
 
-    mfHandleTabAdd(pTargetId, pAction) {
+    mfHandleTabAdd(pTargetId) {
       const objNewTab = {
         label: 'New tab',
         ctToShowInsideTab: require('./ctSearchToAddTabInL2').default,
@@ -111,7 +111,7 @@ export default {
       // @arg The argument is a object list of tabs
       this.$store.commit('mtfAdditionalTabAddOrActivate', objNewTab)
     },
-    mfHandleTabRemove(pTargetId, pAction) {
+    mfHandleTabRemove(pTargetId) {
       const arNewTabs = this.cfArTabs.filter((tab) => {
         return tab.id !== pTargetId
       })
