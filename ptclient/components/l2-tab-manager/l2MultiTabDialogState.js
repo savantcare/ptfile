@@ -10,7 +10,7 @@ export default {
     mtfSetTabDialogVisibility(state, value) {
       state.vblMultiTabDialogInL2Visibility = value
     },
-    mtfAddAdditionalTab(state, newTab) {
+    mtfAdditionalTabAddOrActivate(state, newTab) {
       /* Two cases are possible:
       1. Tab already exisits: In this case make that tab active.
       2. Tab does not exist: In this case create a new tab

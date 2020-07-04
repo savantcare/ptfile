@@ -40,7 +40,7 @@ export default {
           pSelectedSuggestion.ctToShowInsideTab).default,
         id: pSelectedSuggestion.id,
       }
-      this.$store.commit('mtfAddAdditionalTab', objAddTab)
+      this.$store.commit('mtfAdditionalTabAddOrActivate', objAddTab)
     },
   },
 }

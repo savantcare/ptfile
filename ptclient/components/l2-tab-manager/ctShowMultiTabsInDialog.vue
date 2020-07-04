@@ -109,7 +109,7 @@ export default {
 
         // Fire when L2 dialog in open state and add additional tab
         // @arg The argument is a object list of tabs
-        this.$store.commit('mtfAddAdditionalTab', objNewTab)
+        this.$store.commit('mtfAdditionalTabAddOrActivate', objNewTab)
       }
       if (pAction === 'remove') {
         const arNewTabs = this.cfArTabs.filter((tab) => {
