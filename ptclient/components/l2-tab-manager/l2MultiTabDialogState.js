@@ -10,13 +10,13 @@ export default {
     mtfSetTabDialogVisibility(state, value) {
       state.vblSeeDialogHoldingTabsInL2 = value
     },
-    mtfAdditionalTabAddOrActivate(state, newTab) {
+    mtfAdditionalTabAddOrActivate(state, pObjNewTab) {
       /* Two cases are possible:
       1. Tab already exisits: In this case make that tab active.
       2. Tab does not exist: In this case create a new tab
       */
 
-      const { id } = newTab
+      const { id } = pObjNewTab
 
       // Case 1 has happaned hence an existing tab needs to be activated
       const checkArray = state.arTabs.filter((tab) => {
@@ -26,7 +26,7 @@ export default {
 
       // Case 2 has happened hence a new tab needs to be added
       if (checkArray.length === 0) {
-        state.arTabs.push(newTab)
+        state.arTabs.push(pObjNewTab)
       }
 
       // Deciding which tab to make active
@@ -43,6 +43,14 @@ export default {
       state.arTabs = [pTab]
       state.vblSeeDialogHoldingTabsInL2 = true
       state.vsSelectedTabId = pTab.id
+
+      const objNewTab = {
+        label: 'New tab',
+        ctToShowInsideTab: require('./ctSearchToAddTabInL2').default,
+        id: '0',
+      }
+
+      state.arTabs.push(objNewTab)
 
       console.log('state-> ', state)
     },
