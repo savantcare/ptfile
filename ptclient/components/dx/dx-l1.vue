@@ -89,11 +89,14 @@ export default {
     },
     mfOpenADialog() {
       console.log('show add dialog')
+      const resultSet = ormSearch.query().search('Add diagnosis').get()
+      const resultData = resultSet[0]
       const tab = {
-        label: 'Add Dx',
-        ctToShowInsideTab: require('@/components/dx/layer-2/ctAddDx.vue')
-          .default,
-        id: 'tab-add-dx',
+        label: resultData.value,
+        ctToShowInsideTab: require('@/components/' +
+          resultData.ctToShowInsideTab).default,
+        ctAbbr: resultData.ctAbbr,
+        id: resultData.id,
       }
       this.$store.commit('mtfShowNewFirstTabInL2', tab)
     },
