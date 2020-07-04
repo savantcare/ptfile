@@ -19,13 +19,13 @@ export default {
       const { id } = pObjNewTab
 
       // Case 1 has happaned hence an existing tab needs to be activated
-      const checkArray = state.arTabs.filter((tab) => {
+      const checkIfThisIsExistingTab = state.arTabs.filter((currentTab) => {
         // AG: Why not use https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
-        return tab.id === id
+        return currentTab.id === id
       })
 
       // Case 2 has happened hence a new tab needs to be added
-      if (checkArray.length === 0) {
+      if (checkIfThisIsExistingTab.length === 0) {
         state.arTabs.push(pObjNewTab)
       }
 
