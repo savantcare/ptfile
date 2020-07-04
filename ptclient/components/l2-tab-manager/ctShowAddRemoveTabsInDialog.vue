@@ -22,6 +22,10 @@ dialog
     custom-class="multi-tab-dialog"
     width="90%"
     top="5vh"
+    :modal="true"
+    :close-on-click-modal="true"
+    :close-on-press-escape="true"
+    :show-close="false"
   >
     <!-- By passing editable we tell element.io to give add and close option Red: https://element.eleme.io/#/en-US/component/tabs#tabs-attributes -->
     <el-tabs
