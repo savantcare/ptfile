@@ -28,7 +28,8 @@ dialog
       v-model="vsSelectedTabId"
       type="card"
       editable
-      @edit="mfHandleTabsEdit"
+      @tab-add="mfHandleTabAdd"
+      @tab-remove="mfHandleTabRemove"
     >
       <el-tab-pane
         v-for="tab in cfArTabs"
@@ -99,31 +100,29 @@ export default {
     // @arg pTargetId - tab id
     // @arg pAction - add/remove
 
-    mfHandleTabsEdit(pTargetId, pAction) {
-      if (pAction === 'add') {
-        const objNewTab = {
-          label: 'New tab',
-          ctToShowInsideTab: require('./ctSearchToAddTabInL2').default,
-          id: '0',
-        }
-
-        // Fire when L2 dialog in open state and add additional tab
-        // @arg The argument is a object list of tabs
-        this.$store.commit('mtfAdditionalTabAddOrActivate', objNewTab)
+    mfHandleTabAdd(pTargetId, pAction) {
+      const objNewTab = {
+        label: 'New tab',
+        ctToShowInsideTab: require('./ctSearchToAddTabInL2').default,
+        id: '0',
       }
-      if (pAction === 'remove') {
-        const arNewTabs = this.cfArTabs.filter((tab) => {
-          return tab.id !== pTargetId
-        })
 
-        // Fire when L2 dialog open first time
-        // @arg The argument is a array list of tabs
-        this.$store.commit('mtfSetArTabs', arNewTabs)
+      // Fire when L2 dialog in open state and add additional tab
+      // @arg The argument is a object list of tabs
+      this.$store.commit('mtfAdditionalTabAddOrActivate', objNewTab)
+    },
+    mfHandleTabRemove(pTargetId, pAction) {
+      const arNewTabs = this.cfArTabs.filter((tab) => {
+        return tab.id !== pTargetId
+      })
 
-        // If there are no more tabs in the diaglog then hide the dialog
-        if (arNewTabs.length === 0) {
-          this.vblSeeDialogHoldingTabsInL2 = false
-        }
+      // Fire when L2 dialog open first time
+      // @arg The argument is a array list of tabs
+      this.$store.commit('mtfSetArTabs', arNewTabs)
+
+      // If there are no more tabs in the diaglog then hide the dialog
+      if (arNewTabs.length === 0) {
+        this.vblSeeDialogHoldingTabsInL2 = false
       }
     },
   },
