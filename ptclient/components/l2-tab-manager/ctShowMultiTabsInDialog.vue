@@ -18,7 +18,7 @@ dialog
 
 <template>
   <el-dialog
-    :visible.sync="vblMultiTabDialogInL2Visibility"
+    :visible.sync="vblSeeDialogHoldingTabsInL2"
     custom-class="multi-tab-dialog"
     width="90%"
     top="5vh"
@@ -78,10 +78,10 @@ export default {
     // @vuese
     // Get and set L2 dialog visibility from store
     // @type Boolean
-    vblMultiTabDialogInL2Visibility: {
+    vblSeeDialogHoldingTabsInL2: {
       get() {
         return this.$store.state.multiTabDialogLayer2
-          .vblMultiTabDialogInL2Visibility
+          .vblSeeDialogHoldingTabsInL2
       },
       set(value) {
         this.$store.commit('mtfSetTabDialogVisibility', value)
@@ -89,7 +89,7 @@ export default {
     },
   },
   mounted() {
-    this.vblMultiTabDialogInL2Visibility = false
+    this.vblSeeDialogHoldingTabsInL2 = false
     this.cfArTabs = [] // Template has a for loop running on this.
     this.vsSelectedTabId = ''
   },
@@ -122,7 +122,7 @@ export default {
 
         // If there are no more tabs in the diaglog then hide the dialog
         if (arNewTabs.length === 0) {
-          this.vblMultiTabDialogInL2Visibility = false
+          this.vblSeeDialogHoldingTabsInL2 = false
         }
       }
     },

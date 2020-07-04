@@ -1,14 +1,14 @@
 export default {
   state: {
     // #region state
-    vblMultiTabDialogInL2Visibility: false,
+    vblSeeDialogHoldingTabsInL2: false,
     arTabs: [], // Template has a for loop running on this.
     vsSelectedTabId: '', // arTabs might have 10 tabs. Out of those which tab is active needs to be stored outside the array of 10 tabs
     // #endregion state
   },
   mutations: {
     mtfSetTabDialogVisibility(state, value) {
-      state.vblMultiTabDialogInL2Visibility = value
+      state.vblSeeDialogHoldingTabsInL2 = value
     },
     mtfAdditionalTabAddOrActivate(state, newTab) {
       /* Two cases are possible:
@@ -41,7 +41,7 @@ export default {
     },
     mtfShowNewFirstTabInL2(state, pTab) {
       state.arTabs = [pTab]
-      state.vblMultiTabDialogInL2Visibility = true
+      state.vblSeeDialogHoldingTabsInL2 = true
       state.vsSelectedTabId = pTab.id
 
       console.log('state-> ', state)
