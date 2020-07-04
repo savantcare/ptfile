@@ -10,7 +10,7 @@ None
 
 ## Section 3: Storage on client side
 
-<<< @/ptclient/components/l2-tab-manager/l2MultiTabDialogState.js
+<<< @/ptclient/components/l2-tab-manager/l2MultiTabDialogState.js#state
 
 ## Section 4: Operational detail of client side UI design
 

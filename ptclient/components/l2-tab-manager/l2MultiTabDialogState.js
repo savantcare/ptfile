@@ -1,8 +1,10 @@
 export default {
   state: {
+    // #region state
     vblMultiTabDialogInL2Visibility: false,
     arTabs: [], // Template has a for loop running on this.
     vsSelectedTabId: '', // arTabs might have 10 tabs. Out of those which tab is active needs to be stored outside the array of 10 tabs
+    // #endregion state
   },
   mutations: {
     mtfSetTabDialogVisibility(state, value) {
