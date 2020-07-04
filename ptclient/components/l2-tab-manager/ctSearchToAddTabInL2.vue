@@ -39,6 +39,7 @@ export default {
         ctToShowInsideTab: require('@/components/' +
           pSelectedSuggestion.ctToShowInsideTab).default,
         id: pSelectedSuggestion.id,
+        closable: true,
       }
       this.$store.commit('mtfAdditionalTabAddOrActivate', objAddTab)
     },

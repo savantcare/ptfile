@@ -27,8 +27,6 @@ dialog
     <el-tabs
       v-model="vsSelectedTabId"
       type="card"
-      editable
-      @tab-add="mfHandleTabAdd"
       @tab-remove="mfHandleTabRemove"
     >
       <el-tab-pane
@@ -36,6 +34,7 @@ dialog
         :key="tab.id"
         :label="tab.label"
         :name="tab.id"
+        :closable="tab.closable"
       >
         <!-- Using https://vuejs.org/v2/guide/components.html#Dynamic-Components -->
         <component v-bind:is="tab.ctToShowInsideTab"></component>
@@ -95,22 +94,6 @@ export default {
     this.vsSelectedTabId = ''
   },
   methods: {
-    // @vuese
-    // Add tab
-    // @arg pTargetId - tab id
-    // @arg pAction - add/remove
-
-    mfHandleTabAdd(pTargetId) {
-      const objNewTab = {
-        label: 'New tab',
-        ctToShowInsideTab: require('./ctSearchToAddTabInL2').default,
-        id: '0',
-      }
-
-      // Fire when L2 dialog in open state and add additional tab
-      // @arg The argument is a object list of tabs
-      this.$store.commit('mtfAdditionalTabAddOrActivate', objNewTab)
-    },
     mfHandleTabRemove(pTargetId) {
       const arNewTabs = this.cfArTabs.filter((tab) => {
         return tab.id !== pTargetId

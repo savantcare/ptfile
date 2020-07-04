@@ -45,7 +45,7 @@ export default {
       state.vsSelectedTabId = pTab.id
 
       const objNewTab = {
-        label: 'New tab',
+        label: '+',
         ctToShowInsideTab: require('./ctSearchToAddTabInL2').default,
         id: '0',
       }

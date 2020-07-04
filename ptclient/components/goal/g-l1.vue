@@ -95,6 +95,7 @@ export default {
           resultData.ctToShowInsideTab).default,
         ctAbbr: resultData.ctAbbr,
         id: resultData.id,
+        closable: true,
       }
       this.$store.commit('mtfShowNewFirstTabInL2', tab)
     },
