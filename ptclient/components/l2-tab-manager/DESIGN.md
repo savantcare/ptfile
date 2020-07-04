@@ -25,20 +25,10 @@ Source is at: [https://github.com/savantcare/ptfile/tree/master/ptclient/compone
 
 The goal is:
 
-Create a tree strucrure that looks like:
-
-==> :el:
-
-=======> :dialog:
-
-================> :tabs:
-
-=======================> :tab-pane:
-
-=================================> :Component:
+<<< @/ptclient/components/l2-tab-manager/index.vue#goal{1}
 
 To achive the above goal the code is:
 
-<<< @/ptclient/components/l2-tab-manager/index.vue#template{1}
+<<< @/ptclient/components/l2-tab-manager/index.vue#template{2}
 
 <[vuese](@/ptclient/components/l2-tab-manager/index.vue)
