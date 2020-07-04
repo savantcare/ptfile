@@ -6,7 +6,7 @@ import VuexORMSearch from '@vuex-orm/plugin-search'
 import VuexORM from '@vuex-orm/core'
 import axios from 'axios'
 import VuexORMAxios from '@vuex-orm/plugin-axios'
-import l2MultiTabDialogStateModule from '@/components/l2-tab-manager/l2MultiTabDialogState'
+import l2DialogAndTabsStateModule from '@/components/l2-tab-manager/l2DialogAndTabsState'
 import database from '@/database'
 
 VuexORM.use(VuexORMAxios, { axios })
@@ -26,7 +26,7 @@ const createStore = () => {
       },
     },
     modules: {
-      multiTabDialogLayer2: l2MultiTabDialogStateModule,
+      multiTabDialogLayer2: l2DialogAndTabsStateModule,
     },
     plugins: [createPersistedState(), VuexORM.install(database)],
   })
