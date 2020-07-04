@@ -54,7 +54,7 @@ export default {
 
   computed: {
     // @vuese
-    // Returns List of tabs From store
+    // Get and set array of tabs from store
     // @type Array
     cfArTabs: {
       get() {
@@ -65,7 +65,7 @@ export default {
       },
     },
     // @vuese
-    // Returns selected tab id for L2 from store
+    // Get and set selected tab id from store
     // @type String
     vsSelectedTabId: {
       get() {
@@ -76,7 +76,7 @@ export default {
       },
     },
     // @vuese
-    // Returns L2 dialog visibility from store
+    // Get and set L2 dialog visibility from store
     // @type Boolean
     vblMultiTabDialogInL2Visibility: {
       get() {
