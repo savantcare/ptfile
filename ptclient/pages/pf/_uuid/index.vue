@@ -30,7 +30,7 @@ import ctDXL1 from '@/components/dx/dx-l1'
 import ctGL1 from '@/components/goal/g-l1'
 import ctScrL1 from '@/components/scr/scr-l1.vue'
 const Layer2MultiTabDialog = () =>
-  import('@/components/l2-tab-manager/ctShowMultiTabsInDialog')
+  import('@/components/l2-tab-manager/ctShowAddRemoveTabsInDialog')
 
 Vue.use(VueSplit)
 export default {
