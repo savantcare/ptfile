@@ -26,6 +26,7 @@ dialog
     :close-on-click-modal="true"
     :close-on-press-escape="true"
     :show-close="false"
+    v-on:keyup.native="activateTabFromKeyboard($event)"
   >
     <!-- By passing editable we tell element.io to give add and close option Red: https://element.eleme.io/#/en-US/component/tabs#tabs-attributes -->
     <el-tabs
@@ -36,7 +37,7 @@ dialog
       <el-tab-pane
         v-for="tab in cfArTabs"
         :key="tab.id"
-        :label="tab.label"
+        :label="tab.label + 1"
         :name="tab.id"
         :closable="tab.closable"
       >
@@ -96,8 +97,23 @@ export default {
     this.vblSeeDialogHoldingTabsInL2 = false
     this.cfArTabs = [] // Template has a for loop running on this.
     this.vsSelectedTabId = ''
+    window.addEventListener(
+      'keypress',
+      function (e) {
+        console.log(e)
+      }.bind()
+    )
   },
   methods: {
+    // Problems:
+    // 1.  This not getting all the keypress
+    // 2. I need to ignore this if it is already inside a form element
+    activateTabFromKeyboard(pEvent) {
+      if (pEvent.key === '1') {
+        this.$store.commit('mtfSetvsSelectedTabId', this.cfArTabs[1 - 1].id)
+      }
+      console.log(pEvent)
+    },
     mfHandleTabRemove(pTabBeingRemovedID) {
       let tabToRemoveFoundAt = false
       let loopCount = 0
@@ -111,14 +127,13 @@ export default {
         }
       })
 
-      // Fire when L2 dialog open first time
-      // @arg The argument is a array list of tabs
       this.$store.commit('mtfSetArTabs', arNewTabs)
 
       // If there are no more tabs in the diaglog then hide the dialog
       if (arNewTabs.length === 0) {
         this.vblSeeDialogHoldingTabsInL2 = false
       } else {
+        // Once a tab is removed an existing tab needs to be made active
         console.log(tabToRemoveFoundAt, arNewTabs)
         let idOfNewActiveTab = 0
         if (tabToRemoveFoundAt === 0) {
