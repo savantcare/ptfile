@@ -49,12 +49,13 @@ export default {
     },
   },
   computed: {
-    activeTab() {
+    cfFireWhenActiveTabIDChanges() {
       return this.$store.state.multiTabDialogLayer2.vsSelectedTabId
     },
   },
   watch: {
-    activeTab(newTabID, oldTabID) {
+    // Ref: https://stackoverflow.com/questions/43270159/vue-js-2-how-to-watch-store-values-from-vuex
+    cfFireWhenActiveTabIDChanges(newTabID, oldTabID) {
       this.$refs.searchbox.focus()
       console.log(`New Tab ID is ${newTabID}`)
     },
