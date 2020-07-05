@@ -60,6 +60,7 @@ export default {
       console.log(newTabID)
       if (newTabID === '0') {
         this.$refs.searchbox.focus()
+        this.keyword = '' // when this tab is activated 2nd time the search box will be empty
         console.log(`From new Tab search ct ${newTabID}`)
       }
     },

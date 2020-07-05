@@ -110,13 +110,26 @@ export default {
     // 1.  This not getting all the keypress
     // 2. I need to ignore this if it is already inside a form element
     activateTabFromKeyboard(pEvent) {
-      if (pEvent.key === '1') {
-        this.$store.commit('mtfSetvsSelectedTabId', this.cfArTabs[1 - 1].id)
+      if (
+        pEvent.key === '1' ||
+        pEvent.key === '2' ||
+        pEvent.key === '3' ||
+        pEvent.key === '4' ||
+        pEvent.key === '5' ||
+        pEvent.key === '6' ||
+        pEvent.key === '7' ||
+        pEvent.key === '8' ||
+        pEvent.key === '9'
+      ) {
+        this.$store.commit(
+          'mtfSetvsSelectedTabId',
+          this.cfArTabs[pEvent.key - 1].id
+        )
       }
       console.log(pEvent)
     },
     mfHandleTabRemove(pTabBeingRemovedID) {
-      let tabToRemoveFoundAt = false
+      let tabToRemoveFoundAt = false // this is needed to find which tab to activate
       let loopCount = 0
       const arNewTabs = this.cfArTabs.filter((tab) => {
         if (tab.id !== pTabBeingRemovedID) {
