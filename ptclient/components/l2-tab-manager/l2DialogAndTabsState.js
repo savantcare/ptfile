@@ -16,12 +16,10 @@ export default {
       2. Tab does not exist: In this case create a new tab
       */
 
-      const { id } = pObjNewTab
-
       // Case 1 has happaned hence an existing tab needs to be activated
       const checkIfThisIsExistingTab = state.arTabs.filter((currentTab) => {
         // AG: Why not use https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
-        return currentTab.id === id
+        return currentTab.id === pObjNewTab.id
       })
 
       // Case 2 has happened hence a new tab needs to be added
@@ -30,7 +28,7 @@ export default {
       }
 
       // Deciding which tab to make active
-      state.vsSelectedTabId = id
+      state.vsSelectedTabId = pObjNewTab.id
     },
 
     mtfSetvsSelectedTabId(state, value) {
