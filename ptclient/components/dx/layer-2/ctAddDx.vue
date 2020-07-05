@@ -3,7 +3,8 @@
     <!-- <el-tab-pane> -->
     <el-row :gutter="12">
       <el-col :span="24">
-        <el-card class="box-card" style="border: 0;">
+        <!-- If I make style="border: 0;" then when tab is activated the bottom border of the tab does not go away -->
+        <el-card class="box-card">
           <el-form
             label-position="top"
             :model="daDxForm"
