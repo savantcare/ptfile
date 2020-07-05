@@ -110,6 +110,10 @@ export default {
     // 1.  This not getting all the keypress
     // 2. I need to ignore this if it is already inside a form element
     activateTabFromKeyboard(pEvent) {
+      if (this.vblSeeDialogHoldingTabsInL2 === false) {
+        console.log('2nd layer is not active hence dont activate')
+        return
+      }
       if (
         pEvent.key === '1' ||
         pEvent.key === '2' ||
