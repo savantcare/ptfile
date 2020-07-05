@@ -120,9 +120,15 @@ export default {
         this.vblSeeDialogHoldingTabsInL2 = false
       } else {
         console.log(tabToRemoveFoundAt, arNewTabs)
+        let idOfNewActiveTab = 0
+        if (tabToRemoveFoundAt === 0) {
+          idOfNewActiveTab = 0
+        } else {
+          idOfNewActiveTab = tabToRemoveFoundAt - 1
+        }
         this.$store.commit(
           'mtfSetvsSelectedTabId',
-          arNewTabs[tabToRemoveFoundAt - 1].id
+          arNewTabs[idOfNewActiveTab].id
         )
       }
     },
