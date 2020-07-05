@@ -98,9 +98,17 @@ export default {
     this.vsSelectedTabId = ''
   },
   methods: {
-    mfHandleTabRemove(pTargetId) {
+    mfHandleTabRemove(pTabBeingRemovedID) {
+      let tabToRemoveFoundAt = false
+      let loopCount = 0
       const arNewTabs = this.cfArTabs.filter((tab) => {
-        return tab.id !== pTargetId
+        if (tab.id !== pTabBeingRemovedID) {
+          loopCount++
+          return true
+        } else {
+          tabToRemoveFoundAt = loopCount
+          return false
+        }
       })
 
       // Fire when L2 dialog open first time
@@ -110,6 +118,12 @@ export default {
       // If there are no more tabs in the diaglog then hide the dialog
       if (arNewTabs.length === 0) {
         this.vblSeeDialogHoldingTabsInL2 = false
+      } else {
+        console.log(tabToRemoveFoundAt, arNewTabs)
+        this.$store.commit(
+          'mtfSetvsSelectedTabId',
+          arNewTabs[tabToRemoveFoundAt - 1].id
+        )
       }
     },
   },
