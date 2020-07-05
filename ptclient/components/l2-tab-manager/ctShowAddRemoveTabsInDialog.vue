@@ -97,6 +97,7 @@ export default {
     this.vblSeeDialogHoldingTabsInL2 = false
     this.cfArTabs = [] // Template has a for loop running on this.
     this.vsSelectedTabId = ''
+    // This may not be needed if activateTabFromKeyboard works correctly.
     window.addEventListener(
       'keypress',
       function (e) {
