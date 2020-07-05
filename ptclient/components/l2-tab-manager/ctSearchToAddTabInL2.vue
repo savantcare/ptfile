@@ -23,17 +23,11 @@ Features needed in search
 </template>
 
 <script>
-import { focus } from 'vue-focus'
 import ormSearch from '../../models/ormSearchInL2'
 
 export default {
   data() {
     return { keyword: '' }
-  },
-  directives: { focus },
-  mounted() {
-    console.log(this)
-    this.$nextTick(() => this.$refs.searchbox.focus())
   },
   methods: {
     mfQuerySearchTerms(pQueryString, pCallBack) {
@@ -52,6 +46,17 @@ export default {
         closable: true,
       }
       this.$store.commit('mtfAdditionalTabAddOrActivate', objAddTab)
+    },
+  },
+  computed: {
+    activeTab() {
+      return this.$store.state.multiTabDialogLayer2.vsSelectedTabId
+    },
+  },
+  watch: {
+    activeTab(newTabID, oldTabID) {
+      this.$refs.searchbox.focus()
+      console.log(`New Tab ID is ${newTabID}`)
     },
   },
 }
