@@ -28,7 +28,7 @@
 
 <script>
 // import addGoal from './layer-2/addGoal.vue'
-import ormSearch from '../../models/CtSearchInL2'
+import ormSearch from '../../models/ormSearchInL2'
 import ormGoal from '@/models/Goal'
 
 // const { GOAL_API_URL } = 'http://localhost:8000/goals'

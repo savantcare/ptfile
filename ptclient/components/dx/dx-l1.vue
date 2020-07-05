@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import ormSearch from '../../models/CtSearchInL2'
+import ormSearch from '../../models/ormSearchInL2'
 import ormDx from '@/models/Dx'
 
 /* export default {

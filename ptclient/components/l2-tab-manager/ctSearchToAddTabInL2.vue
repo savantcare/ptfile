@@ -22,7 +22,7 @@ Features needed in search
 </template>
 
 <script>
-import ormSearch from '../../models/CtSearchInL2'
+import ormSearch from '../../models/ormSearchInL2'
 
 export default {
   data() {
