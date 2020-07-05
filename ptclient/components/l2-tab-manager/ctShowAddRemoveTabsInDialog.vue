@@ -121,10 +121,14 @@ export default {
         pEvent.key === '8' ||
         pEvent.key === '9'
       ) {
-        this.$store.commit(
-          'mtfSetvsSelectedTabId',
-          this.cfArTabs[pEvent.key - 1].id
-        )
+        if (pEvent.srcElement.type === 'text') {
+          console.log('inside a form so skip')
+        } else {
+          this.$store.commit(
+            'mtfSetvsSelectedTabId',
+            this.cfArTabs[pEvent.key - 1].id
+          )
+        }
       }
       console.log(pEvent)
     },
