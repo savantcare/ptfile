@@ -1,3 +1,10 @@
+<!--
+Features needed in search 
+1. Highlight search term in results 
+2. Search for "rex add" when the search list has "add rex" 
+3. Deal with wrong spellings
+-->
+
 <template>
   <div style="text-align: center;">
     <el-autocomplete
