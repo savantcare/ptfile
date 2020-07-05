@@ -18,7 +18,6 @@ Features needed in search
       prefix-icon="el-icon-search"
       @select="mfHandleSuggestionSelectedByUser"
       clearable
-      :autofocus="true"
     ></el-autocomplete>
   </div>
 </template>
