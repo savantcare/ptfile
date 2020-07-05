@@ -3,7 +3,7 @@
     <!-- <el-tab-pane> -->
     <el-row :gutter="12">
       <el-col :span="24">
-        <el-card class="box-card">
+        <el-card class="box-card" style="border: 0;">
           <el-form
             label-position="top"
             :model="daDxForm"
