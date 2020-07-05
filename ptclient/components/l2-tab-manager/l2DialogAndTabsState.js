@@ -10,7 +10,7 @@ export default {
     mtfSetTabDialogVisibility(state, value) {
       state.vblSeeDialogHoldingTabsInL2 = value
     },
-    mtfAdditionalTabAddOrActivate(state, pObjNewTab) {
+    mtfAdditionalTabAddOrActivate(state, pObjAdditionalTab) {
       /* Two cases are possible:
       1. Tab already exisits: In this case make that tab active.
       2. Tab does not exist: In this case create a new tab
@@ -19,16 +19,16 @@ export default {
       // Case 1 has happaned hence an existing tab needs to be activated
       const checkIfThisIsExistingTab = state.arTabs.filter((currentTab) => {
         // AG: Why not use https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
-        return currentTab.id === pObjNewTab.id
+        return currentTab.id === pObjAdditionalTab.id
       })
 
       // Case 2 has happened hence a new tab needs to be added
       if (checkIfThisIsExistingTab.length === 0) {
-        state.arTabs.push(pObjNewTab)
+        state.arTabs.push(pObjAdditionalTab)
       }
 
       // Deciding which tab to make active
-      state.vsSelectedTabId = pObjNewTab.id
+      state.vsSelectedTabId = pObjAdditionalTab.id
     },
 
     mtfSetvsSelectedTabId(state, value) {
