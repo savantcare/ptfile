@@ -18,6 +18,7 @@ Features needed in search
       prefix-icon="el-icon-search"
       @select="mfHandleSuggestionSelectedByUser"
       clearable
+      :autofocus="true"
     ></el-autocomplete>
   </div>
 </template>
@@ -54,10 +55,14 @@ export default {
     },
   },
   watch: {
-    // Ref: https://stackoverflow.com/questions/43270159/vue-js-2-how-to-watch-store-values-from-vuex
+    // Why? el-input has autofocus property but el-autocomplete does not have auto-focus
+    // How? Ref: https://stackoverflow.com/questions/43270159/vue-js-2-how-to-watch-store-values-from-vuex
     cfFireWhenActiveTabIDChanges(newTabID, oldTabID) {
-      this.$refs.searchbox.focus()
-      console.log(`New Tab ID is ${newTabID}`)
+      console.log(newTabID)
+      if (newTabID === '0') {
+        this.$refs.searchbox.focus()
+        console.log(`From new Tab search ct ${newTabID}`)
+      }
     },
   },
 }
