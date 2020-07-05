@@ -35,9 +35,9 @@ dialog
       @tab-remove="mfHandleTabRemove"
     >
       <el-tab-pane
-        v-for="tab in cfArTabs"
+        v-for="(tab, loopCount) in cfArTabs"
         :key="tab.id"
-        :label="tab.label + 1"
+        :label="tab.label + '(' + (loopCount + 1) + ')'"
         :name="tab.id"
         :closable="tab.closable"
       >
