@@ -26,7 +26,6 @@ dialog
     :close-on-click-modal="true"
     :close-on-press-escape="true"
     :show-close="false"
-    v-on:keyup.native="activateTabFromKeyboard($event)"
   >
     <!-- By passing editable we tell element.io to give add and close option Red: https://element.eleme.io/#/en-US/component/tabs#tabs-attributes -->
     <el-tabs
@@ -97,11 +96,12 @@ export default {
     this.vblSeeDialogHoldingTabsInL2 = false
     this.cfArTabs = [] // Template has a for loop running on this.
     this.vsSelectedTabId = ''
-    // This may not be needed if activateTabFromKeyboard works correctly.
+    const self = this // this is not available inside addEventListener since execution context changes.
     window.addEventListener(
-      'keypress',
+      'keyup',
       function (e) {
-        console.log(e)
+        console.log('the keyboard key up detected')
+        self.activateTabFromKeyboard(e)
       }.bind()
     )
   },
@@ -122,15 +122,18 @@ export default {
         pEvent.key === '9'
       ) {
         if (pEvent.srcElement.type === 'text') {
-          console.log('inside a form so skip')
+          // if I remove this if and only do commit then active tab changes
+          console.log(
+            'inside a form so this is meant as text input hence dont activate tab'
+          )
         } else {
+          console.log('Activating tab at position' + pEvent.key)
           this.$store.commit(
             'mtfSetvsSelectedTabId',
             this.cfArTabs[pEvent.key - 1].id
           )
         }
       }
-      console.log(pEvent)
     },
     mfHandleTabRemove(pTabBeingRemovedID) {
       let tabToRemoveFoundAt = false // this is needed to find which tab to activate
