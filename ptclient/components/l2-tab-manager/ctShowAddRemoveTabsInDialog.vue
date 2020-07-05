@@ -96,48 +96,50 @@ export default {
     this.vblSeeDialogHoldingTabsInL2 = false
     this.cfArTabs = [] // Template has a for loop running on this.
     this.vsSelectedTabId = ''
-    const self = this // this is not available inside addEventListener since execution context changes.
+    const self = this // this is not available inside addEventListener since execution context changes. Hence assining this to self
     window.addEventListener(
       'keyup',
       function (e) {
         console.log('the keyboard key up detected')
-        self.activateTabFromKeyboard(e)
+        self.selectActivateTabFromKeyboard(e)
       }.bind()
     )
   },
   methods: {
-    // Problems:
-    // 1.  This not getting all the keypress
-    // 2. I need to ignore this if it is already inside a form element
-    activateTabFromKeyboard(pEvent) {
+    selectActivateTabFromKeyboard(pEvent) {
       if (this.vblSeeDialogHoldingTabsInL2 === false) {
-        console.log('2nd layer is not active hence dont activate')
+        console.log('Rejection reason 1: 2nd layer not active')
         return
       }
+      const maxValidKeyCodeEnteredByUser = 48 + this.cfArTabs.length
+      console.log(
+        'max code:',
+        maxValidKeyCodeEnteredByUser,
+        'pressed code is',
+        pEvent.keyCode
+      )
       if (
-        pEvent.key === '1' ||
-        pEvent.key === '2' ||
-        pEvent.key === '3' ||
-        pEvent.key === '4' ||
-        pEvent.key === '5' ||
-        pEvent.key === '6' ||
-        pEvent.key === '7' ||
-        pEvent.key === '8' ||
-        pEvent.key === '9'
+        pEvent.keyCode >= '49' &&
+        pEvent.keyCode <= maxValidKeyCodeEnteredByUser
       ) {
-        if (pEvent.srcElement.type === 'text') {
-          // if I remove this if and only do commit then active tab changes
-          console.log(
-            'inside a form so this is meant as text input hence dont activate tab'
-          )
-        } else {
-          console.log('Activating tab at position' + pEvent.key)
-          this.$store.commit(
-            'mtfSetvsSelectedTabId',
-            this.cfArTabs[pEvent.key - 1].id
-          )
-        }
+        // this hurdle passed by the key press
+      } else {
+        console.log(
+          'Rejection reason 2: User entered # is higher then max tabs'
+        )
+        return
       }
+      if (pEvent.srcElement.type === 'text') {
+        console.log(
+          'Rejection reason 3: inside text input hence meant as form entry hence dont activate tab'
+        )
+        return
+      }
+      console.log('Activating tab at position' + pEvent.key)
+      this.$store.commit(
+        'mtfSetvsSelectedTabId',
+        this.cfArTabs[pEvent.key - 1].id
+      )
     },
     mfHandleTabRemove(pTabBeingRemovedID) {
       let tabToRemoveFoundAt = false // this is needed to find which tab to activate
@@ -147,6 +149,7 @@ export default {
           loopCount++
           return true
         } else {
+          // this is the tab that is being removed
           tabToRemoveFoundAt = loopCount
           return false
         }
