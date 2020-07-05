@@ -8,6 +8,7 @@ Features needed in search
 <template>
   <div style="text-align: center;">
     <el-autocomplete
+      ref="searchbox"
       class="inline-input"
       v-model="keyword"
       :fetch-suggestions="mfQuerySearchTerms"
@@ -22,13 +23,18 @@ Features needed in search
 </template>
 
 <script>
+import { focus } from 'vue-focus'
 import ormSearch from '../../models/ormSearchInL2'
 
 export default {
   data() {
     return { keyword: '' }
   },
-  mounted() {},
+  directives: { focus },
+  mounted() {
+    console.log(this)
+    this.$nextTick(() => this.$refs.searchbox.focus())
+  },
   methods: {
     mfQuerySearchTerms(pQueryString, pCallBack) {
       const resultSet = ormSearch.query().search(pQueryString).get()
