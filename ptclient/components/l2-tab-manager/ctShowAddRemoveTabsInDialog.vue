@@ -96,7 +96,7 @@ export default {
     this.vblSeeDialogHoldingTabsInL2 = false
     this.cfArTabs = [] // Template has a for loop running on this.
     this.vsSelectedTabId = ''
-    const self = this // this is not available inside addEventListener since execution context changes. Hence assining this to self
+    const self = this // this is not available inside addEventListener since execution context changes. Hence assining this to self Ref: https://stackoverflow.com/a/50818181
     window.addEventListener(
       'keyup',
       function (e) {
