@@ -20,18 +20,13 @@
               one child is rendered at a time.
           Ref: https://vuejs.org/v2/api/#keep-alive
 
-         
+         Similar working code:
+         https://codesandbox.io/s/github/vuejs/vuejs.org/tree/master/src/v2/examples/vue-20-keep-alive-with-dynamic-components?file=/index.html:296-321
           -->
-        <el-card
-          v-for="(card, loopCount) in cfArCards"
-          :key="card.id"
-          :label="card.label + '(' + (loopCount + 1) + ')'"
-          :name="card.id"
-          :closable="card.closable"
-        >
+        <el-card v-for="card in cfArCards" v-bind:key="card.id">
           <!-- Using https://vuejs.org/v2/guide/components.html#Dynamic-Components -->
           <keep-alive>
-            <component :is="card.ctToShowInsideTab"></component>
+            <component v-bind:is="card.ctToShowInsideTab"></component>
           </keep-alive>
         </el-card>
         <ctSearchBox></ctSearchBox>

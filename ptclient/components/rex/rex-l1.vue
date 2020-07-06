@@ -26,6 +26,7 @@
 <script>
 import ormSearch from '../../models/ormSearchInL2'
 export default {
+  name: 'rex-l1',
   data() {
     return {
       daTable: [
