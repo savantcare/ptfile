@@ -1,8 +1,8 @@
 <!--
 Features needed in search 
 1. Highlight search term in results 
-2. Search for "rex add" when the search list has "add rex" 
-3. Deal with wrong spellings
+2. Search for "goal add" when the search list has "add goal" -> vuex-orm-search is able to do this.
+3. Deal with wrong spellings -> vuex-orm-search is able to do this.
 -->
 
 <template>
@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     mfQuerySearchTerms(pQueryString, pCallBack) {
-      const resultSet = ormSearch.query().search(pQueryString).get()
+      const resultSet = ormSearch.query().search(pQueryString.trim()).get() // trim needs for "goal " to match "goal"
       console.log('search result from orm model', pQueryString, resultSet)
       pCallBack(resultSet)
     },

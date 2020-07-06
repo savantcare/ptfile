@@ -11,7 +11,9 @@ import database from '@/database'
 
 VuexORM.use(VuexORMAxios, { axios })
 VuexORM.use(VuexORMSearch, {
-  // Configure default fuse.js options here (see "Configuration" section below).
+  tokenize: true, // Ref: https://github.com/vuex-orm/plugin-search#configurations needed so "goal add" works when list has "add goal"
+  matchAllTokens: true, // needed so "goal add" shows only opyion 1 when list has "add goal" and "multi rate goal"
+  threshold: 0.4, // the following will match goal: gool gaal gaaal gloa Following not match: gloq
 })
 Vue.use(Vuex)
 
