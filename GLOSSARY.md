@@ -12,9 +12,9 @@
 
 ### Data types
 
-- vsAge: variable of type string called Age
-- viAge: variable of type int called Age
-- vbl: variable of type bool called Age
+- sAge: variable of type string called Age
+- iAge: variable of type int called Age
+- bl: variable of type bool called Age
 - arAge: Array called Age
 - obAge: Object called Age
 

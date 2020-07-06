@@ -31,7 +31,7 @@ dialog
       <!-- By passing editable we tell element.io to give add and close option Red: https://element.eleme.io/#/en-US/component/tabs#tabs-attributes -->
       <el-col :span="20">
         <el-tabs
-          v-model="vsSelectedTabId"
+          v-model="cfVSSelectedTabId"
           type="card"
           @tab-remove="mfHandleTabRemove"
         >
@@ -76,7 +76,7 @@ export default {
         this.$store.commit('mtfSetArTabs', value)
       },
     },
-    vsSelectedTabId: {
+    cfVSSelectedTabId: {
       get() {
         return this.$store.state.dialogHoldingTabsInL2.vsSelectedTabId
       },
@@ -97,7 +97,7 @@ export default {
   mounted() {
     this.vblIsDialogHoldingTabsInL2Visible = false
     this.cfArTabs = [] // Template has a for loop running on this.
-    this.vsSelectedTabId = ''
+    this.cfVSSelectedTabId = ''
     const self = this // this is not available inside addEventListener since execution context changes. Hence assining this to self Ref: https://stackoverflow.com/a/50818181
     window.addEventListener(
       'keyup',
@@ -123,7 +123,7 @@ export default {
       if (pEvent.keyCode === 37) {
         console.log('left arrow pressed let us find the position of the tab')
         const currentTabIdx = this.cfArTabs.findIndex(
-          (tab) => tab.id === this.vsSelectedTabId
+          (tab) => tab.id === this.cfVSSelectedTabId
         )
         console.log('Current tab idx is: ', currentTabIdx)
         if (currentTabIdx === 0) {
@@ -139,7 +139,7 @@ export default {
       if (pEvent.keyCode === 39) {
         console.log('right arrow pressed let us find the position of the tab')
         const currentTabIdx = this.cfArTabs.findIndex(
-          (tab) => tab.id === this.vsSelectedTabId
+          (tab) => tab.id === this.cfVSSelectedTabId
         )
         if (currentTabIdx === this.cfArTabs.length - 1) {
           console.log('at last tab so ignore')
