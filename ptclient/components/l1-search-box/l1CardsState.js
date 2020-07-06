@@ -36,9 +36,7 @@ export default {
     },
     mtfShowNewFirstCardInL2(state, pCard) {
       state.arCards = [pCard]
-      state.vblIsDialogHoldingCardsInL2Visible = true
       state.vsSelectedCardId = pCard.id
-
       console.log('state-> ', state)
     },
   },
