@@ -9,14 +9,14 @@
 
 ### Health components
 
-| #   |                 | Programmer | UI and DB Design | Status    |
-| --- | --------------- | ---------- | ---------------- | --------- |
-| 1   | Recommendations | Sanjay     |                  | Under dev |
-| 2   | Reminders       |            |                  |           |
-| 3   | Goals           | Raj        |                  | Under dev |
-| 4   | Diagnosis       | Anirban    |                  | Under dev |
-| 5   | Screening       | Jana       |                  | Under dev |
-| 6   | Medication      |            |                  |           |
-| 7   |                 |            |                  |           |
+| #   | Name                         | Programmer | Status                             |
+| --- | ---------------------------- | ---------- | ---------------------------------- |
+| 1   | [Recommendations](./rex/)    | Sanjay     | UI and DB final. Feature Under dev |
+| 2   | [Reminders](./rem/)          |            |                                    |
+| 3   | [Goals](./goal/)             | Raj        | UI and DB final. Feature Under dev |
+| 4   | [Diagnosis](./dx/)           | Anirban    | UI and DB final. Feature Under dev |
+| 5   | [Screening](./scr/)          | Jana       | UI and DB final. Feature Under dev |
+| 6   | [Medication](./medications/) |            |                                    |
+| 7   |                              |            |                                    |
 
 ### Other components
