@@ -56,9 +56,7 @@ export default {
     }
   },
   computed: {},
-  beforeCreate() {},
-  mounted() {
-    // Inserting Search interfaces to this component
+  beforeCreate() {
     ormSearch.insert({
       data: {
         value: 'Screening',
@@ -67,6 +65,9 @@ export default {
         layer: 'view',
       },
     })
+  },
+  mounted() {
+    // Inserting Search interfaces to this component
     this.dbGetScreenings()
   },
   methods: {
