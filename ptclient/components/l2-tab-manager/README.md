@@ -16,13 +16,13 @@ None
 
 The goal is:
 
-<<< @/ptclient/components/l2-tab-manager/index.vue#goal{1}
+<<< @/ptclient/components/l2-tab-manager/ctShowAddRemoveTabsInDialog.vue#goal{1}
 
 To achive the above goal the code is:
 
-<<< @/ptclient/components/l2-tab-manager/index.vue#template{2}
+<<< @/ptclient/components/l2-tab-manager/ctShowAddRemoveTabsInDialog.vue#template{2}
 
-<[vuese](@/ptclient/components/l2-tab-manager/index.vue)
+<[vuese](@/ptclient/components/l2-tab-manager/ctShowAddRemoveTabsInDialog.vue)
 
 ## Section 5: Operational detail of Server side API design
 
