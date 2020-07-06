@@ -2,15 +2,15 @@
   <div>
     <Split style="height: 900px; width: 1400px;" :gutterSize="5">
       <SplitArea :size="75">
-        <ctRexL1> </ctRexL1>
+        <keep-alive>
+          <ctRexL1> </ctRexL1>
+        </keep-alive>
         <ctRemL1> </ctRemL1>
         <ctBML1> </ctBML1>
         <ctDXL1> </ctDXL1>
         <ctGL1> </ctGL1>
       </SplitArea>
       <SplitArea :size="25">
-        <ctRexL1> </ctRexL1>
-        <ctScrL1> </ctScrL1>
         <keep-alive>
           <el-card
             v-for="(card, loopCount) in cfArCards"
