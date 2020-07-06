@@ -19,7 +19,9 @@
           :closable="card.closable"
         >
           <!-- Using https://vuejs.org/v2/guide/components.html#Dynamic-Components -->
-          <component v-bind:is="card.ctToShowInsideTab"></component>
+          <keep-alive>
+            <component v-bind:is="card.ctToShowInsideTab"></component>
+          </keep-alive>
         </el-card>
         <ctSearchBox></ctSearchBox>
       </SplitArea>
@@ -60,6 +62,7 @@ export default {
     }
   },
   mounted() {
+    // when page first loads the L2 tabs are set to not show
     this.$store.commit('mtfSetTabDialogVisibility', false)
   },
   computed: {

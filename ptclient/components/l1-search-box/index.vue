@@ -17,7 +17,17 @@ export default {
   data() {
     return { keyword: '' }
   },
-
+  mounted() {
+    // Search interfaces to this component
+    ormSearch.insert({
+      data: {
+        value: 'Clear',
+        ctAbbr: 'clr',
+        ctToShowInsideTab: 'dx/l2/ctAddDx.vue',
+        layer: 'view',
+      },
+    })
+  },
   methods: {
     mfQuerySearchTerms(pQueryString, pCallBack) {
       const resultSet = ormSearch.query().search(pQueryString.trim()).get() // trim needs for "goal " to match "goal"
