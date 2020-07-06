@@ -29,7 +29,7 @@ dialog
   >
     <el-row type="flex">
       <!-- By passing editable we tell element.io to give add and close option Red: https://element.eleme.io/#/en-US/component/tabs#tabs-attributes -->
-      <el-col :span="20">
+      <el-col :span="24">
         <el-tabs
           v-model="cfVSSelectedTabId"
           type="card"
@@ -47,7 +47,7 @@ dialog
           </el-tab-pane>
         </el-tabs>
       </el-col>
-      <el-col>
+      <el-col class="set-of-tabs">
         <ctSetOfTabs></ctSetOfTabs>
       </el-col>
     </el-row>
@@ -223,4 +223,11 @@ export default {
     padding-top: 12px;
   }
 } */
+.set-of-tabs {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 999;
+  width: auto;
+}
 </style>
