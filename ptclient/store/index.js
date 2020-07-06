@@ -6,7 +6,7 @@ import VuexORM from '@vuex-orm/core'
 import axios from 'axios'
 import VuexORMAxios from '@vuex-orm/plugin-axios'
 import clDialogAndTabsStateModule from '@/components/cl-tabs-manager/clDialogAndTabsState'
-import l1CardsStateModule from '@/components/vl-search-box/l1CardsState'
+import vlCardsStateModule from '@/components/vl-search-box/vlCardsState'
 import database from '@/database'
 
 VuexORM.use(VuexORMAxios, { axios })
@@ -22,7 +22,7 @@ const createStore = () => {
     state: () => ({}),
     modules: {
       dialogHoldingTabsInL2: clDialogAndTabsStateModule,
-      cardsInL1CSVA: l1CardsStateModule,
+      cardsInL1CSVA: vlCardsStateModule,
     },
     plugins: [VuexORM.install(database)],
   })
