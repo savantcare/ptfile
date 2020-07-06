@@ -35,6 +35,7 @@ export default {
         closable: true,
       }
       this.$store.commit('mtfShowNewFirstTabInL2', objAddTab)
+      this.keyword = ''
     },
   },
 }
