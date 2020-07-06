@@ -1,7 +1,6 @@
 // This file is structured based on https://github.com/vuex-orm/vuex-orm-examples-nuxt/tree/master/store
 import Vue from 'vue'
 import Vuex from 'vuex'
-import createPersistedState from 'vuex-persistedstate'
 import VuexORMSearch from '@vuex-orm/plugin-search'
 import VuexORM from '@vuex-orm/core'
 import axios from 'axios'
@@ -25,7 +24,7 @@ const createStore = () => {
       dialogHoldingTabsInL2: l2DialogAndTabsStateModule,
       cardsInL1CSVA: l1CardsStateModule,
     },
-    plugins: [createPersistedState(), VuexORM.install(database)],
+    plugins: [VuexORM.install(database)],
   })
 }
 
