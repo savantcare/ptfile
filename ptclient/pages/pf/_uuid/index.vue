@@ -12,14 +12,14 @@
         <ctRexL1> </ctRexL1>
         <ctScrL1> </ctScrL1>
         <el-card
-          v-for="(tab, loopCount) in cfArTabs"
-          :key="tab.id"
-          :label="tab.label + '(' + (loopCount + 1) + ')'"
-          :name="tab.id"
-          :closable="tab.closable"
+          v-for="(card, loopCount) in cfArCards"
+          :key="card.id"
+          :label="card.label + '(' + (loopCount + 1) + ')'"
+          :name="card.id"
+          :closable="card.closable"
         >
           <!-- Using https://vuejs.org/v2/guide/components.html#Dynamic-Components -->
-          <component v-bind:is="tab.ctToShowInsideTab"></component>
+          <component v-bind:is="card.ctToShowInsideTab"></component>
         </el-card>
         <ctSearchBox></ctSearchBox>
       </SplitArea>
@@ -63,12 +63,12 @@ export default {
     this.$store.commit('mtfSetTabDialogVisibility', false)
   },
   computed: {
-    cfArTabs: {
+    cfArCards: {
       get() {
-        return this.$store.state.dialogHoldingTabsInL2.arTabs
+        return this.$store.state.cardsInL2.arCards
       },
       set(value) {
-        this.$store.commit('mtfSetArTabs', value)
+        this.$store.commit('mtfSetArCards', value)
       },
     },
   },

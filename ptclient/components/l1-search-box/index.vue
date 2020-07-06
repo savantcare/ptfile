@@ -35,7 +35,7 @@ export default {
         closable: true,
       }
       if (pSelectedSuggestion.layer === 'view') {
-        console.log('mutate another data structure')
+        this.$store.commit('mtfShowNewFirstCardInL2', objAddTab)
       } else if (pSelectedSuggestion.layer === 'change') {
         this.$store.commit('mtfShowNewFirstTabInL2', objAddTab)
       }
