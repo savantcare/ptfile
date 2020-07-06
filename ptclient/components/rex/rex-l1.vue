@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import ormSearch from '../../models/ormSearchInL2'
 export default {
   data() {
     return {
@@ -38,6 +39,16 @@ export default {
         },
       ],
     }
+  },
+  mounted() {
+    // Search interfaces to this component
+    ormSearch.insert({
+      data: {
+        value: 'Recommendations',
+        ctAbbr: 'rex',
+        ctToShowInsideTab: 'rex/rex-l1.vue',
+      },
+    })
   },
 }
 </script>
