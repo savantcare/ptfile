@@ -29,20 +29,7 @@ yarn docs:dev
 
 ## What
 
-### Q) What are the vs code settings?
-
-auto format on save
-default formatter: prettier
-
-![Formatter setting](./big-picture/images/misc/default-formatter.png)
-
-## Why
-
-### Q) Why is vue-press in parent folder of ptclient and ptserver?
-
-vuepress cannot refer to files in parent folders. This vuepress will be used to document both client and server.
-
-## What is the core tech?
+### Q) What is the core tech?
 
 | Tech                                             | Stars  |
 | ------------------------------------------------ | ------ |
@@ -62,5 +49,19 @@ vuepress cannot refer to files in parent folders. This vuepress will be used to 
 | git                                              |        |
 | github                                           |        |
 | vscode                                           |        |
+| tmux                                             |        |
 | linux                                            |        |
 | Total                                            | 372K + |
+
+### Q) What are the vs code settings?
+
+auto format on save
+default formatter: prettier
+
+![Formatter setting](./big-picture/images/misc/default-formatter.png)
+
+## Why
+
+### Q) Why is vue-press in parent folder of ptclient and ptserver?
+
+vuepress cannot refer to files in parent folders. This vuepress will be used to document both client and server.
