@@ -61,13 +61,13 @@ In the following examples age is a function inside a component
 
 ### Others
 
-- L1: Layer1
-- L2: Layer2
+- VL: View layer
+- CL: Change layer
 - KIL: Keep it local. Do not convert to functions without giving a good reason. Since 1. Each function call makes code hard to read 2. vue vuex-orm element.io all are giving lot of functions 3. A function should not have more than 2 paramters
 - cs: currrent state
-- csva: currrent state view area
+- csvl: currrent state view layer
 - ms: multi state
-- msva: multi state view area
+- msvl: multi state view layer
 - multiStateViewArea: This has components that can show either the current state or historical state
 - timeOfStateSelectedInHeader: This gives the time for which : multiStateViewArea: should be rendered
 - multiStateViewAreaHeader: This has the slider to choose : timeOfStateSelectedInHeader:
