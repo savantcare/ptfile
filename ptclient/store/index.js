@@ -23,7 +23,7 @@ const createStore = () => {
     state: () => ({}),
     modules: {
       dialogHoldingTabsInL2: l2DialogAndTabsStateModule,
-      cardsInL2: l1CardsStateModule,
+      cardsInL1CSVA: l1CardsStateModule,
     },
     plugins: [createPersistedState(), VuexORM.install(database)],
   })

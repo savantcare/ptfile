@@ -74,7 +74,7 @@ export default {
   computed: {
     cfArCards: {
       get() {
-        return this.$store.state.cardsInL2.arCards
+        return this.$store.state.cardsInL1CSVA.arCards
       },
       set(value) {
         this.$store.commit('mtfSetArCards', value)
