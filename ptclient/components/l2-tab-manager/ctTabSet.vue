@@ -43,8 +43,7 @@ export default {
       } else if (pValue === 'plan-tabset') {
         const objAddTab = {
           label: 'Add diagnosis',
-          ctToShowInsideTab: require('@/components/dx/layer-2/ctAddDx.vue')
-            .default,
+          ctToShowInsideTab: require('@/components/dx/l2/ctAddDx.vue').default,
           id: '$uid2',
           closable: true,
         }

@@ -54,7 +54,7 @@ export default {
       data: {
         value: 'Add diagnosis',
         ctAbbr: 'adddx',
-        ctToShowInsideTab: 'dx/layer-2/ctAddDx.vue',
+        ctToShowInsideTab: 'dx/l2/ctAddDx.vue',
       },
     })
     this.mfdaGetDx()
