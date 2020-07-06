@@ -27,24 +27,30 @@ dialog
     :close-on-press-escape="true"
     :show-close="false"
   >
-    <ctTabSet></ctTabSet>
-    <!-- By passing editable we tell element.io to give add and close option Red: https://element.eleme.io/#/en-US/component/tabs#tabs-attributes -->
-    <el-tabs
-      v-model="vsSelectedTabId"
-      type="card"
-      @tab-remove="mfHandleTabRemove"
-    >
-      <el-tab-pane
-        v-for="(tab, loopCount) in cfArTabs"
-        :key="tab.id"
-        :label="tab.label + '(' + (loopCount + 1) + ')'"
-        :name="tab.id"
-        :closable="tab.closable"
-      >
-        <!-- Using https://vuejs.org/v2/guide/components.html#Dynamic-Components -->
-        <component v-bind:is="tab.ctToShowInsideTab"></component>
-      </el-tab-pane>
-    </el-tabs>
+    <el-row type="flex">
+      <!-- By passing editable we tell element.io to give add and close option Red: https://element.eleme.io/#/en-US/component/tabs#tabs-attributes -->
+      <el-col :span="20">
+        <el-tabs
+          v-model="vsSelectedTabId"
+          type="card"
+          @tab-remove="mfHandleTabRemove"
+        >
+          <el-tab-pane
+            v-for="(tab, loopCount) in cfArTabs"
+            :key="tab.id"
+            :label="tab.label + '(' + (loopCount + 1) + ')'"
+            :name="tab.id"
+            :closable="tab.closable"
+          >
+            <!-- Using https://vuejs.org/v2/guide/components.html#Dynamic-Components -->
+            <component v-bind:is="tab.ctToShowInsideTab"></component>
+          </el-tab-pane>
+        </el-tabs>
+      </el-col>
+      <el-col>
+        <ctTabSet></ctTabSet>
+      </el-col>
+    </el-row>
   </el-dialog>
 </template>
 //#endregion template
