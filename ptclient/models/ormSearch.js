@@ -1,7 +1,7 @@
 import { Model } from '@vuex-orm/core'
 
-export default class ormSearchInL2 extends Model {
-  static entity = 'ormSearchInL2'
+export default class ormSearch extends Model {
+  static entity = 'ormSearch'
 
   static fields() {
     return {

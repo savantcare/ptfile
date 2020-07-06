@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import ormSearch from '../../models/ormSearchInL2'
+import ormSearch from '../../models/ormSearch'
 export default {
   data() {
     return { keyword: '' }

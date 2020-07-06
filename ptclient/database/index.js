@@ -1,5 +1,5 @@
 import { Database } from '@vuex-orm/core'
-import CtSearch from '../models/ormSearchInL2'
+import CtSearch from '../models/ormSearch'
 
 import User from '@/models/user'
 import Todo from '@/models/Todo'

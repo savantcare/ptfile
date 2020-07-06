@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import ormSearch from '../../models/ormSearchInL2'
+import ormSearch from '../../models/ormSearch'
 import ormScr from '@/models/Screening'
 export default {
   data() {
