@@ -48,7 +48,11 @@ export default {
   },
   methods: {
     mfQuerySearchTerms(pQueryString, pCallBack) {
-      const resultSet = ormSearch.query().search(pQueryString.trim()).get() // trim needs for "goal " to match "goal"
+      const resultSet = ormSearch
+        .query()
+        .where('layer', 'change')
+        .search(pQueryString.trim())
+        .get() // trim needs for "goal " to match "goal"
       console.log('search result from orm model', pQueryString, resultSet)
       pCallBack(resultSet)
     },
