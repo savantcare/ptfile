@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import ormSearch from '../../models/ormSearchInL2'
 import ormScr from '@/models/Screening'
 export default {
   data() {
@@ -57,6 +58,15 @@ export default {
   computed: {},
   beforeCreate() {},
   mounted() {
+    // Inserting Search interfaces to this component
+    ormSearch.insert({
+      data: {
+        value: 'Screening',
+        ctAbbr: 'scr',
+        ctToShowInsideTab: 'scr/scr-l1.vue',
+        layer: 'view',
+      },
+    })
     this.dbGetScreenings()
   },
   methods: {
