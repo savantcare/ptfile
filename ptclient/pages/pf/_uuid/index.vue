@@ -27,7 +27,7 @@
       </SplitArea>
     </Split>
     <!-- tab-dialog is present in patientFile.vue but in hidden state -->
-    <layer-2-multi-tab-dialog></layer-2-multi-tab-dialog>
+    <L2TabsInDialog></L2TabsInDialog>
   </div>
 </template>
 
@@ -41,13 +41,13 @@ import ctBML1 from '@/components/bm/bm-l1'
 import ctDXL1 from '@/components/dx/dx-l1'
 import ctGL1 from '@/components/goal/g-l1'
 import ctScrL1 from '@/components/scr/scr-l1.vue'
-const Layer2MultiTabDialog = () =>
+const L2TabsInDialog = () =>
   import('@/components/l2-tabs-manager/ctShowAddAndRemoveTabsInDialog')
 
 Vue.use(VueSplit)
 export default {
   components: {
-    Layer2MultiTabDialog,
+    L2TabsInDialog,
     ctSearchBox,
     ctRexL1,
     ctRemL1,
