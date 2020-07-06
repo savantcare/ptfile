@@ -39,7 +39,7 @@ export default {
           closable: true,
         }
         this.$store.commit('mtfShowNewFirstTabInL2', objAddTab)
-        this.$store.state.multiTabDialogLayer2.vsSelectedTabId = '0'
+        this.$store.state.multiTabDialogLayer2.vsSelectedTabId = this.$store.state.multiTabDialogLayer2.arTabs[0].id
       } else if (pValue === 'plan-tabset') {
         const objAddTab = {
           label: 'Add diagnosis',
@@ -49,7 +49,7 @@ export default {
           closable: true,
         }
         this.$store.commit('mtfShowNewFirstTabInL2', objAddTab)
-        this.$store.state.multiTabDialogLayer2.vsSelectedTabId = '0'
+        this.$store.state.multiTabDialogLayer2.vsSelectedTabId = this.$store.state.multiTabDialogLayer2.arTabs[0].id
       }
     },
   },
