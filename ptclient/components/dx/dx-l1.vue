@@ -58,6 +58,14 @@ export default {
         layer: 'change',
       },
     })
+    ormSearch.insert({
+      data: {
+        value: 'Diagnosis',
+        ctAbbr: 'dx',
+        ctToShowInsideTab: 'dx/dx-l1.vue',
+        layer: 'view',
+      },
+    })
     this.mfdaGetDx()
   },
   methods: {
