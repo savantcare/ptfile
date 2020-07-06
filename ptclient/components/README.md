@@ -13,12 +13,12 @@
 | #   | Name                         | Programmer | Status                             |
 | --- | ---------------------------- | ---------- | ---------------------------------- |
 | 1   | [Recommendations](./rex/)    | Sanjay     | UI and DB final. Feature Under dev |
-| 2   | [Reminders](./rem/)          |            |                                    |
-| 3   | [Goals](./goal/)             | Raj        | UI and DB final. Feature Under dev |
-| 4   | [Diagnosis](./dx/)           | Anirban    | UI and DB final. Feature Under dev |
-| 5   | [Screening](./scr/)          | Jana       | UI and DB final. Feature Under dev |
-| 6   | [Medication](./medications/) |            |                                    |
-| 7   | [Body measurement](./bm/)    | Alexey     | Need to bring to nuxt              |
-| 8   | [Mental status exam](./mse/) | Alexey     | Need to bring to nuxt              |
+| 2   | [Goals](./goal/)             | Raj        | UI and DB final. Feature Under dev |
+| 3   | [Diagnosis](./dx/)           | Anirban    | UI and DB final. Feature Under dev |
+| 4   | [Screening](./scr/)          | Jana       | UI and DB final. Feature Under dev |
+| 5   | [Body measurement](./bm/)    | Alexey     | Need to bring to nuxt              |
+| 6   | [Mental status exam](./mse/) | Alexey     | Need to bring to nuxt              |
+| 7   | [Reminders](./rem/)          |            |                                    |
+| 8   | [Medication](./medications/) |            |                                    |
 
 ### Other components

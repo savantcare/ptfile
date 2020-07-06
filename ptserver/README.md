@@ -1,4 +1,4 @@
 # Core tech
 
-sequalize
-nodejs
+- sequalize
+- nodejs
