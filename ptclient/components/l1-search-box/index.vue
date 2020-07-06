@@ -23,7 +23,7 @@ export default {
       data: {
         value: 'Clear',
         ctAbbr: 'clr',
-        ctToShowInsideTab: 'dx/l2/ctAddDx.vue',
+        ctToShowInsideTab: 'clear/index.vue',
         layer: 'view',
       },
     })
