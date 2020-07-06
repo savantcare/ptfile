@@ -11,18 +11,17 @@
         <ctGL1> </ctGL1>
       </SplitArea>
       <SplitArea :size="25">
-        <keep-alive>
-          <el-card
-            v-for="(card, loopCount) in cfArCards"
-            :key="card.id"
-            :label="card.label + '(' + (loopCount + 1) + ')'"
-            :name="card.id"
-            :closable="card.closable"
-          >
-            <!-- Using https://vuejs.org/v2/guide/components.html#Dynamic-Components -->
-            <component :is="card.ctToShowInsideTab"></component>
-          </el-card>
-        </keep-alive>
+        <!-- <keep-alive> before the card creates problem since multiple cards then get inside keep alive -->
+        <el-card
+          v-for="(card, loopCount) in cfArCards"
+          :key="card.id"
+          :label="card.label + '(' + (loopCount + 1) + ')'"
+          :name="card.id"
+          :closable="card.closable"
+        >
+          <!-- Using https://vuejs.org/v2/guide/components.html#Dynamic-Components -->
+          <component :is="card.ctToShowInsideTab"></component>
+        </el-card>
         <ctSearchBox></ctSearchBox>
       </SplitArea>
     </Split>

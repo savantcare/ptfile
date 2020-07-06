@@ -35,7 +35,7 @@ export default {
       state.arCards = value
     },
     mtfShowNewFirstCardInL2(state, pCard) {
-      state.arCards = [pCard]
+      state.arCards.push(pCard)
       state.vsSelectedCardId = pCard.id
       console.log('state-> ', state)
     },
