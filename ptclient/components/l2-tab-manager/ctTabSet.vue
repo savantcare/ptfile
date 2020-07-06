@@ -33,7 +33,7 @@ export default {
       if (pValue === 'assessment-tabset') {
         const objAddTab = {
           label: 'Goals',
-          ctToShowInsideTab: require('@/components/goal/layer-2/ctAddGoal.vue')
+          ctToShowInsideTab: require('@/components/goal/l2/ctAddGoal.vue')
             .default,
           id: '$uid1',
           closable: true,
