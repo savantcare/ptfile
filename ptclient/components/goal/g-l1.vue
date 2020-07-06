@@ -59,6 +59,16 @@ export default {
         layer: 'change',
       },
     })
+
+    ormSearch.insert({
+      data: {
+        value: 'Goal',
+        ctAbbr: 'g',
+        ctToShowInsideTab: 'goal/g-l1.vue',
+        layer: 'view',
+      },
+    })
+
     this.mfdaGetG()
   },
   methods: {
