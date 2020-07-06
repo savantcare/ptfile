@@ -1,5 +1,5 @@
 <template>
-  <el-select v-model="value" placeholder="Select">
+  <el-select v-model="value" placeholder="Select" @change="mfHandleChange">
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -16,16 +16,42 @@ export default {
     return {
       options: [
         {
-          value: 'Assessment tabset',
+          value: 'assessment-tabset',
           label: 'Assessment tabset',
         },
         {
-          value: 'Plan tabset',
+          value: 'plan-tabset',
           label: 'Plan tabset',
         },
       ],
       value: '',
     }
+  },
+  methods: {
+    mfHandleChange(pValue) {
+      console.log('value changed', pValue)
+      if (pValue === 'assessment-tabset') {
+        const objAddTab = {
+          label: 'Goals',
+          ctToShowInsideTab: require('@/components/goal/layer-2/ctAddGoal.vue')
+            .default,
+          id: '$uid1',
+          closable: true,
+        }
+        this.$store.commit('mtfShowNewFirstTabInL2', objAddTab)
+        this.$store.state.multiTabDialogLayer2.vsSelectedTabId = '0'
+      } else if (pValue === 'plan-tabset') {
+        const objAddTab = {
+          label: 'Add diagnosis',
+          ctToShowInsideTab: require('@/components/dx/layer-2/ctAddDx.vue')
+            .default,
+          id: '$uid2',
+          closable: true,
+        }
+        this.$store.commit('mtfShowNewFirstTabInL2', objAddTab)
+        this.$store.state.multiTabDialogLayer2.vsSelectedTabId = '0'
+      }
+    },
   },
 }
 </script>
