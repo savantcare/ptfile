@@ -48,11 +48,11 @@ dialog
                            └────┬─────┘                           
                                 │                                 
                 ┌───────────────▼─────────────────┐               
-                │  Call state mutation function   │                 l2DialogAndTabsState:36            
+                │  Call state mutation function   │                 clDialogAndTabsState:36            
                 └────────────────┬────────────────┘               
                                  │                                
 ┌────────────────────────────────▼───────────────────────────────┐
-│Changes this.$store.state.dialogHoldingTabsInL2.vsSelectedTabId │  l2DialogAndTabsState:37 
+│Changes this.$store.state.dialogHoldingTabsInL2.vsSelectedTabId │  clDialogAndTabsState:37 
 └────────────────────────────────┬───────────────────────────────┘
                                  │                                
                  ┌───────────────▼────────────────────────────┐               
