@@ -1,6 +1,6 @@
 import { Model } from '@vuex-orm/core'
 
-export default class ormSearch extends Model {
+export default class ormSearchUiToCT extends Model {
   static entity = 'ormCtLifeCycle'
 
   static fields() {

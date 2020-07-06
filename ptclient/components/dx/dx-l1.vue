@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import ormSearch from '../../models/ormSearch'
+import ormSearchUiToCT from '../../models/ormSearchUiToCT'
 import ormDx from '@/models/Dx'
 
 /* export default {
@@ -50,7 +50,7 @@ export default {
   },
   mounted() {
     // Search interfaces to this component
-    ormSearch.insert({
+    ormSearchUiToCT.insert({
       data: {
         value: 'Add diagnosis',
         ctAbbr: 'adddx',
@@ -58,7 +58,7 @@ export default {
         layer: 'change',
       },
     })
-    ormSearch.insert({
+    ormSearchUiToCT.insert({
       data: {
         value: 'Diagnosis',
         ctAbbr: 'dx',
@@ -98,7 +98,7 @@ export default {
     },
     mfOpenADialog() {
       console.log('show add dialog')
-      const resultSet = ormSearch.query().search('Add diagnosis').get()
+      const resultSet = ormSearchUiToCT.query().search('Add diagnosis').get()
       const resultData = resultSet[0]
       const tab = {
         label: resultData.value,

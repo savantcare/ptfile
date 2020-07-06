@@ -12,14 +12,14 @@
 </template>
 
 <script>
-import ormSearch from '../../models/ormSearch'
+import ormSearchUiToCT from '../../models/ormSearchUiToCT'
 export default {
   data() {
     return { keyword: '' }
   },
   mounted() {
     // Search interfaces to this component
-    ormSearch.insert({
+    ormSearchUiToCT.insert({
       data: {
         value: 'Clear',
         ctAbbr: 'clr',
@@ -30,7 +30,10 @@ export default {
   },
   methods: {
     mfQuerySearchTerms(pQueryString, pCallBack) {
-      const resultSet = ormSearch.query().search(pQueryString.trim()).get() // trim needs for "goal " to match "goal"
+      const resultSet = ormSearchUiToCT
+        .query()
+        .search(pQueryString.trim())
+        .get() // trim needs for "goal " to match "goal"
       console.log('search result from orm model', pQueryString, resultSet)
       pCallBack(resultSet)
     },

@@ -23,7 +23,7 @@ Features needed in search
 </template>
 
 <script>
-import ormSearch from '../../models/ormSearch'
+import ormSearchUiToCT from '../../models/ormSearchUiToCT'
 
 export default {
   data() {
@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     mfQuerySearchTerms(pQueryString, pCallBack) {
-      const resultSet = ormSearch
+      const resultSet = ormSearchUiToCT
         .query()
         .where('layer', 'change')
         .search(pQueryString.trim())

@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import ormSearch from '../../models/ormSearch'
+import ormSearchUiToCT from '../../models/ormSearchUiToCT'
 export default {
   name: 'rex-l1',
   data() {
@@ -45,7 +45,7 @@ export default {
   // Ref: https://stackoverflow.com/questions/46974234/vue-router-keep-alive-and-mounted-behavior
   mounted() {
     // Inserting Search interfaces to this component
-    ormSearch.insert({
+    ormSearchUiToCT.insert({
       data: {
         value: 'Recommendations',
         ctAbbr: 'rex',

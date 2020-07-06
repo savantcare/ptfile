@@ -28,7 +28,7 @@
 
 <script>
 // import addGoal from './layer-2/addGoal.vue'
-import ormSearch from '../../models/ormSearch'
+import ormSearchUiToCT from '../../models/ormSearchUiToCT'
 import ormGoal from '@/models/Goal'
 
 // const { GOAL_API_URL } = 'http://localhost:8000/goals'
@@ -42,7 +42,7 @@ export default {
   },
   mounted() {
     // Search interfaces to this component
-    ormSearch.insert({
+    ormSearchUiToCT.insert({
       data: {
         value: 'Add goal',
         ctAbbr: 'addg',
@@ -51,7 +51,7 @@ export default {
       },
     })
 
-    ormSearch.insert({
+    ormSearchUiToCT.insert({
       data: {
         value: 'Multi rate goal',
         ctAbbr: 'mcg',
@@ -60,7 +60,7 @@ export default {
       },
     })
 
-    ormSearch.insert({
+    ormSearchUiToCT.insert({
       data: {
         value: 'Goal',
         ctAbbr: 'g',
@@ -99,7 +99,7 @@ export default {
     },
     mfOpenADialog() {
       console.log('show add dialog')
-      const resultSet = ormSearch.query().search('Add goal').get()
+      const resultSet = ormSearchUiToCT.query().search('Add goal').get()
       const resultData = resultSet[0]
       const tab = {
         label: resultData.value,

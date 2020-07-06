@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import ormSearch from '../../models/ormSearch'
+import ormSearchUiToCT from '../../models/ormSearchUiToCT'
 import ormScr from '@/models/Screening'
 export default {
   data() {
@@ -57,7 +57,7 @@ export default {
   },
   computed: {},
   beforeCreate() {
-    ormSearch.insert({
+    ormSearchUiToCT.insert({
       data: {
         value: 'Screening',
         ctAbbr: 'scr',
