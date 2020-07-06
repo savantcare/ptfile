@@ -3,8 +3,7 @@
 <script>
 export default {
   data() {
-    return {
-    }
+    return {}
   },
   mounted() {
     this.$store.commit('mtfSetArCards', '')

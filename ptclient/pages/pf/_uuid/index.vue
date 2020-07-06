@@ -11,18 +11,18 @@
       <SplitArea :size="25">
         <ctRexL1> </ctRexL1>
         <ctScrL1> </ctScrL1>
-        <el-card
-          v-for="(card, loopCount) in cfArCards"
-          :key="card.id"
-          :label="card.label + '(' + (loopCount + 1) + ')'"
-          :name="card.id"
-          :closable="card.closable"
-        >
-          <!-- Using https://vuejs.org/v2/guide/components.html#Dynamic-Components -->
-          <keep-alive>
+        <keep-alive>
+          <el-card
+            v-for="(card, loopCount) in cfArCards"
+            :key="card.id"
+            :label="card.label + '(' + (loopCount + 1) + ')'"
+            :name="card.id"
+            :closable="card.closable"
+          >
+            <!-- Using https://vuejs.org/v2/guide/components.html#Dynamic-Components -->
             <component :is="card.ctToShowInsideTab"></component>
-          </keep-alive>
-        </el-card>
+          </el-card>
+        </keep-alive>
         <ctSearchBox></ctSearchBox>
       </SplitArea>
     </Split>

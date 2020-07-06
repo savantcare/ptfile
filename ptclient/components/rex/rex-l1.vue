@@ -43,7 +43,7 @@ export default {
   // activated lifecycle hook, is called whenever a keep-alive component is activated.
   // Ref: https://stackoverflow.com/questions/46974234/vue-router-keep-alive-and-mounted-behavior
   mounted() {
-    // Search interfaces to this component
+    // Inserting Search interfaces to this component
     ormSearch.insert({
       data: {
         value: 'Recommendations',
