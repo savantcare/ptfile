@@ -11,19 +11,17 @@
       <SplitArea :size="25">
         <ctRexL1> </ctRexL1>
         <ctScrL1> </ctScrL1>
+        <el-card
+          v-for="(tab, loopCount) in cfArTabs"
+          :key="tab.id"
+          :label="tab.label + '(' + (loopCount + 1) + ')'"
+          :name="tab.id"
+          :closable="tab.closable"
+        >
+          <!-- Using https://vuejs.org/v2/guide/components.html#Dynamic-Components -->
+          <component v-bind:is="tab.ctToShowInsideTab"></component>
+        </el-card>
         <ctSearchBox></ctSearchBox>
-        <el-tabs v-model="a" type="card">
-          <el-tab-pane
-            v-for="(tab, loopCount) in cfArTabs"
-            :key="tab.id"
-            :label="tab.label + '(' + (loopCount + 1) + ')'"
-            :name="tab.id"
-            :closable="tab.closable"
-          >
-            <!-- Using https://vuejs.org/v2/guide/components.html#Dynamic-Components -->
-            <component v-bind:is="tab.ctToShowInsideTab"></component>
-          </el-tab-pane>
-        </el-tabs>
       </SplitArea>
     </Split>
     <!-- tab-dialog is present in patientFile.vue but in hidden state -->
