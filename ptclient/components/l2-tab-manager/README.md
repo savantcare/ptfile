@@ -4,15 +4,23 @@
 
 <<< @/ptclient/components/l2-tab-manager/DESIGN.md
 
-## Section 2: Storage on server side
+## Section 2: Components
+
+1. [ctSearchToAddTabInL2](https://github.com/savantcare/ptfile/tree/master/ptclient/components/l2-tab-manager/ctSearchToAddTabInL2.vue)
+2. [ctShowAddRemoveTabsInDialog](https://github.com/savantcare/ptfile/tree/master/ptclient/components/l2-tab-manager/ctShowAddRemoveTabsInDialog.vue)
+3. [ctTabSet](https://github.com/savantcare/ptfile/tree/master/ptclient/components/l2-tab-manager/ctTabSet.vue)
+
+## Section 3: Storage on server side
 
 None
 
-## Section 3: Storage on client side
+## Section 4: Storage on client side
 
 <<< @/ptclient/components/l2-tab-manager/l2DialogAndTabsState.js#state
 
-## Section 4: Operational detail of client side UI design
+[l2DialogAndTabsState](https://github.com/savantcare/ptfile/tree/master/ptclient/components/l2-tab-manager/l2DialogAndTabsState.js)
+
+## Section 5: Operational detail of client side UI design
 
 The goal is:
 
@@ -24,6 +32,6 @@ To achive the above goal the code is:
 
 <[vuese](@/ptclient/components/l2-tab-manager/ctShowAddRemoveTabsInDialog.vue)
 
-## Section 5: Operational detail of Server side API design
+## Section 6: Operational detail of Server side API design
 
 None
