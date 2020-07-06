@@ -30,11 +30,18 @@ dialog
     <el-row type="flex">
       <!-- By passing editable we tell element.io to give add and close option Red: https://element.eleme.io/#/en-US/component/tabs#tabs-attributes -->
       <!-- 
-        When cfVSSelectedTabId changes the ct el-tabs will change the selected tab. Since v-model = cfVSSelectedTabId
-        Since cfVSSelectedTabId is a computed function it will change when anything it depends on changes
-        cfVSSelectedTabId depends on this.$store.state.dialogHoldingTabsInL2.vsSelectedTabId
-        So any Ct can change this.$store.state.dialogHoldingTabsInL2.vsSelectedTabId and that will change the selected Tab
-        The sequence of changes is:
+        Active Tab is changed in following 3 cases:
+          1. If a tab is removed, an adjacent tab is made active
+          2. When left and right arrow are pressed the active tab changes.
+          3. When a number on KB is pressed the active tab changes.
+
+        How is active tab changed?
+          The active tab depends on ct -> el-tabs -> v-model = cfVSSelectedTabId
+          When cfVSSelectedTabId changes the active tab will change. 
+          Since cfVSSelectedTabId is a computed function it will change when anything it depends on changes
+          cfVSSelectedTabId depends on this.$store.state.dialogHoldingTabsInL2.vsSelectedTabId
+          So any Ct can change this.$store.state.dialogHoldingTabsInL2.vsSelectedTabId and that will change the active Tab
+          The sequence of changes is:
                               
                            ┌──────────┐                           
                            │  Any ct  │                           
@@ -48,9 +55,9 @@ dialog
 │Changes this.$store.state.dialogHoldingTabsInL2.vsSelectedTabId │
 └────────────────────────────────┬───────────────────────────────┘
                                  │                                
-                       ┌─────────▼────────────────┐               
-                       │Changes cfVSSelectedTabId │               
-                       └──────────┬───────────────┘               
+                 ┌────------─────▼──────------------──────────┐               
+                 │Changes computed function cfVSSelectedTabId │               
+                 └─────------─────┬────────------------───────┘               
                                   │                               
                        ┌──────────▼─────────────┐                 
                        │changes el-tabs v-model │                 
