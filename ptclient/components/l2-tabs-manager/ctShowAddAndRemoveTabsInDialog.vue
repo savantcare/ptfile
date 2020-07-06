@@ -36,31 +36,31 @@ dialog
           3. When a number on KB is pressed the active tab changes.
 
         How is active tab changed?
-          The active tab depends on ct -> el-tabs -> v-model = cfVSSelectedTabId
-          When cfVSSelectedTabId changes the active tab will change. 
+          The active tab depends on ct -> el-tabs -> v-model = cfVSSelectedTabId (line 72 of this file)
+          When cfVSSelectedTabId (Line 117 of this file) changes the active tab will change. 
           Since cfVSSelectedTabId is a computed function it will change when anything it depends on changes
-          cfVSSelectedTabId depends on this.$store.state.dialogHoldingTabsInL2.vsSelectedTabId
+          cfVSSelectedTabId depends on this.$store.state.dialogHoldingTabsInL2.vsSelectedTabId (Line 119 of this file)
           So any Ct can change this.$store.state.dialogHoldingTabsInL2.vsSelectedTabId and that will change the active Tab
           The sequence of changes is:
                               
                            ┌──────────┐                           
-                           │  Any ct  │                           
+                           │  Any ct  │                           ctShowAddAndRemoveTabsInDialog:171
                            └────┬─────┘                           
                                 │                                 
                 ┌───────────────▼─────────────────┐               
-                │  Call state mutation function   │               
+                │  Call state mutation function   │                 l2DialogAndTabsState:36            
                 └────────────────┬────────────────┘               
                                  │                                
 ┌────────────────────────────────▼───────────────────────────────┐
-│Changes this.$store.state.dialogHoldingTabsInL2.vsSelectedTabId │
+│Changes this.$store.state.dialogHoldingTabsInL2.vsSelectedTabId │  l2DialogAndTabsState:37 
 └────────────────────────────────┬───────────────────────────────┘
                                  │                                
                  ┌───────────────▼────────────────────────────┐               
-                 │Changes computed function cfVSSelectedTabId │               
+                 │Changes computed function cfVSSelectedTabId │     ctShowAddAndRemoveTabsInDialog:117         
                  └────────────────┬───────────────────────────┘               
                                   │                               
                        ┌──────────▼─────────────┐                 
-                       │changes el-tabs v-model │                 
+                       │changes el-tabs v-model │                   ctShowAddAndRemoveTabsInDialog:72
                        └──────────┬─────────────┘                 
                                   │                               
                        ┌──────────▼─────────────┐                 
