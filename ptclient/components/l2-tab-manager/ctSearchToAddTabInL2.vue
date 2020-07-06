@@ -9,15 +9,15 @@ Features needed in search
   <div style="text-align: center;">
     <el-autocomplete
       ref="searchbox"
-      class="inline-input"
       v-model="keyword"
+      class="inline-input"
       :fetch-suggestions="mfQuerySearchTerms"
       :trigger-on-focus="true"
       :highlight-first-item="true"
       placeholder="Please Input"
       prefix-icon="el-icon-search"
-      @select="mfHandleSuggestionSelectedByUser"
       clearable
+      @select="mfHandleSuggestionSelectedByUser"
     ></el-autocomplete>
   </div>
 </template>
@@ -28,6 +28,23 @@ import ormSearch from '../../models/ormSearchInL2'
 export default {
   data() {
     return { keyword: '' }
+  },
+  computed: {
+    cfFireWhenActiveTabIDChanges() {
+      return this.$store.state.multiTabDialogLayer2.vsSelectedTabId
+    },
+  },
+  watch: {
+    // Why? el-input has autofocus property but el-autocomplete does not have auto-focus
+    // How? Ref: https://stackoverflow.com/questions/43270159/vue-js-2-how-to-watch-store-values-from-vuex
+    cfFireWhenActiveTabIDChanges(newTabID, oldTabID) {
+      console.log('New tab id is: ', newTabID)
+      if (newTabID === '0') {
+        this.$refs.searchbox.focus()
+        this.keyword = '' // when this tab is activated 2nd time the search box will be empty
+        console.log(`Msg from L2 search ct: Focus changed and keyword empty`)
+      }
+    },
   },
   methods: {
     mfQuerySearchTerms(pQueryString, pCallBack) {
@@ -46,23 +63,6 @@ export default {
         closable: true,
       }
       this.$store.commit('mtfAdditionalTabAddOrActivate', objAddTab)
-    },
-  },
-  computed: {
-    cfFireWhenActiveTabIDChanges() {
-      return this.$store.state.multiTabDialogLayer2.vsSelectedTabId
-    },
-  },
-  watch: {
-    // Why? el-input has autofocus property but el-autocomplete does not have auto-focus
-    // How? Ref: https://stackoverflow.com/questions/43270159/vue-js-2-how-to-watch-store-values-from-vuex
-    cfFireWhenActiveTabIDChanges(newTabID, oldTabID) {
-      console.log(newTabID)
-      if (newTabID === '0') {
-        this.$refs.searchbox.focus()
-        this.keyword = '' // when this tab is activated 2nd time the search box will be empty
-        console.log(`From new Tab search ct ${newTabID}`)
-      }
     },
   },
 }
