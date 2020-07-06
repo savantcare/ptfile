@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import ormSearch from '../../models/ormSearchInL2'
 export default {
   data() {
     return {
@@ -31,20 +32,28 @@ export default {
     mfHandleChange(pValue) {
       console.log('value changed', pValue)
       if (pValue === 'assessment-tabset') {
+        // cannot hardcode, need to query since dont know the ID created when inserted
+        const resultSet = ormSearch.query().search('Add goal').get()
+        const resultData = resultSet[0]
         const objAddTab = {
-          label: 'Goals',
-          ctToShowInsideTab: require('@/components/goal/l2/ctAddGoal.vue')
-            .default,
-          id: '$uid1',
+          label: resultData.value,
+          ctToShowInsideTab: require('@/components/' +
+            resultData.ctToShowInsideTab).default,
+          ctAbbr: resultData.ctAbbr,
+          id: resultData.id,
           closable: true,
         }
         this.$store.commit('mtfShowNewFirstTabInL2', objAddTab)
         this.$store.state.dialogHoldingTabsInL2.vsSelectedTabId = this.$store.state.dialogHoldingTabsInL2.arTabs[0].id
       } else if (pValue === 'plan-tabset') {
+        const resultSet = ormSearch.query().search('Add diagnosis').get()
+        const resultData = resultSet[0]
         const objAddTab = {
-          label: 'Add diagnosis',
-          ctToShowInsideTab: require('@/components/dx/l2/ctAddDx.vue').default,
-          id: '$uid2',
+          label: resultData.value,
+          ctToShowInsideTab: require('@/components/' +
+            resultData.ctToShowInsideTab).default,
+          ctAbbr: resultData.ctAbbr,
+          id: resultData.id,
           closable: true,
         }
         this.$store.commit('mtfShowNewFirstTabInL2', objAddTab)
