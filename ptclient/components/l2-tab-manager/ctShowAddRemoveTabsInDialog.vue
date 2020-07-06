@@ -18,7 +18,7 @@ dialog
 
 <template>
   <el-dialog
-    :visible.sync="vblSeeDialogHoldingTabsInL2"
+    :visible.sync="vblIsDialogHoldingTabsInL2Visible"
     custom-class="multi-tab-dialog"
     width="90%"
     top="5vh"
@@ -93,10 +93,10 @@ export default {
     // @vuese
     // Get and set L2 dialog visibility from store
     // @type Boolean
-    vblSeeDialogHoldingTabsInL2: {
+    vblIsDialogHoldingTabsInL2Visible: {
       get() {
         return this.$store.state.dialogHoldingTabsInL2
-          .vblSeeDialogHoldingTabsInL2
+          .vblIsDialogHoldingTabsInL2Visible
       },
       set(value) {
         this.$store.commit('mtfSetTabDialogVisibility', value)
@@ -104,7 +104,7 @@ export default {
     },
   },
   mounted() {
-    this.vblSeeDialogHoldingTabsInL2 = false
+    this.vblIsDialogHoldingTabsInL2Visible = false
     this.cfArTabs = [] // Template has a for loop running on this.
     this.vsSelectedTabId = ''
     const self = this // this is not available inside addEventListener since execution context changes. Hence assining this to self Ref: https://stackoverflow.com/a/50818181
@@ -118,7 +118,7 @@ export default {
   },
   methods: {
     selectActiveTabFromKeyboard(pEvent) {
-      if (this.vblSeeDialogHoldingTabsInL2 === false) {
+      if (this.vblIsDialogHoldingTabsInL2Visible === false) {
         console.log('Rejection reason 1: 2nd layer not active')
         return
       }
@@ -201,7 +201,7 @@ export default {
 
       // If there are no more tabs in the diaglog then hide the dialog
       if (arNewTabs.length === 0) {
-        this.vblSeeDialogHoldingTabsInL2 = false
+        this.vblIsDialogHoldingTabsInL2Visible = false
       } else {
         // Once a tab is removed an existing tab needs to be made active
         console.log(tabToRemoveFoundAt, arNewTabs)
