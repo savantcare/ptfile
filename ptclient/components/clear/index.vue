@@ -1,4 +1,4 @@
-<template> </template>
+<template> <div></div></template>
 
 <script>
 import ormSearch from '../../models/ormSearchInL2'

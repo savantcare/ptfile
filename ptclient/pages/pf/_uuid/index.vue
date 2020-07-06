@@ -20,7 +20,7 @@
         >
           <!-- Using https://vuejs.org/v2/guide/components.html#Dynamic-Components -->
           <keep-alive>
-            <component v-bind:is="card.ctToShowInsideTab"></component>
+            <component :is="card.ctToShowInsideTab"></component>
           </keep-alive>
         </el-card>
         <ctSearchBox></ctSearchBox>
