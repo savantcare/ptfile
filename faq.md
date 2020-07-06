@@ -39,6 +39,7 @@ yarn docs:dev
 | vuex-orm-search                                  | 29     |
 | vuepress                                         | 16.9K  |
 | [element.io](https://github.com/ElemeFE/element) | 46K    |
+| nuxt                                             | 28K    |
 | jest                                             | 31.6K  |
 | puppeteer                                        | 62.8K  |
 | sequelize                                        | 22.3K  |

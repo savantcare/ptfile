@@ -1,3 +1,5 @@
+[[toc]]
+
 ## Q1) Why patient app has left side and right side in layer 1?
 
 Psychiatrist needs to be able to look at multiple historical states to make decisions and change the current state.

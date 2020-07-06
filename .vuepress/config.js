@@ -35,38 +35,45 @@ module.exports = {
         title: 'Big picture',
         path: '/big-picture/',
         collapsable: true,
-        sidebarDepth: 2,
+        sidebarDepth: 0,
         // How to do nested sidebar? https://github.com/vuejs/vuepress/issues/287#issuecomment-480805333
         children: [
           {
             path: '/big-picture/ui/',
             title: 'UI',
+            sidebarDepth: 0,
             children: [
               {
                 path: '/big-picture/ui/why',
                 title: 'Why',
+                sidebarDepth: 0,
               },
               {
                 path: '/big-picture/ui/what',
                 title: 'What',
+                sidebarDepth: 0,
               },
             ],
           },
           {
             path: '/big-picture/tech/',
             title: 'Tech',
+            sidebarDepth: 0,
             children: [
               {
                 path: '/big-picture/tech/why',
                 title: 'Why',
+                sidebarDepth: 0,
               },
               {
                 path: '/big-picture/tech/what',
                 title: 'What',
+                sidebarDepth: 0,
               },
               {
                 path: '/big-picture/tech/how',
                 title: 'How',
+                sidebarDepth: 0,
               },
             ],
           },

@@ -1,3 +1,5 @@
+[[toc]]
+
 ## Q1) How to run the app locally?
 
 The conventional method is to run the vuejs and node server locally and the mysql DB on a public server.

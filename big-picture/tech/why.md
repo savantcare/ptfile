@@ -1,3 +1,5 @@
+[[toc]]
+
 ## Q1) Why re-write the exisiting angular app?
 
 1. The current angular app was developed to discover the psychiatrists needs. The system could not have been pre-architected to deliver the discovered features.

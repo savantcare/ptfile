@@ -1,7 +1,8 @@
+[[toc]]
+
 ## Q1) What is the UI pattern for the patient app?
 
 ![UI pattern](./images/ui-pattern.png)
-
 
 ## Q2) What does the UI of a component in layer 1 look like?
 
@@ -18,7 +19,9 @@ Most cards have a data table inside them. But some cards can also have a graph o
 Each component will come with a default set of columns that are displayed. The user can choose a different set of columns. The columns chosen by the user are saved on the client local storage. Once the chose is made for 1 paitent file that choice of columns is remembered for all patient files.
 
 ### Default set of columns
+
 ![Default set of columns](./images/default-set-of-columns.png)
 
 ### User can choose a different set
+
 ![User can choose a different set](./images/user-can-choose-a-different-set.png)
