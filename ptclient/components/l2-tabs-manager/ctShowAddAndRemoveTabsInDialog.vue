@@ -68,9 +68,6 @@ export default {
   },
 
   computed: {
-    // @vuese
-    // Get and set array of tabs from store
-    // @type Array
     cfArTabs: {
       get() {
         return this.$store.state.dialogHoldingTabsInL2.arTabs
@@ -79,9 +76,6 @@ export default {
         this.$store.commit('mtfSetArTabs', value)
       },
     },
-    // @vuese
-    // Get and set selected tab id from store
-    // @type String
     vsSelectedTabId: {
       get() {
         return this.$store.state.dialogHoldingTabsInL2.vsSelectedTabId
@@ -90,9 +84,6 @@ export default {
         this.$store.commit('mtfSetvsSelectedTabId', value)
       },
     },
-    // @vuese
-    // Get and set L2 dialog visibility from store
-    // @type Boolean
     vblIsDialogHoldingTabsInL2Visible: {
       get() {
         return this.$store.state.dialogHoldingTabsInL2

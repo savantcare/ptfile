@@ -1,41 +1,15 @@
 [[toc]]
 
-## Section 1: End product
+## Section 1: Graphical representation of end product
 
 <<< @/ptclient/components/l2-tabs-manager/DESIGN.md
 
-## Section 2: Components
+## Section 2: Feature to code relationship
 
-1. [ctSearchToAddTabInL2](https://github.com/savantcare/ptfile/tree/master/ptclient/components/l2-tabs-manager/ctSearchToAddTabInL2.vue)
-2. [ctShowAddAndRemoveTabsInDialog](https://github.com/savantcare/ptfile/tree/master/ptclient/components/l2-tabs-manager/ctShowAddAndRemoveTabsInDialog.vue)
-3. [ctSetOfTabs](https://github.com/savantcare/ptfile/tree/master/ptclient/components/l2-tabs-manager/ctSetOfTabs.vue)
-
-## Section 3: Storage on server side
-
-None
-
-## Section 4: Storage on client side
-
-<<< @/ptclient/components/l2-tabs-manager/l2DialogAndTabsState.js#state
-
-[l2DialogAndTabsState](https://github.com/savantcare/ptfile/tree/master/ptclient/components/l2-tabs-manager/l2DialogAndTabsState.js)
-
-## Section 5: Operational detail of client side UI design
-
-1. The goal is:
-
-<<< @/ptclient/components/l2-tabs-manager/ctShowAddAndRemoveTabsInDialog.vue#goal{1}
-
-To achive the above goal the code is:
-
-<<< @/ptclient/components/l2-tabs-manager/ctShowAddAndRemoveTabsInDialog.vue#template{2}
-
-2. Keyboard to select tabs
-
-<<< @/ptclient/components/l2-tabs-manager/ctShowAddAndRemoveTabsInDialog.vue#kbselect
-
-<[vuese](@/ptclient/components/l2-tabs-manager/ctShowAddAndRemoveTabsInDialog.vue)
-
-## Section 6: Operational detail of Server side API design
-
-None
+| #   | Feature                | Client side state                 | Server side state | Component                          | Client side code                                                                                                                                                                        | Server side code |
+| --- | ---------------------- | --------------------------------- | ----------------- | ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| 1   | Dialog containing tabs | vblIsDialogHoldingTabsInL2Visible | None              | ctShowAddAndRemoveTabsInDialog.vue | [Dialog containing tabs](https://github.com/savantcare/ptfile/blob/3e5abdae677e3621559b65ee9bc33544ceb103b3/ptclient/components/l2-tabs-manager/ctShowAddAndRemoveTabsInDialog.vue#L20) | None             |
+| 2   | Add a tab              | arTabs                            | None              | ctSearchToAddTabInL2.vue           | [Add a tab](https://github.com/savantcare/ptfile/blob/3e5abdae677e3621559b65ee9bc33544ceb103b3/ptclient/components/l2-tabs-manager/ctSearchToAddTabInL2.vue)                            | None             |
+| 3   | Remove a tab           | same as 2                         | None              | same as 1                          | [Remove a tab](https://github.com/savantcare/ptfile/blob/3e5abdae677e3621559b65ee9bc33544ceb103b3/ptclient/components/l2-tabs-manager/ctShowAddAndRemoveTabsInDialog.vue#L188)          | None             |
+| 4   | KB interaction         | vsSelectedTabId                   | None              | same as 1                          | [KB interaction](https://github.com/savantcare/ptfile/blob/3e5abdae677e3621559b65ee9bc33544ceb103b3/ptclient/components/l2-tabs-manager/ctShowAddAndRemoveTabsInDialog.vue#L121)        | None             |
+| 5   | Set of tabs            | same as 2                         | None              | ctSetOfTabs.vue                    | [Set of tabs](https://github.com/savantcare/ptfile/tree/master/ptclient/components/l2-tabs-manager/ctSetOfTabs.vue)                                                                     | None             |
