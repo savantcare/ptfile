@@ -53,6 +53,7 @@ export default {
         layer: 'view',
       },
     })
+    console.log('mounted')
   },
 }
 </script>

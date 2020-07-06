@@ -25,9 +25,8 @@
           -->
         <el-card v-for="card in cfArCards" v-bind:key="card.id">
           <!-- Using https://vuejs.org/v2/guide/components.html#Dynamic-Components -->
-          <keep-alive>
-            <component v-bind:is="card.ctToShowInsideTab"></component>
-          </keep-alive>
+          {{ log('loop') }}
+          <component v-bind:is="card.ctToShowInsideTab"></component>
         </el-card>
         <ctSearchBox></ctSearchBox>
       </SplitArea>
@@ -61,6 +60,11 @@ export default {
     ctDXL1,
     ctGL1,
     ctScrL1,
+  },
+  methods: {
+    log(message) {
+      console.log(message)
+    },
   },
   data() {
     return {

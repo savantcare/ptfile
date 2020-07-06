@@ -3,3 +3,4 @@
 2. Tab number in top right corner so KB navifation works good.
 3. Screening search term to include even though that component is not being used.
    how to trigger beforeCreate and not trigger mounted.
+4. In for loop when I loop 3 times why is mount happening once
