@@ -27,6 +27,7 @@ dialog
     :close-on-press-escape="true"
     :show-close="false"
   >
+    <ctTabSet></ctTabSet>
     <!-- By passing editable we tell element.io to give add and close option Red: https://element.eleme.io/#/en-US/component/tabs#tabs-attributes -->
     <el-tabs
       v-model="vsSelectedTabId"
@@ -49,9 +50,13 @@ dialog
 //#endregion template
 
 <script>
-// Component items:
+import ctTabSet from './ctTabSet'
+
 export default {
-  name: 'L2-Dialog-Manager',
+  name: 'L2-Dialog-And-Tabs-Manager',
+  components: {
+    ctTabSet,
+  },
   data() {
     return {}
   },
