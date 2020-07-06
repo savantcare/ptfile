@@ -45,7 +45,7 @@ export default {
         closable: true,
       }
       if (pSelectedSuggestion.layer === 'view') {
-        this.$store.commit('mtfShowNewFirstCardInL2', objCtToAdd)
+        this.$store.commit('mtfShowCardInCSVL', objCtToAdd)
       } else if (pSelectedSuggestion.layer === 'change') {
         this.$store.commit('mtfShowNewFirstTabInL2', objCtToAdd)
       }
