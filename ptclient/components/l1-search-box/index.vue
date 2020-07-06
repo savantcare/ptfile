@@ -36,7 +36,7 @@ export default {
     },
     mfHandleSuggestionSelectedByUser(pSelectedSuggestion) {
       console.log('Selected suggestion is', pSelectedSuggestion)
-      const objAddTab = {
+      const objCtToAdd = {
         label: pSelectedSuggestion.value,
         // Here I have to use a variable otherwise webpack gives error. https://stackoverflow.com/questions/57349167/vue-js-dynamic-image-src-with-webpack-require-not-working
         ctToShowInsideTab: require('@/components/' +
@@ -45,9 +45,9 @@ export default {
         closable: true,
       }
       if (pSelectedSuggestion.layer === 'view') {
-        this.$store.commit('mtfShowNewFirstCardInL2', objAddTab)
+        this.$store.commit('mtfShowNewFirstCardInL2', objCtToAdd)
       } else if (pSelectedSuggestion.layer === 'change') {
-        this.$store.commit('mtfShowNewFirstTabInL2', objAddTab)
+        this.$store.commit('mtfShowNewFirstTabInL2', objCtToAdd)
       }
       this.keyword = ''
     },
