@@ -46,9 +46,9 @@ export default {
         this.$store.commit('mtfShowNewFirstTabInL2', objAddTab)
         this.$store.state.dialogHoldingTabsInL2.vsSelectedTabId = this.$store.state.dialogHoldingTabsInL2.arTabs[0].id
       } else if (pValue === 'plan-tabset') {
-        const resultSet = ormSearch.query().search('Add diagnosis').get()
-        const resultData = resultSet[0]
-        const objAddTab = {
+        let resultSet = ormSearch.query().search('Add diagnosis').get()
+        let resultData = resultSet[0]
+        let objAddTab = {
           label: resultData.value,
           ctToShowInsideTab: require('@/components/' +
             resultData.ctToShowInsideTab).default,
@@ -57,6 +57,17 @@ export default {
           closable: true,
         }
         this.$store.commit('mtfShowNewFirstTabInL2', objAddTab)
+        resultSet = ormSearch.query().search('Multi rate goal').get()
+        resultData = resultSet[0]
+        objAddTab = {
+          label: resultData.value,
+          ctToShowInsideTab: require('@/components/' +
+            resultData.ctToShowInsideTab).default,
+          ctAbbr: resultData.ctAbbr,
+          id: resultData.id,
+          closable: true,
+        }
+        this.$store.commit('mtfAdditionalTabAddOrActivate', objAddTab)
         this.$store.state.dialogHoldingTabsInL2.vsSelectedTabId = this.$store.state.dialogHoldingTabsInL2.arTabs[0].id
       }
     },
