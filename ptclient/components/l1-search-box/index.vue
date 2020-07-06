@@ -1,68 +1,41 @@
 <template>
   <div id="search_component">
     <el-autocomplete
-      v-model="state1"
+      v-model="keyword"
       class="inline-input"
-      :fetch-suggestions="querySearch"
+      :fetch-suggestions="mfQuerySearchTerms"
       placeholder="Please Input"
       style="width: 100%;"
-      @select="handleSelect"
+      @select="mfHandleSuggestionSelectedByUser"
     ></el-autocomplete>
   </div>
 </template>
 
 <script>
+import ormSearch from '../../models/ormSearchInL2'
 export default {
   data() {
-    return {
-      links: [],
-      state1: '',
-    }
+    return { keyword: '' }
   },
-  mounted() {
-    this.links = this.loadAll()
-  },
+
   methods: {
-    querySearch(queryString, cb) {
-      const links = this.links
-      const results = queryString
-        ? links.filter(this.createFilter(queryString))
-        : links
-      // call callback function to return suggestions
-      cb(results)
+    mfQuerySearchTerms(pQueryString, pCallBack) {
+      const resultSet = ormSearch.query().search(pQueryString.trim()).get() // trim needs for "goal " to match "goal"
+      console.log('search result from orm model', pQueryString, resultSet)
+      pCallBack(resultSet)
     },
-    createFilter(queryString) {
-      return (link) => {
-        return link.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0
+    mfHandleSuggestionSelectedByUser(pSelectedSuggestion) {
+      console.log('Selected suggestion is', pSelectedSuggestion)
+      const objAddTab = {
+        label: pSelectedSuggestion.value,
+        // Here I have to use a variable otherwise webpack gives error. https://stackoverflow.com/questions/57349167/vue-js-dynamic-image-src-with-webpack-require-not-working
+        ctToShowInsideTab: require('@/components/' +
+          pSelectedSuggestion.ctToShowInsideTab).default,
+        id: pSelectedSuggestion.id,
+        closable: true,
       }
-    },
-    loadAll() {
-      return [
-        {
-          value: 'recommendations (rex) ',
-          link: 'https://github.com/vuejs/vue',
-        },
-        {
-          value: 'reminder (rem)',
-          link: 'https://github.com/vuejs/vue',
-        },
-        {
-          value: 'body measurement (bm)',
-          link: 'https://github.com/vuejs/vue',
-        },
-      ]
-    },
-    handleSelect(item) {
-      console.log(item)
+      this.$store.commit('mtfShowNewFirstTabInL2', objAddTab)
     },
   },
 }
 </script>
-
-<style lang="css">
-#search_component {
-  position: absolute;
-  bottom: 0;
-  z-index: 100;
-}
-</style>
