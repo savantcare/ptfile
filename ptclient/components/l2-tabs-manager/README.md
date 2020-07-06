@@ -7,7 +7,7 @@
 ## Section 2: Components
 
 1. [ctSearchToAddTabInL2](https://github.com/savantcare/ptfile/tree/master/ptclient/components/l2-tabs-manager/ctSearchToAddTabInL2.vue)
-2. [ctShowAddRemoveTabsInDialog](https://github.com/savantcare/ptfile/tree/master/ptclient/components/l2-tabs-manager/ctShowAddRemoveTabsInDialog.vue)
+2. [ctShowAddAndRemoveTabsInDialog](https://github.com/savantcare/ptfile/tree/master/ptclient/components/l2-tabs-manager/ctShowAddAndRemoveTabsInDialog.vue)
 3. [ctSetOfTabs](https://github.com/savantcare/ptfile/tree/master/ptclient/components/l2-tabs-manager/ctSetOfTabs.vue)
 
 ## Section 3: Storage on server side
@@ -24,17 +24,17 @@ None
 
 1. The goal is:
 
-<<< @/ptclient/components/l2-tabs-manager/ctShowAddRemoveTabsInDialog.vue#goal{1}
+<<< @/ptclient/components/l2-tabs-manager/ctShowAddAndRemoveTabsInDialog.vue#goal{1}
 
 To achive the above goal the code is:
 
-<<< @/ptclient/components/l2-tabs-manager/ctShowAddRemoveTabsInDialog.vue#template{2}
+<<< @/ptclient/components/l2-tabs-manager/ctShowAddAndRemoveTabsInDialog.vue#template{2}
 
 2. Keyboard to select tabs
 
-<<< @/ptclient/components/l2-tabs-manager/ctShowAddRemoveTabsInDialog.vue#kbselect
+<<< @/ptclient/components/l2-tabs-manager/ctShowAddAndRemoveTabsInDialog.vue#kbselect
 
-<[vuese](@/ptclient/components/l2-tabs-manager/ctShowAddRemoveTabsInDialog.vue)
+<[vuese](@/ptclient/components/l2-tabs-manager/ctShowAddAndRemoveTabsInDialog.vue)
 
 ## Section 6: Operational detail of Server side API design
 
