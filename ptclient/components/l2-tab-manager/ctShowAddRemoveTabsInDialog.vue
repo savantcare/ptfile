@@ -101,14 +101,51 @@ export default {
       'keyup',
       function (e) {
         console.log('the keyboard key up detected')
-        self.selectActivateTabFromKeyboard(e)
+        self.selectActiveTabFromKeyboard(e)
       }.bind()
     )
   },
   methods: {
-    selectActivateTabFromKeyboard(pEvent) {
+    selectActiveTabFromKeyboard(pEvent) {
       if (this.vblSeeDialogHoldingTabsInL2 === false) {
         console.log('Rejection reason 1: 2nd layer not active')
+        return
+      }
+      if (pEvent.srcElement.type === 'text') {
+        console.log(
+          'Rejection reason 2: inside text input hence meant as form entry hence dont activate tab'
+        )
+        return
+      }
+      if (pEvent.keyCode === 37) {
+        console.log('left arrow pressed let us find the position of the tab')
+        const currentTabIdx = this.cfArTabs.findIndex(
+          (tab) => tab.id === this.vsSelectedTabId
+        )
+        console.log('Current tab idx is: ', currentTabIdx)
+        if (currentTabIdx === 0) {
+          console.log('at first tab so ignore')
+        } else {
+          this.$store.commit(
+            'mtfSetvsSelectedTabId',
+            this.cfArTabs[currentTabIdx - 1].id
+          )
+        }
+        return
+      }
+      if (pEvent.keyCode === 39) {
+        console.log('right arrow pressed let us find the position of the tab')
+        const currentTabIdx = this.cfArTabs.findIndex(
+          (tab) => tab.id === this.vsSelectedTabId
+        )
+        if (currentTabIdx === this.cfArTabs.length - 1) {
+          console.log('at last tab so ignore')
+        } else {
+          this.$store.commit(
+            'mtfSetvsSelectedTabId',
+            this.cfArTabs[currentTabIdx + 1].id
+          )
+        }
         return
       }
       const maxValidKeyCodeEnteredByUser = 48 + this.cfArTabs.length
@@ -125,13 +162,7 @@ export default {
         // this hurdle passed by the key press
       } else {
         console.log(
-          'Rejection reason 2: User entered # is higher then max tabs'
-        )
-        return
-      }
-      if (pEvent.srcElement.type === 'text') {
-        console.log(
-          'Rejection reason 3: inside text input hence meant as form entry hence dont activate tab'
+          'Rejection reason 3: User entered # is higher then max tabs'
         )
         return
       }
