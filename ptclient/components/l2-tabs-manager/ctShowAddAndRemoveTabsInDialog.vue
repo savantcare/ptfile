@@ -29,6 +29,37 @@ dialog
   >
     <el-row type="flex">
       <!-- By passing editable we tell element.io to give add and close option Red: https://element.eleme.io/#/en-US/component/tabs#tabs-attributes -->
+      <!-- 
+        When cfVSSelectedTabId changes the ct el-tabs will change the selected tab. Since v-model = cfVSSelectedTabId
+        Since cfVSSelectedTabId is a computed function it will change when anything it depends on changes
+        cfVSSelectedTabId depends on this.$store.state.dialogHoldingTabsInL2.vsSelectedTabId
+        So any Ct can change this.$store.state.dialogHoldingTabsInL2.vsSelectedTabId and that will change the selected Tab
+        The sequence of changes is:
+                              
+                           ┌──────────┐                           
+                           │  Any ct  │                           
+                           └────┬─────┘                           
+                                │                                 
+                ┌───────────────▼─────────────────┐               
+                │  Call state mutation function   │               
+                └────────────────┬────────────────┘               
+                                 │                                
+┌────────────────────────────────▼───────────────────────────────┐
+│Changes this.$store.state.dialogHoldingTabsInL2.vsSelectedTabId │
+└────────────────────────────────┬───────────────────────────────┘
+                                 │                                
+                       ┌─────────▼────────────────┐               
+                       │Changes cfVSSelectedTabId │               
+                       └──────────┬───────────────┘               
+                                  │                               
+                       ┌──────────▼─────────────┐                 
+                       │changes el-tabs v-model │                 
+                       └──────────┬─────────────┘                 
+                                  │                               
+                       ┌──────────▼─────────────┐                 
+                       │Active tab changed in UI│                 
+                       └────────────────────────┘                          
+      -->
       <el-col :span="24">
         <el-tabs
           v-model="cfVSSelectedTabId"
