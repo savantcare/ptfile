@@ -6,7 +6,7 @@ import VuexORM from '@vuex-orm/core'
 import axios from 'axios'
 import VuexORMAxios from '@vuex-orm/plugin-axios'
 import l2DialogAndTabsStateModule from '@/components/l2-tabs-manager/l2DialogAndTabsState'
-import l1CardsStateModule from '@/components/l1-search-box/l1CardsState'
+import l1CardsStateModule from '@/components/vl-search-box/l1CardsState'
 import database from '@/database'
 
 VuexORM.use(VuexORMAxios, { axios })

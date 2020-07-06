@@ -39,7 +39,7 @@
 <script>
 import Vue from 'vue'
 import VueSplit from 'vue-split-panel'
-import ctSearchBox from '@/components/l1-search-box'
+import ctSearchBox from '@/components/vl-search-box'
 import ctRexL1 from '@/components/rex/rex-l1'
 import ctRemL1 from '@/components/rem/rem-l1'
 import ctBML1 from '@/components/bm/bm-l1'
