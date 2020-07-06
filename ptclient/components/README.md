@@ -6,7 +6,7 @@
 
 | #   | Name                                 | Programmer | Status       |
 | --- | ------------------------------------ | ---------- | ------------ |
-| 1   | [L2 tab manager](./l2-tabs-manager/) | Vikas      | Ready to use |
+| 1   | [L2 tab manager](./cl-tabs-manager/) | Vikas      | Ready to use |
 
 ### Health components
 

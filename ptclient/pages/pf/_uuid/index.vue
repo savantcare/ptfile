@@ -47,7 +47,7 @@ import ctDXL1 from '@/components/dx/dx-l1'
 import ctGL1 from '@/components/goal/g-l1'
 import ctScrL1 from '@/components/scr/scr-l1.vue'
 const L2TabsInDialog = () =>
-  import('@/components/l2-tabs-manager/ctShowAddAndRemoveTabsInDialog')
+  import('@/components/cl-tabs-manager/ctShowAddAndRemoveTabsInDialog')
 
 Vue.use(VueSplit)
 export default {
