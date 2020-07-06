@@ -31,7 +31,7 @@ export default {
   },
   computed: {
     cfFireWhenActiveTabIDChanges() {
-      return this.$store.state.multiTabDialogLayer2.vsSelectedTabId
+      return this.$store.state.dialogHoldingTabsInL2.vsSelectedTabId
     },
   },
   watch: {

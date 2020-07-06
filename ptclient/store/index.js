@@ -26,7 +26,7 @@ const createStore = () => {
       },
     },
     modules: {
-      multiTabDialogLayer2: l2DialogAndTabsStateModule,
+      dialogHoldingTabsInL2: l2DialogAndTabsStateModule,
     },
     plugins: [createPersistedState(), VuexORM.install(database)],
   })

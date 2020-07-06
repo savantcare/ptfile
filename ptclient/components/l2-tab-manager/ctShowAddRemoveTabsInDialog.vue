@@ -73,7 +73,7 @@ export default {
     // @type Array
     cfArTabs: {
       get() {
-        return this.$store.state.multiTabDialogLayer2.arTabs
+        return this.$store.state.dialogHoldingTabsInL2.arTabs
       },
       set(value) {
         this.$store.commit('mtfSetArTabs', value)
@@ -84,7 +84,7 @@ export default {
     // @type String
     vsSelectedTabId: {
       get() {
-        return this.$store.state.multiTabDialogLayer2.vsSelectedTabId
+        return this.$store.state.dialogHoldingTabsInL2.vsSelectedTabId
       },
       set(value) {
         this.$store.commit('mtfSetvsSelectedTabId', value)
@@ -95,7 +95,7 @@ export default {
     // @type Boolean
     vblSeeDialogHoldingTabsInL2: {
       get() {
-        return this.$store.state.multiTabDialogLayer2
+        return this.$store.state.dialogHoldingTabsInL2
           .vblSeeDialogHoldingTabsInL2
       },
       set(value) {

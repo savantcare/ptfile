@@ -218,10 +218,10 @@ export default {
   },
   computed: {
     type() {
-      return this.$store.state.multiTabDialogLayer2.goalTabType
+      return this.$store.state.dialogHoldingTabsInL2.goalTabType
     },
     updateData() {
-      return this.$store.state.multiTabDialogLayer2.goalData
+      return this.$store.state.dialogHoldingTabsInL2.goalData
     },
     userId() {
       return this.$store.state.userId
