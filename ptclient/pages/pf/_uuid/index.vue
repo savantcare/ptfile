@@ -11,7 +11,17 @@
         <ctGL1> </ctGL1>
       </SplitArea>
       <SplitArea :size="25">
-        <!-- <keep-alive> before the card creates problem since multiple cards then get inside keep alive -->
+        <!-- <keep-alive> before the card creates problem since multiple cards then get inside keep alive 
+          
+          
+          <keep-alive> is designed for the case where it has one direct child component that is being toggled. 
+            It does not work if you have v-for inside it. 
+            When there are multiple conditional children, as above, <keep-alive> requires that only 
+              one child is rendered at a time.
+          Ref: https://vuejs.org/v2/api/#keep-alive
+
+         
+          -->
         <el-card
           v-for="(card, loopCount) in cfArCards"
           :key="card.id"
@@ -20,7 +30,9 @@
           :closable="card.closable"
         >
           <!-- Using https://vuejs.org/v2/guide/components.html#Dynamic-Components -->
-          <component :is="card.ctToShowInsideTab"></component>
+          <keep-alive>
+            <component :is="card.ctToShowInsideTab"></component>
+          </keep-alive>
         </el-card>
         <ctSearchBox></ctSearchBox>
       </SplitArea>
