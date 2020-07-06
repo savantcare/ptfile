@@ -8,7 +8,7 @@
 
 1. [ctSearchToAddTabInL2](https://github.com/savantcare/ptfile/tree/master/ptclient/components/l2-tabs-manager/ctSearchToAddTabInL2.vue)
 2. [ctShowAddRemoveTabsInDialog](https://github.com/savantcare/ptfile/tree/master/ptclient/components/l2-tabs-manager/ctShowAddRemoveTabsInDialog.vue)
-3. [ctTabSet](https://github.com/savantcare/ptfile/tree/master/ptclient/components/l2-tabs-manager/ctTabSet.vue)
+3. [ctSetOfTabs](https://github.com/savantcare/ptfile/tree/master/ptclient/components/l2-tabs-manager/ctSetOfTabs.vue)
 
 ## Section 3: Storage on server side
 

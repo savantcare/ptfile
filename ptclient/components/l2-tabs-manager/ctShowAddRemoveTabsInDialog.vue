@@ -48,7 +48,7 @@ dialog
         </el-tabs>
       </el-col>
       <el-col>
-        <ctTabSet></ctTabSet>
+        <ctSetOfTabs></ctSetOfTabs>
       </el-col>
     </el-row>
   </el-dialog>
@@ -56,12 +56,12 @@ dialog
 //#endregion template
 
 <script>
-import ctTabSet from './ctTabSet'
+import ctSetOfTabs from './ctSetOfTabs'
 
 export default {
   name: 'L2-Dialog-And-Tabs-Manager',
   components: {
-    ctTabSet,
+    ctSetOfTabs,
   },
   data() {
     return {}
