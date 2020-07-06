@@ -1,6 +1,6 @@
 import { Database } from '@vuex-orm/core'
-import CtSearch from '../models/ormSearch'
-
+import CtSearch from '@/models/ormSearch'
+import CtLifeCycle from '@/models/ormCtLifeCycle'
 import User from '@/models/user'
 import Todo from '@/models/Todo'
 import Patient from '@/models/patient'
@@ -19,5 +19,6 @@ database.register(Dx)
 database.register(Goal)
 database.register(Scr)
 database.register(CtSearch)
+database.register(CtLifeCycle)
 
 export default database
