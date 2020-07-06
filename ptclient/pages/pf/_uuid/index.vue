@@ -12,6 +12,18 @@
         <ctRexL1> </ctRexL1>
         <ctScrL1> </ctScrL1>
         <ctSearchBox></ctSearchBox>
+        <el-tabs v-model="a" type="card">
+          <el-tab-pane
+            v-for="(tab, loopCount) in cfArTabs"
+            :key="tab.id"
+            :label="tab.label + '(' + (loopCount + 1) + ')'"
+            :name="tab.id"
+            :closable="tab.closable"
+          >
+            <!-- Using https://vuejs.org/v2/guide/components.html#Dynamic-Components -->
+            <component v-bind:is="tab.ctToShowInsideTab"></component>
+          </el-tab-pane>
+        </el-tabs>
       </SplitArea>
     </Split>
     <!-- tab-dialog is present in patientFile.vue but in hidden state -->
@@ -44,8 +56,23 @@ export default {
     ctGL1,
     ctScrL1,
   },
+  data() {
+    return {
+      a: '1',
+    }
+  },
   mounted() {
     this.$store.commit('mtfSetTabDialogVisibility', false)
+  },
+  computed: {
+    cfArTabs: {
+      get() {
+        return this.$store.state.dialogHoldingTabsInL2.arTabs
+      },
+      set(value) {
+        this.$store.commit('mtfSetArTabs', value)
+      },
+    },
   },
 }
 </script>
