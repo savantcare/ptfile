@@ -22,13 +22,17 @@ None
 
 ## Section 5: Operational detail of client side UI design
 
-The goal is:
+1. The goal is:
 
 <<< @/ptclient/components/l2-tab-manager/ctShowAddRemoveTabsInDialog.vue#goal{1}
 
 To achive the above goal the code is:
 
 <<< @/ptclient/components/l2-tab-manager/ctShowAddRemoveTabsInDialog.vue#template{2}
+
+2. Keyboard to select tabs
+
+<<< @/ptclient/components/l2-tab-manager/ctShowAddRemoveTabsInDialog.vue#kbselect
 
 <[vuese](@/ptclient/components/l2-tab-manager/ctShowAddRemoveTabsInDialog.vue)
 

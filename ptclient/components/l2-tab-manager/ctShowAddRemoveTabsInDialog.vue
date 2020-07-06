@@ -117,6 +117,7 @@ export default {
     )
   },
   methods: {
+    // #region kbselect
     selectActiveTabFromKeyboard(pEvent) {
       if (this.vblIsDialogHoldingTabsInL2Visible === false) {
         console.log('Rejection reason 1: 2nd layer not active')
@@ -183,6 +184,7 @@ export default {
         this.cfArTabs[pEvent.key - 1].id
       )
     },
+    // #endregion kbselect
     mfHandleTabRemove(pTabBeingRemovedID) {
       let tabToRemoveFoundAt = false // this is needed to find which tab to activate
       let loopCount = 0
