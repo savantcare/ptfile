@@ -200,18 +200,16 @@ export default {
         pEvent.keyCode >= '49' &&
         pEvent.keyCode <= maxValidKeyCodeEnteredByUser
       ) {
-        // this hurdle passed by the key press
+        console.log('Activating tab at position' + pEvent.key)
+        this.$store.commit(
+          'mtfSetvsSelectedTabId',
+          this.cfArTabs[pEvent.key - 1].id
+        )
       } else {
         console.log(
           'Rejection reason 3: User entered # is higher then max tabs'
         )
-        return
       }
-      console.log('Activating tab at position' + pEvent.key)
-      this.$store.commit(
-        'mtfSetvsSelectedTabId',
-        this.cfArTabs[pEvent.key - 1].id
-      )
     },
     // #endregion kbselect
     mfHandleTabRemove(pTabBeingRemovedID) {
