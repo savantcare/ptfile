@@ -34,7 +34,11 @@ export default {
         id: pSelectedSuggestion.id,
         closable: true,
       }
-      this.$store.commit('mtfShowNewFirstTabInL2', objAddTab)
+      if (pSelectedSuggestion.layer === 'view') {
+        console.log('mutate another data structure')
+      } else if (pSelectedSuggestion.layer === 'change') {
+        this.$store.commit('mtfShowNewFirstTabInL2', objAddTab)
+      }
       this.keyword = ''
     },
   },

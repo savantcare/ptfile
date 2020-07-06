@@ -9,6 +9,7 @@ export default class ormSearchInL2 extends Model {
       value: this.string(''), // this is the tab name that is shown to the user. I call it value since autocomplete function expects the object property to be called value
       ctAbbr: this.string(''),
       ctToShowInsideTab: this.string(''),
+      layer: this.string(''),
     }
   }
 }

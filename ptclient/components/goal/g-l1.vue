@@ -47,6 +47,7 @@ export default {
         value: 'Add goal',
         ctAbbr: 'addg',
         ctToShowInsideTab: 'goal/l2/ctAddGoal.vue',
+        layer: 'change',
       },
     })
 
@@ -55,6 +56,7 @@ export default {
         value: 'Multi rate goal',
         ctAbbr: 'mcg',
         ctToShowInsideTab: 'goal/l2/ctMultiRateGoal.vue',
+        layer: 'change',
       },
     })
     this.mfdaGetG()

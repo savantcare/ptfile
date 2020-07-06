@@ -47,6 +47,7 @@ export default {
         value: 'Recommendations',
         ctAbbr: 'rex',
         ctToShowInsideTab: 'rex/rex-l1.vue',
+        layer: 'view',
       },
     })
   },
