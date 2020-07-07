@@ -1,7 +1,7 @@
 <template>
   <div id="vl-search-box">
     <el-autocomplete
-      v-model="keyword"
+      v-model="searchKeyword"
       class="inline-input"
       :fetch-suggestions="mfQuerySearchTerms"
       placeholder="Please Input"
@@ -15,7 +15,7 @@
 import ormSearchUiToCT from '../../models/ormSearchUiToCT'
 export default {
   data() {
-    return { keyword: '' }
+    return { searchKeyword: '' }
   },
   mounted() {
     // Search interfaces to this component
@@ -52,7 +52,7 @@ export default {
       } else if (pSelectedSuggestion.layer === 'change') {
         this.$store.commit('mtfShowNewFirstTabInL2', objCtToAdd)
       }
-      this.keyword = ''
+      this.searchKeyword = '' // Once search work is done then the searchKeyword needs to be empty
     },
   },
 }

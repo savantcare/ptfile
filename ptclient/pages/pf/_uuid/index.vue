@@ -48,6 +48,9 @@ import ctGL1 from '@/components/goal/g-l1'
 import ctScrL1 from '@/components/scr/scr-l1.vue'
 const L2TabsInDialog = () =>
   import('@/components/cl-tabs-manager/ctShowAddAndRemoveTabsInDialog')
+
+// say the user enter the rex command 10 times. I need to scroll to the bottom of the cards
+// so search box is given a ID and then #vl-search-box is used to scroll down.
 const VueScrollTo = require('vue-scrollto') // Ref: https://github.com/rigor789/vue-scrollto#as-a-vue-directive
 
 Vue.use(VueSplit)
