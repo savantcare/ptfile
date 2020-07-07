@@ -1,7 +1,7 @@
 <!-- Is L2TabManager a component or a view? View is actually intended to be
 accessed by navigation url Ref:
 https://stackoverflow.com/questions/50865828/what-is-the-difference-between-the-views-and-components-folders-in-a-vue-project
-L2TabsInDialog is not expected to be accessed by a URL. */
+CLTabsInDialog is not expected to be accessed by a URL. */
 
 /*
 //#region goal

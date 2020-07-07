@@ -32,7 +32,7 @@
       </SplitArea>
     </Split>
     <!-- tab-dialog is present in patientFile.vue but in hidden state -->
-    <L2TabsInDialog></L2TabsInDialog>
+    <CLTabsInDialog></CLTabsInDialog>
   </div>
 </template>
 
@@ -46,7 +46,7 @@ import ctBML1 from '@/components/bm/bm-l1'
 import ctDXL1 from '@/components/dx/dx-l1'
 import ctGL1 from '@/components/goal/g-l1'
 import ctScrL1 from '@/components/scr/scr-l1.vue'
-const L2TabsInDialog = () =>
+const CLTabsInDialog = () =>
   import('@/components/cl-tabs-manager/ctShowAddAndRemoveTabsInDialog')
 
 // say the user enter the rex command 10 times. I need to scroll to the bottom of the cards
@@ -58,7 +58,7 @@ Vue.use(VueScrollTo)
 
 export default {
   components: {
-    L2TabsInDialog,
+    CLTabsInDialog,
     ctVLSearchBox,
     ctRexL1,
     ctRemL1,
