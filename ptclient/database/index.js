@@ -8,6 +8,7 @@ import Rex from '@/models/Recommendation'
 import Dx from '@/models/Dx'
 import Goal from '@/models/Goal'
 import Scr from '@/models/Screening'
+import Dxa from '@/models/Dxa'
 
 const database = new Database()
 
@@ -20,5 +21,6 @@ database.register(Goal)
 database.register(Scr)
 database.register(CtSearch)
 database.register(CtLifeCycle)
+database.register(Dxa)
 
 export default database

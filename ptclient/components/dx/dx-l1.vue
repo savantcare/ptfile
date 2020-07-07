@@ -9,13 +9,16 @@
         <el-button style="float: right; padding: 3px 0;" type="text"
           >D</el-button
         >
-        <el-button style="float: right; padding: 3px 0;" type="text"
+        <el-button
+          style="float: right; padding: 3px 0;"
+          type="text"
+          @click.prevent="mfOpenMDialog()"
           >M</el-button
         >
         <el-button
-          @click.prevent="mfOpenADialog()"
           style="float: right; padding: 3px 0;"
           type="text"
+          @click.prevent="mfOpenADialog()"
           >A</el-button
         >
       </div>
@@ -32,6 +35,7 @@
 <script>
 import ormSearchUiToCT from '../../models/ormSearchUiToCT'
 import ormDx from '@/models/Dx'
+import ormDxa from '@/models/Dxa'
 
 /* export default {
   async asyncData({ params }) {
@@ -46,6 +50,7 @@ export default {
     return {
       daDxTable: ormDx.query().get(),
       dblOneDxQueryIsRunningGate: false,
+      dblOneDxaQueryIsRunningGate: false,
     }
   },
   mounted() {
@@ -66,7 +71,16 @@ export default {
         layer: 'view',
       },
     })
+    ormSearchUiToCT.insert({
+      data: {
+        value: 'Multichange dx assessment',
+        ctAbbr: 'mcdxa',
+        ctToShowInsideTab: 'dx/l2/ctMultiChangeDxa.vue',
+        layer: 'change',
+      },
+    })
     this.mfdaGetDx()
+    this.mfdaGetDxa()
   },
   methods: {
     async mfdaGetDx() {
@@ -96,9 +110,55 @@ export default {
 
       // console.log(dxList);
     },
+    async mfdaGetDxa() {
+      try {
+        if (!this.dblOneDxaQueryIsRunningGate) {
+          console.log('calling assessment api')
+          this.dblOneDxaQueryIsRunningGate = true
+          const countDxaCountFromORM = ormDxa.query().count()
+          console.log('Number of assessment before query')
+          console.log(
+            'Number of assessment before query =>',
+            countDxaCountFromORM
+          )
+          if (countDxaCountFromORM === 0) {
+            await ormDxa
+              .api()
+              .get(
+                `http://localhost:8000/assessment/?patientId=bfe041fa-073b-4223-8c69-0540ee678ff8`
+              )
+            // this.daDxTable = ormDx.query().get()
+            // ormDx.query('').get()
+            console.log('Number of dx in model =>', ormDx.query().count())
+          } else {
+            this.daDxTable = ormDx.query().get()
+          }
+          this.dblOneDxaQueryIsRunningGate = false
+        }
+      } catch (e) {}
+
+      // console.log(dxList);
+    },
     mfOpenADialog() {
       console.log('show add dialog')
       const resultSet = ormSearchUiToCT.query().search('Add diagnosis').get()
+      const resultData = resultSet[0]
+      const tab = {
+        label: resultData.value,
+        ctToShowInsideTab: require('@/components/' +
+          resultData.ctToShowInsideTab).default,
+        ctAbbr: resultData.ctAbbr,
+        id: resultData.id,
+        closable: true,
+      }
+      this.$store.commit('mtfShowNewFirstTabInL2', tab)
+    },
+    mfOpenMDialog() {
+      console.log('show multi change dialog')
+      const resultSet = ormSearchUiToCT
+        .query()
+        .search('Multichange dx assessment')
+        .get()
       const resultData = resultSet[0]
       const tab = {
         label: resultData.value,

@@ -7,13 +7,13 @@ module.exports = (sequelize, Sequelize) => {
         primaryKey: true,
         defaultValue: Sequelize.UUIDV4,
       },
-      diagnosisUUID: {
+      dxUUID: {
         type: Sequelize.STRING,
       },
       patientUUID: {
         type: Sequelize.STRING,
       },
-      diagnosisAssessment: {
+      dxAssessment: {
         type: Sequelize.STRING,
       },
       recordChangedByUUID: {
