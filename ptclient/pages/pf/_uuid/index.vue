@@ -48,6 +48,7 @@ import ctGL1 from '@/components/goal/g-l1'
 import ctScrL1 from '@/components/scr/scr-l1.vue'
 const L2TabsInDialog = () =>
   import('@/components/cl-tabs-manager/ctShowAddAndRemoveTabsInDialog')
+const VueScrollTo = require('vue-scrollto') // Ref: https://github.com/rigor789/vue-scrollto#as-a-vue-directive
 
 Vue.use(VueSplit)
 export default {
@@ -60,6 +61,7 @@ export default {
     ctDXL1,
     ctGL1,
     ctScrL1,
+    VueScrollTo,
   },
   methods: {
     log(message) {

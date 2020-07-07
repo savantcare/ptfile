@@ -1,5 +1,5 @@
 <template>
-  <div id="search_component">
+  <div id="vl-search-box">
     <el-autocomplete
       v-model="keyword"
       class="inline-input"
