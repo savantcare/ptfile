@@ -25,6 +25,9 @@
           -->
         <el-card v-for="card in cfArCards" v-bind:key="card.id">
           <!-- Using https://vuejs.org/v2/guide/components.html#Dynamic-Components -->
+          <!-- Sorrounding component with keepAlive does not help. Since previous rendering of rex
+          is not hidden. When user types rex 2 times, rex is being displayed 2 times
+          -->
           <component v-bind:is="card.ctToShowInsideTab"></component>
         </el-card>
         <ctSearchBox></ctSearchBox>
