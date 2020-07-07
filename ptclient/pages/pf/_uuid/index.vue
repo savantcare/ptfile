@@ -7,6 +7,7 @@
         <ctBML1> </ctBML1>
         <ctDXL1> </ctDXL1>
         <ctGL1> </ctGL1>
+        <ctScrL1> </ctScrL1>
       </SplitArea>
       <SplitArea :size="25" id="csvl">
         <!-- <keep-alive> before the card creates problem since multiple cards then get inside keep alive 

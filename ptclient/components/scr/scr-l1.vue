@@ -42,6 +42,7 @@
 
 <script>
 import ormSearchUiToCT from '../../models/ormSearchUiToCT'
+import ormCTLifeCycle from '../../models/ormCTLifeCycle'
 import ormScr from '@/models/Screening'
 export default {
   data() {
@@ -56,18 +57,9 @@ export default {
     }
   },
   computed: {},
-  beforeCreate() {
-    ormSearchUiToCT.insert({
-      data: {
-        value: 'Screening',
-        ctAbbr: 'scr',
-        ctToShowInsideTab: 'scr/scr-l1.vue',
-        layer: 'view',
-      },
-    })
-  },
+  beforeCreate() {},
   mounted() {
-    // Inserting Search interfaces to this component
+    this.mfAddOrmSearch()
     this.mfdaGetscr()
   },
   methods: {
@@ -95,6 +87,36 @@ export default {
         }
       } catch (ex) {
         console.log('failed')
+      }
+    },
+    mfAddOrmSearch() {
+      // Inserting Search interfaces to this component
+      const resultSet = ormCTLifeCycle.query().where('name', 'Screening').get()
+      const resultData = resultSet[0]
+      if (typeof resultData !== 'undefined') {
+        console.log('already mounted')
+      } else {
+        // Step 1/3: Store information that this Ct has already been mounted
+        // I run this before API to server since API to server takes time and during the wait time 2 Ct may end up running
+        ormCTLifeCycle.insert({
+          data: {
+            name: 'Screening',
+            status: 3,
+          },
+        })
+
+        // Step 2/3: Inserting Search interfaces to this component
+        ormSearchUiToCT.insert({
+          data: {
+            value: 'Screening',
+            ctAbbr: 'scr',
+            ctToShowInsideTab: 'scr/scr-l1.vue',
+            layer: 'view',
+          },
+        })
+        // Step 3/3: Run API to get data from server
+
+        console.log('Done Screening mounting')
       }
     },
     mfOpenAllScrGDialog() {
