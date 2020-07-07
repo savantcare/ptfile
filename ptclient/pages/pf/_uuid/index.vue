@@ -2,9 +2,7 @@
   <div>
     <Split style="height: 900px; width: 1400px;" :gutterSize="5">
       <SplitArea :size="75">
-        <keep-alive>
-          <ctRexL1> </ctRexL1>
-        </keep-alive>
+        <ctRexL1> </ctRexL1>
         <ctRemL1> </ctRemL1>
         <ctBML1> </ctBML1>
         <ctDXL1> </ctDXL1>
