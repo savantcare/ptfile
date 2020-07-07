@@ -21,8 +21,8 @@ const createStore = () => {
   return new Vuex.Store({
     state: () => ({}),
     modules: {
-      dialogHoldingTabsInL2: clDialogAndTabsStateModule,
-      cardsInL1CSVA: vlCardsStateModule,
+      dialogHoldingTabsInCL: clDialogAndTabsStateModule,
+      cardsInCSOfVL: vlCardsStateModule,
     },
     plugins: [VuexORM.install(database)],
   })

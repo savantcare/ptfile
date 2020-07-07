@@ -205,10 +205,10 @@ export default {
   },
   computed: {
     type() {
-      return this.$store.state.dialogHoldingTabsInL2.goalTabType
+      return this.$store.state.dialogHoldingTabsInCL.goalTabType
     },
     updateData() {
-      return this.$store.state.dialogHoldingTabsInL2.goalData
+      return this.$store.state.dialogHoldingTabsInCL.goalData
     },
     userId() {
       return this.$store.state.userId

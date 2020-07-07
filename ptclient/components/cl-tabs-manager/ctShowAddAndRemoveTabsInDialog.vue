@@ -18,7 +18,7 @@ dialog
 
 <template>
   <el-dialog
-    :visible.sync="vblIsDialogHoldingTabsInL2Visible"
+    :visible.sync="vblIsdialogHoldingTabsInCLVisible"
     custom-class="multi-tab-dialog"
     width="90%"
     top="5vh"
@@ -39,8 +39,8 @@ dialog
           The active tab depends on ct -> el-tabs -> v-model = cfVSSelectedTabId (line 72 of this file)
           When cfVSSelectedTabId (Line 117 of this file) changes the active tab will change. 
           Since cfVSSelectedTabId is a computed function it will change when anything it depends on changes
-          cfVSSelectedTabId depends on this.$store.state.dialogHoldingTabsInL2.vsSelectedTabId (Line 119 of this file)
-          So any Ct can change this.$store.state.dialogHoldingTabsInL2.vsSelectedTabId and that will change the active Tab
+          cfVSSelectedTabId depends on this.$store.state.dialogHoldingTabsInCL.vsSelectedTabId (Line 119 of this file)
+          So any Ct can change this.$store.state.dialogHoldingTabsInCL.vsSelectedTabId and that will change the active Tab
           The sequence of changes is:
                               
                            ┌──────────┐                           
@@ -52,7 +52,7 @@ dialog
                 └────────────────┬────────────────┘               
                                  │                                
 ┌────────────────────────────────▼───────────────────────────────┐
-│Changes this.$store.state.dialogHoldingTabsInL2.vsSelectedTabId │  clDialogAndTabsState:37 
+│Changes this.$store.state.dialogHoldingTabsInCL.vsSelectedTabId │  clDialogAndTabsState:37 
 └────────────────────────────────┬───────────────────────────────┘
                                  │                                
                  ┌───────────────▼────────────────────────────┐               
@@ -108,7 +108,7 @@ export default {
   computed: {
     cfArTabs: {
       get() {
-        return this.$store.state.dialogHoldingTabsInL2.arTabs
+        return this.$store.state.dialogHoldingTabsInCL.arTabs
       },
       set(value) {
         this.$store.commit('mtfSetArTabs', value)
@@ -116,16 +116,16 @@ export default {
     },
     cfVSSelectedTabId: {
       get() {
-        return this.$store.state.dialogHoldingTabsInL2.vsSelectedTabId
+        return this.$store.state.dialogHoldingTabsInCL.vsSelectedTabId
       },
       set(value) {
         this.$store.commit('mtfSetvsSelectedTabId', value)
       },
     },
-    vblIsDialogHoldingTabsInL2Visible: {
+    vblIsdialogHoldingTabsInCLVisible: {
       get() {
-        return this.$store.state.dialogHoldingTabsInL2
-          .vblIsDialogHoldingTabsInL2Visible
+        return this.$store.state.dialogHoldingTabsInCL
+          .vblIsdialogHoldingTabsInCLVisible
       },
       set(value) {
         this.$store.commit('mtfSetTabDialogVisibility', value)
@@ -133,7 +133,7 @@ export default {
     },
   },
   mounted() {
-    this.vblIsDialogHoldingTabsInL2Visible = false
+    this.vblIsdialogHoldingTabsInCLVisible = false
     this.cfArTabs = [] // Template has a for loop running on this.
     this.cfVSSelectedTabId = ''
     const self = this // this is not available inside addEventListener since execution context changes. Hence assining this to self Ref: https://stackoverflow.com/a/50818181
@@ -148,7 +148,7 @@ export default {
   methods: {
     // #region kbselect
     selectActiveTabFromKeyboard(pEvent) {
-      if (this.vblIsDialogHoldingTabsInL2Visible === false) {
+      if (this.vblIsdialogHoldingTabsInCLVisible === false) {
         console.log('Rejection reason 1: 2nd layer not active')
         return
       }
@@ -230,7 +230,7 @@ export default {
 
       // If there are no more tabs in the diaglog then hide the dialog
       if (arNewTabs.length === 0) {
-        this.vblIsDialogHoldingTabsInL2Visible = false
+        this.vblIsdialogHoldingTabsInCLVisible = false
       } else {
         // Once a tab is removed an existing tab needs to be made active
         console.log(tabToRemoveFoundAt, arNewTabs)

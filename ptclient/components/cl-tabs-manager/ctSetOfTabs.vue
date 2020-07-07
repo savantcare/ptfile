@@ -44,7 +44,7 @@ export default {
           closable: true,
         }
         this.$store.commit('mtfShowNewFirstTabInL2', objAddTab)
-        this.$store.state.dialogHoldingTabsInL2.vsSelectedTabId = this.$store.state.dialogHoldingTabsInL2.arTabs[0].id
+        this.$store.state.dialogHoldingTabsInCL.vsSelectedTabId = this.$store.state.dialogHoldingTabsInCL.arTabs[0].id
       } else if (pValue === 'plan-tabset') {
         let resultSet = ormSearchUiToCT.query().search('Add diagnosis').get()
         let resultData = resultSet[0]
@@ -68,7 +68,7 @@ export default {
           closable: true,
         }
         this.$store.commit('mtfAdditionalTabAddOrActivate', objAddTab)
-        this.$store.state.dialogHoldingTabsInL2.vsSelectedTabId = this.$store.state.dialogHoldingTabsInL2.arTabs[0].id
+        this.$store.state.dialogHoldingTabsInCL.vsSelectedTabId = this.$store.state.dialogHoldingTabsInCL.arTabs[0].id
       }
     },
   },
