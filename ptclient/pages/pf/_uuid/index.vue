@@ -28,7 +28,7 @@
           -->
           <component v-bind:is="card.ctToShowInsideTab"></component>
         </el-card>
-        <ctSearchBox></ctSearchBox>
+        <ctVLSearchBox></ctVLSearchBox>
       </SplitArea>
     </Split>
     <!-- tab-dialog is present in patientFile.vue but in hidden state -->
@@ -39,7 +39,7 @@
 <script>
 import Vue from 'vue'
 import VueSplit from 'vue-split-panel'
-import ctSearchBox from '@/components/vl-search-box'
+import ctVLSearchBox from '@/components/vl-search-box'
 import ctRexL1 from '@/components/rex/rex-vl'
 import ctRemL1 from '@/components/rem/rem-l1'
 import ctBML1 from '@/components/bm/bm-l1'
@@ -53,7 +53,7 @@ Vue.use(VueSplit)
 export default {
   components: {
     L2TabsInDialog,
-    ctSearchBox,
+    ctVLSearchBox,
     ctRexL1,
     ctRemL1,
     ctBML1,
