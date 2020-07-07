@@ -5,13 +5,13 @@
         <span>Screening</span>
         <el-button
           style="float: right; padding: 0 3px;"
-          @click="fnShowAllScrGraphInL2()"
+          @click="mfOpenAllScrGDialog()"
           type="text"
           >G</el-button
         >
         <el-button
           style="float: right; padding: 0 3px;"
-          @click="fnAddScrInL2()"
+          @click="mfOpenADialog()"
           type="text"
           >A</el-button
         >
@@ -25,12 +25,12 @@
         </el-table-column>
         <el-table-column>
           <template slot-scope="scope">
-            <el-button type="text" size="mini" @click="fnTakeScrInL2(scope.row)"
+            <el-button type="text" size="mini" @click="mfOpenTDialog(scope.row)"
               >T</el-button
             ><el-button
               type="text"
               size="mini"
-              @click="fnScrGraphInL2(scope.row)"
+              @click="mfOpenGDialog(scope.row)"
               >G</el-button
             >
           </template>
@@ -68,23 +68,10 @@ export default {
   },
   mounted() {
     // Inserting Search interfaces to this component
-    this.dbGetScreenings()
+    this.mfdaGetscr()
   },
   methods: {
-    fnShowAllScrGraphInL2() {
-      console.log('show all screen graph popup')
-    },
-    fnAddScrInL2() {
-      console.log('show ad screen graph in popup')
-    },
-    fnTakeScrInL2(data) {
-      console.log('show take a screen dialog', data)
-      // this.$store.commit("showTakeAScreenTabInLayer2", data);
-    },
-    fnScrGraphInL2(data) {
-      console.log('show screen graph dialog', data)
-    },
-    async dbGetScreenings() {
+    async mfdaGetscr() {
       try {
         if (!this.dblOneQueryIsRunningGate) {
           this.dblOneQueryIsRunningGate = true
@@ -109,6 +96,19 @@ export default {
       } catch (ex) {
         console.log('failed')
       }
+    },
+    mfOpenAllScrGDialog() {
+      console.log('show all screen graph popup')
+    },
+    mfOpenADialog() {
+      console.log('show add screen  in popup')
+    },
+    mfOpenTDialog(data) {
+      console.log('show take a screen dialog', data)
+      // this.$store.commit("showTakeAScreenTabInLayer2", data);
+    },
+    mfOpenGDialog(data) {
+      console.log('show screen graph dialog', data)
     },
   },
 }
