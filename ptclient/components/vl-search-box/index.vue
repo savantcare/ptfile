@@ -13,6 +13,7 @@
 
 <script>
 import ormSearchUiToCT from '../../models/ormSearchUiToCT'
+const VueScrollTo = require('vue-scrollto')
 export default {
   data() {
     return { searchKeyword: '' }
@@ -30,12 +31,19 @@ export default {
   },
   methods: {
     mfQuerySearchTerms(pQueryString, pCallBack) {
-      const resultSet = ormSearchUiToCT
-        .query()
-        .search(pQueryString.trim())
-        .get() // trim needs for "goal " to match "goal"
-      console.log('search result from orm model', pQueryString, resultSet)
-      pCallBack(resultSet)
+      // pQueryString empty means user did not enter anything
+      // to show values in dropdown returning all results
+      if (!pQueryString) {
+        const resultSet = ormSearchUiToCT.all()
+        pCallBack(resultSet)
+      } else {
+        const resultSet = ormSearchUiToCT
+          .query()
+          .search(pQueryString.trim())
+          .get() // trim needs for "goal " to match "goal"
+        console.log('search result from orm model', pQueryString, resultSet)
+        pCallBack(resultSet)
+      }
     },
     mfHandleSuggestionSelectedByUser(pSelectedSuggestion) {
       console.log('Selected suggestion is', pSelectedSuggestion)
@@ -53,6 +61,7 @@ export default {
         this.$store.commit('mtfShowNewFirstTabInL2', objCtToAdd)
       }
       this.searchKeyword = '' // Once search work is done then the searchKeyword needs to be empty
+      VueScrollTo.scrollTo('vl-search-box')
     },
   },
 }
