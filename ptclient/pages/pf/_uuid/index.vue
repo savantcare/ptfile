@@ -8,7 +8,7 @@
         <ctDXL1> </ctDXL1>
         <ctGL1> </ctGL1>
       </SplitArea>
-      <SplitArea :size="25">
+      <SplitArea :size="25" id="csvl">
         <!-- <keep-alive> before the card creates problem since multiple cards then get inside keep alive 
           
           
@@ -54,6 +54,8 @@ const L2TabsInDialog = () =>
 const VueScrollTo = require('vue-scrollto') // Ref: https://github.com/rigor789/vue-scrollto#as-a-vue-directive
 
 Vue.use(VueSplit)
+Vue.use(VueScrollTo)
+
 export default {
   components: {
     L2TabsInDialog,
@@ -64,7 +66,6 @@ export default {
     ctDXL1,
     ctGL1,
     ctScrL1,
-    VueScrollTo,
   },
   methods: {
     log(message) {

@@ -13,7 +13,6 @@
 
 <script>
 import ormSearchUiToCT from '../../models/ormSearchUiToCT'
-const VueScrollTo = require('vue-scrollto')
 export default {
   data() {
     return { searchKeyword: '' }
@@ -60,8 +59,16 @@ export default {
       } else if (pSelectedSuggestion.layer === 'change') {
         this.$store.commit('mtfShowNewFirstTabInL2', objCtToAdd)
       }
-      this.searchKeyword = '' // Once search work is done then the searchKeyword needs to be empty
-      VueScrollTo.scrollTo('vl-search-box')
+      this.searchKeyword = '' // Once search work is done then the input area needs to be empty
+      // scrolling to top of the search input box
+      const options = {
+        container: '#csvl',
+        easing: 'ease-in',
+        offset: 6000, // if offset is negative I do not come on top of search box. Not sure what this means
+        force: true,
+        cancelable: true,
+      }
+      this.$scrollTo('#vl-search-box', 500, options)
     },
   },
 }
