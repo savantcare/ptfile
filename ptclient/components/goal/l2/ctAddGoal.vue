@@ -144,7 +144,7 @@ export default {
       this.daGoalForm.goals.push({
         description: '',
         startDate: '',
-        score: '',
+        score: 0,
       })
     },
     removeDomain(item) {
@@ -154,7 +154,7 @@ export default {
       }
     },
     submitForm(formName) {
-      const vm = this
+      // const vm = this
       this.$refs[formName].validate(async (valid) => {
         if (valid) {
           // Add
@@ -170,50 +170,23 @@ export default {
             })
           })
           console.log('goalList=> ', goalList)
-          // try {
-          const response = await fetch(GOAL_API_URL, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json;charset=utf-8',
-              // Authorization: 'Bearer ' + TOKEN,
-            },
-            body: JSON.stringify({
-              data: goalList,
-              patientUUID: 'bfe041fa-073b-4223-8c69-0540ee678ff8',
-            }),
-          })
-          console.log('response=> ', response)
-          if (!response.ok) {
-            /* notify({
-                title: 'Error',
-                message: 'Failed to add goal data',
-              }) */
-            // commit('setGoalList', originList)
-          } else {
-            /* notify({
-                title: 'Success',
-                message: 'Saved!',
-              }) */
-          }
-          // } catch (ex) {
-          /* notify({
-              title: 'Error',
-              message: 'Server connection error',
+          try {
+            const response = await fetch(GOAL_API_URL, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+                // Authorization: 'Bearer ' + TOKEN,
+              },
+              body: JSON.stringify({
+                data: goalList,
+                patientUUID: 'bfe041fa-073b-4223-8c69-0540ee678ff8',
+              }),
             })
-            commit('setGoalList', originList) */
-          // }
-          /* await this.$store.dispatch('addGoal', {
-            data: goalList,
-            notify: this.$notify,
-            patientUUID: this.id,
-          })
-          await this.$store.dispatch('getGoals', {
-            patientUUID: this.id,
-            notify: this.$notify,
-          })
-          this.daGoalForm = {
-            goals: [{ description: '', startDate: '', score: '' }],
-          } */
+            console.log('response=> ', response)
+            if (!response.ok) {
+            } else {
+            }
+          } catch (ex) {}
         } else {
           console.log('error submit!!')
           return false

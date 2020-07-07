@@ -65,6 +65,7 @@
 </template>
 
 <script>
+import { GOAL_API_URL } from '@/static/others.js'
 import GoalHistoryItem from './GoalHistoryItem'
 import ormGoal from '@/models/Goal'
 export default {
@@ -103,26 +104,46 @@ export default {
     }
   },
   methods: {
-    onClickSave(goal) {
-      this.$store.dispatch('updateGoal', {
-        data: goal,
-        notify: this.$notify,
-      })
+    async onClickSave(goal) {
+      try {
+        const response = await fetch(`${GOAL_API_URL}/${goal.uuid}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            // "Authorization": "Bearer " + TOKEN
+          },
+          body: JSON.stringify(goal),
+        })
+        if (!response.ok) {
+          console.log('Failed to update')
+        } else {
+          console.log('update success')
+        }
+      } catch (ex) {}
     },
-    onClickDiscontinue(goal) {
-      this.$store.dispatch('discontinueGoal', {
-        data: goal,
-        notify: this.$notify,
-      })
+    async onClickDiscontinue(goal) {
+      try {
+        goal['discontinue'] = true
+        const response = await fetch(`${GOAL_API_URL}/${goal.uuid}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            // Authorization: 'Bearer ' + TOKEN,
+          },
+          body: JSON.stringify(goal),
+        })
+        if (!response.ok) {
+          console.log('Failed to discontinue')
+        } else {
+          console.log('Discontinued successfull')
+        }
+      } catch (ex) {}
     },
     formatTooltip(val) {
       return val
     },
   },
   computed: {
-    /* goalList() {
-      return this.$store.state.goal.goalList
-    }, */
     carouselList() {
       const result = []
       let temp = []
