@@ -25,6 +25,7 @@
 
 <script>
 import ormSearchUiToCT from '../../models/ormSearchUiToCT'
+import ormCTLifeCycle from '../../models/ormCTLifeCycle'
 export default {
   name: 'rex-l1',
   data() {
@@ -45,15 +46,30 @@ export default {
   // Ref: https://stackoverflow.com/questions/46974234/vue-router-keep-alive-and-mounted-behavior
   mounted() {
     // Inserting Search interfaces to this component
-    ormSearchUiToCT.insert({
-      data: {
-        value: 'Recommendations',
-        ctAbbr: 'rex',
-        ctToShowInsideTab: 'rex/rex-l1.vue',
-        layer: 'view',
-      },
-    })
-    console.log('mounted')
+    const resultSet = ormCTLifeCycle
+      .query()
+      .where('name', 'Recommendations')
+      .get()
+    const resultData = resultSet[0]
+    if (typeof resultData !== 'undefined') {
+      console.log('already mounted')
+    } else {
+      ormSearchUiToCT.insert({
+        data: {
+          value: 'Recommendations',
+          ctAbbr: 'rex',
+          ctToShowInsideTab: 'rex/rex-l1.vue',
+          layer: 'view',
+        },
+      })
+      ormCTLifeCycle.insert({
+        data: {
+          name: 'Recommendations',
+          status: 3,
+        },
+      })
+      console.log('mounted')
+    }
   },
 }
 </script>
