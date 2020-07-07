@@ -25,7 +25,6 @@
           -->
         <el-card v-for="card in cfArCards" v-bind:key="card.id">
           <!-- Using https://vuejs.org/v2/guide/components.html#Dynamic-Components -->
-          {{ log('loop') }}
           <component v-bind:is="card.ctToShowInsideTab"></component>
         </el-card>
         <ctSearchBox></ctSearchBox>
@@ -40,7 +39,7 @@
 import Vue from 'vue'
 import VueSplit from 'vue-split-panel'
 import ctSearchBox from '@/components/vl-search-box'
-import ctRexL1 from '@/components/rex/rex-l1'
+import ctRexL1 from '@/components/rex/rex-vl'
 import ctRemL1 from '@/components/rem/rem-l1'
 import ctBML1 from '@/components/bm/bm-l1'
 import ctDXL1 from '@/components/dx/dx-l1'
@@ -67,9 +66,7 @@ export default {
     },
   },
   data() {
-    return {
-      a: '1',
-    }
+    return {}
   },
   mounted() {
     // when page first loads the L2 tabs are set to not show

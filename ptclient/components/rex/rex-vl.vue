@@ -27,7 +27,7 @@
 import ormSearchUiToCT from '../../models/ormSearchUiToCT'
 import ormCTLifeCycle from '../../models/ormCTLifeCycle'
 export default {
-  name: 'rex-l1',
+  name: 'rex-vl',
   data() {
     return {
       daTable: [
@@ -58,7 +58,7 @@ export default {
         data: {
           value: 'Recommendations',
           ctAbbr: 'rex',
-          ctToShowInsideTab: 'rex/rex-l1.vue',
+          ctToShowInsideTab: 'rex/rex-vl.vue',
           layer: 'view',
         },
       })
