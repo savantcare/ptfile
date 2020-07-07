@@ -18,6 +18,9 @@ Features needed in search
       prefix-icon="el-icon-search"
       clearable
       @select="mfHandleSuggestionSelectedByUser"
+    >
+      <template slot-scope="{ item }">
+        <div class="value" v-html="item.value"></div> </template
     ></el-autocomplete>
   </div>
 </template>
@@ -47,19 +50,48 @@ export default {
     },
   },
   methods: {
+    replaceBulk(str, findArray) {
+      let i
+      let regex = []
+      for (i = 0; i < findArray.length; i++) {
+        regex.push(findArray[i].replace(/([-[\]{}()*+?.\\^$|#,])/g, '\\$&'))
+      }
+      regex = regex.join('|')
+      str = str.replace(new RegExp(regex, 'ig'), function (matched) {
+        return '<b>' + matched + '</b>'
+      })
+      return str
+    },
+
     mfQuerySearchTerms(pQueryString, pCallBack) {
-      const resultSet = ormSearchUiToCT
+      let resultSet = ormSearchUiToCT
         .query()
         .where('layer', 'change')
         .search(pQueryString.trim())
         .get() // trim needs for "goal " to match "goal"
       console.log('search result from orm model', pQueryString, resultSet)
+
+      resultSet = resultSet.map((result) => {
+        let finalStr = ''
+        if (pQueryString.length > 0) {
+          const strings = pQueryString.split(' ')
+          const finderString = []
+          strings.forEach((string) => {
+            finderString.push(string)
+          })
+          finalStr = this.replaceBulk(result.value, finderString)
+        } else {
+          finalStr = result.value
+        }
+        result.value = finalStr
+        return result
+      })
       pCallBack(resultSet)
     },
     mfHandleSuggestionSelectedByUser(pSelectedSuggestion) {
       console.log('Selected suggestion is', pSelectedSuggestion)
       const objAddTab = {
-        label: pSelectedSuggestion.value,
+        label: pSelectedSuggestion.value.replace(/(<([^>]+)>)/gi, ''),
         // Here I have to use a variable otherwise webpack gives error. https://stackoverflow.com/questions/57349167/vue-js-dynamic-image-src-with-webpack-require-not-working
         ctToShowInsideTab: require('@/components/' +
           pSelectedSuggestion.ctToShowInsideTab).default,
