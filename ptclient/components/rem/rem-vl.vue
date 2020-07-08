@@ -68,9 +68,13 @@ export default {
 
     resultSet = ormRem.query().where('$isNew', true).get()
     if (resultSet.length) {
+      let obj = []
       console.log('unsaved data found', resultSet, resultSet[0].uuid)
       for (let i = 0; i < resultSet.length; i++) {
-        this.dataTable.push(resultSet[i].uuid, resultSet[i].remDescription)
+        obj = {}
+        obj.remDescription = resultSet[i].remDescription
+        obj.createdAt = '1'
+        this.dataTable.push(obj)
       }
     }
     console.log(this.dataTable)
