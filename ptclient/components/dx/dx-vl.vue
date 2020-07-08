@@ -59,7 +59,7 @@ export default {
       data: {
         value: 'Add diagnosis',
         ctAbbr: 'adddx',
-        ctToShowInsideTab: 'dx/l2/ctAddDx.vue',
+        ctToShowInsideTab: 'dx/cl/ctAddDx.vue',
         layer: 'change',
       },
     })
@@ -75,7 +75,7 @@ export default {
       data: {
         value: 'Multichange dx assessment',
         ctAbbr: 'mcdxa',
-        ctToShowInsideTab: 'dx/l2/ctMultiChangeDxa.vue',
+        ctToShowInsideTab: 'dx/cl/ctMultiChangeDxa.vue',
         layer: 'change',
       },
     })
