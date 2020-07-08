@@ -5,6 +5,11 @@
         :value="getDescription(id)"
         @input="setDescription($event, id)"
       ></el-input>
+      <el-form-item>
+        <el-button type="primary" @click="removeRexFromForm(id)"
+          >Remove</el-button
+        >
+      </el-form-item>
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="sendDataToServer">Submit</el-button>
@@ -153,11 +158,10 @@ export default {
       this.arReminderID = []
       this.addRem()
     },
-    removedescription(item) {
-      var index = this.dynamicValidateForm.descriptions.indexOf(item);
-      if (index !== -1) {
-        this.dynamicValidateForm.descriptions.splice(index, 1);
-      }
+    removeRexFromForm(pReminderID) {
+      ormRem.delete(pReminderID)
+      const positionFound = this.arReminderID.indexOf(pReminderID)
+      this.arReminderID.splice(positionFound, 1);
     },
   }
 }
