@@ -13,8 +13,8 @@
           >M</el-button
         >
       </div>
-      <el-table :data="daTable" style="width: 100%;">
-        <el-table-column prop="description" label="Description" width="180">
+      <el-table :data="dataTable" style="width: 100%;">
+        <el-table-column prop="remDescription" label="Description" width="180">
         </el-table-column>
         <el-table-column prop="createdAt" label="Created At" width="180">
         </el-table-column>
@@ -26,20 +26,17 @@
 <script>
 import ormSearchUiToCT from '../../models/ormSearchUiToCT'
 import ormCTLifeCycle from '../../models/ormCTLifeCycle'
+import ormRem from '@/models/ormRem'
+
 export default {
   data() {
     return {
-      daTable: [
-        {
-          createdAt: '2016-05-03',
-          description: 'TSH test in 3 months',
-        },
-      ],
+      dataTable: [],
     }
   },
   mounted() {
     // Why do I check for lifecycle before defining search terms. Reason given at: rex-l1.vue:49
-    const resultSet = ormCTLifeCycle.query().where('name', 'Reminder').get()
+    let resultSet = ormCTLifeCycle.query().where('name', 'Reminder').get()
     const resultData = resultSet[0]
     if (typeof resultData !== 'undefined') {
       console.log('already mounted')
@@ -68,6 +65,15 @@ export default {
         },
       })
     }
+
+    resultSet = ormRem.query().where('$isNew', true).get()
+    if (resultSet.length) {
+      console.log('unsaved data found', resultSet, resultSet[0].uuid)
+      for (let i = 0; i < resultSet.length; i++) {
+        this.dataTable.push(resultSet[i].uuid, resultSet[i].remDescription)
+      }
+    }
+    console.log(this.dataTable)
   },
 }
 </script>
