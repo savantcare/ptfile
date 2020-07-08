@@ -80,6 +80,15 @@ export default {
           layer: 'view',
         },
       })
+
+      ormSearchUiToCT.insert({
+        data: {
+          value: 'Add Recommendations',
+          ctAbbr: 'arex',
+          ctToShowInsideTab: 'rex/rex-vl.vue',
+          layer: 'change',
+        },
+      })
       // Step 3/3: Run API to get data from server
 
       console.log('Done mounting')
