@@ -35,10 +35,11 @@ Working features:
 3. Survive page refresh since state is blank when page is refreshed. Use localforage
    -> Decided not to do. For reasons read rem/cl/add.vue
 4. sync id between server and client so that on sending to server I do not need to update the state with the UUID returned from server.
+5. Reset form
+6. Out of 3 add more doctor removes one of them
 
 Todo:
 
-1. Out of 3 add more doctor removes one of them
-2. Call the post API in the for loop. On success remove isDirty and isNew
-3. Form validation
-4. Reset form
+1. Call the post API in the for loop. On success remove isDirty and isNew
+2. Form validation
+3. Form with unsaved data should get orange border.

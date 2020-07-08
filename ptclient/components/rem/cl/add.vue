@@ -1,6 +1,6 @@
 <template>
   <el-form label-width="120px">
-    <el-form-item v-for="id in arReminderID" label="desc" :key="id">
+    <el-form-item v-for="id in arRemID" label="desc" :key="id">
       <el-input
         :value="getDescription(id)"
         @input="setDescription($event, id)"
@@ -27,12 +27,12 @@ import ormRem from '@/models/ormRem'
 export default {
   data() {
     return {
-      arReminderID: [],
+      arRemID: [],
     }
   },
   computed: {},
   mounted() {
-   /* 
+    /* 
       Should data be loaded from localstorage or state
       There are 2 possibilities
         Possibility 1: There is no unsaved data
@@ -67,9 +67,9 @@ export default {
           Scenario 3: If there is some data edited and browser/laptop is rebooted that data is still there.
           Scenario 4: When user is not online then also the user can load the patient file.
         -ves:
-          Scenario 1: Suppose doctor has added 1 reminder but that is only on indexDB since doctor did not hit submit
+          Scenario 1: Suppose doctor has added 1 rem but that is only on indexDB since doctor did not hit submit
                       Suppose doctor closes laptop for 2 days
-                      when they come back after 2 days there are 3 new reminders on the server
+                      when they come back after 2 days there are 3 new rems on the server
                       When doctor starts the browser, in the code I will have to:
                         1. Get data from mysql server
                         2. Compare data in indexDB to the new data recieved to find out what is different
@@ -78,12 +78,12 @@ export default {
                         5. The new vuex needs to be synced with the storage.
         Decision on 8th July 2020 by VK/AG/TJ/SS/RR: Not to use indexDB
     */
-     // When there is unsaved data we load the unsaved data
-     const resultSet = ormRem.query().where('$isNew', true).get()
+    // When there is unsaved data we load the unsaved data
+    const resultSet = ormRem.query().where('$isNew', true).get()
      if (resultSet.length){
        console.log('unsaved data found', resultSet, resultSet[0].uuid)
        for (let i = 0; i < resultSet.length; i++) {
-         this.arReminderID.push(resultSet[i].uuid)
+         this.arRemID.push(resultSet[i].uuid)
        }
      } else{
        // When there is no unsaved data then we add an empty data to the state inside vuex
@@ -92,24 +92,24 @@ export default {
      }
   },
   methods: {
-      getDescription (pReminderID) {
-        console.log(pReminderID)
-        const resultSet = ormRem.find(pReminderID)
+      getDescription (pRemID) {
+        console.log(pRemID)
+        const resultSet = ormRem.find(pRemID)
         if (resultSet){
           console.log(resultSet)
-          // ['reminderDescription']
+          // ['remDescription']
           console.log(resultSet.uuid)
-          return resultSet.reminderDescription
+          return resultSet.remDescription
         }else{
           return ''
         }
       },
-      setDescription (pEvent,pReminderID) {
-        console.log('set called for', pReminderID, pEvent)
+      setDescription (pEvent,pRemID) {
+        console.log('set called for', pRemID, pEvent)
         const resultSet = ormRem.update({
-          where: pReminderID,
+          where: pRemID,
           data: {
-            reminderDescription: pEvent
+            remDescription: pEvent
           }
         })
         console.log(resultSet)      
@@ -118,7 +118,7 @@ export default {
       console.log('Add rem called')
       const ResultSet = ormRem.insert({
         data: {
-        reminderDescription: '',
+        remDescription: '',
         priority: 1, 
         isAutoRem: 1,
         ROW_START: 1,
@@ -127,8 +127,8 @@ export default {
       }
     }).then((entities) => {
       console.log(entities)
-      this.arReminderID.push(entities.reminder[0].uuid)
-      console.log(this.arReminderID)
+      this.arRemID.push(entities.rem[0].uuid)
+      console.log(this.arRemID)
     })
     console.log(ResultSet)
     },
@@ -155,13 +155,13 @@ export default {
       } else{
         console.log('No Unsaved data')
       }
-      this.arReminderID = []
+      this.arRemID = []
       this.addRem()
     },
-    removeRexFromForm(pReminderID) {
-      ormRem.delete(pReminderID)
-      const positionFound = this.arReminderID.indexOf(pReminderID)
-      this.arReminderID.splice(positionFound, 1);
+    removeRexFromForm(pRemID) {
+      ormRem.delete(pRemID)
+      const positionFound = this.arRemID.indexOf(pRemID)
+      this.arRemID.splice(positionFound, 1);
     },
   }
 }

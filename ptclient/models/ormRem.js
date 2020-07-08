@@ -3,7 +3,7 @@ import uuid from 'uuid/v1'
 
 export default class reminders extends Model {
   // This is the name used as module name of the Vuex Store.
-  static entity = 'reminder'
+  static entity = 'rem'
 
   static primaryKey = 'uuid' // Ref: https://vuex-orm.org/guide/model/defining-models.html#primary-key
 
@@ -12,8 +12,8 @@ export default class reminders extends Model {
   static fields() {
     return {
       uuid: this.uid(() => uuid()),
-      uuidOfreminderMadeFor: this.attr(null),
-      reminderDescription: this.attr(null),
+      uuidOfRemMadeFor: this.attr(null),
+      remDescription: this.attr(null),
       notes: this.attr(null),
       priority: this.number(0),
       isAutoRem: this.number(0),
