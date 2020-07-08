@@ -24,9 +24,9 @@ export default {
   },
    computed: {},
   mounted(){
-    const ResultSet = ormRem.create({
+    const ResultSet = ormRem.insert({
       data: {
-      reminderDescription: 'jai kali ma',
+      reminderDescription: '',
       priority: 1, 
       isAutoRem: 1,
       ROW_START: 1,
@@ -65,7 +65,7 @@ export default {
       },
     addRem(){
       console.log('Add rem called')
-      const ResultSet = ormRem.create({
+      const ResultSet = ormRem.insert({
         data: {
         reminderDescription: '',
         priority: 1, 
