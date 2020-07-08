@@ -1,6 +1,6 @@
 import { Model } from '@vuex-orm/core'
-import Patient from './patient'
-import Dx from './Dx'
+import Patient from '@/models/patient'
+import Dx from '@/models/Dx'
 
 export default class Dxa extends Model {
   static entity = 'dxAssessment'
@@ -8,8 +8,10 @@ export default class Dxa extends Model {
   static fields() {
     return {
       uuid: this.uid(),
-      dxUUID: this.belongsTo(Dx, 'uuid'),
-      patientUUId: this.belongsTo(Patient, 'uid'),
+      dxUUID: this.attr(null),
+      dx: this.belongsTo(Dx, 'dxUUID'),
+      patientUUID: this.attr(null),
+      patient: this.belongsTo(Patient, 'patientUUID'),
       dxAssessment: this.string(null).nullable(),
       recordChangedByUUID: this.attr(null),
       recordChangedFromIPAddress: this.attr(null),

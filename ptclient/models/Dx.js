@@ -1,5 +1,5 @@
 import { Model } from '@vuex-orm/core'
-import Patient from './patient'
+import Patient from '@/models/patient'
 
 export default class Dx extends Model {
   static entity = 'diagnoses'
@@ -11,7 +11,9 @@ export default class Dx extends Model {
       icd10Code: this.string(null).nullable(),
       dxDiscontinueNotes: this.string(null).nullable(),
       dxOnDate: this.string(null).nullable(),
-      patientUUId: this.belongsTo(Patient, 'uid'),
+      // patientUUID: this.belongsTo(Patient, 'uid'),
+      patientUUID: this.attr(null),
+      patient: this.belongsTo(Patient, 'patientUUID'),
       recordChangedByUUID: this.attr(null),
       recordChangedFromIPAddress: this.attr(null),
       // Why store time as a number? Since vuex-orm does not understand dates.
