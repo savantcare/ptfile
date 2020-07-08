@@ -67,7 +67,7 @@ export default {
       data: {
         value: 'Diagnosis',
         ctAbbr: 'dx',
-        ctToShowInsideTab: 'dx/dx-l1.vue',
+        ctToShowInsideTab: 'dx/dx-vl.vue',
         layer: 'view',
       },
     })

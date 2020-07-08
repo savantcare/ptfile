@@ -90,7 +90,7 @@ export default {
       this.dxList.forEach((item) => {
         temp.push(item)
         idx += 1
-        if (idx == 3) {
+        if (idx === 3) {
           result.push(temp)
           idx = 0
           temp = []

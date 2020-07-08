@@ -2,12 +2,12 @@
   <div>
     <Split style="height: 900px; width: 1400px;" :gutterSize="5">
       <SplitArea :size="75">
-        <ctRexL1> </ctRexL1>
+        <ctRexVl> </ctRexVl>
         <ctRemVL> </ctRemVL>
-        <ctBML1> </ctBML1>
-        <ctDXL1> </ctDXL1>
-        <ctGL1> </ctGL1>
-        <ctScrL1> </ctScrL1>
+        <ctBMVl> </ctBMVl>
+        <ctDXVl> </ctDXVl>
+        <ctGVl> </ctGVl>
+        <ctScrVl> </ctScrVl>
       </SplitArea>
       <SplitArea :size="25" id="csvl">
         <!-- <keep-alive> before the card creates problem since multiple cards then get inside keep alive 
@@ -41,12 +41,12 @@
 import Vue from 'vue'
 import VueSplit from 'vue-split-panel'
 import ctVLSearchBox from '@/components/vl-search-box'
-import ctRexL1 from '@/components/rex/rex-vl'
+import ctRexVl from '@/components/rex/rex-vl'
 import ctRemVL from '@/components/rem/rem-vl'
-import ctBML1 from '@/components/bm/bm-l1'
-import ctDXL1 from '@/components/dx/dx-l1'
-import ctGL1 from '@/components/goal/g-l1'
-import ctScrL1 from '@/components/scr/scr-l1.vue'
+import ctBMVl from '@/components/bm/bm-vl'
+import ctDXVl from '@/components/dx/dx-vl'
+import ctGVl from '@/components/goal/g-vl'
+import ctScrVl from '@/components/scr/scr-vl.vue'
 const CLTabsInDialog = () =>
   import('@/components/cl-tabs-manager/ctShowAddAndRemoveTabsInDialog')
 
@@ -61,12 +61,12 @@ export default {
   components: {
     CLTabsInDialog,
     ctVLSearchBox,
-    ctRexL1,
+    ctRexVl,
     ctRemVL,
-    ctBML1,
-    ctDXL1,
-    ctGL1,
-    ctScrL1,
+    ctBMVl,
+    ctDXVl,
+    ctGVl,
+    ctScrVl,
   },
   methods: {
     log(message) {
