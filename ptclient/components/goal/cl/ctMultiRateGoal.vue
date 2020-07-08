@@ -65,8 +65,8 @@
 </template>
 
 <script>
-import { GOAL_API_URL } from '@/static/others.js'
 import GoalHistoryItem from './GoalHistoryItem'
+import { GOAL_API_URL } from '@/static/others.js'
 import ormGoal from '@/models/Goal'
 export default {
   components: {

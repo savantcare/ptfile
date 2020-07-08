@@ -83,7 +83,7 @@ export default {
       return ormDx.query().get()
     },
     sliderSet() {
-      let result = []
+      const result = []
       let temp = []
       let idx = 0
       console.log(this.dxList)

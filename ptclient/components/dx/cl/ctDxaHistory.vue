@@ -34,7 +34,7 @@ export default {
     this.getAssessmentHistory()
   },
   methods: {
-    async getAssessmentHistory() {
+    getAssessmentHistory() {
       const arDxFromORM = ormDx.query().with('dx').get()
       console.log(arDxFromORM)
       this.histories = []

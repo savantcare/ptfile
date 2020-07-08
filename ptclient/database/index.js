@@ -5,6 +5,7 @@ import User from '@/models/user'
 import Todo from '@/models/Todo'
 import Patient from '@/models/patient'
 import Rex from '@/models/Recommendation'
+import Rem from '@/models/ormRem'
 import Dx from '@/models/Dx'
 import Goal from '@/models/Goal'
 import Scr from '@/models/Screening'
@@ -16,6 +17,7 @@ database.register(User)
 database.register(Todo)
 database.register(Patient)
 database.register(Rex)
+database.register(Rem)
 database.register(Dx)
 database.register(Goal)
 database.register(Scr)
