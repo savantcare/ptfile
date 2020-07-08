@@ -82,6 +82,15 @@ export default {
           layer: 'change',
         },
       })
+
+      ormSearchUiToCT.insert({
+        data: {
+          value: 'Multi change Reminder',
+          ctAbbr: 'arem',
+          ctToShowInsideTab: 'rem/cl/mc.vue',
+          layer: 'change',
+        },
+      })
     }
   },
 }
