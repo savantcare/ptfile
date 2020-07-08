@@ -35,14 +35,23 @@ module.exports = (io) => {
   router.get("/", async (req, res) => {
     try {
       const { patientUUID } = req.query;
-      const queryResult = await Goal.findAll({
+      /* const queryResult = await Goal.findAll({
         where: {
           patientUUID: patientUUID,
           //discontinue: {
           //  [Op.ne]: 1
           //}
         },
-      });
+      }); */
+
+      const queryResult = await Goal.sequelize.query(
+        "SELECT *, ROW_START, ROW_END FROM goal FOR SYSTEM_TIME ALL where patientUUID = :patientUUID ORDER BY ROW_START DESC",
+        {
+          replacements: { patientUUID: patientUUID },
+          type: Goal.sequelize.QueryTypes.SELECT,
+        }
+      );
+
       res.send(queryResult);
     } catch (err) {
       res.status(500).send({

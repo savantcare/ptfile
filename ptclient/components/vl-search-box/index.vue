@@ -57,7 +57,7 @@ export default {
       if (pSelectedSuggestion.layer === 'view') {
         this.$store.commit('mtfShowCardInCSVL', objCtToAdd)
       } else if (pSelectedSuggestion.layer === 'change') {
-        this.$store.commit('mtfShowNewFirstTabInL2', objCtToAdd)
+        this.$store.commit('mtfShowNewFirstTabInCl', objCtToAdd)
       }
       this.searchKeyword = '' // Once search work is done then the input area needs to be empty
       // scrolling to top of the search input box
