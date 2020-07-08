@@ -23,38 +23,56 @@ export default {
     }
   },
   computed: {},
-  mounted() {
-    // There are 2 possibilities
-    // Possibility 1: There are already unsaved data on the client sttae in the vuex
-    // Possibility 2: There is no unsaved data
+  async mounted() {
+    /* Should data be loaded from localstorage or state
 
-    // When there is unsaved data we load the unsaved data
+     There are 2 possibilities
+      Possibility 1: There is no unsaved data
+      Possibility 2: There is unsaved data on the client browser
+                    2A: Unsaved data is in state / vuex
+                    2B: Unsaved data is in Indexed DB
+
+     When there is unsaved data we need to load the unsaved data
+    
+    The query to load data from vuex is:
     const resultSet = ormRem.query().where('$isNew', true).get()
-    if (resultSet.length) {
-      console.log('unsaved data found', resultSet, resultSet[0].id)
-      for (let i = 0; i < resultSet.length; i++) {
-        this.arReminderID.push(resultSet[i].id)
-      }
-    } else {
-      // When there is no unsaved data then we add an empty data to the state inside vuex
-      console.log('No Unsaved data')
-      this.addRem()
-    }
+    
+    The permanence of data is:
+    Least permanane: data (local variable) of ct    -> Does not survive Ct remounting
+    Less permanance: State                          -> Survices previous. Does not survive browser refresh
+    Middle permancne: Index DB                      -> Survices previous. Does not survice clean cache or using from diff browser 
+    Most permanent: Mysql                           -> Survices all previous scenarios
+    
+    When Ct is mounted the data should come from:
+      Step1: Mysql to get permanent data
+      IndexDB: to get unsaved data in the client browser    
+    
+    Why IndexDB and not state?
+      When control comes here there are 2 possibilities:
+        1. This is page refresh
+        2. This is just Ct being remounted or mounted for the first time
+
+        In both the above cases IndexDB will have the correct data   
+
+        State will have the correct data only when the Ct is being remounted.
+    */
+    const resultSet = await ormRem.$fetchFromIdx()
+    console.log(resultSet)
   },
   methods: {
-      getDescription(pReminderID) {
-        console.log(pReminderID)
-        const resultSet = ormRem.find(pReminderID)
-        if (resultSet){
+    getDescription(pReminderID) {
+      console.log(pReminderID)
+      const resultSet = ormRem.find(pReminderID)
+      if (resultSet){
           console.log(resultSet)
           // ['reminderDescription']
           console.log(resultSet.id)
           return resultSet.reminderDescription
-        }else{
+      }else{
           return ''
-        }
-      },
-      setDescription (pEvent,pReminderID) {
+      }
+    },
+    setDescription (pEvent,pReminderID) {
         console.log('set called for', pReminderID, pEvent)
         const resultSet = ormRem.$updateOrmAndIdx({
           where: pReminderID,
@@ -63,7 +81,7 @@ export default {
           }
         })
         console.log(resultSet)      
-      },
+    },
     async addRem(){
       console.log('Add rem called')
       const ResultSet = await ormRem.$createOrmAndIdx({

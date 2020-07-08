@@ -46,7 +46,7 @@ VuexORM.use(VuexORMLocalForage, {
   database,
   actions: {
     $get: '$getFromLocal',
-    $fetch: '$fetchFromLocal',
+    $fetch: '$fetchFromIdx',
     $create: '$createOrmAndIdx',
     $update: '$updateOrmAndIdx',
     $replace: '$replaceLocally',
