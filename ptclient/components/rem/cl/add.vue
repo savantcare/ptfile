@@ -24,22 +24,22 @@ export default {
   },
   computed: {},
   mounted() {
-     // There are 2 possibilities
-     // Possibility 1: There are already unsaved data on the client sttae in the vuex
-     // Possibility 2: There is no unsaved data
+    // There are 2 possibilities
+    // Possibility 1: There are already unsaved data on the client sttae in the vuex
+    // Possibility 2: There is no unsaved data
 
-     // When there is unsaved data we load the unsaved data
-     const resultSet = ormRem.query().where('$isNew', true).get()
-     if (resultSet.length){
-       console.log('unsaved data found', resultSet, resultSet[0].$id)
-       for (let i = 0; i < resultSet.length; i++) {
-         this.arReminderID.push(resultSet[i].$id)
-       }
-     } else{
-       // When there is no unsaved data then we add an empty data to the state inside vuex
-       console.log('No Unsaved data')
+    // When there is unsaved data we load the unsaved data
+    const resultSet = ormRem.query().where('$isNew', true).get()
+    if (resultSet.length){
+      console.log('unsaved data found', resultSet, resultSet[0].$id)
+      for (let i = 0; i < resultSet.length; i++) {
+        this.arReminderID.push(resultSet[i].$id)
+      }
+    } else{
+      // When there is no unsaved data then we add an empty data to the state inside vuex
+      console.log('No Unsaved data')
       this.addRem()
-     }
+    }
   },
   methods: {
       getDescription (pReminderID) {
@@ -66,7 +66,7 @@ export default {
       },
     addRem(){
       console.log('Add rem called')
-      const ResultSet = ormRem.insert({
+      const ResultSet = ormRem.$create({
         data: {
         reminderDescription: '',
         priority: 1, 

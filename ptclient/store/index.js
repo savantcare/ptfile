@@ -36,6 +36,10 @@ const createStore = () => {
 
 VuexORM.use(VuexORMLocalForage, {
   database,
+
+  localforage: {
+    name: 'vuex', // Name is required Ref: https://github.com/eldomagan/vuex-orm-localforage#configuration-options
+  },
 })
 
 export default createStore
