@@ -58,6 +58,15 @@ export default {
           layer: 'view',
         },
       })
+
+      ormSearchUiToCT.insert({
+        data: {
+          value: 'Add Reminder',
+          ctAbbr: 'arem',
+          ctToShowInsideTab: 'rex/cl/add.vue',
+          layer: 'change',
+        },
+      })
     }
   },
 }
