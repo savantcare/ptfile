@@ -21,7 +21,7 @@
   </el-form>
 </template>
 <script>
-import ormRem from '@/models/ormRem'
+import ormRem from '@/components/rem/vuex-orm/model.js'
 export default {
   data() {
     return {
@@ -79,10 +79,10 @@ export default {
     // When there is unsaved data we load the unsaved data
     const resultSet = ormRem.query().where('$isNew', true).get()
      if (resultSet.length){
-       console.log('unsaved data found', resultSet, resultSet[0].uuid)
+      console.log('unsaved data found', resultSet, resultSet[0].uuid)
        for (let i = 0; i < resultSet.length; i++) {
          this.arRemID.push(resultSet[i].uuid)
-       }
+      }
      } else{
        // When there is no unsaved data then we add an empty data to the state inside vuex
        console.log('No Unsaved data')

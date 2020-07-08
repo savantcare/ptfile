@@ -9,7 +9,7 @@
   </el-form>
 </template>
 <script>
-import ormRem from '@/models/ormRem'
+import ormRem from '@/components/rem/vuex-orm/model.js'
 export default {
   data() {
     return {
@@ -38,7 +38,7 @@ export default {
           console.log(resultSet.uuid)
           return resultSet.remDescription
         }else{
-            
+
           return ''
         }
       },

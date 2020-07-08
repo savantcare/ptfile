@@ -26,7 +26,7 @@
 <script>
 import ormSearchUiToCT from '../../models/ormSearchUiToCT'
 import ormCTLifeCycle from '../../models/ormCTLifeCycle'
-import ormRem from '@/models/ormRem'
+import ormRem from '@/components/rem/vuex-orm/model.js'
 
 export default {
   data() {
