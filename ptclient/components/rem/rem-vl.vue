@@ -63,7 +63,7 @@ export default {
         data: {
           value: 'Add Reminder',
           ctAbbr: 'arem',
-          ctToShowInsideTab: 'rex/cl/add.vue',
+          ctToShowInsideTab: 'rem/cl/add.vue',
           layer: 'change',
         },
       })
