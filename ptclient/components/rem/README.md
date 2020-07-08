@@ -34,9 +34,11 @@ Working features:
    When rem is mounted again, in the mounted() look for records that have isNew set
 3. Survive page refresh since state is blank when page is refreshed. Use localforage
    -> Decided not to do. For reasons read rem/cl/add.vue
+4. sync id between server and client so that on sending to server I do not need to update the state with the UUID returned from server.
 
 Todo:
 
 1. Out of 3 add more doctor removes one of them
-2. Track if submit has been pressed and then call the DB code.
-3. sync id between server and client so that on sending to server I do not need to update the state with the UUID returned from server.
+2. Call the post API in the for loop. On success remove isDirty and isNew
+3. Form validation
+4. Reset form
