@@ -46,7 +46,7 @@ export default {
       data: {
         value: 'Add goal',
         ctAbbr: 'addg',
-        ctToShowInsideTab: 'goal/l2/ctAddGoal.vue',
+        ctToShowInsideTab: 'goal/cl/ctAddGoal.vue',
         layer: 'change',
       },
     })
@@ -55,7 +55,7 @@ export default {
       data: {
         value: 'Multi rate goal',
         ctAbbr: 'mcg',
-        ctToShowInsideTab: 'goal/l2/ctMultiRateGoal.vue',
+        ctToShowInsideTab: 'goal/cl/ctMultiRateGoal.vue',
         layer: 'change',
       },
     })
@@ -64,7 +64,7 @@ export default {
       data: {
         value: 'Goal',
         ctAbbr: 'g',
-        ctToShowInsideTab: 'goal/g-l1.vue',
+        ctToShowInsideTab: 'goal/g-vl.vue',
         layer: 'view',
       },
     })
@@ -109,7 +109,7 @@ export default {
         id: resultData.id,
         closable: true,
       }
-      this.$store.commit('mtfShowNewFirstTabInL2', tab)
+      this.$store.commit('mtfShowNewFirstTabInCl', tab)
     },
   },
 }

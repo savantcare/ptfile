@@ -43,7 +43,7 @@ export default {
           id: resultData.id,
           closable: true,
         }
-        this.$store.commit('mtfShowNewFirstTabInL2', objAddTab)
+        this.$store.commit('mtfShowNewFirstTabInCl', objAddTab)
         this.$store.state.dialogHoldingTabsInCL.vsSelectedTabId = this.$store.state.dialogHoldingTabsInCL.arTabs[0].id
       } else if (pValue === 'plan-tabset') {
         let resultSet = ormSearchUiToCT.query().search('Add diagnosis').get()
@@ -56,7 +56,7 @@ export default {
           id: resultData.id,
           closable: true,
         }
-        this.$store.commit('mtfShowNewFirstTabInL2', objAddTab)
+        this.$store.commit('mtfShowNewFirstTabInCl', objAddTab)
         resultSet = ormSearchUiToCT.query().search('Multi rate goal').get()
         resultData = resultSet[0]
         objAddTab = {

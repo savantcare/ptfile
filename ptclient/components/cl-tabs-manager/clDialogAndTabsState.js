@@ -39,7 +39,7 @@ export default {
     mtfSetArTabs(state, value) {
       state.arTabs = value
     },
-    mtfShowNewFirstTabInL2(state, pTab) {
+    mtfShowNewFirstTabInCl(state, pTab) {
       state.arTabs = [pTab]
       state.vblIsdialogHoldingTabsInCLVisible = true
       state.vsSelectedTabId = pTab.id
