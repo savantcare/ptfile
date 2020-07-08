@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import ormSearchUiToCT from '../../models/ormSearchUiToCT'
+import ormCTLifeCycle from '../../models/ormCTLifeCycle'
 export default {
   data() {
     return {
@@ -34,6 +36,22 @@ export default {
         },
       ],
     }
+  },
+  mounted() {
+    ormCTLifeCycle.insert({
+      data: {
+        name: 'Reminder',
+        status: 3,
+      },
+    })
+    ormSearchUiToCT.insert({
+      data: {
+        value: 'Reminders',
+        ctAbbr: 'rem',
+        ctToShowInsideTab: 'rem/rem-vl.vue',
+        layer: 'view',
+      },
+    })
   },
 }
 </script>
