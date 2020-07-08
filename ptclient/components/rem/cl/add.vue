@@ -6,42 +6,26 @@
     class="demo-dynamic"
   >
     <el-form-item
-      prop="email"
-      label="Email"
-      :rules="[
-        {
-          required: true,
-          message: 'Please input email address',
-          trigger: 'blur',
-        },
-        {
-          type: 'email',
-          message: 'Please input correct email address',
-          trigger: ['blur', 'change'],
-        },
-      ]"
-    >
-      <el-input v-model="dynamicValidateForm.email"></el-input>
-    </el-form-item>
-    <el-form-item
-      v-for="(domain, index) in dynamicValidateForm.domains"
-      :label="'Domain' + index"
-      :key="domain.key"
-      :prop="'domains.' + index + '.value'"
+      v-for="(description, index) in dynamicValidateForm.descriptions"
+      :label="'description' + index"
+      :key="description.key"
+      :prop="'descriptions.' + index + '.value'"
       :rules="{
         required: true,
-        message: 'domain can not be null',
+        message: 'description can not be null',
         trigger: 'blur',
       }"
     >
-      <el-input v-model="domain.value"></el-input
-      ><el-button @click.prevent="removeDomain(domain)">Delete</el-button>
+      <el-input v-model="description.value"></el-input
+      ><el-button @click.prevent="removedescription(description)"
+        >Delete</el-button
+      >
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="submitForm('dynamicValidateForm')"
         >Submit</el-button
       >
-      <el-button @click="addDomain">New domain</el-button>
+      <el-button @click="adddescription">New description</el-button>
       <el-button @click="resetForm('dynamicValidateForm')">Reset</el-button>
     </el-form-item>
   </el-form>
@@ -51,11 +35,10 @@
     data() {
       return {
         dynamicValidateForm: {
-          domains: [{
+          descriptions: [{
             key: 1,
             value: ''
           }],
-          email: ''
         }
       };
     },
@@ -73,14 +56,14 @@
       resetForm(formName) {
         this.$refs[formName].resetFields();
       },
-      removeDomain(item) {
-        var index = this.dynamicValidateForm.domains.indexOf(item);
+      removedescription(item) {
+        var index = this.dynamicValidateForm.descriptions.indexOf(item);
         if (index !== -1) {
-          this.dynamicValidateForm.domains.splice(index, 1);
+          this.dynamicValidateForm.descriptions.splice(index, 1);
         }
       },
-      addDomain() {
-        this.dynamicValidateForm.domains.push({
+      adddescription() {
+        this.dynamicValidateForm.descriptions.push({
           key: Date.now(),
           value: ''
         });
