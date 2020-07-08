@@ -3,7 +3,7 @@
     <Split style="height: 900px; width: 1400px;" :gutterSize="5">
       <SplitArea :size="75">
         <ctRexL1> </ctRexL1>
-        <ctRemL1> </ctRemL1>
+        <ctRemVL> </ctRemVL>
         <ctBML1> </ctBML1>
         <ctDXL1> </ctDXL1>
         <ctGL1> </ctGL1>
@@ -42,7 +42,7 @@ import Vue from 'vue'
 import VueSplit from 'vue-split-panel'
 import ctVLSearchBox from '@/components/vl-search-box'
 import ctRexL1 from '@/components/rex/rex-vl'
-import ctRemL1 from '@/components/rem/rem-l1'
+import ctRemVL from '@/components/rem/rem-vl'
 import ctBML1 from '@/components/bm/bm-l1'
 import ctDXL1 from '@/components/dx/dx-l1'
 import ctGL1 from '@/components/goal/g-l1'
@@ -62,7 +62,7 @@ export default {
     CLTabsInDialog,
     ctVLSearchBox,
     ctRexL1,
-    ctRemL1,
+    ctRemVL,
     ctBML1,
     ctDXL1,
     ctGL1,
