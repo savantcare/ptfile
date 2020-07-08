@@ -6,6 +6,9 @@ import VuexORM from '@vuex-orm/core'
 import axios from 'axios'
 import VuexORMAxios from '@vuex-orm/plugin-axios'
 import VuexORMisDirtyPlugin from '@vuex-orm/plugin-change-flags'
+
+// Ref: https://github.com/eldomagan/vuex-orm-localforage#installation
+import VuexORMLocalForage from 'vuex-orm-localforage'
 import clDialogAndTabsStateModule from '@/components/cl-tabs-manager/clDialogAndTabsState'
 import vlCardsStateModule from '@/components/vl-search-box/vlCardsState'
 import database from '@/database'
@@ -17,6 +20,7 @@ VuexORM.use(VuexormSearchUiToCT, {
   matchAllTokens: true, // needed so "goal add" shows only opyion 1 when list has "add goal" and "multi rate goal"
   threshold: 0.4, // the following will match goal: gool gaal gaaal gloa Following not match: gloq
 })
+
 Vue.use(Vuex)
 
 const createStore = () => {
@@ -29,5 +33,9 @@ const createStore = () => {
     plugins: [VuexORM.install(database)],
   })
 }
+
+VuexORM.use(VuexORMLocalForage, {
+  database,
+})
 
 export default createStore

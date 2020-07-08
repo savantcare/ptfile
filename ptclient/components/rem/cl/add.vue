@@ -22,8 +22,8 @@ export default {
       arReminderID: [],
     }
   },
-   computed: {},
-  mounted(){
+  computed: {},
+  mounted() {
      // There are 2 possibilities
      // Possibility 1: There are already unsaved data on the client sttae in the vuex
      // Possibility 2: There is no unsaved data

@@ -123,7 +123,7 @@ export default {
     },
     async onClickDiscontinue(goal) {
       try {
-        goal['discontinue'] = true
+        goal.discontinue = true
         const response = await fetch(`${GOAL_API_URL}/${goal.uuid}`, {
           method: 'PATCH',
           headers: {

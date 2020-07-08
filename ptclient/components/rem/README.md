@@ -30,12 +30,12 @@ https://stackoverflow.com/questions/57218760/two-way-data-binding-with-vuex-orm
 Working features:
 
 1. Add more
+2. Tab closed with X this looses values of all local variables
+   When rem is mounted again, in the mounted() look for records that have isNew set
 
 Todo:
 
 1. Survive page refresh since state is blank when page is refreshed. Use localforage
-2. Tab closed with X this makes desc blank
-   When compt is mounted look for values that have isNew set
-3. Out of 3 add more doctor removes one of them
-4. Track if submit has been pressed and then call the DB code.
-5. sync id between server and client
+2. Out of 3 add more doctor removes one of them
+3. Track if submit has been pressed and then call the DB code.
+4. sync id between server and client
