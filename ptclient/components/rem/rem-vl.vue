@@ -31,12 +31,30 @@ import ormRem from '@/models/ormRem'
 export default {
   data() {
     return {
-      dataTable: [],
+      // dataTable: [],
     }
+  },
+  computed: {
+    dataTable() {
+      const dataTable = []
+      const resultSet = ormRem.query().where('$isNew', true).get()
+      if (resultSet.length) {
+        let obj = []
+        console.log('unsaved data found', resultSet, resultSet[0].uuid)
+        for (let i = 0; i < resultSet.length; i++) {
+          obj = {}
+          obj.remDescription = resultSet[i].remDescription
+          obj.createdAt = '1'
+          dataTable.push(obj)
+        }
+      }
+      console.log(dataTable)
+      return dataTable
+    },
   },
   mounted() {
     // Why do I check for lifecycle before defining search terms. Reason given at: rex-l1.vue:49
-    let resultSet = ormCTLifeCycle.query().where('name', 'Reminder').get()
+    const resultSet = ormCTLifeCycle.query().where('name', 'Reminder').get()
     const resultData = resultSet[0]
     if (typeof resultData !== 'undefined') {
       console.log('already mounted')
@@ -65,19 +83,6 @@ export default {
         },
       })
     }
-
-    resultSet = ormRem.query().where('$isNew', true).get()
-    if (resultSet.length) {
-      let obj = []
-      console.log('unsaved data found', resultSet, resultSet[0].uuid)
-      for (let i = 0; i < resultSet.length; i++) {
-        obj = {}
-        obj.remDescription = resultSet[i].remDescription
-        obj.createdAt = '1'
-        this.dataTable.push(obj)
-      }
-    }
-    console.log(this.dataTable)
   },
 }
 </script>
