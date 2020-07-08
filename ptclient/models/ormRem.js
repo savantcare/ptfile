@@ -1,16 +1,17 @@
 import { Model } from '@vuex-orm/core'
+import uuid from 'uuid/v1'
 
 export default class reminders extends Model {
   // This is the name used as module name of the Vuex Store.
   static entity = 'reminder'
 
-  static primaryKey = '$id' // Ref: https://vuex-orm.org/guide/model/defining-models.html#primary-key
+  static primaryKey = 'uuid' // Ref: https://vuex-orm.org/guide/model/defining-models.html#primary-key
 
   // List of all fields (schema) of the post model. `this.attr` is used
   // for the generic field type. The argument is the default value.
   static fields() {
     return {
-      uuid: this.attr(null),
+      uuid: this.uid(() => uuid()),
       uuidOfreminderMadeFor: this.attr(null),
       reminderDescription: this.attr(null),
       notes: this.attr(null),

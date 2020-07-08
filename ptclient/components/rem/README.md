@@ -39,4 +39,4 @@ Todo:
 
 1. Out of 3 add more doctor removes one of them
 2. Track if submit has been pressed and then call the DB code.
-3. sync id between server and client
+3. sync id between server and client so that on sending to server I do not need to update the state with the UUID returned from server.

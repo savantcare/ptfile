@@ -1,6 +1,8 @@
 // This file is structured based on https://github.com/vuex-orm/vuex-orm-examples-nuxt/tree/master/store
 import Vue from 'vue'
 import Vuex from 'vuex'
+import uuid from 'uuid/v1'
+
 import VuexormSearchUiToCT from '@vuex-orm/plugin-search'
 import VuexORM from '@vuex-orm/core'
 import axios from 'axios'
@@ -19,6 +21,8 @@ VuexORM.use(VuexormSearchUiToCT, {
   matchAllTokens: true, // needed so "goal add" shows only opyion 1 when list has "add goal" and "multi rate goal"
   threshold: 0.4, // the following will match goal: gool gaal gaaal gloa Following not match: gloq
 })
+
+Vue.use(uuid)
 
 Vue.use(Vuex)
 

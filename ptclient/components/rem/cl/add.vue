@@ -22,18 +22,18 @@ export default {
       arReminderID: [],
     }
   },
-   computed: {},
-  mounted(){
-     // There are 2 possibilities
-     // Possibility 1: There are already unsaved data on the client sttae in the vuex
+  computed: {},
+  mounted() {
+    // There are 2 possibilities
+    // Possibility 1: There are already unsaved data on the client sttae in the vuex
      // Possibility 2: There is no unsaved data
 
      // When there is unsaved data we load the unsaved data
      const resultSet = ormRem.query().where('$isNew', true).get()
      if (resultSet.length){
-       console.log('unsaved data found', resultSet, resultSet[0].$id)
+       console.log('unsaved data found', resultSet, resultSet[0].uuid)
        for (let i = 0; i < resultSet.length; i++) {
-         this.arReminderID.push(resultSet[i].$id)
+         this.arReminderID.push(resultSet[i].uuid)
        }
      } else{
        // When there is no unsaved data then we add an empty data to the state inside vuex
@@ -48,7 +48,7 @@ export default {
         if (resultSet){
           console.log(resultSet)
           // ['reminderDescription']
-          console.log(resultSet.$id)
+          console.log(resultSet.uuid)
           return resultSet.reminderDescription
         }else{
           return ''
@@ -77,7 +77,7 @@ export default {
       }
     }).then((entities) => {
       console.log(entities)
-      this.arReminderID.push(entities.reminder[0].$id)
+      this.arReminderID.push(entities.reminder[0].uuid)
       console.log(this.arReminderID)
     })
     // need to get UUID
