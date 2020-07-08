@@ -2,23 +2,21 @@
   <el-form label-width="120px">
     <el-form-item v-for="id in arRemID" label="desc" :key="id">
       <el-input
+        type="textarea"
+        style="width: 800px;"
+        :autosize="{ minRows: 2, maxRows: 10 }"
+        placeholder="Please input"
         :value="getDescription(id)"
         @input="setDescription($event, id)"
       ></el-input>
-      <el-form-item>
-        <el-button type="primary" @click="removeRexFromForm(id)"
-          >Remove</el-button
-        >
-      </el-form-item>
+      <el-button type="warning" @click="removeRexFromForm(id)"
+        >Remove</el-button
+      >
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="sendDataToServer">Submit</el-button>
-    </el-form-item>
-    <el-form-item>
       <el-button type="primary" @click="addRem">Add more</el-button>
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary" @click="resetForm">Reset form</el-button>
+      <el-button type="warning" @click="resetForm">Reset form</el-button>
     </el-form-item>
   </el-form>
 </template>

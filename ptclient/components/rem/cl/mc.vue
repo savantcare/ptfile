@@ -38,6 +38,7 @@ export default {
           console.log(resultSet.uuid)
           return resultSet.remDescription
         }else{
+            
           return ''
         }
       },
