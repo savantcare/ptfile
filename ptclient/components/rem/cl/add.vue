@@ -4,7 +4,10 @@
       <el-input v-model="description"></el-input>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary"> >Submit</el-button>
+      <el-button type="primary"> Submit</el-button>
+    </el-form-item>
+    <el-form-item>
+      <el-button type="primary" @click="addRem"> Add more</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -59,6 +62,24 @@ export default {
     console.log(ResultSet)
   },
   methods: {
+    addRem(){
+      console.log('Add rem called')
+      const ResultSet = ormRem.create({
+        data: {
+        reminderDescription: '',
+        priority: 1, 
+        isAutoRem: 1,
+        ROW_START: 1,
+        ROW_END: 1
+      }
+    }).then((entities) => {
+      console.log(entities)
+      this.reminderID = entities.reminder[0].$id
+      console.log(this.reminderID)
+    })
+    // need to get UUID
+    console.log(ResultSet)
+    },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
