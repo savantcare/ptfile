@@ -26,3 +26,11 @@ Positive:
 
 How to do it?
 https://stackoverflow.com/questions/57218760/two-way-data-binding-with-vuex-orm
+
+Features:
+
+1. Add more
+2. Survive page refresh
+   Use localforage
+3. Tab closed with X this makes desc blank
+   When compt is mounted look for values that have isNew set

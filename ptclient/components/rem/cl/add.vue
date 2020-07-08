@@ -44,7 +44,7 @@ export default {
   mounted(){
     const ResultSet = ormRem.create({
       data: {
-      reminderDescription: 'jai kali ma',
+      reminderDescription: '',
       priority: 1, 
       isAutoRem: 1,
       ROW_START: 1,
