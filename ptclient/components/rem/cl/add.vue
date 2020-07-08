@@ -32,7 +32,9 @@ export default {
      const resultSet = ormRem.query().where('$isNew', true).get()
      if (resultSet.length){
        console.log('unsaved data found', resultSet, resultSet[0].$id)
-       this.arReminderID.push(resultSet[0].$id)
+       for (let i = 0; i < resultSet.length; i++) {
+         this.arReminderID.push(resultSet[i].$id)
+       }
      } else{
        // When there is no unsaved data then we add an empty data to the state inside vuex
        console.log('No Unsaved data')
