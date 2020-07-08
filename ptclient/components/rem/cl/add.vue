@@ -151,6 +151,7 @@ export default {
         console.log('No Unsaved data')
       }
       this.arReminderID = []
+      this.addRem()
     },
     removedescription(item) {
       var index = this.dynamicValidateForm.descriptions.indexOf(item);
