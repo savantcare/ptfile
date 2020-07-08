@@ -24,21 +24,7 @@ export default {
   },
    computed: {},
   mounted(){
-    const ResultSet = ormRem.insert({
-      data: {
-      reminderDescription: '',
-      priority: 1, 
-      isAutoRem: 1,
-      ROW_START: 1,
-      ROW_END: 1
-      }
-    }).then((entities) => {
-      console.log(entities)
-      this.arReminderID.push(entities.reminder[0].$id)
-      console.log(this.arReminderID)
-    })
-    // need to get UUID
-    console.log(ResultSet)
+    this.addRem()
   },
   methods: {
       getDescription (pReminderID) {
