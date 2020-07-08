@@ -24,7 +24,20 @@ export default {
   },
    computed: {},
   mounted(){
-    this.addRem()
+     // There are 2 possibilities
+     // Possibility 1: There are already unsaved data on the client sttae in the vuex
+     // Possibility 2: There is no unsaved data
+
+     // When there is unsaved data we load the unsaved data
+     const resultSet = ormRem.query().where('$isNew', true).get()
+     if (resultSet.length){
+       console.log('unsaved data found', resultSet, resultSet[0].$id)
+       this.arReminderID.push(resultSet[0].$id)
+     } else{
+       // When there is no unsaved data then we add an empty data to the state inside vuex
+       console.log('No Unsaved data')
+      this.addRem()
+     }
   },
   methods: {
       getDescription (pReminderID) {
