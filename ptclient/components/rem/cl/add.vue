@@ -57,7 +57,8 @@ export default {
         priority: 1, 
         isAutoRem: 1,
         ROW_START: 1,
-        ROW_END: 1
+        ROW_END: 1,
+        $isNew: true
       }
     }).then((entities) => {
       console.log(entities)

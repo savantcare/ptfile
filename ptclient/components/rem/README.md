@@ -38,3 +38,4 @@ Todo:
    When compt is mounted look for values that have isNew set
 3. Out of 3 add more doctor removes one of them
 4. Track if submit has been pressed and then call the DB code.
+5. sync id between server and client
