@@ -27,10 +27,14 @@ Positive:
 How to do it?
 https://stackoverflow.com/questions/57218760/two-way-data-binding-with-vuex-orm
 
-Features:
+Working features:
 
 1. Add more
-2. Survive page refresh
-   Use localforage
-3. Tab closed with X this makes desc blank
+
+Todo:
+
+1. Survive page refresh since state is blank when page is refreshed. Use localforage
+2. Tab closed with X this makes desc blank
    When compt is mounted look for values that have isNew set
+3. Out of 3 add more doctor removes one of them
+4. Track if submit has been pressed and then call the DB code.
