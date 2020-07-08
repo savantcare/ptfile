@@ -31,43 +31,44 @@
   </el-form>
 </template>
 <script>
-  export default {
-    data() {
-      return {
-        dynamicValidateForm: {
-          descriptions: [{
-            key: 1,
-            value: ''
-          }],
-        }
-      };
-    },
-    methods: {
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            alert('submit!');
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
-      },
-      resetForm(formName) {
-        this.$refs[formName].resetFields();
-      },
-      removedescription(item) {
-        var index = this.dynamicValidateForm.descriptions.indexOf(item);
-        if (index !== -1) {
-          this.dynamicValidateForm.descriptions.splice(index, 1);
-        }
-      },
-      adddescription() {
-        this.dynamicValidateForm.descriptions.push({
-          key: Date.now(),
+import ormRem from '@/models/ormRem'
+export default {
+  data() {
+    return {
+      dynamicValidateForm: {
+        descriptions: [{
+          key: 1,
           value: ''
-        });
+        }],
       }
+    };
+  },
+  methods: {
+    submitForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          alert('submit!');
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
+    },
+    resetForm(formName) {
+      this.$refs[formName].resetFields();
+    },
+    removedescription(item) {
+      var index = this.dynamicValidateForm.descriptions.indexOf(item);
+      if (index !== -1) {
+        this.dynamicValidateForm.descriptions.splice(index, 1);
+      }
+    },
+    adddescription() {
+      this.dynamicValidateForm.descriptions.push({
+        key: Date.now(),
+        value: ''
+      });
     }
   }
+}
 </script>
