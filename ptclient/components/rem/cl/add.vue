@@ -7,10 +7,13 @@
       ></el-input>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="sendDataToServer"> Submit</el-button>
+      <el-button type="primary" @click="sendDataToServer">Submit</el-button>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="addRem"> Add more</el-button>
+      <el-button type="primary" @click="addRem">Add more</el-button>
+    </el-form-item>
+    <el-form-item>
+      <el-button type="primary" @click="resetForm">Reset form</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -137,7 +140,16 @@ export default {
       }
     },
     resetForm(formName) {
-      this.$refs[formName].resetFields();
+      const resultSet = ormRem.query().where('$isNew', true).get()
+      if (resultSet.length){
+        console.log('unsaved data found', resultSet, resultSet[0].uuid)
+        for (let i = 0; i < resultSet.length; i++) {
+          console.log ('Deleting data from ORM')
+          ormRem.delete(resultSet[i].uuid)
+        }
+      } else{
+        console.log('No Unsaved data')
+      }
     },
     removedescription(item) {
       var index = this.dynamicValidateForm.descriptions.indexOf(item);
