@@ -34,25 +34,4 @@ const createStore = () => {
   })
 }
 
-VuexORM.use(VuexORMLocalForage, {
-  database,
-
-  localforage: {
-    name: 'vuex', // Name is required Ref: https://github.com/eldomagan/vuex-orm-localforage#configuration-options
-  },
-})
-
-VuexORM.use(VuexORMLocalForage, {
-  database,
-  actions: {
-    $get: '$getFromLocal',
-    $fetch: '$fetchFromIdx',
-    $create: '$createOrmAndIdx',
-    $update: '$updateOrmAndIdx',
-    $replace: '$replaceLocally',
-    $delete: '$deleteFromLocal',
-    $deleteAll: '$deleteAllFromLocal',
-  },
-})
-
 export default createStore

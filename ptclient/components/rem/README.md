@@ -32,10 +32,11 @@ Working features:
 1. Add more
 2. Tab closed with X this looses values of all local variables
    When rem is mounted again, in the mounted() look for records that have isNew set
+3. Survive page refresh since state is blank when page is refreshed. Use localforage
+   -> Decided not to do. For reasons read rem/cl/add.vue
 
 Todo:
 
-1. Survive page refresh since state is blank when page is refreshed. Use localforage
-2. Out of 3 add more doctor removes one of them
-3. Track if submit has been pressed and then call the DB code.
-4. sync id between server and client
+1. Out of 3 add more doctor removes one of them
+2. Track if submit has been pressed and then call the DB code.
+3. sync id between server and client
