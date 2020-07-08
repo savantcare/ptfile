@@ -1,7 +1,10 @@
 <template>
   <el-form label-width="120px">
-    <el-form-item v-for="id in reminderID" label="desc" :key="id.id">
-      <el-input v-model="description"></el-input>
+    <el-form-item v-for="id in arReminderID" label="desc" :key="id">
+      <el-input
+        :value="getDescription(id)"
+        @input="setDescription($event, id)"
+      ></el-input>
     </el-form-item>
     <el-form-item>
       <el-button type="primary"> Submit</el-button>
@@ -16,13 +19,31 @@ import ormRem from '@/models/ormRem'
 export default {
   data() {
     return {
-      reminderID: [],
+      arReminderID: [],
     }
   },
-   computed: {
-    description: {
-      get () {
-        const resultSet = ormRem.find(this.reminderID[0])
+   computed: {},
+  mounted(){
+    const ResultSet = ormRem.create({
+      data: {
+      reminderDescription: 'jai kali ma',
+      priority: 1, 
+      isAutoRem: 1,
+      ROW_START: 1,
+      ROW_END: 1
+      }
+    }).then((entities) => {
+      console.log(entities)
+      this.arReminderID.push(entities.reminder[0].$id)
+      console.log(this.arReminderID)
+    })
+    // need to get UUID
+    console.log(ResultSet)
+  },
+  methods: {
+      getDescription (pReminderID) {
+        console.log(pReminderID)
+        const resultSet = ormRem.find(pReminderID)
         if (resultSet){
           console.log(resultSet)
           // ['reminderDescription']
@@ -32,36 +53,16 @@ export default {
           return ''
         }
       },
-      set (value) {
-        console.log('set called for', this.reminderID[0], value)
+      setDescription (pEvent,pReminderID) {
+        console.log('set called for', pReminderID, pEvent)
         const resultSet = ormRem.update({
-          where: this.reminderID[0],
+          where: pReminderID,
           data: {
-            reminderDescription: value
+            reminderDescription: pEvent
           }
         })
         console.log(resultSet)      
-      }
-    }
-  },
-  mounted(){
-    const ResultSet = ormRem.create({
-      data: {
-      reminderDescription: '',
-      priority: 1, 
-      isAutoRem: 1,
-      ROW_START: 1,
-      ROW_END: 1
-      }
-    }).then((entities) => {
-      console.log(entities)
-      this.reminderID.push(entities.reminder[0].$id)
-      console.log(this.reminderID)
-    })
-    // need to get UUID
-    console.log(ResultSet)
-  },
-  methods: {
+      },
     addRem(){
       console.log('Add rem called')
       const ResultSet = ormRem.create({
@@ -74,8 +75,8 @@ export default {
       }
     }).then((entities) => {
       console.log(entities)
-      this.reminderID.push(entities.reminder[0].$id)
-      console.log(this.reminderID)
+      this.arReminderID.push(entities.reminder[0].$id)
+      console.log(this.arReminderID)
     })
     // need to get UUID
     console.log(ResultSet)
