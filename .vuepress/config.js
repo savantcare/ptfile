@@ -212,7 +212,7 @@ module.exports = {
                 ],
               },
               {
-                path: '/ptclient/components/rex/',
+                path: '/ptclient/components/rec/',
                 title: 'Recommendations',
               },
               {

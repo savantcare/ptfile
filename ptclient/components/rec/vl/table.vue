@@ -77,7 +77,7 @@ export default {
         data: {
           value: 'Recommendations',
           ctAbbr: 'rex',
-          ctToShowInsideTab: 'rex/vl/table.vue',
+          ctToShowInsideTab: 'rec/vl/table.vue',
           layer: 'view',
         },
       })
@@ -86,7 +86,7 @@ export default {
         data: {
           value: 'Add Recommendations',
           ctAbbr: 'arex',
-          ctToShowInsideTab: 'rex/vl/table.vue',
+          ctToShowInsideTab: 'rec/vl/table.vue',
           layer: 'change',
         },
       })
