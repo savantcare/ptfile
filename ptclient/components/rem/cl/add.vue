@@ -1,6 +1,6 @@
 <template>
   <el-form label-width="120px">
-    <el-form-item label="desc">
+    <el-form-item v-for="id in reminderID" label="desc" :key="id.id">
       <el-input v-model="description"></el-input>
     </el-form-item>
     <el-form-item>
