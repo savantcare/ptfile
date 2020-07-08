@@ -1,7 +1,6 @@
 // This file is structured based on https://github.com/vuex-orm/vuex-orm-examples-nuxt/tree/master/store
 import Vue from 'vue'
 import Vuex from 'vuex'
-import uuid from 'uuid/v1'
 
 import VuexormSearchUiToCT from '@vuex-orm/plugin-search'
 import VuexORM from '@vuex-orm/core'
@@ -14,6 +13,9 @@ import clDialogAndTabsStateModule from '@/components/cl-tabs-manager/clDialogAnd
 import vlCardsStateModule from '@/components/vl-search-box/vlCardsState'
 import database from '@/database'
 
+// Ref: https://stackoverflow.com/a/62247034
+const { v1: uuidv1 } = require('uuid')
+
 VuexORM.use(VuexORMAxios, { axios })
 VuexORM.use(VuexORMisDirtyPlugin)
 VuexORM.use(VuexormSearchUiToCT, {
@@ -22,7 +24,7 @@ VuexORM.use(VuexormSearchUiToCT, {
   threshold: 0.4, // the following will match goal: gool gaal gaaal gloa Following not match: gloq
 })
 
-Vue.use(uuid)
+Vue.use(uuidv1)
 
 Vue.use(Vuex)
 

@@ -78,7 +78,7 @@ export default {
     */
     // When there is unsaved data we load the unsaved data
     const resultSet = ormRem.query().where('$isNew', true).get()
-     if (resultSet.length){
+     if (resultSet.length) {
       console.log('unsaved data found', resultSet, resultSet[0].uuid)
        for (let i = 0; i < resultSet.length; i++) {
          this.arRemID.push(resultSet[i].uuid)

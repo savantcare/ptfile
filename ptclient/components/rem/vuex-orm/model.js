@@ -1,5 +1,5 @@
 import { Model } from '@vuex-orm/core'
-import uuid from 'uuid/v1'
+const { v1: uuidv1 } = require('uuid')
 
 export default class reminders extends Model {
   // This is the name used as module name of the Vuex Store.
@@ -11,7 +11,7 @@ export default class reminders extends Model {
   // for the generic field type. The argument is the default value.
   static fields() {
     return {
-      uuid: this.uid(() => uuid()),
+      uuid: this.uid(() => uuidv1()),
       uuidOfRemMadeFor: this.attr(null),
       remDescription: this.attr(null),
       notes: this.attr(null),
