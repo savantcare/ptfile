@@ -16,13 +16,13 @@ import ormRem from '@/models/ormRem'
 export default {
   data() {
     return {
-      reminderID: '',
+      reminderID: [],
     }
   },
    computed: {
     description: {
       get () {
-        const resultSet = ormRem.find(this.reminderID)
+        const resultSet = ormRem.find(this.reminderID[0])
         if (resultSet){
           console.log(resultSet)
           // ['reminderDescription']
@@ -33,9 +33,9 @@ export default {
         }
       },
       set (value) {
-        console.log('set called for', this.reminderID, value)
+        console.log('set called for', this.reminderID[0], value)
         const resultSet = ormRem.update({
-          where: this.reminderID,
+          where: this.reminderID[0],
           data: {
             reminderDescription: value
           }
@@ -55,7 +55,7 @@ export default {
       }
     }).then((entities) => {
       console.log(entities)
-      this.reminderID = entities.reminder[0].$id
+      this.reminderID.push(entities.reminder[0].$id)
       console.log(this.reminderID)
     })
     // need to get UUID
@@ -74,7 +74,7 @@ export default {
       }
     }).then((entities) => {
       console.log(entities)
-      this.reminderID = entities.reminder[0].$id
+      this.reminderID.push(entities.reminder[0].$id)
       console.log(this.reminderID)
     })
     // need to get UUID
