@@ -42,4 +42,17 @@ VuexORM.use(VuexORMLocalForage, {
   },
 })
 
+VuexORM.use(VuexORMLocalForage, {
+  database,
+  actions: {
+    $get: '$getFromLocal',
+    $fetch: '$fetchFromLocal',
+    $create: '$createOrmAndIdx',
+    $update: '$updateOrmAndIdx',
+    $replace: '$replaceLocally',
+    $delete: '$deleteFromLocal',
+    $deleteAll: '$deleteAllFromLocal',
+  },
+})
+
 export default createStore

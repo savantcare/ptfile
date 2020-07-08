@@ -30,25 +30,25 @@ export default {
 
     // When there is unsaved data we load the unsaved data
     const resultSet = ormRem.query().where('$isNew', true).get()
-    if (resultSet.length){
-      console.log('unsaved data found', resultSet, resultSet[0].$id)
+    if (resultSet.length) {
+      console.log('unsaved data found', resultSet, resultSet[0].id)
       for (let i = 0; i < resultSet.length; i++) {
-        this.arReminderID.push(resultSet[i].$id)
+        this.arReminderID.push(resultSet[i].id)
       }
-    } else{
+    } else {
       // When there is no unsaved data then we add an empty data to the state inside vuex
       console.log('No Unsaved data')
       this.addRem()
     }
   },
   methods: {
-      getDescription (pReminderID) {
+      getDescription(pReminderID) {
         console.log(pReminderID)
         const resultSet = ormRem.find(pReminderID)
         if (resultSet){
           console.log(resultSet)
           // ['reminderDescription']
-          console.log(resultSet.$id)
+          console.log(resultSet.id)
           return resultSet.reminderDescription
         }else{
           return ''
@@ -56,7 +56,7 @@ export default {
       },
       setDescription (pEvent,pReminderID) {
         console.log('set called for', pReminderID, pEvent)
-        const resultSet = ormRem.update({
+        const resultSet = ormRem.$updateOrmAndIdx({
           where: pReminderID,
           data: {
             reminderDescription: pEvent
@@ -64,9 +64,9 @@ export default {
         })
         console.log(resultSet)      
       },
-    addRem(){
+    async addRem(){
       console.log('Add rem called')
-      const ResultSet = ormRem.$create({
+      const ResultSet = await ormRem.$createOrmAndIdx({
         data: {
         reminderDescription: '',
         priority: 1, 
@@ -77,7 +77,7 @@ export default {
       }
     }).then((entities) => {
       console.log(entities)
-      this.arReminderID.push(entities.reminder[0].$id)
+      this.arReminderID.push(entities[0].id)
       console.log(this.arReminderID)
     })
     // need to get UUID
