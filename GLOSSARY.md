@@ -9,6 +9,8 @@
 - ctAge: Age is a component
 - pAge: Age is a parameter to a function
 - ormAge: Age is ORM created with vuex-orm
+- mc: multi change
+- d: discontinue
 
 ### Data types
 
