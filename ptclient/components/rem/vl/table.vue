@@ -24,8 +24,8 @@
 </template>
 
 <script>
-import ormSearchUiToCT from '../../models/ormSearchUiToCT'
-import ormCTLifeCycle from '../../models/ormCTLifeCycle'
+import ormSearchUiToCT from '@/models/ormSearchUiToCT'
+import ormCTLifeCycle from '@/models/ormCTLifeCycle'
 import ormRem from '@/components/rem/vuex-orm/model.js'
 
 export default {
@@ -69,7 +69,7 @@ export default {
         data: {
           value: 'Reminders',
           ctAbbr: 'rem',
-          ctToShowInsideTab: 'rem/rem-vl.vue',
+          ctToShowInsideTab: 'rem/vl/table.vue',
           layer: 'view',
         },
       })

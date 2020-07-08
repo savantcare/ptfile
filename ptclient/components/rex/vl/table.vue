@@ -24,10 +24,10 @@
 </template>
 
 <script>
-import ormSearchUiToCT from '../../models/ormSearchUiToCT'
-import ormCTLifeCycle from '../../models/ormCTLifeCycle'
+import ormSearchUiToCT from '@/models/ormSearchUiToCT'
+import ormCTLifeCycle from '@/models/ormCTLifeCycle'
 export default {
-  name: 'rex-vl',
+  name: 'vl/table',
   data() {
     return {
       daTable: [
@@ -77,7 +77,7 @@ export default {
         data: {
           value: 'Recommendations',
           ctAbbr: 'rex',
-          ctToShowInsideTab: 'rex/rex-vl.vue',
+          ctToShowInsideTab: 'rex/vl/table.vue',
           layer: 'view',
         },
       })
@@ -86,7 +86,7 @@ export default {
         data: {
           value: 'Add Recommendations',
           ctAbbr: 'arex',
-          ctToShowInsideTab: 'rex/rex-vl.vue',
+          ctToShowInsideTab: 'rex/vl/table.vue',
           layer: 'change',
         },
       })
