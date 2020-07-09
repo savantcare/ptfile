@@ -14,7 +14,7 @@
 
 <script>
 import ormSearchUiToCT from '@/components/vl-search-box/vuex-orm/searchUiToCT'
-import remSUI from '@/components/rem/vl/searchInterface'
+import remSUI from '@/components/rem/searchInterface'
 export default {
   data() {
     return { searchKeyword: '' }
