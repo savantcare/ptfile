@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Split style="height: 900px; width: 1400px;" :gutterSize="5">
+    <Split style="height: 900px; width: 1400px;" :gutterSize="4">
       <SplitArea :size="75">
         <ctRexVl> </ctRexVl><br />
         <ctRemVL> </ctRemVL><br />

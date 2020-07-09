@@ -1,5 +1,10 @@
 <template>
   <div>
+    <!-- 
+      By default this is 20px. We want to make the timeline come close to the edge to save space
+    hence made it 3px
+    This controls the space between edge of the card and the line that shows the dots
+    -->
     <el-card class="box-card" :body-style="{ paddingLeft: '3px' }">
       <div slot="header" class="clearfix">
         <span>Reminders</span>
@@ -16,6 +21,8 @@
           <el-button style="padding: 3px;" type="info" plain>X</el-button>
         </el-button-group>
       </div>
+      <!-- This is the space between edge of the card and the line that shows the dots
+      By default this is 40px -->
       <el-timeline style="padding-inline-start: 20px;">
         <el-timeline-item
           v-for="row in dataTable"
