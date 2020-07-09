@@ -78,32 +78,6 @@ export default {
           status: 3,
         },
       })
-      ormSearchUiToCT.insert({
-        data: {
-          value: 'Reminders',
-          ctAbbr: 'rem',
-          ctToShowInsideTab: 'rem/vl/table.vue',
-          layer: 'view',
-        },
-      })
-
-      ormSearchUiToCT.insert({
-        data: {
-          value: 'Add Reminder',
-          ctAbbr: 'arem',
-          ctToShowInsideTab: 'rem/cl/add.vue',
-          layer: 'change',
-        },
-      })
-
-      ormSearchUiToCT.insert({
-        data: {
-          value: 'Multi change Reminder',
-          ctAbbr: 'arem',
-          ctToShowInsideTab: 'rem/cl/mc.vue',
-          layer: 'change',
-        },
-      })
     }
   },
 }

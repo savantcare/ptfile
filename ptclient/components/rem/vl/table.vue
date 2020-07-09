@@ -32,7 +32,6 @@
 </template>
 
 <script>
-import ormSearchUiToCT from '@/components/vl-search-box/vuex-orm/searchUiToCT'
 import ormCTLifeCycle from '@/models/ormCTLifeCycle'
 import ormRem from '@/components/rem/vuex-orm/model.js'
 
@@ -77,36 +76,6 @@ export default {
         data: {
           name: 'Reminder',
           status: 3,
-        },
-      })
-      ormSearchUiToCT.insert({
-        data: {
-          value: 'Reminders',
-          ctAbbr: 'rem',
-          ctToShowInsideTab: 'rem/cl/add.vue',
-          ctToShowInsideMSVL: 'rem/vl/table.vue',
-          ctToShowInsideCSVL: 'rem/vl/timeline.vue',
-          layer: 'view',
-        },
-      })
-
-      ormSearchUiToCT.insert({
-        data: {
-          value: 'Add Reminder',
-          ctAbbr: 'arem',
-          ctToShowInsideTab: 'rem/cl/add.vue',
-          ctToShowInsideMSVL: 'rem/vl/table.vue',
-          ctToShowInsideCSVL: 'rem/vl/timeline.vue',
-          layer: 'change',
-        },
-      })
-
-      ormSearchUiToCT.insert({
-        data: {
-          value: 'Multi change Reminder',
-          ctAbbr: 'arem',
-          ctToShowInsideTab: 'rem/cl/mc.vue',
-          layer: 'change',
         },
       })
     }
