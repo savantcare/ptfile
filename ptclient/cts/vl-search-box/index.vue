@@ -38,7 +38,7 @@ export default {
       if (!pQueryString) {
         const resultSet = ormSearchUiToCT
           .query()
-          .orderBy('usageCountKeptInLS')
+          .orderBy('usageCountKeptInLS', 'desc')
           .get()
         console.log('No user input ', pQueryString, resultSet)
         pCallBack(resultSet)
@@ -49,7 +49,7 @@ export default {
             // Search comes from vuex-orm plugn https://github.com/vuex-orm/plugin-search#during-query-chain
             keys: ['value'], // If key is not specified it will search all fields https://github.com/vuex-orm/plugin-search#during-query-chain
           })
-          .orderBy('usageCountKeptInLS')
+          .orderBy('usageCountKeptInLS', 'desc')
           .get() // trim is needed for "goal " to match "goal"
         console.log('search result from orm model', pQueryString, resultSet)
         pCallBack(resultSet)
