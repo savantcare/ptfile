@@ -22,6 +22,18 @@
         </el-table-column>
         <el-table-column prop="remDescription" label="Description" width="180">
         </el-table-column>
+        <el-table-column label="Operations">
+          <template>
+            <el-button-group>
+              <el-button type="primary" size="mini" style="padding: 3px;" plain
+                >C</el-button
+              >
+              <el-button type="warning" size="mini" style="padding: 3px;" plain
+                >D</el-button
+              >
+            </el-button-group>
+          </template>
+        </el-table-column>
       </el-table>
     </el-card>
   </div>
