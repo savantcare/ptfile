@@ -75,3 +75,13 @@ In the following examples age is a function inside a component
 - multiStateViewAreaHeader: This has the slider to choose : timeOfStateSelectedInHeader:
 - pro: promise
 - vst: vue state
+
+### Naming
+
+- Files are folder names: Al small case seperated by - For e.g. search-interfaces.vue. Why? some filesystems are case sensitive and some are not.
+
+- Component names: camelCase
+- Why?
+  - If I do > import db-interaction from '../db-interaction'
+  - The error will be:
+  - Parsing error: Unexpected token

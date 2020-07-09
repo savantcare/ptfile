@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import dbInteraction from '../dbInteraction'
+import dbInteraction from '../db-interaction'
 import ormSearchUiToCT from '@/cts/vl-search-box/vuex-orm/searchUIToCT'
 import ormRem from '@/cts/rem/vuex-orm/model.js'
 
