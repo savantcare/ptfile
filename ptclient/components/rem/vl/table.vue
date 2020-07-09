@@ -16,6 +16,7 @@
         :showHeader="false"
         size="mini"
         style="width: 100%;"
+        stripe="true"
       >
         <el-table-column type="expand">
           <template slot-scope="props">
