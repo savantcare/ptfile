@@ -3,15 +3,11 @@
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <span>Reminders</span>
-        <el-button style="float: right; padding: 3px 0;" type="warning"
-          >X</el-button
-        >
-        <el-button style="float: right; padding: 3px 0;" type="warning"
-          >D</el-button
-        >
-        <el-button style="float: right; padding: 3px 0;" type="primary"
-          >M</el-button
-        >
+        <el-button-group style="float: right;">
+          <el-button style="padding: 3px;" type="primary" plain>M</el-button>
+          <el-button style="padding: 3px;" type="warning" plain>D</el-button>
+          <el-button style="padding: 3px;" type="info" plain>X</el-button>
+        </el-button-group>
       </div>
       <el-timeline>
         <el-timeline-item
@@ -20,9 +16,13 @@
           :timestamp="row.createdAt"
         >
           {{ row.remDescription }}
-          <el-button-group>
-            <el-button type="primary" size="mini">C</el-button>
-            <el-button type="warning" size="mini">D</el-button>
+          <el-button-group style="float: right;">
+            <el-button type="primary" size="mini" style="padding: 3px;" plain
+              >C</el-button
+            >
+            <el-button type="warning" size="mini" style="padding: 3px;" plain
+              >D</el-button
+            >
           </el-button-group>
         </el-timeline-item>
       </el-timeline>
