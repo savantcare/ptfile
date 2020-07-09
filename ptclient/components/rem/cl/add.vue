@@ -1,6 +1,6 @@
 <template>
   <el-form label-width="120px">
-    <el-form-item v-for="id in arRemID" label="desc" :key="id">
+    <el-form-item v-for="id in daRemID" label="desc" :key="id">
       <el-input
         type="textarea"
         style="width: 800px;"
@@ -26,7 +26,7 @@ import { REMINDER_API_URL } from '../const.js'
 export default {
   data() {
     return {
-      arRemID: [],
+      daRemID: [],
     }
   },
   computed: {},
@@ -82,7 +82,7 @@ export default {
     if (resultSet.length) {
       console.log('unsaved data found', resultSet, resultSet[0].uuid)
       for (let i = 0; i < resultSet.length; i++) {
-        this.arRemID.push(resultSet[i].uuid)
+        this.daRemID.push(resultSet[i].uuid)
       }
     } else {
       // When there is no unsaved data then we add an empty data to the state inside vuex
@@ -128,8 +128,8 @@ export default {
         })
         .then((entities) => {
           console.log(entities)
-          this.arRemID.push(entities.rem[0].uuid)
-          console.log(this.arRemID)
+          this.daRemID.push(entities.rem[0].uuid)
+          console.log(this.daRemID)
         })
       console.log(ResultSet)
     },
@@ -168,19 +168,58 @@ export default {
           if (!response.ok) {
           } else {
             arRemsToCreateInDB.forEach((item) => {
-              ormRem.update({
+
+
+
+
+            /* Method 1: Update exisitng record
+            In this method in July 2020 we were not able to set isDirty to false
+            Posted bug at: https://github.com/vuex-orm/plugin-change-flags/issues/12     
+            ormRem.update({
                 where: item.uuid,
-                data: { $isNew: false },
-                preventDirtyFlag: true,
+                data: { 
+                  $isNew: false,
+                  },
+              })
+
+              console.log("trying to set isdirty false")
+              ormRem.update({
+                data: { 
+                  uuid: item.uuid,
+                  '$isDirty': false, 
+                },
+                preventDirtyFlag: true
+              }).then(result => {
+                console.log('update result: ', result)
+              })
+         
+            */
+
+              /* Method2: Delete existing and insert from item */
+              console.log(item.uuid)
+              ormRem.delete(item.uuid).then(result => {
+                console.log('update result: ', result)
+              })
+              console.log('item is')
+              console.log(item)
+
+/*              item.$isDirty = false;
+              item.$isNew = false;
+              console.log(item)
+              */
+              ormRem.insert({
+                data: {
+                  uuid: item.uuid,
+                  uuidOfRemMadeFor: item.uuidOfRemMadeFor,
+                  remDescription: item.remDescription,
+                  priority: item.priority,
+                  isAutoRem: item.isAutoRem,
+                  ROW_START: item.ROW_START,
+                  ROW_END: item.ROW_END,
+               },
               })
             })
-
-            console.log('Calling reset all dirty flag')
-            store.dispatch['entities/rem/resetAllDirtyFlags'](
-              {},
-              { root: true }
-            )
-          }
+         }
         } catch (ex) {}
       } else {
         console.log('No Unsaved data')
@@ -197,13 +236,13 @@ export default {
       } else {
         console.log('No Unsaved data')
       }
-      this.arRemID = []
+      this.daRemID = []
       this.addRemToUI()
     },
     removeRexFromForm(pRemID) {
       ormRem.delete(pRemID)
-      const positionFound = this.arRemID.indexOf(pRemID)
-      this.arRemID.splice(positionFound, 1)
+      const positionFound = this.daRemID.indexOf(pRemID)
+      this.daRemID.splice(positionFound, 1)
     },
   },
 }
