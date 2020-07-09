@@ -1,22 +1,20 @@
-<template>
-  <div>
-    jai kali ma
-  </div>
-</template>
-
 <script>
-// import ormRem from '@/components/rem/vuex-orm/model.js'
+import { REMINDER_API_URL } from './const.js'
 import ormCTLifeCycle from '@/models/ormCTLifeCycle'
-
+import ormRem from '@/components/rem/vuex-orm/model.js'
 export default {
   data() {
-    return {
-      // dataTable: [],
-    }
+    return {}
   },
 
-  mounted() {
+  async mounted() {
     console.log('mounted function called')
+    const proRemsFromDB = await ormRem
+      .api()
+      .get(`${REMINDER_API_URL}?patientId=bfe041fa-073b-4223-8c69-0540ee678ff8`)
+
+    if (proRemsFromDB.ok) {
+    }
     // Why do I check for lifecycle before calling DB functions. I dont want to get data from DB twice
     const resultSet = ormCTLifeCycle.query().where('name', 'Reminder').get()
     const resultData = resultSet[0]

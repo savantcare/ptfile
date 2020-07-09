@@ -55,7 +55,7 @@ export default {
   computed: {
     dataTable() {
       const dataTable = []
-      const resultSet = ormRem.query().where('$isNew', true).get()
+      const resultSet = ormRem.query().get()
       if (resultSet.length) {
         let obj = []
         let date = ''

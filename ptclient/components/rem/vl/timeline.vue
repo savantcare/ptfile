@@ -44,7 +44,7 @@ export default {
   computed: {
     dataTable() {
       const dataTable = []
-      const resultSet = ormRem.query().where('$isNew', true).get()
+      const resultSet = ormRem.query().get()
       if (resultSet.length) {
         let obj = []
         let date = ''
@@ -60,7 +60,10 @@ export default {
           Ref: https://stackoverflow.com/questions/1643320/get-month-name-from-date
           */
           date = new Date(resultSet[i].ROW_START)
-          obj.createdAt = date.toLocaleString('default', { month: 'long' }) + "-" + date.getDate()
+          obj.createdAt =
+            date.toLocaleString('default', { month: 'long' }) +
+            '-' +
+            date.getDate()
 
           dataTable.push(obj)
         }
@@ -69,7 +72,6 @@ export default {
       return dataTable
     },
   },
-  mounted() {
-  },
+  mounted() {},
 }
 </script>
