@@ -73,3 +73,4 @@ In the following examples age is a function inside a component
 - multiStateViewArea: This has components that can show either the current state or historical state
 - timeOfStateSelectedInHeader: This gives the time for which : multiStateViewArea: should be rendered
 - multiStateViewAreaHeader: This has the slider to choose : timeOfStateSelectedInHeader:
+- pro: promise
