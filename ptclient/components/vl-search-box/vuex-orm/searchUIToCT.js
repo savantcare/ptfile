@@ -6,6 +6,9 @@ export default class ormSearchUiToCT extends Model {
   /*
     The flowchart is:
 
+    From search tern to card in CSVL
+    --------------------------------
+
     Step 1: All CTs when they start for first time they make an entry in this table.
             For e.g. rec/searchInterfaces.vue
 
@@ -21,7 +24,21 @@ export default class ormSearchUiToCT extends Model {
             <component v-bind:is="card.ctToShowInCSVL"></component>
 
     Step 6: User sees the desired HTML
-  */
+
+    From search tern in CL to tab in CL
+    -----------------------------------
+    The state of tabs is in CL (Change layer) is maintained in components/cl-tabs-manager/VueStateOfTabsAndDialogInCL.js
+
+    When autocomplete is done by user in components/vl-search-box/vuex-orm/searchUIToCT.js:mfHandleSuggestionSelectedByUser
+
+    A nre object is added to VueStateOfTabsAndDialogInCL.js
+
+    From click in VL to tab in CL
+    -----------------------------
+    A nre object is added to VueStateOfTabsAndDialogInCL.js
+
+
+    */
 
   static fields() {
     return {
