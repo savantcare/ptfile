@@ -14,7 +14,7 @@
       <el-table
         :data="dataTable"
         :showHeader="false"
-        :size="mini"
+        size="mini"
         style="width: 100%;"
       >
         <el-table-column type="expand">
