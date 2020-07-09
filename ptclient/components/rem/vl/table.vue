@@ -23,9 +23,14 @@
             <p>Created: {{ props.row.createdAt }}</p>
           </template>
         </el-table-column>
-        <el-table-column prop="remDescription" label="Description" width="180">
+
+        <el-table-column prop="remDescription" label="Description">
         </el-table-column>
-        <el-table-column label="Operations">
+        <!-- Why is width = "60" for the action column
+        Setting this makes the middle column of desc flexible.
+        After this is set if desc has 200 words they will use the maximum available space.
+          -->
+        <el-table-column label="Actions" width="60">
           <template>
             <el-button-group>
               <el-button type="primary" size="mini" style="padding: 3px;" plain
