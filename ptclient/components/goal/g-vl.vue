@@ -16,7 +16,7 @@
           >A
         </el-button>
       </div>
-      <el-table :data="daGTable" style="width: 100%;">
+      <el-table :data="daGTable" style="width: 100%;" :showHeader="false">
         <el-table-column prop="description" label="Description" width="180">
         </el-table-column>
         <el-table-column prop="score" label="Score" width="180">

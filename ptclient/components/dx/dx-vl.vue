@@ -22,7 +22,7 @@
           >A</el-button
         >
       </div>
-      <el-table :data="daDxTable" style="width: 100%;">
+      <el-table :data="daDxTable" :showHeader="false" style="width: 100%;">
         <el-table-column prop="dxName" label="Diagnosis name" width="180">
         </el-table-column>
         <el-table-column prop="dxOnDate" label="Diagnosed on" width="180">
