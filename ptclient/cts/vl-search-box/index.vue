@@ -36,13 +36,17 @@ export default {
       // pQueryString empty means user did not enter anything
       // to show values in dropdown returning all results
       if (!pQueryString) {
-        const resultSet = ormSearchUiToCT.all()
+        const resultSet = ormSearchUiToCT
+          .query()
+          .orderBy('usageCountKeptInLS')
+          .get()
+        console.log('No user input ', pQueryString, resultSet)
         pCallBack(resultSet)
       } else {
         const resultSet = ormSearchUiToCT
           .query()
           .search(pQueryString.trim(), {
-            // Search comes from fuzzy search plugin
+            // Search comes from vuex-orm plugn https://github.com/vuex-orm/plugin-search#during-query-chain
             keys: ['value'], // If key is not specified it will search all fields https://github.com/vuex-orm/plugin-search#during-query-chain
           })
           .orderBy('usageCountKeptInLS')

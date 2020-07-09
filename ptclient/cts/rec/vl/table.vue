@@ -21,7 +21,6 @@
 </template>
 
 <script>
-import ormSearchUiToCT from '@/cts/vl-search-box/vuex-orm/searchUIToCT'
 import ormCTLifeCycle from '@/models/ormCtLifeCycle'
 export default {
   name: 'vl/table',
@@ -53,33 +52,6 @@ export default {
       // Step 1/3: Store information that this Ct has already been mounted
       // I run this before API to server since API to server takes time and during the wait time 2 Ct may end up running
       // This ORM is used by the vl-search-ct and once the state is set then the existing ct's update their view
-      ormCTLifeCycle.insert({
-        data: {
-          name: 'Recommendations',
-          status: 3,
-        },
-      })
-
-      // Step 2/3: Inserting Search interfaces to this component
-      ormSearchUiToCT.insert({
-        data: {
-          value: 'Recommendations',
-          ctAbbr: 'rex',
-          ctToShowInCL: '',
-          ctToShowInMSVL: 'rec/vl/table.vue',
-          ctToShowInCSVL: 'rec/vl/timeline.vue',
-          layer: 'view',
-        },
-      })
-
-      ormSearchUiToCT.insert({
-        data: {
-          value: 'Add Recommendations',
-          ctAbbr: 'arex',
-          ctToShowInCL: 'rec/vl/table.vue',
-          layer: 'change',
-        },
-      })
       // Step 3/3: Run API to get data from server
 
       console.log('Done mounting')
