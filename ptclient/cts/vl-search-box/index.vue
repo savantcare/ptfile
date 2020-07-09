@@ -41,12 +41,17 @@ export default {
       } else {
         const resultSet = ormSearchUiToCT
           .query()
-          .search(pQueryString.trim())
-          .get() // trim needs for "goal " to match "goal"
+          .search(pQueryString.trim(), {
+            // Search comes from fuzzy search plugin
+            keys: ['value'], // If key is not specified it will search all fields https://github.com/vuex-orm/plugin-search#during-query-chain
+          })
+          .orderBy('usageCountKeptInLS')
+          .get() // trim is needed for "goal " to match "goal"
         console.log('search result from orm model', pQueryString, resultSet)
         pCallBack(resultSet)
       }
     },
+
     mfHandleSuggestionSelectedByUser(pSelectedSuggestion) {
       console.log('Selected suggestion is', pSelectedSuggestion)
 
