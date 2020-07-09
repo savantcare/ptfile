@@ -48,11 +48,11 @@ dialog
                            └────┬─────┘                           
                                 │                                 
                 ┌───────────────▼─────────────────┐               
-                │  Call state mutation function   │                 clDialogAndTabsState:36            
+                │  Call state mutation function   │                 VueStateOfTabsAndDialogInCL:36            
                 └────────────────┬────────────────┘               
                                  │                                
 ┌────────────────────────────────▼───────────────────────────────┐
-│Changes this.$store.state.dialogHoldingTabsInCL.vsSelectedTabId │  clDialogAndTabsState:37 
+│Changes this.$store.state.dialogHoldingTabsInCL.vsSelectedTabId │  VueStateOfTabsAndDialogInCL:37 
 └────────────────────────────────┬───────────────────────────────┘
                                  │                                
                  ┌───────────────▼────────────────────────────┐               
