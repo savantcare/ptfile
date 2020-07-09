@@ -9,14 +9,16 @@
         :value="getDescription(id)"
         @input="setDescription($event, id)"
       ></el-input>
-      <el-button type="warning" @click="removeRexFromForm(id)"
+      <el-button plain type="warning" @click="removeRexFromForm(id)"
         >Remove</el-button
       >
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="sendDataToServer">Submit</el-button>
-      <el-button type="primary" @click="addRemToUI">Add more</el-button>
-      <el-button type="warning" @click="resetForm">Reset form</el-button>
+      <el-button type="primary" plain @click="sendDataToServer"
+        >Submit</el-button
+      >
+      <el-button type="primary" plain @click="addRemToUI">Add more</el-button>
+      <el-button type="warning" plain @click="resetForm">Reset form</el-button>
     </el-form-item>
   </el-form>
 </template>
