@@ -15,7 +15,7 @@
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="sendDataToServer">Submit</el-button>
-      <el-button type="primary" @click="addRem">Add more</el-button>
+      <el-button type="primary" @click="addRemToUI">Add more</el-button>
       <el-button type="warning" @click="resetForm">Reset form</el-button>
     </el-form-item>
   </el-form>
@@ -87,7 +87,7 @@ export default {
     } else {
       // When there is no unsaved data then we add an empty data to the state inside vuex
       console.log('No Unsaved data')
-      this.addRem()
+      this.addRemToUI()
     }
   },
   methods: {
@@ -113,7 +113,7 @@ export default {
       })
       console.log(resultSet)
     },
-    addRem() {
+    addRemToUI() {
       console.log('Add rem called')
       const ResultSet = ormRem
         .insert({
@@ -200,7 +200,7 @@ export default {
         console.log('No Unsaved data')
       }
       this.arRemID = []
-      this.addRem()
+      this.addRemToUI()
     },
     removeRexFromForm(pRemID) {
       ormRem.delete(pRemID)
