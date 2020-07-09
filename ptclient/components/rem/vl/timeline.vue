@@ -4,6 +4,7 @@
       <div slot="header" class="clearfix">
         <span>Reminders</span>
         <el-button-group style="float: right;">
+          <el-button style="padding: 3px;" type="success" plain>A</el-button>
           <el-button style="padding: 3px;" type="primary" plain>M</el-button>
           <el-button style="padding: 3px;" type="warning" plain>D</el-button>
           <el-button style="padding: 3px;" type="info" plain>X</el-button>
