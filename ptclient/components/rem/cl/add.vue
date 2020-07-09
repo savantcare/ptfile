@@ -137,23 +137,21 @@ export default {
       const resultSet = ormRem.query().where('$isNew', true).get()
       if (resultSet.length) {
         console.log('unsaved data found', resultSet, resultSet[0].uuid)
-        const arRemToCreate = []
+        const arRemsToCreateInDB = []
         for (let i = 0; i < resultSet.length; i++) {
           console.log('call API', resultSet[i].uuid)
-          arRemToCreate.push({
+          arRemsToCreateInDB.push({
             uuid: resultSet[i].uuid,
             remDescription: resultSet[i].remDescription,
             priority: resultSet[i].priority,
             isAutoRem: resultSet[i].isAutoRem,
             uuidOfRemMadeFor: 'bfe041fa-073b-4223-8c69-0540ee678ff8',
-            // uuid: uniqid(),
             recordChangedByUUID: 'bfe041fa-073b-4223-8c69-0540ee678ff8',
           })
           // Once server returns true then: set isNew and IsDirty to false
         }
-        console.log('Data to send in api', arRemToCreate)
+        console.log('Data to send in api', arRemsToCreateInDB)
 
-        // REMINDER_API_URL
         try {
           const response = await fetch(REMINDER_API_URL, {
             method: 'POST',
@@ -162,14 +160,14 @@ export default {
               // Authorization: 'Bearer ' + TOKEN,
             },
             body: JSON.stringify({
-              data: arRemToCreate,
+              data: arRemsToCreateInDB,
               patientUUID: 'bfe041fa-073b-4223-8c69-0540ee678ff8',
             }),
           })
           console.log('response=> ', response)
           if (!response.ok) {
           } else {
-            arRemToCreate.forEach((item) => {
+            arRemsToCreateInDB.forEach((item) => {
               ormRem.update({
                 where: item.uuid,
                 data: { $isNew: false },
