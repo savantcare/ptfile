@@ -5,7 +5,7 @@
       v-model="searchKeyword"
       class="inline-input"
       :fetch-suggestions="mfQuerySearchTerms"
-      placeholder="Please Input"
+      :placeholder="placeholder"
       style="width: 100%;"
       @select="mfHandleSuggestionSelectedByUser"
     ></el-autocomplete>
@@ -17,7 +17,7 @@ import ormSearchUiToCT from '@/cts/vl-search-box/vuex-orm/searchUIToCT'
 import remSUI from '@/cts/rem/searchInterfaces'
 export default {
   data() {
-    return { searchKeyword: '' }
+    return { searchKeyword: '', placeholder: 'e.g.' }
   },
   components: { remSUI },
   mounted() {
@@ -30,6 +30,14 @@ export default {
         layer: 'view',
       },
     })
+
+    const resultSet = ormSearchUiToCT
+      .query()
+      .orderBy('usageCountKeptInLS', 'desc')
+      .get()
+    const resultData = resultSet[0]
+    console.log(resultData)
+    this.placeholder = 'e.g. ' + resultData.value
   },
   methods: {
     mfQuerySearchTerms(pQueryString, pCallBack) {
