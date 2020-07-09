@@ -39,8 +39,8 @@ dialog
           The active tab depends on ct -> el-tabs -> v-model = cfVSSelectedTabId (line 72 of this file)
           When cfVSSelectedTabId (Line 117 of this file) changes the active tab will change. 
           Since cfVSSelectedTabId is a computed function it will change when anything it depends on changes
-          cfVSSelectedTabId depends on this.$store.state.dialogHoldingTabsInCL.vsSelectedTabId (Line 119 of this file)
-          So any Ct can change this.$store.state.dialogHoldingTabsInCL.vsSelectedTabId and that will change the active Tab
+          cfVSSelectedTabId depends on this.$store.state.stObjTabsInCL.vsSelectedTabId (Line 119 of this file)
+          So any Ct can change this.$store.state.stObjTabsInCL.vsSelectedTabId and that will change the active Tab
           The flowchart of changes is:       
           
                            ┌──────────┐                           
@@ -52,7 +52,7 @@ dialog
                 └────────────────┬────────────────┘               
                                  │                                
 ┌────────────────────────────────▼───────────────────────────────┐
-│Changes this.$store.state.dialogHoldingTabsInCL.vsSelectedTabId │  VueStateOfTabsAndDialogInCL:37 
+│Changes this.$store.state.stObjTabsInCL.vsSelectedTabId │  VueStateOfTabsAndDialogInCL:37 
 └────────────────────────────────┬───────────────────────────────┘
                                  │                                
                  ┌───────────────▼────────────────────────────┐               
@@ -108,7 +108,7 @@ export default {
   computed: {
     cfArTabs: {
       get() {
-        return this.$store.state.dialogHoldingTabsInCL.arTabs
+        return this.$store.state.stObjTabsInCL.arTabs
       },
       set(value) {
         this.$store.commit('mtfSetArTabs', value)
@@ -116,7 +116,7 @@ export default {
     },
     cfVSSelectedTabId: {
       get() {
-        return this.$store.state.dialogHoldingTabsInCL.vsSelectedTabId
+        return this.$store.state.stObjTabsInCL.vsSelectedTabId
       },
       set(value) {
         this.$store.commit('mtfSetvsSelectedTabId', value)
@@ -124,8 +124,7 @@ export default {
     },
     vblIsdialogHoldingTabsInCLVisible: {
       get() {
-        return this.$store.state.dialogHoldingTabsInCL
-          .vblIsdialogHoldingTabsInCLVisible
+        return this.$store.state.stObjTabsInCL.vblIsdialogHoldingTabsInCLVisible
       },
       set(value) {
         this.$store.commit('mtfSetTabDialogVisibility', value)

@@ -32,7 +32,7 @@ const createStore = () => {
   return new Vuex.Store({
     state: () => ({}),
     modules: {
-      dialogHoldingTabsInCL: VueStateOfTabsAndDialogInCLModule,
+      stObjTabsInCL: VueStateOfTabsAndDialogInCLModule,
       cardsInCSOfVL: VueStateOfCardsInCSOfVLModule,
     },
     plugins: [VuexORM.install(database)],
