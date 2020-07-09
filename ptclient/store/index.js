@@ -9,8 +9,8 @@ import VuexORMAxios from '@vuex-orm/plugin-axios'
 import VuexORMisDirtyPlugin from '@vuex-orm/plugin-change-flags'
 
 // Ref: https://github.com/eldomagan/vuex-orm-localforage#installation
-import VueStateOfTabsAndDialogInCLModule from '@/components/cl-tabs-manager/VueStateOfTabsAndDialogInCL'
-import VueStateOfCardsInCSOfVLModule from '@/components/vl-search-box/VueStateOfCardsInCSOfVL'
+import VueStateOfTabsAndDialogInCLModule from '@/cts/cl-tabs-manager/VueStateOfTabsAndDialogInCL'
+import VueStateOfCardsInCSOfVLModule from '@/cts/vl-search-box/VueStateOfCardsInCSOfVL'
 import database from '@/database'
 
 // Ref: https://stackoverflow.com/a/62247034

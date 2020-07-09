@@ -46,10 +46,10 @@ In the following examples age is a function inside a component
 
 ### Component short forms
 
-- dx: [Diagnosis](/ptclient/components/dx/)
+- dx: [Diagnosis](/ptclient/cts/dx/)
 - dxa: Diagnosis assessment
 - g: goal
-- bm: [Body measurement](/ptclient/components/bm/)
+- bm: [Body measurement](/ptclient/cts/bm/)
 - rec: Recommendation
 - recs: Recommendations
 - rem: Reminder

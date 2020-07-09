@@ -49,7 +49,7 @@
 
 3. Left and right should depend on a common state.
 
-   components/recommendations/stateDBSocket.js read comments on line 6
+   cts/recommendations/stateDBSocket.js read comments on line 6
    Store the state in 2 dimensional array with the timeOfState being the key. Reasons:
 
    1. Caching
@@ -64,7 +64,7 @@
 
 # Milestone 5:
 
-1. Inside components/common/DataTable.vue:231
+1. Inside cts/common/DataTable.vue:231
 
    if (this.typeOfStateDisplayArea == "csvl") {
    this.$store.dispatch("dbGetMyRecommendations", params);
@@ -80,7 +80,7 @@ The data table should recv data to show instead of calling function to get the d
 
 2. The data for previous appts is not cached. One more dimension should be increased in recs data structure.
 
-Ref: components/patient/Recommendations/stateDBSocket.js:6 Using apollo solves this problem without increasing the dimensions.
+Ref: cts/patient/Recommendations/stateDBSocket.js:6 Using apollo solves this problem without increasing the dimensions.
 
 3. Lock
    Before locking -> All health components DB_SC_Components_V20->componentStateReviewedOn > "previous appt lock dateTime"
@@ -115,7 +115,7 @@ Ref: components/patient/Recommendations/stateDBSocket.js:6 Using apollo solves t
 
 2. Search
 
-   1. Highlight the search term in each row of the result. For e.g. https://vuetifyjs.com/en/components/autocompletes/
+   1. Highlight the search term in each row of the result. For e.g. https://vuetifyjs.com/en/cts/autocompletes/
       Open soruce components: <vue-simple-suggest> https://github.com/KazanExpress/vue-simple-suggest
       https://github.com/FireLemons/Abbreviation-Autocomplete
 

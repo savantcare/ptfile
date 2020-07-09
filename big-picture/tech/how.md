@@ -172,7 +172,7 @@ http://localhost:6060
 
 A new componet called AddRecommendationTab is created inside:
 
-/Users/vk-tech/gt/sc-prog-repos/patientfile/vue-client/src/components/composition-layer2/AddRecommendation.vue
+/Users/vk-tech/gt/sc-prog-repos/patientfile/vue-client/src/cts/composition-layer2/AddRecommendation.vue
 
 ### Step 2
 
@@ -190,7 +190,7 @@ Now when ever someone comes to http://ip-address/recommendation the router sends
 Inside views/recommendation.vue the component created in step 1 is used. By the following codes:
 
 1. Component is imported:
-   import AddRecommendationTab from "@/components/patient/AddRecommendation";
+   import AddRecommendationTab from "@/cts/patient/AddRecommendation";
 
 2. Component is displayed:
 
@@ -285,7 +285,7 @@ Have three types of components? TODO:
 
 3. Domain components:
 
-Ref: https://vueschool.io/articles/vuejs-tutorials/structuring-vue-components/
+Ref: https://vueschool.io/articles/vuejs-tutorials/structuring-vue-cts/
 
 ## Q9) How are the components structured?
 
@@ -321,7 +321,7 @@ Practical:
 
 ## Q10) How to theme app while each component maintains its own scoped local context style?
 
-https://vuedose.tips/tips/theming-using-custom-properties-in-vuejs-components/
+https://vuedose.tips/tips/theming-using-custom-properties-in-vuejs-cts/
 
 https://medium.com/maestral-solutions/coloring-your-app-implementing-live-theming-with-vue-js-and-styled-components-29e428900394
 

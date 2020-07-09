@@ -40,16 +40,16 @@
 <script>
 import Vue from 'vue'
 import VueSplit from 'vue-split-panel'
-import ctVLSearchBox from '@/components/vl-search-box'
-import ctRexVl from '@/components/rec/vl/table'
-import ctRemVL from '@/components/rem/vl/table'
-import ctBMVl from '@/components/bm/bm-vl'
-import ctDXVl from '@/components/dx/dx-vl'
-import ctGVl from '@/components/goal/g-vl'
-import ctScrVl from '@/components/scr/scr-vl.vue'
+import ctVLSearchBox from '@/cts/vl-search-box'
+import ctRexVl from '@/cts/rec/vl/table'
+import ctRemVL from '@/cts/rem/vl/table'
+import ctBMVl from '@/cts/bm/bm-vl'
+import ctDXVl from '@/cts/dx/dx-vl'
+import ctGVl from '@/cts/goal/g-vl'
+import ctScrVl from '@/cts/scr/scr-vl.vue'
 const CLTabsInDialog = () =>
   // The name above expands to change Layer tabs in dialog
-  import('@/components/cl-tabs-manager/ctShowAddAndRemoveTabsInDialog')
+  import('@/cts/cl-tabs-manager/ctShowAddAndRemoveTabsInDialog')
 
 // say the user enter the rex command 10 times. I need to scroll to the bottom of the cards
 // so search box is given a ID and then #vl-search-box is used to scroll down.

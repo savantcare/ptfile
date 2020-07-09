@@ -106,121 +106,119 @@ module.exports = {
             title: "vuex-orm",
           },
           {
-            path: "/ptclient/components/",
+            path: "/ptclient/cts/",
             title: "Components",
             children: [
               {
-                path: "/ptclient/components/allergies/",
+                path: "/ptclient/cts/allergies/",
                 title: "Allergies",
                 children: [
                   {
-                    path: "/ptclient/components/allergies/design/design",
+                    path: "/ptclient/cts/allergies/design/design",
                     title: "Design",
                   },
                 ],
               },
               {
-                path: "/ptclient/components/bm/",
+                path: "/ptclient/cts/bm/",
                 title: "Body measurements",
                 children: [
                   {
-                    path: "/ptclient/components/bm/design/design",
+                    path: "/ptclient/cts/bm/design/design",
                     title: "Design",
                   },
                 ],
               },
               {
-                path: "/ptclient/components/contacts/",
+                path: "/ptclient/cts/contacts/",
                 title: "Contacts",
                 children: [
                   {
-                    path: "/ptclient/components/contacts/design/design",
+                    path: "/ptclient/cts/contacts/design/design",
                     title: "Design",
                   },
                 ],
               },
               {
-                path: "/ptclient/components/dx/",
+                path: "/ptclient/cts/dx/",
                 title: "Diagnosis",
                 children: [
                   {
-                    path: "/ptclient/components/dx/design/design",
+                    path: "/ptclient/cts/dx/design/design",
                     title: "Design",
                   },
                 ],
               },
               {
-                path: "/ptclient/components/documents/",
+                path: "/ptclient/cts/documents/",
                 title: "Documents",
                 children: [
                   {
-                    path: "/ptclient/components/documents/design/design",
+                    path: "/ptclient/cts/documents/design/design",
                     title: "Design",
                   },
                 ],
               },
               {
-                path: "/ptclient/components/family-history/",
+                path: "/ptclient/cts/family-history/",
                 title: "Family history",
                 children: [
                   {
-                    path: "/ptclient/components/family-history/design/design",
+                    path: "/ptclient/cts/family-history/design/design",
                     title: "Design",
                   },
                 ],
               },
               {
-                path: "/ptclient/components/medications/",
+                path: "/ptclient/cts/medications/",
                 title: "Medication",
                 children: [
                   {
-                    path: "/ptclient/components/medications/design/design",
+                    path: "/ptclient/cts/medications/design/design",
                     title: "Design",
                   },
                 ],
               },
               {
-                path: "/ptclient/components/mental-status-exam/",
+                path: "/ptclient/cts/mental-status-exam/",
                 title: "Mental status exam",
                 children: [
                   {
-                    path:
-                      "/ptclient/components/mental-status-exam/design/design",
+                    path: "/ptclient/cts/mental-status-exam/design/design",
                     title: "Design",
                   },
                 ],
               },
               {
-                path: "/ptclient/components/pharmacy/",
+                path: "/ptclient/cts/pharmacy/",
                 title: "Pharmacy",
                 children: [
                   {
-                    path: "/ptclient/components/pharmacy/design/design",
+                    path: "/ptclient/cts/pharmacy/design/design",
                     title: "Design",
                   },
                 ],
               },
               {
-                path: "/ptclient/components/psych-review-of-systems/",
+                path: "/ptclient/cts/psych-review-of-systems/",
                 title: "Psych review of systems",
                 children: [
                   {
-                    path:
-                      "/ptclient/components/psych-review-of-systems/design/design",
+                    path: "/ptclient/cts/psych-review-of-systems/design/design",
                     title: "Design",
                   },
                 ],
               },
               {
-                path: "/ptclient/components/rec/",
+                path: "/ptclient/cts/rec/",
                 title: "Recommendations",
               },
               {
-                path: "/ptclient/components/scr/",
+                path: "/ptclient/cts/scr/",
                 title: "Screening",
                 children: [
                   {
-                    path: "/ptclient/components/scr/design/design",
+                    path: "/ptclient/cts/scr/design/design",
                     title: "Design",
                   },
                 ],
