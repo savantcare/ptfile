@@ -3,15 +3,12 @@
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <span>Body measurement</span>
-        <el-button style="float: right; padding: 3px 0;" type="text"
-          >X</el-button
-        >
-        <el-button style="float: right; padding: 3px 0;" type="text"
-          >D</el-button
-        >
-        <el-button style="float: right; padding: 3px 0;" type="text"
-          >M</el-button
-        >
+        <el-button-group style="float: right;">
+          <el-button style="padding: 3px;" type="success" plain>A</el-button>
+          <el-button style="padding: 3px;" type="primary" plain>M</el-button>
+          <el-button style="padding: 3px;" type="warning" plain>D</el-button>
+          <el-button style="padding: 3px;" type="info" plain>X</el-button>
+        </el-button-group>
       </div>
       <el-table :data="daTable" :showHeader="false" style="width: 100%;">
         <el-table-column prop="description" label="Description" width="180">

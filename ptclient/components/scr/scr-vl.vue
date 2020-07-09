@@ -3,18 +3,22 @@
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <span>Screening</span>
-        <el-button
-          style="float: right; padding: 0 3px;"
-          @click="mfOpenAllScrGDialog()"
-          type="text"
-          >G</el-button
-        >
-        <el-button
-          style="float: right; padding: 0 3px;"
-          @click="mfOpenADialog()"
-          type="text"
-          >A</el-button
-        >
+        <el-button-group style="float: right;">
+          <el-button
+            style="padding: 3px;"
+            @click="mfOpenAllScrGDialog()"
+            type="success"
+            plain
+            >G</el-button
+          >
+          <el-button
+            style="padding: 3px;"
+            @click="mfOpenADialog()"
+            type="primary"
+            plain
+            >A</el-button
+          >
+        </el-button-group>
       </div>
       <el-table :data="daScrTable" style="width: 100%;">
         <el-table-column
