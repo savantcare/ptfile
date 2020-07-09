@@ -37,8 +37,8 @@ export default {
         const resultData = resultSet[0]
         const objAddTab = {
           label: resultData.value,
-          ctToShowInsideTab: require('@/components/' +
-            resultData.ctToShowInsideTab).default,
+          ctToShow: require('@/components/' + resultData.ctToShowInsideTab)
+            .default,
           ctAbbr: resultData.ctAbbr,
           id: resultData.id,
           closable: true,
@@ -50,8 +50,8 @@ export default {
         let resultData = resultSet[0]
         let objAddTab = {
           label: resultData.value,
-          ctToShowInsideTab: require('@/components/' +
-            resultData.ctToShowInsideTab).default,
+          ctToShow: require('@/components/' + resultData.ctToShowInsideTab)
+            .default,
           ctAbbr: resultData.ctAbbr,
           id: resultData.id,
           closable: true,
@@ -61,8 +61,8 @@ export default {
         resultData = resultSet[0]
         objAddTab = {
           label: resultData.value,
-          ctToShowInsideTab: require('@/components/' +
-            resultData.ctToShowInsideTab).default,
+          ctToShow: require('@/components/' + resultData.ctToShowInsideTab)
+            .default,
           ctAbbr: resultData.ctAbbr,
           id: resultData.id,
           closable: true,

@@ -16,7 +16,7 @@ export default {
       data: {
         value: 'Reminders',
         ctAbbr: 'rem',
-        ctToShowInsideTab: '',
+        ctToShow: '',
         ctToShowInsideMSVL: 'rem/vl/table.vue',
         ctToShowInsideCSVL: 'rem/vl/timeline.vue',
         layer: 'view',
@@ -27,7 +27,7 @@ export default {
       data: {
         value: 'Add Reminder',
         ctAbbr: 'arem',
-        ctToShowInsideTab: 'rem/cl/add.vue',
+        ctToShow: 'rem/cl/add.vue',
         ctToShowInsideMSVL: '',
         ctToShowInsideCSVL: '',
         layer: 'change',
@@ -38,7 +38,7 @@ export default {
       data: {
         value: 'Multi change Reminder',
         ctAbbr: 'arem',
-        ctToShowInsideTab: 'rem/cl/mc.vue',
+        ctToShow: 'rem/cl/mc.vue',
         layer: 'change',
         ctToShowInsideMSVL: '',
         ctToShowInsideCSVL: '',

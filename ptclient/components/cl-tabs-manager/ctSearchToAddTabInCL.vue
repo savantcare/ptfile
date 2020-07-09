@@ -93,7 +93,7 @@ export default {
       const objAddTab = {
         label: pSelectedSuggestion.value.replace(/(<([^>]+)>)/gi, ''),
         // Here I have to use a variable otherwise webpack gives error. https://stackoverflow.com/questions/57349167/vue-js-dynamic-image-src-with-webpack-require-not-working
-        ctToShowInsideTab: require('@/components/' +
+        ctToShow: require('@/components/' +
           pSelectedSuggestion.ctToShowInsideTab).default,
         id: pSelectedSuggestion.id,
         closable: true,

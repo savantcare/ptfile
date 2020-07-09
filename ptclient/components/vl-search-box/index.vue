@@ -26,7 +26,7 @@ export default {
       data: {
         value: 'Clear',
         ctAbbr: 'clr',
-        ctToShowInsideTab: 'clear/index.vue',
+        ctToShow: 'clear/index.vue',
         layer: 'view',
       },
     })
