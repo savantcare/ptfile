@@ -26,7 +26,7 @@ Features needed in search
 </template>
 
 <script>
-import ormSearchUiToCT from '../../models/ormSearchUiToCT'
+import ormSearchUiToCT from '@/components/vl-search-box/vuex-orm/searchUiToCT'
 
 export default {
   data() {

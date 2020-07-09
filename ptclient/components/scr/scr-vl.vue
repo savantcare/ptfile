@@ -41,8 +41,8 @@
 </template>
 
 <script>
-import ormSearchUiToCT from '../../models/ormSearchUiToCT'
-import ormCTLifeCycle from '../../models/ormCTLifeCycle'
+import ormSearchUiToCT from '@/components/vl-search-box/vuex-orm/searchUiToCT'
+import ormCTLifeCycle from '@/models/ormCTLifeCycle'
 import ormScr from '@/models/Screening'
 export default {
   data() {

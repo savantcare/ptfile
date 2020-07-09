@@ -83,7 +83,7 @@ export default {
       for (let i = 0; i < resultSet.length; i++) {
         this.arRemID.push(resultSet[i].uuid)
       }
-    } else{
+    } else {
        // When there is no unsaved data then we add an empty data to the state inside vuex
        console.log('No Unsaved data')
       this.addRem()
