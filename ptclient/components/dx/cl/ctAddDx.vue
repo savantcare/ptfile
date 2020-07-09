@@ -218,10 +218,10 @@ export default {
   },
   computed: {
     type() {
-      return this.$store.state.stObjTabsInCL.goalTabType
+      return this.$store.state.vstObjTabsInCL.goalTabType
     },
     updateData() {
-      return this.$store.state.stObjTabsInCL.goalData
+      return this.$store.state.vstObjTabsInCL.goalData
     },
     userId() {
       return this.$store.state.userId

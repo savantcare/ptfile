@@ -32,8 +32,8 @@ const createStore = () => {
   return new Vuex.Store({
     state: () => ({}),
     modules: {
-      stObjTabsInCL: VueStateOfTabsAndDialogInCLModule,
-      cardsInCSOfVL: VueStateOfCardsInCSOfVLModule,
+      vstObjTabsInCL: VueStateOfTabsAndDialogInCLModule,
+      vstObjCardsInCSOfVL: VueStateOfCardsInCSOfVLModule,
     },
     plugins: [VuexORM.install(database)],
   })

@@ -14,7 +14,7 @@ export default class ormSearchUiToCT extends Model {
     Step 3: User makes a selection based on autocomplete 
             components/vl-serach-box/index.vue:32/mfQuerySearchTerms
 
-    Step 4: Once the user selection is finalized the state of cardsInCSOfVL (cards in current state of view layer) 
+    Step 4: Once the user selection is finalized the state of vstObjCardsInCSOfVL (cards in current state of view layer) 
             is updated components/vl-search-box/index.vue:47/mfHandleSuggestionSelectedByUser 
 
     Step 5: This activates pages/pf/_id/index.vue:30
