@@ -33,7 +33,6 @@
 
 <script>
 import ormSearchUiToCT from '@/components/vl-search-box/vuex-orm/searchUiToCT'
-import ormCTLifeCycle from '@/models/ormCTLifeCycle'
 import ormRem from '@/components/rem/vuex-orm/model.js'
 
 export default {
@@ -71,19 +70,6 @@ export default {
     },
   },
   mounted() {
-    // Why do I check for lifecycle before defining search terms. Reason given at: rex-l1.vue:49
-    const resultSet = ormCTLifeCycle.query().where('name', 'Reminder').get()
-    const resultData = resultSet[0]
-    if (typeof resultData !== 'undefined') {
-      console.log('already mounted')
-    } else {
-      ormCTLifeCycle.insert({
-        data: {
-          name: 'Reminder',
-          status: 3,
-        },
-      })
-    }
   },
 }
 </script>

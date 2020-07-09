@@ -21,8 +21,8 @@
   </el-form>
 </template>
 <script>
-import ormRem from '@/components/rem/vuex-orm/model.js'
 import { REMINDER_API_URL } from '../const.js'
+import ormRem from '@/components/rem/vuex-orm/model.js'
 export default {
   data() {
     return {

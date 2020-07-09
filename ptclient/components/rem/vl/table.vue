@@ -1,5 +1,6 @@
 <template>
   <div>
+    <dbInteraction></dbInteraction>
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <span>Reminders</span>
@@ -41,10 +42,11 @@
 </template>
 
 <script>
-import ormCTLifeCycle from '@/models/ormCTLifeCycle'
+import dbInteraction from '../dbInteraction'
 import ormRem from '@/components/rem/vuex-orm/model.js'
 
 export default {
+  components: { dbInteraction },
   data() {
     return {
       // dataTable: [],
@@ -74,20 +76,6 @@ export default {
       return dataTable
     },
   },
-  mounted() {
-    // Why do I check for lifecycle before defining search terms. Reason given at: rex-l1.vue:49
-    const resultSet = ormCTLifeCycle.query().where('name', 'Reminder').get()
-    const resultData = resultSet[0]
-    if (typeof resultData !== 'undefined') {
-      console.log('already mounted')
-    } else {
-      ormCTLifeCycle.insert({
-        data: {
-          name: 'Reminder',
-          status: 3,
-        },
-      })
-    }
-  },
+  mounted() {},
 }
 </script>
