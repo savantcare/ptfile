@@ -7,18 +7,20 @@ export default class ormSearchUiToCT extends Model {
     The flowchart is:
 
     Step 1: All CTs when they start for first time they make an entry in this table.
-            For e.g. rec/vl/table.vue
+            For e.g. rec/searchInterfaces.vue
 
-    Step 2: In vl-search-box user makes a selection based on autocomplete coming from this table
+    Step 2: In component/vl-search-box the dropdown for search uses this table.
+
+    Step 3: User makes a selection based on autocomplete 
             components/vl-serach-box/index.vue:32/mfQuerySearchTerms
 
-    Step 3: Once the user selection is finalized the state of cardsInCSOfVL is updated
-            components/vl-serach-box/index.vue:47/mfHandleSuggestionSelectedByUser 
+    Step 4: Once the user selection is finalized the state of cardsInCSOfVL (cards in current state of view layer) 
+            is updated components/vl-search-box/index.vue:47/mfHandleSuggestionSelectedByUser 
 
-    Step 4: This activates pages/pf/_id/index.vue:30
+    Step 5: This activates pages/pf/_id/index.vue:30
             <component v-bind:is="card.ctToShowInCSVL"></component>
 
-    Step 5: User sees the desired HTML
+    Step 6: User sees the desired HTML
   */
 
   static fields() {
