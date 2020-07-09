@@ -1,5 +1,6 @@
 <template>
   <div id="vl-search-box">
+    <remSUI></remSUI>
     <el-autocomplete
       v-model="searchKeyword"
       class="inline-input"
@@ -13,10 +14,12 @@
 
 <script>
 import ormSearchUiToCT from '@/components/vl-search-box/vuex-orm/searchUiToCT'
+import remSUI from '@/components/rem/vl/searchInterface'
 export default {
   data() {
     return { searchKeyword: '' }
   },
+  components: { remSUI },
   mounted() {
     // Search interfaces to this component
     ormSearchUiToCT.insert({

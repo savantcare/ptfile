@@ -48,7 +48,7 @@ import ctDXVl from '@/components/dx/dx-vl'
 import ctGVl from '@/components/goal/g-vl'
 import ctScrVl from '@/components/scr/scr-vl.vue'
 const CLTabsInDialog = () =>
-  // Change Layer tabs in dialog
+  // The name above expands to change Layer tabs in dialog
   import('@/components/cl-tabs-manager/ctShowAddAndRemoveTabsInDialog')
 
 // say the user enter the rex command 10 times. I need to scroll to the bottom of the cards
