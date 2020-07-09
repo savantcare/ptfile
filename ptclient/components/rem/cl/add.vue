@@ -153,24 +153,37 @@ export default {
         }
         console.log('Data to send in api', arRemToCreate)
 
-        //REMINDER_API_URL
-        // try {
-        const response = await fetch(REMINDER_API_URL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json;charset=utf-8',
-            // Authorization: 'Bearer ' + TOKEN,
-          },
-          body: JSON.stringify({
-            data: arRemToCreate,
-            patientUUID: 'bfe041fa-073b-4223-8c69-0540ee678ff8',
-          }),
-        })
-        console.log('response=> ', response)
-        if (!response.ok) {
-        } else {
-        }
-        // } catch (ex) {}
+        // REMINDER_API_URL
+        try {
+          const response = await fetch(REMINDER_API_URL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8',
+              // Authorization: 'Bearer ' + TOKEN,
+            },
+            body: JSON.stringify({
+              data: arRemToCreate,
+              patientUUID: 'bfe041fa-073b-4223-8c69-0540ee678ff8',
+            }),
+          })
+          console.log('response=> ', response)
+          if (!response.ok) {
+          } else {
+            arRemToCreate.forEach((item) => {
+              ormRem.update({
+                where: item.uuid,
+                data: { $isNew: false },
+                preventDirtyFlag: true,
+              })
+            })
+
+            console.log('Calling reset all dirty flag')
+            store.dispatch['entities/rem/resetAllDirtyFlags'](
+              {},
+              { root: true }
+            )
+          }
+        } catch (ex) {}
       } else {
         console.log('No Unsaved data')
       }
