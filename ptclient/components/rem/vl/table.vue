@@ -104,8 +104,7 @@ export default {
       console.log(resultData)
       const tab = {
         label: resultData.value,
-        ctToShow: require('@/components/' + resultData.ctToShowInsideTab)
-          .default,
+        ctToShow: require('@/components/' + resultData.ctToShowInCL).default,
         ctAbbr: resultData.ctAbbr,
         id: resultData.id,
         closable: true,
@@ -122,8 +121,7 @@ export default {
       console.log(resultData)
       const tab = {
         label: resultData.value,
-        ctToShow: require('@/components/' + resultData.ctToShowInsideTab)
-          .default,
+        ctToShow: require('@/components/' + resultData.ctToShowInCL).default,
         ctAbbr: resultData.ctAbbr,
         id: resultData.id,
         closable: true,

@@ -26,7 +26,7 @@ export default {
       data: {
         value: 'Clear',
         ctAbbr: 'clr',
-        ctToShowInsideCSVL: 'clear/index.vue',
+        ctToShowInCSVL: 'clear/index.vue',
         layer: 'view',
       },
     })
@@ -53,9 +53,9 @@ export default {
       let vsCtToShow = ''
 
       if (pSelectedSuggestion.layer === 'view') {
-        vsCtToShow = pSelectedSuggestion.ctToShowInsideCSVL
+        vsCtToShow = pSelectedSuggestion.ctToShowInCSVL
       } else {
-        vsCtToShow = pSelectedSuggestion.ctToShowInsideTab
+        vsCtToShow = pSelectedSuggestion.ctToShowInCL
       }
 
       const objCtToAdd = {

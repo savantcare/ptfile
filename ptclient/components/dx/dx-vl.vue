@@ -47,7 +47,7 @@ export default {
       data: {
         value: 'Add diagnosis',
         ctAbbr: 'adddx',
-        ctToShowInsideTab: 'dx/cl/ctAddDx.vue',
+        ctToShowInCL: 'dx/cl/ctAddDx.vue',
         layer: 'change',
       },
     })
@@ -55,7 +55,7 @@ export default {
       data: {
         value: 'Diagnosis',
         ctAbbr: 'dx',
-        ctToShowInsideTab: 'dx/dx-vl.vue',
+        ctToShowInCL: 'dx/dx-vl.vue',
         layer: 'view',
       },
     })
@@ -63,7 +63,7 @@ export default {
       data: {
         value: 'Multichange dx assessment',
         ctAbbr: 'mcdxa',
-        ctToShowInsideTab: 'dx/cl/ctMultiChangeDxa.vue',
+        ctToShowInCL: 'dx/cl/ctMultiChangeDxa.vue',
         layer: 'change',
       },
     })
@@ -133,8 +133,7 @@ export default {
       const resultData = resultSet[0]
       const tab = {
         label: resultData.value,
-        ctToShow: require('@/components/' + resultData.ctToShowInsideTab)
-          .default,
+        ctToShow: require('@/components/' + resultData.ctToShowInCL).default,
         ctAbbr: resultData.ctAbbr,
         id: resultData.id,
         closable: true,
@@ -150,8 +149,7 @@ export default {
       const resultData = resultSet[0]
       const tab = {
         label: resultData.value,
-        ctToShow: require('@/components/' + resultData.ctToShowInsideTab)
-          .default,
+        ctToShow: require('@/components/' + resultData.ctToShowInCL).default,
         ctAbbr: resultData.ctAbbr,
         id: resultData.id,
         closable: true,
