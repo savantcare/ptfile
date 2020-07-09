@@ -41,8 +41,8 @@ dialog
           Since cfVSSelectedTabId is a computed function it will change when anything it depends on changes
           cfVSSelectedTabId depends on this.$store.state.dialogHoldingTabsInCL.vsSelectedTabId (Line 119 of this file)
           So any Ct can change this.$store.state.dialogHoldingTabsInCL.vsSelectedTabId and that will change the active Tab
-          The sequence of changes is:
-                              
+          The flowchart of changes is:       
+          
                            ┌──────────┐                           
                            │  Any ct  │                           ctShowAddAndRemoveTabsInDialog:171
                            └────┬─────┘                           

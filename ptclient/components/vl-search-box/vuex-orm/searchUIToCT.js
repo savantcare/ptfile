@@ -4,7 +4,7 @@ export default class ormSearchUiToCT extends Model {
   static entity = 'ormSearchUiToCT'
 
   /*
-    The flow is:
+    The flowchart is:
 
     Step 1: All CTs when they start for first time they make an entry in this table.
             For e.g. rec/vl/table.vue
