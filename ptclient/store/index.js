@@ -10,7 +10,7 @@ import VuexORMisDirtyPlugin from '@vuex-orm/plugin-change-flags'
 
 // Ref: https://github.com/eldomagan/vuex-orm-localforage#installation
 import clDialogAndTabsStateModule from '@/components/cl-tabs-manager/clDialogAndTabsState'
-import vlCardsStateModule from '@/components/vl-search-box/vlCardsState'
+import VueStateOfCardsInCSOfVLModule from '@/components/vl-search-box/VueStateOfCardsInCSOfVL'
 import database from '@/database'
 
 // Ref: https://stackoverflow.com/a/62247034
@@ -33,7 +33,7 @@ const createStore = () => {
     state: () => ({}),
     modules: {
       dialogHoldingTabsInCL: clDialogAndTabsStateModule,
-      cardsInCSOfVL: vlCardsStateModule,
+      cardsInCSOfVL: VueStateOfCardsInCSOfVLModule,
     },
     plugins: [VuexORM.install(database)],
   })
