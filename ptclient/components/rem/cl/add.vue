@@ -22,6 +22,7 @@
 </template>
 <script>
 import ormRem from '@/components/rem/vuex-orm/model.js'
+import { REMINDER_API_URL } from '@/static/others.js'
 export default {
   data() {
     return {
@@ -30,7 +31,7 @@ export default {
   },
   computed: {},
   mounted() {
-    /* 
+    /*
       Should data be loaded from localstorage or state
       There are 2 possibilities
         Possibility 1: There is no unsaved data
@@ -38,25 +39,25 @@ export default {
                       2A: Unsaved data is in state / vuex
                       2B: Unsaved data is in Indexed DB
       When there is unsaved data we need to load the unsaved data
-      
+
       The query to load data from vuex is:
       const resultSet = ormRem.query().where('$isNew', true).get()
-      
+
       The permanence of data is:
       Least permanane: data (local variable) of ct    -> Does not survive Ct remounting
       Less permanance: State                          -> Survives previous. Does not survive browser refresh
-      Middle permancne: Index DB                      -> Survives previous. Does not survice clean cache or using from diff browser 
+      Middle permancne: Index DB                      -> Survives previous. Does not survice clean cache or using from diff browser
       Most permanent: Mysql                           -> Survives all previous scenarios
-      
+
       When Ct is mounted the data should come from:
         Step1: Mysql to get permanent data
-        IndexDB: to get unsaved data in the client browser    
-      
+        IndexDB: to get unsaved data in the client browser
+
       Why IndexDB and not state?
         When control comes here there are 2 possibilities:
           1. This is page refresh
           2. This is just Ct being remounted or mounted for the first time
-          In both the above cases IndexDB will have the correct data   
+          In both the above cases IndexDB will have the correct data
           State will have the correct data only when the Ct is being remounted.
       Should IndexDB be used?
         +Ves:
@@ -108,49 +109,81 @@ export default {
         where: pRemID,
         data: {
           remDescription: pEvent,
-        }
+        },
       })
-      console.log(resultSet)      
+      console.log(resultSet)
     },
-    addRem(){
+    addRem() {
       console.log('Add rem called')
-      const ResultSet = ormRem.insert({
-        data: {
-        remDescription: '',
-        priority: 1, 
-        isAutoRem: 1,
-        ROW_START: new Date().getTime(),
-        ROW_END: "2038-01-19 03:14:07.999999",
-        $isNew: true
-      }
-    }).then((entities) => {
-      console.log(entities)
-      this.arRemID.push(entities.rem[0].uuid)
-      console.log(this.arRemID)
-    })
-    console.log(ResultSet)
+      const ResultSet = ormRem
+        .insert({
+          data: {
+            remDescription: '',
+            priority: 1,
+            isAutoRem: 1,
+            ROW_START: new Date().getTime(),
+            ROW_END: '2038-01-19 03:14:07.999999',
+            $isNew: true,
+          },
+        })
+        .then((entities) => {
+          console.log(entities)
+          this.arRemID.push(entities.rem[0].uuid)
+          console.log(this.arRemID)
+        })
+      console.log(ResultSet)
     },
-    sendDataToServer(formName) {
+    async sendDataToServer(formName) {
       const resultSet = ormRem.query().where('$isNew', true).get()
-      if (resultSet.length){
+      if (resultSet.length) {
         console.log('unsaved data found', resultSet, resultSet[0].uuid)
+        const arRemToCreate = []
         for (let i = 0; i < resultSet.length; i++) {
-          console.log ('call API', resultSet[i].uuid)
+          console.log('call API', resultSet[i].uuid)
+          arRemToCreate.push({
+            uuid: resultSet[i].uuid,
+            remDescription: resultSet[i].remDescription,
+            priority: resultSet[i].priority,
+            isAutoRem: resultSet[i].isAutoRem,
+            uuidOfRemMadeFor: 'bfe041fa-073b-4223-8c69-0540ee678ff8',
+            // uuid: uniqid(),
+            recordChangedByUUID: 'bfe041fa-073b-4223-8c69-0540ee678ff8',
+          })
           // Once server returns true then: set isNew and IsDirty to false
         }
-      } else{
+        console.log('Data to send in api', arRemToCreate)
+
+        //REMINDER_API_URL
+        // try {
+        const response = await fetch(REMINDER_API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            // Authorization: 'Bearer ' + TOKEN,
+          },
+          body: JSON.stringify({
+            data: arRemToCreate,
+            patientUUID: 'bfe041fa-073b-4223-8c69-0540ee678ff8',
+          }),
+        })
+        console.log('response=> ', response)
+        if (!response.ok) {
+        } else {
+        }
+        // } catch (ex) {}
+      } else {
         console.log('No Unsaved data')
       }
     },
     resetForm(formName) {
       const resultSet = ormRem.query().where('$isNew', true).get()
-      if (resultSet.length){
+      if (resultSet.length) {
         console.log('unsaved data found', resultSet, resultSet[0].uuid)
         for (let i = 0; i < resultSet.length; i++) {
-          console.log ('Deleting data from ORM')
+          console.log('Deleting data from ORM')
           ormRem.delete(resultSet[i].uuid)
         }
-      } else{
+      } else {
         console.log('No Unsaved data')
       }
       this.arRemID = []
@@ -159,8 +192,8 @@ export default {
     removeRexFromForm(pRemID) {
       ormRem.delete(pRemID)
       const positionFound = this.arRemID.indexOf(pRemID)
-      this.arRemID.splice(positionFound, 1);
+      this.arRemID.splice(positionFound, 1)
     },
-  }
+  },
 }
 </script>
