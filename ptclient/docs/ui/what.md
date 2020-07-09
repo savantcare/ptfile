@@ -25,3 +25,7 @@ Each component will come with a default set of columns that are displayed. The u
 ### User can choose a different set
 
 ![User can choose a different set](./images/user-can-choose-a-different-set.png)
+
+## Q5) What does emr UI view
+
+![dense-view](./elementio-change-analysis/dense-content.png)
