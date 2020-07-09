@@ -1,3 +1,4 @@
+// For flow chart see components/vl-search-box/vuex-orm/searchUIToCT.js:7
 export default {
   state: {
     arCards: [], // Template has a for loop running on this.
@@ -12,6 +13,7 @@ export default {
       state.arCards = value
     },
     mtfShowCardInCSVL(state, pCard) {
+      // CSVL is current state view layer
       state.arCards.push(pCard)
       state.vsSelectedCardId = pCard.id
       console.log('state-> ', state)
