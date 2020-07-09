@@ -4,7 +4,13 @@
       <div slot="header" class="clearfix">
         <span>Reminders</span>
         <el-button-group style="float: right;">
-          <el-button style="padding: 3px;" type="success" plain>A</el-button>
+          <el-button
+            @click="mfOpenADialog"
+            style="padding: 3px;"
+            type="success"
+            plain
+            >A</el-button
+          >
           <el-button style="padding: 3px;" type="primary" plain>M</el-button>
           <el-button style="padding: 3px;" type="warning" plain>D</el-button>
           <el-button style="padding: 3px;" type="info" plain>X</el-button>
@@ -73,5 +79,22 @@ export default {
     },
   },
   mounted() {},
+  methods: {
+    mfOpenADialog() {
+      console.log('show add dialog')
+      const resultSet = ormSearchUiToCT.query().search('Add Reminder').get()
+      const resultData = resultSet[0]
+      console.log(resultData)
+      const tab = {
+        label: resultData.value,
+        ctToShow: require('@/components/' + resultData.ctToShowInsideTab)
+          .default,
+        ctAbbr: resultData.ctAbbr,
+        id: resultData.id,
+        closable: true,
+      }
+      this.$store.commit('mtfShowNewFirstTabInCl', tab)
+    },
+  },
 }
 </script>

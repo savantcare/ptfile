@@ -53,7 +53,7 @@ export default {
 
       state.arTabs.push(objNewTab)
 
-      console.log('state-> ', state)
+      console.log('state-> ', state.arTabs)
     },
   },
 }
