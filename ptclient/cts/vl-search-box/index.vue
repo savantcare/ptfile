@@ -17,7 +17,7 @@ import ormSearchUiToCT from '@/cts/vl-search-box/vuex-orm/searchUIToCT'
 import remSUI from '@/cts/rem/searchInterfaces'
 export default {
   data() {
-    return { searchKeyword: '', placeholder: 'e.g.' }
+    return { searchKeyword: '' }
   },
   components: { remSUI },
   mounted() {
@@ -30,14 +30,23 @@ export default {
         layer: 'view',
       },
     })
+  },
 
-    const resultSet = ormSearchUiToCT
-      .query()
-      .orderBy('usageCountKeptInLS', 'desc')
-      .get()
-    const resultData = resultSet[0]
-    console.log(resultData)
-    this.placeholder = 'e.g. ' + resultData.value
+  computed: {
+    placeholder() {
+      let resultSet = {}
+      resultSet = ormSearchUiToCT
+        .query()
+        .orderBy('usageCountKeptInLS', 'desc')
+        .get()
+      const resultData = resultSet[0]
+      if (resultData) {
+        console.log(resultData)
+        return 'e.g. ' + resultData.value
+      } else {
+        return 'e.g. screening'
+      }
+    },
   },
   methods: {
     mfQuerySearchTerms(pQueryString, pCallBack) {
