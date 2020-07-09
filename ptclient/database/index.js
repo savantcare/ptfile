@@ -2,7 +2,6 @@ import { Database } from '@vuex-orm/core'
 import CtSearch from '@/components/vl-search-box/vuex-orm/searchUiToCT'
 import CtLifeCycle from '@/models/ormCtLifeCycle'
 import User from '@/models/user'
-import Todo from '@/models/Todo'
 import Patient from '@/models/patient'
 import Rex from '@/components/rec/vuex-orm/model.js'
 import Rem from '@/components/rem/vuex-orm/model.js'
@@ -14,7 +13,6 @@ import Dxa from '@/models/Dxa'
 const database = new Database()
 
 database.register(User)
-database.register(Todo)
 database.register(Patient)
 database.register(Rex)
 database.register(Rem)

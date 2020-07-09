@@ -90,28 +90,28 @@ export default {
     }
   },
   methods: {
-      getDescription (pRemID) {
-        console.log(pRemID)
-        const resultSet = ormRem.find(pRemID)
-        if (resultSet){
-          console.log(resultSet)
-          // ['remDescription']
-          console.log(resultSet.uuid)
-          return resultSet.remDescription
-        }else{
-          return ''
+    getDescription(pRemID) {
+      console.log(pRemID)
+      const resultSet = ormRem.find(pRemID)
+      if (resultSet) {
+        console.log(resultSet)
+        // ['remDescription']
+        console.log(resultSet.uuid)
+        return resultSet.remDescription
+      }else{
+        return ''
+      }
+    },
+    setDescription(pEvent,pRemID) {
+      console.log('set called for', pRemID, pEvent)
+      const resultSet = ormRem.update({
+        where: pRemID,
+        data: {
+          remDescription: pEvent
         }
-      },
-      setDescription (pEvent,pRemID) {
-        console.log('set called for', pRemID, pEvent)
-        const resultSet = ormRem.update({
-          where: pRemID,
-          data: {
-            remDescription: pEvent
-          }
-        })
-        console.log(resultSet)      
-      },
+      })
+      console.log(resultSet)      
+    },
     addRem(){
       console.log('Add rem called')
       const ResultSet = ormRem.insert({
