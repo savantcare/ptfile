@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import ormSearchUiToCT from '@/components/vl-search-box/vuex-orm/searchUiToCT'
+import ormSearchUiToCT from '@/components/vl-search-box/vuex-orm/searchUIToCT'
 import ormDx from '@/models/Dx'
 import ormDxa from '@/models/Dxa'
 

@@ -1,5 +1,5 @@
 import { Database } from '@vuex-orm/core'
-import CtSearch from '@/components/vl-search-box/vuex-orm/searchUiToCT'
+import CtSearch from '@/components/vl-search-box/vuex-orm/searchUIToCT'
 import CtLifeCycle from '@/models/ormCtLifeCycle'
 import User from '@/models/user'
 import Patient from '@/models/patient'

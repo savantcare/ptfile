@@ -1,6 +1,6 @@
 <script>
 import { REMINDER_API_URL } from './const.js'
-import ormCTLifeCycle from '@/models/ormCTLifeCycle'
+import ormCTLifeCycle from '@/models/ormCtLifeCycle'
 import ormRem from '@/components/rem/vuex-orm/model.js'
 export default {
   data() {

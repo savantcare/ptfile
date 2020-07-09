@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-card class="box-card">
+    <el-card class="box-card" :body-style="{ paddingLeft: '3px' }">
       <div slot="header" class="clearfix">
         <span>Reminders</span>
         <el-button-group style="float: right;">
@@ -16,7 +16,7 @@
           <el-button style="padding: 3px;" type="info" plain>X</el-button>
         </el-button-group>
       </div>
-      <el-timeline>
+      <el-timeline style="padding-inline-start: 20px;">
         <el-timeline-item
           v-for="row in dataTable"
           :key="row.createdAt"
@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import ormSearchUiToCT from '@/components/vl-search-box/vuex-orm/searchUiToCT'
+import ormSearchUiToCT from '@/components/vl-search-box/vuex-orm/searchUIToCT'
 import ormRem from '@/components/rem/vuex-orm/model.js'
 
 export default {

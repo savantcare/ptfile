@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import ormSearchUiToCT from '@/components/vl-search-box/vuex-orm/searchUiToCT'
+import ormSearchUiToCT from '@/components/vl-search-box/vuex-orm/searchUIToCT'
 import remSUI from '@/components/rem/searchInterface'
 export default {
   data() {

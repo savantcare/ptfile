@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import ormSearchUiToCT from '@/components/vl-search-box/vuex-orm/searchUiToCT'
+import ormSearchUiToCT from '@/components/vl-search-box/vuex-orm/searchUIToCT'
 export default {
   data() {
     return {

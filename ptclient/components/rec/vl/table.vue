@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import ormSearchUiToCT from '@/components/vl-search-box/vuex-orm/searchUiToCT'
-import ormCTLifeCycle from '@/models/ormCTLifeCycle'
+import ormSearchUiToCT from '@/components/vl-search-box/vuex-orm/searchUIToCT'
+import ormCTLifeCycle from '@/models/ormCtLifeCycle'
 export default {
   name: 'vl/table',
   data() {

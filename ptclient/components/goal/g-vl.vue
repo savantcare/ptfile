@@ -22,7 +22,7 @@
 
 <script>
 // import addGoal from './layer-2/addGoal.vue'
-import ormSearchUiToCT from '@/components/vl-search-box/vuex-orm/searchUiToCT'
+import ormSearchUiToCT from '@/components/vl-search-box/vuex-orm/searchUIToCT'
 import ormGoal from '@/models/Goal'
 
 // const { GOAL_API_URL } = 'http://localhost:8000/goals'
