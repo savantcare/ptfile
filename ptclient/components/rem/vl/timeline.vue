@@ -47,7 +47,7 @@ export default {
         for (let i = 0; i < resultSet.length; i++) {
           obj = {}
           obj.remDescription = resultSet[i].remDescription
-          obj.createdAt = '1'
+          obj.createdAt = resultSet[i].ROW_START
           dataTable.push(obj)
         }
       }
