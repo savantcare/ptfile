@@ -44,9 +44,9 @@ export default {
       
       The permanence of data is:
       Least permanane: data (local variable) of ct    -> Does not survive Ct remounting
-      Less permanance: State                          -> Survices previous. Does not survive browser refresh
-      Middle permancne: Index DB                      -> Survices previous. Does not survice clean cache or using from diff browser 
-      Most permanent: Mysql                           -> Survices all previous scenarios
+      Less permanance: State                          -> Survives previous. Does not survive browser refresh
+      Middle permancne: Index DB                      -> Survives previous. Does not survice clean cache or using from diff browser 
+      Most permanent: Mysql                           -> Survives all previous scenarios
       
       When Ct is mounted the data should come from:
         Step1: Mysql to get permanent data
@@ -69,8 +69,8 @@ export default {
                       Suppose doctor closes laptop for 2 days
                       when they come back after 2 days there are 3 new rems on the server
                       When doctor starts the browser, in the code I will have to:
-                        1. Get data from mysql server
-                        2. Compare data in indexDB to the new data recieved to find out what is different
+                        1. Get data from mysql server.
+                        2. Find data from indexDB where the isDirty or isNew flag is true
                         3. Then the data that is found to be different (unsaved data) needs to be inserted into the array that came back from mysql server
                         4. This array needs to be inserted into vuex
                         5. The new vuex needs to be synced with the storage.

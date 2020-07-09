@@ -13,10 +13,18 @@
           >M</el-button
         >
       </div>
-      <el-table :data="dataTable" style="width: 100%;">
-        <el-table-column prop="remDescription" label="Description" width="180">
+      <el-table
+        :data="dataTable"
+        :showHeader="false"
+        :size="mini"
+        style="width: 100%;"
+      >
+        <el-table-column type="expand">
+          <template slot-scope="props">
+            <p>Created at: {{ props.row.createdAt }}</p>
+          </template>
         </el-table-column>
-        <el-table-column prop="createdAt" label="Created At" width="180">
+        <el-table-column prop="remDescription" label="Description" width="180">
         </el-table-column>
       </el-table>
     </el-card>
