@@ -21,7 +21,7 @@
       >
         <el-table-column type="expand">
           <template slot-scope="props">
-            <p>Created at: {{ props.row.createdAt }}</p>
+            <p>Created: {{ props.row.createdAt }}</p>
           </template>
         </el-table-column>
         <el-table-column prop="remDescription" label="Description" width="180">
@@ -48,11 +48,17 @@ export default {
       const resultSet = ormRem.query().where('$isNew', true).get()
       if (resultSet.length) {
         let obj = []
+        let date = ''
         console.log('unsaved data found', resultSet, resultSet[0].uuid)
         for (let i = 0; i < resultSet.length; i++) {
           obj = {}
           obj.remDescription = resultSet[i].remDescription
-          obj.createdAt = resultSet[i].ROW_START
+          // For date format ref: /components/rem/vl/timeline.vue:53
+          date = new Date(resultSet[i].ROW_START)
+          obj.createdAt =
+            date.toLocaleString('default', { month: 'long' }) +
+            '-' +
+            date.getDate()
           dataTable.push(obj)
         }
       }

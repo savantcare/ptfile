@@ -119,7 +119,7 @@ export default {
         remDescription: '',
         priority: 1, 
         isAutoRem: 1,
-        ROW_START: Math.round(new Date().getTime() / 1000),
+        ROW_START: new Date().getTime(),
         ROW_END: "2038-01-19 03:14:07.999999",
         $isNew: true
       }

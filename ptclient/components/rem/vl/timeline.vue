@@ -43,11 +43,21 @@ export default {
       const resultSet = ormRem.query().where('$isNew', true).get()
       if (resultSet.length) {
         let obj = []
+        let date = ''
         console.log('unsaved data found', resultSet, resultSet[0].uuid)
         for (let i = 0; i < resultSet.length; i++) {
           obj = {}
           obj.remDescription = resultSet[i].remDescription
-          obj.createdAt = resultSet[i].ROW_START
+          /*
+          To get the number of the month:
+          obj.createdAt = date.getMonth() + 1 + "-" + date.getDate()
+
+          To get the name of the month:
+          Ref: https://stackoverflow.com/questions/1643320/get-month-name-from-date
+          */
+          date = new Date(resultSet[i].ROW_START)
+          obj.createdAt = date.toLocaleString('default', { month: 'long' }) + "-" + date.getDate()
+
           dataTable.push(obj)
         }
       }
