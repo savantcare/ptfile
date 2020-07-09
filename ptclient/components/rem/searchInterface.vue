@@ -16,7 +16,6 @@ export default {
       data: {
         value: 'Reminders',
         ctAbbr: 'rem',
-        ctToShowInCL: '',
         ctToShowInMSVL: 'rem/vl/table.vue', // MSVL -> Multi state view layer
         ctToShowInCSVL: 'rem/vl/timeline.vue', // CSVL -> Current state view layer
         layer: 'view',
@@ -28,8 +27,6 @@ export default {
         value: 'Add Reminder',
         ctAbbr: 'arem',
         ctToShowInCL: 'rem/cl/add.vue',
-        ctToShowInMSVL: '',
-        ctToShowInCSVL: '',
         layer: 'change',
       },
     })
@@ -39,8 +36,6 @@ export default {
         value: 'Multi change Reminder',
         ctAbbr: 'arem',
         ctToShowInCL: 'rem/cl/mc.vue',
-        ctToShowInMSVL: '',
-        ctToShowInCSVL: '',
         layer: 'change',
       },
     })
