@@ -50,6 +50,8 @@ export default {
     mfHandleSuggestionSelectedByUser(pSelectedSuggestion) {
       console.log('Selected suggestion is', pSelectedSuggestion)
 
+      // Goal: Add the card in CSVL or tab in CL
+
       let vsCtToShow = ''
 
       if (pSelectedSuggestion.layer === 'view') {
@@ -70,8 +72,20 @@ export default {
       } else if (pSelectedSuggestion.layer === 'change') {
         this.$store.commit('mtfShowNewFirstTabInCl', objCtToAdd)
       }
-      this.searchKeyword = '' // Once search work is done then the input area needs to be empty
-      // scrolling to top of the search input box
+
+      // Goal: Increase the usageCount
+      // Update query ref: https://vuex-orm.org/guide/data/inserting-and-updating.html#updates
+      ormSearchUiToCT.update({
+        where: pSelectedSuggestion.id,
+        data: {
+          usageCountKeptInLS: pSelectedSuggestion.usageCountKeptInLS + 1,
+        },
+      })
+
+      // Goal: Once search work is done then the input area needs to be empty
+      this.searchKeyword = ''
+
+      // Goal: scrolling to top of the search input box
       const options = {
         container: '#csvl',
         easing: 'ease-in',

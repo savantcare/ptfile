@@ -97,7 +97,7 @@ export default {
       })
     },
     removeDomain(item) {
-      var index = this.screenForm.screenings.indexOf(item)
+      const index = this.screenForm.screenings.indexOf(item)
       if (index !== -1) {
         this.screenForm.screenings.splice(index, 1)
       }
@@ -107,13 +107,16 @@ export default {
       this.$refs[formName].validate(async (valid) => {
         if (valid) {
           // Add screen
-          let apptDate = new Date().toISOString().slice(0, 19).replace('T', ' ')
-          let screenList = []
+          const apptDate = new Date()
+            .toISOString()
+            .slice(0, 19)
+            .replace('T', ' ')
+          const screenList = []
 
           // create screen data rowSet
           this.screenForm.screenings.forEach((item) => {
             screenList.push({
-              //uuid: uniqid(),
+              // uuid: uniqid(),
               screenUUID: item.value,
               patientUUID: vm.id,
               notes: 'test note',
@@ -147,14 +150,14 @@ export default {
       return this.$store.state.screening.screeningList
     },
     getMasterScreenList() {
-      let masterScreenList = []
+      const masterScreenList = []
       const dbMasterScreenList = this.$store.state.screening.screenMasterList
       const currentScreenList = this.$store.state.screening.screeningList
       dbMasterScreenList.forEach((list) => {
         if (
           currentScreenList.filter(
-            (item) => item.scientificName == list.scientificName
-          ).length == 0
+            (item) => item.scientificName === list.scientificName
+          ).length === 0
         ) {
           masterScreenList.push({
             value: list.uuid,
@@ -165,9 +168,9 @@ export default {
       return masterScreenList
     },
   },
-  /*created: function() {
+  /* created: function() {
       // imagine getDataFor calls some API via AJAX
       this.masterScreenList = this.getMasterScreenList
-  },*/
+  }, */
 }
 </script>

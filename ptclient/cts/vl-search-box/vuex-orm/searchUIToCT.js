@@ -31,11 +31,11 @@ export default class ormSearchUiToCT extends Model {
 
     When autocomplete is done by user in cts/vl-search-box/vuex-orm/searchUIToCT.js:mfHandleSuggestionSelectedByUser
 
-    A nre object is added to VueStateOfTabsAndDialogInCL.js
+    A new object is added to VueStateOfTabsAndDialogInCL.js
 
     From click in VL to tab in CL
     -----------------------------
-    A nre object is added to VueStateOfTabsAndDialogInCL.js
+    A new object is added to VueStateOfTabsAndDialogInCL.js
 
 
     */
@@ -49,6 +49,7 @@ export default class ormSearchUiToCT extends Model {
       ctToShowInCSVL: this.string(''),
       ctToShowInMSVL: this.string(''),
       layer: this.string(''),
+      usageCountKeptInLS: this.number(0),
     }
   }
 }

@@ -205,11 +205,11 @@ export default {
       notify: this.$notify,
     }
     this.$store.dispatch('getScreeningDetail', params)
-    //console.log(this.$store.state);
+    // console.log(this.$store.state);
 
-    let dbLastScreenAnswerDetail = this.$store.state.screening
+    const dbLastScreenAnswerDetail = this.$store.state.screening
       .screenPHQ9AnswerDetail
-    //console.log(Object.keys(dbLastScreenAnswerDetail).length)
+    // console.log(Object.keys(dbLastScreenAnswerDetail).length)
     if (Object.keys(dbLastScreenAnswerDetail).length > 0) {
       this.updateFlag = true
       this.question10 =
@@ -217,7 +217,7 @@ export default {
           ? null
           : parseInt(dbLastScreenAnswerDetail.question10)
       this.questionData.forEach((row) => {
-        let key = 'question' + row.id
+        const key = 'question' + row.id
         row.selectedAnswer =
           dbLastScreenAnswerDetail[key] == null
             ? null
@@ -238,8 +238,8 @@ export default {
     async submitForm() {
       // submit screeniggn answer screen
 
-      //let apptDate = new Date().toISOString().slice(0, 19).replace('T', ' ')
-      let screenDetailData = {}
+      // let apptDate = new Date().toISOString().slice(0, 19).replace('T', ' ')
+      const screenDetailData = {}
 
       // create screen data rowSet
       // responseUUID: uniqid(),
@@ -250,23 +250,23 @@ export default {
         this.question10 == null ? null : String(this.question10)
 
       this.questionData.forEach((row) => {
-        let key = 'question' + row.id
+        const key = 'question' + row.id
         screenDetailData[key] =
           row.selectedAnswer == null ? null : String(row.selectedAnswer)
       })
 
       console.log(screenDetailData)
 
-      //let aaa = JSON.parse(JSON.stringify(screenDetailData));
+      // let aaa = JSON.parse(JSON.stringify(screenDetailData));
 
-      //console.log(aaa);
+      // console.log(aaa);
       await this.$store.dispatch('storeScreeningDetail', {
         data: [screenDetailData],
         notify: this.$notify,
         patientUUID: this.$route.query.patient_id,
         updateFlag: this.updateFlag,
         screentype: 'PHQ9',
-        //date: apptDate
+        // date: apptDate
       })
     },
     resetForm(formName) {
