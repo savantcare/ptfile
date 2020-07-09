@@ -168,11 +168,7 @@ export default {
           if (!response.ok) {
           } else {
             arRemsToCreateInDB.forEach((item) => {
-
-
-
-
-            /* Method 1: Update exisitng record
+              /* Method 1: Update exisitng record
             In this method in July 2020 we were not able to set isDirty to false
             Posted bug at: https://github.com/vuex-orm/plugin-change-flags/issues/12     
             ormRem.update({
@@ -197,13 +193,13 @@ export default {
 
               /* Method2: Delete existing and insert from item */
               console.log(item.uuid)
-              ormRem.delete(item.uuid).then(result => {
+              ormRem.delete(item.uuid).then((result) => {
                 console.log('update result: ', result)
               })
               console.log('item is')
               console.log(item)
 
-/*              item.$isDirty = false;
+              /*              item.$isDirty = false;
               item.$isNew = false;
               console.log(item)
               */
@@ -216,10 +212,10 @@ export default {
                   isAutoRem: item.isAutoRem,
                   ROW_START: item.ROW_START,
                   ROW_END: item.ROW_END,
-               },
+                },
               })
             })
-         }
+          }
         } catch (ex) {}
       } else {
         console.log('No Unsaved data')

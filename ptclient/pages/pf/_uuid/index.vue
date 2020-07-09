@@ -2,12 +2,12 @@
   <div>
     <Split style="height: 900px; width: 1400px;" :gutterSize="5">
       <SplitArea :size="75">
-        <ctRexVl> </ctRexVl>
-        <ctRemVL> </ctRemVL>
-        <ctBMVl> </ctBMVl>
-        <ctDXVl> </ctDXVl>
-        <ctGVl> </ctGVl>
-        <ctScrVl> </ctScrVl>
+        <ctRexVl> </ctRexVl><br />
+        <ctRemVL> </ctRemVL><br />
+        <ctBMVl> </ctBMVl><br />
+        <ctDXVl> </ctDXVl><br />
+        <ctGVl> </ctGVl><br />
+        <ctScrVl> </ctScrVl><br />
       </SplitArea>
       <SplitArea :size="25" id="csvl">
         <!-- <keep-alive> before the card creates problem since multiple cards then get inside keep alive 
