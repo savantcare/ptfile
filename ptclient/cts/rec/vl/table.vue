@@ -23,7 +23,6 @@
 <script>
 import ormCTLifeCycle from '@/models/ormCtLifeCycle'
 export default {
-  name: 'vl/table',
   data() {
     return {
       daTable: [],
