@@ -30,16 +30,7 @@ export default {
   name: 'vl/table',
   data() {
     return {
-      daTable: [
-        {
-          createdAt: '2016-05-03',
-          description: 'Walk 10 mins everday',
-        },
-        {
-          createdAt: '2016-05-02',
-          description: 'Sleep 8 hours every day',
-        },
-      ],
+      daTable: [],
     }
   },
   // activated lifecycle hook, is called whenever a keep-alive component is activated.
@@ -77,7 +68,9 @@ export default {
         data: {
           value: 'Recommendations',
           ctAbbr: 'rex',
-          ctToShowInsideTab: 'rec/vl/table.vue',
+          ctToShowInsideTab: '',
+          ctToShowInsideMSVL: 'rec/vl/table.vue',
+          ctToShowInsideCSVL: 'rec/vl/timeline.vue',
           layer: 'view',
         },
       })

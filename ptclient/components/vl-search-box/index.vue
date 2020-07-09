@@ -51,6 +51,10 @@ export default {
         // Here I have to use a variable otherwise webpack gives error. https://stackoverflow.com/questions/57349167/vue-js-dynamic-image-src-with-webpack-require-not-working
         ctToShowInsideTab: require('@/components/' +
           pSelectedSuggestion.ctToShowInsideTab).default,
+        ctToShowInsideCSVL: require('@/components/' +
+          pSelectedSuggestion.ctToShowInsideCSVL).default,
+        ctToShowInsideMSVL: require('@/components/' +
+          pSelectedSuggestion.ctToShowInsideMSVL).default,
         id: pSelectedSuggestion.id,
         closable: true,
       }

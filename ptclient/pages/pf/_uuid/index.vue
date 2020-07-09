@@ -27,7 +27,7 @@
           <!-- Sorrounding component with keepAlive does not help. Since previous rendering of rex
           is not hidden. When user types rex 2 times, rex is being displayed 2 times
           -->
-          <component v-bind:is="card.ctToShowInsideTab"></component>
+          <component v-bind:is="card.ctToShowInsideCSVL"></component>
         </el-card>
         <ctVLSearchBox></ctVLSearchBox>
       </SplitArea>
