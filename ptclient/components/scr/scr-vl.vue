@@ -114,7 +114,7 @@ export default {
           data: {
             value: 'Screening',
             ctAbbr: 'scr',
-            ctToShow: 'scr/scr-l1.vue',
+            ctToShowInsideTab: 'scr/scr-l1.vue',
             layer: 'view',
           },
         })

@@ -40,7 +40,7 @@ export default {
       data: {
         value: 'Add goal',
         ctAbbr: 'addg',
-        ctToShow: 'goal/cl/ctAddGoal.vue',
+        ctToShowInsideTab: 'goal/cl/ctAddGoal.vue',
         layer: 'change',
       },
     })
@@ -49,7 +49,7 @@ export default {
       data: {
         value: 'Multi rate goal',
         ctAbbr: 'mcg',
-        ctToShow: 'goal/cl/ctMultiRateGoal.vue',
+        ctToShowInsideTab: 'goal/cl/ctMultiRateGoal.vue',
         layer: 'change',
       },
     })
@@ -58,7 +58,7 @@ export default {
       data: {
         value: 'Goal',
         ctAbbr: 'g',
-        ctToShow: 'goal/g-vl.vue',
+        ctToShowInsideTab: 'goal/g-vl.vue',
         layer: 'view',
       },
     })
