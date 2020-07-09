@@ -81,7 +81,7 @@ dialog
             :closable="tab.closable"
           >
             <!-- Using https://vuejs.org/v2/guide/components.html#Dynamic-Components -->
-            <component v-bind:is="tab.ctToShowInsideTab"></component>
+            <component v-bind:is="tab.ctToShow"></component>
           </el-tab-pane>
         </el-tabs>
       </el-col>

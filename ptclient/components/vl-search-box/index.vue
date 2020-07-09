@@ -49,15 +49,19 @@ export default {
     },
     mfHandleSuggestionSelectedByUser(pSelectedSuggestion) {
       console.log('Selected suggestion is', pSelectedSuggestion)
+
+      let vsCtToShow = ''
+
+      if (pSelectedSuggestion.layer === 'view') {
+        vsCtToShow = pSelectedSuggestion.ctToShowInsideCSVL
+      } else {
+        vsCtToShow = pSelectedSuggestion.ctToShowInsideTab
+      }
+
       const objCtToAdd = {
         label: pSelectedSuggestion.value,
         // Here I have to use a variable otherwise webpack gives error. https://stackoverflow.com/questions/57349167/vue-js-dynamic-image-src-with-webpack-require-not-working
-        ctToShowInsideTab: require('@/components/' +
-          pSelectedSuggestion.ctToShowInsideTab).default,
-        ctToShowInsideCSVL: require('@/components/' +
-          pSelectedSuggestion.ctToShowInsideCSVL).default,
-        ctToShowInsideMSVL: require('@/components/' +
-          pSelectedSuggestion.ctToShowInsideMSVL).default,
+        ctToShow: require('@/components/' + vsCtToShow).default,
         id: pSelectedSuggestion.id,
         closable: true,
       }

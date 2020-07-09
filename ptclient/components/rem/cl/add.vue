@@ -107,7 +107,7 @@ export default {
       const resultSet = ormRem.update({
         where: pRemID,
         data: {
-          remDescription: pEvent
+          remDescription: pEvent,
         }
       })
       console.log(resultSet)      
