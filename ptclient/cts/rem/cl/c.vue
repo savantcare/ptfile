@@ -7,6 +7,11 @@
           @input="setDescription($event)"
         ></el-input>
       </el-form-item>
+      <el-form-item>
+        <el-button type="primary" plain @click="sendDataToServer"
+          >Submit</el-button
+        >
+      </el-form-item>
     </el-form>
   </div>
 </template>
@@ -44,6 +49,7 @@ export default {
       })
       console.log(resultSet)
     },
+    sendDataToServer() {},
   },
 }
 </script>
