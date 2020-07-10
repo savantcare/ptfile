@@ -57,5 +57,8 @@ export default {
    */
   build: {
     transpile: [/^element-ui/],
+    extend(config, ctx) {
+      config.devtool = 'source-map'
+    },
   },
 }

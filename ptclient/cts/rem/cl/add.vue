@@ -94,6 +94,8 @@ export default {
     }
   },
   methods: {
+    // Initially tried to write v-model and this was computed function
+    // But vmodel+computed the description id cannot be sent to computed fn
     getDescription(pRemID) {
       console.log(pRemID)
       const resultSet = ormRem.find(pRemID)
@@ -102,14 +104,6 @@ export default {
         // ['remDescription']
         console.log(resultSet.uuid)
         return resultSet.remDescription
-      } else {
-        return ''
-      }
-    },
-    mfGetDirtyClassName(pRemID) {
-      const resultSet = ormRem.find(pRemID)
-      if (resultSet.$isDirty) {
-        return 'unsaved-data'
       } else {
         return ''
       }
@@ -123,6 +117,14 @@ export default {
         },
       })
       console.log(resultSet)
+    },
+    mfGetDirtyClassName(pRemID) {
+      const resultSet = ormRem.find(pRemID)
+      if (resultSet.$isDirty) {
+        return 'unsaved-data'
+      } else {
+        return ''
+      }
     },
     addRemToUI() {
       console.log('Add rem called')

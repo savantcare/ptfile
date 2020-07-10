@@ -1,16 +1,19 @@
 <template>
-  <el-form label-width="120px">
-    <el-form-item label="Description">
-      <el-input
-        :value="getDescription()"
-        @input="setDescription($event, id)"
-      ></el-input>
-    </el-form-item>
-  </el-form>
+  <div>
+    <el-form label-width="120px">
+      <el-form-item label="Description">
+        <el-input
+          :value="getDescription()"
+          @input="setDescription($event, id)"
+        ></el-input>
+      </el-form-item>
+    </el-form>
+  </div>
 </template>
 <script>
 import ormRem from '@/cts/rem/vuex-orm/model.js'
 export default {
+  props: ['firstParam'],
   data() {
     return {
       doRem: {},
@@ -20,7 +23,7 @@ export default {
     getDescription() {
       const obRemToShowInCl = this.$store.state.vstObjTabsInCL.arTabs.filter(
         (item) => {
-          return item.ctAbbr == 'crem'
+          return item.ctAbbr === 'crem'
         }
       )
       console.log(
@@ -28,7 +31,8 @@ export default {
         obRemToShowInCl[0].ctDataToPass
       )
       if (obRemToShowInCl.length) {
-        return obRemToShowInCl[0].ctDataToPass.remDescription
+        // return obRemToShowInCl[0].ctDataToPass.remDescription
+        return 'jaikali ma'
       } else {
         return ''
       }

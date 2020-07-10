@@ -151,6 +151,9 @@ export default {
       }
       this.$store.commit('mtfShowNewFirstTabInCl', tab)
     },
+    mfOpenDDialog() {
+      console.log('show add dialog')
+    },
     mfOpenXDialog() {
       console.log('show add dialog')
       const resultSet = ormSearchPhraseUiToCT
@@ -168,31 +171,63 @@ export default {
       }
       this.$store.commit('mtfShowNewFirstTabInCl', tab)
     },
-    mfGetDirtyClassName(pRow, pIndex) {
-      if (pRow.row.$isDirty) {
-        return 'unsaved-data'
-      } else {
-        return ''
-      }
-    },
     mfOpenCDialog(pRow) {
       console.log('Open change rem dialog -> ', pRow)
 
+      // Goal: Find out which CT will handle this work
       const resultSet = ormSearchPhraseUiToCT
         .query()
         .search('change reminder')
         .get()
       const resultData = resultSet[0]
       console.log(resultData)
+
+      // Goal: Create the obj Tab that will be worked upon by for loop in
+      // /cts/cl-tabs-manager/ctShowAddAndRemoveTabsInDialog.vue: 76
+
+      /*
+       We need ID inside the change ct. Since change ct needs the exiting description
+       Option 1: Send the whole data row
+       Option 2: Send just the ID in a prop.
+        +ves:
+          1. At some places I may need to call change where I have the reminder ID but
+          i do not have the remainder of the data row. Hence this makes the Change Ct possible
+          to use at other places
+          2. When I send a paramter it is like calling a function. Sending the whole data row
+          is like working on a gloal variable. So other Cts can also modify this global variable.
+      */
+
+      let vstPropsToSendToCt = ''
+      vstPropsToSendToCt = pRow.uuid
+
       const tab = {
-        label: resultData.value,
+        label: resultData.value, // TODO: Should be called vsLabel
+        /*
+        import and require are similar
+        require can use a variable.
+        import cannot use a variable. Benefits: webpack optimization
+        How optimize? Webpack can remove that module completely if module is not used
+
+        What does .default do?
+        Related to webpack and HMR (Hot module reload)
+        Ref: https://stackoverflow.com/questions/46215705/why-need-default-after-require-method-in-vue
+
+        */
         ctToShow: require('@/cts/' + resultData.ctToShowInCL).default,
-        ctAbbr: resultData.ctAbbr,
-        id: resultData.id,
-        ctDataToPass: pRow, // This holds all the data for the record we want to change in cl
-        closable: true,
+        ctAbbr: resultData.ctAbbr, // TODO: Should be called vsCtAbbr
+        id: resultData.id, // TODO: should be called vnID
+        vstPropsToGiveToCt: vstPropsToSendToCt, // This holds all the data for the record we want to change in cl
+        closable: true, // TODO: Should be called blClosable
       }
+      console.log(tab)
       this.$store.commit('mtfShowNewFirstTabInCl', tab)
+    },
+    mfGetDirtyClassName(pRow, pIndex) {
+      if (pRow.row.$isDirty) {
+        return 'unsaved-data'
+      } else {
+        return ''
+      }
     },
   },
 }

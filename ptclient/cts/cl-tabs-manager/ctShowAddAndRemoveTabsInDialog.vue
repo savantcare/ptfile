@@ -81,7 +81,10 @@ dialog
             :closable="tab.closable"
           >
             <!-- Using https://vuejs.org/v2/guide/components.html#Dynamic-Components -->
-            <component v-bind:is="tab.ctToShow"></component>
+            <component
+              v-bind:is="tab.ctToShow"
+              :firstParam="tab.vstPropsToGiveToCt"
+            ></component>
           </el-tab-pane>
         </el-tabs>
       </el-col>
