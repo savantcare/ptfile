@@ -35,12 +35,14 @@ export default {
     return {
       keystrokeCount: 0,
       reminderDesc: '',
+      uuid: '',
     }
   },
   computed: {
     dataTable() {
+      //      console.log('inside computed function the UUID is', this.uuid)
       const dataTable = []
-      const resultSet = ormRem.query().where('uuid', this.firstParam).get()
+      const resultSet = ormRem.query().where('uuid', this.uuid).get()
       if (resultSet.length) {
         let obj = []
         let date = ''
@@ -83,6 +85,7 @@ export default {
         // console.log('Just finisghed running query on vuexORM')
         if (resultSet) {
           // console.log(resultSet)
+          this.uuid = resultSet.uuid
           return resultSet.remDescription
         } else {
           return ''
