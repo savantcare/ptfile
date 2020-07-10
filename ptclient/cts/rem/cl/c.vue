@@ -76,10 +76,9 @@ export default {
   methods: {
     getDescription() {
       const rowID = this.firstParam
-      console.log('Inside get des')
-      console.log(rowID)
+      // console.log('Inside get des rowID')
       if (!this.reminderDesc) {
-        console.log('Going to run query on vuexORM')
+        // console.log('Going to run query on vuexORM')
         const resultSet = ormRem.find(rowID)
         // console.log('Just finisghed running query on vuexORM')
         this.reminderRowStart = resultSet.ROW_START
@@ -98,7 +97,7 @@ export default {
       // Goal: Save to state once every 5 key strokes, This is done so that the system remains resonsive.
 
       if (this.keystrokeCount === 0) {
-        console.log('saving to state')
+        //    console.log('saving to state')
         const rowID = this.firstParam
         ormRem.update({
           where: rowID,
@@ -108,7 +107,7 @@ export default {
         })
         this.keystrokeCount++
       } else {
-        console.log('Not saving to state')
+        // console.log('Not saving to state')
         this.keystrokeCount++
         if (this.keystrokeCount === 5) {
           this.keystrokeCount = 0

@@ -139,14 +139,16 @@ export default {
     this.vblIsdialogHoldingTabsInCLVisible = false
     this.cfArTabs = [] // Template has a for loop running on this.
     this.cfVSSelectedTabId = ''
+    /*
     const self = this // this is not available inside addEventListener since execution context changes. Hence assining this to self Ref: https://stackoverflow.com/a/50818181
-    window.addEventListener(
+      window.addEventListener(
       'keyup',
       function (e) {
         console.log('the keyboard key up detected')
         self.selectActiveTabFromKeyboard(e)
       }.bind()
     )
+    */
   },
   methods: {
     // #region kbselect
