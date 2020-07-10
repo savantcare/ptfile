@@ -28,6 +28,7 @@
   </div>
 </template>
 <script>
+import { REMINDER_API_URL } from '../const.js'
 import ormRem from '@/cts/rem/vuex-orm/model.js'
 export default {
   props: ['firstParam'],
@@ -118,7 +119,25 @@ export default {
       this.reminderDesc = pEvent
     },
 
-    sendDataToServer() {},
+    async sendDataToServer() {
+      try {
+        const response = await fetch(`${REMINDER_API_URL}/${this.uuid}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            // "Authorization": "Bearer " + TOKEN
+          },
+          body: JSON.stringify({ description: this.getDescription() }),
+        })
+        if (!response.ok) {
+          console.log('Failed to update')
+        } else {
+          console.log('update success')
+        }
+      } catch (ex) {}
+
+      console.log('sendDataToServer-> ', this.uuid, this.getDescription())
+    },
   },
 }
 </script>

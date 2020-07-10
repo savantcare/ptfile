@@ -73,7 +73,7 @@ module.exports = (io, sequelize) => {
       // Update the existing object to discontinue.
       await Reminder.update(
         {
-          description: req.body.description,
+          remDescription: req.body.description,
         },
         {
           where: {
@@ -82,10 +82,10 @@ module.exports = (io, sequelize) => {
         }
       );
 
-      io.to(`room-${req.body.patientId}-Doctor`).emit(
+      /* io.to(`room-${req.body.patientId}-Doctor`).emit(
         "UPDATE_REMINDER",
         req.body
-      );
+      ); */
       res.send(
         "ok"
       ); /* Fix: Instead of sending the whole object only OK needs to be sent*/
