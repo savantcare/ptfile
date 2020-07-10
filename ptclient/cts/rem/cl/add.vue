@@ -4,6 +4,7 @@
       <el-input
         type="textarea"
         style="width: 800px;"
+        :class="getFieldClass(id)"
         :autosize="{ minRows: 2, maxRows: 10 }"
         placeholder="Please input"
         :value="getDescription(id)"
@@ -101,6 +102,14 @@ export default {
         // ['remDescription']
         console.log(resultSet.uuid)
         return resultSet.remDescription
+      } else {
+        return ''
+      }
+    },
+    getFieldClass(pRemID) {
+      const unsavedDescription = this.getDescription(pRemID)
+      if (unsavedDescription.length > 0) {
+        return 'unsaved-data'
       } else {
         return ''
       }
@@ -245,3 +254,9 @@ export default {
   },
 }
 </script>
+
+<style>
+.unsaved-data textarea {
+  border-color: #e6a23c;
+}
+</style>
