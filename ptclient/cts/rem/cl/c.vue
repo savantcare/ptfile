@@ -33,7 +33,8 @@ export default {
   props: ['firstParam'],
   data() {
     return {
-      reminderRowPrimaryKey: {},
+      keystrokeCount: 0,
+      reminderDesc: '',
     }
   },
   computed: {
@@ -75,28 +76,47 @@ export default {
   methods: {
     getDescription() {
       const remUUID = this.firstParam
+      console.log('Inside get des')
       // console.log(remUUID)
-      const resultSet = ormRem.query().where('uuid', remUUID).get()
-      // console.log(resultSet)
-      this.reminderRowStart = resultSet[0].ROW_START
-      if (resultSet) {
-        // console.log(resultSet)
-        return resultSet[0].remDescription
+      if (!this.reminderDesc) {
+        console.log('Going to run query on vuexORM')
+        const resultSet = ormRem.query().where('uuid', remUUID).get()
+        // console.log('Just finisghed running query on vuexORM')
+        this.reminderRowStart = resultSet[0].ROW_START
+        if (resultSet) {
+          // console.log(resultSet)
+          return resultSet[0].remDescription
+        } else {
+          return ''
+        }
       } else {
-        return ''
+        console.log('Returning withiout running query on vuexORM')
+        return this.reminderDesc
       }
     },
     setDescription(pEvent) {
       // console.log('set called for',this.firstParam,this.reminderRowStart,pEvent)
-      const remUUID = this.firstParam
-      ormRem.update({
-        where: [remUUID, this.reminderRowStart],
-        data: {
-          remDescription: pEvent,
-        },
-      })
-      // console.log(resultSet)
+
+      if (this.keystrokeCount === 0) {
+        console.log('saving to state')
+        const remUUID = this.firstParam
+        ormRem.update({
+          where: [remUUID, this.reminderRowStart],
+          data: {
+            remDescription: pEvent,
+          },
+        })
+        this.keystrokeCount++
+      } else {
+        console.log('Not saving to state')
+        this.keystrokeCount++
+        if (this.keystrokeCount === 5) {
+          this.keystrokeCount = 0
+        }
+      }
+      this.reminderDesc = pEvent
     },
+
     sendDataToServer() {},
   },
 }
