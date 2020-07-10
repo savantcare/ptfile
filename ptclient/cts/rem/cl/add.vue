@@ -83,9 +83,9 @@ export default {
     // When there is unsaved data we load the unsaved data
     const resultSet = ormRem.query().where('$isNew', true).get()
     if (resultSet.length) {
-      console.log('unsaved data found', resultSet, resultSet[0].uuid)
+      console.log('unsaved data found', resultSet, resultSet[0].$id)
       for (let i = 0; i < resultSet.length; i++) {
-        this.daRemID.push(resultSet[i].uuid)
+        this.daRemID.push(resultSet[i].$id)
       }
     } else {
       // When there is no unsaved data then we add an empty data to the state inside vuex
@@ -120,6 +120,7 @@ export default {
       console.log(resultSet)
     },
     mfGetDirtyClassName(pRemID) {
+      console.log(pRemID)
       const resultSet = ormRem.find(pRemID)
       if (resultSet.$isDirty) {
         return 'unsaved-data'
@@ -142,7 +143,7 @@ export default {
         })
         .then((entities) => {
           console.log(entities)
-          this.daRemID.push(entities.rem[0].uuid)
+          this.daRemID.push(entities.rem[0].$id)
           console.log(this.daRemID)
         })
       console.log(ResultSet)
