@@ -40,6 +40,7 @@
           v-for="row in dataTable"
           :key="row.createdAt"
           :timestamp="row.createdAt"
+          :type="row.type"
         >
           {{ row.remDescription }}
           <el-button-group style="float: right;">
@@ -89,6 +90,11 @@ export default {
             date.toLocaleString('default', { month: 'long' }) +
             '-' +
             date.getDate()
+          if (resultSet[i].$isDirty) {
+            obj.type = 'warning'
+          } else {
+            obj.type = ''
+          }
 
           dataTable.push(obj)
         }
