@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-form label-width="120px">
+    <el-form>
       <el-form-item label="Description">
         <el-input
           :value="getDescription()"
