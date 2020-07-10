@@ -112,7 +112,7 @@ export default {
         // Step 2/3: Inserting Search interfaces to this component
         ormSearchUiToCT.insert({
           data: {
-            value: 'Screening',
+            value: 'screening',
             ctAbbr: 'scr',
             ctToShowInCL: 'scr/scr-l1.vue',
             layer: 'view',

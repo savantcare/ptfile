@@ -11,7 +11,7 @@ export default {
   mounted() {
     ormCTLifeCycle.insert({
       data: {
-        name: 'Recommendations',
+        name: 'recommendations',
         status: 3,
       },
     })
@@ -19,7 +19,7 @@ export default {
     // Step 2/3: Inserting Search interfaces to this component
     ormSearchUiToCT.insert({
       data: {
-        value: 'Recommendations',
+        value: 'recommendations',
         ctAbbr: 'rex',
         ctToShowInCL: '',
         ctToShowInMSVL: 'rec/vl/table.vue',
@@ -30,7 +30,7 @@ export default {
 
     ormSearchUiToCT.insert({
       data: {
-        value: 'Add Recommendations',
+        value: 'add recommendations',
         ctAbbr: 'arex',
         ctToShowInCL: 'rec/vl/table.vue',
         layer: 'change',

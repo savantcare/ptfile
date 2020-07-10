@@ -15,7 +15,7 @@ export default {
     // Search interfaces to this component
     ormSearchUiToCT.insert({
       data: {
-        value: 'Add diagnosis',
+        value: 'add diagnosis',
         ctAbbr: 'adddx',
         ctToShowInCL: 'dx/cl/ctAddDx.vue',
         layer: 'change',
@@ -23,7 +23,7 @@ export default {
     })
     ormSearchUiToCT.insert({
       data: {
-        value: 'Diagnosis',
+        value: 'diagnosis',
         ctAbbr: 'dx',
         ctToShowInCL: 'dx/dx-vl.vue',
         layer: 'view',
@@ -31,7 +31,7 @@ export default {
     })
     ormSearchUiToCT.insert({
       data: {
-        value: 'Multichange dx assessment',
+        value: 'multichange dx assessment',
         ctAbbr: 'mcdxa',
         ctToShowInCL: 'dx/cl/ctMultiChangeDxa.vue',
         layer: 'change',

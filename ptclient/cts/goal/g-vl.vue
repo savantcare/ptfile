@@ -65,7 +65,7 @@ export default {
     },
     mfOpenADialog() {
       console.log('show add dialog')
-      const resultSet = ormSearchUiToCT.query().search('Add goal').get()
+      const resultSet = ormSearchUiToCT.query().search('add goal').get()
       const resultData = resultSet[0]
       const tab = {
         label: resultData.value,

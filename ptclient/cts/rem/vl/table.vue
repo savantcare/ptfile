@@ -99,7 +99,7 @@ export default {
   methods: {
     mfOpenADialog() {
       console.log('show add dialog')
-      const resultSet = ormSearchUiToCT.query().search('Add Reminder').get()
+      const resultSet = ormSearchUiToCT.query().search('add reminder').get()
       const resultData = resultSet[0]
       console.log(resultData)
       const tab = {
@@ -115,7 +115,7 @@ export default {
       console.log('show add dialog')
       const resultSet = ormSearchUiToCT
         .query()
-        .search('Multi change Reminder')
+        .search('multi change reminder')
         .get()
       const resultData = resultSet[0]
       console.log(resultData)

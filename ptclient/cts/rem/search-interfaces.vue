@@ -14,7 +14,7 @@ export default {
   mounted() {
     ormSearchUiToCT.insert({
       data: {
-        value: 'Reminders',
+        value: 'reminders',
         ctAbbr: 'rem',
         ctToShowInMSVL: 'rem/vl/table.vue', // MSVL -> Multi state view layer
         ctToShowInCSVL: 'rem/vl/timeline.vue', // CSVL -> Current state view layer
@@ -24,7 +24,7 @@ export default {
 
     ormSearchUiToCT.insert({
       data: {
-        value: 'Add Reminder',
+        value: 'add reminder',
         ctAbbr: 'arem',
         ctToShowInCL: 'rem/cl/add.vue',
         layer: 'change',
@@ -33,7 +33,7 @@ export default {
 
     ormSearchUiToCT.insert({
       data: {
-        value: 'Multi change Reminder',
+        value: 'multi change reminder',
         ctAbbr: 'arem',
         ctToShowInCL: 'rem/cl/mc.vue',
         layer: 'change',

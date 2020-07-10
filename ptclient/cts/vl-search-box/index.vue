@@ -24,7 +24,7 @@ export default {
     // Search interfaces to this component
     ormSearchUiToCT.insert({
       data: {
-        value: 'Clear',
+        value: 'clear',
         ctAbbr: 'clr',
         ctToShowInCSVL: 'clear/index.vue',
         layer: 'view',
@@ -76,7 +76,7 @@ export default {
     mfHandleSuggestionSelectedByUser(pSelectedSuggestion) {
       console.log('Selected suggestion is', pSelectedSuggestion)
 
-      // Goal: Add the card in CSVL or tab in CL
+      // Goal: Add the card in CSVL (Current state in View layer) or tab in CL (Change layer)
 
       let vsCtToShow = ''
 

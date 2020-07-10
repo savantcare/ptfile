@@ -15,7 +15,7 @@ export default {
     // Search interfaces to this component
     ormSearchUiToCT.insert({
       data: {
-        value: 'Add goal',
+        value: 'add goal',
         ctAbbr: 'addg',
         ctToShowInCL: 'goal/cl/ctAddGoal.vue',
         layer: 'change',
@@ -24,7 +24,7 @@ export default {
 
     ormSearchUiToCT.insert({
       data: {
-        value: 'Multi rate goal',
+        value: 'multi rate goal',
         ctAbbr: 'mcg',
         ctToShowInCL: 'goal/cl/ctMultiRateGoal.vue',
         layer: 'change',
@@ -33,7 +33,7 @@ export default {
 
     ormSearchUiToCT.insert({
       data: {
-        value: 'Goal',
+        value: 'goal',
         ctAbbr: 'g',
         ctToShowInCL: 'goal/g-vl.vue',
         layer: 'view',
