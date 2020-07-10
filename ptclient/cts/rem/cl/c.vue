@@ -4,7 +4,7 @@
       <el-form-item label="Description">
         <el-input
           :value="getDescription()"
-          @input="setDescription($event, id)"
+          @input="setDescription($event)"
         ></el-input>
       </el-form-item>
     </el-form>
@@ -21,26 +21,23 @@ export default {
   },
   methods: {
     getDescription() {
-      const obRemToShowInCl = this.$store.state.vstObjTabsInCL.arTabs.filter(
-        (item) => {
-          return item.ctAbbr === 'crem'
-        }
-      )
-      console.log(
-        'selected rem object after filter',
-        obRemToShowInCl[0].ctDataToPass
-      )
-      if (obRemToShowInCl.length) {
-        // return obRemToShowInCl[0].ctDataToPass.remDescription
-        return 'jaikali ma'
+      const remUUID = this.firstParam
+      console.log(remUUID)
+      const resultSet = ormRem.find(remUUID)
+      if (resultSet) {
+        console.log(resultSet)
+        // ['remDescription']
+        console.log(resultSet.uuid)
+        return resultSet.remDescription
       } else {
         return ''
       }
     },
-    setDescription(pEvent, pRemID) {
-      console.log('set called for', pRemID, pEvent)
+    setDescription(pEvent) {
+      console.log('set called for', this.firstParam, pEvent)
+      const remUUID = this.firstParam
       const resultSet = ormRem.update({
-        where: pRemID,
+        where: remUUID,
         data: {
           remDescription: pEvent,
         },
