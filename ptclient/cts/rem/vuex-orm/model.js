@@ -19,6 +19,7 @@ export default class reminders extends Model {
   // for the generic field type. The argument is the default value.
   static fields() {
     return {
+      id: this.uid(), // if this is not set then update based on primary key will not work
       uuid: this.uid(() => uuidv1()),
       uuidOfRemMadeFor: this.attr(null),
       remDescription: this.attr(null),
