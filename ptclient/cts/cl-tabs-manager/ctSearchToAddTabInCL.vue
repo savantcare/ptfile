@@ -50,7 +50,8 @@ export default {
     },
   },
   methods: {
-    replaceBulk(str, findArray) {
+    // string highlighter function
+    searchStrHighlighter(str, findArray) {
       let i
       let regex = []
       for (i = 0; i < findArray.length; i++) {
@@ -79,7 +80,7 @@ export default {
           strings.forEach((string) => {
             finderString.push(string)
           })
-          finalStr = this.replaceBulk(result.value, finderString)
+          finalStr = this.searchStrHighlighter(result.value, finderString) // highlight search key word on suggestion list
         } else {
           finalStr = result.value
         }
