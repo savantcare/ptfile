@@ -41,6 +41,7 @@
         size="mini"
         style="width: 100%;"
         v-bind:stripe="true"
+        :row-class-name="mfGetDirtyClassName"
       >
         <el-table-column type="expand">
           <template slot-scope="props">
@@ -100,6 +101,7 @@ export default {
             date.toLocaleString('default', { month: 'long' }) +
             '-' +
             date.getDate()
+          obj.$isDirty = resultSet[i].$isDirty
           dataTable.push(obj)
         }
       }
@@ -160,6 +162,22 @@ export default {
       }
       this.$store.commit('mtfShowNewFirstTabInCl', tab)
     },
+    mfGetDirtyClassName(pRow, pIndex) {
+      if (pRow.row.$isDirty) {
+        return 'unsaved-data'
+      } else {
+        return ''
+      }
+    },
   },
 }
 </script>
+
+<style>
+tr.el-table__row.unsaved-data {
+  background: #fde2b9;
+}
+.el-table--striped .el-table__body tr.el-table__row--striped.unsaved-data td {
+  background: #f9d399;
+}
+</style>
