@@ -5,7 +5,11 @@ export default class reminders extends Model {
   // This is the name used as module name of the Vuex Store.
   static entity = 'rem'
 
-  static primaryKey = 'uuid' // Ref: https://vuex-orm.org/guide/model/defining-models.html#primary-key
+  /* 
+    Why is composite primary key needed?
+    Since it is temporal DB multiple records have the same uuid
+  */
+  static primaryKey = ['uuid', 'ROW_START'] // Ref: https://vuex-orm.org/guide/model/defining-models.html#primary-key
 
   // List of all fields (schema) of the post model. `this.attr` is used
   // for the generic field type. The argument is the default value.
@@ -22,8 +26,8 @@ export default class reminders extends Model {
       recordChangedFromSection: this.attr(null),
       // Why store time as a number? Since vuex-orm does not understand dates.
       // The data types that vuex-orm understands are given at: https://vuex-orm.org/guide/model/defining-models.html#generic-type
-      ROW_START: this.number(0),
-      ROW_END: this.number(0),
+      ROW_START: this.string(0),
+      ROW_END: this.string(0),
     }
   }
 }

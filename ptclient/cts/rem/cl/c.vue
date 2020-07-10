@@ -33,7 +33,7 @@ export default {
   props: ['firstParam'],
   data() {
     return {
-      doRem: {},
+      reminderRowPrimaryKey: {},
     }
   },
   computed: {
@@ -43,7 +43,7 @@ export default {
       if (resultSet.length) {
         let obj = []
         let date = ''
-        console.log('sending this to timeline', resultSet, resultSet[0].uuid)
+        // console.log('sending this to timeline', resultSet, resultSet[0].uuid)
         for (let i = 0; i < resultSet.length; i++) {
           obj = {}
           obj.remDescription = resultSet[i].remDescription
@@ -68,34 +68,34 @@ export default {
           dataTable.push(obj)
         }
       }
-      console.log(dataTable)
+      // console.log(dataTable)
       return dataTable
     },
   },
   methods: {
     getDescription() {
       const remUUID = this.firstParam
-      console.log(remUUID)
-      const resultSet = ormRem.find(remUUID)
+      // console.log(remUUID)
+      const resultSet = ormRem.query().where('uuid', remUUID).get()
+      // console.log(resultSet)
+      this.reminderRowStart = resultSet[0].ROW_START
       if (resultSet) {
-        console.log(resultSet)
-        // ['remDescription']
-        console.log(resultSet.uuid)
-        return resultSet.remDescription
+        // console.log(resultSet)
+        return resultSet[0].remDescription
       } else {
         return ''
       }
     },
     setDescription(pEvent) {
-      console.log('set called for', this.firstParam, pEvent)
+      // console.log('set called for',this.firstParam,this.reminderRowStart,pEvent)
       const remUUID = this.firstParam
-      const resultSet = ormRem.update({
-        where: remUUID,
+      ormRem.update({
+        where: [remUUID, this.reminderRowStart],
         data: {
           remDescription: pEvent,
         },
       })
-      console.log(resultSet)
+      // console.log(resultSet)
     },
     sendDataToServer() {},
   },

@@ -96,7 +96,7 @@ export default {
       if (resultSet.length) {
         let obj = []
         let date = ''
-        console.log('unsaved data found', resultSet, resultSet[0].uuid)
+        // console.log('unsaved data found', resultSet, resultSet[0].uuid)
         for (let i = 0; i < resultSet.length; i++) {
           obj = {}
           obj.remDescription = resultSet[i].remDescription
@@ -111,20 +111,20 @@ export default {
           dataTable.push(obj)
         }
       }
-      console.log(dataTable)
+      // console.log(dataTable.length)
       return dataTable
     },
   },
   mounted() {},
   methods: {
     mfOpenADialog() {
-      console.log('show add dialog')
+      // console.log('show add dialog')
       const resultSet = ormSearchPhraseUiToCT
         .query()
         .search('add reminder')
         .get()
       const resultData = resultSet[0]
-      console.log(resultData)
+      // console.log(resultData)
       const tab = {
         label: resultData.value,
         ctToShow: require('@/cts/' + resultData.ctToShowInCL).default,
@@ -135,13 +135,13 @@ export default {
       this.$store.commit('mtfShowNewFirstTabInCl', tab)
     },
     mfOpenMDialog() {
-      console.log('show add dialog')
+      // console.log('show add dialog')
       const resultSet = ormSearchPhraseUiToCT
         .query()
         .search('multi change reminder')
         .get()
       const resultData = resultSet[0]
-      console.log(resultData)
+      // console.log(resultData)
       const tab = {
         label: resultData.value,
         ctToShow: require('@/cts/' + resultData.ctToShowInCL).default,
@@ -152,16 +152,16 @@ export default {
       this.$store.commit('mtfShowNewFirstTabInCl', tab)
     },
     mfOpenDDialog() {
-      console.log('show add dialog')
+      // console.log('show add dialog')
     },
     mfOpenXDialog() {
-      console.log('show add dialog')
+      // console.log('show add dialog')
       const resultSet = ormSearchPhraseUiToCT
         .query()
         .search('discontinued reminders')
         .get()
       const resultData = resultSet[0]
-      console.log(resultData)
+      // console.log(resultData)
       const tab = {
         label: resultData.value,
         ctToShow: require('@/cts/' + resultData.ctToShowInCL).default,
@@ -172,7 +172,7 @@ export default {
       this.$store.commit('mtfShowNewFirstTabInCl', tab)
     },
     mfOpenCDialog(pRow) {
-      console.log('Open change rem dialog -> ', pRow)
+      // console.log('Open change rem dialog -> ', pRow)
 
       // Goal: Find out which CT will handle this work
       const resultSet = ormSearchPhraseUiToCT
@@ -180,7 +180,7 @@ export default {
         .search('change reminder')
         .get()
       const resultData = resultSet[0]
-      console.log(resultData)
+      // console.log(resultData)
 
       // Goal: Create the obj Tab that will be worked upon by for loop in
       // /cts/cl-tabs-manager/ctShowAddAndRemoveTabsInDialog.vue: 76
@@ -219,7 +219,7 @@ export default {
         vstPropsToGiveToCt: vstPropsToSendToCt, // This holds all the data for the record we want to change in cl
         closable: true, // TODO: Should be called blClosable
       }
-      console.log(tab)
+      // console.log(tab)
       this.$store.commit('mtfShowNewFirstTabInCl', tab)
     },
     mfGetDirtyClassName(pRow, pIndex) {
