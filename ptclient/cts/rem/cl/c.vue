@@ -18,7 +18,7 @@
     <el-timeline style="padding-inline-start: 20px;">
       <el-timeline-item
         v-for="row in dataTable"
-        :key="row.createdAt"
+        :key="row.ROW_START"
         :timestamp="row.createdAt"
         :type="row.type"
       >
@@ -67,7 +67,7 @@ export default {
           } else {
             obj.type = ''
           }
-
+          obj.ROW_START = resultSet[i].ROW_START
           dataTable.push(obj)
         }
       }
