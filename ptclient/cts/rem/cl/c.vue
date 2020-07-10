@@ -101,7 +101,7 @@ export default {
         console.log('saving to state')
         const rowID = this.firstParam
         ormRem.update({
-          where: [rowID],
+          where: rowID,
           data: {
             remDescription: pEvent,
           },
