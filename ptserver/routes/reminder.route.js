@@ -50,6 +50,23 @@ module.exports = (io, sequelize) => {
     }
   });
 
+  router.get("/getAll/", async (req, res) => {
+    try {
+      const getAll = await Reminder.sequelize.query(
+        "SELECT *,ROW_START, ROW_END FROM reminder FOR SYSTEM_TIME ALL order by ROW_START desc",
+        {
+          type: Reminder.sequelize.QueryTypes.SELECT,
+        }
+      );
+      res.send(getAll);
+    } catch (err) {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while fetching the Recommenation",
+      });
+    }
+  });
+
   router.put("/:id", async (req, res) => {
     // Replace existing row with new row
     try {
