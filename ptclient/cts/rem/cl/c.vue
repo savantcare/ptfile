@@ -81,7 +81,6 @@ export default {
         // console.log('Going to run query on vuexORM')
         const resultSet = ormRem.find(rowID)
         // console.log('Just finisghed running query on vuexORM')
-        this.reminderRowStart = resultSet.ROW_START
         if (resultSet) {
           // console.log(resultSet)
           return resultSet.remDescription

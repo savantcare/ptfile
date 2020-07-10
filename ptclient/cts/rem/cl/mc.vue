@@ -1,7 +1,7 @@
 <template>
   <el-row type="flex">
-    <div v-for="uuid in daRemUUID" :key="uuid">
-      <c :firstParam="uuid"></c>
+    <div v-for="id in daRemUUID" :key="id">
+      <c :firstParam="id"></c>
     </div>
 
     <c></c>
@@ -21,7 +21,7 @@ export default {
     const resultSet = ormRem.query().get()
     if (resultSet.length) {
       for (let i = 0; i < resultSet.length; i++) {
-        this.daRemUUID.push(resultSet[i].uuid)
+        this.daRemUUID.push(resultSet[i].$id)
       }
     }
     console.log(this.daRemUUID)
