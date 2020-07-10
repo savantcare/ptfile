@@ -95,7 +95,7 @@ export default {
       }
     },
     setDescription(pEvent) {
-      // console.log('set called for',this.firstParam,this.reminderRowStart,pEvent)
+      // Goal: Save to state once every 5 key strokes, This is done so that the system remains resonsive.
 
       if (this.keystrokeCount === 0) {
         console.log('saving to state')
