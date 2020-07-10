@@ -97,6 +97,7 @@ export default {
     // Initially tried to write v-model and this was computed function
     // But vmodel+computed the description id cannot be sent to computed fn
     getDescription(pRemID) {
+      // TODO: change this to pRemUUID
       console.log(pRemID)
       const resultSet = ormRem.find(pRemID)
       if (resultSet) {
