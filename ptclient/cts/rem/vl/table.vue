@@ -19,8 +19,20 @@
             plain
             >M</el-button
           >
-          <el-button style="padding: 3px;" type="warning" plain>D</el-button>
-          <el-button style="padding: 3px;" type="info" plain>X</el-button>
+          <el-button
+            @click="mfOpenDDialog"
+            style="padding: 3px;"
+            type="warning"
+            plain
+            >D</el-button
+          >
+          <el-button
+            @click="mfOpenXDialog"
+            style="padding: 3px;"
+            type="info"
+            plain
+            >X</el-button
+          >
         </el-button-group>
       </div>
       <el-table
@@ -119,6 +131,23 @@ export default {
       const resultSet = ormSearchPhraseUiToCT
         .query()
         .search('multi change reminder')
+        .get()
+      const resultData = resultSet[0]
+      console.log(resultData)
+      const tab = {
+        label: resultData.value,
+        ctToShow: require('@/cts/' + resultData.ctToShowInCL).default,
+        ctAbbr: resultData.ctAbbr,
+        id: resultData.id,
+        closable: true,
+      }
+      this.$store.commit('mtfShowNewFirstTabInCl', tab)
+    },
+    mfOpenXDialog() {
+      console.log('show add dialog')
+      const resultSet = ormSearchPhraseUiToCT
+        .query()
+        .search('discontinued reminders')
         .get()
       const resultData = resultSet[0]
       console.log(resultData)

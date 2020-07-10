@@ -39,6 +39,14 @@ export default {
         layer: 'change',
       },
     })
+    ormSearchPhraseUiToCT.insert({
+      data: {
+        value: 'discontinued reminders',
+        ctAbbr: 'drem',
+        ctToShowInCL: 'rem/vl/discontinued.vue',
+        layer: 'change',
+      },
+    })
   },
 }
 </script>
