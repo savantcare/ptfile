@@ -4,7 +4,7 @@
       <el-input
         type="textarea"
         style="width: 800px;"
-        :class="getFieldClass(id)"
+        :class="mfGetDirtyClassName(id)"
         :autosize="{ minRows: 2, maxRows: 10 }"
         placeholder="Please input"
         :value="getDescription(id)"
@@ -106,9 +106,9 @@ export default {
         return ''
       }
     },
-    getFieldClass(pRemID) {
-      const unsavedDescription = this.getDescription(pRemID)
-      if (unsavedDescription.length > 0) {
+    mfGetDirtyClassName(pRemID) {
+      const resultSet = ormRem.find(pRemID)
+      if (resultSet.$isDirty) {
         return 'unsaved-data'
       } else {
         return ''
