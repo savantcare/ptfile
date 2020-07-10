@@ -17,7 +17,7 @@ export default {
     }
   },
   mounted() {
-    const resultSet = ormRem.query().where('$isNew', true).get()
+    const resultSet = ormRem.query().get()
     if (resultSet.length) {
       console.log('unsaved data found', resultSet, resultSet[0].uuid)
       for (let i = 0; i < resultSet.length; i++) {

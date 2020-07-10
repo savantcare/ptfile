@@ -30,11 +30,18 @@ export default {
         layer: 'change',
       },
     })
-
     ormSearchPhraseUiToCT.insert({
       data: {
-        value: 'multi change reminder',
-        ctAbbr: 'arem',
+        value: 'change reminder',
+        ctAbbr: 'crem',
+        ctToShowInCL: 'rem/cl/c.vue',
+        layer: 'change',
+      },
+    })
+    ormSearchPhraseUiToCT.insert({
+      data: {
+        value: 'multi change reminders',
+        ctAbbr: 'mcrem',
         ctToShowInCL: 'rem/cl/mc.vue',
         layer: 'change',
       },

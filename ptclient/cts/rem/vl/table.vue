@@ -56,9 +56,14 @@
         After this is set if desc has 200 words they will use the maximum available space.
           -->
         <el-table-column label="Actions" width="60">
-          <template>
+          <template slot-scope="props">
             <el-button-group>
-              <el-button type="primary" size="mini" style="padding: 3px;" plain
+              <el-button
+                @click="mfOpenCDialog(props.row)"
+                type="primary"
+                size="mini"
+                style="padding: 3px;"
+                plain
                 >C</el-button
               >
               <el-button type="warning" size="mini" style="padding: 3px;" plain
@@ -102,6 +107,7 @@ export default {
             '-' +
             date.getDate()
           obj.$isDirty = resultSet[i].$isDirty
+          obj.uuid = resultSet[i].uuid
           dataTable.push(obj)
         }
       }
@@ -168,6 +174,25 @@ export default {
       } else {
         return ''
       }
+    },
+    mfOpenCDialog(pRow) {
+      console.log('Open change rem dialog -> ', pRow)
+
+      const resultSet = ormSearchPhraseUiToCT
+        .query()
+        .search('change reminder')
+        .get()
+      const resultData = resultSet[0]
+      console.log(resultData)
+      const tab = {
+        label: resultData.value,
+        ctToShow: require('@/cts/' + resultData.ctToShowInCL).default,
+        ctAbbr: resultData.ctAbbr,
+        id: resultData.id,
+        ctDataToPass: pRow, // This holds all the data for the record we want to change in cl
+        closable: true,
+      }
+      this.$store.commit('mtfShowNewFirstTabInCl', tab)
     },
   },
 }
