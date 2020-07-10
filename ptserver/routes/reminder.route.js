@@ -53,7 +53,7 @@ module.exports = (io, sequelize) => {
   router.get("/getAll/", async (req, res) => {
     try {
       const getAll = await Reminder.sequelize.query(
-        "SELECT *,ROW_START, ROW_END FROM reminder FOR SYSTEM_TIME ALL order by ROW_START desc",
+        "SELECT *,ROW_START, ROW_END FROM reminders FOR SYSTEM_TIME ALL order by ROW_START desc",
         {
           type: Reminder.sequelize.QueryTypes.SELECT,
         }
