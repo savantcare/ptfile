@@ -108,6 +108,7 @@ export default {
             date.getDate()
           obj.$isDirty = resultSet[i].$isDirty
           obj.uuid = resultSet[i].uuid
+          obj.$id = resultSet[i].$id
           dataTable.push(obj)
         }
       }
@@ -172,7 +173,7 @@ export default {
       this.$store.commit('mtfShowNewFirstTabInCl', tab)
     },
     mfOpenCDialog(pRow) {
-      // console.log('Open change rem dialog -> ', pRow)
+      console.log('Open change rem dialog -> ', pRow)
 
       // Goal: Find out which CT will handle this work
       const resultSet = ormSearchPhraseUiToCT
@@ -198,7 +199,7 @@ export default {
       */
 
       let vstPropsToSendToCt = ''
-      vstPropsToSendToCt = pRow.uuid
+      vstPropsToSendToCt = pRow.$id
 
       const tab = {
         label: resultData.value, // TODO: Should be called vsLabel

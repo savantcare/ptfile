@@ -75,17 +75,17 @@ export default {
   },
   methods: {
     getDescription() {
-      const remUUID = this.firstParam
+      const rowID = this.firstParam
       console.log('Inside get des')
-      // console.log(remUUID)
+      console.log(rowID)
       if (!this.reminderDesc) {
         console.log('Going to run query on vuexORM')
-        const resultSet = ormRem.query().where('uuid', remUUID).get()
+        const resultSet = ormRem.find(rowID)
         // console.log('Just finisghed running query on vuexORM')
-        this.reminderRowStart = resultSet[0].ROW_START
+        this.reminderRowStart = resultSet.ROW_START
         if (resultSet) {
           // console.log(resultSet)
-          return resultSet[0].remDescription
+          return resultSet.remDescription
         } else {
           return ''
         }
@@ -99,9 +99,9 @@ export default {
 
       if (this.keystrokeCount === 0) {
         console.log('saving to state')
-        const remUUID = this.firstParam
+        const rowID = this.firstParam
         ormRem.update({
-          where: [remUUID, this.reminderRowStart],
+          where: [rowID],
           data: {
             remDescription: pEvent,
           },

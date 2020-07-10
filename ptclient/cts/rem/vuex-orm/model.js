@@ -6,10 +6,14 @@ export default class reminders extends Model {
   static entity = 'rem'
 
   /* 
-    Why is composite primary key needed?
-    Since it is temporal DB multiple records have the same uuid
+    What should be the primary key?
+    Option1: uuid -> Not possible since there are duplucate uuid as this is temporal DB
+    Option2: composite primary key. 
+            ['uuid', 'ROW_START'] // Ref: https://vuex-orm.org/guide/model/defining-models.html#primary-key
+            Problem found in the above approach by: VK/TJ and RR
+            if I do this everytime a update happens i need to run a where and if there are 100 elements in the array then it needs to loop over all of them
+    Option3: Let vuex-orm give auto generated simple primary key of auto increment numbers.
   */
-  static primaryKey = ['uuid', 'ROW_START'] // Ref: https://vuex-orm.org/guide/model/defining-models.html#primary-key
 
   // List of all fields (schema) of the post model. `this.attr` is used
   // for the generic field type. The argument is the default value.
