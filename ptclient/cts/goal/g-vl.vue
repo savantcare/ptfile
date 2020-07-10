@@ -22,7 +22,7 @@
 
 <script>
 // import addGoal from './layer-2/addGoal.vue'
-import ormSearchUiToCT from '@/cts/vl-search-box/vuex-orm/searchUIToCT'
+import ormSearchPhraseUiToCT from '@/cts/vl-search-box/vuex-orm/searchUIToCT'
 import ormGoal from '@/models/Goal'
 
 // const { GOAL_API_URL } = 'http://localhost:8000/goals'
@@ -65,7 +65,7 @@ export default {
     },
     mfOpenADialog() {
       console.log('show add dialog')
-      const resultSet = ormSearchUiToCT.query().search('add goal').get()
+      const resultSet = ormSearchPhraseUiToCT.query().search('add goal').get()
       const resultData = resultSet[0]
       const tab = {
         label: resultData.value,

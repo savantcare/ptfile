@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import ormSearchUiToCT from '@/cts/vl-search-box/vuex-orm/searchUIToCT'
+import ormSearchPhraseUiToCT from '@/cts/vl-search-box/vuex-orm/searchUIToCT'
 
 export default {
   data() {
@@ -12,7 +12,7 @@ export default {
     }
   },
   mounted() {
-    ormSearchUiToCT.insert({
+    ormSearchPhraseUiToCT.insert({
       data: {
         value: 'reminders',
         ctAbbr: 'rem',
@@ -22,7 +22,7 @@ export default {
       },
     })
 
-    ormSearchUiToCT.insert({
+    ormSearchPhraseUiToCT.insert({
       data: {
         value: 'add reminder',
         ctAbbr: 'arem',
@@ -31,7 +31,7 @@ export default {
       },
     })
 
-    ormSearchUiToCT.insert({
+    ormSearchPhraseUiToCT.insert({
       data: {
         value: 'multi change reminder',
         ctAbbr: 'arem',

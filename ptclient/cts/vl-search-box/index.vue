@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import ormSearchUiToCT from '@/cts/vl-search-box/vuex-orm/searchUIToCT'
+import ormSearchPhraseUiToCT from '@/cts/vl-search-box/vuex-orm/searchUIToCT'
 import remSUI from '@/cts/rem/search-interfaces'
 export default {
   data() {
@@ -22,7 +22,7 @@ export default {
   components: { remSUI },
   mounted() {
     // Search interfaces to this component
-    ormSearchUiToCT.insert({
+    ormSearchPhraseUiToCT.insert({
       data: {
         value: 'clear',
         ctAbbr: 'clr',
@@ -35,7 +35,7 @@ export default {
   computed: {
     placeholder() {
       let resultSet = {}
-      resultSet = ormSearchUiToCT
+      resultSet = ormSearchPhraseUiToCT
         .query()
         .orderBy('usageCountKeptInLS', 'desc')
         .get()
@@ -53,14 +53,14 @@ export default {
       // pQueryString empty means user did not enter anything
       // to show values in dropdown returning all results
       if (!pQueryString) {
-        const resultSet = ormSearchUiToCT
+        const resultSet = ormSearchPhraseUiToCT
           .query()
           .orderBy('usageCountKeptInLS', 'desc')
           .get()
         console.log('No user input ', pQueryString, resultSet)
         pCallBack(resultSet)
       } else {
-        const resultSet = ormSearchUiToCT
+        const resultSet = ormSearchPhraseUiToCT
           .query()
           .search(pQueryString.trim(), {
             // Search comes from vuex-orm plugn https://github.com/vuex-orm/plugin-search#during-query-chain
@@ -101,7 +101,7 @@ export default {
 
       // Goal: Increase the usageCount
       // Update query ref: https://vuex-orm.org/guide/data/inserting-and-updating.html#updates
-      ormSearchUiToCT.update({
+      ormSearchPhraseUiToCT.update({
         where: pSelectedSuggestion.id,
         data: {
           usageCountKeptInLS: pSelectedSuggestion.usageCountKeptInLS + 1,

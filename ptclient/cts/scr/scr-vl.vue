@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import ormSearchUiToCT from '@/cts/vl-search-box/vuex-orm/searchUIToCT'
+import ormSearchPhraseUiToCT from '@/cts/vl-search-box/vuex-orm/searchUIToCT'
 import ormCTLifeCycle from '@/models/ormCtLifeCycle'
 import ormScr from '@/models/Screening'
 export default {
@@ -110,7 +110,7 @@ export default {
         })
 
         // Step 2/3: Inserting Search interfaces to this component
-        ormSearchUiToCT.insert({
+        ormSearchPhraseUiToCT.insert({
           data: {
             value: 'screening',
             ctAbbr: 'scr',

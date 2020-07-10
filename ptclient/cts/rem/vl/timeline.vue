@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import ormSearchUiToCT from '@/cts/vl-search-box/vuex-orm/searchUIToCT'
+import ormSearchPhraseUiToCT from '@/cts/vl-search-box/vuex-orm/searchUIToCT'
 import ormRem from '@/cts/rem/vuex-orm/model.js'
 
 export default {
@@ -95,7 +95,10 @@ export default {
   methods: {
     mfOpenADialog() {
       console.log('show add dialog')
-      const resultSet = ormSearchUiToCT.query().search('add reminder').get()
+      const resultSet = ormSearchPhraseUiToCT
+        .query()
+        .search('add reminder')
+        .get()
       const resultData = resultSet[0]
       console.log(resultData)
       const tab = {
@@ -109,7 +112,7 @@ export default {
     },
     mfOpenMDialog() {
       console.log('show add dialog')
-      const resultSet = ormSearchUiToCT
+      const resultSet = ormSearchPhraseUiToCT
         .query()
         .search('multi change reminder')
         .get()

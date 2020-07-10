@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import ormSearchUiToCT from '@/cts/vl-search-box/vuex-orm/searchUIToCT'
+import ormSearchPhraseUiToCT from '@/cts/vl-search-box/vuex-orm/searchUIToCT'
 export default {
   data() {
     return {
@@ -33,7 +33,7 @@ export default {
       console.log('value changed', pValue)
       if (pValue === 'assessment-tabset') {
         // cannot hardcode, need to query since dont know the ID created when inserted
-        const resultSet = ormSearchUiToCT.query().search('add goal').get()
+        const resultSet = ormSearchPhraseUiToCT.query().search('add goal').get()
         const resultData = resultSet[0]
         const objAddTab = {
           label: resultData.value,
@@ -45,7 +45,10 @@ export default {
         this.$store.commit('mtfShowNewFirstTabInCl', objAddTab)
         this.$store.state.vstObjTabsInCL.vsSelectedTabId = this.$store.state.vstObjTabsInCL.arTabs[0].id
       } else if (pValue === 'plan-tabset') {
-        let resultSet = ormSearchUiToCT.query().search('add diagnosis').get()
+        let resultSet = ormSearchPhraseUiToCT
+          .query()
+          .search('add diagnosis')
+          .get()
         let resultData = resultSet[0]
         let objAddTab = {
           label: resultData.value,
@@ -55,7 +58,10 @@ export default {
           closable: true,
         }
         this.$store.commit('mtfShowNewFirstTabInCl', objAddTab)
-        resultSet = ormSearchUiToCT.query().search('multi rate goal').get()
+        resultSet = ormSearchPhraseUiToCT
+          .query()
+          .search('multi rate goal')
+          .get()
         resultData = resultSet[0]
         objAddTab = {
           label: resultData.value,

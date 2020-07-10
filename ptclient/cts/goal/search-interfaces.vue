@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import ormSearchUiToCT from '@/cts/vl-search-box/vuex-orm/searchUIToCT'
+import ormSearchPhraseUiToCT from '@/cts/vl-search-box/vuex-orm/searchUIToCT'
 
 export default {
   data() {
@@ -13,7 +13,7 @@ export default {
   },
   mounted() {
     // Search interfaces to this component
-    ormSearchUiToCT.insert({
+    ormSearchPhraseUiToCT.insert({
       data: {
         value: 'add goal',
         ctAbbr: 'addg',
@@ -22,7 +22,7 @@ export default {
       },
     })
 
-    ormSearchUiToCT.insert({
+    ormSearchPhraseUiToCT.insert({
       data: {
         value: 'multi rate goal',
         ctAbbr: 'mcg',
@@ -31,7 +31,7 @@ export default {
       },
     })
 
-    ormSearchUiToCT.insert({
+    ormSearchPhraseUiToCT.insert({
       data: {
         value: 'goal',
         ctAbbr: 'g',
