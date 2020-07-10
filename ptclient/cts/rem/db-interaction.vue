@@ -1,3 +1,4 @@
+<template> <div></div> </template>
 <script>
 import { REMINDER_API_URL } from './const.js'
 import ormCTLifeCycle from '@/models/ormCtLifeCycle'
