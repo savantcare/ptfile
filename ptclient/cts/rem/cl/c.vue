@@ -4,7 +4,7 @@
       <el-form-item label="Description">
         <el-input
           :value="getRemDescUsingCache()"
-          @input="setRemDescInStateOn1Sec($event)"
+          @input="setRemDescInStateOnDelay($event)"
         ></el-input>
       </el-form-item>
       <el-form-item>
@@ -121,7 +121,7 @@ export default {
         If the user types "ja" within 1 sec and then exits the state will only have j
       */
 
-    setRemDescInStateOn1Sec(pEvent) {
+    setRemDescInStateOnDelay(pEvent) {
       if (this.vSaveToStateScheduled) {
         console.log('clearing timeout')
         clearTimeout(this.vSaveToStateScheduled)
@@ -142,7 +142,7 @@ export default {
         function (scope) {
           scope.setRemDescInState(pEvent)
         },
-        1000,
+        500,
         this
       )
 
