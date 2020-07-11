@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-form>
-      <el-form-item label="Description">
+      <el-form-item>
         <el-input
           :value="getRemDescUsingCache()"
           @input="setRemDescInStateOnDelay($event)"

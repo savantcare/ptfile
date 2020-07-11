@@ -1,11 +1,21 @@
 <template>
-  <el-row type="flex">
-    <div v-for="id in daUniqueIDOfEachRowFromORM" :key="id">
-      <c :firstParam="id"></c>
-    </div>
-
-    <c></c>
-  </el-row>
+  <div class="block">
+    <el-carousel arrow="always" trigger="click">
+      <el-carousel-item v-for="item in 4" :key="id">
+        <el-row type="flex" id="item">
+          <el-card>
+            <c :firstParam="1"></c>
+          </el-card>
+          <el-card>
+            <c :firstParam="2"></c>
+          </el-card>
+          <el-card>
+            <c :firstParam="3"></c>
+          </el-card>
+        </el-row>
+      </el-carousel-item>
+    </el-carousel>
+  </div>
 </template>
 <script>
 import ormRem from '@/cts/rem/vuex-orm/model.js'
