@@ -37,7 +37,7 @@
       </SplitArea>
     </Split>
     <!-- tab-dialog is present in patientFile.vue but in hidden state -->
-    <CLTabsInDialog></CLTabsInDialog>
+    <ctTabsInDialogInCL></ctTabsInDialogInCL>
   </div>
 </template>
 
@@ -51,7 +51,7 @@ import ctBMVl from '@/cts/bm/bm-vl'
 import ctDXVl from '@/cts/dx/dx-vl'
 import ctGVl from '@/cts/goal/g-vl'
 import ctScrVl from '@/cts/scr/scr-vl.vue'
-const CLTabsInDialog = () =>
+const ctTabsInDialogInCL = () =>
   // The name above expands to change Layer tabs in dialog
   import('@/cts/cl-tabs-manager/ctShowAddAndRemoveTabsInDialog')
 
@@ -64,7 +64,7 @@ Vue.use(VueScrollTo)
 
 export default {
   components: {
-    CLTabsInDialog,
+    ctTabsInDialogInCL,
     ctVLSearchBox,
     ctRexVl,
     ctRemVL,
