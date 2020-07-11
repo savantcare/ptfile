@@ -11,7 +11,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" size="mini" plain @click="sendDataToServer"
-          >Submit</el-button
+          >Submit<!-- Uncomment to see reminder ID {{ this.firstParam }}--></el-button
         >
       </el-form-item>
     </el-form>

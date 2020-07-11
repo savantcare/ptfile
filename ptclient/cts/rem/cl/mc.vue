@@ -74,6 +74,7 @@ export default {
   computed: {
     console: () => console, // Ref: https://stackoverflow.com/questions/51080447/
     getArrayOfRemIDsToShowInThisCard() {
+      // TODO: Need to know when I am at the last cards
       console.log('The virtual slide number is', this.diVirtualSlideNumber)
       const firstCard = this.diVirtualSlideNumber * 3
       console.log('First rem card', firstCard)
