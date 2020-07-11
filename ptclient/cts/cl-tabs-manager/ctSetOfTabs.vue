@@ -37,12 +37,12 @@ export default {
           .query()
           .search('add reminder')
           .get()
-        const resultData = resultArFromORM[0]
+        const objRowFromORM = resultArFromORM[0]
         const objAddTab = {
-          label: resultData.value,
-          ctToShow: require('@/cts/' + resultData.ctToShowInCL).default,
-          ctAbbr: resultData.ctAbbr,
-          id: resultData.id,
+          label: objRowFromORM.value,
+          ctToShow: require('@/cts/' + objRowFromORM.ctToShowInCL).default,
+          ctAbbr: objRowFromORM.ctAbbr,
+          id: objRowFromORM.id,
           closable: true,
         }
         this.$store.commit('mtfShowNewFirstTabInCl', objAddTab)
@@ -52,12 +52,12 @@ export default {
           .query()
           .search('multi change reminders')
           .get()
-        let resultData = resultArFromORM[0]
+        let objRowFromORM = resultArFromORM[0]
         let objAddTab = {
-          label: resultData.value,
-          ctToShow: require('@/cts/' + resultData.ctToShowInCL).default,
-          ctAbbr: resultData.ctAbbr,
-          id: resultData.id,
+          label: objRowFromORM.value,
+          ctToShow: require('@/cts/' + objRowFromORM.ctToShowInCL).default,
+          ctAbbr: objRowFromORM.ctAbbr,
+          id: objRowFromORM.id,
           closable: true,
         }
         this.$store.commit('mtfShowNewFirstTabInCl', objAddTab)
@@ -65,12 +65,12 @@ export default {
           .query()
           .search('add reminder')
           .get()
-        resultData = resultArFromORM[0]
+        objRowFromORM = resultArFromORM[0]
         objAddTab = {
-          label: resultData.value,
-          ctToShow: require('@/cts/' + resultData.ctToShowInCL).default,
-          ctAbbr: resultData.ctAbbr,
-          id: resultData.id,
+          label: objRowFromORM.value,
+          ctToShow: require('@/cts/' + objRowFromORM.ctToShowInCL).default,
+          ctAbbr: objRowFromORM.ctAbbr,
+          id: objRowFromORM.id,
           closable: true,
         }
         this.$store.commit('mtfAdditionalTabAddOrActivate', objAddTab)

@@ -44,8 +44,8 @@ export default {
       .query()
       .where('name', 'Recommendations')
       .get()
-    const resultData = arResultsFromORM[0]
-    if (typeof resultData !== 'undefined') {
+    const objRowFromORM = arResultsFromORM[0]
+    if (typeof objRowFromORM !== 'undefined') {
       console.log('already mounted')
     } else {
       // Step 1/3: Store information that this Ct has already been mounted

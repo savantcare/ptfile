@@ -120,13 +120,13 @@ export default {
         .query()
         .search('add reminder')
         .get()
-      const resultData = arResultsFromORM[0]
-      console.log(resultData)
+      const objRowFromORM = arResultsFromORM[0]
+      console.log(objRowFromORM)
       const tab = {
-        label: resultData.value,
-        ctToShow: require('@/cts/' + resultData.ctToShowInCL).default,
-        ctAbbr: resultData.ctAbbr,
-        id: resultData.id,
+        label: objRowFromORM.value,
+        ctToShow: require('@/cts/' + objRowFromORM.ctToShowInCL).default,
+        ctAbbr: objRowFromORM.ctAbbr,
+        id: objRowFromORM.id,
         closable: true,
       }
       this.$store.commit('mtfShowNewFirstTabInCl', tab)
@@ -137,13 +137,13 @@ export default {
         .query()
         .search('multi change reminder')
         .get()
-      const resultData = arResultsFromORM[0]
-      console.log(resultData)
+      const objRowFromORM = arResultsFromORM[0]
+      console.log(objRowFromORM)
       const tab = {
-        label: resultData.value,
-        ctToShow: require('@/cts/' + resultData.ctToShowInCL).default,
-        ctAbbr: resultData.ctAbbr,
-        id: resultData.id,
+        label: objRowFromORM.value,
+        ctToShow: require('@/cts/' + objRowFromORM.ctToShowInCL).default,
+        ctAbbr: objRowFromORM.ctAbbr,
+        id: objRowFromORM.id,
         closable: true,
       }
       this.$store.commit('mtfShowNewFirstTabInCl', tab)
@@ -154,13 +154,13 @@ export default {
         .query()
         .search('discontinued reminders')
         .get()
-      const resultData = arResultsFromORM[0]
-      console.log(resultData)
+      const objRowFromORM = arResultsFromORM[0]
+      console.log(objRowFromORM)
       const tab = {
-        label: resultData.value,
-        ctToShow: require('@/cts/' + resultData.ctToShowInCL).default,
-        ctAbbr: resultData.ctAbbr,
-        id: resultData.id,
+        label: objRowFromORM.value,
+        ctToShow: require('@/cts/' + objRowFromORM.ctToShowInCL).default,
+        ctAbbr: objRowFromORM.ctAbbr,
+        id: objRowFromORM.id,
         closable: true,
       }
       this.$store.commit('mtfShowNewFirstTabInCl', tab)

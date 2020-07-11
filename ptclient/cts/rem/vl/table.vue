@@ -159,13 +159,13 @@ export default {
         .query()
         .search('add reminder')
         .get()
-      const resultData = arResultsFromORM[0]
-      // console.log(resultData)
+      const objRowFromORM = arResultsFromORM[0]
+      // console.log(objRowFromORM)
       const tab = {
-        label: resultData.value,
-        ctToShow: require('@/cts/' + resultData.ctToShowInCL).default,
-        ctAbbr: resultData.ctAbbr,
-        id: resultData.id,
+        label: objRowFromORM.value,
+        ctToShow: require('@/cts/' + objRowFromORM.ctToShowInCL).default,
+        ctAbbr: objRowFromORM.ctAbbr,
+        id: objRowFromORM.id,
         closable: true,
       }
       this.$store.commit('mtfShowNewFirstTabInCl', tab)
@@ -176,13 +176,13 @@ export default {
         .query()
         .search('multi change reminder')
         .get()
-      const resultData = arResultsFromORM[0]
-      // console.log(resultData)
+      const objRowFromORM = arResultsFromORM[0]
+      // console.log(objRowFromORM)
       const tab = {
-        label: resultData.value,
-        ctToShow: require('@/cts/' + resultData.ctToShowInCL).default,
-        ctAbbr: resultData.ctAbbr,
-        id: resultData.id,
+        label: objRowFromORM.value,
+        ctToShow: require('@/cts/' + objRowFromORM.ctToShowInCL).default,
+        ctAbbr: objRowFromORM.ctAbbr,
+        id: objRowFromORM.id,
         closable: true,
       }
       this.$store.commit('mtfShowNewFirstTabInCl', tab)
@@ -196,13 +196,13 @@ export default {
         .query()
         .search('discontinued reminders')
         .get()
-      const resultData = arResultsFromORM[0]
-      // console.log(resultData)
+      const objRowFromORM = arResultsFromORM[0]
+      // console.log(objRowFromORM)
       const tab = {
-        label: resultData.value,
-        ctToShow: require('@/cts/' + resultData.ctToShowInCL).default,
-        ctAbbr: resultData.ctAbbr,
-        id: resultData.id,
+        label: objRowFromORM.value,
+        ctToShow: require('@/cts/' + objRowFromORM.ctToShowInCL).default,
+        ctAbbr: objRowFromORM.ctAbbr,
+        id: objRowFromORM.id,
         closable: true,
       }
       this.$store.commit('mtfShowNewFirstTabInCl', tab)
@@ -215,8 +215,8 @@ export default {
         .query()
         .search('change reminder')
         .get()
-      const resultData = arResultsFromORM[0]
-      // console.log(resultData)
+      const objRowFromORM = arResultsFromORM[0]
+      // console.log(objRowFromORM)
 
       // Goal: Create the obj Tab that will be worked upon by for loop in
       // /cts/cl-tabs-manager/ctShowAddAndRemoveTabsInDialog.vue: 76
@@ -234,7 +234,7 @@ export default {
       */
 
       const tab = {
-        label: resultData.value, // TODO: Should be called vsLabel
+        label: objRowFromORM.value, // TODO: Should be called vsLabel
         /*
         import and require are similar
         require can use a variable.
@@ -246,9 +246,9 @@ export default {
         Ref: https://stackoverflow.com/questions/46215705/why-need-default-after-require-method-in-vue
 
         */
-        ctToShow: require('@/cts/' + resultData.ctToShowInCL).default,
-        ctAbbr: resultData.ctAbbr, // TODO: Should be called vsCtAbbr
-        id: resultData.id, // TODO: should be called vnID
+        ctToShow: require('@/cts/' + objRowFromORM.ctToShowInCL).default,
+        ctAbbr: objRowFromORM.ctAbbr, // TODO: Should be called vsCtAbbr
+        id: objRowFromORM.id, // TODO: should be called vnID
         vstPropsToGiveToCt: pORMDataRowID, // This holds all the data for the record we want to change in cl
         closable: true, // TODO: Should be called blClosable
       }

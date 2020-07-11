@@ -47,10 +47,10 @@ export default {
         .query()
         .orderBy('usageCountKeptInLS', 'desc')
         .get()
-      const resultData = arResultsFromORM[0]
-      if (resultData) {
-        console.log(resultData)
-        return 'e.g. ' + resultData.value
+      const objRowFromORM = arResultsFromORM[0]
+      if (objRowFromORM) {
+        console.log(objRowFromORM)
+        return 'e.g. ' + objRowFromORM.value
       } else {
         return 'e.g. screening'
       }

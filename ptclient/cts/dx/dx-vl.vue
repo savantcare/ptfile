@@ -108,12 +108,12 @@ export default {
         .query()
         .search('add diagnosis')
         .get()
-      const resultData = arResultsFromORM[0]
+      const objRowFromORM = arResultsFromORM[0]
       const tab = {
-        label: resultData.value,
-        ctToShow: require('@/cts/' + resultData.ctToShowInCL).default,
-        ctAbbr: resultData.ctAbbr,
-        id: resultData.id,
+        label: objRowFromORM.value,
+        ctToShow: require('@/cts/' + objRowFromORM.ctToShowInCL).default,
+        ctAbbr: objRowFromORM.ctAbbr,
+        id: objRowFromORM.id,
         closable: true,
       }
       this.$store.commit('mtfShowNewFirstTabInL2', tab)
@@ -124,12 +124,12 @@ export default {
         .query()
         .search('Multichange dx assessment')
         .get()
-      const resultData = arResultsFromORM[0]
+      const objRowFromORM = arResultsFromORM[0]
       const tab = {
-        label: resultData.value,
-        ctToShow: require('@/cts/' + resultData.ctToShowInCL).default,
-        ctAbbr: resultData.ctAbbr,
-        id: resultData.id,
+        label: objRowFromORM.value,
+        ctToShow: require('@/cts/' + objRowFromORM.ctToShowInCL).default,
+        ctAbbr: objRowFromORM.ctAbbr,
+        id: objRowFromORM.id,
         closable: true,
       }
       this.$store.commit('mtfShowNewFirstTabInL2', tab)
