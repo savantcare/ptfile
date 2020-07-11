@@ -96,6 +96,7 @@ export default {
     },
     setDescription(pEvent) {
       // Goal: Save to state once every 5 key strokes, This is done so that the system remains responsive.
+      // There are a lot of listeners on this state and they will update themselves once very 5 keystrokes.
 
       if (this.keystrokeCount === 0) {
         // console.log('saving to state')

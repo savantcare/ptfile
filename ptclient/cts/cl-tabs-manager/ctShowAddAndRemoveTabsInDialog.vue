@@ -52,7 +52,7 @@ dialog
                 └────────────────┬────────────────┘               
                                  │                                
 ┌────────────────────────────────▼───────────────────────────────┐
-│Changes this.$store.state.vstObjTabsInCL.vsSelectedTabId │  VueStateOfTabsAndDialogInCL:37 
+│Changes this.$store.state.vstObjTabsInCL.vsSelectedTabId        │  VueStateOfTabsAndDialogInCL:37 
 └────────────────────────────────┬───────────────────────────────┘
                                  │                                
                  ┌───────────────▼────────────────────────────┐               

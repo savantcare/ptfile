@@ -222,7 +222,7 @@ export default {
       // /cts/cl-tabs-manager/ctShowAddAndRemoveTabsInDialog.vue: 76
 
       /*
-       We need ID inside the change ct. Since change ct needs the exiting description
+       We need rowID of vuexORM inside the change ct. Since change ct needs the exiting description of the reminbder to change
        Option 1: Send the whole data row
        Option 2: Send just the ID in a prop.
         +ves:
