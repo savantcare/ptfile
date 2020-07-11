@@ -32,3 +32,37 @@ The 1st tab shows the health components and the 2nd tab shows the non-health com
 Most data like recommendations made to paient. Goals of the patient etc .. have a priority to them.
 
 ![patient file](./images/rex-ordering-demo.gif)
+
+# Why choose vxe-table for Table component
+
+Features needed:
+
+1. KB control
+   https://xuliangzhan_admin.gitee.io/vxe-table/#/table/advanced/highlight
+
+2. Extend to show row details
+   https://xuliangzhan_admin.gitee.io/vxe-table/#/table/advanced/expandAccordion
+   https://examples.bootstrap-table.com/#options/detail-view.html
+   https://element.eleme.io/#/en-US/component/table#expandable-row
+
+3. Hide header. Since components like Rem have self explanatory column heading like description.
+   https://xuliangzhan_admin.gitee.io/vxe-table/#/table/base/header
+   https://examples.bootstrap-table.com/#options/show-header.html
+   elelemt.io/table has show-header
+
+4. Mini size
+   https://xuliangzhan_admin.gitee.io/vxe-table/#/table/base/header
+   elelemt.io/table has size=mini
+
+5. Good performance
+   elkement.io with 100 rows is giving bad performance to VK on 10th July 2020
+   Ref: https://github.com/ElemeFE/element/issues/6089
+   vxe-table implement concept of virtual table.
+
+Features not needed:
+
+1. select column on client side:
+   https://xuliangzhan_admin.gitee.io/vxe-table/#/table/advanced/toolbar
+
+2. Print:
+   https://xuliangzhan_admin.gitee.io/vxe-table/#/table/advanced/toolbar

@@ -43,32 +43,3 @@ Todo:
 1. Call the post API in the for loop. On success remove isDirty and isNew
 2. Form validation
 3. Form with unsaved data should get orange border.
-
-# Table component
-
-Features needed:
-
-1. KB control
-   https://xuliangzhan_admin.gitee.io/vxe-table/#/table/advanced/highlight
-
-2. Extend to show row details
-   https://xuliangzhan_admin.gitee.io/vxe-table/#/table/advanced/expandAccordion
-   https://examples.bootstrap-table.com/#options/detail-view.html
-   https://element.eleme.io/#/en-US/component/table#expandable-row
-
-3. Hide header. Since components like Rem have self explanatory column heading like description.
-   https://xuliangzhan_admin.gitee.io/vxe-table/#/table/base/header
-   https://examples.bootstrap-table.com/#options/show-header.html
-   elelemt.io/table has show-header
-
-4. Mini size
-   https://xuliangzhan_admin.gitee.io/vxe-table/#/table/base/header
-   elelemt.io/table has size=mini
-
-Features not needed:
-
-1. select column on client side:
-   https://xuliangzhan_admin.gitee.io/vxe-table/#/table/advanced/toolbar
-
-2. Print:
-   https://xuliangzhan_admin.gitee.io/vxe-table/#/table/advanced/toolbar
