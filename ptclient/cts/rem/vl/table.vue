@@ -36,7 +36,7 @@
         </el-button-group>
       </div>
       <el-table
-        :data="cfRemArrayForDisplay"
+        :data="cfArRemForDisplayInTable"
         :showHeader="false"
         size="mini"
         style="width: 100%;"
@@ -102,9 +102,9 @@ export default {
       const resultSet = ormRem.query().get()
       return resultSet.length
     },
-    cfRemArrayForDisplay() {
+    cfArRemForDisplayInTable() {
       console.log(
-        'cfRemArrayForDisplay called. Whenever ormRem will change this will get called. Even when there are 100 rows in the table when orm rem changes this gets called once'
+        'cfArRemForDisplayInTable called. Whenever ormRem will change this will get called. Even when there are 100 rows in the table when orm rem changes this gets called once'
       )
       const resultSet = ormRem.query().get()
 
@@ -145,7 +145,7 @@ export default {
         }
       }
       return arRemsForDisplay
-    }, // end of cfRemArrayForDisplay
+    }, // end of cfArRemForDisplayInTable
   },
   mounted() {},
   methods: {
