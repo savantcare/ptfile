@@ -1,15 +1,11 @@
 <template>
   <div class="block">
     <el-carousel arrow="always" trigger="click">
-      <el-carousel-item v-for="item in 4" :key="id">
-        <el-row type="flex" id="item">
-          <el-card> <c :firstParam="1"></c> item </el-card>
-          <el-card>
-            <c :firstParam="2"></c>
-          </el-card>
-          <el-card>
-            <c :firstParam="3"></c>
-          </el-card>
+      <el-carousel-item v-for="rem in daUniqueIDOfEachRowFromORM">
+        <el-row type="flex">
+          <el-card> <c :firstParam="rem"></c></el-card>
+          <el-card> <c :firstParam="rem + 1"></c></el-card>
+          <el-card> <c :firstParam="rem + 2"></c></el-card>
         </el-row>
       </el-carousel-item>
     </el-carousel>
@@ -26,6 +22,7 @@ export default {
     }
   },
   mounted() {
+    console.log('In mounted function')
     const resultSet = ormRem.query().get()
     if (resultSet.length) {
       for (let i = 0; i < resultSet.length; i++) {
