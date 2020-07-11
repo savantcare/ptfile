@@ -93,7 +93,7 @@ dialog
 import ctSetOfTabs from './ctSetOfTabs'
 
 export default {
-  name: 'L2-Dialog-And-Tabs-Manager',
+  name: 'CL-Tabs-In-Dialog-Manager',
   components: {
     ctSetOfTabs,
   },
