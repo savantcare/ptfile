@@ -51,9 +51,8 @@ import ctBMVl from '@/cts/bm/bm-vl'
 import ctDXVl from '@/cts/dx/dx-vl'
 import ctGVl from '@/cts/goal/g-vl'
 import ctScrVl from '@/cts/scr/scr-vl.vue'
-const ctTabsInDialogInCL = () =>
-  // The name above expands to change Layer tabs in dialog
-  import('@/cts/cl-tabs-manager/ctShowAddAndRemoveTabsInDialog')
+import ctTabsInDialogInCL from '@/cts/cl-tabs-manager/ctShowAddAndRemoveTabsInDialog'
+// The name above expands to Component tabs in dialog in change layer
 
 // say the user enter the rex command 10 times. I need to scroll to the bottom of the cards
 // so search box is given a ID and then #vl-search-box is used to scroll down.
