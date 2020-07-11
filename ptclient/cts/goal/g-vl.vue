@@ -65,8 +65,11 @@ export default {
     },
     mfOpenADialog() {
       console.log('show add dialog')
-      const resultSet = ormSearchPhraseUiToCT.query().search('add goal').get()
-      const resultData = resultSet[0]
+      const arResultsFromORM = ormSearchPhraseUiToCT
+        .query()
+        .search('add goal')
+        .get()
+      const resultData = arResultsFromORM[0]
       const tab = {
         label: resultData.value,
         ctToShow: require('@/cts/' + resultData.ctToShowInCL).default,

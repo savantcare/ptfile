@@ -99,17 +99,17 @@ export default {
   },
   computed: {
     cfLengthOfDataArray() {
-      const resultSet = ormRem.query().get()
-      return resultSet.length
+      const arResultsFromORM = ormRem.query().get()
+      return arResultsFromORM.length
     },
     cfArRemForDisplayInTable() {
       console.log(
         'cfArRemForDisplayInTable called. Whenever ormRem will change this will get called. Even when there are 100 rows in the table when orm rem changes this gets called once'
       )
-      const resultSet = ormRem.query().get()
+      const arResultsFromORM = ormRem.query().get()
 
       /* Option1 of returning data from this cf:
-          return resultSet
+          return arResultsFromORM
           Disadvantage
             Created at needs to be made inside the template
             vue will get more data since when I loop here I can send less data to vue
@@ -121,26 +121,26 @@ export default {
        */
       const arRemsForDisplay = []
       let obj = {}
-      if (resultSet.length) {
+      if (arResultsFromORM.length) {
         let date = ''
         const startDataRowInidex = (this.tablePageNumber - 1) * 10
         const endDataRowIndex = startDataRowInidex + 10
         for (
           let i = startDataRowInidex;
-          i < resultSet.length && i < endDataRowIndex;
+          i < arResultsFromORM.length && i < endDataRowIndex;
           i++
         ) {
           obj = {}
-          obj.remDescription = resultSet[i].remDescription
+          obj.remDescription = arResultsFromORM[i].remDescription
           // For date format ref: /cts/rem/vl/timeline.vue:53
-          date = new Date(resultSet[i].ROW_START)
+          date = new Date(arResultsFromORM[i].ROW_START)
           obj.createdAt =
             date.toLocaleString('default', { month: 'long' }) +
             '-' +
             date.getDate()
-          obj.$isDirty = resultSet[i].$isDirty
-          obj.uuid = resultSet[i].uuid
-          obj.$id = resultSet[i].$id
+          obj.$isDirty = arResultsFromORM[i].$isDirty
+          obj.uuid = arResultsFromORM[i].uuid
+          obj.$id = arResultsFromORM[i].$id
           arRemsForDisplay.push(obj)
         }
       }
@@ -155,11 +155,11 @@ export default {
     },
     mfOpenADialog() {
       // console.log('show add dialog')
-      const resultSet = ormSearchPhraseUiToCT
+      const arResultsFromORM = ormSearchPhraseUiToCT
         .query()
         .search('add reminder')
         .get()
-      const resultData = resultSet[0]
+      const resultData = arResultsFromORM[0]
       // console.log(resultData)
       const tab = {
         label: resultData.value,
@@ -172,11 +172,11 @@ export default {
     },
     mfOpenMDialog() {
       // console.log('show add dialog')
-      const resultSet = ormSearchPhraseUiToCT
+      const arResultsFromORM = ormSearchPhraseUiToCT
         .query()
         .search('multi change reminder')
         .get()
-      const resultData = resultSet[0]
+      const resultData = arResultsFromORM[0]
       // console.log(resultData)
       const tab = {
         label: resultData.value,
@@ -192,11 +192,11 @@ export default {
     },
     mfOpenXDialog() {
       // console.log('show add dialog')
-      const resultSet = ormSearchPhraseUiToCT
+      const arResultsFromORM = ormSearchPhraseUiToCT
         .query()
         .search('discontinued reminders')
         .get()
-      const resultData = resultSet[0]
+      const resultData = arResultsFromORM[0]
       // console.log(resultData)
       const tab = {
         label: resultData.value,
@@ -211,11 +211,11 @@ export default {
       console.log('Open change rem dialog -> ', pORMDataRowID)
 
       // Goal: Find out which CT will handle this work
-      const resultSet = ormSearchPhraseUiToCT
+      const arResultsFromORM = ormSearchPhraseUiToCT
         .query()
         .search('change reminder')
         .get()
-      const resultData = resultSet[0]
+      const resultData = arResultsFromORM[0]
       // console.log(resultData)
 
       // Goal: Create the obj Tab that will be worked upon by for loop in

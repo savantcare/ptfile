@@ -44,7 +44,7 @@ export default {
       When there is unsaved data we need to load the unsaved data
 
       The query to load data from vuex is:
-      const resultSet = ormRem.query().where('$isNew', true).get()
+      const arResultsFromORM = ormRem.query().where('$isNew', true).get()
 
       The permanence of data is:
       Least permanane: data (local variable) of ct    -> Does not survive Ct remounting
@@ -81,11 +81,15 @@ export default {
         Decision on 8th July 2020 by VK/AG/TJ/SS/RR: Not to use indexDB
     */
     // When there is unsaved data we load the unsaved data
-    const resultSet = ormRem.query().where('$isNew', true).get()
-    if (resultSet.length) {
-      console.log('unsaved data found', resultSet, resultSet[0].$id)
-      for (let i = 0; i < resultSet.length; i++) {
-        this.daRemID.push(resultSet[i].$id)
+    const arResultsFromORM = ormRem.query().where('$isNew', true).get()
+    if (arResultsFromORM.length) {
+      console.log(
+        'unsaved data found',
+        arResultsFromORM,
+        arResultsFromORM[0].$id
+      )
+      for (let i = 0; i < arResultsFromORM.length; i++) {
+        this.daRemID.push(arResultsFromORM[i].$id)
       }
     } else {
       // When there is no unsaved data then we add an empty data to the state inside vuex
@@ -99,30 +103,30 @@ export default {
     getDescription(pRemID) {
       // TODO: change this to pRemUUID
       console.log(pRemID)
-      const resultSet = ormRem.find(pRemID)
-      if (resultSet) {
-        console.log(resultSet)
+      const arResultsFromORM = ormRem.find(pRemID)
+      if (arResultsFromORM) {
+        console.log(arResultsFromORM)
         // ['remDescription']
-        console.log(resultSet.uuid)
-        return resultSet.remDescription
+        console.log(arResultsFromORM.uuid)
+        return arResultsFromORM.remDescription
       } else {
         return ''
       }
     },
     setDescription(pEvent, pRemID) {
       console.log('set called for', pRemID, pEvent)
-      const resultSet = ormRem.update({
+      const arResultsFromORM = ormRem.update({
         where: pRemID,
         data: {
           remDescription: pEvent,
         },
       })
-      console.log(resultSet)
+      console.log(arResultsFromORM)
     },
     mfGetDirtyClassName(pRemID) {
       console.log(pRemID)
-      const resultSet = ormRem.find(pRemID)
-      if (resultSet.$isDirty) {
+      const arResultsFromORM = ormRem.find(pRemID)
+      if (arResultsFromORM.$isDirty) {
         return 'unsaved-data'
       } else {
         return ''
@@ -130,7 +134,7 @@ export default {
     },
     addRemToUI() {
       console.log('Add rem called')
-      const ResultSet = ormRem
+      const arResultsFromORM = ormRem
         .insert({
           data: {
             remDescription: '',
@@ -146,20 +150,24 @@ export default {
           this.daRemID.push(entities.rem[0].$id)
           console.log(this.daRemID)
         })
-      console.log(ResultSet)
+      console.log(arResultsFromORM)
     },
     async sendDataToServer(formName) {
-      const resultSet = ormRem.query().where('$isNew', true).get()
-      if (resultSet.length) {
-        console.log('unsaved data found', resultSet, resultSet[0].uuid)
+      const arResultsFromORM = ormRem.query().where('$isNew', true).get()
+      if (arResultsFromORM.length) {
+        console.log(
+          'unsaved data found',
+          arResultsFromORM,
+          arResultsFromORM[0].uuid
+        )
         const arRemsToCreateInDB = []
-        for (let i = 0; i < resultSet.length; i++) {
-          console.log('call API', resultSet[i].uuid)
+        for (let i = 0; i < arResultsFromORM.length; i++) {
+          console.log('call API', arResultsFromORM[i].uuid)
           arRemsToCreateInDB.push({
-            uuid: resultSet[i].uuid,
-            remDescription: resultSet[i].remDescription,
-            priority: resultSet[i].priority,
-            isAutoRem: resultSet[i].isAutoRem,
+            uuid: arResultsFromORM[i].uuid,
+            remDescription: arResultsFromORM[i].remDescription,
+            priority: arResultsFromORM[i].priority,
+            isAutoRem: arResultsFromORM[i].isAutoRem,
             uuidOfRemMadeFor: 'bfe041fa-073b-4223-8c69-0540ee678ff8',
             recordChangedByUUID: 'bfe041fa-073b-4223-8c69-0540ee678ff8',
           })
@@ -237,12 +245,16 @@ export default {
       }
     },
     resetForm(formName) {
-      const resultSet = ormRem.query().where('$isNew', true).get()
-      if (resultSet.length) {
-        console.log('unsaved data found', resultSet, resultSet[0].uuid)
-        for (let i = 0; i < resultSet.length; i++) {
+      const arResultsFromORM = ormRem.query().where('$isNew', true).get()
+      if (arResultsFromORM.length) {
+        console.log(
+          'unsaved data found',
+          arResultsFromORM,
+          arResultsFromORM[0].uuid
+        )
+        for (let i = 0; i < arResultsFromORM.length; i++) {
           console.log('Deleting data from ORM')
-          ormRem.delete(resultSet[i].uuid)
+          ormRem.delete(arResultsFromORM[i].uuid)
         }
       } else {
         console.log('No Unsaved data')

@@ -104,11 +104,11 @@ export default {
     },
     mfOpenADialog() {
       console.log('show add dialog')
-      const resultSet = ormSearchPhraseUiToCT
+      const arResultsFromORM = ormSearchPhraseUiToCT
         .query()
         .search('add diagnosis')
         .get()
-      const resultData = resultSet[0]
+      const resultData = arResultsFromORM[0]
       const tab = {
         label: resultData.value,
         ctToShow: require('@/cts/' + resultData.ctToShowInCL).default,
@@ -120,11 +120,11 @@ export default {
     },
     mfOpenMDialog() {
       console.log('show multi change dialog')
-      const resultSet = ormSearchPhraseUiToCT
+      const arResultsFromORM = ormSearchPhraseUiToCT
         .query()
         .search('Multichange dx assessment')
         .get()
-      const resultData = resultSet[0]
+      const resultData = arResultsFromORM[0]
       const tab = {
         label: resultData.value,
         ctToShow: require('@/cts/' + resultData.ctToShowInCL).default,

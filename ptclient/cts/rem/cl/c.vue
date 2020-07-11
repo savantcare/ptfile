@@ -53,14 +53,17 @@ export default {
       const dataTable = []
 
       // to create timeline the uuid will be same but id will be different.
-      const resultSetFromORM = ormRem.query().where('uuid', this.uuid).get()
-      if (resultSetFromORM.length) {
+      const arResultsFromORMFromORM = ormRem
+        .query()
+        .where('uuid', this.uuid)
+        .get()
+      if (arResultsFromORMFromORM.length) {
         let obj = []
         let date = ''
-        // console.log('sending this to timeline', resultSetFromORM, resultSetFromORM[0].uuid)
-        for (let i = 0; i < resultSetFromORM.length; i++) {
+        // console.log('sending this to timeline', arResultsFromORMFromORM, arResultsFromORMFromORM[0].uuid)
+        for (let i = 0; i < arResultsFromORMFromORM.length; i++) {
           obj = {}
-          obj.remDescription = resultSetFromORM[i].remDescription
+          obj.remDescription = arResultsFromORMFromORM[i].remDescription
           /*
           To get the number of the month:
           obj.createdAt = date.getMonth() + 1 + "-" + date.getDate()
@@ -68,17 +71,17 @@ export default {
           To get the name of the month:
           Ref: https://stackoverflow.com/questions/1643320/get-month-name-from-date
           */
-          date = new Date(resultSetFromORM[i].ROW_START)
+          date = new Date(arResultsFromORMFromORM[i].ROW_START)
           obj.createdAt =
             date.toLocaleString('default', { month: 'long' }) +
             '-' +
             date.getDate()
-          if (resultSetFromORM[i].$isDirty) {
+          if (arResultsFromORMFromORM[i].$isDirty) {
             obj.type = 'warning'
           } else {
             obj.type = ''
           }
-          obj.ROW_START = resultSetFromORM[i].ROW_START
+          obj.ROW_START = arResultsFromORMFromORM[i].ROW_START
           dataTable.push(obj)
         }
       }
@@ -119,11 +122,11 @@ export default {
     getRemDescFromState() {
       // console.log('Inside get desc')
       this.stateForRowID = this.firstParam
-      const resultSetFromORM = ormRem.find(this.firstParam)
-      if (resultSetFromORM) {
-        // console.log(resultSetFromORM)
-        this.uuid = resultSetFromORM.uuid
-        return resultSetFromORM.remDescription
+      const arResultsFromORMFromORM = ormRem.find(this.firstParam)
+      if (arResultsFromORMFromORM) {
+        // console.log(arResultsFromORMFromORM)
+        this.uuid = arResultsFromORMFromORM.uuid
+        return arResultsFromORMFromORM.remDescription
       } else {
         return ''
       }

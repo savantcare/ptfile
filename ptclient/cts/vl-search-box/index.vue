@@ -42,12 +42,12 @@ export default {
 
   computed: {
     placeholder() {
-      let arrResultFromORM = {}
-      arrResultFromORM = ormSearchPhraseUiToCT
+      let arResultsFromORM = {}
+      arResultsFromORM = ormSearchPhraseUiToCT
         .query()
         .orderBy('usageCountKeptInLS', 'desc')
         .get()
-      const resultData = arrResultFromORM[0]
+      const resultData = arResultsFromORM[0]
       if (resultData) {
         console.log(resultData)
         return 'e.g. ' + resultData.value
@@ -61,14 +61,14 @@ export default {
       // pQueryString empty means user did not enter anything
       // to show values in dropdown returning all results
       if (!pQueryString) {
-        const arrResultFromORM = ormSearchPhraseUiToCT
+        const arResultsFromORM = ormSearchPhraseUiToCT
           .query()
           .orderBy('usageCountKeptInLS', 'desc')
           .get()
-        console.log('No user input ', pQueryString, arrResultFromORM)
-        pCallBack(arrResultFromORM)
+        console.log('No user input ', pQueryString, arResultsFromORM)
+        pCallBack(arResultsFromORM)
       } else {
-        const arrResultFromORM = ormSearchPhraseUiToCT
+        const arResultsFromORM = ormSearchPhraseUiToCT
           .query()
           .search(pQueryString.trim(), {
             // Search comes from vuex-orm plugn https://github.com/vuex-orm/plugin-search#during-query-chain
@@ -79,9 +79,9 @@ export default {
         console.log(
           'search result from orm model',
           pQueryString,
-          arrResultFromORM
+          arResultsFromORM
         )
-        pCallBack(arrResultFromORM)
+        pCallBack(arResultsFromORM)
       }
     },
 
