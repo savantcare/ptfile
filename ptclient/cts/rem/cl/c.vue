@@ -3,8 +3,8 @@
     <el-form>
       <el-form-item label="Description">
         <el-input
-          :value="getRemDescription()"
-          @input="setRemDescription($event)"
+          :value="getRemDescUsingCache()"
+          @input="setRemDescInStateOn5KeyPress($event)"
         ></el-input>
       </el-form-item>
       <el-form-item>
@@ -80,42 +80,51 @@ export default {
     },
   },
   methods: {
-    getRemDescriptionUsingCache() {
-      // console.log('Inside get desc')
+    getRemDescUsingCache() {
+      // console.log('Inside get desc. Only first time it needs to come from ORM and subsequently it can always come from cache, the value set by setRemDescOn5KeyPress')
       if (this.stateForRowID != this.firstParam) this.reminderDescCached = ''
       if (!this.reminderDescCached) {
         // console.log('Going to run query on vuexORM since for this parameter data has never been fetched from vuex-orm')
-        this.stateForRowID = this.firstParam
-        const resultSetFromORM = ormRem.find(this.firstParam)
-        if (resultSetFromORM) {
-          // console.log(resultSetFromORM)
-          this.uuid = resultSetFromORM.uuid
-          return resultSetFromORM.remDescription
-        } else {
-          return ''
-        }
+        return this.getRemDescFromState()
       } else {
         console.log('Better perf: Returning without running query on vuexORM')
         return this.reminderDescCached
       }
     },
-    setRemDescriptionUsingCache(pEvent) {
-      /* Goal: Save to state once every 5 key strokes,
-       Why?
+
+    getRemDescFromState() {
+      // console.log('Inside get desc')
+      this.stateForRowID = this.firstParam
+      const resultSetFromORM = ormRem.find(this.firstParam)
+      if (resultSetFromORM) {
+        // console.log(resultSetFromORM)
+        this.uuid = resultSetFromORM.uuid
+        return resultSetFromORM.remDescription
+      } else {
+        return ''
+      }
+    },
+
+    setRemDescInStateOn5KeyPress(pEvent) {
+      /* Goal: Save to state smartly instead of every keystroke
+      Why?
        So that the system remains responsive.
        There are a lot of listeners on this state and they will update themselves everytime there is a write to the vuexORM/rem
+
+      Strategy 1: Save to state once every 5 key strokes,
        Disadvnatage?
-       If the user types "jai kali" the state will only have "jai k"
+       If the user types "jai kali" the state will only have "jai k" even if user exits the form after one hour
+
+      Strategy 2: Each time you save to state you store the time
+      Ignore next save if 1 second has not passed.
+      Disadvnatage?
+       If the user types "ja" within 1 sec and then exits the state will only have j
+       
       */
 
       if (this.keystrokeCount === 0) {
         // console.log('saving to state')
-        ormRem.update({
-          where: this.firstParam,
-          data: {
-            remDescription: pEvent,
-          },
-        })
+        this.setRemDescriptionInState(pEvent)
         this.keystrokeCount++
       } else {
         // console.log('Better perf: Not saving to state')
@@ -127,17 +136,12 @@ export default {
       this.reminderDescCached = pEvent
     },
 
-    getRemDescription() {
-      // console.log('Inside get desc')
-      this.stateForRowID = this.firstParam
-      const resultSetFromORM = ormRem.find(this.firstParam)
-      if (resultSetFromORM) {
-        // console.log(resultSetFromORM)
-        this.uuid = resultSetFromORM.uuid
-        return resultSetFromORM.remDescription
-      }
+    setRemDescInStateOnKeyPress(pEvent) {
+      this.setRemDescriptionInState(pEvent)
+      this.reminderDescCached = pEvent
     },
-    setRemDescription(pEvent) {
+
+    setRemDescriptionInState(pEvent) {
       ormRem.update({
         where: this.firstParam,
         data: {
@@ -155,7 +159,7 @@ export default {
             // "Authorization": "Bearer " + TOKEN
           },
           body: JSON.stringify({
-            description: this.getRemDescriptionUsingCache(),
+            description: this.getRemDescUsingCache(),
           }),
         })
         if (!response.ok) {
@@ -165,11 +169,7 @@ export default {
         }
       } catch (ex) {}
 
-      console.log(
-        'sendDataToServer-> ',
-        this.uuid,
-        this.getRemDescriptionUsingCache()
-      )
+      console.log('sendDataToServer-> ', this.uuid, this.getRemDescUsingCache())
     },
   },
 }

@@ -75,6 +75,7 @@ In the following examples age is a function inside a component
 - multiStateViewAreaHeader: This has the slider to choose : timeOfStateSelectedInHeader:
 - pro: promise
 - vst: vue state
+- dec: description
 
 ### Naming
 
