@@ -33,6 +33,10 @@
 import { REMINDER_API_URL } from '../const.js'
 import ormRem from '@/cts/rem/vuex-orm/model.js'
 export default {
+  /* Why is this called firstParam
+        This Ct is called in a for loop. In the same for loop other Ct are also called. 
+        So the param name has to be generic and cannot be unique to each Ct
+    */
   props: ['firstParam'], // this is the unique row id crated by vuex-orm
   data() {
     return {
