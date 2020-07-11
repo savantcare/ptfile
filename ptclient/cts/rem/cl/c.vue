@@ -84,6 +84,11 @@ export default {
   },
   methods: {
     getRemDescUsingCache() {
+      // Performance problem: When C is first clicked and the control comes here. This fn is called twice
+      // Since following console.log is written twice.
+      // If I remove :value="getRemDescUsingCache()" then this fn is called 0 times
+
+      // When to get from ORM and when from cache?
       // Inside get desc. 1st time it comes from ORM from then on it always come from cache. The cache value is set by setRemDescOn5KeyPress
       console.log(this.firstParam)
       if (this.stateForRowID !== this.firstParam) this.reminderDescCached = ''

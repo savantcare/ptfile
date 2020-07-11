@@ -31,6 +31,23 @@ How to solve this?
     >
       <!-- Reason for v-bind to pass boolean value https://stackoverflow.com/questions/49225002/passing-boolean-vue-prop-value-in-html -->
       <el-carousel-item v-for="slide in getNumOfCarouselSlides" :key="slide">
+        <!-- How to improve performance?  TODO
+          
+            If getNumOfCarouselSlides is 3  
+              When carousel is first invoked.
+                On console:
+                "slide is: X" is printed 6 times. X is 1 to 3 and then 1 to 3
+                From the change component message given is 18 times    
+
+              When carousel is invoked 2nd time
+                slide is: X" is printed 0 times
+                From the change component message given is 0 times    
+
+              Everytime prev or nexxt is clicked 
+                "slide is: X" is printed 3 times
+              From the change component message given is 18 times    
+        -->
+        {{ console.log('slide is ', slide) }}
         <el-row type="flex">
           <el-card
             v-for="remID in getArrayOfRemIDsToShowInThisCard"
@@ -55,6 +72,7 @@ export default {
     }
   },
   computed: {
+    console: () => console, // Ref: https://stackoverflow.com/questions/51080447/
     getArrayOfRemIDsToShowInThisCard() {
       console.log('The virtual slide number is', this.diVirtualSlideNumber)
       const firstCard = this.diVirtualSlideNumber * 3
