@@ -11,7 +11,7 @@ Carausel                           |
     <el-carousel arrow="always" trigger="click" @change="slideChanged">
       <el-carousel-item v-for="slide in getNumOfCarouselSlides">
         <el-row type="flex">
-          <el-card v-for="set in getArrayOfRemIDs">
+          <el-card v-for="set in getArrayOfRemIDsToShowInThisCard">
             <changeRen :firstParam="set"></changeRen>
           </el-card>
         </el-row>
@@ -31,8 +31,8 @@ export default {
     }
   },
   computed: {
-    getArrayOfRemIDs() {
-      const firstCard = this.diCurrentSlideNumber * 3
+    getArrayOfRemIDsToShowInThisCard() {
+      const firstCard = (this.diCurrentSlideNumber - 1) * 3
       console.log('First Card', firstCard)
       const arr = this.daUniqueIDOfEachRowFromORM.slice(
         firstCard,
