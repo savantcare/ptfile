@@ -30,16 +30,24 @@ export default {
         layer: 'view',
       },
     })
+    ormSearchPhraseUiToCT.insert({
+      data: {
+        value: 'feed',
+        ctAbbr: 'fd',
+        ctToShowInCSVL: 'feed/drawer.vue',
+        layer: 'view',
+      },
+    })
   },
 
   computed: {
     placeholder() {
-      let resultSet = {}
-      resultSet = ormSearchPhraseUiToCT
+      let arrResultFromORM = {}
+      arrResultFromORM = ormSearchPhraseUiToCT
         .query()
         .orderBy('usageCountKeptInLS', 'desc')
         .get()
-      const resultData = resultSet[0]
+      const resultData = arrResultFromORM[0]
       if (resultData) {
         console.log(resultData)
         return 'e.g. ' + resultData.value
@@ -53,14 +61,14 @@ export default {
       // pQueryString empty means user did not enter anything
       // to show values in dropdown returning all results
       if (!pQueryString) {
-        const resultSet = ormSearchPhraseUiToCT
+        const arrResultFromORM = ormSearchPhraseUiToCT
           .query()
           .orderBy('usageCountKeptInLS', 'desc')
           .get()
-        console.log('No user input ', pQueryString, resultSet)
-        pCallBack(resultSet)
+        console.log('No user input ', pQueryString, arrResultFromORM)
+        pCallBack(arrResultFromORM)
       } else {
-        const resultSet = ormSearchPhraseUiToCT
+        const arrResultFromORM = ormSearchPhraseUiToCT
           .query()
           .search(pQueryString.trim(), {
             // Search comes from vuex-orm plugn https://github.com/vuex-orm/plugin-search#during-query-chain
@@ -68,8 +76,12 @@ export default {
           })
           .orderBy('usageCountKeptInLS', 'desc')
           .get() // trim is needed for "goal " to match "goal"
-        console.log('search result from orm model', pQueryString, resultSet)
-        pCallBack(resultSet)
+        console.log(
+          'search result from orm model',
+          pQueryString,
+          arrResultFromORM
+        )
+        pCallBack(arrResultFromORM)
       }
     },
 
@@ -99,8 +111,8 @@ export default {
         this.$store.commit('mtfShowNewFirstTabInCl', objCtToAdd)
       }
 
-      // Goal: Increase the usageCount
-      // Update query ref: https://vuex-orm.org/guide/data/inserting-and-updating.html#updates
+      /* Goal: Increase the usageCount of the search term so I can order them better
+        Update query ref: https://vuex-orm.org/guide/data/inserting-and-updating.html#updates */
       ormSearchPhraseUiToCT.update({
         where: pSelectedSuggestion.id,
         data: {
@@ -108,10 +120,10 @@ export default {
         },
       })
 
-      // Goal: Once search work is done then the input area needs to be empty
+      /* Goal: Once search work is done then the input area needs to be empty */
       this.searchKeyword = ''
 
-      // Goal: scrolling to top of the search input box
+      /* Goal: scrolling to top of the search input box */
       const options = {
         container: '#csvl',
         easing: 'ease-in',
