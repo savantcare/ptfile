@@ -59,7 +59,7 @@
           <template slot-scope="props">
             <el-button-group>
               <el-button
-                @click="mfOpenCDialog(props.row)"
+                @click="mfOpenCDialog(props.row.$id)"
                 type="primary"
                 size="mini"
                 style="padding: 3px;"
@@ -185,8 +185,8 @@ export default {
       }
       this.$store.commit('mtfShowNewFirstTabInCl', tab)
     },
-    mfOpenCDialog(pRow) {
-      console.log('Open change rem dialog -> ', pRow)
+    mfOpenCDialog(pORMDataRowID) {
+      console.log('Open change rem dialog -> ', pORMDataRowID)
 
       // Goal: Find out which CT will handle this work
       const resultSet = ormSearchPhraseUiToCT
@@ -211,9 +211,6 @@ export default {
           is like working on a gloal variable. So other Cts can also modify this global variable.
       */
 
-      let vstPropsToSendToCt = ''
-      vstPropsToSendToCt = pRow.$id
-
       const tab = {
         label: resultData.value, // TODO: Should be called vsLabel
         /*
@@ -230,7 +227,7 @@ export default {
         ctToShow: require('@/cts/' + resultData.ctToShowInCL).default,
         ctAbbr: resultData.ctAbbr, // TODO: Should be called vsCtAbbr
         id: resultData.id, // TODO: should be called vnID
-        vstPropsToGiveToCt: vstPropsToSendToCt, // This holds all the data for the record we want to change in cl
+        vstPropsToGiveToCt: pORMDataRowID, // This holds all the data for the record we want to change in cl
         closable: true, // TODO: Should be called blClosable
       }
       // console.log(tab)
