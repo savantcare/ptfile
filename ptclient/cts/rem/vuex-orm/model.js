@@ -6,15 +6,15 @@ const { v1: uuidv1 } = require('uuid')
     https://stackoverflow.com/questions/10639488/faster-to-access-numeric-property-by-string-or-integer  
     How?
       Solution comes from cue on slack given on 10th July 2020
-        The closure passed into this.uid(() => myUid()) simply invokes the closure when the model is instructed to generate a uid. The callback simply needs to return a value. 
+        The closure passed into this.uid(() => intUniqueID()) simply invokes the closure when the model is instructed to generate a uid. The callback simply needs to return a value. 
         In it’s simplest form, all you need for a primitive value is:
         let count = 0
-        const myUid = () => ++count
-        this.uid(() => myUid())
+        const intUniqueID = () => ++count
+        this.uid(() => intUniqueID())
       */
 
 let count = 0
-const myUid = () => ++count
+const intUniqueID = () => ++count
 
 export default class reminders extends Model {
   static entity = 'rem'
@@ -57,7 +57,7 @@ export default class reminders extends Model {
 
   static fields() {
     return {
-      id: this.uid(() => myUid()), // if this is not set then update based on primary key will not work
+      id: this.uid(() => intUniqueID()), // if this is not set then update based on primary key will not work
       uuid: this.uid(() => uuidv1()),
       uuidOfRemMadeFor: this.string(null),
       remDescription: this.string(null), // Change this to remDesc
