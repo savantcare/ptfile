@@ -1,11 +1,11 @@
 <template>
   <div class="block">
     <el-carousel arrow="always" trigger="click">
-      <el-carousel-item v-for="rem in daUniqueIDOfEachRowFromORM">
+      <el-carousel-item v-for="slide in getNumOfCarouselItems">
         <el-row type="flex">
-          <el-card> <c :firstParam="rem"></c></el-card>
-          <el-card> <c :firstParam="rem + 1"></c></el-card>
-          <el-card> <c :firstParam="rem + 2"></c></el-card>
+          <el-card v-for="set in getArrayOfReminderIDs">
+            <c :firstParam="set"></c>
+          </el-card>
         </el-row>
       </el-carousel-item>
     </el-carousel>
@@ -20,6 +20,22 @@ export default {
     return {
       daUniqueIDOfEachRowFromORM: [],
     }
+  },
+  computed: {
+    getArrayOfReminderIDs() {
+      const arr = this.daUniqueIDOfEachRowFromORM.slice(1, 3)
+      return arr
+    },
+    getNumOfCarouselItems() {
+      const count = this.daUniqueIDOfEachRowFromORM.length / 3
+      const intValue = Math.floor(count)
+      console.log('number of items in carousel are', count, intValue)
+      if (count === 0) {
+        return 1
+      } else {
+        return intValue
+      }
+    },
   },
   mounted() {
     console.log('In mounted function')
