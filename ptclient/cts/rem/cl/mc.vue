@@ -5,6 +5,15 @@ Carausel                           |
   -- Carausel item                 |   These are the slides
     -- Cards                       |   Each card is a reminder
 
+
+Performance:
+Inside rem/cl/c.vue:getRemDescUsingCache enable the console.log 
+console.log(
+        'Inside get desc. Only first time it needs to come from ORM and subsequently it can always come from cache, the value set by setRemDescOn5KeyPress'
+      )
+When this Ct is mounted it loads the changeRem 204 times since the above console.log is put on console 204 times. 
+
+Every time the slide is changed the getRemDescUsingCache() is again called 204 times since on console.log I see 204 messages
 -->
 <template>
   <div class="block">
@@ -12,9 +21,10 @@ Carausel                           |
       arrow="always"
       trigger="click"
       @change="slideChanged"
-      autoplay="false"
+      v-bind:autoplay="false"
     >
-      <el-carousel-item v-for="slide in getNumOfCarouselSlides">
+      <!-- Reason for v-bind to pass boolean value https://stackoverflow.com/questions/49225002/passing-boolean-vue-prop-value-in-html -->
+      <el-carousel-item v-for="slide in getNumOfCarouselSlides" :key="slide">
         <el-row type="flex">
           <el-card v-for="remID in getArrayOfRemIDsToShowInThisCard">
             <changeRem :firstParam="remID"></changeRem>{{ remID }}
@@ -32,12 +42,12 @@ export default {
   data() {
     return {
       daUniqueIDOfEachRowFromORM: [],
-      diCurrentSlideNumber: 1,
+      diCurrentSlideNumber: 0,
     }
   },
   computed: {
     getArrayOfRemIDsToShowInThisCard() {
-      const firstCard = (this.diCurrentSlideNumber - 1) * 3
+      const firstCard = this.diCurrentSlideNumber * 3
       console.log('First rem card', firstCard)
       const arr = this.daUniqueIDOfEachRowFromORM.slice(
         firstCard,

@@ -84,7 +84,9 @@ export default {
   },
   methods: {
     getRemDescUsingCache() {
-      // console.log('Inside get desc. Only first time it needs to come from ORM and subsequently it can always come from cache, the value set by setRemDescOn5KeyPress')
+      console.log(
+        'Inside get desc. Only first time it needs to come from ORM and subsequently it can always come from cache, the value set by setRemDescOn5KeyPress'
+      )
       if (this.stateForRowID !== this.firstParam) this.reminderDescCached = ''
       if (!this.reminderDescCached) {
         // console.log('Going to run query on vuexORM since for this parameter data has never been fetched from vuex-orm')
