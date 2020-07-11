@@ -5,12 +5,7 @@
       <el-col :span="24">
         <!-- If I make style="border: 0;" then when tab is activated the bottom border of the tab does not go away -->
         <el-card class="box-card">
-          <el-form
-            label-position="top"
-            :model="daDxForm"
-            ref="daDxForm"
-            class="demo-dynamic"
-          >
+          <el-form label-position="top" :model="daDxForm" ref="daDxForm" class="demo-dynamic">
             <el-card
               class="box-card"
               v-for="(diagnosis, index) in daDxForm.diagnosis"
@@ -19,10 +14,7 @@
             >
               <el-row>
                 <el-col :span="2" :offset="24">
-                  <i
-                    class="el-icon-close"
-                    @click.prevent="removeDomain(diagnosis)"
-                  ></i>
+                  <i class="el-icon-close" @click.prevent="removeDomain(diagnosis)"></i>
                 </el-col>
               </el-row>
 
@@ -75,15 +67,10 @@
             </el-card>
 
             <el-form-item>
-              <el-button
-                type="success"
-                @click="submitForm('daDxForm')"
-                size="small"
+              <el-button type="success" @click="submitForm('daDxForm')" size="small"
                 >Save</el-button
               >
-              <el-button type="primary" @click="addDomain" size="small"
-                >Add one more</el-button
-              >
+              <el-button type="primary" @click="addDomain" size="small">Add one more</el-button>
             </el-form-item>
           </el-form>
         </el-card>
@@ -126,20 +113,16 @@ export default {
           label: 'Other specified bacterial intestinal infections',
         },
         {
-          value:
-            'Catatonia associated with another mental disorder (catatonia specifier)',
-          label:
-            'Catatonia associated with another mental disorder (catatonia specifier)',
+          value: 'Catatonia associated with another mental disorder (catatonia specifier)',
+          label: 'Catatonia associated with another mental disorder (catatonia specifier)',
         },
         {
           value: 'Adult antisocial behavior',
           label: 'Adult antisocial behavior',
         },
         {
-          value:
-            'Spouse or partner abuse, Psychological, Confirmed, Initial encounter',
-          label:
-            'Spouse or partner abuse, Psychological, Confirmed, Initial encounter',
+          value: 'Spouse or partner abuse, Psychological, Confirmed, Initial encounter',
+          label: 'Spouse or partner abuse, Psychological, Confirmed, Initial encounter',
         },
         {
           value: 'Adjustment disorder, Unspecified',

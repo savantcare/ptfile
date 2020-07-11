@@ -2,7 +2,10 @@
     In JSON you cannot add comments.
     So converted to JS module
     For different file types see: https://prettier.io/docs/en/configuration.html
-*/
+
+    How to do changes in a lot of files at once?
+    > /ptclient> npx prettier --write .  
+  */
 module.exports = {
   semi: false, // https://prettier.io/docs/en/options.html#semicolons
   singleQuote: true,

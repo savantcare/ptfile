@@ -9,28 +9,10 @@
       <div slot="header" class="clearfix">
         <span>Reminders</span>
         <el-button-group style="float: right;">
-          <el-button
-            @click="mfOpenADialog"
-            style="padding: 3px;"
-            type="success"
-            plain
-            >A</el-button
-          >
-          <el-button
-            @click="mfOpenMDialog"
-            style="padding: 3px;"
-            type="primary"
-            plain
-            >M</el-button
-          >
+          <el-button @click="mfOpenADialog" style="padding: 3px;" type="success" plain>A</el-button>
+          <el-button @click="mfOpenMDialog" style="padding: 3px;" type="primary" plain>M</el-button>
           <el-button style="padding: 3px;" type="warning" plain>D</el-button>
-          <el-button
-            @click="mfOpenXDialog"
-            style="padding: 3px;"
-            type="info"
-            plain
-            >X</el-button
-          >
+          <el-button @click="mfOpenXDialog" style="padding: 3px;" type="info" plain>X</el-button>
         </el-button-group>
       </div>
       <!-- explanation of following params:
@@ -49,12 +31,8 @@
         >
           {{ row.remDescription }}
           <el-button-group style="float: right;">
-            <el-button type="primary" size="mini" style="padding: 3px;" plain
-              >C</el-button
-            >
-            <el-button type="warning" size="mini" style="padding: 3px;" plain
-              >D</el-button
-            >
+            <el-button type="primary" size="mini" style="padding: 3px;" plain>C</el-button>
+            <el-button type="warning" size="mini" style="padding: 3px;" plain>D</el-button>
           </el-button-group>
         </el-timeline-item>
       </el-timeline>
@@ -79,11 +57,7 @@ export default {
       if (arResultsFromORM.length) {
         let obj = []
         let date = ''
-        console.log(
-          'unsaved data found',
-          arResultsFromORM,
-          arResultsFromORM[0].uuid
-        )
+        console.log('unsaved data found', arResultsFromORM, arResultsFromORM[0].uuid)
         for (let i = 0; i < arResultsFromORM.length; i++) {
           obj = {}
           obj.remDescription = arResultsFromORM[i].remDescription
@@ -95,10 +69,7 @@ export default {
           Ref: https://stackoverflow.com/questions/1643320/get-month-name-from-date
           */
           date = new Date(arResultsFromORM[i].ROW_START)
-          obj.createdAt =
-            date.toLocaleString('default', { month: 'long' }) +
-            '-' +
-            date.getDate()
+          obj.createdAt = date.toLocaleString('default', { month: 'long' }) + '-' + date.getDate()
           if (arResultsFromORM[i].$isDirty) {
             obj.type = 'warning'
           } else {
@@ -116,10 +87,7 @@ export default {
   methods: {
     mfOpenADialog() {
       console.log('show add dialog')
-      const arResultsFromORM = ormSearchPhraseUiToCT
-        .query()
-        .search('add reminder')
-        .get()
+      const arResultsFromORM = ormSearchPhraseUiToCT.query().search('add reminder').get()
       const objRowFromORM = arResultsFromORM[0]
       console.log(objRowFromORM)
       const tab = {
@@ -133,10 +101,7 @@ export default {
     },
     mfOpenMDialog() {
       console.log('show add dialog')
-      const arResultsFromORM = ormSearchPhraseUiToCT
-        .query()
-        .search('multi change reminder')
-        .get()
+      const arResultsFromORM = ormSearchPhraseUiToCT.query().search('multi change reminder').get()
       const objRowFromORM = arResultsFromORM[0]
       console.log(objRowFromORM)
       const tab = {
@@ -150,10 +115,7 @@ export default {
     },
     mfOpenXDialog() {
       console.log('show add dialog')
-      const arResultsFromORM = ormSearchPhraseUiToCT
-        .query()
-        .search('discontinued reminders')
-        .get()
+      const arResultsFromORM = ormSearchPhraseUiToCT.query().search('discontinued reminders').get()
       const objRowFromORM = arResultsFromORM[0]
       console.log(objRowFromORM)
       const tab = {

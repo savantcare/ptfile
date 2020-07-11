@@ -11,10 +11,8 @@
         </el-button-group>
       </div>
       <el-table :data="daGTable" style="width: 100%;" :showHeader="false">
-        <el-table-column prop="description" label="Description" width="180">
-        </el-table-column>
-        <el-table-column prop="score" label="Score" width="180">
-        </el-table-column>
+        <el-table-column prop="description" label="Description" width="180"> </el-table-column>
+        <el-table-column prop="score" label="Score" width="180"> </el-table-column>
       </el-table>
     </el-card>
   </div>
@@ -49,9 +47,7 @@ export default {
           if (dnCountG === 0) {
             await ormGoal
               .api()
-              .get(
-                'http://localhost:8000/goals?patientUUID=bfe041fa-073b-4223-8c69-0540ee678ff8'
-              )
+              .get('http://localhost:8000/goals?patientUUID=bfe041fa-073b-4223-8c69-0540ee678ff8')
 
             console.log('Number of goal in model =>', ormGoal.query().count())
             const arGoalEvalList = ormGoal.query().get()
@@ -65,10 +61,7 @@ export default {
     },
     mfOpenADialog() {
       console.log('show add dialog')
-      const arResultsFromORM = ormSearchPhraseUiToCT
-        .query()
-        .search('add goal')
-        .get()
+      const arResultsFromORM = ormSearchPhraseUiToCT.query().search('add goal').get()
       const objRowFromORM = arResultsFromORM[0]
       const tab = {
         label: objRowFromORM.value,

@@ -69,10 +69,7 @@ export default {
           Ref: https://stackoverflow.com/questions/1643320/get-month-name-from-date
           */
           date = new Date(arResultsFromORM[i].ROW_START)
-          obj.createdAt =
-            date.toLocaleString('default', { month: 'long' }) +
-            '-' +
-            date.getDate()
+          obj.createdAt = date.toLocaleString('default', { month: 'long' }) + '-' + date.getDate()
           if (arResultsFromORM[i].$isDirty) {
             obj.type = 'warning'
           } else {

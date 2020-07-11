@@ -1,15 +1,8 @@
 <template>
   <el-row :gutter="12">
     <el-carousel :interval="5000" arrow="always" :autoplay="false">
-      <el-carousel-item
-        v-for="(goalList, index) in carouselList"
-        :key="`carouse-${index}`"
-      >
-        <el-col
-          :span="8"
-          v-for="(goal, index) in goalList"
-          :key="`goal-${index}`"
-        >
+      <el-carousel-item v-for="(goalList, index) in carouselList" :key="`carouse-${index}`">
+        <el-col :span="8" v-for="(goal, index) in goalList" :key="`goal-${index}`">
           <el-card class="box-card" shadow="hover">
             <el-form label-position="top" ref="form">
               <el-form-item style="font-weight: bold;" label="Description:">
@@ -42,16 +35,8 @@
               </el-form-item>
 
               <el-form-item>
-                <el-button
-                  type="success"
-                  @click="onClickSave(goal)"
-                  size="small"
-                  >Save</el-button
-                >
-                <el-button
-                  type="danger"
-                  @click="onClickDiscontinue(goal)"
-                  size="small"
+                <el-button type="success" @click="onClickSave(goal)" size="small">Save</el-button>
+                <el-button type="danger" @click="onClickDiscontinue(goal)" size="small"
                   >Discontinue</el-button
                 >
               </el-form-item>

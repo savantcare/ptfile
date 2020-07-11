@@ -43,10 +43,7 @@ export default {
   computed: {
     placeholder() {
       let arResultsFromORM = {}
-      arResultsFromORM = ormSearchPhraseUiToCT
-        .query()
-        .orderBy('usageCountKeptInLS', 'desc')
-        .get()
+      arResultsFromORM = ormSearchPhraseUiToCT.query().orderBy('usageCountKeptInLS', 'desc').get()
       const objRowFromORM = arResultsFromORM[0]
       if (objRowFromORM) {
         console.log(objRowFromORM)
@@ -76,11 +73,7 @@ export default {
           })
           .orderBy('usageCountKeptInLS', 'desc')
           .get() // trim is needed for "goal " to match "goal"
-        console.log(
-          'search result from orm model',
-          pQueryString,
-          arResultsFromORM
-        )
+        console.log('search result from orm model', pQueryString, arResultsFromORM)
         pCallBack(arResultsFromORM)
       }
     },

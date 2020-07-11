@@ -19,8 +19,7 @@ Features needed in search
       clearable
       @select="mfHandleSuggestionSelectedByUser"
     >
-      <template slot-scope="{ item }">
-        <div class="value" v-html="item.value"></div> </template
+      <template slot-scope="{ item }"> <div class="value" v-html="item.value"></div> </template
     ></el-autocomplete>
   </div>
 </template>
@@ -70,11 +69,7 @@ export default {
         .where('layer', 'change')
         .search(pQueryString.trim())
         .get() // trim needs for "goal " to match "goal"
-      console.log(
-        'search result from orm model',
-        pQueryString,
-        arResultsFromORM
-      )
+      console.log('search result from orm model', pQueryString, arResultsFromORM)
 
       arResultsFromORM = arResultsFromORM.map((result) => {
         let finalStr = ''

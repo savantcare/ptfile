@@ -13,10 +13,7 @@
             >
               <el-row>
                 <el-col :span="2" :offset="24">
-                  <i
-                    class="el-icon-close"
-                    @click.prevent="removeDomain(domain)"
-                  ></i>
+                  <i class="el-icon-close" @click.prevent="removeDomain(domain)"></i>
                 </el-col>
               </el-row>
               <el-form-item
@@ -31,11 +28,7 @@
                 }"
               >
                 <p class="lbl-screen">Select screen:</p>
-                <el-select
-                  v-model="domain.value"
-                  filterable
-                  placeholder="Select"
-                >
+                <el-select v-model="domain.value" filterable placeholder="Select">
                   <el-option
                     v-for="item in getMasterScreenList"
                     :key="item.value"
@@ -48,15 +41,10 @@
             </el-card>
 
             <el-form-item>
-              <el-button
-                type="success"
-                @click="submitForm('screenForm')"
-                size="small"
+              <el-button type="success" @click="submitForm('screenForm')" size="small"
                 >Save</el-button
               >
-              <el-button type="primary" @click="addDomain" size="small"
-                >Add one more</el-button
-              >
+              <el-button type="primary" @click="addDomain" size="small">Add one more</el-button>
             </el-form-item>
           </el-form>
         </el-card>
@@ -107,10 +95,7 @@ export default {
       this.$refs[formName].validate(async (valid) => {
         if (valid) {
           // Add screen
-          const apptDate = new Date()
-            .toISOString()
-            .slice(0, 19)
-            .replace('T', ' ')
+          const apptDate = new Date().toISOString().slice(0, 19).replace('T', ' ')
           const screenList = []
 
           // create screen data rowSet
@@ -155,9 +140,8 @@ export default {
       const currentScreenList = this.$store.state.screening.screeningList
       dbMasterScreenList.forEach((list) => {
         if (
-          currentScreenList.filter(
-            (item) => item.scientificName === list.scientificName
-          ).length === 0
+          currentScreenList.filter((item) => item.scientificName === list.scientificName).length ===
+          0
         ) {
           masterScreenList.push({
             value: list.uuid,

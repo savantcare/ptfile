@@ -11,10 +11,8 @@
         </el-button-group>
       </div>
       <el-table :data="daDxTable" :showHeader="false" style="width: 100%;">
-        <el-table-column prop="dxName" label="Diagnosis name" width="180">
-        </el-table-column>
-        <el-table-column prop="dxOnDate" label="Diagnosed on" width="180">
-        </el-table-column>
+        <el-table-column prop="dxName" label="Diagnosis name" width="180"> </el-table-column>
+        <el-table-column prop="dxOnDate" label="Diagnosed on" width="180"> </el-table-column>
       </el-table>
     </el-card>
   </div>
@@ -80,10 +78,7 @@ export default {
           this.dblOneDxaQueryIsRunningGate = true
           const countDxaCountFromORM = ormDxa.query().count()
           console.log('Number of assessment before query')
-          console.log(
-            'Number of assessment before query =>',
-            countDxaCountFromORM
-          )
+          console.log('Number of assessment before query =>', countDxaCountFromORM)
           if (countDxaCountFromORM === 0) {
             await ormDxa
               .api()
@@ -104,10 +99,7 @@ export default {
     },
     mfOpenADialog() {
       console.log('show add dialog')
-      const arResultsFromORM = ormSearchPhraseUiToCT
-        .query()
-        .search('add diagnosis')
-        .get()
+      const arResultsFromORM = ormSearchPhraseUiToCT.query().search('add diagnosis').get()
       const objRowFromORM = arResultsFromORM[0]
       const tab = {
         label: objRowFromORM.value,

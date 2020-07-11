@@ -4,39 +4,21 @@
       <div slot="header" class="clearfix">
         <span>Screening</span>
         <el-button-group style="float: right;">
-          <el-button
-            style="padding: 3px;"
-            @click="mfOpenAllScrGDialog()"
-            type="success"
-            plain
+          <el-button style="padding: 3px;" @click="mfOpenAllScrGDialog()" type="success" plain
             >G</el-button
           >
-          <el-button
-            style="padding: 3px;"
-            @click="mfOpenADialog()"
-            type="primary"
-            plain
+          <el-button style="padding: 3px;" @click="mfOpenADialog()" type="primary" plain
             >A</el-button
           >
         </el-button-group>
       </div>
       <el-table :data="daScrTable" style="width: 100%;">
-        <el-table-column
-          prop="scientificName"
-          label="Scientific name"
-          width="150"
-        >
+        <el-table-column prop="scientificName" label="Scientific name" width="150">
         </el-table-column>
         <el-table-column>
           <template slot-scope="scope">
-            <el-button type="text" size="mini" @click="mfOpenTDialog(scope.row)"
-              >T</el-button
-            ><el-button
-              type="text"
-              size="mini"
-              @click="mfOpenGDialog(scope.row)"
-              >G</el-button
-            >
+            <el-button type="text" size="mini" @click="mfOpenTDialog(scope.row)">T</el-button
+            ><el-button type="text" size="mini" @click="mfOpenGDialog(scope.row)">G</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -95,10 +77,7 @@ export default {
     },
     mfAddOrmSearch() {
       // Inserting Search interfaces to this component
-      const arResultsFromORM = ormCTLifeCycle
-        .query()
-        .where('name', 'Screening')
-        .get()
+      const arResultsFromORM = ormCTLifeCycle.query().where('name', 'Screening').get()
       const objRowFromORM = arResultsFromORM[0]
       if (typeof objRowFromORM !== 'undefined') {
         console.log('already mounted')

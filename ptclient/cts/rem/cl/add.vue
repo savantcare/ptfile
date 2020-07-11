@@ -10,14 +10,10 @@
         :value="getDescription(id)"
         @input="setDescription($event, id)"
       ></el-input>
-      <el-button plain type="warning" @click="removeRexFromForm(id)"
-        >Remove</el-button
-      >
+      <el-button plain type="warning" @click="removeRexFromForm(id)">Remove</el-button>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" plain @click="sendDataToServer"
-        >Submit</el-button
-      >
+      <el-button type="primary" plain @click="sendDataToServer">Submit</el-button>
       <el-button type="primary" plain @click="addRemToUI">Add more</el-button>
       <el-button type="warning" plain @click="resetForm">Reset form</el-button>
     </el-form-item>
@@ -83,11 +79,7 @@ export default {
     // When there is unsaved data we load the unsaved data
     const arResultsFromORM = ormRem.query().where('$isNew', true).get()
     if (arResultsFromORM.length) {
-      console.log(
-        'unsaved data found',
-        arResultsFromORM,
-        arResultsFromORM[0].$id
-      )
+      console.log('unsaved data found', arResultsFromORM, arResultsFromORM[0].$id)
       for (let i = 0; i < arResultsFromORM.length; i++) {
         this.daRemID.push(arResultsFromORM[i].$id)
       }
@@ -155,11 +147,7 @@ export default {
     async sendDataToServer(formName) {
       const arResultsFromORM = ormRem.query().where('$isNew', true).get()
       if (arResultsFromORM.length) {
-        console.log(
-          'unsaved data found',
-          arResultsFromORM,
-          arResultsFromORM[0].uuid
-        )
+        console.log('unsaved data found', arResultsFromORM, arResultsFromORM[0].uuid)
         const arRemsToCreateInDB = []
         for (let i = 0; i < arResultsFromORM.length; i++) {
           console.log('call API', arResultsFromORM[i].uuid)
@@ -247,11 +235,7 @@ export default {
     resetForm(formName) {
       const arResultsFromORM = ormRem.query().where('$isNew', true).get()
       if (arResultsFromORM.length) {
-        console.log(
-          'unsaved data found',
-          arResultsFromORM,
-          arResultsFromORM[0].uuid
-        )
+        console.log('unsaved data found', arResultsFromORM, arResultsFromORM[0].uuid)
         for (let i = 0; i < arResultsFromORM.length; i++) {
           console.log('Deleting data from ORM')
           ormRem.delete(arResultsFromORM[i].uuid)

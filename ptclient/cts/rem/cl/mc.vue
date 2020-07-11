@@ -23,12 +23,7 @@ How to solve this?
 -->
 <template>
   <div class="block">
-    <el-carousel
-      arrow="always"
-      trigger="click"
-      @change="slideChanged"
-      v-bind:autoplay="false"
-    >
+    <el-carousel arrow="always" trigger="click" @change="slideChanged" v-bind:autoplay="false">
       <!-- Reason for v-bind to pass boolean value https://stackoverflow.com/questions/49225002/passing-boolean-vue-prop-value-in-html -->
       <el-carousel-item v-for="slide in getNumOfCarouselSlides" :key="slide">
         <!-- Performance analysis  TODO
@@ -52,10 +47,7 @@ How to solve this?
               There are 3 cards and they will come attached to each other if I do not give :gutter=20
           -->
         <el-row type="flex" :gutter="20">
-          <el-col
-            v-for="remID in getArrayOfRemIDsToShowInThisCard"
-            :key="remID"
-          >
+          <el-col v-for="remID in getArrayOfRemIDsToShowInThisCard" :key="remID">
             <el-card>
               <changeRem :firstParam="remID"></changeRem>
             </el-card>
@@ -83,10 +75,7 @@ export default {
       console.log('The virtual slide number is', this.diVirtualSlideNumber)
       const firstCard = this.diVirtualSlideNumber * 3
       console.log('First rem card', firstCard)
-      const arr = this.daUniqueIDOfEachRowFromORM.slice(
-        firstCard,
-        firstCard + 3
-      )
+      const arr = this.daUniqueIDOfEachRowFromORM.slice(firstCard, firstCard + 3)
       return arr
     },
     getNumOfCarouselSlides() {
@@ -109,16 +98,8 @@ export default {
   methods: {
     slideChanged(newSlideNumber, oldSlideNumber) {
       // This is virtual scroller. This improves performance substantially.
-      console.log(
-        'slide changed from: ',
-        oldSlideNumber,
-        'to: ',
-        newSlideNumber
-      )
-      if (
-        newSlideNumber > oldSlideNumber ||
-        (newSlideNumber === 0 && oldSlideNumber === 2)
-      ) {
+      console.log('slide changed from: ', oldSlideNumber, 'to: ', newSlideNumber)
+      if (newSlideNumber > oldSlideNumber || (newSlideNumber === 0 && oldSlideNumber === 2)) {
         // user clicked next
         this.diVirtualSlideNumber = this.diVirtualSlideNumber + 1
       } else {

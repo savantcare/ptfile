@@ -3,35 +3,35 @@
 
 MSE component has 15 child components.
 
-Mood/Affect  
-Appearance  
-Attitude  
-Cognition  
-Constitutional  
-Eye Contact  
-Impulse Control  
-Insight  
-Judgement  
-Perception  
-Psychomotor  
-Speech  
-Thought Content  
-Thought Process  
+Mood/Affect
+Appearance
+Attitude
+Cognition
+Constitutional
+Eye Contact
+Impulse Control
+Insight
+Judgement
+Perception
+Psychomotor
+Speech
+Thought Content
+Thought Process
 Neurologicalal
 
 ## Appearence sub component
 
-Normal (Short code)  
-Good grooming and hygiene,  
-No apparent distress,  
-Well-developed, well-nourished,  
-Appears stated age,  
-Appears younger than stated age,  
-Appears older than stated age,  
-Obese,  
-Thin or cachectic,  
-Disheveled, unkempt,  
-Malodorous,  
+Normal (Short code)
+Good grooming and hygiene,
+No apparent distress,
+Well-developed, well-nourished,
+Appears stated age,
+Appears younger than stated age,
+Appears older than stated age,
+Obese,
+Thin or cachectic,
+Disheveled, unkempt,
+Malodorous,
 Other
 
 Note: when user choose "Normal (Short code)", it will select following automatically:
@@ -43,14 +43,14 @@ Note: when user choose "Normal (Short code)", it will select following automatic
 
 ## Attitude sub component
 
-Normal (Short code)  
-Pleasant and cooperative,  
-Uncooperative,  
-Hostile or defiant,  
-Guarded,  
-Evasive,  
-Apathetic,  
-Disorganized behavior,  
+Normal (Short code)
+Pleasant and cooperative,
+Uncooperative,
+Hostile or defiant,
+Guarded,
+Evasive,
+Apathetic,
+Disorganized behavior,
 Other
 
 Note: when user choose "Normal (Short code)", it will select following automatically:
@@ -58,23 +58,23 @@ Pleasant and cooperative
 
 ## Cognition sub component
 
-Grossly intact, no memory impairment, adequate fund of knowledge, no language deficit, normal attention,  
-Impaired,  
-Fluctuating,  
+Grossly intact, no memory impairment, adequate fund of knowledge, no language deficit, normal attention,
+Impaired,
+Fluctuating,
 Other
 
 ## Consitutional sub component
 
-Vitals signs stable,  
+Vitals signs stable,
 Other
 
 ## Eye Contact sub component
 
-Normal (Short code)  
-Appropriate,  
-Downcast,  
-Intense,  
-Fleeting,  
+Normal (Short code)
+Appropriate,
+Downcast,
+Intense,
+Fleeting,
 Other
 
 Note: when user choose "Normal (Short code)", it will select following automatically:
@@ -82,13 +82,13 @@ Appropriate,
 
 ## Impulse Control sub component
 
-Normal (Short code)  
-Good,  
-Fair,  
-Questionable,  
-Poor,  
-Impaired,  
-Limited,  
+Normal (Short code)
+Good,
+Fair,
+Questionable,
+Poor,
+Impaired,
+Limited,
 Other
 
 Note: when user choose "Normal (Short code)", it will select following automatically:
@@ -96,13 +96,13 @@ Good,
 
 ## Insight sub component
 
-Normal (Short code)  
-Good,  
-Fair,  
-Questionable,  
-Poor,  
-Impaired,  
-Limited,  
+Normal (Short code)
+Good,
+Fair,
+Questionable,
+Poor,
+Impaired,
+Limited,
 Other
 
 Note: when user choose "Normal (Short code)", it will select following automatically:
@@ -111,12 +111,12 @@ Good,
 ## Judgement sub component
 
 Normal (Short code) ,
-Good,  
-Fair,  
-Questionable,  
-Poor,  
-Impaired,  
-Limited,  
+Good,
+Fair,
+Questionable,
+Poor,
+Impaired,
+Limited,
 Other
 
 Note: when user choose "Normal (Short code)", it will select following automatically:
@@ -124,11 +124,11 @@ Good,
 
 ## Perception sub component
 
-Normal (Short code),  
-No AVH,  
-+AH,  
-+Command AH,  
-+VH,  
+Normal (Short code),
+No AVH,
++AH,
++Command AH,
++VH,
 Other
 
 Note: when user choose "Normal (Short code)", it will select following automatically:
@@ -136,10 +136,10 @@ No AVH,
 
 ## Psychomotor sub component
 
-Normal (Short code),  
-Normal,  
-Agitated,  
-Retarded,  
+Normal (Short code),
+Normal,
+Agitated,
+Retarded,
 Other
 
 Note: when user choose "Normal (Short code)", it will select following automatically:
@@ -147,13 +147,13 @@ Normal,
 
 ## Speech sub component
 
-Normal (Short code),  
-Regular, rate and rhythm,  
-Fluent,  
-Incoherent,  
-Talkative,  
-Pressured,  
-Mumbling,  
+Normal (Short code),
+Regular, rate and rhythm,
+Fluent,
+Incoherent,
+Talkative,
+Pressured,
+Mumbling,
 Other
 
 Note: when user choose "Normal (Short code)", it will select following automatically:
@@ -162,38 +162,38 @@ Regular, rate and rhythm,
 ## Thought Content sub component
 
 Normal (Short code),
-No SI, intent or plan,  
-No passive death wish,  
-No HI, intent or plan,  
-No delusional thinking observed,  
-No obsessive thinking observed,  
-+ruminations,  
-+SI without intent or plan,  
-+SI as detailed below,  
-+HI as detailed below,  
-+delusions,  
-+IOR,  
-+obsessions,  
-Other,  
+No SI, intent or plan,
+No passive death wish,
+No HI, intent or plan,
+No delusional thinking observed,
+No obsessive thinking observed,
++ruminations,
++SI without intent or plan,
++SI as detailed below,
++HI as detailed below,
++delusions,
++IOR,
++obsessions,
+Other,
 Passive death wish
 
 Note: when user choose "Normal (Short code)", it will select following automatically:
-No SI, intent or plan,  
-No passive death wish,  
-No HI, intent or plan,  
-No delusional thinking observed,  
+No SI, intent or plan,
+No passive death wish,
+No HI, intent or plan,
+No delusional thinking observed,
 No obsessive thinking observed,
 
 ## Thought Process sub component
 
 Normal (Short code),
-Linear, logical and goal-directed,  
-Disorganized,  
-Circumstantial,  
-Tangential,  
-Looseness of associations,  
-Flight of ideas,  
-Poverty of thought,  
+Linear, logical and goal-directed,
+Disorganized,
+Circumstantial,
+Tangential,
+Looseness of associations,
+Flight of ideas,
+Poverty of thought,
 Other
 
 Note: when user choose "Normal (Short code)", it will select following automatically:
@@ -201,36 +201,36 @@ Linear, logical and goal-directed,
 
 ## Neurologicalal sub component
 
-Gait and station normal,  
-Other,  
+Gait and station normal,
+Other,
 Gait and station abnormal
 
 ## Mood/Affect sub component
 
 Normal (Short code)
-Euthymic,  
-Dysphoric,  
-Irritable,  
-Angry,  
-Bright,  
-Euphoric,  
-Labile,  
-Stable,  
-Mood congruent,  
-Mood incongruent,  
-Expansive,  
-Constricted,  
-Blunted,  
-Flat,  
-Anxious,  
-Tearful,  
-Dysthymic,  
-Full-range,  
+Euthymic,
+Dysphoric,
+Irritable,
+Angry,
+Bright,
+Euphoric,
+Labile,
+Stable,
+Mood congruent,
+Mood incongruent,
+Expansive,
+Constricted,
+Blunted,
+Flat,
+Anxious,
+Tearful,
+Dysthymic,
+Full-range,
 Other,
 
 Note: when user choose "Normal (Short code)", it will select following automatically:
-Euthymic,  
-Stable,  
+Euthymic,
+Stable,
 Full-range,
 Mood congruent,
 
@@ -241,11 +241,11 @@ Mood congruent,
 Layer 1 card
 ============
 
-                       ┌────────────────────────────────┐                           
-                       │      Mental status exam        │                           
-                       │                                │                           
-                       │  Layer 1 card - Current state  │                           
-                       └────────────────────────────────┘                           
+                       ┌────────────────────────────────┐
+                       │      Mental status exam        │
+                       │                                │
+                       │  Layer 1 card - Current state  │
+                       └────────────────────────────────┘
 ┌─┬─────────────────────┬────────────────────────────────────────┬─────┬───────────┐
 │ │ Mental status exam  │                                        │ M F │           │
 │ └─────────────────────┘                                        └─────┘           │
@@ -275,20 +275,20 @@ Layer 1 card
 │    │             │    e.g. of graph see image in same folder                     │
 │    │             │                                                               │
 └────┼─────────────┴───────────────────────────────────────────────────────────────┘
-     │                                                                              
-     │            ┌─────────────────────────────────────────┐                       
-     │            │  C -> get 2nd layer tab to submit form  │                       
-     ▼            └─────────────────────────────────────────┘                       
-┌──────────┐                                                                        
-│ 15 tabs  │                                                                        
-└──────────┘                                                                        
-                                                                                    
-                                                                                    
-                           ┌────────────────────────────────┐                       
-                           │      Mental status exam        │                       
-                           │                                │                       
-                           │   Layer 1 card - multiState    │                       
-                           └────────────────────────────────┘                       
+     │
+     │            ┌─────────────────────────────────────────┐
+     │            │  C -> get 2nd layer tab to submit form  │
+     ▼            └─────────────────────────────────────────┘
+┌──────────┐
+│ 15 tabs  │
+└──────────┘
+
+
+                           ┌────────────────────────────────┐
+                           │      Mental status exam        │
+                           │                                │
+                           │   Layer 1 card - multiState    │
+                           └────────────────────────────────┘
 ┌─┬─────────────────────┬────────────────────────────────────────┬─────┬───────────┐
 │ │ Mental status exam  │                                        │  M  │           │
 │ └─────────────────────┘                                        └─────┘           │
@@ -312,12 +312,12 @@ Layer 1 card
 │         │        │                                                               │
 │         │        │                                                               │
 └─────────┼────────┴───────────────────────────────────────────────────────────────┘
-          │                                                                         
-          │                                                                         
-          ▼                                                                         
-     ┌──────────┐                                                                   
-     │ 15 rows  │                                                                   
-     └──────────┘                                                                   
+          │
+          │
+          ▼
+     ┌──────────┐
+     │ 15 rows  │
+     └──────────┘
 
 
 

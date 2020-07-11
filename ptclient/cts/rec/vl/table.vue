@@ -11,10 +11,8 @@
         </el-button-group>
       </div>
       <el-table :data="daTable" style="width: 100%;" :showHeader="false">
-        <el-table-column prop="description" label="Description" width="180">
-        </el-table-column>
-        <el-table-column prop="createdAt" label="CreatedAt" width="180">
-        </el-table-column>
+        <el-table-column prop="description" label="Description" width="180"> </el-table-column>
+        <el-table-column prop="createdAt" label="CreatedAt" width="180"> </el-table-column>
       </el-table>
     </el-card>
   </div>
@@ -40,10 +38,7 @@ export default {
         Sorrounding component with keepAlive in pf/_uuid/index.vue does not help. Since previous rendering of rex
         is not hidden. When user types rex 2 times, rex is being displayed 2 times
     */
-    const arResultsFromORM = ormCTLifeCycle
-      .query()
-      .where('name', 'Recommendations')
-      .get()
+    const arResultsFromORM = ormCTLifeCycle.query().where('name', 'Recommendations').get()
     const objRowFromORM = arResultsFromORM[0]
     if (typeof objRowFromORM !== 'undefined') {
       console.log('already mounted')

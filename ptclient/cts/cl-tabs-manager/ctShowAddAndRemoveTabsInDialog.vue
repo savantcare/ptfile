@@ -68,11 +68,7 @@ dialog
                        └────────────────────────┘                          
       -->
       <el-col :span="24">
-        <el-tabs
-          v-model="cfVSSelectedTabId"
-          type="card"
-          @tab-remove="mfHandleTabRemove"
-        >
+        <el-tabs v-model="cfVSSelectedTabId" type="card" @tab-remove="mfHandleTabRemove">
           <el-tab-pane
             v-for="(tab, loopCount) in cfArTabs"
             :key="tab.id"
@@ -81,10 +77,7 @@ dialog
             :closable="tab.closable"
           >
             <!-- Using https://vuejs.org/v2/guide/components.html#Dynamic-Components -->
-            <component
-              v-bind:is="tab.ctToShow"
-              :firstParam="tab.vstPropsToGiveToCt"
-            ></component>
+            <component v-bind:is="tab.ctToShow" :firstParam="tab.vstPropsToGiveToCt"></component>
           </el-tab-pane>
         </el-tabs>
       </el-col>
@@ -127,8 +120,7 @@ export default {
     },
     vblIsdialogHoldingTabsInCLVisible: {
       get() {
-        return this.$store.state.vstObjTabsInCL
-          .vblIsdialogHoldingTabsInCLVisible
+        return this.$store.state.vstObjTabsInCL.vblIsdialogHoldingTabsInCLVisible
       },
       set(value) {
         this.$store.commit('mtfSetTabDialogVisibility', value)
@@ -165,55 +157,32 @@ export default {
       }
       if (pEvent.keyCode === 37) {
         console.log('left arrow pressed let us find the position of the tab')
-        const currentTabIdx = this.cfArTabs.findIndex(
-          (tab) => tab.id === this.cfVSSelectedTabId
-        )
+        const currentTabIdx = this.cfArTabs.findIndex((tab) => tab.id === this.cfVSSelectedTabId)
         console.log('Current tab idx is: ', currentTabIdx)
         if (currentTabIdx === 0) {
           console.log('at first tab so ignore')
         } else {
-          this.$store.commit(
-            'mtfSetvsSelectedTabId',
-            this.cfArTabs[currentTabIdx - 1].id
-          )
+          this.$store.commit('mtfSetvsSelectedTabId', this.cfArTabs[currentTabIdx - 1].id)
         }
         return
       }
       if (pEvent.keyCode === 39) {
         console.log('right arrow pressed let us find the position of the tab')
-        const currentTabIdx = this.cfArTabs.findIndex(
-          (tab) => tab.id === this.cfVSSelectedTabId
-        )
+        const currentTabIdx = this.cfArTabs.findIndex((tab) => tab.id === this.cfVSSelectedTabId)
         if (currentTabIdx === this.cfArTabs.length - 1) {
           console.log('at last tab so ignore')
         } else {
-          this.$store.commit(
-            'mtfSetvsSelectedTabId',
-            this.cfArTabs[currentTabIdx + 1].id
-          )
+          this.$store.commit('mtfSetvsSelectedTabId', this.cfArTabs[currentTabIdx + 1].id)
         }
         return
       }
       const maxValidKeyCodeEnteredByUser = 48 + this.cfArTabs.length
-      console.log(
-        'max code:',
-        maxValidKeyCodeEnteredByUser,
-        'pressed code is',
-        pEvent.keyCode
-      )
-      if (
-        pEvent.keyCode >= '49' &&
-        pEvent.keyCode <= maxValidKeyCodeEnteredByUser
-      ) {
+      console.log('max code:', maxValidKeyCodeEnteredByUser, 'pressed code is', pEvent.keyCode)
+      if (pEvent.keyCode >= '49' && pEvent.keyCode <= maxValidKeyCodeEnteredByUser) {
         console.log('Activating tab at position' + pEvent.key)
-        this.$store.commit(
-          'mtfSetvsSelectedTabId',
-          this.cfArTabs[pEvent.key - 1].id
-        )
+        this.$store.commit('mtfSetvsSelectedTabId', this.cfArTabs[pEvent.key - 1].id)
       } else {
-        console.log(
-          'Rejection reason 3: User entered # is higher then max tabs'
-        )
+        console.log('Rejection reason 3: User entered # is higher then max tabs')
       }
     },
     // #endregion kbselect
@@ -245,10 +214,7 @@ export default {
         } else {
           idOfNewActiveTab = tabToRemoveFoundAt - 1
         }
-        this.$store.commit(
-          'mtfSetvsSelectedTabId',
-          arNewTabs[idOfNewActiveTab].id
-        )
+        this.$store.commit('mtfSetvsSelectedTabId', arNewTabs[idOfNewActiveTab].id)
       }
     },
   },

@@ -4,12 +4,7 @@
     <el-row :gutter="12">
       <el-col :span="24">
         <el-card class="box-card">
-          <el-form
-            label-position="top"
-            :model="daGoalForm"
-            ref="daGoalForm"
-            class="demo-dynamic"
-          >
+          <el-form label-position="top" :model="daGoalForm" ref="daGoalForm" class="demo-dynamic">
             <el-card
               class="box-card"
               v-for="(domain, index) in daGoalForm.goals"
@@ -18,10 +13,7 @@
             >
               <el-row>
                 <el-col :span="2" :offset="24">
-                  <i
-                    class="el-icon-close"
-                    @click.prevent="removeDomain(domain)"
-                  ></i>
+                  <i class="el-icon-close" @click.prevent="removeDomain(domain)"></i>
                 </el-col>
               </el-row>
               <el-form-item
@@ -82,15 +74,10 @@
             </el-card>
 
             <el-form-item>
-              <el-button
-                type="success"
-                @click="submitForm('daGoalForm')"
-                size="small"
+              <el-button type="success" @click="submitForm('daGoalForm')" size="small"
                 >Save</el-button
               >
-              <el-button type="primary" @click="addDomain" size="small"
-                >Add one more</el-button
-              >
+              <el-button type="primary" @click="addDomain" size="small">Add one more</el-button>
             </el-form-item>
           </el-form>
         </el-card>

@@ -14,41 +14,25 @@
 
           <el-table-column prop="option1" label="Not at all" width="170">
             <template slot-scope="scope">
-              <el-radio
-                :label="0"
-                v-model="scope.row.selectedAnswer"
-              ></el-radio>
+              <el-radio :label="0" v-model="scope.row.selectedAnswer"></el-radio>
             </template>
           </el-table-column>
 
           <el-table-column prop="option2" label="Several days" width="170">
             <template slot-scope="scope">
-              <el-radio
-                :label="1"
-                v-model="scope.row.selectedAnswer"
-              ></el-radio>
+              <el-radio :label="1" v-model="scope.row.selectedAnswer"></el-radio>
             </template>
           </el-table-column>
 
-          <el-table-column
-            prop="option3"
-            label="More than half the days"
-            width="170"
-          >
+          <el-table-column prop="option3" label="More than half the days" width="170">
             <template slot-scope="scope">
-              <el-radio
-                :label="2"
-                v-model="scope.row.selectedAnswer"
-              ></el-radio>
+              <el-radio :label="2" v-model="scope.row.selectedAnswer"></el-radio>
             </template>
           </el-table-column>
 
           <el-table-column prop="option4" label="Nearly every day" width="170">
             <template slot-scope="scope">
-              <el-radio
-                :label="3"
-                v-model="scope.row.selectedAnswer"
-              ></el-radio>
+              <el-radio :label="3" v-model="scope.row.selectedAnswer"></el-radio>
             </template>
           </el-table-column>
         </el-table>
@@ -60,9 +44,8 @@
         <br />
         <span
           ><b
-            >If you checked off any problems, how difficult have these problems
-            made it for you to do your work, take care of things at home, or get
-            along with other people?</b
+            >If you checked off any problems, how difficult have these problems made it for you to
+            do your work, take care of things at home, or get along with other people?</b
           ></span
         >
         <br />
@@ -75,9 +58,7 @@
       </el-form-item>
 
       <el-form-item class="qstn-submit">
-        <el-button type="success" @click="submitForm()" size="small"
-          >Submit</el-button
-        >
+        <el-button type="success" @click="submitForm()" size="small">Submit</el-button>
       </el-form-item>
     </el-form>
   </el-row>
@@ -113,8 +94,7 @@ export default {
         {
           id: 3,
           selectedAnswer: null,
-          question:
-            '3. Trouble falling or staying asleep, or sleeping too much...',
+          question: '3. Trouble falling or staying asleep, or sleeping too much...',
           option1: '0',
           option2: '1',
           option3: '2',
@@ -207,8 +187,7 @@ export default {
     this.$store.dispatch('getScreeningDetail', params)
     // console.log(this.$store.state);
 
-    const dbLastScreenAnswerDetail = this.$store.state.screening
-      .screenPHQ9AnswerDetail
+    const dbLastScreenAnswerDetail = this.$store.state.screening.screenPHQ9AnswerDetail
     // console.log(Object.keys(dbLastScreenAnswerDetail).length)
     if (Object.keys(dbLastScreenAnswerDetail).length > 0) {
       this.updateFlag = true
@@ -219,9 +198,7 @@ export default {
       this.questionData.forEach((row) => {
         const key = 'question' + row.id
         row.selectedAnswer =
-          dbLastScreenAnswerDetail[key] == null
-            ? null
-            : parseInt(dbLastScreenAnswerDetail[key])
+          dbLastScreenAnswerDetail[key] == null ? null : parseInt(dbLastScreenAnswerDetail[key])
       })
     }
 
@@ -246,13 +223,11 @@ export default {
       screenDetailData.patientUUID = this.$route.query.patient_id
       screenDetailData.recordChangedByUUID = this.getUserId
       screenDetailData.recordChangedFromIPAddress = ''
-      screenDetailData.question10 =
-        this.question10 == null ? null : String(this.question10)
+      screenDetailData.question10 = this.question10 == null ? null : String(this.question10)
 
       this.questionData.forEach((row) => {
         const key = 'question' + row.id
-        screenDetailData[key] =
-          row.selectedAnswer == null ? null : String(row.selectedAnswer)
+        screenDetailData[key] = row.selectedAnswer == null ? null : String(row.selectedAnswer)
       })
 
       console.log(screenDetailData)

@@ -17,12 +17,10 @@ export default {
       */
 
       // Case 1 has happened hence an existing tab needs to be activated
-      const checkIfAdditionalTabIsExisting = state.arTabs.filter(
-        (currentTab) => {
-          // AG: Why not use https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
-          return currentTab.id === pObjAdditionalTab.id
-        }
-      )
+      const checkIfAdditionalTabIsExisting = state.arTabs.filter((currentTab) => {
+        // AG: Why not use https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
+        return currentTab.id === pObjAdditionalTab.id
+      })
 
       // Case 2 has happened hence a new tab needs to be added
       if (checkIfAdditionalTabIsExisting.length === 0) {

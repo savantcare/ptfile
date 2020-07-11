@@ -1,24 +1,14 @@
 <template>
   <el-row :gutter="12">
     <el-carousel :interval="5000" arrow="always" :autoplay="false">
-      <el-carousel-item
-        v-for="(dxList, index) in sliderSet"
-        :key="`dxCarousel-${index}`"
-      >
+      <el-carousel-item v-for="(dxList, index) in sliderSet" :key="`dxCarousel-${index}`">
         <el-col :span="8" v-for="(dx, index) in dxList" :key="index">
-          <el-card
-            class="box-card"
-            shadow="hover"
-            style="font-family: Helvetica;"
-          >
+          <el-card class="box-card" shadow="hover" style="font-family: Helvetica;">
             <div><b>Name:</b> {{ dx.dxName }}</div>
             <div><b>Diagnosed On:</b> {{ dx.dxOnDate }}</div>
             <el-divider></el-divider>
             <el-form label-position="top" ref="dx" :model="dx">
-              <el-form-item
-                style="font-weight: bold;"
-                label="Change assessment"
-              >
+              <el-form-item style="font-weight: bold;" label="Change assessment">
                 <el-input
                   :span="8"
                   type="textarea"
@@ -27,13 +17,8 @@
                 ></el-input>
               </el-form-item>
               <el-form-item>
-                <el-button type="success" @click="onClickSave(dx)" size="small"
-                  >Save</el-button
-                >
-                <el-button
-                  type="danger"
-                  @click="onClickDiscontinue(dx)"
-                  size="small"
+                <el-button type="success" @click="onClickSave(dx)" size="small">Save</el-button>
+                <el-button type="danger" @click="onClickDiscontinue(dx)" size="small"
                   >Discontinue</el-button
                 >
               </el-form-item>
