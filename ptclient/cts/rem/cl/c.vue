@@ -37,7 +37,7 @@ export default {
         This Ct is called in a for loop. In the same for loop other Ct are also called. 
         So the param name has to be generic and cannot be unique to each Ct
     */
-  props: ['firstParam'], // this is the unique row id crated by vuex-orm
+  props: ['firstParam'], // this is the unique row id created by vuex-orm
   data() {
     return {
       keystrokeCount: 0,

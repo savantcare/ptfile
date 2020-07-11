@@ -2,6 +2,10 @@
   <div>
     <Split style="height: 900px; width: 1400px;" :gutterSize="4">
       <SplitArea :size="75">
+        <!--  Who determines the set of cards to show here and also the sequence?
+              The doctor team leader decides it.
+              When they want a change we come into the source code and make the change.
+          -->
         <ctRexVl> </ctRexVl><br />
         <ctRemVL> </ctRemVL><br />
         <ctBMVl> </ctBMVl><br />
@@ -10,26 +14,26 @@
         <ctScrVl> </ctScrVl><br />
       </SplitArea>
       <SplitArea :size="25" id="csvl">
-        <!-- <keep-alive> before the card creates problem since multiple cards then get inside keep alive 
-          
-          
-          <keep-alive> is designed for the case where it has one direct child component that is being toggled. 
+        <!-- Why not use <keep-alive> before el-card ?
+            <keep-alive> before the card creates problem since multiple cards then get inside keep alive   
+            <keep-alive> is designed for the case where it has one direct child component that is being toggled. 
             It does not work if you have v-for inside it. 
-            When there are multiple conditional children, as above, <keep-alive> requires that only 
-              one child is rendered at a time.
-          Ref: https://vuejs.org/v2/api/#keep-alive
+            When there are multiple conditional children, as above, <keep-alive> requires that only one child is rendered at a time.
+            Ref: https://vuejs.org/v2/api/#keep-alive
 
-         Similar working code:
-         https://codesandbox.io/s/github/vuejs/vuejs.org/tree/master/src/v2/examples/vue-20-keep-alive-with-dynamic-components?file=/index.html:296-321
+            Similar working code:
+            https://codesandbox.io/s/github/vuejs/vuejs.org/tree/master/src/v2/examples/vue-20-keep-alive-with-dynamic-components?file=/index.html:296-321
           -->
         <el-card v-for="card in cfArCards" v-bind:key="card.id">
           <!-- Using https://vuejs.org/v2/guide/components.html#Dynamic-Components -->
-          <!-- Sorrounding component with keepAlive does not help. Since previous rendering of rex
-          is not hidden. When user types rex 2 times, rex is being displayed 2 times
-          -->
+          <!--  Why not use keep-alive before <component v-bind:is="card.ctToShow"></component> 
+                Sorrounding component with keepAlive does not help. Since previous rendering of rex
+                is not hidden. When user types rex 2 times, rex is being displayed 2 times
+            -->
           <component v-bind:is="card.ctToShow"></component>
         </el-card>
         <ctVLSearchBox></ctVLSearchBox>
+        <!-- ctVLSearchBox as per glossary is Component View layer search box -->
       </SplitArea>
     </Split>
     <!-- tab-dialog is present in patientFile.vue but in hidden state -->
