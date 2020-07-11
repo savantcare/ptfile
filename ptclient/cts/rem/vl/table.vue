@@ -73,6 +73,14 @@
           </template>
         </el-table-column>
       </el-table>
+      <el-pagination
+        vbind:hide-on-single-page="true"
+        background
+        layout="pager"
+        :total="cfLengthOfDataArray"
+        @current-change="mfTablePageChanged"
+      >
+      </el-pagination>
     </el-card>
   </div>
 </template>
@@ -86,10 +94,14 @@ export default {
   components: { dbInteraction },
   data() {
     return {
-      // dataTable: [],
+      tablePageNumber: 1,
     }
   },
   computed: {
+    cfLengthOfDataArray() {
+      const resultSet = ormRem.query().get()
+      return resultSet.length
+    },
     cfRemArrayForDisplay() {
       console.log(
         'cfRemArrayForDisplay called. Whenever ormRem will change this will get called. Even when there are 100 rows in the table when orm rem changes this gets called once'
@@ -98,10 +110,10 @@ export default {
 
       /* Option1 of returning data from this cf:
           return resultSet
-          Disadvantage 
+          Disadvantage
             Created at needs to be made inside the template
             vue will get more data since when I loop here I can send less data to vue
-          Advantage: 
+          Advantage:
             No need to run the for loop
       */
 
@@ -111,7 +123,13 @@ export default {
       let obj = {}
       if (resultSet.length) {
         let date = ''
-        for (let i = 0; i < resultSet.length; i++) {
+        const startDataRowInidex = (this.tablePageNumber - 1) * 10
+        const endDataRowIndex = startDataRowInidex + 10
+        for (
+          let i = startDataRowInidex;
+          i < resultSet.length && i < endDataRowIndex;
+          i++
+        ) {
           obj = {}
           obj.remDescription = resultSet[i].remDescription
           // For date format ref: /cts/rem/vl/timeline.vue:53
@@ -131,6 +149,10 @@ export default {
   },
   mounted() {},
   methods: {
+    mfTablePageChanged(pNewPageNumber) {
+      console.log('Page changed', pNewPageNumber)
+      this.tablePageNumber = pNewPageNumber
+    },
     mfOpenADialog() {
       // console.log('show add dialog')
       const resultSet = ormSearchPhraseUiToCT
