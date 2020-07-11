@@ -33,8 +33,11 @@ export default {
       console.log('value changed', pValue)
       if (pValue === 'assessment-tabset') {
         // cannot hardcode, need to query since dont know the ID created when inserted
-        const resultSet = ormSearchPhraseUiToCT.query().search('add goal').get()
-        const resultData = resultSet[0]
+        const resultArFromORM = ormSearchPhraseUiToCT
+          .query()
+          .search('add goal')
+          .get()
+        const resultData = resultArFromORM[0]
         const objAddTab = {
           label: resultData.value,
           ctToShow: require('@/cts/' + resultData.ctToShowInCL).default,
@@ -45,11 +48,11 @@ export default {
         this.$store.commit('mtfShowNewFirstTabInCl', objAddTab)
         this.$store.state.vstObjTabsInCL.vsSelectedTabId = this.$store.state.vstObjTabsInCL.arTabs[0].id
       } else if (pValue === 'plan-tabset') {
-        let resultSet = ormSearchPhraseUiToCT
+        let resultArFromORM = ormSearchPhraseUiToCT
           .query()
           .search('add diagnosis')
           .get()
-        let resultData = resultSet[0]
+        let resultData = resultArFromORM[0]
         let objAddTab = {
           label: resultData.value,
           ctToShow: require('@/cts/' + resultData.ctToShowInCL).default,
@@ -58,11 +61,11 @@ export default {
           closable: true,
         }
         this.$store.commit('mtfShowNewFirstTabInCl', objAddTab)
-        resultSet = ormSearchPhraseUiToCT
+        resultArFromORM = ormSearchPhraseUiToCT
           .query()
           .search('multi rate goal')
           .get()
-        resultData = resultSet[0]
+        resultData = resultArFromORM[0]
         objAddTab = {
           label: resultData.value,
           ctToShow: require('@/cts/' + resultData.ctToShowInCL).default,
