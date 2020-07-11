@@ -59,10 +59,10 @@ export default {
   },
   mounted() {
     console.log('In mounted function')
-    const resultSet = ormRem.query().get()
-    if (resultSet.length) {
-      for (let i = 0; i < resultSet.length; i++) {
-        this.daUniqueIDOfEachRowFromORM.push(resultSet[i].$id)
+    const resultArFromORM = ormRem.query().get()
+    if (resultArFromORM.length) {
+      for (let i = 0; i < resultArFromORM.length; i++) {
+        this.daUniqueIDOfEachRowFromORM.push(resultArFromORM[i].$id)
       }
     }
     console.log(this.daUniqueIDOfEachRowFromORM)
