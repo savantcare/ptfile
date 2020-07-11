@@ -3,8 +3,8 @@
     <el-form>
       <el-form-item label="Description">
         <el-input
-          :value="getDescription()"
-          @input="setDescription($event)"
+          :value="getRemDescription()"
+          @input="setRemDescription($event)"
         ></el-input>
       </el-form-item>
       <el-form-item>
@@ -35,22 +35,25 @@ export default {
   data() {
     return {
       keystrokeCount: 0,
-      reminderDesc: '',
+      reminderDescCached: '',
       uuid: '',
+      stateForRowID: 0,
     }
   },
   computed: {
     cfTimeLineDataAr() {
       //      console.log('inside computed function the UUID is', this.uuid)
       const dataTable = []
-      const resultSet = ormRem.query().where('uuid', this.uuid).get()
-      if (resultSet.length) {
+
+      // to create timeline the uuid will be same but id will be different.
+      const resultSetFromORM = ormRem.query().where('uuid', this.uuid).get()
+      if (resultSetFromORM.length) {
         let obj = []
         let date = ''
-        // console.log('sending this to timeline', resultSet, resultSet[0].uuid)
-        for (let i = 0; i < resultSet.length; i++) {
+        // console.log('sending this to timeline', resultSetFromORM, resultSetFromORM[0].uuid)
+        for (let i = 0; i < resultSetFromORM.length; i++) {
           obj = {}
-          obj.remDescription = resultSet[i].remDescription
+          obj.remDescription = resultSetFromORM[i].remDescription
           /*
           To get the number of the month:
           obj.createdAt = date.getMonth() + 1 + "-" + date.getDate()
@@ -58,17 +61,17 @@ export default {
           To get the name of the month:
           Ref: https://stackoverflow.com/questions/1643320/get-month-name-from-date
           */
-          date = new Date(resultSet[i].ROW_START)
+          date = new Date(resultSetFromORM[i].ROW_START)
           obj.createdAt =
             date.toLocaleString('default', { month: 'long' }) +
             '-' +
             date.getDate()
-          if (resultSet[i].$isDirty) {
+          if (resultSetFromORM[i].$isDirty) {
             obj.type = 'warning'
           } else {
             obj.type = ''
           }
-          obj.ROW_START = resultSet[i].ROW_START
+          obj.ROW_START = resultSetFromORM[i].ROW_START
           dataTable.push(obj)
         }
       }
@@ -77,26 +80,33 @@ export default {
     },
   },
   methods: {
-    getDescription() {
+    getRemDescriptionUsingCache() {
       // console.log('Inside get desc')
-      if (!this.reminderDesc) {
-        // console.log('Going to run query on vuexORM since this came here for first time')
-        const resultSet = ormRem.find(this.firstParam)
-        if (resultSet) {
-          // console.log(resultSet)
-          this.uuid = resultSet.uuid
-          return resultSet.remDescription
+      if (this.stateForRowID != this.firstParam) this.reminderDescCached = ''
+      if (!this.reminderDescCached) {
+        // console.log('Going to run query on vuexORM since for this parameter data has never been fetched from vuex-orm')
+        this.stateForRowID = this.firstParam
+        const resultSetFromORM = ormRem.find(this.firstParam)
+        if (resultSetFromORM) {
+          // console.log(resultSetFromORM)
+          this.uuid = resultSetFromORM.uuid
+          return resultSetFromORM.remDescription
         } else {
           return ''
         }
       } else {
-        console.log('Returning withiout running query on vuexORM')
-        return this.reminderDesc
+        console.log('Better perf: Returning without running query on vuexORM')
+        return this.reminderDescCached
       }
     },
-    setDescription(pEvent) {
-      // Goal: Save to state once every 5 key strokes, This is done so that the system remains responsive.
-      // There are a lot of listeners on this state and they will update themselves once very 5 keystrokes.
+    setRemDescriptionUsingCache(pEvent) {
+      /* Goal: Save to state once every 5 key strokes,
+       Why?
+       So that the system remains responsive.
+       There are a lot of listeners on this state and they will update themselves everytime there is a write to the vuexORM/rem
+       Disadvnatage?
+       If the user types "jai kali" the state will only have "jai k"
+      */
 
       if (this.keystrokeCount === 0) {
         // console.log('saving to state')
@@ -108,13 +118,32 @@ export default {
         })
         this.keystrokeCount++
       } else {
-        // console.log('Not saving to state')
+        // console.log('Better perf: Not saving to state')
         this.keystrokeCount++
         if (this.keystrokeCount === 5) {
           this.keystrokeCount = 0
         }
       }
-      this.reminderDesc = pEvent
+      this.reminderDescCached = pEvent
+    },
+
+    getRemDescription() {
+      // console.log('Inside get desc')
+      this.stateForRowID = this.firstParam
+      const resultSetFromORM = ormRem.find(this.firstParam)
+      if (resultSetFromORM) {
+        // console.log(resultSetFromORM)
+        this.uuid = resultSetFromORM.uuid
+        return resultSetFromORM.remDescription
+      }
+    },
+    setRemDescription(pEvent) {
+      ormRem.update({
+        where: this.firstParam,
+        data: {
+          remDescription: pEvent,
+        },
+      })
     },
 
     async sendDataToServer() {
@@ -125,7 +154,9 @@ export default {
             'Content-Type': 'application/json;charset=utf-8',
             // "Authorization": "Bearer " + TOKEN
           },
-          body: JSON.stringify({ description: this.getDescription() }),
+          body: JSON.stringify({
+            description: this.getRemDescriptionUsingCache(),
+          }),
         })
         if (!response.ok) {
           console.log('Failed to update')
@@ -134,7 +165,11 @@ export default {
         }
       } catch (ex) {}
 
-      console.log('sendDataToServer-> ', this.uuid, this.getDescription())
+      console.log(
+        'sendDataToServer-> ',
+        this.uuid,
+        this.getRemDescriptionUsingCache()
+      )
     },
   },
 }
