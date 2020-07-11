@@ -4,7 +4,7 @@
       <el-form-item label="Description">
         <el-input
           :value="getRemDescUsingCache()"
-          @input="setRemDescInStateOn2Sec($event)"
+          @input="setRemDescInStateOn1Sec($event)"
         ></el-input>
       </el-form-item>
       <el-form-item>
@@ -121,7 +121,7 @@ export default {
         If the user types "ja" within 1 sec and then exits the state will only have j
       */
 
-    setRemDescInStateOn2Sec(pEvent) {
+    setRemDescInStateOn1Sec(pEvent) {
       if (this.vSaveToStateScheduled) {
         console.log('clearing timeout')
         clearTimeout(this.vSaveToStateScheduled)
@@ -138,11 +138,11 @@ export default {
         Inside a traditional function called by setTimeout, however, this refers to the window object
         Ref: https://stackoverflow.com/questions/38399050/vue-equivalent-of-settimeout */
 
-      setTimeout(
+      this.vSaveToStateScheduled = setTimeout(
         function (scope) {
           scope.setRemDescInState(pEvent)
         },
-        2000,
+        1000,
         this
       )
 
