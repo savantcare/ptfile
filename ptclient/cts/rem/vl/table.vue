@@ -36,7 +36,7 @@
         </el-button-group>
       </div>
       <el-table
-        :data="dataTable"
+        :data="cfDataTable"
         :showHeader="false"
         size="mini"
         style="width: 100%;"
@@ -90,13 +90,15 @@ export default {
     }
   },
   computed: {
-    dataTable() {
+    cfDataTable() {
+      console.log(
+        'cfDataTable called. Whenever ormRem will change this will get called. Even when there are 100 rows in the table when orm rem changes this gets called once'
+      )
       const dataTable = []
       const resultSet = ormRem.query().get()
+      let obj = {}
       if (resultSet.length) {
-        let obj = []
         let date = ''
-        // console.log('unsaved data found', resultSet, resultSet[0].uuid)
         for (let i = 0; i < resultSet.length; i++) {
           obj = {}
           obj.remDescription = resultSet[i].remDescription
