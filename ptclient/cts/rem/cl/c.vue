@@ -17,7 +17,7 @@
     <!-- Goal show history of this reminder -->
     <el-timeline style="padding-inline-start: 20px;">
       <el-timeline-item
-        v-for="row in timelineDataTable"
+        v-for="row in cfTimeLineDataAr"
         :key="row.ROW_START"
         :timestamp="row.createdAt"
         :type="row.type"
@@ -40,7 +40,7 @@ export default {
     }
   },
   computed: {
-    timelineDataTable() {
+    cfTimeLineDataAr() {
       //      console.log('inside computed function the UUID is', this.uuid)
       const dataTable = []
       const resultSet = ormRem.query().where('uuid', this.uuid).get()
