@@ -46,15 +46,17 @@ How to solve this?
               Everytime prev or nexxt is clicked 
                 "slide is: X" is printed 3 times
               From the change component message given is 18 times    
+              {{ console.log('slide is ', slide) }}
         -->
-        {{ console.log('slide is ', slide) }}
         <el-row type="flex">
-          <el-card
+          <el-col
             v-for="remID in getArrayOfRemIDsToShowInThisCard"
             :key="remID"
           >
-            <changeRem :firstParam="remID"></changeRem>
-          </el-card>
+            <el-card>
+              <changeRem :firstParam="remID"></changeRem>
+            </el-card>
+          </el-col>
         </el-row>
       </el-carousel-item>
     </el-carousel>
