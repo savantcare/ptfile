@@ -18,7 +18,7 @@ Every time the slide is changed the getRemDescUsingCache() is again called 204 t
 How to solve this?
 1. Load with getNumOfCarouselSlides as 2. 
 2. Each time prev and next is clicked increment or descrement the local variable currentSlideNumber.
-3. getArrayOfRemIDsToShowInThisCard depends on this.diCurrentSlideNumber
+3. getArrayOfRemIDsToShowInThisCard depends on this.diVirtualSlideNumber
 
 -->
 <template>
@@ -48,12 +48,13 @@ export default {
   data() {
     return {
       daUniqueIDOfEachRowFromORM: [],
-      diCurrentSlideNumber: 0,
+      diVirtualSlideNumber: 0,
     }
   },
   computed: {
     getArrayOfRemIDsToShowInThisCard() {
-      const firstCard = this.diCurrentSlideNumber * 3
+      console.log('The virtual slide number is', this.diVirtualSlideNumber)
+      const firstCard = this.diVirtualSlideNumber * 3
       console.log('First rem card', firstCard)
       const arr = this.daUniqueIDOfEachRowFromORM.slice(
         firstCard,
@@ -62,30 +63,39 @@ export default {
       return arr
     },
     getNumOfCarouselSlides() {
-      /* Importace performance matter here
+      /* Important performance matter here
           If I return the actual length of this.daUniqueIDOfEachRowFromORM.length
           say the length is 100 then 300 times the change component will get called with different params.
         */
 
       const count = this.daUniqueIDOfEachRowFromORM.length / 3
       const intValue = Math.floor(count)
-      console.log('number of items in carousel are', count, intValue)
+      console.log('number of slides in carousel are', count, intValue)
+      // I used to return intValue but that had negative performance effect
       if (count === 0) {
         return 1
       } else {
-        return 2
+        return 3 // I need initial 3 slides since I need to know transition from 0 to 1 is going forward but 1 to 0 can be reached both with prev and next
       }
     },
   },
   methods: {
     slideChanged(newSlideNumber, oldSlideNumber) {
-      console.log('slide changed', newSlideNumber, oldSlideNumber)
-      if (newSlideNumber > oldSlideNumber) {
+      console.log(
+        'slide changed from: ',
+        oldSlideNumber,
+        'to: ',
+        newSlideNumber
+      )
+      if (
+        newSlideNumber > oldSlideNumber ||
+        (newSlideNumber === 0 && oldSlideNumber == 2)
+      ) {
         // user clicked next
-        this.diCurrentSlideNumber = this.diCurrentSlideNumber + 1
+        this.diVirtualSlideNumber = this.diVirtualSlideNumber + 1
       } else {
         // user clicked prev
-        this.diCurrentSlideNumber = this.diCurrentSlideNumber - 1
+        this.diVirtualSlideNumber = this.diVirtualSlideNumber - 1
       }
     },
   },
