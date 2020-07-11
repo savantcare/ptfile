@@ -81,6 +81,7 @@ export default {
   },
   methods: {
     slideChanged(newSlideNumber, oldSlideNumber) {
+      // This is virtual scroller. This improves performance substantially.
       console.log(
         'slide changed from: ',
         oldSlideNumber,
