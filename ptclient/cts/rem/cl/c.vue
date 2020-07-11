@@ -3,6 +3,8 @@
     <el-form>
       <el-form-item>
         <el-input
+          type="textarea"
+          :autosize="{ minRows: 2, maxRows: 4 }"
           :value="getRemDescUsingCache()"
           @input="setRemDescInStateOnDelay($event)"
         ></el-input>
