@@ -32,8 +32,11 @@ How to solve this?
       <!-- Reason for v-bind to pass boolean value https://stackoverflow.com/questions/49225002/passing-boolean-vue-prop-value-in-html -->
       <el-carousel-item v-for="slide in getNumOfCarouselSlides" :key="slide">
         <el-row type="flex">
-          <el-card v-for="remID in getArrayOfRemIDsToShowInThisCard">
-            <changeRem :firstParam="remID"></changeRem>{{ remID }}
+          <el-card
+            v-for="remID in getArrayOfRemIDsToShowInThisCard"
+            :key="remID"
+          >
+            <changeRem :firstParam="remID"></changeRem>
           </el-card>
         </el-row>
       </el-carousel-item>
@@ -90,7 +93,7 @@ export default {
       )
       if (
         newSlideNumber > oldSlideNumber ||
-        (newSlideNumber === 0 && oldSlideNumber == 2)
+        (newSlideNumber === 0 && oldSlideNumber === 2)
       ) {
         // user clicked next
         this.diVirtualSlideNumber = this.diVirtualSlideNumber + 1
