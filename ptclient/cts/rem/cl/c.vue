@@ -17,7 +17,7 @@
     <!-- Goal show history of this reminder -->
     <el-timeline style="padding-inline-start: 20px;">
       <el-timeline-item
-        v-for="row in dataTable"
+        v-for="row in timelineDataTable"
         :key="row.ROW_START"
         :timestamp="row.createdAt"
         :type="row.type"
@@ -31,7 +31,7 @@
 import { REMINDER_API_URL } from '../const.js'
 import ormRem from '@/cts/rem/vuex-orm/model.js'
 export default {
-  props: ['firstParam'],
+  props: ['firstParam'], // this is the unique row id crated by vuex-orm
   data() {
     return {
       keystrokeCount: 0,
@@ -40,7 +40,7 @@ export default {
     }
   },
   computed: {
-    dataTable() {
+    timelineDataTable() {
       //      console.log('inside computed function the UUID is', this.uuid)
       const dataTable = []
       const resultSet = ormRem.query().where('uuid', this.uuid).get()
@@ -78,11 +78,10 @@ export default {
   },
   methods: {
     getDescription() {
-      const rowID = this.firstParam
-      // console.log('Inside get des rowID')
+      // console.log('Inside get desc')
       if (!this.reminderDesc) {
-        // console.log('Going to run query on vuexORM')
-        const resultSet = ormRem.find(rowID)
+        // console.log('Going to run query on vuexORM since this came here for first time')
+        const resultSet = ormRem.find(this.firstParam)
         // console.log('Just finisghed running query on vuexORM')
         if (resultSet) {
           // console.log(resultSet)
@@ -97,13 +96,12 @@ export default {
       }
     },
     setDescription(pEvent) {
-      // Goal: Save to state once every 5 key strokes, This is done so that the system remains resonsive.
+      // Goal: Save to state once every 5 key strokes, This is done so that the system remains responsive.
 
       if (this.keystrokeCount === 0) {
-        //    console.log('saving to state')
-        const rowID = this.firstParam
+        // console.log('saving to state')
         ormRem.update({
-          where: rowID,
+          where: this.firstParam,
           data: {
             remDescription: pEvent,
           },
