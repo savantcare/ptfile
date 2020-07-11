@@ -8,11 +8,16 @@ Carausel                           |
 -->
 <template>
   <div class="block">
-    <el-carousel arrow="always" trigger="click" @change="slideChanged">
+    <el-carousel
+      arrow="always"
+      trigger="click"
+      @change="slideChanged"
+      autoplay="false"
+    >
       <el-carousel-item v-for="slide in getNumOfCarouselSlides">
         <el-row type="flex">
-          <el-card v-for="set in getArrayOfRemIDsToShowInThisCard">
-            <changeRen :firstParam="set"></changeRen>
+          <el-card v-for="remID in getArrayOfRemIDsToShowInThisCard">
+            <changeRem :firstParam="remID"></changeRem>{{ remID }}
           </el-card>
         </el-row>
       </el-carousel-item>
@@ -21,9 +26,9 @@ Carausel                           |
 </template>
 <script>
 import ormRem from '@/cts/rem/vuex-orm/model.js'
-import changeRen from '@/cts/rem/cl/c.vue'
+import changeRem from '@/cts/rem/cl/c.vue'
 export default {
-  components: { changeRen },
+  components: { changeRem },
   data() {
     return {
       daUniqueIDOfEachRowFromORM: [],
@@ -33,7 +38,7 @@ export default {
   computed: {
     getArrayOfRemIDsToShowInThisCard() {
       const firstCard = (this.diCurrentSlideNumber - 1) * 3
-      console.log('First Card', firstCard)
+      console.log('First rem card', firstCard)
       const arr = this.daUniqueIDOfEachRowFromORM.slice(
         firstCard,
         firstCard + 3
