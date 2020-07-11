@@ -1,3 +1,4 @@
+<!-- When  i went from 80 to 100 the line count went rom 276 to 230 -->
 <template>
   <div>
     <dbInteraction></dbInteraction>
@@ -5,34 +6,10 @@
       <div slot="header" class="clearfix">
         <span>Reminders</span>
         <el-button-group style="float: right;">
-          <el-button
-            @click="mfOpenADialog"
-            style="padding: 3px;"
-            type="success"
-            plain
-            >A</el-button
-          >
-          <el-button
-            @click="mfOpenMDialog"
-            style="padding: 3px;"
-            type="primary"
-            plain
-            >M</el-button
-          >
-          <el-button
-            @click="mfOpenDDialog"
-            style="padding: 3px;"
-            type="warning"
-            plain
-            >D</el-button
-          >
-          <el-button
-            @click="mfOpenXDialog"
-            style="padding: 3px;"
-            type="info"
-            plain
-            >X</el-button
-          >
+          <el-button @click="mfOpenADialog" style="padding: 3px;" type="success" plain>A</el-button>
+          <el-button @click="mfOpenMDialog" style="padding: 3px;" type="primary" plain>M</el-button>
+          <el-button @click="mfOpenDDialog" style="padding: 3px;" type="warning" plain>D</el-button>
+          <el-button @click="mfOpenXDialog" style="padding: 3px;" type="info" plain>X</el-button>
         </el-button-group>
       </div>
       <el-table
@@ -49,8 +26,7 @@
           </template>
         </el-table-column>
 
-        <el-table-column prop="remDescription" label="Description">
-        </el-table-column>
+        <el-table-column prop="remDescription" label="Description"> </el-table-column>
         <!-- Why is width = "60" for the action column
         Setting this makes the middle column of desc flexible.
         After this is set if desc has 200 words they will use the maximum available space.
@@ -66,15 +42,13 @@
                 plain
                 >C</el-button
               >
-              <el-button type="warning" size="mini" style="padding: 3px;" plain
-                >D</el-button
-              >
+              <el-button type="warning" size="mini" style="padding: 3px;" plain>D</el-button>
             </el-button-group>
           </template>
         </el-table-column>
       </el-table>
       <el-pagination
-        vbind:hide-on-single-page="true"
+        :hide-on-single-page="true"
         background
         layout="pager"
         :total="cfLengthOfDataArray"
@@ -125,19 +99,12 @@ export default {
         let date = ''
         const startDataRowInidex = (this.tablePageNumber - 1) * 10
         const endDataRowIndex = startDataRowInidex + 10
-        for (
-          let i = startDataRowInidex;
-          i < arResultsFromORM.length && i < endDataRowIndex;
-          i++
-        ) {
+        for (let i = startDataRowInidex; i < arResultsFromORM.length && i < endDataRowIndex; i++) {
           obj = {}
           obj.remDescription = arResultsFromORM[i].remDescription
           // For date format ref: /cts/rem/vl/timeline.vue:53
           date = new Date(arResultsFromORM[i].ROW_START)
-          obj.createdAt =
-            date.toLocaleString('default', { month: 'long' }) +
-            '-' +
-            date.getDate()
+          obj.createdAt = date.toLocaleString('default', { month: 'long' }) + '-' + date.getDate()
           obj.$isDirty = arResultsFromORM[i].$isDirty
           obj.uuid = arResultsFromORM[i].uuid
           obj.$id = arResultsFromORM[i].$id
@@ -155,10 +122,7 @@ export default {
     },
     mfOpenADialog() {
       // console.log('show add dialog')
-      const arResultsFromORM = ormSearchPhraseUiToCT
-        .query()
-        .search('add reminder')
-        .get()
+      const arResultsFromORM = ormSearchPhraseUiToCT.query().search('add reminder').get()
       const objRowFromORM = arResultsFromORM[0]
       // console.log(objRowFromORM)
       const tab = {
@@ -172,10 +136,7 @@ export default {
     },
     mfOpenMDialog() {
       // console.log('show add dialog')
-      const arResultsFromORM = ormSearchPhraseUiToCT
-        .query()
-        .search('multi change reminder')
-        .get()
+      const arResultsFromORM = ormSearchPhraseUiToCT.query().search('multi change reminder').get()
       const objRowFromORM = arResultsFromORM[0]
       // console.log(objRowFromORM)
       const tab = {
@@ -192,10 +153,7 @@ export default {
     },
     mfOpenXDialog() {
       // console.log('show add dialog')
-      const arResultsFromORM = ormSearchPhraseUiToCT
-        .query()
-        .search('discontinued reminders')
-        .get()
+      const arResultsFromORM = ormSearchPhraseUiToCT.query().search('discontinued reminders').get()
       const objRowFromORM = arResultsFromORM[0]
       // console.log(objRowFromORM)
       const tab = {
@@ -211,10 +169,7 @@ export default {
       console.log('Open change rem dialog -> ', pORMDataRowID)
 
       // Goal: Find out which CT will handle this work
-      const arResultsFromORM = ormSearchPhraseUiToCT
-        .query()
-        .search('change reminder')
-        .get()
+      const arResultsFromORM = ormSearchPhraseUiToCT.query().search('change reminder').get()
       const objRowFromORM = arResultsFromORM[0]
       // console.log(objRowFromORM)
 
