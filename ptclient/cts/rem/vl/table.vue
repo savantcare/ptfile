@@ -36,7 +36,7 @@
         </el-button-group>
       </div>
       <el-table
-        :data="cfDataTable"
+        :data="cfRemArrayForDisplay"
         :showHeader="false"
         size="mini"
         style="width: 100%;"
@@ -90,12 +90,24 @@ export default {
     }
   },
   computed: {
-    cfDataTable() {
+    cfRemArrayForDisplay() {
       console.log(
-        'cfDataTable called. Whenever ormRem will change this will get called. Even when there are 100 rows in the table when orm rem changes this gets called once'
+        'cfRemArrayForDisplay called. Whenever ormRem will change this will get called. Even when there are 100 rows in the table when orm rem changes this gets called once'
       )
-      const dataTable = []
       const resultSet = ormRem.query().get()
+
+      /* Option1 of returning data from this cf:
+          return resultSet
+          Disadvantage 
+            Created at needs to be made inside the template
+            vue will get more data since when I loop here I can send less data to vue
+          Advantage: 
+            No need to run the for loop
+      */
+
+      /* Option2 of returning data from this cf:
+       */
+      const arRemsForDisplay = []
       let obj = {}
       if (resultSet.length) {
         let date = ''
@@ -111,12 +123,11 @@ export default {
           obj.$isDirty = resultSet[i].$isDirty
           obj.uuid = resultSet[i].uuid
           obj.$id = resultSet[i].$id
-          dataTable.push(obj)
+          arRemsForDisplay.push(obj)
         }
       }
-      // console.log(dataTable.length)
-      return dataTable
-    },
+      return arRemsForDisplay
+    }, // end of cfRemArrayForDisplay
   },
   mounted() {},
   methods: {
