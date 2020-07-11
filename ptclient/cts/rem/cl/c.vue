@@ -82,7 +82,6 @@ export default {
       if (!this.reminderDesc) {
         // console.log('Going to run query on vuexORM since this came here for first time')
         const resultSet = ormRem.find(this.firstParam)
-        // console.log('Just finisghed running query on vuexORM')
         if (resultSet) {
           // console.log(resultSet)
           this.uuid = resultSet.uuid
