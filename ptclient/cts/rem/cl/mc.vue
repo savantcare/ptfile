@@ -14,6 +14,12 @@ console.log(
 When this Ct is mounted it loads the changeRem 204 times since the above console.log is put on console 204 times. 
 
 Every time the slide is changed the getRemDescUsingCache() is again called 204 times since on console.log I see 204 messages
+
+How to solve this?
+1. Load with getNumOfCarouselSlides as 2. 
+2. Each time prev and next is clicked increment or descrement the local variable currentSlideNumber.
+3. getArrayOfRemIDsToShowInThisCard depends on this.diCurrentSlideNumber
+
 -->
 <template>
   <div class="block">
@@ -67,9 +73,15 @@ export default {
     },
   },
   methods: {
-    slideChanged(val) {
-      console.log('slide changed', val)
-      this.diCurrentSlideNumber = val
+    slideChanged(newSlideNumber, oldSlideNumber) {
+      console.log('slide changed', newSlideNumber, oldSlideNumber)
+      if (newSlideNumber > oldSlideNumber) {
+        // user clicked next
+        this.diCurrentSlideNumber = this.diCurrentSlideNumber + 1
+      } else {
+        // user clicked prev
+        this.diCurrentSlideNumber = this.diCurrentSlideNumber - 1
+      }
     },
   },
   mounted() {
