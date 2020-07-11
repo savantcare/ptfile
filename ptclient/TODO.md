@@ -1,6 +1,6 @@
 # ptclient
 
-1. rename to id to ormID in model
+1. rename to id to uniqueRowID in model
 2. single change on submit to sync with DB
 3. multi change to show change in carousel
 4. Dirty fields to get orange border currently in table the row gets orange bg
