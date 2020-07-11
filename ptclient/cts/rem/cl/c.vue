@@ -84,12 +84,23 @@ export default {
   },
   methods: {
     getRemDescUsingCache() {
-      // Performance problem: When C is first clicked and the control comes here. This fn is called twice
-      // Since following console.log is written twice.
-      // If I remove :value="getRemDescUsingCache()" then this fn is called 0 times
+      /* Performance analysis
+         When C is first clicked and the control comes here. This fn is called twice
+         Since following console.log is written twice.
+         If I remove :value="getRemDescUsingCache()" then this fn is called 0 times
 
-      // When to get from ORM and when from cache?
-      // Inside get desc. 1st time it comes from ORM from then on it always come from cache. The cache value is set by setRemDescOn5KeyPress
+         Why?
+         It is a default browser behavior. Clicking on the <label> will trigger 2 clicks, one for <label> and one for <input>.
+         Ref: https://stackoverflow.com/a/58724163
+
+         This fn is fired once when the property is first defined with undefined value and then is fired twice when a value is assigned to it. 
+
+        */
+
+      /* When to get from ORM and when from cache?
+         Inside get desc. 1st time it comes from ORM from then on it always come from cache. The cache value is set by setRemDesc
+        */
+
       console.log(this.firstParam)
       if (this.stateForRowID !== this.firstParam) this.reminderDescCached = ''
       if (!this.reminderDescCached) {

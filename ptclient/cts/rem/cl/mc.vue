@@ -31,7 +31,7 @@ How to solve this?
     >
       <!-- Reason for v-bind to pass boolean value https://stackoverflow.com/questions/49225002/passing-boolean-vue-prop-value-in-html -->
       <el-carousel-item v-for="slide in getNumOfCarouselSlides" :key="slide">
-        <!-- How to improve performance?  TODO
+        <!-- Performance analysis  TODO
           
             If getNumOfCarouselSlides is 3  
               When carousel is first invoked.
