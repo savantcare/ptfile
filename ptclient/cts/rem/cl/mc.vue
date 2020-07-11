@@ -48,7 +48,10 @@ How to solve this?
               From the change component message given is 18 times    
               {{ console.log('slide is ', slide) }}
         -->
-        <el-row type="flex">
+        <!-- Why give :gutter="20" 
+              There are 3 cards and they will come attached to each other if I do not give :gutter=20
+          -->
+        <el-row type="flex" :gutter="20">
           <el-col
             v-for="remID in getArrayOfRemIDsToShowInThisCard"
             :key="remID"
