@@ -10,7 +10,7 @@
         ></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" plain @click="sendDataToServer"
+        <el-button type="primary" size="mini" plain @click="sendDataToServer"
           >Submit</el-button
         >
       </el-form-item>

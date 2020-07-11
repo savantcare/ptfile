@@ -35,7 +35,7 @@ export default {
         // cannot hardcode, need to query since dont know the ID created when inserted
         const resultArFromORM = ormSearchPhraseUiToCT
           .query()
-          .search('add goal')
+          .search('add reminder')
           .get()
         const resultData = resultArFromORM[0]
         const objAddTab = {
@@ -50,7 +50,7 @@ export default {
       } else if (pValue === 'plan-tabset') {
         let resultArFromORM = ormSearchPhraseUiToCT
           .query()
-          .search('add diagnosis')
+          .search('multi change reminders')
           .get()
         let resultData = resultArFromORM[0]
         let objAddTab = {
@@ -63,7 +63,7 @@ export default {
         this.$store.commit('mtfShowNewFirstTabInCl', objAddTab)
         resultArFromORM = ormSearchPhraseUiToCT
           .query()
-          .search('multi rate goal')
+          .search('add reminder')
           .get()
         resultData = resultArFromORM[0]
         objAddTab = {

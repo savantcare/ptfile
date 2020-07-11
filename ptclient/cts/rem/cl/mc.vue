@@ -3,9 +3,7 @@
     <el-carousel arrow="always" trigger="click">
       <el-carousel-item v-for="item in 4" :key="id">
         <el-row type="flex" id="item">
-          <el-card>
-            <c :firstParam="1"></c>
-          </el-card>
+          <el-card> <c :firstParam="1"></c> item </el-card>
           <el-card>
             <c :firstParam="2"></c>
           </el-card>
