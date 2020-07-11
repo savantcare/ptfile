@@ -1,6 +1,6 @@
 <template>
   <el-row type="flex">
-    <div v-for="id in daRemUUID" :key="id">
+    <div v-for="id in daUniqueIDOfEachRowFromORM" :key="id">
       <c :firstParam="id"></c>
     </div>
 
@@ -14,17 +14,17 @@ export default {
   components: { c },
   data() {
     return {
-      daRemUUID: [],
+      daUniqueIDOfEachRowFromORM: [],
     }
   },
   mounted() {
     const resultSet = ormRem.query().get()
     if (resultSet.length) {
       for (let i = 0; i < resultSet.length; i++) {
-        this.daRemUUID.push(resultSet[i].$id)
+        this.daUniqueIDOfEachRowFromORM.push(resultSet[i].$id)
       }
     }
-    console.log(this.daRemUUID)
+    console.log(this.daUniqueIDOfEachRowFromORM)
   },
 }
 </script>
