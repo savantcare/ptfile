@@ -1,6 +1,21 @@
 import { Model } from '@vuex-orm/core'
 const { v1: uuidv1 } = require('uuid')
 
+/* Giving a numeric ID to each row
+    Why?
+    https://stackoverflow.com/questions/10639488/faster-to-access-numeric-property-by-string-or-integer  
+    How?
+      Solution comes from cue on slack given on 10th July 2020
+        The closure passed into this.uid(() => myUid()) simply invokes the closure when the model is instructed to generate a uid. The callback simply needs to return a value. 
+        In it’s simplest form, all you need for a primitive value is:
+        let count = 0
+        const myUid = () => ++count
+        this.uid(() => myUid())
+      */
+
+let count = 0
+const myUid = () => ++count
+
 export default class reminders extends Model {
   static entity = 'rem'
 
@@ -32,18 +47,20 @@ export default class reminders extends Model {
               })      
                 
 
-    Option3: Let vuex-orm give auto generated simple primary key of auto increment numbers.
+    Option3: Let vuex-orm give auto generated string primary key of auto increment numbers like $uid1
 
-    Choice made in July 2020: Option 3
+    Option 4: Generate a numerical ID
+
+    Choice made in July 2020: Option 4
     
     */
 
   static fields() {
     return {
-      id: this.uid(), // if this is not set then update based on primary key will not work
+      id: this.uid(() => myUid()), // if this is not set then update based on primary key will not work
       uuid: this.uid(() => uuidv1()),
       uuidOfRemMadeFor: this.string(null),
-      remDescription: this.string(null),
+      remDescription: this.string(null), // Change this to remDesc
       notes: this.string(null),
       priority: this.number(0),
       isAutoRem: this.number(0),
