@@ -62,13 +62,18 @@ export default {
       return arr
     },
     getNumOfCarouselSlides() {
+      /* Importace performance matter here
+          If I return the actual length of this.daUniqueIDOfEachRowFromORM.length
+          say the length is 100 then 300 times the change component will get called with different params.
+        */
+
       const count = this.daUniqueIDOfEachRowFromORM.length / 3
       const intValue = Math.floor(count)
       console.log('number of items in carousel are', count, intValue)
       if (count === 0) {
         return 1
       } else {
-        return intValue
+        return 2
       }
     },
   },
