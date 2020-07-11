@@ -59,6 +59,12 @@ Features needed:
    Ref: https://github.com/ElemeFE/element/issues/6089
    vxe-table implement concept of virtual table.
 
+6. Paging component
+   vue-easytable
+   http://doc.huangsw.com/vue-easytable/app.html#/pagination  
+   element-io: No
+   vxe-table: Yes
+
 Features not needed:
 
 1. select column on client side:
