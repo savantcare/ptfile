@@ -4,7 +4,7 @@
       <el-form-item label="Description">
         <el-input
           :value="getRemDescUsingCache()"
-          @input="setRemDescInStateOn5KeyPress($event)"
+          @input="setRemDescInStateOn2Sec($event)"
         ></el-input>
       </el-form-item>
       <el-form-item>
@@ -38,6 +38,7 @@ export default {
       reminderDescCached: '',
       uuid: '',
       stateForRowID: 0,
+      vSaveToStateScheduled: '',
     }
   },
   computed: {
@@ -105,26 +106,34 @@ export default {
       }
     },
 
-    setRemDescInStateOn5KeyPress(pEvent) {
-      /* Goal: Save to state smartly instead of every keystroke
-      Why?
-       So that the system remains responsive.
-       There are a lot of listeners on this state and they will update themselves everytime there is a write to the vuexORM/rem
+    /* Goal: Save to state smartly instead of every keystroke
+        Why?
+        So that the system remains responsive.
+        There are a lot of listeners on this state and they will update themselves everytime there is a write to the vuexORM/rem
 
-      Strategy 1: Save to state once every 5 key strokes,
-       Disadvnatage?
-       If the user types "jai kali" the state will only have "jai k" even if user exits the form after one hour
+        Strategy 1: Save to state once every 5 key strokes,
+        Disadvnatage?
+        If the user types "jai kali" the state will only have "jai k" even if user exits the form after one hour
 
-      Strategy 2: Each time you save to state you store the time
-      Ignore next save if 1 second has not passed.
-      Disadvnatage?
-       If the user types "ja" within 1 sec and then exits the state will only have j
-       
+        Strategy 2: Each time you save to state you store the time
+        Ignore next save if 1 second has not passed.
+        Disadvnatage?
+        If the user types "ja" within 1 sec and then exits the state will only have j
       */
 
+    setRemDescInStateOn2Sec(pEvent) {
+      if (this.vSaveToStateScheduled) {
+        console.log('clearing timeout')
+        clearTimeout(this.vSaveToStateScheduled)
+      }
+      this.vSaveToStateScheduled = setTimeout(this.setRemDescInState, 2000)
+      this.reminderDescCached = pEvent
+    },
+
+    setRemDescInStateOn5KeyPress(pEvent) {
       if (this.keystrokeCount === 0) {
         // console.log('saving to state')
-        this.setRemDescriptionInState(pEvent)
+        this.setRemDescInState(pEvent)
         this.keystrokeCount++
       } else {
         // console.log('Better perf: Not saving to state')
@@ -137,11 +146,12 @@ export default {
     },
 
     setRemDescInStateOnKeyPress(pEvent) {
-      this.setRemDescriptionInState(pEvent)
+      this.setRemDescInState(pEvent)
       this.reminderDescCached = pEvent
     },
 
-    setRemDescriptionInState(pEvent) {
+    setRemDescInState(pEvent) {
+      console.log('Inside setRemDesc')
       ormRem.update({
         where: this.firstParam,
         data: {
