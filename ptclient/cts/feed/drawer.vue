@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     handleClose(done) {
-      console.log('In the handle close function')
+      // console.log('In the handle close function')
       this.cfDrawerVisibility = false
     },
   },
@@ -32,7 +32,7 @@ export default {
     },
   },
   mounted() {
-    console.log('Drawer ct mounted')
+    // console.log('Drawer ct mounted')
   },
 }
 </script>

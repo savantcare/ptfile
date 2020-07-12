@@ -87,7 +87,7 @@ export default {
       console.log(message)
     },
     mouseleave(event) {
-      console.log('mouse leave', event)
+      // console.log('mouse leave', event)
 
       // How to identify which side the mouse left https://stackoverflow.com/a/48281888
       if (event.clientX <= 0) {
