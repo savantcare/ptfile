@@ -19,16 +19,16 @@ dialog
 <template>
   <!--  Explanation of props sent to ct 
 
-        We want to make it easy to read view layer and also show change layer as a seperate layer
+        Goal: make it easy to read view layer and also show change layer as a seperate layer
           custom-class="multi-tab-dialog"
           :modal="false"
 
-        We want to declutter the screen and at the same time give easy way to close the diaglog. Hence:
+        Goal: declutter the screen and at the same time give easy way to close the diaglog. Hence:
           :close-on-click-modal="true"
           :close-on-press-escape="true"
           :show-close="false"
 
-        We want to control dialog visibility based on user actions
+        Goal: control dialog visibility based on user actions
           :visible.sync="vblIsdialogHoldingTabsInCLVisible"      
 
         Earlier width="90%" but it has been removed why?
@@ -39,6 +39,8 @@ dialog
           Goal is to let user move as little mouse as possible. Keeping modal in center of page will make mouse movement least.
           By specifying top start at 5% of height  I make the user move the mouse more
 
+        Goal: Dont scroll the parent when model is scroeed.
+          :lock-scroll="true"
     -->
   <el-dialog
     custom-class="multi-tab-dialog"
@@ -47,7 +49,7 @@ dialog
     :close-on-press-escape="true"
     :show-close="false"
     :visible.sync="vblIsdialogHoldingTabsInCLVisible"
-    :lock-scroll="false"
+    :lock-scroll="true"
   >
     <el-row type="flex">
       <!-- By passing editable we tell element.io to give add and close option Red: https://element.eleme.io/#/en-US/component/tabs#tabs-attributes -->
