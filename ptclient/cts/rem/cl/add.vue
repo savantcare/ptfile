@@ -13,7 +13,7 @@
     </el-form-item>
     <el-form-item>
       <el-button type="primary" plain @click="sendDataToServer">Submit</el-button>
-      <el-button type="primary" plain @click="addRemToUI">Add more</el-button>
+      <el-button type="primary" plain @click="addEmptyRemToUI">Add more</el-button>
       <el-button type="warning" plain @click="resetForm">Reset form</el-button>
     </el-form-item>
   </el-form>
@@ -85,20 +85,17 @@ export default {
     } else {
       // When there is no unsaved data then we add an empty data to the state inside vuex
       console.log('No Unsaved data')
-      this.addRemToUI()
+      this.addEmptyRemToUI()
     }
   },
   methods: {
     // Initially tried to write v-model and this was computed function
     // But vmodel+computed the description id cannot be sent to computed fn
     getDescription(pRemID) {
-      // TODO: change this to pRemUUID
       console.log(pRemID)
       const arResultsFromORM = ormRem.find(pRemID)
       if (arResultsFromORM) {
         console.log(arResultsFromORM)
-        // ['remDescription']
-        console.log(arResultsFromORM.uuid)
         return arResultsFromORM.remDescription
       } else {
         return ''
@@ -123,7 +120,7 @@ export default {
         return ''
       }
     },
-    addRemToUI() {
+    addEmptyRemToUI() {
       console.log('Add rem called')
       const arResultsFromORM = ormRem
         .insert({
@@ -202,8 +199,8 @@ export default {
             */
 
               /* Method2: Delete existing and insert from item */
-              console.log(item.uuid)
-              ormRem.delete(item.uuid).then((result) => {
+              console.log(item.$id)
+              ormRem.delete(item.$id).then((result) => {
                 console.log('update result: ', result)
               })
               console.log('item is')
@@ -234,16 +231,16 @@ export default {
     resetForm(formName) {
       const arResultsFromORM = ormRem.query().where('$isNew', true).get()
       if (arResultsFromORM.length) {
-        console.log('unsaved data found', arResultsFromORM, arResultsFromORM[0].uuid)
+        console.log('unsaved data found', arResultsFromORM)
         for (let i = 0; i < arResultsFromORM.length; i++) {
           console.log('Deleting data from ORM')
-          ormRem.delete(arResultsFromORM[i].uuid)
+          ormRem.delete(arResultsFromORM[i].$id)
         }
       } else {
         console.log('No Unsaved data')
       }
       this.daRemID = []
-      this.addRemToUI()
+      this.addEmptyRemToUI()
     },
     removeRexFromForm(pRemID) {
       ormRem.delete(pRemID)

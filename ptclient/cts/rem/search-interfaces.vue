@@ -7,9 +7,7 @@ import ormSearchPhraseUiToCT from '@/cts/vl-search-box/vuex-orm/searchUIToCT'
 
 export default {
   data() {
-    return {
-      // dataTable: [],
-    }
+    return {}
   },
   mounted() {
     ormSearchPhraseUiToCT.insert({

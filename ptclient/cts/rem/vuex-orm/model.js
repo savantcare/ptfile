@@ -3,7 +3,7 @@ const { v1: uuidv1 } = require('uuid')
 
 /* Giving a numeric ID to each row
     Why?
-    https://stackoverflow.com/questions/10639488/faster-to-access-numeric-property-by-string-or-integer  
+    Better performance. Ref: https://stackoverflow.com/questions/10639488/faster-to-access-numeric-property-by-string-or-integer  
     How?
       Solution comes from cue on slack given on 10th July 2020
         The closure passed into this.uid(() => intUniqueID()) simply invokes the closure when the model is instructed to generate a uid. The callback simply needs to return a value. 
@@ -21,10 +21,10 @@ export default class reminders extends Model {
 
   /*  What should be the primary key?
     
-    Option1: uuid -> Not possible since there are duplicate uuid as this is temporal DB
+     Option1: uuid -> Not possible since there are duplicate uuid as this is temporal DB
                       if there are 10 data rows and 2 are duplicate then entities will only get 8 entries.
     
-    Option2: composite primary key. 
+     Option2: composite primary key. 
             ['uuid', 'ROW_START'] // Ref: https://vuex-orm.org/guide/model/defining-models.html#primary-key
             
             Finding data from primary key is much faster then finding data by running a loop over all the data rows.
@@ -47,13 +47,13 @@ export default class reminders extends Model {
               })      
                 
 
-    Option3: Let vuex-orm give auto generated string primary key of auto increment numbers like $uid1
+     Option3: Let vuex-orm give auto generated string primary key of auto increment numbers like $uid1
 
-    Option 4: Generate a numerical ID
+     Option 4: Generate a numerical ID
 
-    Choice made in July 2020: Option 4
+     Choice made in July 2020: Option 4
     
-    */
+     */
 
   static fields() {
     return {
