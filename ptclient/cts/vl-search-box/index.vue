@@ -1,6 +1,7 @@
 <template>
   <div id="vl-search-box">
     <remSUI></remSUI>
+    <feedSUI></feedSUI>
     <el-autocomplete
       v-model="searchKeyword"
       class="inline-input"
@@ -14,12 +15,14 @@
 
 <script>
 import ormSearchPhraseUiToCT from '@/cts/vl-search-box/vuex-orm/searchUIToCT'
-import remSUI from '@/cts/rem/search-interfaces'
+// Goal: Get the search terms from each component
+import remSUI from '@/cts/rem/search-interfaces' // TODO: this is used by search box both in vl and cl. So this should not be in vl
+import feedSUI from '@/cts/feed/search-interfaces'
 export default {
   data() {
     return { searchKeyword: '' }
   },
-  components: { remSUI },
+  components: { remSUI, feedSUI },
   mounted() {
     // Search interfaces to this component
     ormSearchPhraseUiToCT.insert({
@@ -27,14 +30,6 @@ export default {
         value: 'clear',
         ctAbbr: 'clr',
         ctToShowInCSVL: 'clear/index.vue',
-        layer: 'view',
-      },
-    })
-    ormSearchPhraseUiToCT.insert({
-      data: {
-        value: 'feed',
-        ctAbbr: 'fd',
-        ctToShowInCSVL: 'feed/drawer.vue',
         layer: 'view',
       },
     })
