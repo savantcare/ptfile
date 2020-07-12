@@ -1,17 +1,25 @@
 <template>
-  <!-- Goal: Make it very easy to get the feed
-        When the user tkes the mouse to the left edge of the browser then bring the feed up
-        Why not put it inside <SplitArea> the event does not get fired.
+  <!--  Prop explanation:
+          v-on:mouseleave="mouseleave"
+          Goal: Make it very easy to get the feed
+          When the user takes the mouse to the left edge of the browser then bring the feed up
+          Why not put it inside <SplitArea> the event does not get fired.
           Why not put a div inside and then put mouseleave event over there?
             when go from msvl to csvl the event gets fired.
         Ref: https://codepen.io/intotheprogram/pen/ZjxZdg 
     -->
   <div v-on:mouseleave="mouseleave">
+    <!-- Prop explanation:
+        :gutterSize="0"
+          This is thickness of the line between left and right panels. This line is used to adjust size of left and right
+      -->
     <Split style="height: 900px; width: 1400px;" :gutterSize="4">
       <SplitArea :size="75">
-        <!--  Who determines the set of cards to show here and also the sequence?
-              The doctor team leader decides it.
-              When they want a change we come into the source code and make the change.
+        <!--  Q) Who determines the set of cards to show here and also the sequence?
+                The doctor team leader decides it.
+                When they want a change we come into the source code and make the change.
+              Q) Why not make this dynamic and have this come from vuex-orm or Maria DB?
+                This will change on average once in 1 year. Hence there is no advantage of doing this.
           -->
         <ctRexVl> </ctRexVl><br />
         <ctRemVL> </ctRemVL><br />
@@ -40,7 +48,9 @@
           <component v-bind:is="card.ctToShow"></component>
         </el-card>
         <ctVLSearchBox></ctVLSearchBox>
-        <!-- ctVLSearchBox as per glossary is Component View layer search box -->
+        <!-- ctVLSearchBox as per glossary is Component View layer search box 
+             This is at bottom of the for loop since we want the search box to come at the bottom
+        -->
       </SplitArea>
     </Split>
     <!-- tab-dialog is present in patientFile.vue but in hidden state -->
