@@ -1,11 +1,29 @@
+<!-- Params
+      Goal: Do not show the shadow so doctor can read the view layer.
+            modal=false means -> Do now show shadowing layer
+  -->
 <template>
   <el-drawer
     title="Feed"
     :visible="cfDrawerVisibility"
-    :direction="direction"
+    direction="ltr"
     :before-close="handleClose"
     :modal="false"
-  ></el-drawer>
+    :close-on-press-escape="true"
+    :show-close="false"
+  >
+    <div class="block">
+      <el-timeline :reverse="reverse">
+        <el-timeline-item
+          v-for="(activity, index) in activities"
+          :key="index"
+          :timestamp="activity.timestamp"
+        >
+          {{ activity.content }}
+        </el-timeline-item>
+      </el-timeline>
+    </div>
+  </el-drawer>
 </template>
 
 <script>
@@ -13,6 +31,21 @@ export default {
   data() {
     return {
       direction: 'ltr',
+      reverse: true,
+      activities: [
+        {
+          content: 'Diagnosed depession',
+          timestamp: '2018-04-15',
+        },
+        {
+          content: 'Finished high school',
+          timestamp: '2018-04-13',
+        },
+        {
+          content: 'Born',
+          timestamp: '2018-04-11',
+        },
+      ],
     }
   },
   methods: {
