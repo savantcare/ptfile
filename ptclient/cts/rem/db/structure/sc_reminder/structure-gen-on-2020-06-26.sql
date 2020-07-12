@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS `reminder`;
 CREATE TABLE `reminders` (
   `uuid` char(36) COLLATE utf8_unicode_ci NOT NULL,
   `uuidOfRemMadeFor` char(36) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `remDescription` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `remDesc` text COLLATE utf8_unicode_ci DEFAULT NULL,
   `notes` text DEFAULT NULL,
   `priority` int(11) DEFAULT NULL,
   `isAutoRem` int(11) DEFAULT NULL,

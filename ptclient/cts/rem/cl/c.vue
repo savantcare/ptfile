@@ -24,7 +24,7 @@
         :timestamp="row.createdAt"
         :type="row.type"
       >
-        {{ row.remDescription }}
+        {{ row.remDesc }}
       </el-timeline-item>
     </el-timeline>
   </div>
@@ -60,7 +60,7 @@ export default {
         // console.log('sending this to timeline', arResultsFromORM, arResultsFromORM[0].uuid)
         for (let i = 0; i < arResultsFromORM.length; i++) {
           obj = {}
-          obj.remDescription = arResultsFromORM[i].remDescription
+          obj.remDesc = arResultsFromORM[i].remDesc
           /*
           To get the number of the month:
           obj.createdAt = date.getMonth() + 1 + "-" + date.getDate()
@@ -120,7 +120,7 @@ export default {
       if (arResultsFromORM) {
         // console.log(arResultsFromORM)
         this.uuid = arResultsFromORM.uuid
-        return arResultsFromORM.remDescription
+        return arResultsFromORM.remDesc
       } else {
         return ''
       }
@@ -194,7 +194,7 @@ export default {
       ormRem.update({
         where: this.firstParam,
         data: {
-          remDescription: pEvent,
+          remDesc: pEvent,
         },
       })
     },
@@ -208,7 +208,7 @@ export default {
             // "Authorization": "Bearer " + TOKEN
           },
           body: JSON.stringify({
-            description: this.getRemDescUsingCache(),
+            remDesc: this.getRemDescUsingCache(),
           }),
         })
         if (!response.ok) {

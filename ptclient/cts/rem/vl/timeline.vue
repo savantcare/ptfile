@@ -29,7 +29,7 @@
           :timestamp="row.createdAt"
           :type="row.type"
         >
-          {{ row.remDescription }}
+          {{ row.remDesc }}
           <el-button-group style="float: right;">
             <el-button type="primary" size="mini" style="padding: 3px;" plain>C</el-button>
             <el-button type="warning" size="mini" style="padding: 3px;" plain>D</el-button>
@@ -60,7 +60,7 @@ export default {
         console.log('unsaved data found', arResultsFromORM, arResultsFromORM[0].uuid)
         for (let i = 0; i < arResultsFromORM.length; i++) {
           obj = {}
-          obj.remDescription = arResultsFromORM[i].remDescription
+          obj.remDesc = arResultsFromORM[i].remDesc
           /*
           To get the number of the month:
           obj.createdAt = date.getMonth() + 1 + "-" + date.getDate()

@@ -26,7 +26,7 @@
           </template>
         </el-table-column>
 
-        <el-table-column prop="remDescription" label="Description"> </el-table-column>
+        <el-table-column prop="remDesc" label="Desc"> </el-table-column>
         <!-- Why is width = "60" for the action column
         Setting this makes the middle column of desc flexible.
         After this is set if desc has 200 words they will use the maximum available space.
@@ -101,7 +101,7 @@ export default {
         const endDataRowIndex = startDataRowInidex + 10
         for (let i = startDataRowInidex; i < arResultsFromORM.length && i < endDataRowIndex; i++) {
           obj = {}
-          obj.remDescription = arResultsFromORM[i].remDescription
+          obj.remDesc = arResultsFromORM[i].remDesc
           // For date format ref: /cts/rem/vl/timeline.vue:53
           date = new Date(arResultsFromORM[i].ROW_START)
           obj.createdAt = date.toLocaleString('default', { month: 'long' }) + '-' + date.getDate()
@@ -177,7 +177,7 @@ export default {
       // /cts/cl-tabs-manager/ctShowAddAndRemoveTabsInDialog.vue: 76
 
       /*
-       We need rowID of vuexORM inside the change ct. Since change ct needs the exiting description of the reminbder to change
+       We need rowID of vuexORM inside the change ct. Since change ct needs the exiting Desc of the reminbder to change
        Option 1: Send the whole data row
        Option 2: Send just the ID in a prop.
         +ves:

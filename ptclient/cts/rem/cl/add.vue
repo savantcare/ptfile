@@ -6,10 +6,10 @@
         :class="mfGetDirtyClassName(id)"
         :autosize="{ minRows: 2, maxRows: 10 }"
         placeholder="Please enter the reminder .."
-        :value="getDescription(id)"
-        @input="setDescription($event, id)"
+        :value="getDesc(id)"
+        @input="setDesc($event, id)"
       ></el-input>
-      <el-button plain type="warning" @click="removeRexFromForm(id)">Remove</el-button>
+      <el-button plain type="warning" @click="removeSingleRemInAddForm(id)">Remove</el-button>
     </el-form-item>
     <el-form-item>
       <el-button type="primary" plain @click="sendDataToServer">Submit</el-button>
@@ -90,30 +90,30 @@ export default {
   },
   methods: {
     // Initially tried to write v-model and this was computed function
-    // But vmodel+computed the description id cannot be sent to computed fn
-    getDescription(pRemID) {
-      console.log(pRemID)
-      const arResultsFromORM = ormRem.find(pRemID)
+    // But vmodel+computed the Desc id cannot be sent to computed fn
+    getDesc(pRemIDGivenByORM) {
+      console.log(pRemIDGivenByORM)
+      const arResultsFromORM = ormRem.find(pRemIDGivenByORM)
       if (arResultsFromORM) {
         console.log(arResultsFromORM)
-        return arResultsFromORM.remDescription
+        return arResultsFromORM.remDesc
       } else {
         return ''
       }
     },
-    setDescription(pEvent, pRemID) {
-      console.log('set called for', pRemID, pEvent)
+    setDesc(pEvent, pRemIDGivenByORM) {
+      console.log('set called for', pRemIDGivenByORM, pEvent)
       const arResultsFromORM = ormRem.update({
-        where: pRemID,
+        where: pRemIDGivenByORM,
         data: {
-          remDescription: pEvent,
+          remDesc: pEvent,
         },
       })
       console.log(arResultsFromORM)
     },
-    mfGetDirtyClassName(pRemID) {
-      console.log(pRemID)
-      const arResultsFromORM = ormRem.find(pRemID)
+    mfGetDirtyClassName(pRemIDGivenByORM) {
+      console.log(pRemIDGivenByORM)
+      const arResultsFromORM = ormRem.find(pRemIDGivenByORM)
       if (arResultsFromORM.$isDirty) {
         return 'unsaved-data'
       } else {
@@ -125,7 +125,7 @@ export default {
       const arResultsFromORM = ormRem
         .insert({
           data: {
-            remDescription: '',
+            remDesc: '',
             priority: 1,
             isAutoRem: 1,
             ROW_START: new Date().getTime(),
@@ -149,7 +149,7 @@ export default {
           console.log('call API', arResultsFromORM[i].uuid)
           arRemsToCreateInDB.push({
             uuid: arResultsFromORM[i].uuid,
-            remDescription: arResultsFromORM[i].remDescription,
+            remDesc: arResultsFromORM[i].remDesc,
             priority: arResultsFromORM[i].priority,
             isAutoRem: arResultsFromORM[i].isAutoRem,
             uuidOfRemMadeFor: 'bfe041fa-073b-4223-8c69-0540ee678ff8',
@@ -214,7 +214,7 @@ export default {
                 data: {
                   uuid: item.uuid,
                   uuidOfRemMadeFor: item.uuidOfRemMadeFor,
-                  remDescription: item.remDescription,
+                  remDesc: item.remDesc,
                   priority: item.priority,
                   isAutoRem: item.isAutoRem,
                   ROW_START: item.ROW_START,
@@ -242,9 +242,9 @@ export default {
       this.daRemID = []
       this.addEmptyRemToUI()
     },
-    removeRexFromForm(pRemID) {
-      ormRem.delete(pRemID)
-      const positionFound = this.daRemID.indexOf(pRemID)
+    removeSingleRemInAddForm(pRemIDGivenByORM) {
+      ormRem.delete(pRemIDGivenByORM)
+      const positionFound = this.daRemID.indexOf(pRemIDGivenByORM)
       this.daRemID.splice(positionFound, 1)
     },
   },

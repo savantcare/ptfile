@@ -10,7 +10,7 @@ module.exports = (sequelize, Sequelize) => {
       uuidOfRemMadeFor: {
         type: Sequelize.STRING,
       },
-      remDescription: {
+      remDesc: {
         type: Sequelize.STRING,
       },
       notes: {
