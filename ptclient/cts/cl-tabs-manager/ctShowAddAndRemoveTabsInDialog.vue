@@ -1,7 +1,7 @@
-<!-- Is L2TabManager a component or a view? View is actually intended to be
+<!-- Is ctShowAddAndRemoveTabsInDialog a component or a view? View is actually intended to be
 accessed by navigation url Ref:
 https://stackoverflow.com/questions/50865828/what-is-the-difference-between-the-views-and-components-folders-in-a-vue-project
-ctTabsInDialogInCL is not expected to be accessed by a URL. */
+ctShowAddAndRemoveTabsInDialog is not expected to be accessed by a URL. */
 
 /*
 //#region goal
@@ -17,15 +17,29 @@ dialog
 //#region template
 
 <template>
+  <!--  Explanation of props sent to ct 
+        We want to make it easy to read view layer and also show change layer as a seperate layer
+          custom-class="multi-tab-dialog"
+          :modal="false"
+
+        We want to declutter the screen and at the same time give easy way to close the diaglog. Hence:
+          :close-on-click-modal="true"
+          :close-on-press-escape="true"
+          :show-close="false"
+
+        We want to control dialog visibility based on user actions
+          :visible.sync="vblIsdialogHoldingTabsInCLVisible"      
+    -->
   <el-dialog
-    :visible.sync="vblIsdialogHoldingTabsInCLVisible"
-    custom-class="multi-tab-dialog"
     width="90%"
     top="5vh"
-    :modal="true"
+    :lock-scroll="false"
+    :visible.sync="vblIsdialogHoldingTabsInCLVisible"
     :close-on-click-modal="true"
     :close-on-press-escape="true"
     :show-close="false"
+    custom-class="multi-tab-dialog"
+    :modal="false"
   >
     <el-row type="flex">
       <!-- By passing editable we tell element.io to give add and close option Red: https://element.eleme.io/#/en-US/component/tabs#tabs-attributes -->
@@ -222,14 +236,29 @@ export default {
 </script>
 
 <style>
-/* .multi-tab-dialog {
-  .el-dialog__header {
-    display: none;
-  }
-  .el-dialog__body 
-    padding-top: 12px;
-  }
-} */
+/* Why put the shadow?
+Goal
+1. Read the view layer even when I have change layer open
+2. Clearly see the change layer as different from view layer
+
+Option 1: 
+When I set modal=true in el-dialog the background content is hard to read. Hence goal 1 is defeated.
+
+Option 2:
+When I set modal=false in el-dialog the popup that comes in change layer is hard to distinguish from view layer. Hence Goal 2 is defeated.
+
+Option 3:
+Setting modal=false to get the popup of change layer where the view layer is still readable and the shadow to make the change layer seem seperate from view layer
+
+Hence chose option 3.
+
+Q) How to put the shadow?
+   https://stackoverflow.com/questions/3448813/jqueryui-how-to-make-a-shadow-around-a-dialog-box
+*/
+.multi-tab-dialog {
+  -webkit-box-shadow: 0px 0px 120px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 0px 120px rgba(0, 0, 0, 0.5);
+}
 .set-of-tabs {
   position: absolute;
   top: 0;
