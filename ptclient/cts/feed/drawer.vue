@@ -12,7 +12,6 @@
 export default {
   data() {
     return {
-      drawer: true,
       direction: 'ltr',
     }
   },
