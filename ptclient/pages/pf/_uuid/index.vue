@@ -1,5 +1,12 @@
 <template>
-  <div>
+  <!-- Goal: Make it very easy to get the feed
+        When the user tkes the mouse to the left edge of the browser then bring the feed up
+        Why not put it inside <SplitArea> the event does not get fired.
+          Why not put a div inside and then put mouseleave event over there?
+            when go from msvl to csvl the event gets fired.
+        Ref: https://codepen.io/intotheprogram/pen/ZjxZdg 
+    -->
+  <div v-on:mouseleave="mouseleave">
     <Split style="height: 900px; width: 1400px;" :gutterSize="4">
       <SplitArea :size="75">
         <!--  Who determines the set of cards to show here and also the sequence?
@@ -78,6 +85,13 @@ export default {
   methods: {
     log(message) {
       console.log(message)
+    },
+    mouseover() {
+      console.log('mouse over')
+    },
+    mouseleave() {
+      console.log('mouse leave')
+      this.$store.commit('mtfSetTabDialogVisibility', true)
     },
   },
   data() {
