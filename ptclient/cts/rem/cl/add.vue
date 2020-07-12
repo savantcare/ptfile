@@ -1,9 +1,8 @@
 <template>
-  <el-form label-width="120px">
+  <el-form>
     <el-form-item v-for="id in daRemID" :key="id">
       <el-input
         type="textarea"
-        style="width: 800px;"
         :class="mfGetDirtyClassName(id)"
         :autosize="{ minRows: 2, maxRows: 10 }"
         placeholder="Please enter the reminder .."

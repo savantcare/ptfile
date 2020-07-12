@@ -39,7 +39,7 @@ dialog
           Goal is to let user move as little mouse as possible. Keeping modal in center of page will make mouse movement least.
           By specifying top start at 5% of height  I make the user move the mouse more
 
-        Goal: Dont scroll the parent when model is scroeed.
+        Goal: Dont scroll the parent when model is scrolled.
           :lock-scroll="true"
     -->
   <el-dialog
