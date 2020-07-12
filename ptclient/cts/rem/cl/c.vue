@@ -6,7 +6,7 @@
           type="textarea"
           :autosize="{ minRows: 2, maxRows: 4 }"
           :value="getRemDescUsingCache()"
-          @input="setRemDescInStateOnDelay($event)"
+          @input="setRemDescInVstOnDelay($event)"
         ></el-input>
       </el-form-item>
       <el-form-item>
@@ -141,16 +141,16 @@ export default {
         If the user types "ja" within 1 sec and then exits the state will only have j
       */
 
-    setRemDescInStateOnDelay(pEvent) {
+    setRemDescInVstOnDelay(pEvent) {
       if (this.vSaveToStateScheduled) {
         console.log('clearing timeout')
         clearTimeout(this.vSaveToStateScheduled)
       }
 
-      /* Method 1 of calling the setRemDescInState function
+      /* Method 1 of calling the setRemDescInVst function
         this.vSaveToStateScheduled = setTimeout(function () {
           console.log(this)
-          this.setRemDescInState(pEvent) // here this is not vue but window so this will say setRemDescInState not found
+          this.setRemDescInVst(pEvent) // here this is not vue but window so this will say setRemDescInVst not found
         }, 2000)
         */
 
@@ -160,7 +160,7 @@ export default {
 
       this.vSaveToStateScheduled = setTimeout(
         function (scope) {
-          scope.setRemDescInState(pEvent)
+          scope.setRemDescInVst(pEvent)
         },
         500,
         this
@@ -169,10 +169,10 @@ export default {
       this.reminderDescCached = pEvent
     },
 
-    setRemDescInStateOn5KeyPress(pEvent) {
+    setRemDescInVstOn5KeyPress(pEvent) {
       if (this.keystrokeCount === 0) {
         // console.log('saving to state')
-        this.setRemDescInState(pEvent)
+        this.setRemDescInVst(pEvent)
         this.keystrokeCount++
       } else {
         // console.log('Better perf: Not saving to state')
@@ -184,12 +184,12 @@ export default {
       this.reminderDescCached = pEvent
     },
 
-    setRemDescInStateOnKeyPress(pEvent) {
-      this.setRemDescInState(pEvent)
+    setRemDescInVstOnKeyPress(pEvent) {
+      this.setRemDescInVst(pEvent)
       this.reminderDescCached = pEvent
     },
 
-    setRemDescInState(pEvent) {
+    setRemDescInVst(pEvent) {
       console.log('Inside setRemDesc')
       ormRem.update({
         where: this.firstParam,
