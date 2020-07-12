@@ -1,19 +1,29 @@
 <template>
   <el-drawer
-    title="I am the title"
-    :visible.sync="drawer"
-    :direction="ltr"
-    :show-close="false"
-    :with-header="false"
-  >
-    <span>Hi, there!</span>
-  </el-drawer>
+    title="Feed"
+    :visible="drawer"
+    :direction="direction"
+    :before-close="handleClose"
+    :modal="false"
+  ></el-drawer>
 </template>
 
 <script>
 export default {
   data() {
-    return {}
+    return {
+      drawer: true,
+      direction: 'ltr',
+    }
+  },
+  methods: {
+    handleClose(done) {
+      console.log('In the handle close function')
+      this.drawer = false
+    },
+  },
+  mounted() {
+    console.log('Drawer ct mounted')
   },
 }
 </script>
