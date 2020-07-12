@@ -86,12 +86,17 @@ export default {
     log(message) {
       console.log(message)
     },
-    mouseover() {
-      console.log('mouse over')
-    },
-    mouseleave() {
-      console.log('mouse leave')
-      this.$store.commit('mtfSetFeedDrawerVisibility', true)
+    mouseleave(event) {
+      console.log('mouse leave', event)
+
+      // How to identify which side the mouse left https://stackoverflow.com/a/48281888
+      if (event.clientX <= 0) {
+        // This is when the mouse leave from the left
+        if (event.clientY <= 200) {
+          // This is the top corner
+          this.$store.commit('mtfSetFeedDrawerVisibility', true)
+        }
+      }
     },
   },
   data() {
