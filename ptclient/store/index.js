@@ -10,7 +10,11 @@ import VuexORMisDirtyPlugin from '@vuex-orm/plugin-change-flags'
 
 // Ref: https://github.com/eldomagan/vuex-orm-localforage#installation
 import VueStateOfTabsAndDialogInCLModule from '@/cts/cl-tabs-manager/VueStateOfTabsAndDialogInCL'
+
+// Full form: Vue State Of Cards In Current state Of View layer Module
 import VueStateOfCardsInCSOfVLModule from '@/cts/vl-search-box/VueStateOfCardsInCSOfVL'
+
+import VueStateOfDrawerModule from '@/cts/feed/VueStateOfFeedDrawer'
 import database from '@/database'
 
 // Ref: https://stackoverflow.com/a/62247034
@@ -33,6 +37,11 @@ const createStore = () => {
     state: () => ({}),
     modules: {
       vstObjTabsInCL: VueStateOfTabsAndDialogInCLModule,
+
+      // Full form: view state object drawer
+      vstObjDrawer: VueStateOfDrawerModule,
+
+      // Full form: view state object cards in current state of view layer
       vstObjCardsInCSOfVL: VueStateOfCardsInCSOfVLModule,
     },
     plugins: [VuexORM.install(database)],

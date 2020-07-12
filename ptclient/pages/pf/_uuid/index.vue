@@ -91,7 +91,7 @@ export default {
     },
     mouseleave() {
       console.log('mouse leave')
-      this.$store.commit('mtfSetTabDialogVisibility', true)
+      this.$store.commit('mtfSetFeedDrawerVisibility', true)
     },
   },
   data() {

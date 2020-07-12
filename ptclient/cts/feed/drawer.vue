@@ -1,7 +1,7 @@
 <template>
   <el-drawer
     title="Feed"
-    :visible="drawer"
+    :visible="cfDrawerVisibility"
     :direction="direction"
     :before-close="handleClose"
     :modal="false"
@@ -19,7 +19,17 @@ export default {
   methods: {
     handleClose(done) {
       console.log('In the handle close function')
-      this.drawer = false
+      this.cfDrawerVisibility = false
+    },
+  },
+  computed: {
+    cfDrawerVisibility: {
+      get() {
+        return this.$store.state.vstObjDrawer.vblIsFeedDrawerVisible
+      },
+      set(value) {
+        this.$store.commit('mtfSetFeedDrawerVisibility', value)
+      },
     },
   },
   mounted() {
