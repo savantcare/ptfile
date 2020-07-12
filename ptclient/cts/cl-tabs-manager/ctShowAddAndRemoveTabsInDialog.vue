@@ -18,6 +18,7 @@ dialog
 
 <template>
   <!--  Explanation of props sent to ct 
+
         We want to make it easy to read view layer and also show change layer as a seperate layer
           custom-class="multi-tab-dialog"
           :modal="false"
@@ -29,17 +30,24 @@ dialog
 
         We want to control dialog visibility based on user actions
           :visible.sync="vblIsdialogHoldingTabsInCLVisible"      
+
+        Earlier width="90%" but it has been removed why?
+          Goal is to let user read as much of the view layer as possible when the user is in change layer
+          By specifying a fixed width I take that control away from the user.
+
+        Earlier top="5vh" but it has been removed why?
+          Goal is to let user move as little mouse as possible. Keeping modal in center of page will make mouse movement least.
+          By specifying top start at 5% of height  I make the user move the mouse more
+
     -->
   <el-dialog
-    width="90%"
-    top="5vh"
-    :lock-scroll="false"
-    :visible.sync="vblIsdialogHoldingTabsInCLVisible"
+    custom-class="multi-tab-dialog"
+    :modal="false"
     :close-on-click-modal="true"
     :close-on-press-escape="true"
     :show-close="false"
-    custom-class="multi-tab-dialog"
-    :modal="false"
+    :visible.sync="vblIsdialogHoldingTabsInCLVisible"
+    :lock-scroll="false"
   >
     <el-row type="flex">
       <!-- By passing editable we tell element.io to give add and close option Red: https://element.eleme.io/#/en-US/component/tabs#tabs-attributes -->
