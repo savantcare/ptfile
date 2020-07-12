@@ -31,18 +31,18 @@ export default {
   data() {
     return {
       direction: 'ltr',
-      reverse: true,
+      reverse: false,
       activities: [
         {
-          content: 'Diagnosed depession',
+          content: 'HDR sent for rescheduling appointment',
           timestamp: '2018-04-15',
         },
         {
-          content: 'Finished high school',
+          content: 'New appt booked',
           timestamp: '2018-04-13',
         },
         {
-          content: 'Born',
+          content: 'Patient called to say will arrive 10 mins late',
           timestamp: '2018-04-11',
         },
       ],
@@ -57,7 +57,7 @@ export default {
   computed: {
     cfDrawerVisibility: {
       get() {
-        return this.$store.state.vstObjDrawer.vblIsFeedDrawerVisible
+        return this.$store.state.vstObjFeedDrawer.vblIsFeedDrawerVisible
       },
       set(value) {
         this.$store.commit('mtfSetFeedDrawerVisibility', value)

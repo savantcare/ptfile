@@ -14,7 +14,9 @@ import VueStateOfTabsAndDialogInCLModule from '@/cts/cl-tabs-manager/VueStateOfT
 // Full form: Vue State Of Cards In Current state Of View layer Module
 import VueStateOfCardsInCSOfVLModule from '@/cts/vl-search-box/VueStateOfCardsInCSOfVL'
 
-import VueStateOfDrawerModule from '@/cts/feed/VueStateOfFeedDrawer'
+import VueStateOfFeedDrawerModule from '@/cts/feed/VueStateOfFeedDrawer'
+import VueStateOfMapDrawerModule from '@/cts/map/VueStateOfMapDrawer'
+
 import database from '@/database'
 
 // Ref: https://stackoverflow.com/a/62247034
@@ -38,8 +40,9 @@ const createStore = () => {
     modules: {
       vstObjTabsInCL: VueStateOfTabsAndDialogInCLModule,
 
-      // Full form: view state object drawer
-      vstObjDrawer: VueStateOfDrawerModule,
+      // Full form: view state object feed drawer
+      vstObjFeedDrawer: VueStateOfFeedDrawerModule,
+      vstObjMapDrawer: VueStateOfMapDrawerModule,
 
       // Full form: view state object cards in current state of view layer
       vstObjCardsInCSOfVL: VueStateOfCardsInCSOfVLModule,

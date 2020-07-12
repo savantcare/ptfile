@@ -1,12 +1,12 @@
 <template>
   <el-form label-width="120px">
-    <el-form-item v-for="id in daRemID" label="desc" :key="id">
+    <el-form-item v-for="id in daRemID" :key="id">
       <el-input
         type="textarea"
         style="width: 800px;"
         :class="mfGetDirtyClassName(id)"
         :autosize="{ minRows: 2, maxRows: 10 }"
-        placeholder="Please input"
+        placeholder="Please enter the reminder .."
         :value="getDescription(id)"
         @input="setDescription($event, id)"
       ></el-input>
