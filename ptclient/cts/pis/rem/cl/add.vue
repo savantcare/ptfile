@@ -149,8 +149,10 @@ export default {
     }
   },
   methods: {
-    // Initially tried to write v-model and this was computed function
-    // But vmodel+computed the Desc id cannot be sent to computed fn
+    /* Why are getDesc and setDesc not a single computed function called desc with a setter and a getter 
+      Initially tried to write v-model and this was computed function
+       But vmodel+computed the Desc id cannot be sent to computed fn
+       */
     getDesc(pRemIDGivenByORM) {
       console.log(pRemIDGivenByORM)
       const arResultsFromORM = ormRem.find(pRemIDGivenByORM)
