@@ -78,7 +78,14 @@ export default class reminders extends Model {
                   MariaDB is already storing the ROW_START and ROW_END as numbers.
              3. When saving data 
                   I can again use numbers. No need to change from string to numbers.       
-        */
+        
+        Q) On the client side should I work with seconds or microseconds?
+          ROW_START and ROW_END are stored as timestamp(6). This mneans there is 6 digits of precision hence in microseconds
+              Ref: https://mariadb.com/kb/en/timestamp/ and 
+              https://mariadb.com/kb/en/temporal-data-tables/
+
+           Goal is to do monimum number of conversions. Hence we will store the data the way it is given to us.   
+         */
 
       ROW_START: this.number(0),
       ROW_END: this.number(0),

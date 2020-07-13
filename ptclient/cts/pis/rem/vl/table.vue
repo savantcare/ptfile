@@ -76,14 +76,14 @@ export default {
   },
   computed: {
     cfLengthOfDataArray() {
-      const arResultsFromORM = ormRem.query().where('ROW_END', '2038-01-19T03:14:07.999Z').get()
+      const arResultsFromORM = ormRem.query().where('ROW_END', 2147483647.999999).get()
       return arResultsFromORM.length
     },
     cfArOfRemForDisplayInTable() {
       console.log(
         'cfArOfRemForDisplayInTable called. Whenever ormRem will change this will get called. Even when there are 100 rows in the table when orm rem changes this gets called once'
       )
-      const arResultsFromORM = ormRem.query().where('ROW_END', '2038-01-19T03:14:07.999Z').get()
+      const arResultsFromORM = ormRem.query().where('ROW_END', 2147483647.999999).get()
 
       /*  Q) Should this function return the array it gets from ORM or modify the array? 
               Option1: Return origianl array
