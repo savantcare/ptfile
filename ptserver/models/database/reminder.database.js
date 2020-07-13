@@ -25,10 +25,7 @@ const reminderDB = {};
 reminderDB.Sequelize = Sequelize;
 reminderDB.sequelize = reminderSequelize;
 
-reminderDB.reminders = require("../reminder.model.js")(
-  reminderSequelize,
-  Sequelize
-);
+reminderDB.rems = require("../reminder.model.js")(reminderSequelize, Sequelize);
 
 reminderDB.sequelize.sync();
 
