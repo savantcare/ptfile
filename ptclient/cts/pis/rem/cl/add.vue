@@ -68,6 +68,16 @@
     >
       <el-table-column prop="remDesc" label="Reminders added this session"> </el-table-column>
     </el-table>
+
+    <!-- Showing errors -->
+    <el-table
+      v-if="cfDataApiErrorThisSession.length > 0"
+      :data="cfDataApiErrorThisSession"
+      style="width: 100%; background: #f0f9eb;"
+    >
+      <el-table-column prop="remDesc" label="Error: Reminders attempted but failed to save">
+      </el-table-column>
+    </el-table>
   </div>
 </template>
 <script>
@@ -84,12 +94,15 @@ export default {
         .where('rowStateOfClientSession', 2)
         .orWhere('rowStateOfClientSession', 23)
         .orWhere('rowStateOfClientSession', 2345)
-        .orWhere('rowStateOfClientSession', 23467)
         .get()
       return arResultsFromORM
     },
     cfDataSavedToDBThisSessionSuccessfully() {
       const arResultsFromORM = ormRem.query().where('rowStateOfClientSession', 23461).get()
+      return arResultsFromORM
+    },
+    cfDataApiErrorThisSession() {
+      const arResultsFromORM = ormRem.query().where('rowStateOfClientSession', 23467).get()
       return arResultsFromORM
     },
   },
