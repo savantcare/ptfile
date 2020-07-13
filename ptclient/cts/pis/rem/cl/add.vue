@@ -11,7 +11,7 @@
 
   <div>
     <el-form>
-      <el-form-item v-for="rem in cfDataAddedInThisSession" :key="rem.id">
+      <el-form-item v-for="rem in cfDataAddedOnClientThisSession" :key="rem.id">
         <!-- Prop explaination 
           Read prop explanation for span=4 on line 18
            -->
@@ -62,8 +62,8 @@
                 For the end user it is a matter of comfort to see the previous data in the table.
       -->
     <el-table
-      v-if="cfDataSavedToDBInThisSession.length > 0"
-      :data="cfDataSavedToDBInThisSession"
+      v-if="cfDataSavedToDBThisSessionSuccessfully.length > 0"
+      :data="cfDataSavedToDBThisSessionSuccessfully"
       style="width: 100%; background: #f0f9eb;"
     >
       <el-table-column prop="remDesc" label="Reminders added this session"> </el-table-column>
@@ -78,21 +78,18 @@ export default {
     return {}
   },
   computed: {
-    cfDataAddedInThisSession() {
+    cfDataAddedOnClientThisSession() {
       const arResultsFromORM = ormRem
         .query()
         .where('rowStateOfClientSession', 2)
         .orWhere('rowStateOfClientSession', 23)
         .orWhere('rowStateOfClientSession', 2345)
+        .orWhere('rowStateOfClientSession', 23467)
         .get()
       return arResultsFromORM
     },
-    cfDataSavedToDBInThisSession() {
-      const arResultsFromORM = ormRem
-        .query()
-        .where('rowStateOfClientSession', 23461)
-        .orWhere('rowStateOfClientSession', 23467)
-        .get()
+    cfDataSavedToDBThisSessionSuccessfully() {
+      const arResultsFromORM = ormRem.query().where('rowStateOfClientSession', 23461).get()
       return arResultsFromORM
     },
   },
@@ -211,7 +208,7 @@ export default {
     },
 
     onSubmit() {
-      const arResultsFromORM = ormRem
+      let arResultsFromORM = ormRem
         .query()
         .where('rowStateOfClientSession', 23)
         .orWhere('rowStateOfClientSession', 2)
@@ -241,23 +238,34 @@ export default {
 
             // API will return 1 (Success) or 0 (Failure)
             const status = Math.floor(Math.random() * (1 - 0 + 1)) + 0 // Ref: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+            console.log(status)
             if (status === 0) {
-              ormRem.update({
-                where: (record) => record.id === arResultsFromORM[i].id,
-                data: {
-                  rowStateOfClientSession: '23461',
-                },
-              })
-            } else {
               ormRem.update({
                 where: (record) => record.id === arResultsFromORM[i].id,
                 data: {
                   rowStateOfClientSession: '23467',
                 },
               })
+            } else {
+              ormRem.update({
+                where: (record) => record.id === arResultsFromORM[i].id,
+                data: {
+                  rowStateOfClientSession: '23461',
+                },
+              })
             }
           }
         }
+      }
+      // if there are no records left then I need to add a empty
+      arResultsFromORM = ormRem
+        .query()
+        .where('rowStateOfClientSession', 23)
+        .orWhere('rowStateOfClientSession', 2)
+        .get()
+      if (arResultsFromORM.length) {
+      } else {
+        this.addEmptyRemToUI()
       }
     },
     async sendDataToServer(formName) {
