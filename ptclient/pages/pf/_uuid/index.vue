@@ -76,16 +76,16 @@
 <script>
 import Vue from 'vue'
 import VueSplit from 'vue-split-panel'
-import ctVLSearchBox from '@/cts/vl-search-box'
-import ctRexVl from '@/cts/rec/vl/table'
-import ctRemVL from '@/cts/rem/vl/table'
-import ctBMVl from '@/cts/bm/bm-vl'
-import ctDXVl from '@/cts/dx/dx-vl'
-import ctGVl from '@/cts/goal/g-vl'
-import ctScrVl from '@/cts/scr/scr-vl.vue'
-import ctTabsInDialogInCL from '@/cts/cl-tabs-manager/ctShowAddAndRemoveTabsInDialog'
-import ctFeedDrawer from '@/cts/feed/drawer.vue'
-import ctMapDrawer from '@/cts/map/drawer.vue'
+import ctVLSearchBox from '@/cts/core/vl-search-box'
+import ctRexVl from '@/cts/pis/rec/vl/table'
+import ctRemVL from '@/cts/pis/rem/vl/table'
+import ctBMVl from '@/cts/pis/bm/bm-vl'
+import ctDXVl from '@/cts/pis/dx/dx-vl'
+import ctGVl from '@/cts/pis/goal/g-vl'
+import ctScrVl from '@/cts/pis/scr/scr-vl.vue'
+import ctTabsInDialogInCL from '@/cts/core/cl-tabs-manager/ctShowAddAndRemoveTabsInDialog'
+import ctFeedDrawer from '@/cts/core/feed/drawer.vue'
+import ctMapDrawer from '@/cts/core/map/drawer.vue'
 
 // The name above expands to Component tabs in dialog in change layer
 

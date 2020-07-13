@@ -9,13 +9,13 @@ import VuexORMAxios from '@vuex-orm/plugin-axios'
 import VuexORMisDirtyPlugin from '@vuex-orm/plugin-change-flags'
 
 // Ref: https://github.com/eldomagan/vuex-orm-localforage#installation
-import VueStateOfTabsAndDialogInCLModule from '@/cts/cl-tabs-manager/VueStateOfTabsAndDialogInCL'
+import VueStateOfTabsAndDialogInCLModule from '@/cts/core/cl-tabs-manager/VueStateOfTabsAndDialogInCL'
 
 // Full form: Vue State Of Cards In Current state Of View layer Module
-import VstOfCardsInCSOfVLModule from '@/cts/vl-search-box/VstOfCardsInCSOfVL'
+import VstOfCardsInCSOfVLModule from '@/cts/core/vl-search-box/VstOfCardsInCSOfVL'
 
-import VueStateOfFeedDrawerModule from '@/cts/feed/VueStateOfFeedDrawer'
-import VueStateOfMapDrawerModule from '@/cts/map/VueStateOfMapDrawer'
+import VueStateOfFeedDrawerModule from '@/cts/core/feed/VueStateOfFeedDrawer'
+import VueStateOfMapDrawerModule from '@/cts/core/map/VueStateOfMapDrawer'
 
 import database from '@/database'
 
