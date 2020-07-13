@@ -142,8 +142,8 @@ export default {
     const arResultsFromORM = ormRem
       .query()
       .where('rowStateOfClientSession', 2)
-      .where('rowStateOfClientSession', 23)
-      .where('rowStateOfClientSession', 2345)
+      .orWhere('rowStateOfClientSession', 23)
+      .orWhere('rowStateOfClientSession', 2345)
       .get()
     if (arResultsFromORM.length) {
       console.log('there is unsaved data')
