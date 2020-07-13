@@ -67,6 +67,29 @@ export default class reminders extends Model {
       recordChangedByUUID: this.string(null),
       recordChangedFromIPAddress: this.string(null),
       recordChangedFromSection: this.string(null),
+
+      /* If 
+        0 => Not known
+        1 => Got from DB and not changed on client
+        2 => Got from DB changed on client but update not synced to DB
+              After 2 if there is success the state goes back to 1
+        3 => Created new on client
+        4 => Client requested save to server
+        5 => Data saved to server failed.
+      
+        Data is stored with the timeline
+        
+        A. New record when the data is saved the value will be clientSideState = 3.4.1
+
+        B. Record is discontinued. Query sent is update. Value will be clientSideState = 1.2.1
+
+        C. When a record is changed 
+        Since temporal DB old is deleted and new is inserted. But from client side the query sent is update
+          clientSideState = 1.2.1
+          
+        */
+      clientSideRowState: this.number(0),
+
       /* Should ROW_START and ROW_END be string or numnber?
         vuex-orm does not have a native type called Date. The native data types are at: https://vuex-orm.org/guide/model/defining-models.html#generic-type
            + ves of storing as a number:

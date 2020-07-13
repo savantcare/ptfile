@@ -1,28 +1,61 @@
 <template>
-  <el-form>
-    <el-form-item v-for="id in daRemID" :key="id">
-      <el-col :span="20">
-        <el-input
-          type="textarea"
-          :class="mfGetDirtyClassName(id)"
-          :autosize="{ minRows: 2, maxRows: 10 }"
-          placeholder="Please enter the reminder .."
-          :value="getDesc(id)"
-          @input="setDesc($event, id)"
-        ></el-input>
-      </el-col>
-      <el-col :span="4">
-        <el-button plain type="warning" @click="removeSingleRemInAddForm(id)" style="float: right;"
-          >Remove</el-button
-        >
-      </el-col>
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary" plain @click="sendDataToServer">Submit</el-button>
-      <el-button type="primary" plain @click="addEmptyRemToUI">Add more</el-button>
-      <el-button type="warning" plain @click="resetForm">Reset form</el-button>
-    </el-form-item>
-  </el-form>
+  <!-- Goal of add user experience is: 
+    1. Give visual feedback to the user that the data was added.
+    2. Visual feedback should come close to where the user eyes are. The visual feedback should not be on top right corner.
+    3. Immediately allow the user to add one more.
+    4. User should be able to add 1 more without taking another action with their mouse.
+    -->
+
+  <div>
+    <el-form>
+      <el-form-item v-for="id in daRemID" :key="id">
+        <!-- Prop explaination 
+          Read prop explanation for span=4 on line 18
+           -->
+        <el-col :span="20">
+          <el-input
+            type="textarea"
+            :class="mfGetDirtyClassName(id)"
+            :autosize="{ minRows: 2, maxRows: 10 }"
+            placeholder="Please enter the reminder .."
+            :value="getDesc(id)"
+            @input="setDesc($event, id)"
+          ></el-input>
+        </el-col>
+
+        <!-- Prop explaination 
+            Goal: Show the remove button on the right hand side of the input area. Since element.io divides it into 24 columns. we are giving 
+            20 columns to input and 4 columns to remove button
+           -->
+        <el-col :span="4">
+          <el-button
+            plain
+            type="warning"
+            @click="removeSingleRemInAddForm(id)"
+            style="float: right;"
+            >Remove</el-button
+          >
+        </el-col>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" plain @click="sendDataToServer">Submit</el-button>
+        <el-button type="primary" plain @click="addEmptyRemToUI">Add more</el-button>
+        <el-button type="warning" plain @click="resetForm">Reset form</el-button>
+      </el-form-item>
+    </el-form>
+    <!-- In a for loop show all reminders that have orm.RowStateOfClientSession = 3.4.1 
+          The table reminders added this session only comes if there is atleast a single row
+
+          The row color will be orange if the number is 3.4
+          the row color will be white if the number is 3.4.1
+
+          As soon submit is pressed  RowStateOfClientSession = 3.4
+          when the api succeed RowStateOfClientSession = 3.4.1
+              Why not set RowStateOfClientSession = 1 when api succeds?
+                For the end user it is a matter of comfort to see the previous data in the table.
+      -->
+    Reminders added this session:
+  </div>
 </template>
 <script>
 import { REMINDER_API_URL } from '../const.js'
@@ -35,8 +68,7 @@ export default {
   },
   computed: {},
   mounted() {
-    /*
-      Should data be loaded from localstorage or state
+    /* Should data be loaded from localstorage or state?
       There are 2 possibilities
         Possibility 1: There is no unsaved data
         Possibility 2: There is unsaved data on the client browser
@@ -80,7 +112,7 @@ export default {
                         4. This array needs to be inserted into vuex
                         5. The new vuex needs to be synced with the storage.
         Decision on 8th July 2020 by VK/AG/TJ/SS/RR: Not to use indexDB
-    */
+      */
     // When there is unsaved data we load the unsaved data
     const arResultsFromORM = ormRem.query().where('$isNew', true).get()
     if (arResultsFromORM.length) {
@@ -133,8 +165,9 @@ export default {
           data: {
             remDesc: '',
             priority: 1,
-            isAutoRem: 1,
-            ROW_START: new Date().getTime(),
+            isAutoRem: 0,
+            RowStateOfClientSession: 3, // For meaning of diff values read rem/vuex-orm/models.js:71
+            ROW_START: Math.floor(Date.now() / 1000), // Ref: https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
             ROW_END: 2147483647.999999, // this is unix_timestamp value from mariaDB for ROW_END when a record is created new in MariaDB system versioned table.
             $isNew: true,
           },
@@ -182,27 +215,26 @@ export default {
           } else {
             arRemsToCreateInDB.forEach((item) => {
               /* Method 1: Update exisitng record
-            In this method in July 2020 we were not able to set isDirty to false
-            Posted bug at: https://github.com/vuex-orm/plugin-change-flags/issues/12     
-            ormRem.update({
-                where: item.uuid,
-                data: { 
-                  $isNew: false,
-                  },
-              })
+                    In this method in July 2020 we were not able to set isDirty to false
+                    Posted bug at: https://github.com/vuex-orm/plugin-change-flags/issues/12     
+                    ormRem.update({
+                        where: item.uuid,
+                        data: { 
+                          $isNew: false,
+                          },
+                      })
 
-              console.log("trying to set isdirty false")
-              ormRem.update({
-                data: { 
-                  uuid: item.uuid,
-                  '$isDirty': false, 
-                },
-                preventDirtyFlag: true
-              }).then(result => {
-                console.log('update result: ', result)
-              })
-         
-            */
+                      console.log("trying to set isdirty false")
+                      ormRem.update({
+                        data: { 
+                          uuid: item.uuid,
+                          '$isDirty': false, 
+                        },
+                        preventDirtyFlag: true
+                      }).then(result => {
+                        console.log('update result: ', result)
+                      })
+               */
 
               /* Method2: Delete existing and insert from item */
               console.log(item.$id)
@@ -212,10 +244,6 @@ export default {
               console.log('item is')
               console.log(item)
 
-              /*              item.$isDirty = false;
-              item.$isNew = false;
-              console.log(item)
-              */
               ormRem.insert({
                 data: {
                   uuid: item.uuid,
@@ -223,6 +251,7 @@ export default {
                   remDesc: item.remDesc,
                   priority: item.priority,
                   isAutoRem: item.isAutoRem,
+                  RowStateOfClientSession: '3.4.1',
                   ROW_START: item.ROW_START,
                   ROW_END: item.ROW_END,
                 },
