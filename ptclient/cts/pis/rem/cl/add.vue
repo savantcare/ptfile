@@ -269,7 +269,7 @@ export default {
 
               // Method 3: State is maintained by rowStateOfClientSession
               ormRem.update({
-                where: (record) => record.id == item.id,
+                where: (record) => record.id === item.id,
                 data: { rowStateOfClientSession: '231' },
               })
               console.log('ormRem 231 updated', item.id)
