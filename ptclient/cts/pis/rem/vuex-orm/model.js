@@ -73,7 +73,7 @@ export default class reminders extends Model {
         An integer is stored here.
         0 => Not known
         1 => Got from DB and not changed on client
-        2 => Created new on client
+        2 => Created new on client but not on the server yet.
         3 => Changed on client 
               After 2 if there is success the state goes back to 1
         4 => Client requested save to server
