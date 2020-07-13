@@ -215,8 +215,8 @@ export default {
     },
     async sendDataToServer(formName) {
       /* Should bulk created be used
-          Out of 10 reminders set what if 9 got created successfuly but 1 failed?
-          To keep code simple it was decided by VK on 13th July 2020 that for creasting 10 items we will fire 10 API calls.
+         Out of 10 reminders set what if 9 got created successfuly but 1 failed?
+         To keep code simple it was decided by VK on 13th July 2020 that for creasting 10 items we will fire 10 API calls.
         */
 
       const arResultsFromORM = ormRem
@@ -354,7 +354,7 @@ export default {
     removeSingleRemInAddForm(pRemIDGivenByORM) {
       ormRem.delete(pRemIDGivenByORM)
       const positionFound = this.daRem.filter((rem) => {
-        return rem.id == pRemIDGivenByORM
+        return rem.id === pRemIDGivenByORM
       })
 
       // const positionFound = this.daRemID.indexOf(pRemIDGivenByORM)

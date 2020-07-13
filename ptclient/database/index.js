@@ -1,6 +1,6 @@
 import { Database } from '@vuex-orm/core'
 import CtSearch from '@/cts/core/vl-search-box/vuex-orm/searchUIToCT'
-import CtLifeCycle from '@/models/ormCtLifeCycle'
+import CtLifeCycle from '@/cts/core/ctMaster/ormCtLifeCycle'
 import User from '@/models/user'
 import Patient from '@/models/patient'
 import Rex from '@/cts/pis/rec/vuex-orm/model.js'

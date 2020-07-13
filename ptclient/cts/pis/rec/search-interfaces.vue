@@ -1,6 +1,6 @@
 <script>
 import ormSearchPhraseUiToCT from '@/cts/core/vl-search-box/vuex-orm/searchUIToCT'
-import ormCTLifeCycle from '@/models/ormCtLifeCycle'
+import ormCTLifeCycle from '@/cts/core/ctMaster/ormCtLifeCycle'
 
 export default {
   data() {

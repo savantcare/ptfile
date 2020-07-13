@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import ormCTLifeCycle from '@/models/ormCtLifeCycle'
+import ormCTLifeCycle from '@/cts/core/ctMaster/ormCtLifeCycle'
 export default {
   data() {
     return {
