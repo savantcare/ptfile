@@ -1,15 +1,21 @@
 <template>
   <el-form>
     <el-form-item v-for="id in daRemID" :key="id">
-      <el-input
-        type="textarea"
-        :class="mfGetDirtyClassName(id)"
-        :autosize="{ minRows: 2, maxRows: 10 }"
-        placeholder="Please enter the reminder .."
-        :value="getDesc(id)"
-        @input="setDesc($event, id)"
-      ></el-input>
-      <el-button plain type="warning" @click="removeSingleRemInAddForm(id)">Remove</el-button>
+      <el-col :span="20">
+        <el-input
+          type="textarea"
+          :class="mfGetDirtyClassName(id)"
+          :autosize="{ minRows: 2, maxRows: 10 }"
+          placeholder="Please enter the reminder .."
+          :value="getDesc(id)"
+          @input="setDesc($event, id)"
+        ></el-input>
+      </el-col>
+      <el-col :span="4">
+        <el-button plain type="warning" @click="removeSingleRemInAddForm(id)" style="float: right;"
+          >Remove</el-button
+        >
+      </el-col>
     </el-form-item>
     <el-form-item>
       <el-button type="primary" plain @click="sendDataToServer">Submit</el-button>
