@@ -5,6 +5,8 @@
     3. Immediately allow the user to add one more.
     4. User should be able to add 1 more without taking another action with their mouse.
     5. While the data is being sent to the server allow the user to add one more.
+    6. If user does "add more" and now there are 2 add more forms open. The first rem has 5 charecters and 2nd rem has 2 charecters.
+        On clicking submit the 1st should move down and the 2nd should stay up.
     -->
 
   <div>
@@ -199,7 +201,6 @@ export default {
             rowStateOfClientSession: 2, // For meaning of diff values read rem/vuex-orm/models.js:71
             ROW_START: Math.floor(Date.now() / 1000), // Ref: https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
             ROW_END: 2147483647.999999, // this is unix_timestamp value from mariaDB for ROW_END when a record is created new in MariaDB system versioned table.
-            $isNew: true,
           },
         })
         .then((entities) => {
@@ -215,8 +216,8 @@ export default {
     },
     async sendDataToServer(formName) {
       /* Should bulk created be used
-         Out of 10 reminders set what if 9 got created successfuly but 1 failed?
-         To keep code simple it was decided by VK on 13th July 2020 that for creasting 10 items we will fire 10 API calls.
+          Out of 10 reminders set what if 9 got created successfuly but 1 failed?
+          To keep code simple it was decided by VK on 13th July 2020 that for creasting 10 items we will fire 10 API calls.
         */
 
       const arResultsFromORM = ormRem
@@ -338,7 +339,7 @@ export default {
       }
     },
     resetForm(formName) {
-      const arResultsFromORM = ormRem.query().where('$isNew', true).get()
+      const arResultsFromORM = ormRem.query().where('rowStateOfClientSession', 2).get()
       if (arResultsFromORM.length) {
         console.log('unsaved data found', arResultsFromORM)
         for (let i = 0; i < arResultsFromORM.length; i++) {

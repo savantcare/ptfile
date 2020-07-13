@@ -1,7 +1,7 @@
 import { Model } from '@vuex-orm/core'
 const { v1: uuidv1 } = require('uuid')
 
-/* Giving a numeric ID to each row
+/*  Giving a numeric ID to each row
     Why?
     Better performance. Ref: https://stackoverflow.com/questions/10639488/faster-to-access-numeric-property-by-string-or-integer  
     How?
@@ -11,7 +11,7 @@ const { v1: uuidv1 } = require('uuid')
         let count = 0
         const intUniqueID = () => ++count
         this.uid(() => intUniqueID())
-      */
+  */
 
 let count = 0
 const intUniqueID = () => ++count
