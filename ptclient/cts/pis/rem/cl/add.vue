@@ -8,19 +8,23 @@
 
   <div>
     <el-form>
-      <el-form-item v-for="id in daRemID" :key="id">
+      <el-form-item v-for="rem in daRem" :key="rem.id">
         <!-- Prop explaination 
           Read prop explanation for span=4 on line 18
            -->
-        <el-col :span="20">
+
+        <el-col :span="20" :class="rem.validationClass">
           <el-input
             type="textarea"
-            :class="mfGetDirtyClassName(id)"
+            :class="mfGetDirtyClassName(rem.id)"
             :autosize="{ minRows: 2, maxRows: 10 }"
             placeholder="Please enter the reminder .."
-            :value="getDesc(id)"
-            @input="setDesc($event, id)"
+            :value="getDesc(rem.id)"
+            @input="setDesc($event, rem.id)"
           ></el-input>
+          <div v-if="rem.isValidationError" class="el-form-item__error">
+            Please enter minimum 3 characters.
+          </div>
         </el-col>
 
         <!-- Prop explaination 
@@ -31,7 +35,7 @@
           <el-button
             plain
             type="warning"
-            @click="removeSingleRemInAddForm(id)"
+            @click="removeSingleRemInAddForm(rem.id)"
             style="float: right;"
             >Remove</el-button
           >
@@ -66,7 +70,7 @@ import ormRem from '@/cts/pis/rem/vuex-orm/model.js'
 export default {
   data() {
     return {
-      daRemID: [],
+      daRem: [],
     }
   },
   computed: {
@@ -126,7 +130,11 @@ export default {
     if (arResultsFromORM.length) {
       console.log('unsaved data found', arResultsFromORM, arResultsFromORM[0].$id)
       for (let i = 0; i < arResultsFromORM.length; i++) {
-        this.daRemID.push(arResultsFromORM[i].$id)
+        this.daRem.push({
+          id: arResultsFromORM[i].$id,
+          isValidationError: false,
+          validationClass: '',
+        })
       }
     } else {
       // When there is no unsaved data then we add an empty data to the state inside vuex
@@ -149,6 +157,15 @@ export default {
     },
     setDesc(pEvent, pRemIDGivenByORM) {
       console.log('set called for', pRemIDGivenByORM, pEvent)
+
+      const elementFound = this.daRem.filter((rem) => {
+        return rem.id == pRemIDGivenByORM
+      })
+
+      const positionFound = this.daRem.indexOf(elementFound[0])
+      this.daRem[positionFound].validationClass = ''
+      this.daRem[positionFound].isValidationError = false
+
       const arResultsFromORM = ormRem.update({
         where: pRemIDGivenByORM,
         data: {
@@ -161,7 +178,7 @@ export default {
     mfGetDirtyClassName(pRemIDGivenByORM) {
       console.log(pRemIDGivenByORM)
       const arResultsFromORM = ormRem.find(pRemIDGivenByORM)
-      if (arResultsFromORM.rowStateOfClientSession === 23) {
+      if (arResultsFromORM && arResultsFromORM.rowStateOfClientSession === 23) {
         return 'unsaved-data'
       } else {
         return ''
@@ -183,8 +200,12 @@ export default {
         })
         .then((entities) => {
           console.log(entities)
-          this.daRemID.push(entities.rem[0].$id)
-          console.log(this.daRemID)
+          this.daRem.push({
+            id: entities.rem[0].$id,
+            isValidationError: false,
+            validationClass: '',
+          })
+          console.log(this.daRem)
         })
       console.log(arResultsFromORM)
     },
@@ -194,10 +215,15 @@ export default {
           To keep code simple it was decided by VK on 13th July 2020 that for creasting 10 items we will fire 10 API calls.
         */
 
-      const arResultsFromORM = ormRem.query().where('rowStateOfClientSession', 23).get()
+      const arResultsFromORM = ormRem
+        .query()
+        .where('rowStateOfClientSession', 23)
+        .orWhere('rowStateOfClientSession', 2)
+        .get()
       if (arResultsFromORM.length) {
         console.log('unsaved data found', arResultsFromORM, arResultsFromORM[0].uuid)
         const arRemsToCreateInDB = []
+        let vblIsValidated = true
         for (let i = 0; i < arResultsFromORM.length; i++) {
           console.log('call API', arResultsFromORM[i].uuid)
           arRemsToCreateInDB.push({
@@ -209,9 +235,23 @@ export default {
             uuidOfRemMadeFor: 'bfe041fa-073b-4223-8c69-0540ee678ff8',
             recordChangedByUUID: 'bfe041fa-073b-4223-8c69-0540ee678ff8',
           })
-          // Once server returns true then: set isNew and IsDirty to false
+
+          if (arResultsFromORM[i].remDesc.length < 3) {
+            vblIsValidated = false
+            const elementFound = this.daRem.filter((rem) => {
+              return rem.id == arResultsFromORM[i].id
+            })
+
+            const positionFound = this.daRem.indexOf(elementFound[0])
+            this.daRem[positionFound].validationClass = 'validaionErrorExist'
+            this.daRem[positionFound].isValidationError = true
+          }
         }
+
         console.log('Data to send in api', arRemsToCreateInDB)
+        if (!vblIsValidated) {
+          return false
+        }
 
         try {
           const response = await fetch(REMINDER_API_URL, {
@@ -304,13 +344,17 @@ export default {
       } else {
         console.log('No Unsaved data')
       }
-      this.daRemID = []
+      this.daRem = []
       this.addEmptyRemToUI()
     },
     removeSingleRemInAddForm(pRemIDGivenByORM) {
       ormRem.delete(pRemIDGivenByORM)
-      const positionFound = this.daRemID.indexOf(pRemIDGivenByORM)
-      this.daRemID.splice(positionFound, 1)
+      const positionFound = this.daRem.filter((rem) => {
+        return rem.id == pRemIDGivenByORM
+      })
+
+      // const positionFound = this.daRemID.indexOf(pRemIDGivenByORM)
+      this.daRem.splice(positionFound, 1)
     },
   },
 }
@@ -319,5 +363,8 @@ export default {
 <style>
 .unsaved-data textarea {
   border-color: #e6a23c;
+}
+.validaionErrorExist .el-textarea__inner {
+  border-color: #ff4949;
 }
 </style>
