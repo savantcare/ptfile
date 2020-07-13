@@ -194,6 +194,7 @@ export default {
         for (let i = 0; i < arResultsFromORM.length; i++) {
           console.log('call API', arResultsFromORM[i].uuid)
           arRemsToCreateInDB.push({
+            id: arResultsFromORM[i].id,
             uuid: arResultsFromORM[i].uuid,
             remDesc: arResultsFromORM[i].remDesc,
             priority: arResultsFromORM[i].priority,
@@ -226,16 +227,16 @@ export default {
                     Posted bug at: https://github.com/vuex-orm/plugin-change-flags/issues/12 on slack the programmer accepted it as a bug
                     ormRem.update({
                         where: item.uuid,
-                        data: { 
+                        data: {
                           $isNew: false,
                           },
                       })
 
                       console.log("trying to set isdirty false")
                       ormRem.update({
-                        data: { 
+                        data: {
                           uuid: item.uuid,
-                          '$isDirty': false, 
+                          '$isDirty': false,
                         },
                         preventDirtyFlag: true
                       }).then(result => {
@@ -243,7 +244,7 @@ export default {
                       })
                */
 
-              /* Method 2: Delete existing and insert from item 
+              /* Method 2: Delete existing and insert from item
                   console.log(item.$id)
                   ormRem.delete(item.$id).then((result) => {
                     console.log('update result: ', result)
@@ -267,13 +268,17 @@ export default {
                 */
 
               // Method 3: State is maintained by rowStateOfClientSession
-
               ormRem.update({
+                where: (record) => record.id == item.id,
+                data: { rowStateOfClientSession: '231' },
+              })
+              console.log('ormRem 231 updated', item.id)
+              /* ormRem.update({
                 where: item.$id,
                 data: {
                   rowStateOfClientSession: 231,
                 },
-              })
+              }) */
             })
           }
         } catch (ex) {}
