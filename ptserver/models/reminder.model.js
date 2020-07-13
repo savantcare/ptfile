@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
   const Reminder = sequelize.define(
-    "reminder",
+    "rems",
     {
       uuid: {
         type: Sequelize.STRING,
