@@ -21,8 +21,8 @@ export default {
       data: {
         value: 'recommendations',
         ctAbbr: 'rex',
-        ctToShowInCL: '',
-        ctToShowInMSVL: 'rec/vl/table.vue',
+        ctToShowInCL: 'pis/',
+        ctToShowInMSVL: 'pis/rec/vl/table.vue', // expands to Ct to show in Musti state of view layer
         ctToShowInCSVL: 'pis/rec/vl/timeline.vue',
         layer: 'view',
       },
@@ -32,7 +32,7 @@ export default {
       data: {
         value: 'add recommendations',
         ctAbbr: 'arex',
-        ctToShowInCL: 'rec/vl/table.vue',
+        ctToShowInCL: 'pis/rec/vl/table.vue',
         layer: 'change',
       },
     })
