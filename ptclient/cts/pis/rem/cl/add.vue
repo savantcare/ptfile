@@ -1,9 +1,10 @@
 <template>
-  <!-- Goal of add user experience is: 
+  <!-- What is the of add user experience?
     1. Give visual feedback to the user that the data was added.
     2. Visual feedback should come close to where the user eyes are. The visual feedback should not be on top right corner.
     3. Immediately allow the user to add one more.
     4. User should be able to add 1 more without taking another action with their mouse.
+    5. While the data is being sent to the server allow the user to add one more.
     -->
 
   <div>
@@ -47,24 +48,23 @@
         <el-button type="warning" plain @click="resetForm">Reset form</el-button>
       </el-form-item>
     </el-form>
-    <!-- In a for loop show all reminders that have orm.RowStateOfClientSession = 3.4.1 
-          The table reminders added this session only comes if there is atleast a single row
+    <!-- In a for loop show all reminders that have orm.RowStateOfClientSession = 231 
+          The table "Reminders added this session" only comes if there is atleast a single row
 
-          The row color will be orange if the number is 3.4
-          the row color will be white if the number is 3.4.1
+          The row color will be orange if the number is 234 or 235
+          the row color will be white if the number is 231
 
-          As soon submit is pressed  RowStateOfClientSession = 3.4
-          when the api succeed RowStateOfClientSession = 3.4.1
+          As soon submit is pressed  RowStateOfClientSession = 24
+          when the api succeed RowStateOfClientSession = 241
               Why not set RowStateOfClientSession = 1 when api succeds?
                 For the end user it is a matter of comfort to see the previous data in the table.
       -->
-    Reminders added this session:
     <el-table
       v-if="cfDataAddedInThisSession.length > 0"
       :data="cfDataAddedInThisSession"
       style="width: 100%; background: #f0f9eb;"
     >
-      <el-table-column prop="remDesc" label="Description"> </el-table-column>
+      <el-table-column prop="remDesc" label="Reminders added this session"> </el-table-column>
     </el-table>
   </div>
 </template>
