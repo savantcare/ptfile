@@ -129,7 +129,7 @@ export default {
             priority: 1,
             isAutoRem: 1,
             ROW_START: new Date().getTime(),
-            ROW_END: '2038-01-19 03:14:07.999999',
+            ROW_END: 2147483647.999999, // this is unix_timestamp value from mariaDB for ROW_END when a record is created new in MariaDB system versioned table.
             $isNew: true,
           },
         })
