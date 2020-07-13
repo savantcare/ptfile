@@ -23,6 +23,7 @@
         <el-table-column type="expand">
           <template slot-scope="props">
             <p>Created: {{ props.row.createdAt }}</p>
+            <p>uuid: {{ props.row.uuid }}</p>
           </template>
         </el-table-column>
 
@@ -123,13 +124,13 @@ export default {
     mfOpenADialog() {
       // console.log('show add dialog')
       const arResultsFromORM = ormSearchPhraseUiToCT.query().search('add reminder').get()
-      const objRowFromORM = arResultsFromORM[0]
-      // console.log(objRowFromORM)
+      const objSearchRowFromORM = arResultsFromORM[0]
+      // console.log(objSearchRowFromORM)
       const tab = {
-        label: objRowFromORM.value,
-        ctToShow: require('@/cts/' + objRowFromORM.ctToShowInCL).default,
-        ctAbbr: objRowFromORM.ctAbbr,
-        id: objRowFromORM.id,
+        label: objSearchRowFromORM.value,
+        ctToShow: require('@/cts/' + objSearchRowFromORM.ctToShowInCL).default,
+        ctAbbr: objSearchRowFromORM.ctAbbr,
+        id: objSearchRowFromORM.id,
         closable: true,
       }
       this.$store.commit('mtfShowNewFirstTabInCl', tab)
@@ -137,13 +138,13 @@ export default {
     mfOpenMDialog() {
       // console.log('show add dialog')
       const arResultsFromORM = ormSearchPhraseUiToCT.query().search('multi change reminder').get()
-      const objRowFromORM = arResultsFromORM[0]
-      // console.log(objRowFromORM)
+      const objSearchRowFromORM = arResultsFromORM[0]
+      // console.log(objSearchRowFromORM)
       const tab = {
-        label: objRowFromORM.value,
-        ctToShow: require('@/cts/' + objRowFromORM.ctToShowInCL).default,
-        ctAbbr: objRowFromORM.ctAbbr,
-        id: objRowFromORM.id,
+        label: objSearchRowFromORM.value,
+        ctToShow: require('@/cts/' + objSearchRowFromORM.ctToShowInCL).default,
+        ctAbbr: objSearchRowFromORM.ctAbbr,
+        id: objSearchRowFromORM.id,
         closable: true,
       }
       this.$store.commit('mtfShowNewFirstTabInCl', tab)
@@ -154,13 +155,13 @@ export default {
     mfOpenXDialog() {
       // console.log('show add dialog')
       const arResultsFromORM = ormSearchPhraseUiToCT.query().search('discontinued reminders').get()
-      const objRowFromORM = arResultsFromORM[0]
-      // console.log(objRowFromORM)
+      const objSearchRowFromORM = arResultsFromORM[0]
+      // console.log(objSearchRowFromORM)
       const tab = {
-        label: objRowFromORM.value,
-        ctToShow: require('@/cts/' + objRowFromORM.ctToShowInCL).default,
-        ctAbbr: objRowFromORM.ctAbbr,
-        id: objRowFromORM.id,
+        label: objSearchRowFromORM.value,
+        ctToShow: require('@/cts/' + objSearchRowFromORM.ctToShowInCL).default,
+        ctAbbr: objSearchRowFromORM.ctAbbr,
+        id: objSearchRowFromORM.id,
         closable: true,
       }
       this.$store.commit('mtfShowNewFirstTabInCl', tab)
@@ -170,8 +171,8 @@ export default {
 
       // Goal: Find out which CT will handle this work
       const arResultsFromORM = ormSearchPhraseUiToCT.query().search('change reminder').get()
-      const objRowFromORM = arResultsFromORM[0]
-      // console.log(objRowFromORM)
+      const objSearchRowFromORM = arResultsFromORM[0]
+      // console.log(objSearchRowFromORM)
 
       // Goal: Create the obj Tab that will be worked upon by for loop in
       // /cts/core/cl-tabs-manager/ctShowAddAndRemoveTabsInDialog.vue: 76
@@ -189,7 +190,7 @@ export default {
       */
 
       const tab = {
-        label: objRowFromORM.value, // TODO: Should be called vsLabel
+        label: objSearchRowFromORM.value, // TODO: Should be called vsLabel
         /*
         import and require are similar
         require can use a variable.
@@ -201,9 +202,9 @@ export default {
         Ref: https://stackoverflow.com/questions/46215705/why-need-default-after-require-method-in-vue
 
         */
-        ctToShow: require('@/cts/' + objRowFromORM.ctToShowInCL).default,
-        ctAbbr: objRowFromORM.ctAbbr, // TODO: Should be called vsCtAbbr
-        id: objRowFromORM.id, // This id comes from search phrases UI to Ct. TODO: should be called vnID
+        ctToShow: require('@/cts/' + objSearchRowFromORM.ctToShowInCL).default,
+        ctAbbr: objSearchRowFromORM.ctAbbr, // TODO: Should be called vsCtAbbr
+        id: objSearchRowFromORM.id, // This id comes from search phrases UI to Ct. TODO: should be called vnID
         vstPropsToGiveToCt: pORMDataRowID, // This holds all the data for the record we want to change in cl
         closable: true, // TODO: Should be called blClosable
       }
