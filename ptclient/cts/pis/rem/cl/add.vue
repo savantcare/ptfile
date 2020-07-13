@@ -114,7 +114,7 @@ export default {
         Decision on 8th July 2020 by VK/AG/TJ/SS/RR: Not to use indexDB
       */
     // When there is unsaved data we load the unsaved data
-    const arResultsFromORM = ormRem.query().where('$isNew', true).get()
+    const arResultsFromORM = ormRem.query().where('rowStateOfClientSession', 23).get()
     if (arResultsFromORM.length) {
       console.log('unsaved data found', arResultsFromORM, arResultsFromORM[0].$id)
       for (let i = 0; i < arResultsFromORM.length; i++) {
@@ -145,6 +145,7 @@ export default {
         where: pRemIDGivenByORM,
         data: {
           remDesc: pEvent,
+          rowStateOfClientSession: 23,
         },
       })
       console.log(arResultsFromORM)
@@ -152,7 +153,7 @@ export default {
     mfGetDirtyClassName(pRemIDGivenByORM) {
       console.log(pRemIDGivenByORM)
       const arResultsFromORM = ormRem.find(pRemIDGivenByORM)
-      if (arResultsFromORM.$isDirty) {
+      if (arResultsFromORM.rowStateOfClientSession === 23) {
         return 'unsaved-data'
       } else {
         return ''
@@ -166,7 +167,7 @@ export default {
             remDesc: '',
             priority: 1,
             isAutoRem: 0,
-            RowStateOfClientSession: 3, // For meaning of diff values read rem/vuex-orm/models.js:71
+            rowStateOfClientSession: 2, // For meaning of diff values read rem/vuex-orm/models.js:71
             ROW_START: Math.floor(Date.now() / 1000), // Ref: https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
             ROW_END: 2147483647.999999, // this is unix_timestamp value from mariaDB for ROW_END when a record is created new in MariaDB system versioned table.
             $isNew: true,
@@ -251,7 +252,7 @@ export default {
                   remDesc: item.remDesc,
                   priority: item.priority,
                   isAutoRem: item.isAutoRem,
-                  RowStateOfClientSession: '3.4.1',
+                  rowStateOfClientSession: '2.3.1',
                   ROW_START: item.ROW_START,
                   ROW_END: item.ROW_END,
                 },

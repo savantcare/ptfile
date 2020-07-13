@@ -142,6 +142,7 @@ export default {
       */
 
     setRemDescInVstOnDelay(pEvent) {
+      // Full form: Set reminder in vue state on delay
       if (this.vSaveToStateScheduled) {
         console.log('clearing timeout')
         clearTimeout(this.vSaveToStateScheduled)
