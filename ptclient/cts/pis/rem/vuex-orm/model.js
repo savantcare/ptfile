@@ -77,7 +77,9 @@ export default class reminders extends Model {
         3 => Changed on client 
               After 2 if there is success the state goes back to 1
         4 => Client requested save to server
-        5 => Data saved to server failed.
+        5 => form error on client side
+        6 => Data sent to server to save
+        7 => Data saved to server failed.
       
         Data is stored with the timeline
         
