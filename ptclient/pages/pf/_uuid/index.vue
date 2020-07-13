@@ -47,10 +47,23 @@
             -->
           <component v-bind:is="card.ctToShow"></component>
         </el-card>
-        <ctVLSearchBox></ctVLSearchBox>
         <!-- ctVLSearchBox as per glossary is Component View layer search box 
-             This is at bottom of the for loop since we want the search box to come at the bottom
+             Top or bottom of the for loop -> determines if search comes at top or bottom of the other cards
+             Advantages of having search box at the top:
+              1. We are used to reading from top to bottom
+              2. If I give the command rec and that medications card on top of it. 
+                  If window is at bottom:  I will loose the top of meds card. 
+                  If window is at top:  I will loose the bottom of the meds card.
+                  Each card (including meds) the card top will have more useful information.
+              3. If there is a single rec card and that is longer then the space available when I have search at top I will info at bottom of the card.
+             Advantages of having search box at the top:
+              1. Everyone uses chat and in chat the box to type is at the bottom
+
+              Choice in July 2020 by VK: keep search box at botoom
+
+              Do not make the mistake of making something like this configurable. When needed the change should be made directly in the code
         -->
+        <ctVLSearchBox></ctVLSearchBox>
       </SplitArea>
     </Split>
     <!-- tab-dialog is present in patientFile.vue but in hidden state -->

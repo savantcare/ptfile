@@ -11,7 +11,11 @@
     :modal="false"
     :close-on-press-escape="true"
     :show-close="false"
+    size="90%"
   >
+    <img
+      src="https://github.com/DataV-Team/DataV/blob/master/demoImg/construction-data.jpg?raw=true"
+    />
   </el-drawer>
 </template>
 
