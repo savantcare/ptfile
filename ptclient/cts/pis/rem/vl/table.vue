@@ -13,7 +13,7 @@
         </el-button-group>
       </div>
       <el-table
-        :data="cfArRemForDisplayInTable"
+        :data="cfArOfRemForDisplayInTable"
         :showHeader="false"
         size="mini"
         style="width: 100%;"
@@ -23,6 +23,8 @@
         <el-table-column type="expand">
           <template slot-scope="props">
             <p>Created: {{ props.row.createdAt }}</p>
+            <p>Row start: {{ props.row.ROW_START }}</p>
+            <p>Row end: {{ props.row.ROW_END }}</p>
             <p>uuid: {{ props.row.uuid }}</p>
           </template>
         </el-table-column>
@@ -74,22 +76,22 @@ export default {
   },
   computed: {
     cfLengthOfDataArray() {
-      const arResultsFromORM = ormRem.query().get()
+      const arResultsFromORM = ormRem.query().where('ROW_END', '2038-01-19T03:14:07.999Z').get()
       return arResultsFromORM.length
     },
-    cfArRemForDisplayInTable() {
+    cfArOfRemForDisplayInTable() {
       console.log(
-        'cfArRemForDisplayInTable called. Whenever ormRem will change this will get called. Even when there are 100 rows in the table when orm rem changes this gets called once'
+        'cfArOfRemForDisplayInTable called. Whenever ormRem will change this will get called. Even when there are 100 rows in the table when orm rem changes this gets called once'
       )
-      const arResultsFromORM = ormRem.query().get()
+      const arResultsFromORM = ormRem.query().where('ROW_END', '2038-01-19T03:14:07.999Z').get()
 
-      /* Option1 of returning data from this cf:
-          return arResultsFromORM
-          Disadvantage
-            Created at needs to be made inside the template
-            vue will get more data since when I loop here I can send less data to vue
-          Advantage:
-            No need to run the for loop
+      /*  Q) Should this function return the array it gets from ORM or modify the array? 
+              Option1: Return origianl array
+                  -ves:
+                    Created at needs to be made inside the template
+                    vue will get more data since when I loop here I can send less data to vue
+                  +ves:              
+                    No need to run the for loop
       */
 
       /* Option2 of returning data from this cf:
@@ -113,7 +115,7 @@ export default {
         }
       }
       return arRemsForDisplay
-    }, // end of cfArRemForDisplayInTable
+    }, // end of cfArOfRemForDisplayInTable
   },
   mounted() {},
   methods: {

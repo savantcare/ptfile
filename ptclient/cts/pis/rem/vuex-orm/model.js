@@ -67,10 +67,21 @@ export default class reminders extends Model {
       recordChangedByUUID: this.string(null),
       recordChangedFromIPAddress: this.string(null),
       recordChangedFromSection: this.string(null),
-      // Why store time as a number? Since vuex-orm does not understand dates.
-      // The data types that vuex-orm understands are given at: https://vuex-orm.org/guide/model/defining-models.html#generic-type
-      ROW_START: this.string(0), // Todo: store this as number
-      ROW_END: this.string(0),
+      /* Should ROW_START and ROW_END be string or numnber?
+        vuex-orm does not have a native type called Date. The native data types are at: https://vuex-orm.org/guide/model/defining-models.html#generic-type
+           + ves of storing as a number:
+             1.  When using data 
+                    At a lot of places in the code I will need to compare the current time with ROW_END 
+                    For e.g. 1. To decide if the row is discontinued.
+                           2. For a previous appt to decide if the row was discontinued before that appt time.
+             2. Whhen reading data
+                  MariaDB is already storing the ROW_START and ROW_END as numbers.
+             3. When saving data 
+                  I can again use numbers. No need to change from string to numbers.       
+        */
+
+      ROW_START: this.number(0),
+      ROW_END: this.number(0),
     }
   }
 }
