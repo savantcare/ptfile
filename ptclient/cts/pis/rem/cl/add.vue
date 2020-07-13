@@ -129,7 +129,7 @@ export default {
                         5. The new vuex needs to be synced with the storage.
         Decision on 8th July 2020 by VK/AG/TJ/SS/RR: Not to use indexDB
       */
-    // When there is unsaved data we load the unsaved data
+    // Goal: When there is unsaved data in the state then load the unsaved data
     const arResultsFromORM = ormRem.query().where('rowStateOfClientSession', 23).get()
     if (arResultsFromORM.length) {
       console.log('unsaved data found', arResultsFromORM, arResultsFromORM[0].$id)
@@ -163,7 +163,7 @@ export default {
       console.log('set called for', pRemIDGivenByORM, pEvent)
 
       const elementFound = this.daRem.filter((rem) => {
-        return rem.id == pRemIDGivenByORM
+        return rem.id === pRemIDGivenByORM
       })
 
       const positionFound = this.daRem.indexOf(elementFound[0])
@@ -243,7 +243,7 @@ export default {
           if (arResultsFromORM[i].remDesc.length < 3) {
             vblIsValidated = false
             const elementFound = this.daRem.filter((rem) => {
-              return rem.id == arResultsFromORM[i].id
+              return rem.id === arResultsFromORM[i].id
             })
 
             const positionFound = this.daRem.indexOf(elementFound[0])
