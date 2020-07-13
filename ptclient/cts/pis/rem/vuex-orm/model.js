@@ -116,6 +116,10 @@ export default class reminders extends Model {
 
       ROW_START: this.number(0),
       ROW_END: this.number(0),
+
+      // the following fields only exist on client
+      validationClass: this.string(''),
+      isValidationError: this.boolean(false),
     }
   }
 }
