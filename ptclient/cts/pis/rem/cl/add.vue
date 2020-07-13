@@ -88,7 +88,11 @@ export default {
       return arResultsFromORM
     },
     cfDataSavedToDBInThisSession() {
-      const arResultsFromORM = ormRem.query().where('rowStateOfClientSession', 231).get()
+      const arResultsFromORM = ormRem
+        .query()
+        .where('rowStateOfClientSession', 23461)
+        .orWhere('rowStateOfClientSession', 23467)
+        .get()
       return arResultsFromORM
     },
   },
@@ -234,13 +238,30 @@ export default {
               },
             })
             console.log('calling api to save data')
+
+            // API will return 1 (Success) or 0 (Failure)
+            const status = Math.floor(Math.random() * (1 - 0 + 1)) + 0 // Ref: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+            if (status === 0) {
+              ormRem.update({
+                where: (record) => record.id === arResultsFromORM[i].id,
+                data: {
+                  rowStateOfClientSession: '23461',
+                },
+              })
+            } else {
+              ormRem.update({
+                where: (record) => record.id === arResultsFromORM[i].id,
+                data: {
+                  rowStateOfClientSession: '23467',
+                },
+              })
+            }
           }
         }
       }
     },
     async sendDataToServer(formName) {
-      /* Should bulk created be used
-Out of 10 reminders set what if 9 got created successfuly but 1 failed?
+      /* Should bulk created be used Out of 10 reminders set what if 9 got created successfuly but 1 failed? 
 To keep code simple it was decided by VK on 13th July 2020 that for creasting 10 items we will fire 10 API calls.
 */
 
