@@ -59,9 +59,13 @@
                 For the end user it is a matter of comfort to see the previous data in the table.
       -->
     Reminders added this session:
-    <div v-for="newDataAdded in cfDataAddedInThisSession" :key="newDataAdded.id">
-      {{ newDataAdded.remDesc }}
-    </div>
+    <el-table
+      v-if="cfDataAddedInThisSession.length > 0"
+      :data="cfDataAddedInThisSession"
+      style="width: 100%; background: #f0f9eb;"
+    >
+      <el-table-column prop="remDesc" label="Description"> </el-table-column>
+    </el-table>
   </div>
 </template>
 <script>
