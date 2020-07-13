@@ -12,7 +12,7 @@ import VuexORMisDirtyPlugin from '@vuex-orm/plugin-change-flags'
 import VueStateOfTabsAndDialogInCLModule from '@/cts/cl-tabs-manager/VueStateOfTabsAndDialogInCL'
 
 // Full form: Vue State Of Cards In Current state Of View layer Module
-import VueStateOfCardsInCSOfVLModule from '@/cts/vl-search-box/VueStateOfCardsInCSOfVL'
+import VstOfCardsInCSOfVLModule from '@/cts/vl-search-box/VstOfCardsInCSOfVL'
 
 import VueStateOfFeedDrawerModule from '@/cts/feed/VueStateOfFeedDrawer'
 import VueStateOfMapDrawerModule from '@/cts/map/VueStateOfMapDrawer'
@@ -45,7 +45,7 @@ const createStore = () => {
       vstObjMapDrawer: VueStateOfMapDrawerModule,
 
       // Full form: view state object cards in current state of view layer
-      vstObjCardsInCSOfVL: VueStateOfCardsInCSOfVLModule,
+      vstObjCardsInCSOfVL: VstOfCardsInCSOfVLModule,
     },
     plugins: [VuexORM.install(database)],
   })
