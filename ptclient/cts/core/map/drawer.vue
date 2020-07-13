@@ -1,6 +1,9 @@
 <!-- Params
       Goal: Do not show the shadow so doctor can read the view layer.
             modal=false means -> Do now show shadowing layer
+
+     How to see table in drawer?
+        https://element.eleme.io/#/en-US/component/drawer       
   -->
 <template>
   <el-drawer
