@@ -55,6 +55,9 @@
                 For the end user it is a matter of comfort to see the previous data in the table.
       -->
     Reminders added this session:
+    <div v-for="newDataAdded in cfDataAddedInThisSession" :key="newDataAdded.id">
+      {{ newDataAdded.remDesc }}
+    </div>
   </div>
 </template>
 <script>
@@ -66,7 +69,12 @@ export default {
       daRemID: [],
     }
   },
-  computed: {},
+  computed: {
+    cfDataAddedInThisSession() {
+      const arResultsFromORM = ormRem.query().where('rowStateOfClientSession', 231).get()
+      return arResultsFromORM
+    },
+  },
   mounted() {
     /* Should data be loaded from localstorage or state?
       There are 2 possibilities
