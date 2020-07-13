@@ -181,7 +181,7 @@ export default {
       console.log(arResultsFromORM)
     },
     async sendDataToServer(formName) {
-      const arResultsFromORM = ormRem.query().where('$isNew', true).get()
+      const arResultsFromORM = ormRem.query().where('rowStateOfClientSession', 23).get()
       if (arResultsFromORM.length) {
         console.log('unsaved data found', arResultsFromORM, arResultsFromORM[0].uuid)
         const arRemsToCreateInDB = []
@@ -215,9 +215,9 @@ export default {
           if (!response.ok) {
           } else {
             arRemsToCreateInDB.forEach((item) => {
-              /* Method 1: Update exisitng record
+              /* Method 1: Update exisitng record when vuex-orm change flag plugin is used
                     In this method in July 2020 we were not able to set isDirty to false
-                    Posted bug at: https://github.com/vuex-orm/plugin-change-flags/issues/12     
+                    Posted bug at: https://github.com/vuex-orm/plugin-change-flags/issues/12 on slack the programmer accepted it as a bug
                     ormRem.update({
                         where: item.uuid,
                         data: { 
@@ -237,24 +237,35 @@ export default {
                       })
                */
 
-              /* Method2: Delete existing and insert from item */
-              console.log(item.$id)
-              ormRem.delete(item.$id).then((result) => {
-                console.log('update result: ', result)
-              })
-              console.log('item is')
-              console.log(item)
+              /* Method 2: Delete existing and insert from item 
+                  console.log(item.$id)
+                  ormRem.delete(item.$id).then((result) => {
+                    console.log('update result: ', result)
+                  })
+                  console.log('item is')
+                  console.log(item)
 
-              ormRem.insert({
+                  ormRem.insert({
+                    data: {
+                      uuid: item.uuid,
+                      uuidOfRemMadeFor: item.uuidOfRemMadeFor,
+                      remDesc: item.remDesc,
+                      priority: item.priority,
+                      isAutoRem: item.isAutoRem,
+                      rowStateOfClientSession: '2.3.1',
+                      ROW_START: item.ROW_START,
+                      ROW_END: item.ROW_END,
+                    },
+                  })
+
+                */
+
+              // Method 3: State is maintained by rowStateOfClientSession
+
+              ormRem.update({
+                where: item.$id,
                 data: {
-                  uuid: item.uuid,
-                  uuidOfRemMadeFor: item.uuidOfRemMadeFor,
-                  remDesc: item.remDesc,
-                  priority: item.priority,
-                  isAutoRem: item.isAutoRem,
-                  rowStateOfClientSession: '2.3.1',
-                  ROW_START: item.ROW_START,
-                  ROW_END: item.ROW_END,
+                  rowStateOfClientSession: 231,
                 },
               })
             })
