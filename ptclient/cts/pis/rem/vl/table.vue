@@ -177,7 +177,7 @@ export default {
       // /cts/core/cl-tabs-manager/ctShowAddAndRemoveTabsInDialog.vue: 76
 
       /*
-       We need rowID of vuexORM inside the change ct. Since change ct needs the exiting Desc of the reminbder to change
+       We need rowID of vuexORM inside the change ct. Since change ct needs the exiting Desc of the reminber to change
        Option 1: Send the whole data row
        Option 2: Send just the ID in a prop.
         +ves:
@@ -203,7 +203,7 @@ export default {
         */
         ctToShow: require('@/cts/' + objRowFromORM.ctToShowInCL).default,
         ctAbbr: objRowFromORM.ctAbbr, // TODO: Should be called vsCtAbbr
-        id: objRowFromORM.id, // TODO: should be called vnID
+        id: objRowFromORM.id, // This id comes from search phrases UI to Ct. TODO: should be called vnID
         vstPropsToGiveToCt: pORMDataRowID, // This holds all the data for the record we want to change in cl
         closable: true, // TODO: Should be called blClosable
       }
