@@ -273,8 +273,9 @@ export default {
       // if there are no records left then I need to add a empty
       arResultsFromORM = ormRem
         .query()
-        .where('rowStateOfClientSession', 23)
-        .orWhere('rowStateOfClientSession', 2)
+        .where('rowStateOfClientSession', 2)
+        .orWhere('rowStateOfClientSession', 23)
+        .orWhere('rowStateOfClientSession', 2345)
         .get()
       if (arResultsFromORM.length) {
       } else {
