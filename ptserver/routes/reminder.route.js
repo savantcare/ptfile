@@ -7,8 +7,11 @@ const { Op } = require("sequelize");
 module.exports = (io, sequelize) => {
   router.post("/", async (req, res) => {
     try {
-      const { data, patientId } = req.body;
-      const newReminder = await Reminder.bulkCreate(data); // See
+      const { data } = req.body;
+      const patientId = data.uuidOfRemMadeFor;
+      const newReminder = await Reminder.create(data);
+      /* Goal: we want to get each record's success and failure response
+          So, we are using create and not using bulkCreate and making separate api query for each data */
       //console.log(newReminder)
       /* this informs all the clients.
        -doctor is added so that DA does not get high security messages on their socket. 
