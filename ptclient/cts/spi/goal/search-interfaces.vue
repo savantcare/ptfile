@@ -15,26 +15,28 @@ export default {
     // Search interfaces to this component
     ormSearchPhraseUiToCT.insert({
       data: {
-        value: 'add diagnosis',
-        ctAbbr: 'adddx',
-        ctToShowInCL: 'pis/dx/cl/ctAddDx.vue',
+        value: 'add goal',
+        ctAbbr: 'addg',
+        ctToShowInCL: 'spi/goal/cl/ctAddGoal.vue',
         layer: 'change',
       },
     })
+
     ormSearchPhraseUiToCT.insert({
       data: {
-        value: 'diagnosis',
-        ctAbbr: 'dx',
-        ctToShowInCL: 'pis/dx/dx-vl.vue',
+        value: 'multi rate goal',
+        ctAbbr: 'mcg',
+        ctToShowInCL: 'spi/goal/cl/ctMultiRateGoal.vue',
+        layer: 'change',
+      },
+    })
+
+    ormSearchPhraseUiToCT.insert({
+      data: {
+        value: 'goal',
+        ctAbbr: 'g',
+        ctToShowInCL: 'spi/goal/g-vl.vue',
         layer: 'view',
-      },
-    })
-    ormSearchPhraseUiToCT.insert({
-      data: {
-        value: 'multichange dx assessment',
-        ctAbbr: 'mcdxa',
-        ctToShowInCL: 'pis/dx/cl/ctMultiChangeDxa.vue',
-        layer: 'change',
       },
     })
   },

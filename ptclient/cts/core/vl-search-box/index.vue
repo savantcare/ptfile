@@ -18,7 +18,7 @@
 <script>
 import ormSearchPhraseUiToCT from '@/cts/core/vl-search-box/vuex-orm/searchUIToCT'
 // Goal: Get the search terms from each component
-import remSUI from '@/cts/pis/rem/search-interfaces' // TODO: this is used by search box both in vl and cl. So this should not be in vl
+import remSUI from '@/cts/spi/rem/search-interfaces' // TODO: this is used by search box both in vl and cl. So this should not be in vl
 import feedSUI from '@/cts/core/feed/search-interfaces'
 import mapSUI from '@/cts/core/map/search-interfaces'
 import clearSUI from '@/cts/core/clear/search-interfaces'

@@ -82,7 +82,7 @@
 </template>
 <script>
 import { REMINDER_API_URL } from '../const.js'
-import ormRem from '@/cts/pis/rem/db/vuex-orm/model.js'
+import ormRem from '@/cts/spi/rem/db/vuex-orm/model.js'
 export default {
   data() {
     return {}
@@ -288,7 +288,7 @@ export default {
 To keep code simple it was decided by VK on 13th July 2020 that for creasting 10 items we will fire 10 API calls.
 */
 
-      console.log(pORMRowArray)
+      console.log(pORMRowArray, REMINDER_API_URL)
       const status = Math.floor(Math.random() * (1 - 0 + 1)) + 0 // Ref: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
       return status
     },

@@ -46,10 +46,10 @@ In the following examples age is a function inside a component
 
 ### Component short forms
 
-- dx: [Diagnosis](/ptclient/cts/pis/dx/)
+- dx: [Diagnosis](/ptclient/cts/spi/dx/)
 - dxa: Diagnosis assessment
 - g: goal
-- bm: [Body measurement](/ptclient/cts/pis/bm/)
+- bm: [Body measurement](/ptclient/cts/spi/bm/)
 - rec: Recommendation
 - recs: Recommendations
 - rem: Reminder
@@ -77,7 +77,7 @@ In the following examples age is a function inside a component
 - vst: vue state
 - dec: description
 - pi: patient info
-- pis: patient info seperate. e,g, allergy is a pis. But feed that combines allergy with rec is not pis.
+- spi: seperate patient info. e,g, allergy is a spi. But feed that combines allergy with rec is not spi.
 
 ### Naming
 

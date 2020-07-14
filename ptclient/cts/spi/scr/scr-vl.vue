@@ -96,7 +96,7 @@ export default {
           data: {
             value: 'screening',
             ctAbbr: 'scr',
-            ctToShowInCL: 'pis/scr/scr-l1.vue',
+            ctToShowInCL: 'spi/scr/scr-l1.vue',
             layer: 'view',
           },
         })

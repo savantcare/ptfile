@@ -120,11 +120,11 @@ module.exports = {
                 ],
               },
               {
-                path: "/ptclient/cts/pis/bm/",
+                path: "/ptclient/cts/spi/bm/",
                 title: "Body measurements",
                 children: [
                   {
-                    path: "/ptclient/cts/pis/bm/design/design",
+                    path: "/ptclient/cts/spi/bm/design/design",
                     title: "Design",
                   },
                 ],
@@ -140,11 +140,11 @@ module.exports = {
                 ],
               },
               {
-                path: "/ptclient/cts/pis/dx/",
+                path: "/ptclient/cts/spi/dx/",
                 title: "Diagnosis",
                 children: [
                   {
-                    path: "/ptclient/cts/pis/dx/design/design",
+                    path: "/ptclient/cts/spi/dx/design/design",
                     title: "Design",
                   },
                 ],
@@ -210,15 +210,15 @@ module.exports = {
                 ],
               },
               {
-                path: "/ptclient/cts/pis/rec/",
+                path: "/ptclient/cts/spi/rec/",
                 title: "Recommendations",
               },
               {
-                path: "/ptclient/cts/pis/scr/",
+                path: "/ptclient/cts/spi/scr/",
                 title: "Screening",
                 children: [
                   {
-                    path: "/ptclient/cts/pis/scr/design/design",
+                    path: "/ptclient/cts/spi/scr/design/design",
                     title: "Design",
                   },
                 ],

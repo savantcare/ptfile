@@ -65,7 +65,7 @@
 <script>
 import dbInteraction from '../db-interaction'
 import ormSearchPhraseUiToCT from '@/cts/core/vl-search-box/vuex-orm/searchUIToCT'
-import ormRem from '@/cts/pis/rem/db/vuex-orm/model.js'
+import ormRem from '@/cts/spi/rem/db/vuex-orm/model.js'
 
 export default {
   components: { dbInteraction },
@@ -105,7 +105,7 @@ export default {
         for (let i = startDataRowInidex; i < arResultsFromORM.length && i < endDataRowIndex; i++) {
           obj = {}
           obj.remDesc = arResultsFromORM[i].remDesc
-          // For date format ref: /cts/pis/rem/vl/timeline.vue:53
+          // For date format ref: /cts/spi/rem/vl/timeline.vue:53
           date = new Date(arResultsFromORM[i].ROW_START)
           obj.createdAt = date.toLocaleString('default', { month: 'long' }) + '-' + date.getDate()
           obj.$isDirty = arResultsFromORM[i].$isDirty

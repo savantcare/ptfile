@@ -58,8 +58,8 @@ How to solve this?
   </div>
 </template>
 <script>
-import ormRem from '@/cts/pis/rem/db/vuex-orm/model.js'
-import changeRem from '@/cts/pis/rem/cl/c.vue'
+import ormRem from '@/cts/spi/rem/db/vuex-orm/model.js'
+import changeRem from '@/cts/spi/rem/cl/c.vue'
 export default {
   components: { changeRem },
   data() {
