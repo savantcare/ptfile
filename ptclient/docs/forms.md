@@ -1,10 +1,46 @@
-# Q1) How is the state of data entered in the form managed on client side?
+# Q1) What is the user experience of the forms desired?
+
+1. Give visual feedback to the user that the data was added.
+2. Visual feedback should come close to where the user eyes are. The visual feedback should not be on top right corner.
+3. Immediately allow the user to add one more.
+4. User should be able to add 1 more without taking another action with their mouse.
+5. While the data is being sent to the server allow the user to add one more.
+6. If user does "add more" and now there are 2 add more forms open. The first rem has 5 charecters and 2nd rem has 2 charecters.
+   On clicking submit the 1st should move down and the 2nd should stay up.
+
+# Q2) What are the different possible form states?
+
+### Before hitting submit the possibilities are:
+
+```
+add -> enter 2 charecters -> remove
+                          -> reset form
+                          -> Close form and destroy Ct Local variables.
+      enter 4 charecters  -> remove
+                          -> reset form
+                          -> Close form and destroy Ct Local variables.
+add -> enter 2 charecters -> Add more -> enter 4 charecters -> Submit
+```
+
+### After hitting submit the possibilities are:
+
+onsubmit gets N number of rows.
+Some rows are in state 234 (Created new -> Changed -> Requested save to server)
+Some rows are in state 2345 (Created new -> Changed -> Requested save to server -> form validation errors)
+Incoming may be 2345 since user may hit submit without making changes
+
+Once submit button finishes the possibles states are:
+2345
+23467
+23461
+
+# Q3) How is the state of data entered in the form managed on client side?
 
 vuex orm field: rowStateOfClientSession of type int
 
 e.g. cts/spi/rem/db/vuex-orm/rems:71
 
-# Q2) What are the different possible values for rowStateOfClientSession?
+# Q4) What are the different possible values for rowStateOfClientSession?
 
 0 => Not known
 1 => Got from DB and not changed on client
@@ -28,17 +64,7 @@ C. When a record is changed
 Since temporal DB old is deleted and new is inserted. But from client side the query sent is update
 clientSideState = 121
 
-# Q3) What is the user experience of the forms desired?
-
-1. Give visual feedback to the user that the data was added.
-2. Visual feedback should come close to where the user eyes are. The visual feedback should not be on top right corner.
-3. Immediately allow the user to add one more.
-4. User should be able to add 1 more without taking another action with their mouse.
-5. While the data is being sent to the server allow the user to add one more.
-6. If user does "add more" and now there are 2 add more forms open. The first rem has 5 charecters and 2nd rem has 2 charecters.
-   On clicking submit the 1st should move down and the 2nd should stay up.
-
-# Q4) Should data be loaded from localstorage or state?
+# Q5) Should data be loaded from localstorage or state?
 
       There are 2 possibilities
         Possibility 1: There is no unsaved data
