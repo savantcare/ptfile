@@ -82,7 +82,10 @@ export default {
           */
           date = new Date(arResultsFromORM[i].ROW_START)
           obj.createdAt = date.toLocaleString('default', { month: 'long' }) + '-' + date.getDate()
-          if (arResultsFromORM[i].$isDirty) {
+          if (
+            arResultsFromORM[i].rowStateOfClientSession == 23 ||
+            arResultsFromORM[i].rowStateOfClientSession == 2345
+          ) {
             obj.type = 'warning'
           } else {
             obj.type = ''
