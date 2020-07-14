@@ -58,7 +58,27 @@ export default {
   build: {
     transpile: [/^element-ui/],
     extend(config, ctx) {
+      // set for vscode debugger
       config.devtool = 'source-map'
+      // push new rule in module
+      config.module.rules.push(
+        {
+          // push rule to fix all format error in js and vue file
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/,
+          options: {
+            fix: true,
+          },
+        },
+        {
+          // push rule to specify ignore loader for some format (sql, md, monopic)
+          test: /\.(sql|md|monopic|)$/,
+          exclude: /(node_modules)/,
+          loader: 'ignore-loader',
+        }
+      )
     },
   },
 }
