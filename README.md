@@ -6,3 +6,5 @@
 - Maintain eye contact with patient
   [Get out of the way of patient doctor relationship](https://khn.org/news/death-by-a-thousand-clicks/)
 - Be helpful
+
+jaikalima
