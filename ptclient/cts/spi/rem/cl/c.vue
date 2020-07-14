@@ -167,7 +167,7 @@ export default {
       }
     },
 
-    // Strategy 1 of making state update smarter. Programmer can choose 1 of the 2 stragies by changing Line 9 of this file
+    // state updates are smarter.
     setRemDescInVstOnDelay(pEvent) {
       // Full form: Set reminder in vue state on delay
       if (this.vSaveToStateScheduled) {
@@ -187,13 +187,6 @@ export default {
       this.reminderDescCached = pEvent
     },
 
-    // Strategy 2: Default method of saving state on each key press
-    setRemDescInVstOnKeyPress(pEvent) {
-      this.setRemDescInVst(pEvent)
-      this.reminderDescCached = pEvent
-    },
-
-    // Each of above 2 strategies call this base function
     setRemDescInVst(pEvent) {
       console.log('Inside setRemDesc')
       ormRem.update({
