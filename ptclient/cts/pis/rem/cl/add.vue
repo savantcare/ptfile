@@ -250,7 +250,8 @@ export default {
             console.log('calling api to save data')
 
             // API will return 1 (Success) or 0 (Failure)
-            const status = Math.floor(Math.random() * (1 - 0 + 1)) + 0 // Ref: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+            const status = this.sendDataToServer(arResultsFromORM[i])
+
             console.log(status)
             if (status === 0) {
               ormRem.update({
@@ -282,128 +283,14 @@ export default {
         this.addEmptyRemToUI()
       }
     },
-    async sendDataToServer(formName) {
+    async sendDataToServer(pORMRowArray) {
       /* Should bulk created be used Out of 10 reminders set what if 9 got created successfuly but 1 failed? 
 To keep code simple it was decided by VK on 13th July 2020 that for creasting 10 items we will fire 10 API calls.
 */
 
-      const arResultsFromORM = ormRem
-        .query()
-        .where('rowStateOfClientSession', 23)
-        .orWhere('rowStateOfClientSession', 2)
-        .get()
-      if (arResultsFromORM.length) {
-        console.log('unsaved data found', arResultsFromORM, arResultsFromORM[0].uuid)
-        const arRemsToCreateInDB = []
-        let vblIsValidated = true
-        for (let i = 0; i < arResultsFromORM.length; i++) {
-          console.log('call API', arResultsFromORM[i].uuid)
-          arRemsToCreateInDB.push({
-            id: arResultsFromORM[i].id,
-            uuid: arResultsFromORM[i].uuid,
-            remDesc: arResultsFromORM[i].remDesc,
-            priority: arResultsFromORM[i].priority,
-            isAutoRem: arResultsFromORM[i].isAutoRem,
-            uuidOfRemMadeFor: 'bfe041fa-073b-4223-8c69-0540ee678ff8',
-            recordChangedByUUID: 'bfe041fa-073b-4223-8c69-0540ee678ff8',
-          })
-
-          if (arResultsFromORM[i].remDesc.length < 3) {
-            vblIsValidated = false
-            const elementFound = this.daRem.filter((rem) => {
-              return rem.id === arResultsFromORM[i].id
-            })
-
-            const positionFound = this.daRem.indexOf(elementFound[0])
-            this.daRem[positionFound].validationClass = 'validaionErrorExist'
-            this.daRem[positionFound].isValidationError = true
-          }
-        }
-
-        console.log('Data to send in api', arRemsToCreateInDB)
-        if (!vblIsValidated) {
-          return false
-        }
-
-        try {
-          const response = await fetch(REMINDER_API_URL, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json;charset=utf-8',
-              // Authorization: 'Bearer ' + TOKEN,
-            },
-            body: JSON.stringify({
-              data: arRemsToCreateInDB,
-              patientUUID: 'bfe041fa-073b-4223-8c69-0540ee678ff8',
-            }),
-          })
-          console.log('response=> ', response)
-          if (!response.ok) {
-          } else {
-            arRemsToCreateInDB.forEach((item) => {
-              /* Method 1: Update exisitng record when vuex-orm change flag plugin is used
-                    In this method in July 2020 we were not able to set isDirty to false
-                    Posted bug at: https://github.com/vuex-orm/plugin-change-flags/issues/12 on slack the programmer accepted it as a bug
-                    ormRem.update({
-                        where: item.uuid,
-                        data: {
-                          $isNew: false,
-                          },
-                      })
-
-                      console.log("trying to set isdirty false")
-                      ormRem.update({
-                        data: {
-                          uuid: item.uuid,
-                          '$isDirty': false,
-                        },
-                        preventDirtyFlag: true
-                      }).then(result => {
-                        console.log('update result: ', result)
-                      })
-               */
-
-              /* Method 2: Delete existing and insert from item
-                  console.log(item.$id)
-                  ormRem.delete(item.$id).then((result) => {
-                    console.log('update result: ', result)
-                  })
-                  console.log('item is')
-                  console.log(item)
-
-                  ormRem.insert({
-                    data: {
-                      uuid: item.uuid,
-                      uuidOfRemMadeFor: item.uuidOfRemMadeFor,
-                      remDesc: item.remDesc,
-                      priority: item.priority,
-                      isAutoRem: item.isAutoRem,
-                      rowStateOfClientSession: '2.3.1',
-                      ROW_START: item.ROW_START,
-                      ROW_END: item.ROW_END,
-                    },
-                  })
-
-                */
-
-              // Method 3: State is maintained by rowStateOfClientSession
-              ormRem.update({
-                where: (record) => record.id === item.id,
-                data: { rowStateOfClientSession: '231' },
-              })
-              console.log('ormRem 231 updated', item.id)
-              /* ormRem.update({
-                where: item.$id,
-                data: {
-                  rowStateOfClientSession: 231,
-                },
-              }) */
-            })
-          }
-        } catch (ex) {}
-      } else {
-        console.log('No Unsaved data')
-      }
+      console.log(pORMRowArray)
+      const status = Math.floor(Math.random() * (1 - 0 + 1)) + 0 // Ref: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+      return status
     },
     resetForm(formName) {
       const arResultsFromORM = ormRem
