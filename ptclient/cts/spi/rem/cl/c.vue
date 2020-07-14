@@ -52,8 +52,7 @@ export default {
     cfRowInEditStateOnClient() {
       const arResultsFromORM = ormRem
         .query()
-        .where('rowStateOfClientSession', 2) // New
-        .orWhere('rowStateOfClientSession', 23) // New -> Changed
+        .where('rowStateOfClientSession', 23) // New -> Changed
         .orWhere('rowStateOfClientSession', 2345) // New -> Changed -> Requested save -> form error
         .where((_record, query) => {
           query.where('uuid', this.uuid)
@@ -66,7 +65,7 @@ export default {
       const dataTable = []
 
       // to create timeline the uuid will be same but id will be different.
-      const arResultsFromORM = ormRem.query().where('uuid', this.uuid).get()
+      const arResultsFromORM = ormRem.query().where('uuid', this.uuid).orderBy('id', 'desc').get()
       if (arResultsFromORM.length) {
         let obj = []
         let date = ''
@@ -100,7 +99,11 @@ export default {
     // Goal: If there is no unsaved data then give user a empty form
     console.log('in mounted state')
     const arResultsFromORM = this.cfRowInEditStateOnClient
-    if (!arResultsFromORM.length) this.addEmptyRemToUI()
+    console.log(arResultsFromORM)
+    if (!arResultsFromORM.length) {
+      console.log('adding a new blank record. Since this is temporal DB')
+      this.addEmptyRemToUI()
+    }
   },
   methods: {
     addEmptyRemToUI() {
