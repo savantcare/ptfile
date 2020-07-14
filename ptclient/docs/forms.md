@@ -129,3 +129,21 @@ New record after data is saved on server. rowStateOfClientSession = 23461
                         4. This array needs to be inserted into vuex
                         5. The new vuex needs to be synced with the storage.
         Decision on 8th July 2020 by VK/AG/TJ/SS/RR: Not to use indexDB
+
+# Q7) How to save data to state smartly.
+
+Non smart way is to save data to state on every keystroke.
+Why do we want a smart way to save data?
+So that the system remains responsive.
+There are a lot of listeners on this state and they will update themselves everytime there is a write to the vuexORM/rem
+
+### Strategy 1: Save to state once every 5 key strokes,
+
+        Disadvnatage?
+        If the user types "jai kali" the state will only have "jai k" even if user exits the form after one hour
+
+### Strategy 2: Each time you save to state you store the time
+
+        Ignore next save if 1 second has not passed.
+        Disadvnatage?
+        If the user types "ja" within 1 sec and then exits the state will only have j
