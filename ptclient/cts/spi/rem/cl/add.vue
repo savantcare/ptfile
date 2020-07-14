@@ -212,12 +212,7 @@ export default {
         }
       }
       // if there are no records left then I need to add a empty
-      arResultsFromORM = ormRem
-        .query()
-        .where('rowStateOfClientSession', 2)
-        .orWhere('rowStateOfClientSession', 23)
-        .orWhere('rowStateOfClientSession', 2345)
-        .get()
+      arResultsFromORM = this.cfDataAddedOnClientThisSession
       if (arResultsFromORM.length) {
       } else {
         this.addEmptyRemToUI()
@@ -250,12 +245,7 @@ export default {
     removeSingleRemInAddForm(pRemIDGivenByORM) {
       ormRem.delete(pRemIDGivenByORM)
       // if there are no records left then I need to add a empty
-      const arResultsFromORM = ormRem
-        .query()
-        .where('rowStateOfClientSession', 2)
-        .orWhere('rowStateOfClientSession', 23)
-        .orWhere('rowStateOfClientSession', 2345)
-        .get()
+      const arResultsFromORM = cfDataAddedOnClientThisSession
       if (arResultsFromORM.length) {
       } else {
         this.addEmptyRemToUI()
