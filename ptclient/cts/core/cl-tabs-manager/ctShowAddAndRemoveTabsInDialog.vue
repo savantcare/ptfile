@@ -21,7 +21,9 @@ dialog
 
         Goal: make it easy to read view layer and also show change layer as a seperate layer
           custom-class="multi-tab-dialog"
-          :modal="false"
+          :modal="false" creates issue to CL close functionality by 'Esc' button
+          fixing this by css in line 284
+          :modal="true"
 
         Goal: declutter the screen and at the same time give easy way to close the diaglog. Hence:
           :close-on-click-modal="true"
@@ -44,7 +46,7 @@ dialog
     -->
   <el-dialog
     custom-class="multi-tab-dialog"
-    :modal="false"
+    :modal="true"
     :close-on-click-modal="true"
     :close-on-press-escape="true"
     :show-close="false"
@@ -275,5 +277,11 @@ Q) How to put the shadow?
   right: 0;
   z-index: 999;
   width: auto;
+}
+/*
+Disabled shadow provided by modal=true in line 49
+*/
+.v-modal {
+  background: none;
 }
 </style>
