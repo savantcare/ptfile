@@ -43,7 +43,7 @@ export default {
     return {
       reminderDescCached: '',
       uuid: '',
-      stateForRowID: 0,
+      ORMRowIDForPreviousInvocation: 0,
       vSaveToStateScheduledUsedForSmartUpdatesToState: '',
     }
   },
@@ -141,7 +141,7 @@ export default {
         */
 
       console.log(this.firstParam)
-      if (this.stateForRowID !== this.firstParam) this.reminderDescCached = ''
+      if (this.ORMRowIDForPreviousInvocation !== this.firstParam) this.reminderDescCached = ''
       if (!this.reminderDescCached) {
         // console.log('Going to run query on vuexORM since for this parameter data has never been fetched from vuex-orm')
         return this.getRemDescFromVst()
@@ -154,7 +154,7 @@ export default {
     getRemDescFromVst() {
       // Full form: Get reminder description from view state.
       // console.log('Inside get desc')
-      this.stateForRowID = this.firstParam
+      this.ORMRowIDForPreviousInvocation = this.firstParam
       // When I come here there are 2 possibilities: 1. It is a new row 2. It is a previously edited row
       // Goal: Get the latest data with this UUID. This will take care of both the above cases
       const arResultsFromORM = ormRem.query().where('uuid', this.uuid).orderBy('id', 'desc').get()
