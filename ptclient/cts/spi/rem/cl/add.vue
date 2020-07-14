@@ -2,7 +2,7 @@
   <div>
     <el-form>
       <el-form-item v-for="rem in cfRowsInEditStateOnClient" :key="rem.id">
-        <!-- Prop explaination  Read prop explanation for span=4 on line 18 -->
+        <!-- Prop explaination  Read prop explanation for span=4 on line 19 -->
         <el-col :span="20" :class="rem.validationClass">
           <el-input
             type="textarea"
@@ -17,7 +17,7 @@
           </div>
         </el-col>
         <!-- Prop explaination 
-            Goal: Show the remove button on the right hand side of the input area. Since element.io divides it into 24 columns. we are giving 
+            Goal: Show remove button on the RHS of input area. Since element.io divides it into 24 columns. we are giving 
             20 columns to input and 4 columns to remove button
            -->
         <el-col :span="4">
