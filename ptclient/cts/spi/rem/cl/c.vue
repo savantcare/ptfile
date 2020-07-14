@@ -173,17 +173,7 @@ export default {
         clearTimeout(this.vSaveToStateScheduled)
       }
 
-      /* Method 1 of calling the setRemDescInVst function
-        this.vSaveToStateScheduled = setTimeout(function () {
-          console.log(this)
-          this.setRemDescInVst(pEvent) // here this is not vue but window so this will say setRemDescInVst not found
-        }, 2000)
-        */
-
-      /* Problem of method 1 is solved since this of arrow functions is bound to the this of its enclosing scope in Vue,
-        Inside a traditional function called by setTimeout, however, this refers to the window object
-        Ref: https://stackoverflow.com/questions/38399050/vue-equivalent-of-settimeout */
-
+      /* Ref: https://stackoverflow.com/questions/38399050/vue-equivalent-of-settimeout */
       this.vSaveToStateScheduled = setTimeout(
         function (scope) {
           scope.setRemDescInVst(pEvent)
