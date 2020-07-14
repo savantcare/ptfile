@@ -1,3 +1,4 @@
+<!-- For design see ptclient/docs/forms.md -->
 <template>
   <div>
     <el-form>
@@ -141,7 +142,7 @@ export default {
       console.log(arResultsFromORM)
     },
 
-    onSubmit() {
+    async onSubmit() {
       let arResultsFromORM = ormRem
         .query()
         .where('rowStateOfClientSession', 23)

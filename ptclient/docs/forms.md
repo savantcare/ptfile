@@ -1,12 +1,22 @@
 # Q1) What is the goal of user experience of the forms?
 
 1. Give visual feedback to the user that the data was added.
+   - There are 2 tables below the form:
+     - A. Data added this session: rem/cl/add.vue:46
+     - Uses rem/cl/add.vue:76:cfDataSavedToDBThisSessionSuccessfully()
+     - B. Error: Reminders attempleted but failed to save rem/cl/add.vue:54
+     - Uses rem/cl/add.vue:81:cfDataApiErrorThisSession
 2. Visual feedback should come close to where the user eyes are. The visual feedback should not be on top right corner.
+   - Achived with 2 tables above.
 3. Immediately allow the user to add one more.
+   - rem/cl/add.vue:Onsubmit:145 is async
 4. User should be able to add 1 more without taking another action with their mouse.
+   - Description field has focus using v-on on the div.
 5. While the data is being sent to the server allow the user to add one more.
+   - same as point 3.
 6. If user does "add more" and now there are 2 add more forms open. The first rem has 5 charecters and 2nd rem has 2 charecters.
    On clicking submit the 1st should move down and the 2nd should stay up.
+   - rem/cl/add.vue:Onsubmit:154 calls the api in the else part
 
 # Q2) How is the state of data entered in the form managed on client side?
 
@@ -28,7 +38,7 @@ After 2 if there is success the state goes back to 1
 
 Data is stored with the timeline
 
-# Q4) What are the different possible form states?
+# Q4) What are the different possible user scenarios?
 
 ### Before hitting submit the possibilities are:
 
