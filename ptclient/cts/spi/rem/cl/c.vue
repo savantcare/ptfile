@@ -152,6 +152,7 @@ export default {
     },
 
     getRemDescFromVst() {
+      // Full form: Get reminder description from view state.
       // console.log('Inside get desc')
       this.stateForRowID = this.firstParam
       // When I come here there are 2 possibilities: 1. It is a new row 2. It is a previously edited row
