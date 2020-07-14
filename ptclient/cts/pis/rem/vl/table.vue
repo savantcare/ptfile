@@ -65,7 +65,7 @@
 <script>
 import dbInteraction from '../db-interaction'
 import ormSearchPhraseUiToCT from '@/cts/core/vl-search-box/vuex-orm/searchUIToCT'
-import ormRem from '@/cts/pis/rem/vuex-orm/model.js'
+import ormRem from '@/cts/pis/rem/db/vuex-orm/model.js'
 
 export default {
   components: { dbInteraction },

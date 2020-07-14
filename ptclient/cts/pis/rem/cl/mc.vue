@@ -58,7 +58,7 @@ How to solve this?
   </div>
 </template>
 <script>
-import ormRem from '@/cts/pis/rem/vuex-orm/model.js'
+import ormRem from '@/cts/pis/rem/db/vuex-orm/model.js'
 import changeRem from '@/cts/pis/rem/cl/c.vue'
 export default {
   components: { changeRem },

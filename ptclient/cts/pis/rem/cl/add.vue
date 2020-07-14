@@ -82,7 +82,7 @@
 </template>
 <script>
 import { REMINDER_API_URL } from '../const.js'
-import ormRem from '@/cts/pis/rem/vuex-orm/model.js'
+import ormRem from '@/cts/pis/rem/db/vuex-orm/model.js'
 export default {
   data() {
     return {}
@@ -212,7 +212,7 @@ export default {
           remDesc: '',
           priority: 1,
           isAutoRem: 0,
-          rowStateOfClientSession: 2, // For meaning of diff values read rem/vuex-orm/models.js:71
+          rowStateOfClientSession: 2, // For meaning of diff values read rem/db/vuex-orm/models.js:71
           ROW_START: Math.floor(Date.now() / 1000), // Ref: https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
           ROW_END: 2147483647.999999, // this is unix_timestamp value from mariaDB for ROW_END when a record is created new in MariaDB system versioned table.
         },
@@ -247,7 +247,7 @@ export default {
                 isValidationError: false,
               },
             })
-            console.log('calling api to save data')
+            console.log('calling api to save data', ormRem)
 
             // API will return 1 (Success) or 0 (Failure)
             const status = this.sendDataToServer(arResultsFromORM[i])
@@ -311,6 +311,17 @@ To keep code simple it was decided by VK on 13th July 2020 that for creasting 10
     },
     removeSingleRemInAddForm(pRemIDGivenByORM) {
       ormRem.delete(pRemIDGivenByORM)
+      // if there are no records left then I need to add a empty
+      const arResultsFromORM = ormRem
+        .query()
+        .where('rowStateOfClientSession', 2)
+        .orWhere('rowStateOfClientSession', 23)
+        .orWhere('rowStateOfClientSession', 2345)
+        .get()
+      if (arResultsFromORM.length) {
+      } else {
+        this.addEmptyRemToUI()
+      }
     },
   },
 }
