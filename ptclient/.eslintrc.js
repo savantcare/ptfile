@@ -15,12 +15,14 @@ module.exports = {
     'plugin:nuxt/recommended',
   ],
   plugins: ['prettier'],
-  // add your custom rules here
+  // add custom rules here
   rules: {
-    'no-console': 'off', // stop showing console warning
-    'no-irregular-whitespace': 'off', // stop showing white space warning
-    'vue/no-template-shadow': 'off', // stop showing template shadow warning
-    'vue/no-v-html': 'off', // stop showing v-html warning
-    'vue/require-prop-types': 'off', // stop showing pro types warning
+    /*
+      Q) Why needed? 
+      - before every build eslint loader check all files and return format errors and warnings (eg:  no-console, whitspace ...) in console and console look show dirty.
+      ** this config by passing below mention warning from dev enviroment
+    */
+    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off', // stop showing console warning from development enviroment
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off', // stop showing debugger warning from development enviroment
   },
 }
