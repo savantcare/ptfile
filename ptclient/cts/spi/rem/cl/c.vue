@@ -8,6 +8,7 @@
           :value="getRemDescUsingCache()"
           @input="setRemDescInVstOnDelay($event)"
         ></el-input>
+        <!-- setRemDescInVstOnDelay -> Full form: Set reminder description in view status on delay -->
       </el-form-item>
       <el-form-item>
         <el-button type="primary" size="mini" plain @click="sendDataToServer"
@@ -34,7 +35,7 @@ import { REMINDER_API_URL } from '../const.js'
 import ormRem from '@/cts/spi/rem/db/vuex-orm/rem.js'
 export default {
   /* Why is this called firstParam
-        This Ct is called in a for loop. In the same for loop other Ct are also called. 
+        This Ct is called in a for loop. In the same for loop other Ct are also called.
         So the param name has to be generic and cannot be unique to each Ct
     */
   props: ['firstParam'], // this is the unique row id created by vuex-orm
@@ -48,6 +49,18 @@ export default {
     }
   },
   computed: {
+    cfRowInEditStateOnClient() {
+      const arResultsFromORM = ormRem
+        .query()
+        .where('rowStateOfClientSession', 2) // New
+        .orWhere('rowStateOfClientSession', 23) // New -> Changed
+        .orWhere('rowStateOfClientSession', 2345) // New -> Changed -> Requested save -> form error
+        .where((_record, query) => {
+          query.where('uuid', this.uuid)
+        })
+        .get()
+      return arResultsFromORM
+    },
     cfTimeLineDataAr() {
       //      console.log('inside computed function the UUID is', this.uuid)
       const dataTable = []
@@ -83,7 +96,24 @@ export default {
       return dataTable
     },
   },
+  mounted() {
+    // Goal: If there is no unsaved data then give user a empty form
+    console.log('in mounted state')
+    const arResultsFromORM = this.cfRowInEditStateOnClient
+    if (!arResultsFromORM.length) this.addEmptyRemToUI()
+  },
   methods: {
+    addEmptyRemToUI() {
+      console.log('Add rem called')
+      const arResultsFromORM = ormRem.insert({
+        data: {
+          uuid: this.uuid,
+          rowStateOfClientSession: 2, // For meaning of diff values read rem/db/vuex-orm/rems.js:71
+          ROW_START: Math.floor(Date.now() / 1000), // Ref: https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
+        },
+      })
+      console.log(arResultsFromORM)
+    },
     getRemDescUsingCache() {
       /* Performance analysis
          When C is first clicked and the control comes here. This fn is called twice
@@ -94,7 +124,7 @@ export default {
          It is a default browser behavior. Clicking on the <label> will trigger 2 clicks, one for <label> and one for <input>.
          Ref: https://stackoverflow.com/a/58724163
 
-         This fn is fired once when the property is first defined with undefined value and then is fired twice when a value is assigned to it. 
+         This fn is fired once when the property is first defined with undefined value and then is fired twice when a value is assigned to it.
 
         */
 
