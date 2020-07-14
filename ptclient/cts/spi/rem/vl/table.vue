@@ -83,7 +83,18 @@ export default {
       console.log(
         'cfArOfRemForDisplayInTable called. Whenever ormRem will change this will get called. Even when there are 100 rows in the table when orm rem changes this gets called once'
       )
-      const arResultsFromORM = ormRem.query().where('ROW_END', 2147483647.999999).get()
+      /* Goal: Whenever 'C' icon is clicked to open CL popup a blank row was getting populated in the VL table
+      To fix the problem we are loading only those values which are saved in DB and added the condition checking 
+      on  rowStateOfClientSession */
+      const arResultsFromORM = ormRem
+        .query()
+        .where('ROW_END', 2147483647.999999)
+        .where((_record, query) => {
+          query
+            .where('rowStateOfClientSession', 1) // Data is New and unchanged
+            .orWhere('rowStateOfClientSession', 2346) // Data is New -> Changed on client -> Saved successfully
+        })
+        .get()
 
       /*  Q) Should this function return the array it gets from ORM or modify the array? 
               Option1: Return origianl array
