@@ -142,14 +142,14 @@ export default {
       if (this.stateForRowID !== this.firstParam) this.reminderDescCached = ''
       if (!this.reminderDescCached) {
         // console.log('Going to run query on vuexORM since for this parameter data has never been fetched from vuex-orm')
-        return this.getRemDescFromState()
+        return this.getRemDescFromVst()
       } else {
         console.log('Better perf: Returning without running query on vuexORM')
         return this.reminderDescCached
       }
     },
 
-    getRemDescFromState() {
+    getRemDescFromVst() {
       // console.log('Inside get desc')
       this.stateForRowID = this.firstParam
       // When I come here there are 2 possibilities: 1. It is a new row 2. It is a previously edited row
