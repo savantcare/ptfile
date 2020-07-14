@@ -449,6 +449,49 @@
               </div>
             </el-col>
           </el-row>
+          <el-row>
+            <el-col :span="12">
+              <div class="map-grid-content pharmacy">
+                <el-card class="box-card">
+                  <div class="clearfix header">
+                    <span>Pharmacy</span>
+                  </div>
+                  <div
+                    v-for="(pharmacyInfo, index) in arPharmacyData"
+                    :key="pharmacyInfo.id"
+                    class="map-item-row"
+                    :class="{ 'odd-row': index % 2 === 1, 'even-row': index % 2 === 0 }"
+                    :title="pharmacyInfo.name + ', ' + pharmacyInfo.address"
+                  >
+                    <el-row>
+                      <el-col :span="12">
+                        <div class="truncate-field">{{ pharmacyInfo.name }}</div>
+                      </el-col>
+                      <el-col :span="12">
+                        <div class="truncate-field">{{ pharmacyInfo.address }}</div>
+                      </el-col>
+                    </el-row>
+                  </div>
+                </el-card>
+              </div>
+            </el-col>
+            <el-col :span="12">
+              <div class="map-grid-content documents">
+                <el-card class="box-card">
+                  <div class="clearfix header">
+                    <span>Documents</span>
+                  </div>
+                  <el-tree
+                    class="map-tree-item"
+                    :data="arDocumentsData"
+                    :props="obDocumentsDataTreeProps"
+                    node-key="id"
+                    :default-expanded-keys="[1]"
+                  ></el-tree>
+                </el-card>
+              </div>
+            </el-col>
+          </el-row>
         </div>
       </el-col>
     </el-row>
@@ -913,6 +956,40 @@ export default {
         { id: 3, relationship: 'Other uncle', description: 'Alcoholic and abusive' },
         { id: 4, relationship: 'Other Brother', description: 'Attempted to suicide' },
       ],
+      arPharmacyData: [
+        { id: 1, name: 'Walgreens Pharmacy', address: '11795 West Olympic Boulevard' },
+        { id: 2, name: 'Dummy Pharmacy', address: 'Dummy address' },
+      ],
+      arDocumentsData: [
+        {
+          id: 1,
+          label: 'Folder 1 (Medical Records) ',
+          children: [
+            {
+              label: 'Test report 1.pdf',
+            },
+            {
+              label: 'Test report 2.jpg',
+            },
+          ],
+        },
+        {
+          id: 2,
+          label: 'Folder 2 (Other)',
+          children: [
+            {
+              label: 'Case history.pdf',
+            },
+            {
+              label: 'Old prescriptions.jpg',
+            },
+          ],
+        },
+      ],
+      obDocumentsDataTreeProps: {
+        children: 'children',
+        label: 'label',
+      },
     }
   },
   methods: {
