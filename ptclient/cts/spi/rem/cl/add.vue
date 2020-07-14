@@ -1,11 +1,10 @@
 <template>
   <div>
     <el-form>
-      <el-form-item v-for="rem in cfDataAddedOnClientThisSession" :key="rem.id">
+      <el-form-item v-for="rem in cfRowsInEditStateOnClient" :key="rem.id">
         <!-- Prop explaination 
           Read prop explanation for span=4 on line 18
            -->
-
         <el-col :span="20" :class="rem.validationClass">
           <el-input
             type="textarea"
@@ -19,7 +18,6 @@
             Please enter minimum 3 characters.
           </div>
         </el-col>
-
         <!-- Prop explaination 
             Goal: Show the remove button on the right hand side of the input area. Since element.io divides it into 24 columns. we are giving 
             20 columns to input and 4 columns to remove button
@@ -78,7 +76,7 @@ export default {
     return {}
   },
   computed: {
-    cfDataAddedOnClientThisSession() {
+    cfRowsInEditStateOnClient() {
       const arResultsFromORM = ormRem
         .query()
         .where('rowStateOfClientSession', 2)
@@ -98,7 +96,7 @@ export default {
   },
   mounted() {
     // Goal: When there is unsaved data in the state then load the unsaved data
-    const arResultsFromORM = this.cfDataAddedOnClientThisSession
+    const arResultsFromORM = this.cfRowsInEditStateOnClient
     if (arResultsFromORM.length) {
       console.log('there is unsaved data')
     } else {
@@ -212,7 +210,7 @@ export default {
         }
       }
       // if there are no records left then I need to add a empty
-      arResultsFromORM = this.cfDataAddedOnClientThisSession
+      arResultsFromORM = this.cfRowsInEditStateOnClient
       if (arResultsFromORM.length) {
       } else {
         this.addEmptyRemToUI()
@@ -245,7 +243,7 @@ export default {
     removeSingleRemInAddForm(pRemIDGivenByORM) {
       ormRem.delete(pRemIDGivenByORM)
       // if there are no records left then I need to add a empty
-      const arResultsFromORM = cfDataAddedOnClientThisSession
+      const arResultsFromORM = this.cfRowsInEditStateOnClient
       if (arResultsFromORM.length) {
       } else {
         this.addEmptyRemToUI()
