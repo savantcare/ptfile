@@ -101,7 +101,7 @@ dialog
             :closable="tab.closable"
           >
             <!-- Using https://vuejs.org/v2/guide/components.html#Dynamic-Components -->
-            <component v-bind:is="tab.ctToShow" :firstParam="tab.vstPropsToGiveToCt"></component>
+            <component :is="tab.ctToShow" :first-param="tab.vstPropsToGiveToCt"></component>
           </el-tab-pane>
         </el-tabs>
       </el-col>
@@ -117,7 +117,7 @@ dialog
 import ctSetOfTabs from './ctSetOfTabs'
 
 export default {
-  name: 'CL-Tabs-In-Dialog-Manager',
+  name: 'CLTabsInDialogManager',
   components: {
     ctSetOfTabs,
   },

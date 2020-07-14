@@ -48,12 +48,6 @@ export default {
       ],
     }
   },
-  methods: {
-    handleClose(done) {
-      // console.log('In the handle close function')
-      this.cfDrawerVisibility = false
-    },
-  },
   computed: {
     cfDrawerVisibility: {
       get() {
@@ -66,6 +60,12 @@ export default {
   },
   mounted() {
     // console.log('Drawer ct mounted')
+  },
+  methods: {
+    handleClose(done) {
+      // console.log('In the handle close function')
+      this.cfDrawerVisibility = false
+    },
   },
 }
 </script>

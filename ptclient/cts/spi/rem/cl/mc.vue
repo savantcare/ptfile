@@ -23,7 +23,7 @@ How to solve this?
 -->
 <template>
   <div class="block">
-    <el-carousel arrow="always" trigger="click" @change="slideChanged" v-bind:autoplay="false">
+    <el-carousel arrow="always" trigger="click" :autoplay="false" @change="slideChanged">
       <!-- Reason for v-bind to pass boolean value https://stackoverflow.com/questions/49225002/passing-boolean-vue-prop-value-in-html -->
       <el-carousel-item v-for="slide in getNumOfCarouselSlides" :key="slide">
         <!-- Performance analysis  TODO
@@ -49,7 +49,7 @@ How to solve this?
         <el-row type="flex" :gutter="20">
           <el-col v-for="remID in getArrayOfRemIDsToShowInThisCard" :key="remID">
             <el-card>
-              <changeRem :firstParam="remID"></changeRem>
+              <changeRem :first-param="remID"></changeRem>
             </el-card>
           </el-col>
         </el-row>
@@ -95,6 +95,16 @@ export default {
       }
     },
   },
+  mounted() {
+    console.log('In mounted function')
+    const resultArFromORM = ormRem.query().get()
+    if (resultArFromORM.length) {
+      for (let i = 0; i < resultArFromORM.length; i++) {
+        this.daUniqueIDOfEachRowFromORM.push(resultArFromORM[i].$id)
+      }
+    }
+    console.log(this.daUniqueIDOfEachRowFromORM)
+  },
   methods: {
     slideChanged(newSlideNumber, oldSlideNumber) {
       // This is virtual scroller. This improves performance substantially.
@@ -107,16 +117,6 @@ export default {
         this.diVirtualSlideNumber = this.diVirtualSlideNumber - 1
       }
     },
-  },
-  mounted() {
-    console.log('In mounted function')
-    const resultArFromORM = ormRem.query().get()
-    if (resultArFromORM.length) {
-      for (let i = 0; i < resultArFromORM.length; i++) {
-        this.daUniqueIDOfEachRowFromORM.push(resultArFromORM[i].$id)
-      }
-    }
-    console.log(this.daUniqueIDOfEachRowFromORM)
   },
 }
 </script>

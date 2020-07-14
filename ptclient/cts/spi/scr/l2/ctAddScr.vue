@@ -4,11 +4,11 @@
     <el-row :gutter="12">
       <el-col :span="24">
         <el-card class="box-card" :body-style="{ padding: '3px' }">
-          <el-form :model="screenForm" ref="screenForm" class="demo-dynamic">
+          <el-form ref="screenForm" :model="screenForm" class="demo-dynamic">
             <el-card
-              class="box-card"
               v-for="(domain, index) in screenForm.screenings"
               :key="index"
+              class="box-card"
               style="margin-bottom: 20px;"
             >
               <el-row>
@@ -41,10 +41,10 @@
             </el-card>
 
             <el-form-item>
-              <el-button type="success" @click="submitForm('screenForm')" size="small"
+              <el-button type="success" size="small" @click="submitForm('screenForm')"
                 >Save</el-button
               >
-              <el-button type="primary" @click="addDomain" size="small">Add one more</el-button>
+              <el-button type="primary" size="small" @click="addDomain">Add one more</el-button>
             </el-form-item>
           </el-form>
         </el-card>
@@ -64,6 +64,31 @@ export default {
       screenForm: { screenings: [{ value: '' }] },
       masterScreenList: [],
     }
+  },
+  computed: {
+    getUserId() {
+      return this.$store.state.userId
+    },
+    userScreenList() {
+      return this.$store.state.screening.screeningList
+    },
+    getMasterScreenList() {
+      const masterScreenList = []
+      const dbMasterScreenList = this.$store.state.screening.screenMasterList
+      const currentScreenList = this.$store.state.screening.screeningList
+      dbMasterScreenList.forEach((list) => {
+        if (
+          currentScreenList.filter((item) => item.scientificName === list.scientificName).length ===
+          0
+        ) {
+          masterScreenList.push({
+            value: list.uuid,
+            label: list.scientificName,
+          })
+        }
+      })
+      return masterScreenList
+    },
   },
   mounted() {
     // This is a lifecycle hook. Other lifecycle hooks are created, updated etc. Ref: https://vuejs.org/v2/api/#Options-Lifecycle-Hooks
@@ -125,31 +150,6 @@ export default {
           return false
         }
       })
-    },
-  },
-  computed: {
-    getUserId() {
-      return this.$store.state.userId
-    },
-    userScreenList() {
-      return this.$store.state.screening.screeningList
-    },
-    getMasterScreenList() {
-      const masterScreenList = []
-      const dbMasterScreenList = this.$store.state.screening.screenMasterList
-      const currentScreenList = this.$store.state.screening.screeningList
-      dbMasterScreenList.forEach((list) => {
-        if (
-          currentScreenList.filter((item) => item.scientificName === list.scientificName).length ===
-          0
-        ) {
-          masterScreenList.push({
-            value: list.uuid,
-            label: list.scientificName,
-          })
-        }
-      })
-      return masterScreenList
     },
   },
   /* created: function() {

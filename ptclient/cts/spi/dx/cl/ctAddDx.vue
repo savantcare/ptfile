@@ -5,11 +5,11 @@
       <el-col :span="24">
         <!-- If I make style="border: 0;" then when tab is activated the bottom border of the tab does not go away -->
         <el-card class="box-card">
-          <el-form label-position="top" :model="daDxForm" ref="daDxForm" class="demo-dynamic">
+          <el-form ref="daDxForm" label-position="top" :model="daDxForm" class="demo-dynamic">
             <el-card
-              class="box-card"
               v-for="(diagnosis, index) in daDxForm.diagnosis"
               :key="index"
+              class="box-card"
               style="margin-bottom: 20px;"
             >
               <el-row>
@@ -57,9 +57,9 @@
                 }"
               >
                 <el-date-picker
+                  v-model="diagnosis.when"
                   type="date"
                   placeholder="Pick a date"
-                  v-model="diagnosis.when"
                   style="width: 100%;"
                 >
                 </el-date-picker>
@@ -67,10 +67,10 @@
             </el-card>
 
             <el-form-item>
-              <el-button type="success" @click="submitForm('daDxForm')" size="small"
+              <el-button type="success" size="small" @click="submitForm('daDxForm')"
                 >Save</el-button
               >
-              <el-button type="primary" @click="addDomain" size="small">Add one more</el-button>
+              <el-button type="primary" size="small" @click="addDomain">Add one more</el-button>
             </el-form-item>
           </el-form>
         </el-card>
@@ -135,6 +135,43 @@ export default {
       ],
     }
   },
+  computed: {
+    type() {
+      return this.$store.state.vstObjTabsInCL.goalTabType
+    },
+    updateData() {
+      return this.$store.state.vstObjTabsInCL.goalData
+    },
+    userId() {
+      return this.$store.state.userId
+    },
+  },
+  watch: {
+    updateData() {
+      this.daDxForm = {
+        diagnosis: [
+          {
+            description: this.updateData.description,
+            startDate: this.updateData.startDate,
+            score: this.updateData.score,
+          },
+        ],
+      }
+    },
+  },
+  mounted() {
+    if (this.type === RATE_GOAL) {
+      this.daDxForm = {
+        diagnosis: [
+          {
+            description: this.updateData.description,
+            startDate: this.updateData.startDate,
+            score: this.updateData.score,
+          },
+        ],
+      }
+    }
+  },
   methods: {
     addDomain() {
       this.daDxForm.diagnosis.push({
@@ -197,43 +234,6 @@ export default {
     },
     formatTooltip(val) {
       return val
-    },
-  },
-  computed: {
-    type() {
-      return this.$store.state.vstObjTabsInCL.goalTabType
-    },
-    updateData() {
-      return this.$store.state.vstObjTabsInCL.goalData
-    },
-    userId() {
-      return this.$store.state.userId
-    },
-  },
-  mounted() {
-    if (this.type === RATE_GOAL) {
-      this.daDxForm = {
-        diagnosis: [
-          {
-            description: this.updateData.description,
-            startDate: this.updateData.startDate,
-            score: this.updateData.score,
-          },
-        ],
-      }
-    }
-  },
-  watch: {
-    updateData() {
-      this.daDxForm = {
-        diagnosis: [
-          {
-            description: this.updateData.description,
-            startDate: this.updateData.startDate,
-            score: this.updateData.score,
-          },
-        ],
-      }
     },
   },
 }

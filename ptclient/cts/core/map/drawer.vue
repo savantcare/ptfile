@@ -34,7 +34,7 @@
                     :key="rec.id"
                     class="map-item-row"
                     :class="{ 'odd-row': index % 2 === 1, 'even-row': index % 2 === 0 }"
-                    v-bind:title="rec.label"
+                    :title="rec.label"
                   >
                     {{ rec.label }}
                   </div>
@@ -104,7 +104,7 @@
                     :key="rem.id"
                     class="map-item-row"
                     :class="{ 'odd-row': index % 2 === 1, 'even-row': index % 2 === 0 }"
-                    v-bind:title="rem.label"
+                    :title="rem.label"
                   >
                     {{ rem.label }}
                   </div>
@@ -325,12 +325,6 @@ export default {
       ],
     }
   },
-  methods: {
-    handleClose(done) {
-      // console.log('In the handle close function')
-      this.cfMapDrawerVisibility = false
-    },
-  },
   computed: {
     cfMapDrawerVisibility: {
       get() {
@@ -343,6 +337,12 @@ export default {
   },
   mounted() {
     // console.log('Drawer ct mounted')
+  },
+  methods: {
+    handleClose(done) {
+      // console.log('In the handle close function')
+      this.cfMapDrawerVisibility = false
+    },
   },
 }
 </script>

@@ -23,11 +23,10 @@ import feedSUI from '@/cts/core/feed/search-interfaces'
 import mapSUI from '@/cts/core/map/search-interfaces'
 import clearSUI from '@/cts/core/clear/search-interfaces'
 export default {
+  components: { remSUI, feedSUI, clearSUI, mapSUI },
   data() {
     return { searchKeyword: '' }
   },
-  components: { remSUI, feedSUI, clearSUI, mapSUI },
-  mounted() {},
 
   computed: {
     placeholder() {
@@ -42,6 +41,7 @@ export default {
       }
     },
   },
+  mounted() {},
   methods: {
     mfQuerySearchTerms(pQueryString, pCallBack) {
       // pQueryString empty means user did not enter anything

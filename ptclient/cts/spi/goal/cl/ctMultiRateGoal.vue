@@ -2,21 +2,21 @@
   <el-row :gutter="12">
     <el-carousel :interval="5000" arrow="always" :autoplay="false">
       <el-carousel-item v-for="(goalList, index) in carouselList" :key="`carouse-${index}`">
-        <el-col :span="8" v-for="(goal, index) in goalList" :key="`goal-${index}`">
+        <el-col v-for="(goal, index) in goalList" :key="`goal-${index}`" :span="8">
           <el-card class="box-card" shadow="hover">
-            <el-form label-position="top" ref="form">
+            <el-form ref="form" label-position="top">
               <el-form-item style="font-weight: bold;" label="Description:">
                 <el-input
-                  :span="8"
                   v-model="goal.description"
+                  :span="8"
                   type="textarea"
                   :disabled="true"
                 ></el-input>
               </el-form-item>
               <el-form-item style="font-weight: bold;" label="Score:">
                 <el-slider
-                  :span="8"
                   v-model="goal.score"
+                  :span="8"
                   :format-tooltip="formatTooltip"
                   show-input
                   :max="10"
@@ -25,8 +25,8 @@
               </el-form-item>
               <el-form-item style="font-weight: bold;" label="Date:">
                 <el-date-picker
-                  :span="8"
                   v-model="goal.startDate"
+                  :span="8"
                   type="date"
                   placeholder="Pick a day"
                   :picker-options="pickerOptions"
@@ -35,8 +35,8 @@
               </el-form-item>
 
               <el-form-item>
-                <el-button type="success" @click="onClickSave(goal)" size="small">Save</el-button>
-                <el-button type="danger" @click="onClickDiscontinue(goal)" size="small"
+                <el-button type="success" size="small" @click="onClickSave(goal)">Save</el-button>
+                <el-button type="danger" size="small" @click="onClickDiscontinue(goal)"
                   >Discontinue</el-button
                 >
               </el-form-item>
@@ -88,6 +88,26 @@ export default {
       },
     }
   },
+  computed: {
+    carouselList() {
+      const result = []
+      let temp = []
+      let idx = 0
+      this.daGTableForL2.forEach((item) => {
+        temp.push(item)
+        idx += 1
+        if (idx === 3) {
+          result.push(temp)
+          idx = 0
+          temp = []
+        }
+      })
+      if (idx > 0) {
+        result.push(temp)
+      }
+      return result
+    },
+  },
   methods: {
     async onClickSave(goal) {
       try {
@@ -126,26 +146,6 @@ export default {
     },
     formatTooltip(val) {
       return val
-    },
-  },
-  computed: {
-    carouselList() {
-      const result = []
-      let temp = []
-      let idx = 0
-      this.daGTableForL2.forEach((item) => {
-        temp.push(item)
-        idx += 1
-        if (idx === 3) {
-          result.push(temp)
-          idx = 0
-          temp = []
-        }
-      })
-      if (idx > 0) {
-        result.push(temp)
-      }
-      return result
     },
   },
 }

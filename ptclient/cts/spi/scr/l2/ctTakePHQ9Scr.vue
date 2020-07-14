@@ -1,6 +1,6 @@
 <template>
   <el-row :gutter="12">
-    <el-form label-position="top" ref="form">
+    <el-form ref="form" label-position="top">
       <el-form-item>
         <h4>Patient health questionnaire</h4>
 
@@ -14,25 +14,25 @@
 
           <el-table-column prop="option1" label="Not at all" width="170">
             <template slot-scope="scope">
-              <el-radio :label="0" v-model="scope.row.selectedAnswer"></el-radio>
+              <el-radio v-model="scope.row.selectedAnswer" :label="0"></el-radio>
             </template>
           </el-table-column>
 
           <el-table-column prop="option2" label="Several days" width="170">
             <template slot-scope="scope">
-              <el-radio :label="1" v-model="scope.row.selectedAnswer"></el-radio>
+              <el-radio v-model="scope.row.selectedAnswer" :label="1"></el-radio>
             </template>
           </el-table-column>
 
           <el-table-column prop="option3" label="More than half the days" width="170">
             <template slot-scope="scope">
-              <el-radio :label="2" v-model="scope.row.selectedAnswer"></el-radio>
+              <el-radio v-model="scope.row.selectedAnswer" :label="2"></el-radio>
             </template>
           </el-table-column>
 
           <el-table-column prop="option4" label="Nearly every day" width="170">
             <template slot-scope="scope">
-              <el-radio :label="3" v-model="scope.row.selectedAnswer"></el-radio>
+              <el-radio v-model="scope.row.selectedAnswer" :label="3"></el-radio>
             </template>
           </el-table-column>
         </el-table>
@@ -58,7 +58,7 @@
       </el-form-item>
 
       <el-form-item class="qstn-submit">
-        <el-button type="success" @click="submitForm()" size="small">Submit</el-button>
+        <el-button type="success" size="small" @click="submitForm()">Submit</el-button>
       </el-form-item>
     </el-form>
   </el-row>
@@ -176,6 +176,14 @@ export default {
       },
     }
   },
+  computed: {
+    getUserId() {
+      return this.$store.state.userId
+    },
+    userScreenAnswerDetail() {
+      return this.$store.state.screening.screenPHQ9AnswerDetail
+    },
+  },
   mounted() {
     // This is a lifecycle hook. Other lifecycle hooks are created, updated etc. Ref: https://vuejs.org/v2/api/#Options-Lifecycle-Hooks
 
@@ -246,14 +254,6 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields()
-    },
-  },
-  computed: {
-    getUserId() {
-      return this.$store.state.userId
-    },
-    userScreenAnswerDetail() {
-      return this.$store.state.screening.screenPHQ9AnswerDetail
     },
   },
 }

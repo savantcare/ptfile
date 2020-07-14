@@ -9,10 +9,10 @@
       <div slot="header" class="clearfix">
         <span>Reminders</span>
         <el-button-group style="float: right;">
-          <el-button @click="mfOpenADialog" style="padding: 3px;" type="success" plain>A</el-button>
-          <el-button @click="mfOpenMDialog" style="padding: 3px;" type="primary" plain>M</el-button>
+          <el-button style="padding: 3px;" type="success" plain @click="mfOpenADialog">A</el-button>
+          <el-button style="padding: 3px;" type="primary" plain @click="mfOpenMDialog">M</el-button>
           <el-button style="padding: 3px;" type="warning" plain>D</el-button>
-          <el-button @click="mfOpenXDialog" style="padding: 3px;" type="info" plain>X</el-button>
+          <el-button style="padding: 3px;" type="info" plain @click="mfOpenXDialog">X</el-button>
         </el-button-group>
       </div>
       <!-- explanation of following params:

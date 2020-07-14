@@ -8,12 +8,12 @@
             when go from msvl to csvl the event gets fired.
         Ref: https://codepen.io/intotheprogram/pen/ZjxZdg 
     -->
-  <div v-on:mouseleave="mouseleave">
+  <div @mouseleave="mouseleave">
     <!-- Prop explanation:
         :gutterSize="0"
           This is thickness of the line between left and right panels. This line is used to adjust size of left and right
       -->
-    <Split style="height: 900px; width: 1400px;" :gutterSize="4">
+    <Split style="height: 900px; width: 1400px;" :gutter-size="4">
       <SplitArea :size="75">
         <!--  Q) Who determines the set of cards to show here and also the sequence?
                 The doctor team leader decides it.
@@ -28,7 +28,7 @@
         <ctGVl> </ctGVl><br />
         <ctScrVl> </ctScrVl><br />
       </SplitArea>
-      <SplitArea :size="25" id="csvl">
+      <SplitArea id="csvl" :size="25">
         <!-- Why not use <keep-alive> before el-card ?
             <keep-alive> before the card creates problem since multiple cards then get inside keep alive   
             <keep-alive> is designed for the case where it has one direct child component that is being toggled. 
@@ -39,13 +39,13 @@
             Similar working code:
             https://codesandbox.io/s/github/vuejs/vuejs.org/tree/master/src/v2/examples/vue-20-keep-alive-with-dynamic-components?file=/index.html:296-321
           -->
-        <el-card v-for="card in cfArCards" v-bind:key="card.id">
+        <el-card v-for="card in cfArCards" :key="card.id">
           <!-- Using https://vuejs.org/v2/guide/components.html#Dynamic-Components -->
           <!--  Why not use keep-alive before <component v-bind:is="card.ctToShow"></component> 
                 Sorrounding component with keepAlive does not help. Since previous rendering of rex
                 is not hidden. When user types rex 2 times, rex is being displayed 2 times
             -->
-          <component v-bind:is="card.ctToShow"></component>
+          <component :is="card.ctToShow"></component>
         </el-card>
         <!-- ctVLSearchBox as per glossary is Component View layer search box 
              Top or bottom of the for loop -> determines if search comes at top or bottom of the other cards
@@ -109,6 +109,23 @@ export default {
     ctGVl,
     ctScrVl,
   },
+  data() {
+    return {}
+  },
+  computed: {
+    cfArCards: {
+      get() {
+        return this.$store.state.vstObjCardsInCSOfVL.arCards
+      },
+      set(value) {
+        this.$store.commit('mtfSetArCards', value)
+      },
+    },
+  },
+  mounted() {
+    // when page first loads the L2 tabs are set to not show
+    this.$store.commit('mtfSetTabDialogVisibility', false)
+  },
   methods: {
     log(message) {
       console.log(message)
@@ -124,23 +141,6 @@ export default {
           this.$store.commit('mtfSetFeedDrawerVisibility', true)
         }
       }
-    },
-  },
-  data() {
-    return {}
-  },
-  mounted() {
-    // when page first loads the L2 tabs are set to not show
-    this.$store.commit('mtfSetTabDialogVisibility', false)
-  },
-  computed: {
-    cfArCards: {
-      get() {
-        return this.$store.state.vstObjCardsInCSOfVL.arCards
-      },
-      set(value) {
-        this.$store.commit('mtfSetArCards', value)
-      },
     },
   },
 }

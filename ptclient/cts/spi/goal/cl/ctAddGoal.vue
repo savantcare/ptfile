@@ -4,11 +4,11 @@
     <el-row :gutter="12">
       <el-col :span="24">
         <el-card class="box-card">
-          <el-form label-position="top" :model="daGoalForm" ref="daGoalForm" class="demo-dynamic">
+          <el-form ref="daGoalForm" label-position="top" :model="daGoalForm" class="demo-dynamic">
             <el-card
-              class="box-card"
               v-for="(domain, index) in daGoalForm.goals"
               :key="index"
+              class="box-card"
               style="margin-bottom: 20px;"
             >
               <el-row>
@@ -28,9 +28,9 @@
                 }"
               >
                 <el-input
+                  v-model="domain.description"
                   :span="8"
                   type="textarea"
-                  v-model="domain.description"
                   placeholder="You may enter multi line text"
                   :autosize="{ minRows: 4 }"
                   :autofocus="true"
@@ -49,8 +49,8 @@
                 }"
               >
                 <el-date-picker
-                  :span="8"
                   v-model="domain.startDate"
+                  :span="8"
                   type="date"
                   placeholder="Pick a day"
                   :picker-options="pickerOptions"
@@ -74,10 +74,10 @@
             </el-card>
 
             <el-form-item>
-              <el-button type="success" @click="submitForm('daGoalForm')" size="small"
+              <el-button type="success" size="small" @click="submitForm('daGoalForm')"
                 >Save</el-button
               >
-              <el-button type="primary" @click="addDomain" size="small">Add one more</el-button>
+              <el-button type="primary" size="small" @click="addDomain">Add one more</el-button>
             </el-form-item>
           </el-form>
         </el-card>
@@ -124,6 +124,43 @@ export default {
           },
         ],
       },
+    }
+  },
+  computed: {
+    type() {
+      return this.$store.state.vstObjTabsInCL.goalTabType
+    },
+    updateData() {
+      return this.$store.state.vstObjTabsInCL.goalData
+    },
+    userId() {
+      return this.$store.state.userId
+    },
+  },
+  watch: {
+    updateData() {
+      this.daGoalForm = {
+        goals: [
+          {
+            description: this.updateData.description,
+            startDate: this.updateData.startDate,
+            score: this.updateData.score,
+          },
+        ],
+      }
+    },
+  },
+  mounted() {
+    if (this.type === RATE_GOAL) {
+      this.daGoalForm = {
+        goals: [
+          {
+            description: this.updateData.description,
+            startDate: this.updateData.startDate,
+            score: this.updateData.score,
+          },
+        ],
+      }
     }
   },
   methods: {
@@ -182,43 +219,6 @@ export default {
     },
     formatTooltip(val) {
       return val
-    },
-  },
-  computed: {
-    type() {
-      return this.$store.state.vstObjTabsInCL.goalTabType
-    },
-    updateData() {
-      return this.$store.state.vstObjTabsInCL.goalData
-    },
-    userId() {
-      return this.$store.state.userId
-    },
-  },
-  mounted() {
-    if (this.type === RATE_GOAL) {
-      this.daGoalForm = {
-        goals: [
-          {
-            description: this.updateData.description,
-            startDate: this.updateData.startDate,
-            score: this.updateData.score,
-          },
-        ],
-      }
-    }
-  },
-  watch: {
-    updateData() {
-      this.daGoalForm = {
-        goals: [
-          {
-            description: this.updateData.description,
-            startDate: this.updateData.startDate,
-            score: this.updateData.score,
-          },
-        ],
-      }
     },
   },
 }

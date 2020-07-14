@@ -10,7 +10,7 @@
           <el-button style="padding: 3px;" type="info" plain>X</el-button>
         </el-button-group>
       </div>
-      <el-table :data="daGTable" style="width: 100%;" :showHeader="false">
+      <el-table :data="daGTable" style="width: 100%;" :show-header="false">
         <el-table-column prop="description" label="Description" width="180"> </el-table-column>
         <el-table-column prop="score" label="Score" width="180"> </el-table-column>
       </el-table>

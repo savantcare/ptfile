@@ -25,8 +25,8 @@
           <el-button
             plain
             type="warning"
-            @click="removeSingleRemInAddForm(rem.id)"
             style="float: right;"
+            @click="removeSingleRemInAddForm(rem.id)"
             >Remove</el-button
           >
         </el-col>
