@@ -8,7 +8,7 @@
           :value="getRemDescUsingCache()"
           @input="setRemDescInVstOnDelay($event)"
         ></el-input>
-        <!-- setRemDescInVstOnDelay -> Full form: Set reminder description in view status on delay -->
+        <!-- setRemDescInVstOnDelay -> Full form: Set reminder description in view state on delay -->
       </el-form-item>
       <el-form-item>
         <el-button type="primary" size="mini" plain @click="sendDataToServer"
@@ -41,7 +41,6 @@ export default {
   props: ['firstParam'], // this is the unique row id created by vuex-orm
   data() {
     return {
-      keystrokeCount: 0,
       reminderDescCached: '',
       uuid: '',
       stateForRowID: 0,
@@ -165,7 +164,7 @@ export default {
       }
     },
 
-    // Strategy 1 of making state update smarter. Programmer can choose 1 of the 3 stragies by changing Line 9 of this file
+    // Strategy 1 of making state update smarter. Programmer can choose 1 of the 2 stragies by changing Line 9 of this file
     setRemDescInVstOnDelay(pEvent) {
       // Full form: Set reminder in vue state on delay
       if (this.vSaveToStateScheduled) {
@@ -185,29 +184,13 @@ export default {
       this.reminderDescCached = pEvent
     },
 
-    // Strategy 2 of making state update smarter
-    setRemDescInVstOn5KeyPress(pEvent) {
-      if (this.keystrokeCount === 0) {
-        // console.log('saving to state')
-        this.setRemDescInVst(pEvent)
-        this.keystrokeCount++
-      } else {
-        // console.log('Better perf: Not saving to state')
-        this.keystrokeCount++
-        if (this.keystrokeCount === 5) {
-          this.keystrokeCount = 0
-        }
-      }
-      this.reminderDescCached = pEvent
-    },
-
-    // Strategy 3: Default method of saving state on each key press
+    // Strategy 2: Default method of saving state on each key press
     setRemDescInVstOnKeyPress(pEvent) {
       this.setRemDescInVst(pEvent)
       this.reminderDescCached = pEvent
     },
 
-    // Each of above 3 strategies call this base function
+    // Each of above 2 strategies call this base function
     setRemDescInVst(pEvent) {
       console.log('Inside setRemDesc')
       ormRem.update({
