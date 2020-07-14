@@ -8,7 +8,7 @@
           :value="getRemDescUsingCache()"
           @input="setRemDescInVstOnDelay($event)"
         ></el-input>
-        <!-- setRemDescInVstOnDelay -> Full form: Set reminder description in view status on delay -->
+        <!-- setRemDescInVstOnDelay -> Full form: Set reminder description in view state on delay -->
       </el-form-item>
       <el-form-item>
         <el-button type="primary" size="mini" plain @click="sendDataToServer"
@@ -41,11 +41,10 @@ export default {
   props: ['firstParam'], // this is the unique row id created by vuex-orm
   data() {
     return {
-      keystrokeCount: 0,
       reminderDescCached: '',
       uuid: '',
-      stateForRowID: 0,
-      vSaveToStateScheduled: '',
+      ORMRowIDForPreviousInvocation: 0,
+      vSaveToStateScheduledUsedForSmartUpdatesToState: '',
     }
   },
   computed: {
@@ -66,6 +65,7 @@ export default {
 
       // to create timeline the uuid will be same but id will be different.
       const arResultsFromORM = ormRem.query().where('uuid', this.uuid).orderBy('id', 'desc').get()
+      console.log('Time line if for uuid', this.uuid)
       if (arResultsFromORM.length) {
         let obj = []
         let date = ''
@@ -82,7 +82,10 @@ export default {
           */
           date = new Date(arResultsFromORM[i].ROW_START)
           obj.createdAt = date.toLocaleString('default', { month: 'long' }) + '-' + date.getDate()
-          if (arResultsFromORM[i].$isDirty) {
+          if (
+            arResultsFromORM[i].rowStateOfClientSession === 23 ||
+            arResultsFromORM[i].rowStateOfClientSession === 2345
+          ) {
             obj.type = 'warning'
           } else {
             obj.type = ''
@@ -98,7 +101,9 @@ export default {
   mounted() {
     // Goal: If there is no unsaved data then give user a empty form
     console.log('in mounted state')
-    const arResultsFromORM = this.cfRowInEditStateOnClient
+    let arResultsFromORM = ormRem.find(this.firstParam)
+    this.uuid = arResultsFromORM.uuid
+    arResultsFromORM = this.cfRowInEditStateOnClient
     console.log(arResultsFromORM)
     if (!arResultsFromORM.length) {
       console.log('adding a new blank record. Since this is temporal DB')
@@ -136,48 +141,43 @@ export default {
         */
 
       console.log(this.firstParam)
-      if (this.stateForRowID !== this.firstParam) this.reminderDescCached = ''
+      if (this.ORMRowIDForPreviousInvocation !== this.firstParam) this.reminderDescCached = ''
       if (!this.reminderDescCached) {
         // console.log('Going to run query on vuexORM since for this parameter data has never been fetched from vuex-orm')
-        return this.getRemDescFromState()
+        return this.getRemDescFromVst()
       } else {
         console.log('Better perf: Returning without running query on vuexORM')
         return this.reminderDescCached
       }
     },
 
-    getRemDescFromState() {
+    getRemDescFromVst() {
+      // Full form: Get reminder description from view state.
       // console.log('Inside get desc')
-      this.stateForRowID = this.firstParam
-      const arResultsFromORM = ormRem.find(this.firstParam)
-      if (arResultsFromORM) {
+      this.ORMRowIDForPreviousInvocation = this.firstParam
+      // When I come here there are 2 possibilities: 1. It is a new row 2. It is a previously edited row
+      // Goal: Get the latest data with this UUID. This will take care of both the above cases
+      const arResultsFromORM = ormRem.query().where('uuid', this.uuid).orderBy('id', 'desc').get()
+      console.log(arResultsFromORM, this.uuid)
+      if (arResultsFromORM.length > 0) {
         // console.log(arResultsFromORM)
-        this.uuid = arResultsFromORM.uuid
-        return arResultsFromORM.remDesc
+        this.newRowIDfromORM = arResultsFromORM[0].id
+        return arResultsFromORM[0].remDesc
       } else {
-        return ''
+        return 'ERROR: This is not possible'
       }
     },
 
+    // state updates are smarter.
     setRemDescInVstOnDelay(pEvent) {
       // Full form: Set reminder in vue state on delay
-      if (this.vSaveToStateScheduled) {
+      if (this.vSaveToStateScheduledUsedForSmartUpdatesToState) {
         console.log('clearing timeout')
-        clearTimeout(this.vSaveToStateScheduled)
+        clearTimeout(this.vSaveToStateScheduledUsedForSmartUpdatesToState)
       }
 
-      /* Method 1 of calling the setRemDescInVst function
-        this.vSaveToStateScheduled = setTimeout(function () {
-          console.log(this)
-          this.setRemDescInVst(pEvent) // here this is not vue but window so this will say setRemDescInVst not found
-        }, 2000)
-        */
-
-      /* Problem of method 1 is solved since this of arrow functions is bound to the this of its enclosing scope in Vue,
-        Inside a traditional function called by setTimeout, however, this refers to the window object
-        Ref: https://stackoverflow.com/questions/38399050/vue-equivalent-of-settimeout */
-
-      this.vSaveToStateScheduled = setTimeout(
+      /* Ref: https://stackoverflow.com/questions/38399050/vue-equivalent-of-settimeout */
+      this.vSaveToStateScheduledUsedForSmartUpdatesToState = setTimeout(
         function (scope) {
           scope.setRemDescInVst(pEvent)
         },
@@ -188,32 +188,13 @@ export default {
       this.reminderDescCached = pEvent
     },
 
-    setRemDescInVstOn5KeyPress(pEvent) {
-      if (this.keystrokeCount === 0) {
-        // console.log('saving to state')
-        this.setRemDescInVst(pEvent)
-        this.keystrokeCount++
-      } else {
-        // console.log('Better perf: Not saving to state')
-        this.keystrokeCount++
-        if (this.keystrokeCount === 5) {
-          this.keystrokeCount = 0
-        }
-      }
-      this.reminderDescCached = pEvent
-    },
-
-    setRemDescInVstOnKeyPress(pEvent) {
-      this.setRemDescInVst(pEvent)
-      this.reminderDescCached = pEvent
-    },
-
     setRemDescInVst(pEvent) {
       console.log('Inside setRemDesc')
       ormRem.update({
-        where: this.firstParam,
+        where: this.newRowIDfromORM,
         data: {
           remDesc: pEvent,
+          rowStateOfClientSession: 23,
         },
       })
     },

@@ -204,7 +204,7 @@ export default {
       pORMRowArray.uuidOfRemMadeFor = 'bfe041fa-073b-4223-8c69-0540ee678ff8' // This is the patient ID for whom the reminder is added
       pORMRowArray.recordChangedByUUID = 'bua674fa-073b-4223-8c69-0540ee786kj8' // This is the logged in user ID for who added the reminder
       try {
-        const response = await fetch(REMINDER_API_URL, {
+        const response = fetch(REMINDER_API_URL, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json;charset=utf-8',
