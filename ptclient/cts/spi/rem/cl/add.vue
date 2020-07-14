@@ -82,7 +82,7 @@
 </template>
 <script>
 import { REMINDER_API_URL } from '../const.js'
-import ormRem from '@/cts/spi/rem/db/vuex-orm/model.js'
+import ormRem from '@/cts/spi/rem/db/vuex-orm/rem.js'
 export default {
   data() {
     return {}
@@ -212,7 +212,7 @@ export default {
           remDesc: '',
           priority: 1,
           isAutoRem: 0,
-          rowStateOfClientSession: 2, // For meaning of diff values read rem/db/vuex-orm/models.js:71
+          rowStateOfClientSession: 2, // For meaning of diff values read rem/db/vuex-orm/rems.js:71
           ROW_START: Math.floor(Date.now() / 1000), // Ref: https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
           ROW_END: 2147483647.999999, // this is unix_timestamp value from mariaDB for ROW_END when a record is created new in MariaDB system versioned table.
         },
@@ -283,11 +283,9 @@ export default {
         this.addEmptyRemToUI()
       }
     },
-    async sendDataToServer(pORMRowArray) {
-      /* Should bulk created be used Out of 10 reminders set what if 9 got created successfuly but 1 failed? 
-To keep code simple it was decided by VK on 13th July 2020 that for creasting 10 items we will fire 10 API calls.
-*/
-
+    sendDataToServer(pORMRowArray) {
+      // Should bulk created be used Out of 10 reminders set what if 9 got created successfuly but 1 failed?
+      // To keep code simple it was decided by VK on 13th July 2020 that for creasting 10 items we will fire 10 API calls.
       console.log(pORMRowArray, REMINDER_API_URL)
       const status = Math.floor(Math.random() * (1 - 0 + 1)) + 0 // Ref: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
       return status

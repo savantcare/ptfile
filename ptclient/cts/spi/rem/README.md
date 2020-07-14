@@ -4,7 +4,7 @@
 
 ## Option 2: vuex-orm
 
-Positive:
+Positive of saving data in vuex-orm
 
     1. It is state hence it will survice even if user clicks on cross and that removes the tab and hence component local variable is lost
 
@@ -26,20 +26,3 @@ Positive:
 
 How to do it?
 https://stackoverflow.com/questions/57218760/two-way-data-binding-with-vuex-orm
-
-Working features:
-
-1. Add more
-2. Tab closed with X this looses values of all local variables
-   When rem is mounted again, in the mounted() look for records that have isNew set
-3. Survive page refresh since state is blank when page is refreshed. Use localforage
-   -> Decided not to do. For reasons read rem/cl/add.vue
-4. sync id between server and client so that on sending to server I do not need to update the state with the UUID returned from server.
-5. Reset form
-6. Out of 3 add more doctor removes one of them
-
-Todo:
-
-1. Call the post API in the for loop. On success remove isDirty and isNew
-2. Form validation
-3. Form with unsaved data should get orange border.
