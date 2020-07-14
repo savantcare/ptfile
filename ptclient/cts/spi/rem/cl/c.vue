@@ -44,7 +44,7 @@ export default {
       reminderDescCached: '',
       uuid: '',
       stateForRowID: 0,
-      vSaveToStateScheduled: '',
+      vSaveToStateScheduledUsedForSmartUpdatesToState: '',
     }
   },
   computed: {
@@ -170,13 +170,13 @@ export default {
     // state updates are smarter.
     setRemDescInVstOnDelay(pEvent) {
       // Full form: Set reminder in vue state on delay
-      if (this.vSaveToStateScheduled) {
+      if (this.vSaveToStateScheduledUsedForSmartUpdatesToState) {
         console.log('clearing timeout')
-        clearTimeout(this.vSaveToStateScheduled)
+        clearTimeout(this.vSaveToStateScheduledUsedForSmartUpdatesToState)
       }
 
       /* Ref: https://stackoverflow.com/questions/38399050/vue-equivalent-of-settimeout */
-      this.vSaveToStateScheduled = setTimeout(
+      this.vSaveToStateScheduledUsedForSmartUpdatesToState = setTimeout(
         function (scope) {
           scope.setRemDescInVst(pEvent)
         },
