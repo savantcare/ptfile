@@ -220,6 +220,7 @@ export default {
         where: this.newRowIDfromORM,
         data: {
           remDesc: pEvent,
+          rowStateOfClientSession: 23,
         },
       })
     },
