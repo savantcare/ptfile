@@ -2,9 +2,7 @@
   <div>
     <el-form>
       <el-form-item v-for="rem in cfRowsInEditStateOnClient" :key="rem.id">
-        <!-- Prop explaination 
-          Read prop explanation for span=4 on line 18
-           -->
+        <!-- Prop explaination  Read prop explanation for span=4 on line 18 -->
         <el-col :span="20" :class="rem.validationClass">
           <el-input
             type="textarea"
@@ -38,17 +36,7 @@
         <el-button type="warning" plain @click="resetForm">Reset form</el-button>
       </el-form-item>
     </el-form>
-    <!-- In a for loop show all reminders that have orm.RowStateOfClientSession = 231 
-          The table "Reminders added this session" only comes if there is atleast a single row
-
-          The row color will be orange if the number is 234 or 235
-          the row color will be white if the number is 231
-
-          As soon submit is pressed  RowStateOfClientSession = 24
-          when the api succeed RowStateOfClientSession = 241
-              Why not set RowStateOfClientSession = 1 when api succeds?
-                For the end user it is a matter of comfort to see the previous data in the table.
-      -->
+    <!-- Goal: Show data saved successfuly this session -->
     <el-table
       v-if="cfDataSavedToDBThisSessionSuccessfully.length > 0"
       :data="cfDataSavedToDBThisSessionSuccessfully"
@@ -56,8 +44,7 @@
     >
       <el-table-column prop="remDesc" label="Reminders added this session"> </el-table-column>
     </el-table>
-
-    <!-- Showing errors -->
+    <!-- Goal: Show data of API that failed -->
     <el-table
       v-if="cfDataApiErrorThisSession.length > 0"
       :data="cfDataApiErrorThisSession"
@@ -99,12 +86,7 @@ export default {
   mounted() {
     // Goal: If there is no unsaved data then give user a empty form
     const arResultsFromORM = this.cfRowsInEditStateOnClient
-    if (arResultsFromORM.length) {
-      // console.log('there is unsaved data')
-    } else {
-      // console.log('No Unsaved data')
-      this.addEmptyRemToUI()
-    }
+    if (!arResultsFromORM.length) this.addEmptyRemToUI()
   },
   methods: {
     /* Why are getDesc and setDesc not a single computed function called desc with a setter and a getter
