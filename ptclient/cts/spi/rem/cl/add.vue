@@ -122,6 +122,7 @@ export default {
       console.log(pRemIDGivenByORM)
       const arResultsFromORM = ormRem.find(pRemIDGivenByORM)
       if (arResultsFromORM && arResultsFromORM.rowStateOfClientSession === 23) {
+        // New -> Changed
         return 'unsaved-data'
       } else {
         return ''
@@ -145,8 +146,8 @@ export default {
     async onSubmit() {
       let arResultsFromORM = ormRem
         .query()
-        .where('rowStateOfClientSession', 23)
-        .orWhere('rowStateOfClientSession', 2345)
+        .where('rowStateOfClientSession', 23) // New -> Changed
+        .orWhere('rowStateOfClientSession', 2345) // New -> Changed -> Requested save -> form error
         .get()
       if (arResultsFromORM.length) {
         console.log('unsaved data found', arResultsFromORM)
@@ -156,7 +157,7 @@ export default {
               where: (record) => record.id === arResultsFromORM[i].id,
               data: {
                 validationClass: 'validaionErrorExist',
-                rowStateOfClientSession: '2345',
+                rowStateOfClientSession: '2345', // New -> Changed -> Requested save -> form error
                 isValidationError: true,
               },
             })
@@ -165,7 +166,7 @@ export default {
               where: (record) => record.id === arResultsFromORM[i].id,
               data: {
                 validationClass: '',
-                rowStateOfClientSession: '2346',
+                rowStateOfClientSession: '2346', // New -> Changed -> Requested save -> Send to server
                 isValidationError: false,
               },
             })
@@ -179,14 +180,14 @@ export default {
               ormRem.update({
                 where: (record) => record.id === arResultsFromORM[i].id,
                 data: {
-                  rowStateOfClientSession: '23467',
+                  rowStateOfClientSession: '23467', // New -> Changed -> Requested save -> Send to server -> API fail
                 },
               })
             } else {
               ormRem.update({
                 where: (record) => record.id === arResultsFromORM[i].id,
                 data: {
-                  rowStateOfClientSession: '23461',
+                  rowStateOfClientSession: '23461', // New -> Changed -> Requested save -> Send to server -> API Success
                 },
               })
             }

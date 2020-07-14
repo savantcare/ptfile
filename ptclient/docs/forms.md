@@ -64,20 +64,27 @@ Once submit button finishes the possibles states are:
 23467
 23461
 
-- Why not set RowStateOfClientSession = 1 when api succeds?
-  - For the end user it is a matter of comfort to see the previous data in the table.
-
 New record changed on client but not saved = 23
+
+- See rem/cl/add.vue:114
 
 New record after data is saved on server. rowStateOfClientSession = 23461
 
-B. Record is discontinued. Query sent is update. Value will be rowStateOfClientSession =
+- See rem/cl/add.vue:189
 
-C. When a record is changed
-Since temporal DB old is deleted and new is inserted. But from client side the query sent is update
-rowStateOfClientSession =
+# Q5) Why not set RowStateOfClientSession = 1 when api succeds?
 
-# Q5) Should data be loaded from localstorage or state?
+- For the end user it is a matter of comfort to see the previous data in the table.
+
+# Q6) How is change and discontinued handle?
+
+1. Record is discontinued. Query sent is update. Value will be rowStateOfClientSession =
+
+2. When a record is changed
+   Since temporal DB old is deleted and new is inserted. But from client side the query sent is update
+   rowStateOfClientSession =
+
+# Q7) Should data be loaded from localstorage or state?
 
       There are 2 possibilities
         Possibility 1: There is no unsaved data
