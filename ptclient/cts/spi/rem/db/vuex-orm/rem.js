@@ -60,15 +60,13 @@ export default class reminders extends Model {
       id: this.uid(() => intUniqueID()), // if this is not set then update based on primary key will not work
       uuid: this.uid(() => uuidv1()),
       uuidOfRemMadeFor: this.string(null),
-      remDesc: this.string(null),
+      remDesc: this.string(''),
       notes: this.string(null),
       priority: this.number(0),
       isAutoRem: this.number(0),
       recordChangedByUUID: this.string(null),
       recordChangedFromIPAddress: this.string(null),
       recordChangedFromSection: this.string(null),
-
-      rowStateOfClientSession: this.number(1), // Details read: /ptclient/docs/forms.md
 
       /* Should ROW_START and ROW_END be string or numnber?
         vuex-orm does not have a native type called Date. The native data types are at: https://vuex-orm.org/guide/model/defining-models.html#generic-type
@@ -91,11 +89,12 @@ export default class reminders extends Model {
          */
 
       ROW_START: this.number(0),
-      ROW_END: this.number(0),
+      ROW_END: this.number(2147483647.999999), // this is unix_timestamp value from mariaDB for ROW_END when a record is created new in MariaDB system versioned table.
 
       // the following fields only exist on client
       validationClass: this.string(''),
       isValidationError: this.boolean(false),
+      rowStateOfClientSession: this.number(1), // Details read: /ptclient/docs/forms.md
     }
   }
 }

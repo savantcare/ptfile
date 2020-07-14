@@ -132,12 +132,8 @@ export default {
       console.log('Add rem called')
       const arResultsFromORM = ormRem.insert({
         data: {
-          remDesc: '',
-          priority: 1,
-          isAutoRem: 0,
           rowStateOfClientSession: 2, // For meaning of diff values read rem/db/vuex-orm/rems.js:71
           ROW_START: Math.floor(Date.now() / 1000), // Ref: https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
-          ROW_END: 2147483647.999999, // this is unix_timestamp value from mariaDB for ROW_END when a record is created new in MariaDB system versioned table.
         },
       })
       console.log(arResultsFromORM)
@@ -173,7 +169,7 @@ export default {
             console.log('calling api to save data', ormRem)
 
             // API will return 1 (Success) or 0 (Failure)
-            const status = this.sendDataToServer(arResultsFromORM[i])
+            const status = await this.sendDataToServer(arResultsFromORM[i])
 
             console.log(status)
             if (status === 0) {
