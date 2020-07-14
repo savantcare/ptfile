@@ -66,6 +66,7 @@ export default {
 
       // to create timeline the uuid will be same but id will be different.
       const arResultsFromORM = ormRem.query().where('uuid', this.uuid).orderBy('id', 'desc').get()
+      console.log('Time line if for uuid', this.uuid)
       if (arResultsFromORM.length) {
         let obj = []
         let date = ''
@@ -98,7 +99,9 @@ export default {
   mounted() {
     // Goal: If there is no unsaved data then give user a empty form
     console.log('in mounted state')
-    const arResultsFromORM = this.cfRowInEditStateOnClient
+    let arResultsFromORM = ormRem.find(this.firstParam)
+    this.uuid = arResultsFromORM.uuid
+    arResultsFromORM = this.cfRowInEditStateOnClient
     console.log(arResultsFromORM)
     if (!arResultsFromORM.length) {
       console.log('adding a new blank record. Since this is temporal DB')
@@ -149,13 +152,16 @@ export default {
     getRemDescFromState() {
       // console.log('Inside get desc')
       this.stateForRowID = this.firstParam
-      const arResultsFromORM = ormRem.find(this.firstParam)
-      if (arResultsFromORM) {
+      // When I come here there are 2 possibilities: 1. It is a new row 2. It is a previously edited row
+      // Goal: Get the latest data with this UUID. This will take care of both the above cases
+      const arResultsFromORM = ormRem.query().where('uuid', this.uuid).orderBy('id', 'desc').get()
+      console.log(arResultsFromORM, this.uuid)
+      if (arResultsFromORM.length > 0) {
         // console.log(arResultsFromORM)
-        this.uuid = arResultsFromORM.uuid
-        return arResultsFromORM.remDesc
+        this.newRowIDfromORM = arResultsFromORM[0].id
+        return arResultsFromORM[0].remDesc
       } else {
-        return ''
+        return 'ERROR: This is not possible'
       }
     },
 
