@@ -159,21 +159,6 @@ export default {
       }
     },
 
-    /* Goal: Save to state smartly instead of every keystroke
-        Why?
-        So that the system remains responsive.
-        There are a lot of listeners on this state and they will update themselves everytime there is a write to the vuexORM/rem
-
-        Strategy 1: Save to state once every 5 key strokes,
-        Disadvnatage?
-        If the user types "jai kali" the state will only have "jai k" even if user exits the form after one hour
-
-        Strategy 2: Each time you save to state you store the time
-        Ignore next save if 1 second has not passed.
-        Disadvnatage?
-        If the user types "ja" within 1 sec and then exits the state will only have j
-      */
-
     setRemDescInVstOnDelay(pEvent) {
       // Full form: Set reminder in vue state on delay
       if (this.vSaveToStateScheduled) {
