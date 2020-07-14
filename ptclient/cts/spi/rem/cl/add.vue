@@ -162,7 +162,7 @@ export default {
       let arResultsFromORM = ormRem
         .query()
         .where('rowStateOfClientSession', 23)
-        .orWhere('rowStateOfClientSession', 2)
+        .orWhere('rowStateOfClientSession', 2345)
         .get()
       if (arResultsFromORM.length) {
         console.log('unsaved data found', arResultsFromORM)
@@ -224,11 +224,7 @@ export default {
       return status
     },
     resetForm(formName) {
-      const arResultsFromORM = ormRem
-        .query()
-        .where('rowStateOfClientSession', 2)
-        .orWhere('rowStateOfClientSession', 23)
-        .get()
+      const arResultsFromORM = this.cfRowsInEditStateOnClient
       if (arResultsFromORM.length) {
         console.log('unsaved data found', arResultsFromORM)
         for (let i = 0; i < arResultsFromORM.length; i++) {
