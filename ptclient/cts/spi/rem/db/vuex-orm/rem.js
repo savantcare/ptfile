@@ -60,7 +60,7 @@ export default class reminders extends Model {
       id: this.uid(() => intUniqueID()), // if this is not set then update based on primary key will not work
       uuid: this.uid(() => uuidv1()),
       uuidOfRemMadeFor: this.string(null),
-      remDesc: this.string(null), // TODO: Change this to remDesc. In DB this needs to be textArea
+      remDesc: this.string(null),
       notes: this.string(null),
       priority: this.number(0),
       isAutoRem: this.number(0),
