@@ -79,29 +79,30 @@ export default {
     cfRowsInEditStateOnClient() {
       const arResultsFromORM = ormRem
         .query()
-        .where('rowStateOfClientSession', 2)
-        .orWhere('rowStateOfClientSession', 23)
-        .orWhere('rowStateOfClientSession', 2345)
+        .where('rowStateOfClientSession', 2) // New
+        .orWhere('rowStateOfClientSession', 23) // New -> Changed
+        .orWhere('rowStateOfClientSession', 2345) // New -> Changed -> Requested save -> form error
         .get()
       return arResultsFromORM
     },
     cfDataSavedToDBThisSessionSuccessfully() {
+      // New -> Changed -> Requested save -> Sent to server -> Success
       const arResultsFromORM = ormRem.query().where('rowStateOfClientSession', 23461).get()
       return arResultsFromORM
     },
     cfDataApiErrorThisSession() {
+      // New -> Changed -> Requested save -> Sent to server -> Failure
       const arResultsFromORM = ormRem.query().where('rowStateOfClientSession', 23467).get()
       return arResultsFromORM
     },
   },
   mounted() {
-    // Goal: When there is unsaved data in the state then load the unsaved data
+    // Goal: If there is no unsaved data then give user a empty form
     const arResultsFromORM = this.cfRowsInEditStateOnClient
     if (arResultsFromORM.length) {
-      console.log('there is unsaved data')
+      // console.log('there is unsaved data')
     } else {
-      // When there is no unsaved data then we add an empty data to the state inside vuex
-      console.log('No Unsaved data')
+      // console.log('No Unsaved data')
       this.addEmptyRemToUI()
     }
   },
@@ -209,7 +210,7 @@ export default {
           }
         }
       }
-      // if there are no records left then I need to add a empty
+      // if there are no records left then I need to add a empty. For goal read docs/forms.md/1.3
       arResultsFromORM = this.cfRowsInEditStateOnClient
       if (arResultsFromORM.length) {
       } else {
@@ -238,7 +239,7 @@ export default {
     },
     removeSingleRemInAddForm(pRemIDGivenByORM) {
       ormRem.delete(pRemIDGivenByORM)
-      // if there are no records left then I need to add a empty
+      // if there are no records left then I need to add a empty. For goal read docs/forms.md/1.3
       const arResultsFromORM = this.cfRowsInEditStateOnClient
       if (arResultsFromORM.length) {
       } else {

@@ -1,4 +1,4 @@
-# Q1) What is the user experience of the forms desired?
+# Q1) What is the goal of user experience of the forms?
 
 1. Give visual feedback to the user that the data was added.
 2. Visual feedback should come close to where the user eyes are. The visual feedback should not be on top right corner.
