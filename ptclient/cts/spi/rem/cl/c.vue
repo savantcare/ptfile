@@ -217,7 +217,7 @@ export default {
     setRemDescInVst(pEvent) {
       console.log('Inside setRemDesc')
       ormRem.update({
-        where: this.firstParam,
+        where: this.newRowIDfromORM,
         data: {
           remDesc: pEvent,
         },
