@@ -64,7 +64,7 @@ export default {
   data() {
     return {
       vOrmSaveScheduled: '',
-      reminderDescCached: [],
+      arrRemDescCached: [],
     }
   },
   computed: {
@@ -115,11 +115,11 @@ export default {
        */
     getDesc(pRemIDGivenByORM) {
       // M2/9
-      const contentFromCache = this.reminderDescCached[pRemIDGivenByORM]
+      const contentFromCache = this.arrarrRemDescCached[pRemIDGivenByORM]
       if (!contentFromCache) {
         return this.getRemDescFromOrm(pRemIDGivenByORM)
       } else {
-        return this.reminderDescCached[pRemIDGivenByORM]
+        return this.arrRemDescCached[pRemIDGivenByORM]
       }
     },
 
@@ -137,7 +137,7 @@ export default {
 
       console.log('enter')
 
-      this.$set(this.reminderDescCached, pRemIDGivenByORM, pEvent)
+      this.$set(this.arrRemDescCached, pRemIDGivenByORM, pEvent)
 
       if (this.vOrmSaveScheduled) {
         console.log('clearing timeout')
@@ -187,7 +187,7 @@ export default {
       const arFromORM = this.cfRowsInEditStateInOrm
       if (arFromORM.length) {
       } else {
-        this.reminderDescCached = []
+        this.arrRemDescCached = []
         this.addEmptyRemToOrm()
       }
     },
@@ -264,7 +264,7 @@ export default {
       arFromORM = this.cfRowsInEditStateInOrm
       if (arFromORM.length) {
       } else {
-        this.reminderDescCached = []
+        this.arrRemDescCached = []
         this.addEmptyRemToOrm()
       }
     },
