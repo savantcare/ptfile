@@ -4,6 +4,9 @@
 
      How to see table in drawer?
         https://element.eleme.io/#/en-US/component/drawer       
+
+     modal = false means esc key will not work.   
+     modal = true means 1. esc key will work. 2. Background will have grey ovrelay and becomes hard to read.
   -->
 <template>
   <el-drawer
