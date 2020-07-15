@@ -60,23 +60,33 @@ export default {
     extend(config, ctx) {
       // set for vscode debugger
       config.devtool = 'source-map'
-      // push new rule in module
+      // push new rules in module
       config.module.rules.push(
         {
-          // push rule to fix all format error in js and vue file
+          /*
+            Q) Why this config needed? 
+            - before every build eslint loader check all mention file type (eg: md, js) from source directory and return format errors and warnings.try to fix those errors automattically.
+            ** this config try to fix all errors and warnings before build the project
+          */
           enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/,
+          test: /\.(js|vue)$/, // file type pattern
+          loader: 'eslint-loader', // loader name
+          exclude: /(node_modules)/, // bypass node_modules
           options: {
-            fix: true,
+            fix: true, // to fix errors
           },
         },
         {
+          /*
+            Q) Why this config needed? 
+            - before every build eslint loader check sql, md, monopic file and throwing console error, console looks very dirty. try to by passing those file types.
+            ** before add this config run yarn add ignore-loader if ignore-loader module doesn't exsists
+            ** this config put ignore loader for mentioned file type (sql, md, monopic) to stop arise those error.
+          */
           // push rule to specify ignore loader for some format (sql, md, monopic)
-          test: /\.(sql|md|monopic|)$/,
-          exclude: /(node_modules)/,
-          loader: 'ignore-loader',
+          test: /\.(sql|md|monopic|)$/, // file type pattern
+          exclude: /(node_modules)/, // bypass node_modules
+          loader: 'ignore-loader', // loader name
         }
       )
     },
