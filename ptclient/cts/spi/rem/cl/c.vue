@@ -51,9 +51,9 @@ export default {
     cfRowInEditStateOnClient() {
       const arFromORM = ormRem
         .query()
-        .where('rowStateOfClientSession', 3) // Copy -> Changed
-        .orWhere('rowStateOfClientSession', 34) // Copy -> Changed
-        .orWhere('rowStateOfClientSession', 3456) // Copy -> Changed -> Requested save -> form error
+        .where('rowStateInThisSession', 3) // Copy -> Changed
+        .orWhere('rowStateInThisSession', 34) // Copy -> Changed
+        .orWhere('rowStateInThisSession', 3456) // Copy -> Changed -> Requested save -> form error
         .where((_record, query) => {
           query.where('uuid', this.uuid)
         })
@@ -85,9 +85,9 @@ export default {
           date = new Date(arFromORM[i].ROW_START)
           obj.createdAt = date.toLocaleString('default', { month: 'long' }) + '-' + date.getDate()
           if (
-            arFromORM[i].rowStateOfClientSession === 3 ||
-            arFromORM[i].rowStateOfClientSession === 34 ||
-            arFromORM[i].rowStateOfClientSession === 3456
+            arFromORM[i].rowStateInThisSession === 3 ||
+            arFromORM[i].rowStateInThisSession === 34 ||
+            arFromORM[i].rowStateInThisSession === 3456
           ) {
             obj.type = 'warning' // row is being edited and is not on server
           } else {
@@ -109,7 +109,7 @@ export default {
         data: {
           remDesc: pDesc,
           uuid: this.uuid,
-          rowStateOfClientSession: 3, // For meaning of diff values read rem/db/vuex-orm/rems.js:71
+          rowStateInThisSession: 3, // For meaning of diff values read rem/db/vuex-orm/rems.js:71
           ROW_START: Math.floor(Date.now() / 1000), // Ref: https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
         },
       })
@@ -228,7 +228,7 @@ export default {
         where: this.newRowIDfromORM,
         data: {
           remDesc: pEvent,
-          rowStateOfClientSession: 34,
+          rowStateInThisSession: 34,
         },
       })
     },
