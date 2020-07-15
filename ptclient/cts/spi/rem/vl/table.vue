@@ -133,7 +133,7 @@ export default {
           // For date format ref: /cts/spi/rem/vl/timeline.vue:53
           date = new Date(arFromORM[i].ROW_START)
           obj.createdAt = date.toLocaleString('default', { month: 'long' }) + '-' + date.getDate()
-          obj.rowStateOfClientSession = arFromORM[i].rowStateOfClientSession
+          obj.rowStateInThisSession = arFromORM[i].rowStateInThisSession
           obj.uuid = arFromORM[i].uuid
           obj.$id = arFromORM[i].$id
           obj.id = arFromORM[i].id
@@ -240,14 +240,14 @@ export default {
       this.$store.commit('mtfShowNewFirstTabInCl', tab)
     },
     mfGetDirtyClassName(pRow, pIndex) {
-      const strOfNumber = pRow.row.rowStateOfClientSession.toString()
+      /*      const strOfNumber = pRow.row.rowStateInThisSession.toString()
       const lastCharecter = strOfNumber.slice(-1)
       console.log('pRow', pRow, 'pIndex', pIndex, 'Last charecter', lastCharecter)
       if (lastCharecter === 3 || lastCharecter === 4 || lastCharecter === 6) {
         return 'unsaved-data'
       } else {
         return ''
-      }
+      } */
     },
   },
 }
