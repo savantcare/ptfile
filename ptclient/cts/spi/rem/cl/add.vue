@@ -72,22 +72,22 @@ export default {
       // C1/3
       const arFromORM = ormRem
         .query()
-        .where('rowStateInClientSession', 2) // New
-        .orWhere('rowStateInClientSession', 24) // New -> Changed
-        .orWhere('rowStateInClientSession', 2456) // New -> Changed -> Requested save -> form error
+        .where('rowStateInThisSession', 2) // New
+        .orWhere('rowStateInThisSession', 24) // New -> Changed
+        .orWhere('rowStateInThisSession', 2456) // New -> Changed -> Requested save -> form error
         .get()
       return arFromORM
     },
     cfDataApiSuccessInThisSession() {
       // C2/3
       // New -> Changed -> Requested save -> Sent to server -> Success
-      const arFromORM = ormRem.query().where('rowStateInClientSession', 24571).get()
+      const arFromORM = ormRem.query().where('rowStateInThisSession', 24571).get()
       return arFromORM
     },
     cfDataApiErrorInThisSession() {
       // C3/3
       // New -> Changed -> Requested save -> Sent to server -> Failure
-      const arFromORM = ormRem.query().where('rowStateInClientSession', 24578).get()
+      const arFromORM = ormRem.query().where('rowStateInThisSession', 24578).get()
       return arFromORM
     },
   },
@@ -103,7 +103,7 @@ export default {
       const arFromORM = ormRem.insert({
         data: {
           remDesc: '',
-          rowStateInClientSession: 2, // For meaning of diff values read rem/db/vuex-orm/rems.js:71
+          rowStateInThisSession: 2, // For meaning of diff values read rem/db/vuex-orm/rems.js:71
           ROW_START: Math.floor(Date.now() / 1000), // Ref: https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
         },
       })
@@ -162,7 +162,7 @@ export default {
         where: pRemIDGivenByORM,
         data: {
           remDesc: pEvent,
-          rowStateInClientSession: 24,
+          rowStateInThisSession: 24,
           validationClass: '',
           isValidationError: false,
         },
@@ -173,7 +173,7 @@ export default {
       // M5/9
       console.log(pRemIDGivenByORM)
       const arFromORM = ormRem.find(pRemIDGivenByORM)
-      if (arFromORM && arFromORM.rowStateInClientSession === 24) {
+      if (arFromORM && arFromORM.rowStateInThisSession === 24) {
         // New -> Changed
         return 'unsaved-data'
       } else {
@@ -209,8 +209,8 @@ export default {
       // M8/9
       let arFromORM = ormRem
         .query()
-        .where('rowStateInClientSession', 24) // New -> Changed
-        .orWhere('rowStateInClientSession', 2456) // New -> Changed -> Requested save -> form error
+        .where('rowStateInThisSession', 24) // New -> Changed
+        .orWhere('rowStateInThisSession', 2456) // New -> Changed -> Requested save -> form error
         .get()
       if (arFromORM.length) {
         console.log('unsaved data found', arFromORM)
@@ -221,7 +221,7 @@ export default {
               where: (record) => record.id === arFromORM[i].id,
               data: {
                 validationClass: 'validaionErrorExist',
-                rowStateInClientSession: '2456', // New -> Changed -> Requested save -> form error
+                rowStateInThisSession: '2456', // New -> Changed -> Requested save -> form error
                 isValidationError: true,
               },
             })
@@ -230,7 +230,7 @@ export default {
               where: (record) => record.id === arFromORM[i].id,
               data: {
                 validationClass: '',
-                rowStateInClientSession: '2457', // New -> Changed -> Requested save -> Send to server
+                rowStateInThisSession: '2457', // New -> Changed -> Requested save -> Send to server
                 isValidationError: false,
               },
             })
@@ -245,7 +245,7 @@ export default {
               ormRem.update({
                 where: (record) => record.id === arFromORM[i].id,
                 data: {
-                  rowStateInClientSession: '24578', // New -> Changed -> Requested save -> Send to server -> API fail
+                  rowStateInThisSession: '24578', // New -> Changed -> Requested save -> Send to server -> API fail
                 },
               })
             } else {
@@ -253,7 +253,7 @@ export default {
               ormRem.update({
                 where: (record) => record.id === arFromORM[i].id,
                 data: {
-                  rowStateInClientSession: '24571', // New -> Changed -> Requested save -> Send to server -> API Success
+                  rowStateInThisSession: '24571', // New -> Changed -> Requested save -> Send to server -> API Success
                 },
               })
             }
