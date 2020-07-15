@@ -77,6 +77,7 @@ export default {
   },
   computed: {
     cfGetUniqueReminders() {
+      debugger
       const arFromORM = ormRem.query().where('ROW_END', 2147483647.999999).get()
 
       const uniqueUUIDReminders = []
@@ -110,12 +111,12 @@ export default {
 
       const arFromORM = this.cfGetUniqueReminders
 
-      /*  Q) Should this function return the array it gets from ORM or modify the array? 
+      /*  Q) Should this function return the array it gets from ORM or modify the array?
               Option1: Return origianl array
                   -ves:
                     Created at needs to be made inside the template
                     vue will get more data since when I loop here I can send less data to vue
-                  +ves:              
+                  +ves:
                     No need to run the for loop
       */
 
@@ -133,7 +134,7 @@ export default {
           // For date format ref: /cts/spi/rem/vl/timeline.vue:53
           date = new Date(arFromORM[i].ROW_START)
           obj.createdAt = date.toLocaleString('default', { month: 'long' }) + '-' + date.getDate()
-          obj.$isDirty = arFromORM[i].$isDirty
+          obj.rowStateOfClientSession = arFromORM[i].rowStateOfClientSession
           obj.uuid = arFromORM[i].uuid
           obj.$id = arFromORM[i].$id
           obj.id = arFromORM[i].id
@@ -240,7 +241,10 @@ export default {
       this.$store.commit('mtfShowNewFirstTabInCl', tab)
     },
     mfGetDirtyClassName(pRow, pIndex) {
-      if (pRow.row.$isDirty) {
+      const strOfNumber = pRow.row.rowStateOfClientSession.toString()
+      const lastCharecter = strOfNumber.slice(-1)
+      console.log('pRow', pRow, 'pIndex', pIndex, 'Last charecter', lastCharecter)
+      if (lastCharecter === 3 || lastCharecter === 4 || lastCharecter === 6) {
         return 'unsaved-data'
       } else {
         return ''
