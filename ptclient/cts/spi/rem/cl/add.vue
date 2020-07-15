@@ -115,7 +115,7 @@ export default {
        */
     getDesc(pRemIDGivenByORM) {
       // M2/9
-      const contentFromCache = this.arrarrRemDescCached[pRemIDGivenByORM]
+      const contentFromCache = this.arrRemDescCached[pRemIDGivenByORM]
       if (!contentFromCache) {
         return this.getRemDescFromOrm(pRemIDGivenByORM)
       } else {

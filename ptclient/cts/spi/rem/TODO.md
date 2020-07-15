@@ -5,7 +5,7 @@
    console.log('Add rem called')
    const arFromORM = ormRem.insert({
    data: {
-   rowStateOfClientSession: 2, // For meaning of diff values read rem/db/vuex-orm/rems.js:71
+   rowStateInThisSession: 2, // For meaning of diff values read rem/db/vuex-orm/rems.js:71
    ROW_START: Math.floor(Date.now() / 1000), // Ref: https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
    },
    })

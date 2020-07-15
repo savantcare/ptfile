@@ -27,7 +27,7 @@ export default class reminders extends Model {
       // the following fields only exist on client
       validationClass: this.string(''),
       isValidationError: this.boolean(false),
-      rowStateOfClientSession: this.number(1), // Details read: /ptclient/docs/forms.md
+      rowStateInThisSession: this.number(1), // Details read: /ptclient/docs/forms.md
     }
   }
 }
