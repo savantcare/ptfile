@@ -12,7 +12,7 @@
             :autosize="{ minRows: 2, maxRows: 10 }"
             placeholder="Please enter the reminder .."
             :value="getDesc(rem.id)"
-            @input="setRemDescInOrmOnDelay($event, rem.id)"
+            @input="setRemDescInOrmOnTimeout($event, rem.id)"
           ></el-input>
           <div v-if="rem.isValidationError" class="el-form-item__error">
             Please enter minimum 3 characters.
@@ -63,7 +63,7 @@ import ormRem from '@/cts/spi/rem/db/vuex-orm/rem.js'
 export default {
   data() {
     return {
-      vStateSaveScheduled: '',
+      vOrmSaveScheduled: '',
       reminderDescCached: [],
     }
   },
@@ -115,28 +115,23 @@ export default {
        */
     getDesc(pRemIDGivenByORM) {
       // M2/9
-      console.log(pRemIDGivenByORM)
-      console.log(this.reminderDescCached)
       const contentFromCache = this.reminderDescCached[pRemIDGivenByORM]
-      console.log(contentFromCache)
       if (!contentFromCache) {
-        return this.getRemDescFromVst(pRemIDGivenByORM)
+        return this.getRemDescFromOrm(pRemIDGivenByORM)
       } else {
-        console.log('returning from cache')
         return this.reminderDescCached[pRemIDGivenByORM]
       }
     },
 
-    getRemDescFromVst(pRemIDGivenByORM) {
+    getRemDescFromOrm(pRemIDGivenByORM) {
       const arFromORM = ormRem.find(pRemIDGivenByORM)
       if (arFromORM) {
-        console.log(arFromORM)
         return arFromORM.remDesc
       }
     },
 
     // state updates are smarter.
-    setRemDescInOrmOnDelay(pEvent, pRemIDGivenByORM) {
+    setRemDescInOrmOnTimeout(pEvent, pRemIDGivenByORM) {
       // M3/9
       // Full form: Set reminder in vue state on delay
 
@@ -144,12 +139,12 @@ export default {
 
       this.$set(this.reminderDescCached, pRemIDGivenByORM, pEvent)
 
-      if (this.vStateSaveScheduled) {
+      if (this.vOrmSaveScheduled) {
         console.log('clearing timeout')
-        clearTimeout(this.vStateSaveScheduled)
+        clearTimeout(this.vOrmSaveScheduled)
       }
       /* Ref: https://stackoverflow.com/questions/38399050/vue-equivalent-of-settimeout */
-      this.vStateSaveScheduled = setTimeout(
+      this.vOrmSaveScheduled = setTimeout(
         function (scope) {
           scope.setRemDescInOrm(pEvent, pRemIDGivenByORM)
         },
@@ -246,6 +241,7 @@ export default {
 
             console.log(status)
             if (status === 0) {
+              // Handle api returned success
               ormRem.update({
                 where: (record) => record.id === arFromORM[i].id,
                 data: {
@@ -253,6 +249,7 @@ export default {
                 },
               })
             } else {
+              // Handle api returned failure
               ormRem.update({
                 where: (record) => record.id === arFromORM[i].id,
                 data: {
