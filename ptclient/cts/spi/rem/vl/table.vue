@@ -77,30 +77,30 @@ export default {
   },
   computed: {
     cfGetUniqueReminders() {
-      const arResultsFromORM = ormRem.query().where('ROW_END', 2147483647.999999).get()
+      const arFromORM = ormRem.query().where('ROW_END', 2147483647.999999).get()
 
       const uniqueUUIDReminders = []
 
       // Goal: Find unique UUIDs since it is possible that some UUID is being changed and now there are 2 records with same UUID
 
       let breakCheck1 = false
-      for (let i = 0; i < arResultsFromORM.length; i++) {
+      for (let i = 0; i < arFromORM.length; i++) {
         for (let j = 0; j < uniqueUUIDReminders.length; j++) {
-          if (arResultsFromORM[i].uuid === uniqueUUIDReminders[j].uuid) {
+          if (arFromORM[i].uuid === uniqueUUIDReminders[j].uuid) {
             breakCheck1 = true
             break
           }
         }
         if (breakCheck1) break
-        uniqueUUIDReminders.push(arResultsFromORM[i])
+        uniqueUUIDReminders.push(arFromORM[i])
       }
 
       return uniqueUUIDReminders
     },
 
     cfLengthOfDataArray() {
-      const arResultsFromORM = this.cfGetUniqueReminders
-      return arResultsFromORM.length
+      const arFromORM = this.cfGetUniqueReminders
+      return arFromORM.length
     },
 
     cfArOfRemForDisplayInTable() {
@@ -108,7 +108,7 @@ export default {
         'cfArOfRemForDisplayInTable called. Whenever ormRem will change this will get called. Even when there are 100 rows in the table when orm rem changes this gets called once'
       )
 
-      const arResultsFromORM = this.cfGetUniqueReminders
+      const arFromORM = this.cfGetUniqueReminders
 
       /*  Q) Should this function return the array it gets from ORM or modify the array? 
               Option1: Return origianl array
@@ -123,20 +123,20 @@ export default {
        */
       const arRemsForDisplay = []
       let obj = {}
-      if (arResultsFromORM.length) {
+      if (arFromORM.length) {
         let date = ''
         const startDataRowInidex = (this.tablePageNumber - 1) * 10
         const endDataRowIndex = startDataRowInidex + 10
-        for (let i = startDataRowInidex; i < arResultsFromORM.length && i < endDataRowIndex; i++) {
+        for (let i = startDataRowInidex; i < arFromORM.length && i < endDataRowIndex; i++) {
           obj = {}
-          obj.remDesc = arResultsFromORM[i].remDesc
+          obj.remDesc = arFromORM[i].remDesc
           // For date format ref: /cts/spi/rem/vl/timeline.vue:53
-          date = new Date(arResultsFromORM[i].ROW_START)
+          date = new Date(arFromORM[i].ROW_START)
           obj.createdAt = date.toLocaleString('default', { month: 'long' }) + '-' + date.getDate()
-          obj.$isDirty = arResultsFromORM[i].$isDirty
-          obj.uuid = arResultsFromORM[i].uuid
-          obj.$id = arResultsFromORM[i].$id
-          obj.id = arResultsFromORM[i].id
+          obj.$isDirty = arFromORM[i].$isDirty
+          obj.uuid = arFromORM[i].uuid
+          obj.$id = arFromORM[i].$id
+          obj.id = arFromORM[i].id
           arRemsForDisplay.push(obj)
         }
       }
@@ -151,8 +151,8 @@ export default {
     },
     mfOpenADialog() {
       // console.log('show add dialog')
-      const arResultsFromORM = ormSearchPhraseUiToCT.query().search('add reminder').get()
-      const objSearchRowFromORM = arResultsFromORM[0]
+      const arFromORM = ormSearchPhraseUiToCT.query().search('add reminder').get()
+      const objSearchRowFromORM = arFromORM[0]
       // console.log(objSearchRowFromORM)
       const tab = {
         label: objSearchRowFromORM.value,
@@ -165,8 +165,8 @@ export default {
     },
     mfOpenMDialog() {
       // console.log('show add dialog')
-      const arResultsFromORM = ormSearchPhraseUiToCT.query().search('multi change reminder').get()
-      const objSearchRowFromORM = arResultsFromORM[0]
+      const arFromORM = ormSearchPhraseUiToCT.query().search('multi change reminder').get()
+      const objSearchRowFromORM = arFromORM[0]
       // console.log(objSearchRowFromORM)
       const tab = {
         label: objSearchRowFromORM.value,
@@ -182,8 +182,8 @@ export default {
     },
     mfOpenXDialog() {
       // console.log('show add dialog')
-      const arResultsFromORM = ormSearchPhraseUiToCT.query().search('discontinued reminders').get()
-      const objSearchRowFromORM = arResultsFromORM[0]
+      const arFromORM = ormSearchPhraseUiToCT.query().search('discontinued reminders').get()
+      const objSearchRowFromORM = arFromORM[0]
       // console.log(objSearchRowFromORM)
       const tab = {
         label: objSearchRowFromORM.value,
@@ -198,8 +198,8 @@ export default {
       console.log('Open change rem dialog -> ', pORMDataRowID)
 
       // Goal: Find out which CT will handle this work
-      const arResultsFromORM = ormSearchPhraseUiToCT.query().search('change reminder').get()
-      const objSearchRowFromORM = arResultsFromORM[0]
+      const arFromORM = ormSearchPhraseUiToCT.query().search('change reminder').get()
+      const objSearchRowFromORM = arFromORM[0]
       // console.log(objSearchRowFromORM)
 
       // Goal: Create the obj Tab that will be worked upon by for loop in

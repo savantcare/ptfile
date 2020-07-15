@@ -64,14 +64,14 @@ export default {
     },
 
     mfQuerySearchTerms(pQueryString, pCallBack) {
-      let arResultsFromORM = ormSearchPhraseUiToCT
+      let arFromORM = ormSearchPhraseUiToCT
         .query()
         .where('layer', 'change')
         .search(pQueryString.trim())
         .get() // trim needs for "goal " to match "goal"
-      console.log('search result from orm model', pQueryString, arResultsFromORM)
+      console.log('search result from orm model', pQueryString, arFromORM)
 
-      arResultsFromORM = arResultsFromORM.map((result) => {
+      arFromORM = arFromORM.map((result) => {
         let finalStr = ''
         if (pQueryString.length > 0) {
           const strings = pQueryString.split(' ')
@@ -86,7 +86,7 @@ export default {
         result.value = finalStr
         return result
       })
-      pCallBack(arResultsFromORM)
+      pCallBack(arFromORM)
     },
     mfHandleSuggestionSelectedByUser(pSelectedSuggestion) {
       console.log('Selected suggestion is', pSelectedSuggestion)

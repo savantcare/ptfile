@@ -53,14 +53,14 @@ export default {
   computed: {
     dataTable() {
       const dataTable = []
-      const arResultsFromORM = ormRem.query().get()
-      if (arResultsFromORM.length) {
+      const arFromORM = ormRem.query().get()
+      if (arFromORM.length) {
         let obj = []
         let date = ''
-        console.log('unsaved data found', arResultsFromORM, arResultsFromORM[0].uuid)
-        for (let i = 0; i < arResultsFromORM.length; i++) {
+        console.log('unsaved data found', arFromORM, arFromORM[0].uuid)
+        for (let i = 0; i < arFromORM.length; i++) {
           obj = {}
-          obj.remDesc = arResultsFromORM[i].remDesc
+          obj.remDesc = arFromORM[i].remDesc
           /*
           To get the number of the month:
           obj.createdAt = date.getMonth() + 1 + "-" + date.getDate()
@@ -68,9 +68,9 @@ export default {
           To get the name of the month:
           Ref: https://stackoverflow.com/questions/1643320/get-month-name-from-date
           */
-          date = new Date(arResultsFromORM[i].ROW_START)
+          date = new Date(arFromORM[i].ROW_START)
           obj.createdAt = date.toLocaleString('default', { month: 'long' }) + '-' + date.getDate()
-          if (arResultsFromORM[i].$isDirty) {
+          if (arFromORM[i].$isDirty) {
             obj.type = 'warning'
           } else {
             obj.type = ''
@@ -87,8 +87,8 @@ export default {
   methods: {
     mfOpenADialog() {
       console.log('show add dialog')
-      const arResultsFromORM = ormSearchPhraseUiToCT.query().search('add reminder').get()
-      const objRowFromORM = arResultsFromORM[0]
+      const arFromORM = ormSearchPhraseUiToCT.query().search('add reminder').get()
+      const objRowFromORM = arFromORM[0]
       console.log(objRowFromORM)
       const tab = {
         label: objRowFromORM.value,
@@ -101,8 +101,8 @@ export default {
     },
     mfOpenMDialog() {
       console.log('show add dialog')
-      const arResultsFromORM = ormSearchPhraseUiToCT.query().search('multi change reminder').get()
-      const objRowFromORM = arResultsFromORM[0]
+      const arFromORM = ormSearchPhraseUiToCT.query().search('multi change reminder').get()
+      const objRowFromORM = arFromORM[0]
       console.log(objRowFromORM)
       const tab = {
         label: objRowFromORM.value,
@@ -115,8 +115,8 @@ export default {
     },
     mfOpenXDialog() {
       console.log('show add dialog')
-      const arResultsFromORM = ormSearchPhraseUiToCT.query().search('discontinued reminders').get()
-      const objRowFromORM = arResultsFromORM[0]
+      const arFromORM = ormSearchPhraseUiToCT.query().search('discontinued reminders').get()
+      const objRowFromORM = arFromORM[0]
       console.log(objRowFromORM)
       const tab = {
         label: objRowFromORM.value,

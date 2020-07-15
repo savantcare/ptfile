@@ -49,7 +49,7 @@ export default {
   },
   computed: {
     cfRowInEditStateOnClient() {
-      const arResultsFromORM = ormRem
+      const arFromORM = ormRem
         .query()
         .where('rowStateOfClientSession', 3) // Copy -> Changed
         .orWhere('rowStateOfClientSession', 34) // Copy -> Changed
@@ -58,27 +58,23 @@ export default {
           query.where('uuid', this.uuid)
         })
         .get()
-      console.log(arResultsFromORM)
-      return arResultsFromORM
+      console.log(arFromORM)
+      return arFromORM
     },
     cfTimeLineDataAr() {
       // console.log('inside computed function the UUID is', this.uuid)
       const dataTable = []
 
       // to create timeline the uuid will be same but id will be different.
-      const arResultsFromORM = ormRem
-        .query()
-        .where('uuid', this.uuid)
-        .orderBy('ROW_START', 'desc')
-        .get()
+      const arFromORM = ormRem.query().where('uuid', this.uuid).orderBy('ROW_START', 'desc').get()
       console.log('Time line if for uuid', this.uuid)
-      if (arResultsFromORM.length) {
+      if (arFromORM.length) {
         let obj = []
         let date = ''
-        // console.log('sending this to timeline', arResultsFromORM, arResultsFromORM[0].uuid)
-        for (let i = 0; i < arResultsFromORM.length; i++) {
+        // console.log('sending this to timeline', arFromORM, arFromORM[0].uuid)
+        for (let i = 0; i < arFromORM.length; i++) {
           obj = {}
-          obj.remDesc = arResultsFromORM[i].remDesc
+          obj.remDesc = arFromORM[i].remDesc
           /*
           To get the number of the month:
           obj.createdAt = date.getMonth() + 1 + "-" + date.getDate()
@@ -86,18 +82,18 @@ export default {
           To get the name of the month:
           Ref: https://stackoverflow.com/questions/1643320/get-month-name-from-date
           */
-          date = new Date(arResultsFromORM[i].ROW_START)
+          date = new Date(arFromORM[i].ROW_START)
           obj.createdAt = date.toLocaleString('default', { month: 'long' }) + '-' + date.getDate()
           if (
-            arResultsFromORM[i].rowStateOfClientSession === 3 ||
-            arResultsFromORM[i].rowStateOfClientSession === 34 ||
-            arResultsFromORM[i].rowStateOfClientSession === 3456
+            arFromORM[i].rowStateOfClientSession === 3 ||
+            arFromORM[i].rowStateOfClientSession === 34 ||
+            arFromORM[i].rowStateOfClientSession === 3456
           ) {
             obj.type = 'warning' // row is being edited and is not on server
           } else {
             obj.type = ''
           }
-          obj.ROW_START = arResultsFromORM[i].ROW_START
+          obj.ROW_START = arFromORM[i].ROW_START
           dataTable.push(obj)
         }
       }
@@ -109,7 +105,7 @@ export default {
   methods: {
     addEmptyRemToUI(pDesc) {
       console.log('Add rem called')
-      const arResultsFromORM = ormRem.insert({
+      const arFromORM = ormRem.insert({
         data: {
           remDesc: pDesc,
           uuid: this.uuid,
@@ -117,7 +113,7 @@ export default {
           ROW_START: Math.floor(Date.now() / 1000), // Ref: https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
         },
       })
-      console.log(arResultsFromORM)
+      console.log(arFromORM)
     },
     getRemDescUsingCache() {
       /* Performance analysis
@@ -157,7 +153,7 @@ export default {
         */
 
       // Goal: decide if it is repeat or first invocation
-      let arResultsFromORM = []
+      let arFromORM = []
       if (this.ORMRowIDForPreviousInvocation === this.firstParam) {
         console.log('this is repeat invocation')
         // this.uuid is already existing
@@ -166,15 +162,15 @@ export default {
         // this is first time this Ct has been called with this parameter
         console.log('this is first time invocation')
         this.ORMRowIDForPreviousInvocation = this.firstParam
-        arResultsFromORM = ormRem.find(this.firstParam)
-        this.uuid = arResultsFromORM.uuid
+        arFromORM = ormRem.find(this.firstParam)
+        this.uuid = arFromORM.uuid
         this.reminderDescCached = null
         console.log('Find if there is unsaved data', this.uuid)
         const arEditRowsFromORM = this.cfRowInEditStateOnClient
-        // console.log(arResultsFromORM)
+        // console.log(arFromORM)
         if (!arEditRowsFromORM.length) {
           console.log('adding a new blank record. Since this is temporal DB')
-          this.addEmptyRemToUI(arResultsFromORM.remDesc)
+          this.addEmptyRemToUI(arFromORM.remDesc)
         }
       }
 
@@ -195,12 +191,12 @@ export default {
       // Full form: Get reminder description from view state.
 
       // Goal: Get the latest data with this UUID. Since there can be 2 rows with the same UUID hence important to get latest row with the same UUID
-      const arResultsFromORM = ormRem.query().where('uuid', this.uuid).orderBy('id', 'desc').get()
-      console.log(arResultsFromORM, this.uuid)
-      if (arResultsFromORM.length > 0) {
-        // console.log(arResultsFromORM)
-        this.newRowIDfromORM = arResultsFromORM[0].id
-        return arResultsFromORM[0].remDesc
+      const arFromORM = ormRem.query().where('uuid', this.uuid).orderBy('id', 'desc').get()
+      console.log(arFromORM, this.uuid)
+      if (arFromORM.length > 0) {
+        // console.log(arFromORM)
+        this.newRowIDfromORM = arFromORM[0].id
+        return arFromORM[0].remDesc
       } else {
         return 'ERROR: This is not possible'
       }

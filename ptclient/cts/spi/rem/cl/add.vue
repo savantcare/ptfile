@@ -65,29 +65,29 @@ export default {
   },
   computed: {
     cfRowsInEditStateOnClient() {
-      const arResultsFromORM = ormRem
+      const arFromORM = ormRem
         .query()
         .where('rowStateOfClientSession', 2) // New
         .orWhere('rowStateOfClientSession', 24) // New -> Changed
         .orWhere('rowStateOfClientSession', 2456) // New -> Changed -> Requested save -> form error
         .get()
-      return arResultsFromORM
+      return arFromORM
     },
     cfDataSavedToDBThisSessionSuccessfully() {
       // New -> Changed -> Requested save -> Sent to server -> Success
-      const arResultsFromORM = ormRem.query().where('rowStateOfClientSession', 24571).get()
-      return arResultsFromORM
+      const arFromORM = ormRem.query().where('rowStateOfClientSession', 24571).get()
+      return arFromORM
     },
     cfDataApiErrorThisSession() {
       // New -> Changed -> Requested save -> Sent to server -> Failure
-      const arResultsFromORM = ormRem.query().where('rowStateOfClientSession', 24578).get()
-      return arResultsFromORM
+      const arFromORM = ormRem.query().where('rowStateOfClientSession', 24578).get()
+      return arFromORM
     },
   },
   mounted() {
     // Goal: If there is no unsaved data then give user a empty form
-    const arResultsFromORM = this.cfRowsInEditStateOnClient
-    if (!arResultsFromORM.length) this.addEmptyRemToUI()
+    const arFromORM = this.cfRowsInEditStateOnClient
+    if (!arFromORM.length) this.addEmptyRemToUI()
   },
   methods: {
     /* Why are getDesc and setDesc not a single computed function called desc with a setter and a getter
@@ -96,10 +96,10 @@ export default {
        */
     getDesc(pRemIDGivenByORM) {
       console.log(pRemIDGivenByORM)
-      const arResultsFromORM = ormRem.find(pRemIDGivenByORM)
-      if (arResultsFromORM) {
-        console.log(arResultsFromORM)
-        return arResultsFromORM.remDesc
+      const arFromORM = ormRem.find(pRemIDGivenByORM)
+      if (arFromORM) {
+        console.log(arFromORM)
+        return arFromORM.remDesc
       } else {
         return ''
       }
@@ -107,7 +107,7 @@ export default {
     setDesc(pEvent, pRemIDGivenByORM) {
       console.log('set called for', pRemIDGivenByORM, pEvent)
 
-      const arResultsFromORM = ormRem.update({
+      const arFromORM = ormRem.update({
         where: pRemIDGivenByORM,
         data: {
           remDesc: pEvent,
@@ -116,12 +116,12 @@ export default {
           isValidationError: false,
         },
       })
-      console.log(arResultsFromORM)
+      console.log(arFromORM)
     },
     mfGetDirtyClassName(pRemIDGivenByORM) {
       console.log(pRemIDGivenByORM)
-      const arResultsFromORM = ormRem.find(pRemIDGivenByORM)
-      if (arResultsFromORM && arResultsFromORM.rowStateOfClientSession === 24) {
+      const arFromORM = ormRem.find(pRemIDGivenByORM)
+      if (arFromORM && arFromORM.rowStateOfClientSession === 24) {
         // New -> Changed
         return 'unsaved-data'
       } else {
@@ -130,28 +130,28 @@ export default {
     },
     addEmptyRemToUI() {
       console.log('Add rem called')
-      const arResultsFromORM = ormRem.insert({
+      const arFromORM = ormRem.insert({
         data: {
           rowStateOfClientSession: 2, // For meaning of diff values read rem/db/vuex-orm/rems.js:71
           ROW_START: Math.floor(Date.now() / 1000), // Ref: https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
         },
       })
-      console.log(arResultsFromORM)
+      console.log(arFromORM)
     },
 
     async onSubmit() {
-      let arResultsFromORM = ormRem
+      let arFromORM = ormRem
         .query()
         .where('rowStateOfClientSession', 24) // New -> Changed
         .orWhere('rowStateOfClientSession', 2456) // New -> Changed -> Requested save -> form error
         .get()
-      if (arResultsFromORM.length) {
-        console.log('unsaved data found', arResultsFromORM)
-        for (let i = 0; i < arResultsFromORM.length; i++) {
-          if (arResultsFromORM[i].remDesc.length < 3) {
+      if (arFromORM.length) {
+        console.log('unsaved data found', arFromORM)
+        for (let i = 0; i < arFromORM.length; i++) {
+          if (arFromORM[i].remDesc.length < 3) {
             // Validation check
             ormRem.update({
-              where: (record) => record.id === arResultsFromORM[i].id,
+              where: (record) => record.id === arFromORM[i].id,
               data: {
                 validationClass: 'validaionErrorExist',
                 rowStateOfClientSession: '2456', // New -> Changed -> Requested save -> form error
@@ -160,7 +160,7 @@ export default {
             })
           } else {
             ormRem.update({
-              where: (record) => record.id === arResultsFromORM[i].id,
+              where: (record) => record.id === arFromORM[i].id,
               data: {
                 validationClass: '',
                 rowStateOfClientSession: '2457', // New -> Changed -> Requested save -> Send to server
@@ -170,19 +170,19 @@ export default {
             console.log('calling api to save data', ormRem)
 
             // API will return 1 (Success) or 0 (Failure)
-            const status = await this.sendDataToServer(arResultsFromORM[i])
+            const status = await this.sendDataToServer(arFromORM[i])
 
             console.log(status)
             if (status === 0) {
               ormRem.update({
-                where: (record) => record.id === arResultsFromORM[i].id,
+                where: (record) => record.id === arFromORM[i].id,
                 data: {
                   rowStateOfClientSession: '24578', // New -> Changed -> Requested save -> Send to server -> API fail
                 },
               })
             } else {
               ormRem.update({
-                where: (record) => record.id === arResultsFromORM[i].id,
+                where: (record) => record.id === arFromORM[i].id,
                 data: {
                   rowStateOfClientSession: '24571', // New -> Changed -> Requested save -> Send to server -> API Success
                 },
@@ -192,8 +192,8 @@ export default {
         }
       }
       // if there are no records left then I need to add a empty. For goal read docs/forms.md/1.3
-      arResultsFromORM = this.cfRowsInEditStateOnClient
-      if (arResultsFromORM.length) {
+      arFromORM = this.cfRowsInEditStateOnClient
+      if (arFromORM.length) {
       } else {
         this.addEmptyRemToUI()
       }
@@ -226,12 +226,12 @@ export default {
       }
     },
     resetForm(formName) {
-      const arResultsFromORM = this.cfRowsInEditStateOnClient
-      if (arResultsFromORM.length) {
-        console.log('unsaved data found', arResultsFromORM)
-        for (let i = 0; i < arResultsFromORM.length; i++) {
+      const arFromORM = this.cfRowsInEditStateOnClient
+      if (arFromORM.length) {
+        console.log('unsaved data found', arFromORM)
+        for (let i = 0; i < arFromORM.length; i++) {
           console.log('Deleting data from ORM')
-          ormRem.delete(arResultsFromORM[i].$id)
+          ormRem.delete(arFromORM[i].$id)
         }
       } else {
         console.log('No Unsaved data')
@@ -241,8 +241,8 @@ export default {
     removeSingleRemInAddForm(pRemIDGivenByORM) {
       ormRem.delete(pRemIDGivenByORM)
       // if there are no records left then I need to add a empty. For goal read docs/forms.md/1.3
-      const arResultsFromORM = this.cfRowsInEditStateOnClient
-      if (arResultsFromORM.length) {
+      const arFromORM = this.cfRowsInEditStateOnClient
+      if (arFromORM.length) {
       } else {
         this.addEmptyRemToUI()
       }

@@ -77,8 +77,8 @@ export default {
     },
     mfAddOrmSearch() {
       // Inserting Search interfaces to this component
-      const arResultsFromORM = ormCTLifeCycle.query().where('name', 'Screening').get()
-      const objRowFromORM = arResultsFromORM[0]
+      const arFromORM = ormCTLifeCycle.query().where('name', 'Screening').get()
+      const objRowFromORM = arFromORM[0]
       if (typeof objRowFromORM !== 'undefined') {
         console.log('already mounted')
       } else {
