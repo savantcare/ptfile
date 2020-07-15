@@ -51,7 +51,8 @@ export default {
     cfRowInEditStateOnClient() {
       const arResultsFromORM = ormRem
         .query()
-        .where('rowStateOfClientSession', 34) // Copy -> Changed
+        .where('rowStateOfClientSession', 3) // Copy -> Changed
+        .orWhere('rowStateOfClientSession', 34) // Copy -> Changed
         .orWhere('rowStateOfClientSession', 3456) // Copy -> Changed -> Requested save -> form error
         .where((_record, query) => {
           query.where('uuid', this.uuid)
@@ -61,7 +62,7 @@ export default {
       return arResultsFromORM
     },
     cfTimeLineDataAr() {
-      //      console.log('inside computed function the UUID is', this.uuid)
+      // console.log('inside computed function the UUID is', this.uuid)
       const dataTable = []
 
       // to create timeline the uuid will be same but id will be different.
