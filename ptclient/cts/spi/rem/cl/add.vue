@@ -218,6 +218,7 @@ export default {
       arFromORM = this.cfRowsInEditStateOnClient
       if (arFromORM.length) {
       } else {
+        this.reminderDescCached = null
         this.addEmptyRemToUI()
       }
     },
