@@ -34,22 +34,22 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" plain @click="onSubmit">Submit</el-button>
-        <el-button type="primary" plain @click="addEmptyRemToOrm">Add more</el-button>
+        <el-button type="primary" plain @click="addEmptyRowToOrm">Add more</el-button>
         <el-button type="warning" plain @click="resetForm">Reset form</el-button>
       </el-form-item>
     </el-form>
     <!-- Goal: Show data saved successfuly this session -->
     <el-table
-      v-if="cfDataApiSuccessInThisSession.length > 0"
-      :data="cfDataApiSuccessInThisSession"
+      v-if="cfRowsInApiSuccessStateInOrm.length > 0"
+      :data="cfRowsInApiSuccessStateInOrm"
       style="width: 100%; background: #f0f9eb;"
     >
       <el-table-column prop="remDesc" label="Reminders added this session"> </el-table-column>
     </el-table>
     <!-- Goal: Show data of API that failed -->
     <el-table
-      v-if="cfDataApiErrorInThisSession.length > 0"
-      :data="cfDataApiErrorInThisSession"
+      v-if="cfRowsInApiErrorStateInOrm.length > 0"
+      :data="cfRowsInApiErrorStateInOrm"
       style="width: 100%; background: #f0f9eb;"
     >
       <el-table-column prop="remDesc" label="Error: Reminders attempted but failed to save">
@@ -78,13 +78,13 @@ export default {
         .get()
       return arFromORM
     },
-    cfDataApiSuccessInThisSession() {
+    cfRowsInApiSuccessStateInOrm() {
       // C2/3
       // New -> Changed -> Requested save -> Sent to server -> Success
       const arFromORM = ormRem.query().where('rowStateInThisSession', 24571).get()
       return arFromORM
     },
-    cfDataApiErrorInThisSession() {
+    cfRowsInApiErrorStateInOrm() {
       // C3/3
       // New -> Changed -> Requested save -> Sent to server -> Failure
       const arFromORM = ormRem.query().where('rowStateInThisSession', 24578).get()
@@ -94,10 +94,10 @@ export default {
   mounted() {
     // Goal: If there is no unsaved data then give user a empty form
     const arFromORM = this.cfRowsInEditStateInOrm
-    if (!arFromORM.length) this.addEmptyRemToOrm()
+    if (!arFromORM.length) this.addEmptyRowToOrm()
   },
   methods: {
-    addEmptyRemToOrm() {
+    addEmptyRowToOrm() {
       // M1/9
       console.log('Add rem called')
       const arFromORM = ormRem.insert({
@@ -188,7 +188,7 @@ export default {
       if (arFromORM.length) {
       } else {
         this.arrRemDescCached = []
-        this.addEmptyRemToOrm()
+        this.addEmptyRowToOrm()
       }
     },
     resetForm(formName) {
@@ -203,7 +203,7 @@ export default {
       } else {
         console.log('No Unsaved data')
       }
-      this.addEmptyRemToOrm()
+      this.addEmptyRowToOrm()
     },
     async onSubmit() {
       // M8/9
@@ -265,7 +265,7 @@ export default {
       if (arFromORM.length) {
       } else {
         this.arrRemDescCached = []
-        this.addEmptyRemToOrm()
+        this.addEmptyRowToOrm()
       }
     },
     async sendDataToServer(pORMRowArray) {
