@@ -27,4 +27,4 @@
 
 8) multi discontinue -> no comment to be added.
 
-9) Form field focus using vue technologies
+9) Form field focus using v-on

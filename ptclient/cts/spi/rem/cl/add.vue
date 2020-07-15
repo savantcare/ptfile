@@ -267,7 +267,7 @@ export default {
       arFromORM = this.cfRowsInEditStateInOrm
       if (arFromORM.length) {
       } else {
-        this.reminderDescCached = null
+        this.reminderDescCached = []
         this.addEmptyRemToOrm()
       }
     },
