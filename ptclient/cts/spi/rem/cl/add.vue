@@ -64,11 +64,12 @@ export default {
   data() {
     return {
       vStateSaveScheduled: '',
-      reminderDescCached: '',
+      reminderDescCached: [],
     }
   },
   computed: {
     cfRowsInEditStateInOrm() {
+      // C1/3
       const arFromORM = ormRem
         .query()
         .where('rowStateOfClientSession', 2) // New
@@ -78,11 +79,13 @@ export default {
       return arFromORM
     },
     cfDataSavedToDBThisSessionSuccessfully() {
+      // C2/3
       // New -> Changed -> Requested save -> Sent to server -> Success
       const arFromORM = ormRem.query().where('rowStateOfClientSession', 24571).get()
       return arFromORM
     },
     cfDataApiErrorThisSession() {
+      // C3/3
       // New -> Changed -> Requested save -> Sent to server -> Failure
       const arFromORM = ormRem.query().where('rowStateOfClientSession', 24578).get()
       return arFromORM
@@ -95,9 +98,11 @@ export default {
   },
   methods: {
     addEmptyRemToOrm() {
+      // M1/9
       console.log('Add rem called')
       const arFromORM = ormRem.insert({
         data: {
+          remDesc: '',
           rowStateOfClientSession: 2, // For meaning of diff values read rem/db/vuex-orm/rems.js:71
           ROW_START: Math.floor(Date.now() / 1000), // Ref: https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
         },
@@ -109,20 +114,36 @@ export default {
        But vmodel+computed the Desc id cannot be sent to computed fn
        */
     getDesc(pRemIDGivenByORM) {
+      // M2/9
       console.log(pRemIDGivenByORM)
-      if (!this.reminderDescCached) {
-        const arFromORM = ormRem.find(pRemIDGivenByORM)
-        if (arFromORM) {
-          console.log(arFromORM)
-          return arFromORM.remDesc
-        }
+      console.log(this.reminderDescCached)
+      const contentFromCache = this.reminderDescCached[pRemIDGivenByORM]
+      console.log(contentFromCache)
+      if (!contentFromCache) {
+        return this.getRemDescFromVst(pRemIDGivenByORM)
       } else {
-        return this.reminderDescCached
+        console.log('returning from cache')
+        return this.reminderDescCached[pRemIDGivenByORM]
       }
     },
+
+    getRemDescFromVst(pRemIDGivenByORM) {
+      const arFromORM = ormRem.find(pRemIDGivenByORM)
+      if (arFromORM) {
+        console.log(arFromORM)
+        return arFromORM.remDesc
+      }
+    },
+
     // state updates are smarter.
     setRemDescInOrmOnDelay(pEvent, pRemIDGivenByORM) {
+      // M3/9
       // Full form: Set reminder in vue state on delay
+
+      console.log('enter')
+
+      this.$set(this.reminderDescCached, pRemIDGivenByORM, pEvent)
+
       if (this.vStateSaveScheduled) {
         console.log('clearing timeout')
         clearTimeout(this.vStateSaveScheduled)
@@ -132,13 +153,14 @@ export default {
         function (scope) {
           scope.setRemDescInOrm(pEvent, pRemIDGivenByORM)
         },
-        500,
+        5000,
         this
       )
-      this.reminderDescCached = pEvent
+      console.log('exit')
     },
 
     setRemDescInOrm(pEvent, pRemIDGivenByORM) {
+      // M4/9
       console.log('set called for', pRemIDGivenByORM, pEvent)
 
       const arFromORM = ormRem.update({
@@ -153,6 +175,7 @@ export default {
       console.log(arFromORM)
     },
     mfGetCssClassName(pRemIDGivenByORM) {
+      // M5/9
       console.log(pRemIDGivenByORM)
       const arFromORM = ormRem.find(pRemIDGivenByORM)
       if (arFromORM && arFromORM.rowStateOfClientSession === 24) {
@@ -163,6 +186,7 @@ export default {
       }
     },
     removeSingleRemInAddForm(pRemIDGivenByORM) {
+      // M6/9
       ormRem.delete(pRemIDGivenByORM)
       // if there are no records left then I need to add a empty. For goal read docs/forms.md/1.3
       const arFromORM = this.cfRowsInEditStateInOrm
@@ -173,6 +197,7 @@ export default {
       }
     },
     resetForm(formName) {
+      // M7/9
       const arFromORM = this.cfRowsInEditStateInOrm
       if (arFromORM.length) {
         console.log('unsaved data found', arFromORM)
@@ -186,6 +211,7 @@ export default {
       this.addEmptyRemToOrm()
     },
     async onSubmit() {
+      // M8/9
       let arFromORM = ormRem
         .query()
         .where('rowStateOfClientSession', 24) // New -> Changed
@@ -246,6 +272,7 @@ export default {
       }
     },
     async sendDataToServer(pORMRowArray) {
+      // M9/9
       // Should bulk created be used Out of 10 reminders set what if 9 got created successfuly but 1 failed?
       // To keep code simple it was decided by VK on 13th July 2020 that for creasting 10 items we will fire 10 API calls.
 
