@@ -2,7 +2,6 @@
 accessed by navigation url Ref:
 https://stackoverflow.com/questions/50865828/what-is-the-difference-between-the-views-and-components-folders-in-a-vue-project
 ctShowAddAndRemoveTabsInDialog is not expected to be accessed by a URL. */
-
 /*
 //#region goal
 Create a tree strucrure that looks like:
@@ -21,7 +20,10 @@ dialog
 
         Goal: make it easy to read view layer and also show change layer as a seperate layer
           custom-class="multi-tab-dialog"
-          :modal="false"
+          :modal=false creates issue to CL close functionality by 'Esc' button
+          setting :modal=true  fixed the 'Esc' button issue but creates shadow in background
+          which is fixed by css in line 285
+          :modal="true"
 
         Goal: declutter the screen and at the same time give easy way to close the diaglog. Hence:
           :close-on-click-modal="true"
@@ -44,7 +46,7 @@ dialog
     -->
   <el-dialog
     custom-class="multi-tab-dialog"
-    :modal="false"
+    :modal="true"
     :close-on-click-modal="true"
     :close-on-press-escape="true"
     :show-close="false"
@@ -275,5 +277,11 @@ Q) How to put the shadow?
   right: 0;
   z-index: 999;
   width: auto;
+}
+/*
+Disabled shadow provided by modal=true in line 50
+*/
+.v-modal {
+  background: none;
 }
 </style>
