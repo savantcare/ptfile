@@ -66,7 +66,11 @@ export default {
       const dataTable = []
 
       // to create timeline the uuid will be same but id will be different.
-      const arResultsFromORM = ormRem.query().where('uuid', this.uuid).orderBy('id', 'desc').get()
+      const arResultsFromORM = ormRem
+        .query()
+        .where('uuid', this.uuid)
+        .orderBy('ROW_START', 'desc')
+        .get()
       console.log('Time line if for uuid', this.uuid)
       if (arResultsFromORM.length) {
         let obj = []
@@ -85,6 +89,7 @@ export default {
           date = new Date(arResultsFromORM[i].ROW_START)
           obj.createdAt = date.toLocaleString('default', { month: 'long' }) + '-' + date.getDate()
           if (
+            arResultsFromORM[i].rowStateOfClientSession === 3 ||
             arResultsFromORM[i].rowStateOfClientSession === 34 ||
             arResultsFromORM[i].rowStateOfClientSession === 3456
           ) {
