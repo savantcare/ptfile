@@ -12,7 +12,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" size="mini" plain @click="sendDataToServer"
-          >Submit<!-- Uncomment to see reminder ID {{ this.firstParam }}--></el-button
+          >Submit {{ this.firstParam }}</el-button
         >
       </el-form-item>
     </el-form>
@@ -64,14 +64,7 @@ export default {
       const dataTable = []
 
       // to create timeline the uuid will be same but id will be different.
-
-      /* Goal: The current description was not taking the description of latest one if sorted by id 
-          To fix this we changed it to sort by ROW_END */
-      const arResultsFromORM = ormRem
-        .query()
-        .where('uuid', this.uuid)
-        .orderBy('ROW_END', 'desc')
-        .get()
+      const arResultsFromORM = ormRem.query().where('uuid', this.uuid).orderBy('id', 'desc').get()
       console.log('Time line if for uuid', this.uuid)
       if (arResultsFromORM.length) {
         let obj = []
@@ -107,53 +100,27 @@ export default {
   },
   mounted() {
     // Goal: If there is no unsaved data then give user a empty form
+    console.log('in mounted fn')
+    let arResultsFromORM = ormRem.find(this.firstParam)
+    this.uuid = arResultsFromORM.uuid
+    arResultsFromORM = this.cfRowInEditStateOnClient
+    console.log(arResultsFromORM)
+    if (!arResultsFromORM.length) {
+      console.log('adding a new blank record. Since this is temporal DB')
+      this.addEmptyRemToUI()
+    }
   },
   methods: {
-    /* Goal: this.uuid was not getting updated if we press ESC to close popup and open different reminder 
-    Removed the code from mounted() and called this function initializeRemData() 
-    from the method getRemDescUsingCache() in line 172
-    so that uuid gets correct value whenever the CL opens
-    */
-    initializeRemData() {
-      console.log('in mounted state')
-      let arResultsFromORM = ormRem.find(this.firstParam)
-      this.uuid = arResultsFromORM.uuid
-      arResultsFromORM = this.cfRowInEditStateOnClient
-      console.log(arResultsFromORM)
-      if (!arResultsFromORM.length) {
-        console.log('adding a new blank record. Since this is temporal DB')
-        this.addEmptyRemToUI()
-      }
-    },
     addEmptyRemToUI() {
       console.log('Add rem called')
-      const arCheckEmptyStateAlreadyExistsInORM = ormRem
-        .query()
-        .where('uuid', this.uuid)
-        .where((_record, query) => {
-          query
-            .where('rowStateOfClientSession', 2) // Data is New and unchanged
-            .orWhere('rowStateOfClientSession', 23) // Data is New -> Changed on client
-            .orWhere('rowStateOfClientSession', 2345) // Data is New -> Changed on client -> Validation error
-            .orWhere('rowStateOfClientSession', 2347) // Data is New -> Changed on client -> Failed to save
-        })
-        .where('rowStateOfClientSession', 2)
-        .get()
-      /* Goal: When change rem is re-opened after closing the tab in CL, the empty record should not be duplicated 
-          To do this we are fetching the unsaved states with same UUID and if found restricting new entry
-      */
-      if (arCheckEmptyStateAlreadyExistsInORM.length === 0) {
-        /* Goal : At the time of opening change popup the input box was not showing current description */
-        const arResultsFromORM = ormRem.insert({
-          data: {
-            uuid: this.uuid,
-            remDesc: this.getRemDescFromVst(), // Called this function to get the latest version of description
-            rowStateOfClientSession: 2, // For meaning of diff values read rem/db/vuex-orm/rems.js:71
-            ROW_START: Math.floor(Date.now() / 1000), // Ref: https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
-          },
-        })
-        console.log(arResultsFromORM)
-      }
+      const arResultsFromORM = ormRem.insert({
+        data: {
+          uuid: this.uuid,
+          rowStateOfClientSession: 2, // For meaning of diff values read rem/db/vuex-orm/rems.js:71
+          ROW_START: Math.floor(Date.now() / 1000), // Ref: https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
+        },
+      })
+      console.log(arResultsFromORM)
     },
     getRemDescUsingCache() {
       /* Performance analysis
@@ -173,7 +140,6 @@ export default {
          Inside get desc. 1st time it comes from ORM from then on it always come from cache. The cache value is set by setRemDesc
         */
 
-      this.initializeRemData()
       console.log(this.firstParam)
       if (this.ORMRowIDForPreviousInvocation !== this.firstParam) this.reminderDescCached = ''
       if (!this.reminderDescCached) {
@@ -191,13 +157,7 @@ export default {
       this.ORMRowIDForPreviousInvocation = this.firstParam
       // When I come here there are 2 possibilities: 1. It is a new row 2. It is a previously edited row
       // Goal: Get the latest data with this UUID. This will take care of both the above cases
-      /* Goal: The current description was not taking the description of latest one if sorted by id 
-          To fix this we changed it to sort by ROW_END */
-      const arResultsFromORM = ormRem
-        .query()
-        .where('uuid', this.uuid)
-        .orderBy('ROW_END', 'desc')
-        .get()
+      const arResultsFromORM = ormRem.query().where('uuid', this.uuid).orderBy('id', 'desc').get()
       console.log(arResultsFromORM, this.uuid)
       if (arResultsFromORM.length > 0) {
         // console.log(arResultsFromORM)
@@ -252,38 +212,8 @@ export default {
           }),
         })
         if (!response.ok) {
-          /* Goal: Update the value of 'rowStateOfClientSession' to success or failure depending on the api response */
-          ormRem.update({
-            where: this.newRowIDfromORM,
-            data: {
-              rowStateOfClientSession: 2345,
-            },
-          })
           console.log('Failed to update')
         } else {
-          /* We are sorting this records by id because all the records have same ROW_END and 
-          as the latest version of the data has newer id we can sort by id */
-          const arResultsFromORM = ormRem
-            .query()
-            .where('uuid', this.uuid)
-            .where('ROW_END', 2147483647.999999)
-            .orderBy('id', 'desc')
-            .get()
-          /* Goal: Update old version of the reminder's ROW_END to current timestamp if change is successful */
-          ormRem.update({
-            where: arResultsFromORM[1].$id,
-            data: {
-              ROW_END: Math.floor(Date.now() / 1000),
-            },
-          })
-
-          /* Goal: Update the value of 'rowStateOfClientSession' to success or failure depending on the api response */
-          ormRem.update({
-            where: this.newRowIDfromORM,
-            data: {
-              rowStateOfClientSession: 2346,
-            },
-          })
           console.log('update success')
         }
       } catch (ex) {}

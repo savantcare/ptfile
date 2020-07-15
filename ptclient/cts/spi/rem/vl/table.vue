@@ -26,6 +26,7 @@
             <p>Row start: {{ props.row.ROW_START }}</p>
             <p>Row end: {{ props.row.ROW_END }}</p>
             <p>uuid: {{ props.row.uuid }}</p>
+            <p>id: {{ props.row.id }}</p>
           </template>
         </el-table-column>
 
@@ -75,26 +76,39 @@ export default {
     }
   },
   computed: {
-    cfLengthOfDataArray() {
+    cfGetUniqueReminders() {
       const arResultsFromORM = ormRem.query().where('ROW_END', 2147483647.999999).get()
+
+      const uniqueUUIDReminders = []
+
+      // Goal: Find unique UUIDs since it is possible that some UUID is being changed and now there are 2 records with same UUID
+
+      let breakCheck1 = false
+      for (let i = 0; i < arResultsFromORM.length; i++) {
+        for (let j = 0; j < uniqueUUIDReminders.length; j++) {
+          if (arResultsFromORM[i].uuid === uniqueUUIDReminders[j].uuid) {
+            breakCheck1 = true
+            break
+          }
+        }
+        if (breakCheck1) break
+        uniqueUUIDReminders.push(arResultsFromORM[i])
+      }
+
+      return uniqueUUIDReminders
+    },
+
+    cfLengthOfDataArray() {
+      const arResultsFromORM = this.cfGetUniqueReminders
       return arResultsFromORM.length
     },
+
     cfArOfRemForDisplayInTable() {
       console.log(
         'cfArOfRemForDisplayInTable called. Whenever ormRem will change this will get called. Even when there are 100 rows in the table when orm rem changes this gets called once'
       )
-      /* Goal: Whenever 'C' icon is clicked to open CL popup a blank row was getting populated in the VL table
-      To fix the problem we are loading only those values which are saved in DB and added the condition checking 
-      on  rowStateOfClientSession */
-      const arResultsFromORM = ormRem
-        .query()
-        .where('ROW_END', 2147483647.999999)
-        .where((_record, query) => {
-          query
-            .where('rowStateOfClientSession', 1) // Data is New and unchanged
-            .orWhere('rowStateOfClientSession', 2346) // Data is New -> Changed on client -> Saved successfully
-        })
-        .get()
+
+      const arResultsFromORM = this.cfGetUniqueReminders
 
       /*  Q) Should this function return the array it gets from ORM or modify the array? 
               Option1: Return origianl array
@@ -122,6 +136,7 @@ export default {
           obj.$isDirty = arResultsFromORM[i].$isDirty
           obj.uuid = arResultsFromORM[i].uuid
           obj.$id = arResultsFromORM[i].$id
+          obj.id = arResultsFromORM[i].id
           arRemsForDisplay.push(obj)
         }
       }
