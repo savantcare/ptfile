@@ -12,7 +12,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" size="mini" plain @click="sendDataToServer"
-          >Submit {{ this.firstParam }}</el-button
+          >Submit<!-- firstpapram is {{ this.firstParam }}--></el-button
         >
       </el-form-item>
     </el-form>
