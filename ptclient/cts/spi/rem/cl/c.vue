@@ -186,9 +186,8 @@ export default {
 
     getRemDescFromVst() {
       // Full form: Get reminder description from view state.
-      // console.log('Inside get desc')
-      // When I come here there are 2 possibilities: 1. It is a new row 2. It is a previously edited row
-      // Goal: Get the latest data with this UUID. This will take care of both the above cases
+
+      // Goal: Get the latest data with this UUID. Since there can be 2 rows with the same UUID hence important to get latest row with the same UUID
       const arResultsFromORM = ormRem.query().where('uuid', this.uuid).orderBy('id', 'desc').get()
       console.log(arResultsFromORM, this.uuid)
       if (arResultsFromORM.length > 0) {
