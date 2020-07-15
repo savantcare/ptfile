@@ -1,17 +1,18 @@
 <!-- For design see ptclient/docs/forms.md -->
 <template>
   <div>
+    <!-- Goal: Show multiple add boxes along with remove each row and reset whole form -->
     <el-form>
       <el-form-item v-for="rem in cfRowsInEditStateOnClient" :key="rem.id">
         <!-- Prop explaination  Read prop explanation for span=4 on line 19 -->
         <el-col :span="20" :class="rem.validationClass">
           <el-input
             type="textarea"
-            :class="mfGetDirtyClassName(rem.id)"
+            :class="mfGetCssClassName(rem.id)"
             :autosize="{ minRows: 2, maxRows: 10 }"
             placeholder="Please enter the reminder .."
             :value="getDesc(rem.id)"
-            @input="setRemDescInVstOnDelay($event, rem.id)"
+            @input="setRemDescInOrmOnDelay($event, rem.id)"
           ></el-input>
           <div v-if="rem.isValidationError" class="el-form-item__error">
             Please enter minimum 3 characters.
@@ -93,6 +94,16 @@ export default {
     if (!arFromORM.length) this.addEmptyRemToUI()
   },
   methods: {
+    addEmptyRemToUI() {
+      console.log('Add rem called')
+      const arFromORM = ormRem.insert({
+        data: {
+          rowStateOfClientSession: 2, // For meaning of diff values read rem/db/vuex-orm/rems.js:71
+          ROW_START: Math.floor(Date.now() / 1000), // Ref: https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
+        },
+      })
+      console.log(arFromORM)
+    },
     /* Why are getDesc and setDesc not a single computed function called desc with a setter and a getter
       Initially tried to write v-model and this was computed function
        But vmodel+computed the Desc id cannot be sent to computed fn
@@ -110,7 +121,7 @@ export default {
       }
     },
     // state updates are smarter.
-    setRemDescInVstOnDelay(pEvent, pRemIDGivenByORM) {
+    setRemDescInOrmOnDelay(pEvent, pRemIDGivenByORM) {
       // Full form: Set reminder in vue state on delay
       if (this.vSaveToStateScheduledUsedForSmartUpdatesToState) {
         console.log('clearing timeout')
@@ -119,7 +130,7 @@ export default {
       /* Ref: https://stackoverflow.com/questions/38399050/vue-equivalent-of-settimeout */
       this.vSaveToStateScheduledUsedForSmartUpdatesToState = setTimeout(
         function (scope) {
-          scope.setRemDescInVst(pEvent, pRemIDGivenByORM)
+          scope.setRemDescInOrm(pEvent, pRemIDGivenByORM)
         },
         500,
         this
@@ -127,7 +138,7 @@ export default {
       this.reminderDescCached = pEvent
     },
 
-    setRemDescInVst(pEvent, pRemIDGivenByORM) {
+    setRemDescInOrm(pEvent, pRemIDGivenByORM) {
       console.log('set called for', pRemIDGivenByORM, pEvent)
 
       const arFromORM = ormRem.update({
@@ -141,7 +152,7 @@ export default {
       })
       console.log(arFromORM)
     },
-    mfGetDirtyClassName(pRemIDGivenByORM) {
+    mfGetCssClassName(pRemIDGivenByORM) {
       console.log(pRemIDGivenByORM)
       const arFromORM = ormRem.find(pRemIDGivenByORM)
       if (arFromORM && arFromORM.rowStateOfClientSession === 24) {
@@ -151,17 +162,29 @@ export default {
         return ''
       }
     },
-    addEmptyRemToUI() {
-      console.log('Add rem called')
-      const arFromORM = ormRem.insert({
-        data: {
-          rowStateOfClientSession: 2, // For meaning of diff values read rem/db/vuex-orm/rems.js:71
-          ROW_START: Math.floor(Date.now() / 1000), // Ref: https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
-        },
-      })
-      console.log(arFromORM)
+    removeSingleRemInAddForm(pRemIDGivenByORM) {
+      ormRem.delete(pRemIDGivenByORM)
+      // if there are no records left then I need to add a empty. For goal read docs/forms.md/1.3
+      const arFromORM = this.cfRowsInEditStateOnClient
+      if (arFromORM.length) {
+      } else {
+        this.reminderDescCached = null
+        this.addEmptyRemToUI()
+      }
     },
-
+    resetForm(formName) {
+      const arFromORM = this.cfRowsInEditStateOnClient
+      if (arFromORM.length) {
+        console.log('unsaved data found', arFromORM)
+        for (let i = 0; i < arFromORM.length; i++) {
+          console.log('Deleting data from ORM')
+          ormRem.delete(arFromORM[i].$id)
+        }
+      } else {
+        console.log('No Unsaved data')
+      }
+      this.addEmptyRemToUI()
+    },
     async onSubmit() {
       let arFromORM = ormRem
         .query()
@@ -247,29 +270,6 @@ export default {
         }
       } catch (ex) {
         return 0 // Returns error code when try block gets an exception and fails
-      }
-    },
-    resetForm(formName) {
-      const arFromORM = this.cfRowsInEditStateOnClient
-      if (arFromORM.length) {
-        console.log('unsaved data found', arFromORM)
-        for (let i = 0; i < arFromORM.length; i++) {
-          console.log('Deleting data from ORM')
-          ormRem.delete(arFromORM[i].$id)
-        }
-      } else {
-        console.log('No Unsaved data')
-      }
-      this.addEmptyRemToUI()
-    },
-    removeSingleRemInAddForm(pRemIDGivenByORM) {
-      ormRem.delete(pRemIDGivenByORM)
-      // if there are no records left then I need to add a empty. For goal read docs/forms.md/1.3
-      const arFromORM = this.cfRowsInEditStateOnClient
-      if (arFromORM.length) {
-      } else {
-        this.reminderDescCached = null
-        this.addEmptyRemToUI()
       }
     },
   },
