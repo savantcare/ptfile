@@ -102,10 +102,11 @@ export default {
   },
   mounted() {},
   methods: {
-    addEmptyRemToUI() {
+    addEmptyRemToUI(pDesc) {
       console.log('Add rem called')
       const arResultsFromORM = ormRem.insert({
         data: {
+          remDesc: pDesc,
           uuid: this.uuid,
           rowStateOfClientSession: 3, // For meaning of diff values read rem/db/vuex-orm/rems.js:71
           ROW_START: Math.floor(Date.now() / 1000), // Ref: https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
@@ -164,11 +165,11 @@ export default {
         this.uuid = arResultsFromORM.uuid
         this.reminderDescCached = null
         console.log('Find if there is unsaved data', this.uuid)
-        arResultsFromORM = this.cfRowInEditStateOnClient
+        const arEditRowsFromORM = this.cfRowInEditStateOnClient
         // console.log(arResultsFromORM)
-        if (!arResultsFromORM.length) {
+        if (!arEditRowsFromORM.length) {
           console.log('adding a new blank record. Since this is temporal DB')
-          this.addEmptyRemToUI()
+          this.addEmptyRemToUI(arResultsFromORM.remDesc)
         }
       }
 
