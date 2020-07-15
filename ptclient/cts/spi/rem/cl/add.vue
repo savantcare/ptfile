@@ -3,7 +3,7 @@
   <div>
     <!-- Goal: Show multiple add boxes along with remove each row and reset whole form -->
     <el-form>
-      <el-form-item v-for="rem in cfRowsInEditStateOnClient" :key="rem.id">
+      <el-form-item v-for="rem in cfRowsInEditStateInOrm" :key="rem.id">
         <!-- Prop explaination  Read prop explanation for span=4 on line 19 -->
         <el-col :span="20" :class="rem.validationClass">
           <el-input
@@ -34,7 +34,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" plain @click="onSubmit">Submit</el-button>
-        <el-button type="primary" plain @click="addEmptyRemToUI">Add more</el-button>
+        <el-button type="primary" plain @click="addEmptyRemToOrm">Add more</el-button>
         <el-button type="warning" plain @click="resetForm">Reset form</el-button>
       </el-form-item>
     </el-form>
@@ -63,12 +63,12 @@ import ormRem from '@/cts/spi/rem/db/vuex-orm/rem.js'
 export default {
   data() {
     return {
-      vSaveToStateScheduledUsedForSmartUpdatesToState: '',
+      vStateSaveScheduled: '',
       reminderDescCached: '',
     }
   },
   computed: {
-    cfRowsInEditStateOnClient() {
+    cfRowsInEditStateInOrm() {
       const arFromORM = ormRem
         .query()
         .where('rowStateOfClientSession', 2) // New
@@ -90,11 +90,11 @@ export default {
   },
   mounted() {
     // Goal: If there is no unsaved data then give user a empty form
-    const arFromORM = this.cfRowsInEditStateOnClient
-    if (!arFromORM.length) this.addEmptyRemToUI()
+    const arFromORM = this.cfRowsInEditStateInOrm
+    if (!arFromORM.length) this.addEmptyRemToOrm()
   },
   methods: {
-    addEmptyRemToUI() {
+    addEmptyRemToOrm() {
       console.log('Add rem called')
       const arFromORM = ormRem.insert({
         data: {
@@ -123,12 +123,12 @@ export default {
     // state updates are smarter.
     setRemDescInOrmOnDelay(pEvent, pRemIDGivenByORM) {
       // Full form: Set reminder in vue state on delay
-      if (this.vSaveToStateScheduledUsedForSmartUpdatesToState) {
+      if (this.vStateSaveScheduled) {
         console.log('clearing timeout')
-        clearTimeout(this.vSaveToStateScheduledUsedForSmartUpdatesToState)
+        clearTimeout(this.vStateSaveScheduled)
       }
       /* Ref: https://stackoverflow.com/questions/38399050/vue-equivalent-of-settimeout */
-      this.vSaveToStateScheduledUsedForSmartUpdatesToState = setTimeout(
+      this.vStateSaveScheduled = setTimeout(
         function (scope) {
           scope.setRemDescInOrm(pEvent, pRemIDGivenByORM)
         },
@@ -165,15 +165,15 @@ export default {
     removeSingleRemInAddForm(pRemIDGivenByORM) {
       ormRem.delete(pRemIDGivenByORM)
       // if there are no records left then I need to add a empty. For goal read docs/forms.md/1.3
-      const arFromORM = this.cfRowsInEditStateOnClient
+      const arFromORM = this.cfRowsInEditStateInOrm
       if (arFromORM.length) {
       } else {
         this.reminderDescCached = null
-        this.addEmptyRemToUI()
+        this.addEmptyRemToOrm()
       }
     },
     resetForm(formName) {
-      const arFromORM = this.cfRowsInEditStateOnClient
+      const arFromORM = this.cfRowsInEditStateInOrm
       if (arFromORM.length) {
         console.log('unsaved data found', arFromORM)
         for (let i = 0; i < arFromORM.length; i++) {
@@ -183,7 +183,7 @@ export default {
       } else {
         console.log('No Unsaved data')
       }
-      this.addEmptyRemToUI()
+      this.addEmptyRemToOrm()
     },
     async onSubmit() {
       let arFromORM = ormRem
@@ -238,11 +238,11 @@ export default {
         }
       }
       // if there are no records left then I need to add a empty. For goal read docs/forms.md/1.3
-      arFromORM = this.cfRowsInEditStateOnClient
+      arFromORM = this.cfRowsInEditStateInOrm
       if (arFromORM.length) {
       } else {
         this.reminderDescCached = null
-        this.addEmptyRemToUI()
+        this.addEmptyRemToOrm()
       }
     },
     async sendDataToServer(pORMRowArray) {
