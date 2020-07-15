@@ -992,12 +992,6 @@ export default {
       },
     }
   },
-  methods: {
-    handleClose(done) {
-      // console.log('In the handle close function')
-      this.cfMapDrawerVisibility = false
-    },
-  },
   computed: {
     cfMapDrawerVisibility: {
       get() {
@@ -1010,6 +1004,12 @@ export default {
   },
   mounted() {
     // console.log('Drawer ct mounted')
+  },
+  methods: {
+    handleClose(done) {
+      // console.log('In the handle close function')
+      this.cfMapDrawerVisibility = false
+    },
   },
 }
 </script>
