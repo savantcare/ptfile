@@ -8,6 +8,7 @@
 <template>
   <el-drawer
     title="Map"
+    :with-header="false"
     :visible="cfMapDrawerVisibility"
     direction="ttb"
     :before-close="handleClose"
