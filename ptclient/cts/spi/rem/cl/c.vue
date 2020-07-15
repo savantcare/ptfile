@@ -51,12 +51,13 @@ export default {
     cfRowInEditStateOnClient() {
       const arResultsFromORM = ormRem
         .query()
-        .where('rowStateOfClientSession', 23) // New -> Changed
-        .orWhere('rowStateOfClientSession', 2345) // New -> Changed -> Requested save -> form error
+        .where('rowStateOfClientSession', 34) // Copy -> Changed
+        .orWhere('rowStateOfClientSession', 3456) // Copy -> Changed -> Requested save -> form error
         .where((_record, query) => {
           query.where('uuid', this.uuid)
         })
         .get()
+      console.log(arResultsFromORM)
       return arResultsFromORM
     },
     cfTimeLineDataAr() {
@@ -83,10 +84,10 @@ export default {
           date = new Date(arResultsFromORM[i].ROW_START)
           obj.createdAt = date.toLocaleString('default', { month: 'long' }) + '-' + date.getDate()
           if (
-            arResultsFromORM[i].rowStateOfClientSession === 23 ||
-            arResultsFromORM[i].rowStateOfClientSession === 2345
+            arResultsFromORM[i].rowStateOfClientSession === 34 ||
+            arResultsFromORM[i].rowStateOfClientSession === 3456
           ) {
-            obj.type = 'warning'
+            obj.type = 'warning' // row is being edited and is not on server
           } else {
             obj.type = ''
           }
@@ -98,25 +99,14 @@ export default {
       return dataTable
     },
   },
-  mounted() {
-    // Goal: If there is no unsaved data then give user a empty form
-    console.log('in mounted fn')
-    let arResultsFromORM = ormRem.find(this.firstParam)
-    this.uuid = arResultsFromORM.uuid
-    arResultsFromORM = this.cfRowInEditStateOnClient
-    console.log(arResultsFromORM)
-    if (!arResultsFromORM.length) {
-      console.log('adding a new blank record. Since this is temporal DB')
-      this.addEmptyRemToUI()
-    }
-  },
+  mounted() {},
   methods: {
     addEmptyRemToUI() {
       console.log('Add rem called')
       const arResultsFromORM = ormRem.insert({
         data: {
           uuid: this.uuid,
-          rowStateOfClientSession: 2, // For meaning of diff values read rem/db/vuex-orm/rems.js:71
+          rowStateOfClientSession: 3, // For meaning of diff values read rem/db/vuex-orm/rems.js:71
           ROW_START: Math.floor(Date.now() / 1000), // Ref: https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
         },
       })
@@ -140,10 +130,53 @@ export default {
          Inside get desc. 1st time it comes from ORM from then on it always come from cache. The cache value is set by setRemDesc
         */
 
-      console.log(this.firstParam)
-      if (this.ORMRowIDForPreviousInvocation !== this.firstParam) this.reminderDescCached = ''
+      console.log('in get desc from cache fn')
+
+      /* States: For the paramters supplied to this Ct.
+                 1. Repeat invocatoion => 1.1 no unsaved data 1.2 there is unsaved data
+                 2. First time invocation => 2.1 no unsaved data 2.2 there is unsaved data 
+
+        What are the different times this function is called?
+          1. User types multiple keystrokes. This fn is called for each keystroke
+          2. User click C from the table. Uses esc key to closes the tab and then again clicks C
+          3. User click C from table clicks cross to exit the tab and then again click C
+
+          1st click on C -> 1 fti / 1 ri 
+                      each keystroke -> ri 2 times   
+                                                    close tab by clicking outside modal -> 
+                                                                                then click same C -> NO  fti / ri                                                                                
+                                                                                then click different C -> 1 fti / 1 ri
+                                                    close tab by clicking cross -> then click same C -> -> 1 fti / 1 ri 
+        */
+
+      // Goal: decide if it is repeat or first invocation
+      let arResultsFromORM = []
+      if (this.ORMRowIDForPreviousInvocation === this.firstParam) {
+        console.log('this is repeat invocation')
+        // this.uuid is already existing
+        // the new empty row where the user can type is already existing
+      } else {
+        // this is first time this Ct has been called with this parameter
+        console.log('this is first time invocation')
+        this.ORMRowIDForPreviousInvocation = this.firstParam
+        arResultsFromORM = ormRem.find(this.firstParam)
+        this.uuid = arResultsFromORM.uuid
+        this.reminderDescCached = null
+        console.log('Find if there is unsaved data', this.uuid)
+        arResultsFromORM = this.cfRowInEditStateOnClient
+        // console.log(arResultsFromORM)
+        if (!arResultsFromORM.length) {
+          console.log('adding a new blank record. Since this is temporal DB')
+          this.addEmptyRemToUI()
+        }
+      }
+
+      // From this point on the state is the same.
+
       if (!this.reminderDescCached) {
-        // console.log('Going to run query on vuexORM since for this parameter data has never been fetched from vuex-orm')
+        console.log(
+          'Going to run query on vuexORM since for this parameter data has never been fetched from vuex-orm'
+        )
         return this.getRemDescFromVst()
       } else {
         console.log('Better perf: Returning without running query on vuexORM')
@@ -154,7 +187,6 @@ export default {
     getRemDescFromVst() {
       // Full form: Get reminder description from view state.
       // console.log('Inside get desc')
-      this.ORMRowIDForPreviousInvocation = this.firstParam
       // When I come here there are 2 possibilities: 1. It is a new row 2. It is a previously edited row
       // Goal: Get the latest data with this UUID. This will take care of both the above cases
       const arResultsFromORM = ormRem.query().where('uuid', this.uuid).orderBy('id', 'desc').get()
@@ -194,7 +226,7 @@ export default {
         where: this.newRowIDfromORM,
         data: {
           remDesc: pEvent,
-          rowStateOfClientSession: 23,
+          rowStateOfClientSession: 34,
         },
       })
     },

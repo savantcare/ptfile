@@ -19,10 +19,10 @@ module.exports = {
   rules: {
     /*
       Q) Why needed? 
-      - before every build eslint loader check all files and return format errors and warnings (eg:  no-console, whitspace ...) in console and console look show dirty.
-      ** this config by passing below mention warning from production enviroment
+      - before every build eslint loader check all files and return format errors and warnings (eg:  no-console, whitspace ...) in console.
+      - We do not want to show these errors in production environment as private data may leak.
     */
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'warning', // stop showing console warning from production enviroment
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'warning', // stop showing debugger warning from production enviroment
+    'no-console': process.env.NODE_ENV === 'production' ? 'off' : 'warning', // stop showing console warning from production enviroment
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'off' : 'warning', // stop showing debugger warning from production enviroment
   },
 }

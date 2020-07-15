@@ -27,14 +27,15 @@ e.g. cts/spi/rem/db/vuex-orm/rems:71
 # Q3) What are the different possible values for rowStateOfClientSession?
 
 0 => Not known
-1 => Got from DB and not changed on client
-2 => Created new on client but not on the server yet.
-3 => Changed on client
+1 => Got from DB. Same as DB.
+2 => Created new on client
+3 => Created as copy on client
+4 => Changed on client
 After 2 if there is success the state goes back to 1
-4 => Client requested save to server. Now data validation on client side will start.
-5 => form error on client side
-6 => Data sent to server to save
-7 => Data saved to server failed.
+5 => Client requested save to server. Now data validation on client side will start.
+6 => form error on client side
+7 => Data sent to server to save
+8 => Data saved to server failed.
 
 Data is stored with the timeline
 

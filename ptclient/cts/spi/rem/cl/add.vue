@@ -68,19 +68,19 @@ export default {
       const arResultsFromORM = ormRem
         .query()
         .where('rowStateOfClientSession', 2) // New
-        .orWhere('rowStateOfClientSession', 23) // New -> Changed
-        .orWhere('rowStateOfClientSession', 2345) // New -> Changed -> Requested save -> form error
+        .orWhere('rowStateOfClientSession', 24) // New -> Changed
+        .orWhere('rowStateOfClientSession', 2456) // New -> Changed -> Requested save -> form error
         .get()
       return arResultsFromORM
     },
     cfDataSavedToDBThisSessionSuccessfully() {
       // New -> Changed -> Requested save -> Sent to server -> Success
-      const arResultsFromORM = ormRem.query().where('rowStateOfClientSession', 23461).get()
+      const arResultsFromORM = ormRem.query().where('rowStateOfClientSession', 24571).get()
       return arResultsFromORM
     },
     cfDataApiErrorThisSession() {
       // New -> Changed -> Requested save -> Sent to server -> Failure
-      const arResultsFromORM = ormRem.query().where('rowStateOfClientSession', 23467).get()
+      const arResultsFromORM = ormRem.query().where('rowStateOfClientSession', 24578).get()
       return arResultsFromORM
     },
   },
@@ -111,7 +111,7 @@ export default {
         where: pRemIDGivenByORM,
         data: {
           remDesc: pEvent,
-          rowStateOfClientSession: 23,
+          rowStateOfClientSession: 24,
           validationClass: '',
           isValidationError: false,
         },
@@ -121,7 +121,7 @@ export default {
     mfGetDirtyClassName(pRemIDGivenByORM) {
       console.log(pRemIDGivenByORM)
       const arResultsFromORM = ormRem.find(pRemIDGivenByORM)
-      if (arResultsFromORM && arResultsFromORM.rowStateOfClientSession === 23) {
+      if (arResultsFromORM && arResultsFromORM.rowStateOfClientSession === 24) {
         // New -> Changed
         return 'unsaved-data'
       } else {
@@ -142,18 +142,19 @@ export default {
     async onSubmit() {
       let arResultsFromORM = ormRem
         .query()
-        .where('rowStateOfClientSession', 23) // New -> Changed
-        .orWhere('rowStateOfClientSession', 2345) // New -> Changed -> Requested save -> form error
+        .where('rowStateOfClientSession', 24) // New -> Changed
+        .orWhere('rowStateOfClientSession', 2456) // New -> Changed -> Requested save -> form error
         .get()
       if (arResultsFromORM.length) {
         console.log('unsaved data found', arResultsFromORM)
         for (let i = 0; i < arResultsFromORM.length; i++) {
           if (arResultsFromORM[i].remDesc.length < 3) {
+            // Validation check
             ormRem.update({
               where: (record) => record.id === arResultsFromORM[i].id,
               data: {
                 validationClass: 'validaionErrorExist',
-                rowStateOfClientSession: '2345', // New -> Changed -> Requested save -> form error
+                rowStateOfClientSession: '2456', // New -> Changed -> Requested save -> form error
                 isValidationError: true,
               },
             })
@@ -162,7 +163,7 @@ export default {
               where: (record) => record.id === arResultsFromORM[i].id,
               data: {
                 validationClass: '',
-                rowStateOfClientSession: '2346', // New -> Changed -> Requested save -> Send to server
+                rowStateOfClientSession: '2457', // New -> Changed -> Requested save -> Send to server
                 isValidationError: false,
               },
             })
@@ -176,14 +177,14 @@ export default {
               ormRem.update({
                 where: (record) => record.id === arResultsFromORM[i].id,
                 data: {
-                  rowStateOfClientSession: '23467', // New -> Changed -> Requested save -> Send to server -> API fail
+                  rowStateOfClientSession: '24578', // New -> Changed -> Requested save -> Send to server -> API fail
                 },
               })
             } else {
               ormRem.update({
                 where: (record) => record.id === arResultsFromORM[i].id,
                 data: {
-                  rowStateOfClientSession: '23461', // New -> Changed -> Requested save -> Send to server -> API Success
+                  rowStateOfClientSession: '24571', // New -> Changed -> Requested save -> Send to server -> API Success
                 },
               })
             }
