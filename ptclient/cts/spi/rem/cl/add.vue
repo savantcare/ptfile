@@ -11,7 +11,7 @@
             :autosize="{ minRows: 2, maxRows: 10 }"
             placeholder="Please enter the reminder .."
             :value="getDesc(rem.id)"
-            @input="setDesc($event, rem.id)"
+            @input="setRemDescInVstOnDelay($event, rem.id)"
           ></el-input>
           <div v-if="rem.isValidationError" class="el-form-item__error">
             Please enter minimum 3 characters.
@@ -61,7 +61,10 @@ import { REMINDER_API_URL } from '../const.js'
 import ormRem from '@/cts/spi/rem/db/vuex-orm/rem.js'
 export default {
   data() {
-    return {}
+    return {
+      vSaveToStateScheduledUsedForSmartUpdatesToState: '',
+      reminderDescCached: '',
+    }
   },
   computed: {
     cfRowsInEditStateOnClient() {
@@ -96,15 +99,35 @@ export default {
        */
     getDesc(pRemIDGivenByORM) {
       console.log(pRemIDGivenByORM)
-      const arFromORM = ormRem.find(pRemIDGivenByORM)
-      if (arFromORM) {
-        console.log(arFromORM)
-        return arFromORM.remDesc
+      if (!this.reminderDescCached) {
+        const arFromORM = ormRem.find(pRemIDGivenByORM)
+        if (arFromORM) {
+          console.log(arFromORM)
+          return arFromORM.remDesc
+        }
       } else {
-        return ''
+        return this.reminderDescCached
       }
     },
-    setDesc(pEvent, pRemIDGivenByORM) {
+    // state updates are smarter.
+    setRemDescInVstOnDelay(pEvent, pRemIDGivenByORM) {
+      // Full form: Set reminder in vue state on delay
+      if (this.vSaveToStateScheduledUsedForSmartUpdatesToState) {
+        console.log('clearing timeout')
+        clearTimeout(this.vSaveToStateScheduledUsedForSmartUpdatesToState)
+      }
+      /* Ref: https://stackoverflow.com/questions/38399050/vue-equivalent-of-settimeout */
+      this.vSaveToStateScheduledUsedForSmartUpdatesToState = setTimeout(
+        function (scope) {
+          scope.setRemDescInVst(pEvent, pRemIDGivenByORM)
+        },
+        500,
+        this
+      )
+      this.reminderDescCached = pEvent
+    },
+
+    setRemDescInVst(pEvent, pRemIDGivenByORM) {
       console.log('set called for', pRemIDGivenByORM, pEvent)
 
       const arFromORM = ormRem.update({

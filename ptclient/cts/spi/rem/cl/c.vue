@@ -215,7 +215,7 @@ export default {
         function (scope) {
           scope.setRemDescInVst(pEvent)
         },
-        500,
+        1000,
         this
       )
 
