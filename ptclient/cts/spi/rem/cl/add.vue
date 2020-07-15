@@ -40,16 +40,16 @@
     </el-form>
     <!-- Goal: Show data saved successfuly this session -->
     <el-table
-      v-if="cfDataSavedToDBThisSessionSuccessfully.length > 0"
-      :data="cfDataSavedToDBThisSessionSuccessfully"
+      v-if="cfDataApiSuccessInThisSession.length > 0"
+      :data="cfDataApiSuccessInThisSession"
       style="width: 100%; background: #f0f9eb;"
     >
       <el-table-column prop="remDesc" label="Reminders added this session"> </el-table-column>
     </el-table>
     <!-- Goal: Show data of API that failed -->
     <el-table
-      v-if="cfDataApiErrorThisSession.length > 0"
-      :data="cfDataApiErrorThisSession"
+      v-if="cfDataApiErrorInThisSession.length > 0"
+      :data="cfDataApiErrorInThisSession"
       style="width: 100%; background: #f0f9eb;"
     >
       <el-table-column prop="remDesc" label="Error: Reminders attempted but failed to save">
@@ -78,13 +78,13 @@ export default {
         .get()
       return arFromORM
     },
-    cfDataSavedToDBThisSessionSuccessfully() {
+    cfDataApiSuccessInThisSession() {
       // C2/3
       // New -> Changed -> Requested save -> Sent to server -> Success
       const arFromORM = ormRem.query().where('rowStateInClientSession', 24571).get()
       return arFromORM
     },
-    cfDataApiErrorThisSession() {
+    cfDataApiErrorInThisSession() {
       // C3/3
       // New -> Changed -> Requested save -> Sent to server -> Failure
       const arFromORM = ormRem.query().where('rowStateInClientSession', 24578).get()
