@@ -77,7 +77,6 @@ export default {
   },
   computed: {
     cfGetUniqueReminders() {
-      debugger
       const arFromORM = ormRem.query().where('ROW_END', 2147483647.999999).get()
 
       const uniqueUUIDReminders = []
