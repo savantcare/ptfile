@@ -165,11 +165,7 @@ export default {
         */
         const cfDialogWidth = this.$store.state.vstObjTabsInCL.vbldialogWidth
         console.log('cfDialogWidth', cfDialogWidth)
-        if (cfDialogWidth === '' || cfDialogWidth === 'small') {
-          return '50%'
-        } else if (cfDialogWidth === 'large') {
-          return '80%'
-        }
+        return cfDialogWidth === '' || cfDialogWidth === 'small' ? '50%' : '80%'
       },
       set(value) {
         this.$store.commit('mtfSetTabDialogWidth', value)
