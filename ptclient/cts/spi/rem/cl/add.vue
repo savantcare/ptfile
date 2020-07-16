@@ -28,7 +28,7 @@
               plain
               type="warning"
               style="float: right;"
-              @click="mfRemoveSingleRemInAddForm(rem.id)"
+              @click="mfDeleteRowFromOrm(rem.id)"
               >Remove</el-button
             >
           </el-col>
@@ -163,11 +163,9 @@ export default {
         return ''
       }
     },
-    mfRemoveSingleRemInAddForm(pRemIDGivenByORM) {
+    mfDeleteRowFromOrm(pRemIDGivenByORM) {
       // M6/9
       ormRem.delete(pRemIDGivenByORM)
-      // if there are no records left then I need to add a empty. For goal read docs/forms.md/1.3
-      const arFromORM = this.cfEditStateRowsInOrm
     },
     mfResetForm(formName) {
       // M7/9
