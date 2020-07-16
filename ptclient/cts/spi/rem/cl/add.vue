@@ -42,6 +42,15 @@
         <el-button type="warning" plain @click="mfResetForm">Reset form</el-button>
       </el-form-item>
     </el-form>
+    <!-- Goal: Show data at the time of sending to server -->
+    <el-table
+      v-if="cfGetOrmApiSendingStateRows.length > 0"
+      :data="cfGetOrmApiSendingStateRows"
+      style="width: 100%; background: #f0f9eb;"
+    >
+      <el-table-column prop="remDesc" label="Reminders sending to server"> </el-table-column>
+    </el-table>
+
     <!-- Goal: Show data saved successfuly this session -->
     <el-table
       v-if="cfGetOrmApiSuccessStateRows.length > 0"
@@ -76,6 +85,9 @@ export default {
     },
     cfGetOrmApiErrorStateRows() {
       return ormRem.getApiErrorStateRows()
+    },
+    cfGetOrmApiSendingStateRows() {
+      return ormRem.getApiSendingStateRows()
     },
   },
   mounted() {},
