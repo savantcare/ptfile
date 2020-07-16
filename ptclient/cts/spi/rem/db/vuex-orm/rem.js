@@ -1,20 +1,10 @@
 // For docs read ptclient/docs/models.md
-import { Model } from '@vuex-orm/core'
+import rowStatus from '@/cts/spi/rem/db/vuex-orm/rowstatus.js'
+
 const { v1: uuidv1 } = require('uuid')
 
 let count = 0
 const intUniqueID = () => ++count
-
-class rowStatus extends Model {
-  static getOrmEditStateRows() {
-    const arFromORM = this.query()
-      .where('rowStateInThisSession', 2) // New
-      .orWhere('rowStateInThisSession', 24) // New -> Changed
-      .orWhere('rowStateInThisSession', 2456) // New -> Changed -> Requested save -> form error
-      .get()
-    return arFromORM
-  }
-}
 
 export default class reminders extends rowStatus {
   static entity = 'rem'

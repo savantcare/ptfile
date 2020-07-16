@@ -68,31 +68,22 @@ export default {
   data() {
     return {
       vOrmSaveScheduled: '',
-      arOrmRowsCached: [],
     }
   },
   computed: {
     cfGetOrmEditStateRows() {
-      // C1/3 Possible improvement: Can this be defined in a base class from which Rem and Rec come so Rem and Rec get this function from base class.
       return ormRem.getOrmEditStateRows()
     },
     cfGetOrmApiSuccessStateRows() {
-      // C2/3
-      // New -> Changed -> Requested save -> Sent to server -> Success
-      const arFromORM = ormRem.query().where('rowStateInThisSession', 24571).get()
-      return arFromORM
+      return ormRem.getOrmApiSuccessStateRows()
     },
     cfGetOrmApiErrorStateRows() {
-      // C3/3
-      // New -> Changed -> Requested save -> Sent to server -> Failure
-      const arFromORM = ormRem.query().where('rowStateInThisSession', 24578).get()
-      return arFromORM
+      return ormRem.getOrmApiErrorStateRows()
     },
   },
   mounted() {},
   methods: {
     mfAddEmptyRowInOrm() {
-      // M1/9
       const arFromORM = ormRem.insert({
         data: {
           remDesc: '',
@@ -105,61 +96,15 @@ export default {
       }
     },
     mfGetField(pOrmRowId, pFieldName) {
-      // M2/9
-      if (typeof this.arOrmRowsCached[pOrmRowId] === 'undefined') {
-        return this.mfGetFieldFromOrm(pOrmRowId, pFieldName)
-      }
-      return this.arOrmRowsCached[pOrmRowId][pFieldName]
-    },
-    mfGetFieldFromOrm(pOrmRowId, pFieldName) {
-      const arFromORM = ormRem.find(pOrmRowId)
-      if (arFromORM) {
-        return arFromORM[pFieldName]
-      }
+      console.log('mf get field called')
+      return ormRem.getField(pOrmRowId, pFieldName)
     },
     // state updates are smarter.
     mfSetFieldInOrmOnTimeout(pEvent, pOrmRowId, pFieldName) {
-      // M3/9 // Ref: https://stackoverflow.com/questions/45644781/update-value-in-multidimensional-array-in-vue
-      let newRow = []
-      if (typeof this.arOrmRowsCached[pOrmRowId] === 'undefined') {
-        console.log('Creating a new blank row')
-      } else {
-        newRow = this.arOrmRowsCached[pOrmRowId].slice(0)
-        console.log('Pulling out existiung row')
-      }
-      newRow[pFieldName] = pEvent
-      this.$set(this.arOrmRowsCached, pOrmRowId, newRow)
-
-      if (this.vOrmSaveScheduled) {
-        clearTimeout(this.vOrmSaveScheduled)
-      }
-      /* Ref: https://stackoverflow.com/questions/38399050/vue-equivalent-of-settimeout */
-      this.vOrmSaveScheduled = setTimeout(
-        function (scope) {
-          scope.mfSetFieldInOrm(pEvent, pOrmRowId, pFieldName)
-        },
-        1000,
-        this
-      )
-    },
-    mfSetFieldInOrm(pEvent, pOrmRowId, pFieldName) {
-      // M4/9
-      const row = {
-        [pFieldName]: pEvent,
-        rowStateInThisSession: 24,
-        validationClass: '',
-        isValidationError: false,
-      }
-      const arFromORM = ormRem.update({
-        where: pOrmRowId,
-        data: row,
-      })
-      if (!arFromORM) {
-        console.log('FATAL ERROR')
-      }
+      ormRem.setFieldInOrmOnTimeout(pEvent, pOrmRowId, pFieldName)
+      this.$forceUpdate() // How to remove this? TODO
     },
     mfGetCssClassName(pOrmRowId) {
-      // M5/9
       const arFromORM = ormRem.find(pOrmRowId)
       if (arFromORM && arFromORM.rowStateInThisSession === 24) {
         // New -> Changed
@@ -169,27 +114,14 @@ export default {
       }
     },
     mfDeleteRowInOrm(pOrmRowId) {
-      // M6/9
       ormRem.delete(pOrmRowId)
     },
     mfResetForm(formName) {
-      // M7/9
-      const arFromORM = this.cfGetOrmEditStateRows
-      if (arFromORM.length) {
-        console.log('unsaved data found', arFromORM)
-        for (let i = 0; i < arFromORM.length; i++) {
-          ormRem.delete(arFromORM[i].$id)
-        }
-      }
+      ormRem.deleteEditStateRows()
     },
     async mfOnSubmit() {
       // M8/9
-      let arFromORM = ormRem
-        .query()
-        .where('rowStateInThisSession', 2) // New -> Changed
-        .orWhere('rowStateInThisSession', 24) // New -> Changed
-        .orWhere('rowStateInThisSession', 2456) // New -> Changed -> Requested save -> form error
-        .get()
+      let arFromORM = this.cfGetOrmEditStateRows()
       if (arFromORM.length) {
         console.log('unsaved data found', arFromORM)
         for (let i = 0; i < arFromORM.length; i++) {

@@ -1,9 +1,12 @@
+// this is file 3 in example
+
 import { Database } from '@vuex-orm/core'
 import CtSearch from '@/cts/core/vl-search-box/vuex-orm/searchUIToCT'
 import CtLifeCycle from '@/cts/core/ctMaster/ormCtLifeCycle'
 import User from '@/models/user'
 import Patient from '@/models/patient'
 import Rex from '@/cts/spi/rec/vuex-orm/model.js'
+import rowStatus from '@/cts/spi/rem/db/vuex-orm/rowstatus.js'
 import Rem from '@/cts/spi/rem/db/vuex-orm/rem.js'
 import Dx from '@/models/Dx'
 import Goal from '@/models/Goal'
@@ -15,6 +18,7 @@ const database = new Database()
 database.register(User)
 database.register(Patient)
 database.register(Rex)
+database.register(rowStatus)
 database.register(Rem)
 database.register(Dx)
 database.register(Goal)
