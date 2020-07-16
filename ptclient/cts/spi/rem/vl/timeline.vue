@@ -96,6 +96,7 @@ export default {
         ctAbbr: objRowFromORM.ctAbbr,
         id: objRowFromORM.id,
         closable: true,
+        ctWidth: objRowFromORM.ctWidth,
       }
       this.$store.commit('mtfShowNewFirstTabInCl', tab)
     },
@@ -110,6 +111,7 @@ export default {
         ctAbbr: objRowFromORM.ctAbbr,
         id: objRowFromORM.id,
         closable: true,
+        ctWidth: objRowFromORM.ctWidth,
       }
       this.$store.commit('mtfShowNewFirstTabInCl', tab)
     },
@@ -124,6 +126,7 @@ export default {
         ctAbbr: objRowFromORM.ctAbbr,
         id: objRowFromORM.id,
         closable: true,
+        ctWidth: objRowFromORM.ctWidth,
       }
       this.$store.commit('mtfShowNewFirstTabInCl', tab)
     },

@@ -5,10 +5,15 @@ export default {
     arTabs: [], // Template has a for loop running on this.
     vsSelectedTabId: '', // arTabs might have 10 tabs. Out of those which tab is active needs to be stored outside the array of 10 tabs
     // #endregion state
+    vbldialogWidth: 'small', // set default CL dialog width
   },
   mutations: {
     mtfSetTabDialogVisibility(state, value) {
       state.vblIsdialogHoldingTabsInCLVisible = value
+    },
+    mtfSetTabDialogWidth(state, value) {
+      console.log('Dialog width', value)
+      state.vbldialogWidth = value
     },
     mtfAdditionalTabAddOrActivate(state, pObjAdditionalTab) {
       /* Two cases are possible:
@@ -41,12 +46,14 @@ export default {
       state.arTabs = [pTab]
       state.vblIsdialogHoldingTabsInCLVisible = true
       state.vsSelectedTabId = pTab.id
+      state.vbldialogWidth = pTab.ctWidth
 
       const objNewTab = {
         label: '+',
         closable: false,
         ctToShow: require('./ctSearchToAddTabInCL').default,
         id: '0',
+        ctWidth: 'small', // Provide ct width in CL
       }
 
       state.arTabs.push(objNewTab)

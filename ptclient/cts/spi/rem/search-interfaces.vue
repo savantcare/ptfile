@@ -26,6 +26,7 @@ export default {
         ctAbbr: 'arem',
         ctToShowInCL: 'spi/rem/cl/add.vue',
         layer: 'change',
+        ctWidth: 'small',
       },
     })
     ormSearchPhraseUiToCT.insert({
@@ -34,6 +35,7 @@ export default {
         ctAbbr: 'crem',
         ctToShowInCL: 'spi/rem/cl/c.vue',
         layer: 'change',
+        ctWidth: 'small',
       },
     })
     ormSearchPhraseUiToCT.insert({
@@ -42,6 +44,7 @@ export default {
         ctAbbr: 'mcrem',
         ctToShowInCL: 'spi/rem/cl/mc.vue',
         layer: 'change',
+        ctWidth: 'large',
       },
     })
     ormSearchPhraseUiToCT.insert({
@@ -50,6 +53,7 @@ export default {
         ctAbbr: 'drem',
         ctToShowInCL: 'spi/rem/vl/discontinued.vue',
         layer: 'change',
+        ctWidth: 'large',
       },
     })
   },

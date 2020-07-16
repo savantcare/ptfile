@@ -160,6 +160,7 @@ export default {
         ctAbbr: objSearchRowFromORM.ctAbbr,
         id: objSearchRowFromORM.id,
         closable: true,
+        ctWidth: objSearchRowFromORM.ctWidth,
       }
       this.$store.commit('mtfShowNewFirstTabInCl', tab)
     },
@@ -174,6 +175,7 @@ export default {
         ctAbbr: objSearchRowFromORM.ctAbbr,
         id: objSearchRowFromORM.id,
         closable: true,
+        ctWidth: objSearchRowFromORM.ctWidth,
       }
       this.$store.commit('mtfShowNewFirstTabInCl', tab)
     },
@@ -191,6 +193,7 @@ export default {
         ctAbbr: objSearchRowFromORM.ctAbbr,
         id: objSearchRowFromORM.id,
         closable: true,
+        ctWidth: objSearchRowFromORM.ctWidth,
       }
       this.$store.commit('mtfShowNewFirstTabInCl', tab)
     },
@@ -235,6 +238,7 @@ export default {
         id: objSearchRowFromORM.id, // This id comes from search phrases UI to Ct. TODO: should be called vnID
         vstPropsToGiveToCt: pORMDataRowID, // This holds all the data for the record we want to change in cl
         closable: true, // TODO: Should be called blClosable
+        ctWidth: objSearchRowFromORM.ctWidth,
       }
       // console.log(tab)
       this.$store.commit('mtfShowNewFirstTabInCl', tab)
