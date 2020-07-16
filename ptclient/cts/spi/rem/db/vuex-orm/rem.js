@@ -9,6 +9,8 @@ const intUniqueID = () => ++count
 export default class reminders extends rowStatus {
   static entity = 'rem'
 
+  static apiUrl = 'http://localhost:8000/reminders'
+
   static fields() {
     return {
       id: this.uid(() => intUniqueID()), // if this is not set then update based on primary key will not work
