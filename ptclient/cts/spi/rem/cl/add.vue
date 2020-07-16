@@ -156,6 +156,9 @@ export default {
           isValidationError: false,
         },
       })
+      if (!arFromORM) {
+        console.log('FATAL ERROR')
+      }
     },
     mfGetCssClassName(pRemIDGivenByORM) {
       // M5/9
