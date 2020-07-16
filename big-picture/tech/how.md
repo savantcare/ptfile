@@ -77,7 +77,8 @@ To enter the docker container:
 
 ```
 root@server1:/gt/sc-prog-repos/ptfile/deploy/docker# docker exec -ti docker_mariadb_1 bash
-root@c02b4fc1097e:/# cd /gt/sc-prog-repos/ptfile/
+root@c02b4fc1097e:/# cd /gt/sc-prog-repos/ptfile/db
+root@08e0dceb186a:/gt/sc-prog-repos/ptfile/deploy/db# ./create-first-user.sh
 ```
 
 Ref: https://hackernoon.com/mariadb-phpmyadmin-docker-running-local-database-ok9q36ji
