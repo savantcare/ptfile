@@ -4,9 +4,9 @@ services:
     image: node:14
     tty: true
     ports:
-      - 8080:8080
-    working_dir: /gt/sc-prog-repos/ptfile/vue-client
-    command: bash -c "npm install && npm run serve"
+      - 3000:3000
+    working_dir: /gt/sc-prog-repos/ptfile/ptclient
+    command: bash -c "npm install && npm run build"
     volumes:
       - /gt/sc-prog-repos/ptfile/ptclient:/gt/sc-prog-repos/ptfile/ptclient # This will allow hot reloading when files are changed on host
   node:
@@ -16,7 +16,7 @@ services:
       - NODE_ENV=development # This is neededed to load the correct override file from /node-server/config/ folder. For more read node-server/config/readme.md
     ports:
       - 8000:8000
-    working_dir: /gt/sc-prog-repos/ptfile/node-server
+    working_dir: /gt/sc-prog-repos/ptfile/ptserver
     command: bash -c "npm install && npm run start"
     volumes:
       - /gt/sc-prog-repos/ptfile/ptserver:/gt/sc-prog-repos/ptfile/ptserver # This allows file changes on host to be available inside docker container without recreating docker image.
