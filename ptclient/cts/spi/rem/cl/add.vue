@@ -3,35 +3,38 @@
   <div>
     <!-- Goal: Show multiple add boxes along with remove each row and reset whole form -->
     <el-form>
-      <el-form-item v-for="rem in cfEditStateRowsInOrm" :key="rem.id">
-        <!-- Prop explaination  Read prop explanation for span=4 on line 19 -->
-        <el-col :span="20" :class="rem.validationClass">
-          <el-input
-            type="textarea"
-            :class="mfGetCssClassName(rem.id)"
-            :autosize="{ minRows: 2, maxRows: 10 }"
-            placeholder="Please enter the reminder .."
-            :value="mfGetDesc(rem.id)"
-            @input="mfSetRemDescInOrmOnTimeout($event, rem.id)"
-          ></el-input>
-          <div v-if="rem.isValidationError" class="el-form-item__error">
-            Please enter minimum 3 characters.
-          </div>
-        </el-col>
-        <!-- Prop explaination 
+      <div v-if="cfEditStateRowsInOrm.length">
+        <el-form-item v-for="rem in cfEditStateRowsInOrm" :key="rem.id">
+          <!-- Prop explaination  Read prop explanation for span=4 on line 19 -->
+          <el-col :span="20" :class="rem.validationClass">
+            <el-input
+              type="textarea"
+              :class="mfGetCssClassName(rem.id)"
+              :autosize="{ minRows: 2, maxRows: 10 }"
+              placeholder="Please enter the reminder .."
+              :value="mfGetDesc(rem.id)"
+              @input="mfSetRemDescInOrmOnTimeout($event, rem.id)"
+            ></el-input>
+            <div v-if="rem.isValidationError" class="el-form-item__error">
+              Please enter minimum 3 characters.
+            </div>
+          </el-col>
+          <!-- Prop explaination 
             Goal: Show remove button on the RHS of input area. Since element.io divides it into 24 columns. we are giving 
             20 columns to input and 4 columns to remove button
            -->
-        <el-col :span="4">
-          <el-button
-            plain
-            type="warning"
-            style="float: right;"
-            @click="mfRemoveSingleRemInAddForm(rem.id)"
-            >Remove</el-button
-          >
-        </el-col>
-      </el-form-item>
+          <el-col :span="4">
+            <el-button
+              plain
+              type="warning"
+              style="float: right;"
+              @click="mfRemoveSingleRemInAddForm(rem.id)"
+              >Remove</el-button
+            >
+          </el-col>
+        </el-form-item>
+      </div>
+      <p v-else>{{ mfAddEmptyRowToOrm() }}</p>
       <el-form-item>
         <el-button type="primary" plain @click="mfOnSubmit">Submit</el-button>
         <el-button type="primary" plain @click="mfAddEmptyRowToOrm">Add more</el-button>
@@ -91,11 +94,7 @@ export default {
       return arFromORM
     },
   },
-  mounted() {
-    // Goal: If there is no unsaved data then give user a empty form
-    const arFromORM = this.cfEditStateRowsInOrm
-    if (!arFromORM.length) this.mfAddEmptyRowToOrm()
-  },
+  mounted() {},
   methods: {
     mfAddEmptyRowToOrm() {
       // M1/9
@@ -169,11 +168,6 @@ export default {
       ormRem.delete(pRemIDGivenByORM)
       // if there are no records left then I need to add a empty. For goal read docs/forms.md/1.3
       const arFromORM = this.cfEditStateRowsInOrm
-      if (arFromORM.length) {
-      } else {
-        this.arrRemDescCached = []
-        this.mfAddEmptyRowToOrm()
-      }
     },
     mfResetForm(formName) {
       // M7/9
@@ -183,9 +177,7 @@ export default {
         for (let i = 0; i < arFromORM.length; i++) {
           ormRem.delete(arFromORM[i].$id)
         }
-      } else {
       }
-      this.mfAddEmptyRowToOrm()
     },
     async mfOnSubmit() {
       // M8/9
@@ -241,11 +233,6 @@ export default {
       }
       // if there are no records left then I need to add a empty. For goal read docs/forms.md/1.3
       arFromORM = this.cfEditStateRowsInOrm
-      if (arFromORM.length) {
-      } else {
-        this.arrRemDescCached = []
-        this.mfAddEmptyRowToOrm()
-      }
     },
     async mfSendDataToServer(pORMRowArray) {
       // M9/9
