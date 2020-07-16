@@ -1,1 +1,1 @@
-create database sc_reminder
+create database sc_rem

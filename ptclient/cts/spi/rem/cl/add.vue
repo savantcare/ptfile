@@ -106,6 +106,9 @@ export default {
           ROW_START: Math.floor(Date.now() / 1000), // Ref: https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
         },
       })
+      if (!arFromORM) {
+        console.log('FATAL ERROR')
+      }
     },
     /* Why are mfGetDesc and setDesc not a single computed function called desc with a setter and a getter
       Initially tried to write v-model and this was computed function
