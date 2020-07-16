@@ -6,7 +6,7 @@ services:
     ports:
       - 8080:8080
     working_dir: /gt/sc-prog-repos/ptfile/vue-client
-    #    command: bash -c "npm install && npm run serve"
+    command: bash -c "npm install && npm run serve"
     volumes:
       - /gt/sc-prog-repos/ptfile/ptclient:/gt/sc-prog-repos/ptfile/ptclient # This will allow hot reloading when files are changed on host
   node:
