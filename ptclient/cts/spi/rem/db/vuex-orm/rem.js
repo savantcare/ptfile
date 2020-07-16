@@ -5,7 +5,18 @@ const { v1: uuidv1 } = require('uuid')
 let count = 0
 const intUniqueID = () => ++count
 
-export default class reminders extends Model {
+class rowStatus extends Model {
+  static getOrmEditStateRows() {
+    const arFromORM = this.query()
+      .where('rowStateInThisSession', 2) // New
+      .orWhere('rowStateInThisSession', 24) // New -> Changed
+      .orWhere('rowStateInThisSession', 2456) // New -> Changed -> Requested save -> form error
+      .get()
+    return arFromORM
+  }
+}
+
+export default class reminders extends rowStatus {
   static entity = 'rem'
 
   static fields() {
@@ -29,14 +40,5 @@ export default class reminders extends Model {
       isValidationError: this.boolean(false),
       rowStateInThisSession: this.number(1), // Details read: /ptclient/docs/forms.md
     }
-  }
-
-  static getOrmEditStateRows() {
-    const arFromORM = this.query()
-      .where('rowStateInThisSession', 2) // New
-      .orWhere('rowStateInThisSession', 24) // New -> Changed
-      .orWhere('rowStateInThisSession', 2456) // New -> Changed -> Requested save -> form error
-      .get()
-    return arFromORM
   }
 }
