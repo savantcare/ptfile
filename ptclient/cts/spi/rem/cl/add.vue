@@ -3,7 +3,7 @@
   <div>
     <!-- Goal: Show multiple add boxes along with remove each row and reset whole form -->
     <el-form>
-      <el-form-item v-for="rem in cfRowsInEditStateInOrm" :key="rem.id">
+      <el-form-item v-for="rem in cfEditStateRowsInOrm" :key="rem.id">
         <!-- Prop explaination  Read prop explanation for span=4 on line 19 -->
         <el-col :span="20" :class="rem.validationClass">
           <el-input
@@ -11,8 +11,8 @@
             :class="mfGetCssClassName(rem.id)"
             :autosize="{ minRows: 2, maxRows: 10 }"
             placeholder="Please enter the reminder .."
-            :value="getDesc(rem.id)"
-            @input="setRemDescInOrmOnTimeout($event, rem.id)"
+            :value="mfGetDesc(rem.id)"
+            @input="mfSetRemDescInOrmOnTimeout($event, rem.id)"
           ></el-input>
           <div v-if="rem.isValidationError" class="el-form-item__error">
             Please enter minimum 3 characters.
@@ -27,29 +27,29 @@
             plain
             type="warning"
             style="float: right;"
-            @click="removeSingleRemInAddForm(rem.id)"
+            @click="mfRemoveSingleRemInAddForm(rem.id)"
             >Remove</el-button
           >
         </el-col>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" plain @click="onSubmit">Submit</el-button>
-        <el-button type="primary" plain @click="addEmptyRowToOrm">Add more</el-button>
-        <el-button type="warning" plain @click="resetForm">Reset form</el-button>
+        <el-button type="primary" plain @click="mfOnSubmit">Submit</el-button>
+        <el-button type="primary" plain @click="mfAddEmptyRowToOrm">Add more</el-button>
+        <el-button type="warning" plain @click="mfResetForm">Reset form</el-button>
       </el-form-item>
     </el-form>
     <!-- Goal: Show data saved successfuly this session -->
     <el-table
-      v-if="cfRowsInApiSuccessStateInOrm.length > 0"
-      :data="cfRowsInApiSuccessStateInOrm"
+      v-if="cfApiSuccessStateRowsInOrm.length > 0"
+      :data="cfApiSuccessStateRowsInOrm"
       style="width: 100%; background: #f0f9eb;"
     >
       <el-table-column prop="remDesc" label="Reminders added this session"> </el-table-column>
     </el-table>
     <!-- Goal: Show data of API that failed -->
     <el-table
-      v-if="cfRowsInApiErrorStateInOrm.length > 0"
-      :data="cfRowsInApiErrorStateInOrm"
+      v-if="cfApiErrorStateRowsInOrm.length > 0"
+      :data="cfApiErrorStateRowsInOrm"
       style="width: 100%; background: #f0f9eb;"
     >
       <el-table-column prop="remDesc" label="Error: Reminders attempted but failed to save">
@@ -68,7 +68,7 @@ export default {
     }
   },
   computed: {
-    cfRowsInEditStateInOrm() {
+    cfEditStateRowsInOrm() {
       // C1/3
       const arFromORM = ormRem
         .query()
@@ -78,13 +78,13 @@ export default {
         .get()
       return arFromORM
     },
-    cfRowsInApiSuccessStateInOrm() {
+    cfApiSuccessStateRowsInOrm() {
       // C2/3
       // New -> Changed -> Requested save -> Sent to server -> Success
       const arFromORM = ormRem.query().where('rowStateInThisSession', 24571).get()
       return arFromORM
     },
-    cfRowsInApiErrorStateInOrm() {
+    cfApiErrorStateRowsInOrm() {
       // C3/3
       // New -> Changed -> Requested save -> Sent to server -> Failure
       const arFromORM = ormRem.query().where('rowStateInThisSession', 24578).get()
@@ -93,13 +93,12 @@ export default {
   },
   mounted() {
     // Goal: If there is no unsaved data then give user a empty form
-    const arFromORM = this.cfRowsInEditStateInOrm
-    if (!arFromORM.length) this.addEmptyRowToOrm()
+    const arFromORM = this.cfEditStateRowsInOrm
+    if (!arFromORM.length) this.mfAddEmptyRowToOrm()
   },
   methods: {
-    addEmptyRowToOrm() {
+    mfAddEmptyRowToOrm() {
       // M1/9
-      console.log('Add rem called')
       const arFromORM = ormRem.insert({
         data: {
           remDesc: '',
@@ -107,57 +106,44 @@ export default {
           ROW_START: Math.floor(Date.now() / 1000), // Ref: https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
         },
       })
-      console.log(arFromORM)
     },
-    /* Why are getDesc and setDesc not a single computed function called desc with a setter and a getter
+    /* Why are mfGetDesc and setDesc not a single computed function called desc with a setter and a getter
       Initially tried to write v-model and this was computed function
        But vmodel+computed the Desc id cannot be sent to computed fn
        */
-    getDesc(pRemIDGivenByORM) {
+    mfGetDesc(pRemIDGivenByORM) {
       // M2/9
       const contentFromCache = this.arrRemDescCached[pRemIDGivenByORM]
       if (!contentFromCache) {
-        return this.getRemDescFromOrm(pRemIDGivenByORM)
+        return this.mfGetRemDescFromOrm(pRemIDGivenByORM)
       } else {
         return this.arrRemDescCached[pRemIDGivenByORM]
       }
     },
-
-    getRemDescFromOrm(pRemIDGivenByORM) {
+    mfGetRemDescFromOrm(pRemIDGivenByORM) {
       const arFromORM = ormRem.find(pRemIDGivenByORM)
       if (arFromORM) {
         return arFromORM.remDesc
       }
     },
-
     // state updates are smarter.
-    setRemDescInOrmOnTimeout(pEvent, pRemIDGivenByORM) {
+    mfSetRemDescInOrmOnTimeout(pEvent, pRemIDGivenByORM) {
       // M3/9
-      // Full form: Set reminder in vue state on delay
-
-      console.log('enter')
-
       this.$set(this.arrRemDescCached, pRemIDGivenByORM, pEvent)
-
       if (this.vOrmSaveScheduled) {
-        console.log('clearing timeout')
         clearTimeout(this.vOrmSaveScheduled)
       }
       /* Ref: https://stackoverflow.com/questions/38399050/vue-equivalent-of-settimeout */
       this.vOrmSaveScheduled = setTimeout(
         function (scope) {
-          scope.setRemDescInOrm(pEvent, pRemIDGivenByORM)
+          scope.mfSetRemDescInOrm(pEvent, pRemIDGivenByORM)
         },
-        5000,
+        1000,
         this
       )
-      console.log('exit')
     },
-
-    setRemDescInOrm(pEvent, pRemIDGivenByORM) {
+    mfSetRemDescInOrm(pEvent, pRemIDGivenByORM) {
       // M4/9
-      console.log('set called for', pRemIDGivenByORM, pEvent)
-
       const arFromORM = ormRem.update({
         where: pRemIDGivenByORM,
         data: {
@@ -167,11 +153,9 @@ export default {
           isValidationError: false,
         },
       })
-      console.log(arFromORM)
     },
     mfGetCssClassName(pRemIDGivenByORM) {
       // M5/9
-      console.log(pRemIDGivenByORM)
       const arFromORM = ormRem.find(pRemIDGivenByORM)
       if (arFromORM && arFromORM.rowStateInThisSession === 24) {
         // New -> Changed
@@ -180,36 +164,35 @@ export default {
         return ''
       }
     },
-    removeSingleRemInAddForm(pRemIDGivenByORM) {
+    mfRemoveSingleRemInAddForm(pRemIDGivenByORM) {
       // M6/9
       ormRem.delete(pRemIDGivenByORM)
       // if there are no records left then I need to add a empty. For goal read docs/forms.md/1.3
-      const arFromORM = this.cfRowsInEditStateInOrm
+      const arFromORM = this.cfEditStateRowsInOrm
       if (arFromORM.length) {
       } else {
         this.arrRemDescCached = []
-        this.addEmptyRowToOrm()
+        this.mfAddEmptyRowToOrm()
       }
     },
-    resetForm(formName) {
+    mfResetForm(formName) {
       // M7/9
-      const arFromORM = this.cfRowsInEditStateInOrm
+      const arFromORM = this.cfEditStateRowsInOrm
       if (arFromORM.length) {
         console.log('unsaved data found', arFromORM)
         for (let i = 0; i < arFromORM.length; i++) {
-          console.log('Deleting data from ORM')
           ormRem.delete(arFromORM[i].$id)
         }
       } else {
-        console.log('No Unsaved data')
       }
-      this.addEmptyRowToOrm()
+      this.mfAddEmptyRowToOrm()
     },
-    async onSubmit() {
+    async mfOnSubmit() {
       // M8/9
       let arFromORM = ormRem
         .query()
-        .where('rowStateInThisSession', 24) // New -> Changed
+        .where('rowStateInThisSession', 2) // New -> Changed
+        .orWhere('rowStateInThisSession', 24) // New -> Changed
         .orWhere('rowStateInThisSession', 2456) // New -> Changed -> Requested save -> form error
         .get()
       if (arFromORM.length) {
@@ -234,12 +217,8 @@ export default {
                 isValidationError: false,
               },
             })
-            console.log('calling api to save data', ormRem)
-
             // API will return 1 (Success) or 0 (Failure)
-            const status = await this.sendDataToServer(arFromORM[i])
-
-            console.log(status)
+            const status = await this.mfSendDataToServer(arFromORM[i])
             if (status === 0) {
               // Handle api returned success
               ormRem.update({
@@ -261,20 +240,17 @@ export default {
         }
       }
       // if there are no records left then I need to add a empty. For goal read docs/forms.md/1.3
-      arFromORM = this.cfRowsInEditStateInOrm
+      arFromORM = this.cfEditStateRowsInOrm
       if (arFromORM.length) {
       } else {
         this.arrRemDescCached = []
-        this.addEmptyRowToOrm()
+        this.mfAddEmptyRowToOrm()
       }
     },
-    async sendDataToServer(pORMRowArray) {
+    async mfSendDataToServer(pORMRowArray) {
       // M9/9
-      // Should bulk created be used Out of 10 reminders set what if 9 got created successfuly but 1 failed?
-      // To keep code simple it was decided by VK on 13th July 2020 that for creasting 10 items we will fire 10 API calls.
-
-      pORMRowArray.uuidOfRemMadeFor = 'bfe041fa-073b-4223-8c69-0540ee678ff8' // This is the patient ID for whom the reminder is added
-      pORMRowArray.recordChangedByUUID = 'bua674fa-073b-4223-8c69-0540ee786kj8' // This is the logged in user ID for who added the reminder
+      pORMRowArray.uuidOfRemMadeFor = 'bfe041fa-073b-4223-8c69-0540ee678ff8'
+      pORMRowArray.recordChangedByUUID = 'bua674fa-073b-4223-8c69-0540ee786kj8'
       try {
         const response = await fetch(REMINDER_API_URL, {
           method: 'POST',
@@ -286,7 +262,6 @@ export default {
             data: pORMRowArray,
           }),
         })
-        console.log('response=> ', response)
         if (!response.ok) {
           return 0 // Returns error code when api fails to update record in DB
         } else {

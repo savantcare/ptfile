@@ -148,3 +148,7 @@ There are a lot of listeners on this state and they will update themselves every
         Ignore next save if 1 second has not passed.
         Disadvnatage?
         If the user types "ja" within 1 sec and then exits the state will only have j
+
+# Q8) Should bulk created be used Out of 10 reminders set what if 9 got created successfuly but 1 failed?
+
+      // To keep code simple it was decided by VK on 13th July 2020 that for creasting 10 items we will fire 10 API calls.
