@@ -36,6 +36,7 @@ export default {
           ctAbbr: objRowFromORM.ctAbbr,
           id: objRowFromORM.id,
           closable: true,
+          ctWidth: objRowFromORM.ctWidth,
         }
         this.$store.commit('mtfShowNewFirstTabInCl', objAddTab)
         this.$store.state.vstObjTabsInCL.vsSelectedTabId = this.$store.state.vstObjTabsInCL.arTabs[0].id
@@ -48,6 +49,7 @@ export default {
           ctAbbr: objRowFromORM.ctAbbr,
           id: objRowFromORM.id,
           closable: true,
+          ctWidth: objRowFromORM.ctWidth,
         }
         this.$store.commit('mtfShowNewFirstTabInCl', objAddTab)
         resultArFromORM = ormSearchPhraseUiToCT.query().search('add reminder').get()
@@ -58,6 +60,7 @@ export default {
           ctAbbr: objRowFromORM.ctAbbr,
           id: objRowFromORM.id,
           closable: true,
+          ctWidth: objRowFromORM.ctWidth,
         }
         this.$store.commit('mtfAdditionalTabAddOrActivate', objAddTab)
         this.$store.state.vstObjTabsInCL.vsSelectedTabId = this.$store.state.vstObjTabsInCL.arTabs[0].id

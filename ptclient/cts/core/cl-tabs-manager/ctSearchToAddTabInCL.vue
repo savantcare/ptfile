@@ -41,6 +41,14 @@ export default {
     // How? Ref: https://stackoverflow.com/questions/43270159/vue-js-2-how-to-watch-store-values-from-vuex
     cfFireWhenActiveTabIDChanges(newTabID, oldTabID) {
       console.log('New tab id is: ', newTabID)
+
+      // get the CL selected tab and update the dialog width accoding to the tab width
+      const clSelectedTab = this.$store.state.vstObjTabsInCL.arTabs.find(
+        (element) => element.id === newTabID
+      )
+      console.log('selected tab: ', clSelectedTab)
+      this.$store.commit('mtfSetTabDialogWidth', clSelectedTab.ctWidth)
+
       if (newTabID === '0') {
         this.$refs.searchbox.focus()
         this.keyword = '' // when this tab is activated 2nd time the search box will be empty
@@ -96,6 +104,7 @@ export default {
         ctToShow: require('@/cts/' + pSelectedSuggestion.ctToShowInCL).default,
         id: pSelectedSuggestion.id,
         closable: true,
+        ctWidth: pSelectedSuggestion.ctWidth,
       }
       this.$store.commit('mtfAdditionalTabAddOrActivate', objAddTab)
     },
