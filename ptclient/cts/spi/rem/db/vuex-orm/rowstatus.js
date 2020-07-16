@@ -96,6 +96,58 @@ class rowStatus extends Model {
       console.log('FATAL ERROR')
     }
   }
+
+  static async sendToServer() {
+    // API will return 1 (Success) or 0 (Failure)
+    const arFromORM = this.query().where('rowStateInThisSession', 2457).get()
+
+    console.log(arFromORM)
+
+    for (let i = 0; i < arFromORM.length; i++) {
+      const status = await this.sendDataToServer(arFromORM[i])
+      if (status === 0) {
+        // Handle api returned success
+        this.update({
+          where: (record) => record.id === arFromORM[i].id,
+          data: {
+            rowStateInThisSession: '24578', // New -> Changed -> Requested save -> Send to server -> API fail
+          },
+        })
+      } else {
+        // Handle api returned failure
+        this.update({
+          where: (record) => record.id === arFromORM[i].id,
+          data: {
+            rowStateInThisSession: '24571', // New -> Changed -> Requested save -> Send to server -> API Success
+          },
+        })
+      }
+    }
+  }
+
+  static async sendDataToServer(pORMRowArray) {
+    pORMRowArray.uuidOfRemMadeFor = 'bfe041fa-073b-4223-8c69-0540ee678ff8'
+    pORMRowArray.recordChangedByUUID = 'bua674fa-073b-4223-8c69-0540ee786kj8'
+    try {
+      const response = await fetch('http://localhost:8000/reminders', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          // Authorization: 'Bearer ' + TOKEN,
+        },
+        body: JSON.stringify({
+          data: pORMRowArray,
+        }),
+      })
+      if (!response.ok) {
+        return 0 // Returns error code when api fails to update record in DB
+      } else {
+        return 1 // Returns success code when api successfully updates record in DB
+      }
+    } catch (ex) {
+      return 0 // Returns error code when try block gets an exception and fails
+    }
+  }
 }
 
 export default rowStatus

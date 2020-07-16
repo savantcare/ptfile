@@ -121,7 +121,7 @@ export default {
     },
     async mfOnSubmit() {
       // M8/9
-      let arFromORM = this.cfGetOrmEditStateRows()
+      const arFromORM = this.cfGetOrmEditStateRows
       if (arFromORM.length) {
         console.log('unsaved data found', arFromORM)
         for (let i = 0; i < arFromORM.length; i++) {
@@ -144,54 +144,11 @@ export default {
                 isValidationError: false,
               },
             })
-            // API will return 1 (Success) or 0 (Failure)
-            const status = await this.mfSendDataToServer(arFromORM[i])
-            if (status === 0) {
-              // Handle api returned success
-              ormRem.update({
-                where: (record) => record.id === arFromORM[i].id,
-                data: {
-                  rowStateInThisSession: '24578', // New -> Changed -> Requested save -> Send to server -> API fail
-                },
-              })
-            } else {
-              // Handle api returned failure
-              ormRem.update({
-                where: (record) => record.id === arFromORM[i].id,
-                data: {
-                  rowStateInThisSession: '24571', // New -> Changed -> Requested save -> Send to server -> API Success
-                },
-              })
-            }
           }
         }
       }
       // if there are no records left then I need to add a empty. For goal read docs/forms.md/1.3
-      arFromORM = this.cfGetOrmEditStateRows
-    },
-    async mfSendDataToServer(pORMRowArray) {
-      // M9/9
-      pORMRowArray.uuidOfRemMadeFor = 'bfe041fa-073b-4223-8c69-0540ee678ff8'
-      pORMRowArray.recordChangedByUUID = 'bua674fa-073b-4223-8c69-0540ee786kj8'
-      try {
-        const response = await fetch(REMINDER_API_URL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json;charset=utf-8',
-            // Authorization: 'Bearer ' + TOKEN,
-          },
-          body: JSON.stringify({
-            data: pORMRowArray,
-          }),
-        })
-        if (!response.ok) {
-          return 0 // Returns error code when api fails to update record in DB
-        } else {
-          return 1 // Returns success code when api successfully updates record in DB
-        }
-      } catch (ex) {
-        return 0 // Returns error code when try block gets an exception and fails
-      }
+      await ormRem.sendToServer()
     },
   },
 }
