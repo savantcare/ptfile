@@ -74,13 +74,7 @@ export default {
   computed: {
     cfGetOrmEditStateRows() {
       // C1/3 Possible improvement: Can this be defined in a base class from which Rem and Rec come so Rem and Rec get this function from base class.
-      const arFromORM = ormRem
-        .query()
-        .where('rowStateInThisSession', 2) // New
-        .orWhere('rowStateInThisSession', 24) // New -> Changed
-        .orWhere('rowStateInThisSession', 2456) // New -> Changed -> Requested save -> form error
-        .get()
-      return arFromORM
+      return ormRem.getOrmEditStateRows()
     },
     cfGetOrmApiSuccessStateRows() {
       // C2/3

@@ -30,4 +30,13 @@ export default class reminders extends Model {
       rowStateInThisSession: this.number(1), // Details read: /ptclient/docs/forms.md
     }
   }
+
+  static getOrmEditStateRows() {
+    const arFromORM = this.query()
+      .where('rowStateInThisSession', 2) // New
+      .orWhere('rowStateInThisSession', 24) // New -> Changed
+      .orWhere('rowStateInThisSession', 2456) // New -> Changed -> Requested save -> form error
+      .get()
+    return arFromORM
+  }
 }
