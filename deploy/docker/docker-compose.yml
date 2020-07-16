@@ -4,7 +4,7 @@ services:
     image: node:14
     tty: true
     ports:
-      - 3000:3000
+      - 80:80
     working_dir: /gt/sc-prog-repos/ptfile/ptclient
     command: bash -c "npm install && npm run build"
     volumes:
