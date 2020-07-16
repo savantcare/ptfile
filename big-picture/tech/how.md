@@ -59,7 +59,7 @@ Start mysqld
 mkdir /gt/sc-prog-repos
 cd /gt/sc-prog-repos
 git clone https://github.com/savantcare/ptfile.git
-cd ptfile/deply/docker
+cd ptfile/deploy/docker
 apt update
 apt install -y docker-compose
 ptfile/deploy/docker> docker-compose -f maria-10.4-docker-compose.yml up -d
@@ -77,7 +77,7 @@ To enter the docker container:
 
 ```
 root@server1:/gt/sc-prog-repos/ptfile/deploy/docker# docker exec -ti docker_mariadb_1 bash
-root@c02b4fc1097e:/# /db/create-first-user.sh
+root@c02b4fc1097e:/# cd /gt/sc-prog-repos/ptfile/
 ```
 
 Ref: https://hackernoon.com/mariadb-phpmyadmin-docker-running-local-database-ok9q36ji
