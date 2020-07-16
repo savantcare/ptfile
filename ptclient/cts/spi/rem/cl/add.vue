@@ -84,7 +84,6 @@ export default {
   mounted() {},
   methods: {
     mfAddEmptyRowInOrm() {
-      // M1/9
       const arFromORM = ormRem.insert({
         data: {
           remDesc: '',
@@ -122,12 +121,7 @@ export default {
     },
     async mfOnSubmit() {
       // M8/9
-      let arFromORM = ormRem
-        .query()
-        .where('rowStateInThisSession', 2) // New -> Changed
-        .orWhere('rowStateInThisSession', 24) // New -> Changed
-        .orWhere('rowStateInThisSession', 2456) // New -> Changed -> Requested save -> form error
-        .get()
+      let arFromORM = this.cfGetOrmEditStateRows()
       if (arFromORM.length) {
         console.log('unsaved data found', arFromORM)
         for (let i = 0; i < arFromORM.length; i++) {
