@@ -65,9 +65,7 @@
 import ormRem from '@/cts/spi/rem/db/vuex-orm/rem.js'
 export default {
   data() {
-    return {
-      vOrmSaveScheduled: '',
-    }
+    return {}
   },
   computed: {
     cfGetOrmEditStateRows() {
