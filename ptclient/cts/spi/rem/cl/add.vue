@@ -102,48 +102,10 @@ export default {
     },
     // state updates are smarter.
     mfSetFieldInOrmOnTimeout(pEvent, pOrmRowId, pFieldName) {
-      // M3/9 // Ref: https://stackoverflow.com/questions/45644781/update-value-in-multidimensional-array-in-vue
-      let newRow = []
-      if (typeof ormRem.arOrmRowsCached[pOrmRowId] === 'undefined') {
-        console.log('Creating a new blank row')
-      } else {
-        newRow = ormRem.arOrmRowsCached[pOrmRowId].slice(0)
-        console.log('Pulling out existing row')
-      }
-      newRow[pFieldName] = pEvent
-      this.$set(ormRem.arOrmRowsCached, pOrmRowId, newRow)
-      this.$forceUpdate() // Find a way to remove this. Without this the field value does not get updated.
-
-      if (this.vOrmSaveScheduled) {
-        clearTimeout(this.vOrmSaveScheduled)
-      }
-      /* Ref: https://stackoverflow.com/questions/38399050/vue-equivalent-of-settimeout */
-      this.vOrmSaveScheduled = setTimeout(
-        function (scope) {
-          scope.mfSetFieldInOrm(pEvent, pOrmRowId, pFieldName)
-        },
-        5000,
-        this
-      )
-    },
-    mfSetFieldInOrm(pEvent, pOrmRowId, pFieldName) {
-      // M4/9
-      const row = {
-        [pFieldName]: pEvent,
-        rowStateInThisSession: 24,
-        validationClass: '',
-        isValidationError: false,
-      }
-      const arFromORM = ormRem.update({
-        where: pOrmRowId,
-        data: row,
-      })
-      if (!arFromORM) {
-        console.log('FATAL ERROR')
-      }
+      ormRem.setFieldInOrmOnTimeout(pEvent, pOrmRowId, pFieldName)
+      this.$forceUpdate() // How to remove this? TODO
     },
     mfGetCssClassName(pOrmRowId) {
-      // M5/9
       const arFromORM = ormRem.find(pOrmRowId)
       if (arFromORM && arFromORM.rowStateInThisSession === 24) {
         // New -> Changed
@@ -153,11 +115,9 @@ export default {
       }
     },
     mfDeleteRowInOrm(pOrmRowId) {
-      // M6/9
       ormRem.delete(pOrmRowId)
     },
     mfResetForm(formName) {
-      // M7/9
       ormRem.deleteEditStateRows()
     },
     async mfOnSubmit() {
