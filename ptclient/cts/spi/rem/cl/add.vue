@@ -114,41 +114,41 @@ export default {
       Initially tried to write v-model and this was computed function
        But vmodel+computed the Desc id cannot be sent to computed fn
        */
-    mfGetDesc(pRemIDGivenByORM) {
+    mfGetDesc(pOrmRowId) {
       // M2/9
-      const contentFromCache = this.arrRemDescCached[pRemIDGivenByORM]
+      const contentFromCache = this.arrRemDescCached[pOrmRowId]
       if (!contentFromCache) {
-        return this.mfGetRemDescFromOrm(pRemIDGivenByORM)
+        return this.mfGetRemDescFromOrm(pOrmRowId)
       } else {
-        return this.arrRemDescCached[pRemIDGivenByORM]
+        return this.arrRemDescCached[pOrmRowId]
       }
     },
-    mfGetRemDescFromOrm(pRemIDGivenByORM) {
-      const arFromORM = ormRem.find(pRemIDGivenByORM)
+    mfGetRemDescFromOrm(pOrmRowId) {
+      const arFromORM = ormRem.find(pOrmRowId)
       if (arFromORM) {
         return arFromORM.remDesc
       }
     },
     // state updates are smarter.
-    mfSetRemDescInOrmOnTimeout(pEvent, pRemIDGivenByORM) {
+    mfSetRemDescInOrmOnTimeout(pEvent, pOrmRowId) {
       // M3/9
-      this.$set(this.arrRemDescCached, pRemIDGivenByORM, pEvent)
+      this.$set(this.arrRemDescCached, pOrmRowId, pEvent)
       if (this.vOrmSaveScheduled) {
         clearTimeout(this.vOrmSaveScheduled)
       }
       /* Ref: https://stackoverflow.com/questions/38399050/vue-equivalent-of-settimeout */
       this.vOrmSaveScheduled = setTimeout(
         function (scope) {
-          scope.mfSetRemDescInOrm(pEvent, pRemIDGivenByORM)
+          scope.mfSetRemDescInOrm(pEvent, pOrmRowId)
         },
         1000,
         this
       )
     },
-    mfSetRemDescInOrm(pEvent, pRemIDGivenByORM) {
+    mfSetRemDescInOrm(pEvent, pOrmRowId) {
       // M4/9
       const arFromORM = ormRem.update({
-        where: pRemIDGivenByORM,
+        where: pOrmRowId,
         data: {
           remDesc: pEvent,
           rowStateInThisSession: 24,
@@ -160,9 +160,9 @@ export default {
         console.log('FATAL ERROR')
       }
     },
-    mfGetCssClassName(pRemIDGivenByORM) {
+    mfGetCssClassName(pOrmRowId) {
       // M5/9
-      const arFromORM = ormRem.find(pRemIDGivenByORM)
+      const arFromORM = ormRem.find(pOrmRowId)
       if (arFromORM && arFromORM.rowStateInThisSession === 24) {
         // New -> Changed
         return 'unsaved-data'
@@ -170,9 +170,9 @@ export default {
         return ''
       }
     },
-    mfDeleteRowInOrm(pRemIDGivenByORM) {
+    mfDeleteRowInOrm(pOrmRowId) {
       // M6/9
-      ormRem.delete(pRemIDGivenByORM)
+      ormRem.delete(pOrmRowId)
     },
     mfResetForm(formName) {
       // M7/9
