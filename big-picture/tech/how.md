@@ -59,26 +59,25 @@ Start mysqld
 mkdir /gt/sc-prog-repos
 cd /gt/sc-prog-repos
 git clone https://github.com/savantcare/ptfile.git
+cd ptfile/deply/docker
+apt update
+apt install -y docker-compose
 ptfile/deploy/docker> docker-compose -f maria-10.4-docker-compose.yml up -d
 ```
 
 To access phpmyadmin:
 http://[ip-address]:81/
 
-First time the root password is qwerty
+First time the root password is qwerty. PhpmyAdmin that is installed with the above docker-compose will give access from root password.
 
 The admin password is given in:
-patientfile/node-server/config/development.json
+patientfile/node-server/config/development.json (But this file is never committed to the repo)
 
 To enter the docker container:
 
 ```
-root@server1:/gt/sc-prog-repos/patientfile/docker# docker exec -ti docker_mariadb_1 bash
-root@c02b4fc1097e:/# /db/design/step1-execute-in-mysql-contaier-to-init-mysqld.sh
-root@c02b4fc1097e:/# /db/design/step2-create-first-user.sh
-root@c02b4fc1097e:/# /db/design/step3-structure/drop-tables-and-then-create-structure.sh
-root@c02b4fc1097e:/# /db/design/step4-master-data/
-root@c02b4fc1097e:/# /db/design/step4-runtime-data/
+root@server1:/gt/sc-prog-repos/ptfile/deploy/docker# docker exec -ti docker_mariadb_1 bash
+root@c02b4fc1097e:/# /db/create-first-user.sh
 ```
 
 Ref: https://hackernoon.com/mariadb-phpmyadmin-docker-running-local-database-ok9q36ji

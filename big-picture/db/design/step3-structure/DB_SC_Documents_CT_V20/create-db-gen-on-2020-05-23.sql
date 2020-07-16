@@ -1,1 +1,0 @@
-create database DB_SC_Documents_CT_V20
