@@ -17,13 +17,13 @@ class rowStatus extends Model {
     return arFromORM
   }
 
-  static getOrmApiSuccessStateRows() {
+  static getApiSuccessStateRows() {
     // New -> Changed -> Requested save -> Sent to server -> Success
     const arFromORM = this.query().where('rowStateInThisSession', 24571).get()
     return arFromORM
   }
 
-  static getOrmApiErrorStateRows() {
+  static getApiErrorStateRows() {
     // C3/3
     // New -> Changed -> Requested save -> Sent to server -> Failure
     const arFromORM = this.query().where('rowStateInThisSession', 24578).get()
@@ -53,7 +53,7 @@ class rowStatus extends Model {
     }
   }
 
-  static setFieldInOrmOnTimeout(pEvent, pOrmRowId, pFieldName) {
+  static setFieldOnTimeout(pEvent, pOrmRowId, pFieldName) {
     // Ref: https://stackoverflow.com/questions/45644781/update-value-in-multidimensional-array-in-vue
     let newRow = []
     if (typeof this.arOrmRowsCached[pOrmRowId] === 'undefined') {
@@ -74,14 +74,14 @@ class rowStatus extends Model {
     /* Ref: https://stackoverflow.com/questions/38399050/vue-equivalent-of-settimeout */
     this.vOrmSaveScheduled = setTimeout(
       function (scope) {
-        scope.setFieldInOrm(pEvent, pOrmRowId, pFieldName)
+        scope.setFieldInVuex(pEvent, pOrmRowId, pFieldName)
       },
       1000,
       this
     )
   }
 
-  static setFieldInOrm(pEvent, pOrmRowId, pFieldName) {
+  static setFieldInVuex(pEvent, pOrmRowId, pFieldName) {
     const row = {
       [pFieldName]: pEvent,
       rowStateInThisSession: 24,

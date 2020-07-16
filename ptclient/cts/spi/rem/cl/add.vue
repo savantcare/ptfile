@@ -62,7 +62,6 @@
   </div>
 </template>
 <script>
-import { REMINDER_API_URL } from '../const.js'
 import ormRem from '@/cts/spi/rem/db/vuex-orm/rem.js'
 export default {
   data() {
@@ -75,10 +74,10 @@ export default {
       return ormRem.getOrmEditStateRows()
     },
     cfGetOrmApiSuccessStateRows() {
-      return ormRem.getOrmApiSuccessStateRows()
+      return ormRem.getApiSuccessStateRows()
     },
     cfGetOrmApiErrorStateRows() {
-      return ormRem.getOrmApiErrorStateRows()
+      return ormRem.getApiErrorStateRows()
     },
   },
   mounted() {},
@@ -101,7 +100,7 @@ export default {
     },
     // state updates are smarter.
     mfSetFieldInOrmOnTimeout(pEvent, pOrmRowId, pFieldName) {
-      ormRem.setFieldInOrmOnTimeout(pEvent, pOrmRowId, pFieldName)
+      ormRem.setFieldOnTimeout(pEvent, pOrmRowId, pFieldName)
       this.$forceUpdate() // How to remove this? TODO
     },
     mfGetCssClassName(pOrmRowId) {
