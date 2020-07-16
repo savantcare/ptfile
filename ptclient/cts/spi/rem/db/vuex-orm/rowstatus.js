@@ -26,6 +26,16 @@ class rowStatus extends Model {
     const arFromORM = this.query().where('rowStateInThisSession', 24578).get()
     return arFromORM
   }
+
+  static deleteEditStateRows() {
+    const arFromORM = this.getOrmEditStateRows()
+    if (arFromORM.length) {
+      console.log('unsaved data found', arFromORM)
+      for (let i = 0; i < arFromORM.length; i++) {
+        this.delete(arFromORM[i].$id)
+      }
+    }
+  }
 }
 
 export default rowStatus

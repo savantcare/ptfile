@@ -167,13 +167,7 @@ export default {
     },
     mfResetForm(formName) {
       // M7/9
-      const arFromORM = this.cfGetOrmEditStateRows
-      if (arFromORM.length) {
-        console.log('unsaved data found', arFromORM)
-        for (let i = 0; i < arFromORM.length; i++) {
-          ormRem.delete(arFromORM[i].$id)
-        }
-      }
+      ormRem.deleteEditStateRows()
     },
     async mfOnSubmit() {
       // M8/9
