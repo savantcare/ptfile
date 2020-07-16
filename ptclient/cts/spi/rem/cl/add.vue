@@ -73,20 +73,13 @@ export default {
   },
   computed: {
     cfGetOrmEditStateRows() {
-      // C1/3 Possible improvement: Can this be defined in a base class from which Rem and Rec come so Rem and Rec get this function from base class.
       return ormRem.getOrmEditStateRows()
     },
     cfGetOrmApiSuccessStateRows() {
-      // C2/3
-      // New -> Changed -> Requested save -> Sent to server -> Success
-      const arFromORM = ormRem.query().where('rowStateInThisSession', 24571).get()
-      return arFromORM
+      return ormRem.getOrmApiSuccessStateRows()
     },
     cfGetOrmApiErrorStateRows() {
-      // C3/3
-      // New -> Changed -> Requested save -> Sent to server -> Failure
-      const arFromORM = ormRem.query().where('rowStateInThisSession', 24578).get()
-      return arFromORM
+      return ormRem.getOrmApiErrorStateRows()
     },
   },
   mounted() {},
