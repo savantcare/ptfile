@@ -68,7 +68,6 @@ export default {
   data() {
     return {
       vOrmSaveScheduled: '',
-      arOrmRowsCached: [],
     }
   },
   computed: {
@@ -98,30 +97,22 @@ export default {
       }
     },
     mfGetField(pOrmRowId, pFieldName) {
-      // M2/9
-      if (typeof this.arOrmRowsCached[pOrmRowId] === 'undefined') {
-        return this.mfGetFieldFromOrm(pOrmRowId, pFieldName)
-      }
-      return this.arOrmRowsCached[pOrmRowId][pFieldName]
-    },
-    mfGetFieldFromOrm(pOrmRowId, pFieldName) {
-      const arFromORM = ormRem.find(pOrmRowId)
-      if (arFromORM) {
-        return arFromORM[pFieldName]
-      }
+      console.log('mf get field called')
+      return ormRem.getField(pOrmRowId, pFieldName)
     },
     // state updates are smarter.
     mfSetFieldInOrmOnTimeout(pEvent, pOrmRowId, pFieldName) {
       // M3/9 // Ref: https://stackoverflow.com/questions/45644781/update-value-in-multidimensional-array-in-vue
       let newRow = []
-      if (typeof this.arOrmRowsCached[pOrmRowId] === 'undefined') {
+      if (typeof ormRem.arOrmRowsCached[pOrmRowId] === 'undefined') {
         console.log('Creating a new blank row')
       } else {
-        newRow = this.arOrmRowsCached[pOrmRowId].slice(0)
-        console.log('Pulling out existiung row')
+        newRow = ormRem.arOrmRowsCached[pOrmRowId].slice(0)
+        console.log('Pulling out existing row')
       }
       newRow[pFieldName] = pEvent
-      this.$set(this.arOrmRowsCached, pOrmRowId, newRow)
+      this.$set(ormRem.arOrmRowsCached, pOrmRowId, newRow)
+      this.$forceUpdate() // Find a way to remove this. Without this the field value does not get updated.
 
       if (this.vOrmSaveScheduled) {
         clearTimeout(this.vOrmSaveScheduled)
@@ -131,7 +122,7 @@ export default {
         function (scope) {
           scope.mfSetFieldInOrm(pEvent, pOrmRowId, pFieldName)
         },
-        1000,
+        5000,
         this
       )
     },

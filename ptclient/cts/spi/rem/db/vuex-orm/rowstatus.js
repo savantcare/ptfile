@@ -5,6 +5,8 @@ import { Model } from '@vuex-orm/core'
 class rowStatus extends Model {
   static entity = 'rowstatus'
 
+  static arOrmRowsCached = []
+
   static getOrmEditStateRows() {
     const arFromORM = this.query()
       .where('rowStateInThisSession', 2) // New
@@ -34,6 +36,20 @@ class rowStatus extends Model {
       for (let i = 0; i < arFromORM.length; i++) {
         this.delete(arFromORM[i].$id)
       }
+    }
+  }
+
+  static getField(pOrmRowId, pFieldName) {
+    console.log(this.arOrmRowsCached)
+    if (typeof this.arOrmRowsCached[pOrmRowId] === 'undefined') {
+      console.log('finding in model')
+      const arFromORM = this.find(pOrmRowId)
+      if (arFromORM) {
+        return arFromORM[pFieldName]
+      }
+    } else {
+      console.log('returning from cache')
+      return this.arOrmRowsCached[pOrmRowId][pFieldName]
     }
   }
 }
