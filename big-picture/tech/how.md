@@ -49,12 +49,17 @@ Login as doctor -> http://localhost:8080/login user1@gmail.com : 123
 
 Login as doctor admin assistant -> http://localhost:8080/login user1@gmail.com : 123
 
-### How to run a local DB?
+### How to run mysql server?
+
+Steps from VK deployment on DO in July 2020:
 
 Start mysqld
 
 ```
-patientfile/docker> docker-compose -f maria-10.4-docker-compose.yml up -d
+mkdir /gt/sc-prog-repos
+cd /gt/sc-prog-repos
+git clone https://github.com/savantcare/ptfile.git
+ptfile/deploy/docker> docker-compose -f maria-10.4-docker-compose.yml up -d
 ```
 
 To access phpmyadmin:
