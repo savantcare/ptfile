@@ -4,18 +4,18 @@
     <!-- Goal: Show multiple add rows along with remove each row. At end A. Reset B. Add more C. Submit -->
     <el-form>
       <div v-if="cfGetOrmEditStateRows.length">
-        <el-form-item v-for="rem in cfGetOrmEditStateRows" :key="rem.id">
+        <el-form-item v-for="ormRow in cfGetOrmEditStateRows" :key="ormRow.id">
           <!-- Prop explaination  Read prop explanation for span=4 on line 19 -->
-          <el-col :span="20" :class="rem.validationClass">
+          <el-col :span="20" :class="ormRow.validationClass">
             <el-input
               type="textarea"
-              :class="mfGetCssClassName(rem.id)"
+              :class="mfGetCssClassName(ormRow.id)"
               :autosize="{ minRows: 2, maxRows: 10 }"
               placeholder="Please enter the reminder .."
-              :value="mfGetDesc(rem.id)"
-              @input="mfSetRemDescInOrmOnTimeout($event, rem.id)"
+              :value="mfGetDesc(ormRow.id)"
+              @input="mfSetRemDescInOrmOnTimeout($event, ormRow.id)"
             ></el-input>
-            <div v-if="rem.isValidationError" class="el-form-item__error">
+            <div v-if="ormRow.isValidationError" class="el-form-item__error">
               Please enter minimum 3 characters.
             </div>
           </el-col>
@@ -28,17 +28,17 @@
               plain
               type="warning"
               style="float: right;"
-              @click="mfDeleteRowFromOrm(rem.id)"
+              @click="mfDeleteRowInOrm(ormRow.id)"
               >Remove</el-button
             >
           </el-col>
         </el-form-item>
       </div>
       <!-- If there are no edit state rows then create a empty row for faster data input -->
-      <p v-else>{{ mfAddEmptyRowToOrm() }}</p>
+      <p v-else>{{ mfAddEmptyRowInOrm() }}</p>
       <el-form-item>
         <el-button type="primary" plain @click="mfOnSubmit">Submit</el-button>
-        <el-button type="primary" plain @click="mfAddEmptyRowToOrm">Add more</el-button>
+        <el-button type="primary" plain @click="mfAddEmptyRowInOrm">Add more</el-button>
         <el-button type="warning" plain @click="mfResetForm">Reset form</el-button>
       </el-form-item>
     </el-form>
@@ -97,7 +97,7 @@ export default {
   },
   mounted() {},
   methods: {
-    mfAddEmptyRowToOrm() {
+    mfAddEmptyRowInOrm() {
       // M1/9
       const arFromORM = ormRem.insert({
         data: {
@@ -167,7 +167,7 @@ export default {
         return ''
       }
     },
-    mfDeleteRowFromOrm(pRemIDGivenByORM) {
+    mfDeleteRowInOrm(pRemIDGivenByORM) {
       // M6/9
       ormRem.delete(pRemIDGivenByORM)
     },
