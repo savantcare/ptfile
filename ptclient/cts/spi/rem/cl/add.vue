@@ -12,8 +12,8 @@
               :class="mfGetCssClassName(ormRow.id)"
               :autosize="{ minRows: 2, maxRows: 10 }"
               placeholder="Please enter the reminder .."
-              :value="mfGetDesc(ormRow.id)"
-              @input="mfSetRemDescInOrmOnTimeout($event, ormRow.id)"
+              :value="mfGetField(ormRow.id, 'remDesc')"
+              @input="mfSetFieldInOrmOnTimeout($event, ormRow.id, 'remDesc')"
             ></el-input>
             <div v-if="ormRow.isValidationError" class="el-form-item__error">
               Please enter minimum 3 characters.
@@ -68,7 +68,7 @@ export default {
   data() {
     return {
       vOrmSaveScheduled: '',
-      arrRemDescCached: [],
+      arOrmRowsCached: [],
     }
   },
   computed: {
@@ -110,42 +110,45 @@ export default {
         console.log('FATAL ERROR')
       }
     },
-    /* Why are mfGetDesc and setDesc not a single computed function called desc with a setter and a getter
-      Initially tried to write v-model and this was computed function
-       But vmodel+computed the Desc id cannot be sent to computed fn
-       */
-    mfGetDesc(pOrmRowId) {
+    mfGetField(pOrmRowId, pFieldName) {
       // M2/9
-      const contentFromCache = this.arrRemDescCached[pOrmRowId]
-      if (!contentFromCache) {
-        return this.mfGetRemDescFromOrm(pOrmRowId)
-      } else {
-        return this.arrRemDescCached[pOrmRowId]
+      if (typeof this.arOrmRowsCached[pOrmRowId] === 'undefined') {
+        return this.mfGetFieldFromOrm(pOrmRowId, pFieldName)
       }
+      return this.arOrmRowsCached[pOrmRowId][pFieldName]
     },
-    mfGetRemDescFromOrm(pOrmRowId) {
+    mfGetFieldFromOrm(pOrmRowId, pFieldName) {
       const arFromORM = ormRem.find(pOrmRowId)
       if (arFromORM) {
-        return arFromORM.remDesc
+        return arFromORM[pFieldName]
       }
     },
     // state updates are smarter.
-    mfSetRemDescInOrmOnTimeout(pEvent, pOrmRowId) {
-      // M3/9
-      this.$set(this.arrRemDescCached, pOrmRowId, pEvent)
+    mfSetFieldInOrmOnTimeout(pEvent, pOrmRowId, pFieldName) {
+      // M3/9 // Ref: https://stackoverflow.com/questions/45644781/update-value-in-multidimensional-array-in-vue
+      let newRow = []
+      if (typeof this.arOrmRowsCached[pOrmRowId] === 'undefined') {
+        console.log('Creating a new blank row')
+      } else {
+        newRow = this.arOrmRowsCached[pOrmRowId].slice(0)
+        console.log('Pulling out existiung row')
+      }
+      newRow[pFieldName] = pEvent
+      this.$set(this.arOrmRowsCached, pOrmRowId, newRow)
+
       if (this.vOrmSaveScheduled) {
         clearTimeout(this.vOrmSaveScheduled)
       }
       /* Ref: https://stackoverflow.com/questions/38399050/vue-equivalent-of-settimeout */
       this.vOrmSaveScheduled = setTimeout(
         function (scope) {
-          scope.mfSetRemDescInOrm(pEvent, pOrmRowId)
+          scope.mfSetRemDescInOrm(pEvent, pOrmRowId, pFieldName)
         },
         1000,
         this
       )
     },
-    mfSetRemDescInOrm(pEvent, pOrmRowId) {
+    mfSetRemDescInOrm(pEvent, pOrmRowId, pFieldName) {
       // M4/9
       const arFromORM = ormRem.update({
         where: pOrmRowId,
