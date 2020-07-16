@@ -147,7 +147,7 @@ export default {
     },
     mfSetRemDescInOrm(pEvent, pRemIDGivenByORM) {
       // M4/9
-      const arFromORM = ormRem.update({
+      ormRem.update({
         where: pRemIDGivenByORM,
         data: {
           remDesc: pEvent,

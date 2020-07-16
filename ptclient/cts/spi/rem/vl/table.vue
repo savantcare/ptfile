@@ -240,14 +240,14 @@ export default {
       this.$store.commit('mtfShowNewFirstTabInCl', tab)
     },
     mfGetDirtyClassName(pRow, pIndex) {
-      /*      const strOfNumber = pRow.row.rowStateInThisSession.toString()
+      const strOfNumber = pRow.row.rowStateInThisSession.toString()
       const lastCharecter = strOfNumber.slice(-1)
       console.log('pRow', pRow, 'pIndex', pIndex, 'Last charecter', lastCharecter)
-      if (lastCharecter === 3 || lastCharecter === 4 || lastCharecter === 6) {
+      if (lastCharecter === '3' || lastCharecter === '4' || lastCharecter === '6') {
         return 'unsaved-data'
       } else {
         return ''
-      } */
+      }
     },
   },
 }
