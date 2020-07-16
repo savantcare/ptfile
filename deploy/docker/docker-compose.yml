@@ -8,7 +8,7 @@ services:
     working_dir: /gt/sc-prog-repos/ptfile/vue-client
     #    command: bash -c "npm install && npm run serve"
     volumes:
-      - /gt/sc-prog-repos/patientfile/vue-client:/gt/sc-prog-repos/patientfile/vue-client # This will allow hot reloading when files are changed on host
+      - /gt/sc-prog-repos/ptfile/ptclient:/gt/sc-prog-repos/ptfile/ptclient # This will allow hot reloading when files are changed on host
   node:
     image: node:14
     tty: true
@@ -19,5 +19,5 @@ services:
     working_dir: /gt/sc-prog-repos/ptfile/node-server
     command: bash -c "npm install && npm run start"
     volumes:
-      - /gt/sc-prog-repos/ptfile/node-server:/gt/sc-prog-repos/ptfile/node-server # This allows file changes on host to be available inside docker container without recreating docker image.
+      - /gt/sc-prog-repos/ptfile/ptserver:/gt/sc-prog-repos/ptfile/ptserver # This allows file changes on host to be available inside docker container without recreating docker image.
       # For reasons of this volume mount see the vue: section comments
