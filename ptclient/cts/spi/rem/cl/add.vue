@@ -44,7 +44,7 @@
     </el-form>
     <!-- Goal: Show data saved successfuly this session -->
     <el-table
-      v-if="cfGetOrmApiSuccessStateRowsInOrm.length > 0"
+      v-if="cfGetOrmApiSuccessStateRows.length > 0"
       :data="cfGetOrmApiSuccessStateRows"
       style="width: 100%; background: #f0f9eb;"
     >
