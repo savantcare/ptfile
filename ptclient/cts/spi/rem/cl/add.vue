@@ -142,13 +142,13 @@ export default {
       /* Ref: https://stackoverflow.com/questions/38399050/vue-equivalent-of-settimeout */
       this.vOrmSaveScheduled = setTimeout(
         function (scope) {
-          scope.mfSetRemDescInOrm(pEvent, pOrmRowId, pFieldName)
+          scope.mfSetFieldInOrm(pEvent, pOrmRowId, pFieldName)
         },
         1000,
         this
       )
     },
-    mfSetRemDescInOrm(pEvent, pOrmRowId, pFieldName) {
+    mfSetFieldInOrm(pEvent, pOrmRowId, pFieldName) {
       // M4/9
       const arFromORM = ormRem.update({
         where: pOrmRowId,
