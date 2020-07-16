@@ -150,9 +150,8 @@ export default {
     },
     mfSetFieldInOrm(pEvent, pOrmRowId, pFieldName) {
       // M4/9
-      // debugger
       const row = {
-        remDesc: pEvent,
+        [pFieldName]: pEvent,
         rowStateInThisSession: 24,
         validationClass: '',
         isValidationError: false,
