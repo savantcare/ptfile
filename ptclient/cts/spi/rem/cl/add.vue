@@ -150,14 +150,16 @@ export default {
     },
     mfSetFieldInOrm(pEvent, pOrmRowId, pFieldName) {
       // M4/9
+      // debugger
+      const row = {
+        remDesc: pEvent,
+        rowStateInThisSession: 24,
+        validationClass: '',
+        isValidationError: false,
+      }
       const arFromORM = ormRem.update({
         where: pOrmRowId,
-        data: {
-          remDesc: pEvent,
-          rowStateInThisSession: 24,
-          validationClass: '',
-          isValidationError: false,
-        },
+        data: row,
       })
       if (!arFromORM) {
         console.log('FATAL ERROR')
