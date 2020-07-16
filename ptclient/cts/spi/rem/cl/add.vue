@@ -1,10 +1,10 @@
 <!-- For design see ptclient/docs/forms.md -->
 <template>
   <div>
-    <!-- Goal: Show multiple add boxes along with remove each row and reset whole form -->
+    <!-- Goal: Show multiple add rows along with remove each row. At end A. Reset B. Add more C. Submit -->
     <el-form>
-      <div v-if="cfEditStateRowsInOrm.length">
-        <el-form-item v-for="rem in cfEditStateRowsInOrm" :key="rem.id">
+      <div v-if="cfGetOrmEditStateRows.length">
+        <el-form-item v-for="rem in cfGetOrmEditStateRows" :key="rem.id">
           <!-- Prop explaination  Read prop explanation for span=4 on line 19 -->
           <el-col :span="20" :class="rem.validationClass">
             <el-input
@@ -34,6 +34,7 @@
           </el-col>
         </el-form-item>
       </div>
+      <!-- If there are no edit state rows then create a empty row for faster data input -->
       <p v-else>{{ mfAddEmptyRowToOrm() }}</p>
       <el-form-item>
         <el-button type="primary" plain @click="mfOnSubmit">Submit</el-button>
@@ -43,16 +44,16 @@
     </el-form>
     <!-- Goal: Show data saved successfuly this session -->
     <el-table
-      v-if="cfApiSuccessStateRowsInOrm.length > 0"
-      :data="cfApiSuccessStateRowsInOrm"
+      v-if="cfGetOrmApiSuccessStateRowsInOrm.length > 0"
+      :data="cfGetOrmApiSuccessStateRows"
       style="width: 100%; background: #f0f9eb;"
     >
       <el-table-column prop="remDesc" label="Reminders added this session"> </el-table-column>
     </el-table>
-    <!-- Goal: Show data of API that failed -->
+    <!-- Goal: Show data of API that failed in this session -->
     <el-table
-      v-if="cfApiErrorStateRowsInOrm.length > 0"
-      :data="cfApiErrorStateRowsInOrm"
+      v-if="cfGetOrmApiErrorStateRows.length > 0"
+      :data="cfGetOrmApiErrorStateRows"
       style="width: 100%; background: #f0f9eb;"
     >
       <el-table-column prop="remDesc" label="Error: Reminders attempted but failed to save">
@@ -71,7 +72,7 @@ export default {
     }
   },
   computed: {
-    cfEditStateRowsInOrm() {
+    cfGetOrmEditStateRows() {
       // C1/3
       const arFromORM = ormRem
         .query()
@@ -81,13 +82,13 @@ export default {
         .get()
       return arFromORM
     },
-    cfApiSuccessStateRowsInOrm() {
+    cfGetOrmApiSuccessStateRows() {
       // C2/3
       // New -> Changed -> Requested save -> Sent to server -> Success
       const arFromORM = ormRem.query().where('rowStateInThisSession', 24571).get()
       return arFromORM
     },
-    cfApiErrorStateRowsInOrm() {
+    cfGetOrmApiErrorStateRows() {
       // C3/3
       // New -> Changed -> Requested save -> Sent to server -> Failure
       const arFromORM = ormRem.query().where('rowStateInThisSession', 24578).get()
@@ -169,7 +170,7 @@ export default {
     },
     mfResetForm(formName) {
       // M7/9
-      const arFromORM = this.cfEditStateRowsInOrm
+      const arFromORM = this.cfGetOrmEditStateRows
       if (arFromORM.length) {
         console.log('unsaved data found', arFromORM)
         for (let i = 0; i < arFromORM.length; i++) {
@@ -230,7 +231,7 @@ export default {
         }
       }
       // if there are no records left then I need to add a empty. For goal read docs/forms.md/1.3
-      arFromORM = this.cfEditStateRowsInOrm
+      arFromORM = this.cfGetOrmEditStateRows
     },
     async mfSendDataToServer(pORMRowArray) {
       // M9/9
