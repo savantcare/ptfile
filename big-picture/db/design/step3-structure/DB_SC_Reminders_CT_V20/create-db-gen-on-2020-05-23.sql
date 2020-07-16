@@ -1,1 +1,0 @@
-create database DB_SC_Reminders_CT_V20

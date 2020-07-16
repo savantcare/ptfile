@@ -1,1 +1,1 @@
-drop database sc_reminder
+drop database sc_rem

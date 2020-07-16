@@ -1,1 +1,0 @@
-create database DB_SC_SubstanseUse_CT_V20

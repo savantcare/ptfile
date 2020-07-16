@@ -20,21 +20,22 @@
 
 # Q2) How is the state of data entered in the form managed on client side?
 
-vuex orm field: rowStateOfClientSession of type int
+vuex orm field: rowStateInThisSession of type int
 
 e.g. cts/spi/rem/db/vuex-orm/rems:71
 
-# Q3) What are the different possible values for rowStateOfClientSession?
+# Q3) What are the different possible values for rowStateInThisSession?
 
 0 => Not known
-1 => Got from DB and not changed on client
-2 => Created new on client but not on the server yet.
-3 => Changed on client
+1 => Got from DB. Same as DB.
+2 => Created new on client
+3 => Created as copy on client
+4 => Changed on client
 After 2 if there is success the state goes back to 1
-4 => Client requested save to server. Now data validation on client side will start.
-5 => form error on client side
-6 => Data sent to server to save
-7 => Data saved to server failed.
+5 => Client requested save to server. Now data validation on client side will start.
+6 => form error on client side
+7 => Data sent to server to save
+8 => Data saved to server failed.
 
 Data is stored with the timeline
 
@@ -68,21 +69,21 @@ New record changed on client but not saved = 23
 
 - See rem/cl/add.vue:114
 
-New record after data is saved on server. rowStateOfClientSession = 23461
+New record after data is saved on server. rowStateInThisSession = 23461
 
 - See rem/cl/add.vue:189
 
-# Q5) Why not set RowStateOfClientSession = 1 when api succeds?
+# Q5) Why not set rowStateInThisSession = 1 when api succeds?
 
 - For the end user it is a matter of comfort to see the previous data in the table.
 
 # Q6) How is change and discontinued handle?
 
-1. Record is discontinued. Query sent is update. Value will be rowStateOfClientSession =
+1. Record is discontinued. Query sent is update. Value will be rowStateInThisSession =
 
 2. When a record is changed
    Since temporal DB old is deleted and new is inserted. But from client side the query sent is update
-   rowStateOfClientSession =
+   rowStateInThisSession =
 
 # Q7) Should data be loaded from localstorage or state?
 
@@ -94,7 +95,7 @@ New record after data is saved on server. rowStateOfClientSession = 23461
       When there is unsaved data we need to load the unsaved data
 
       The query to load data from vuex is:
-      const arResultsFromORM = ormRem.query().where('$isNew', true).get()
+      const arFromORM = ormRem.query().where('$isNew', true).get()
 
       The permanence of data is:
       Least permanane: data (local variable) of ct    -> Does not survive Ct remounting
@@ -147,3 +148,7 @@ There are a lot of listeners on this state and they will update themselves every
         Ignore next save if 1 second has not passed.
         Disadvnatage?
         If the user types "ja" within 1 sec and then exits the state will only have j
+
+# Q8) Should bulk created be used Out of 10 reminders set what if 9 got created successfuly but 1 failed?
+
+      // To keep code simple it was decided by VK on 13th July 2020 that for creasting 10 items we will fire 10 API calls.
