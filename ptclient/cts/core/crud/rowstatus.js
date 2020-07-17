@@ -5,9 +5,15 @@ import { Model } from '@vuex-orm/core'
 class rowStatus extends Model {
   // For Class syntax https://javascript.info/class
   static entity = 'rowstatus'
-
   static arOrmRowsCached = []
   static vOrmSaveScheduled = ''
+
+  /*
+  constructor() {
+    super()
+    this.arOrmRowsCached = []       // If I do this each row of the orm model will have arOrmRowsCached = []
+  }
+  */
 
   static fields() {
     return {
