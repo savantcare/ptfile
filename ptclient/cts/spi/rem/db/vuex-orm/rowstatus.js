@@ -10,7 +10,10 @@ class rowStatus extends Model {
 
   static fields() {
     return {
+      // the following fields only exist on client
       rowStateInThisSession: this.number(1), // Details read: /ptclient/docs/forms.md
+      validationClass: this.string(''),
+      isValidationError: this.boolean(false),
     }
   }
 

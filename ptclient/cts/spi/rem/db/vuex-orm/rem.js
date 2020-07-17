@@ -28,10 +28,6 @@ export default class reminders extends rowStatus {
 
       ROW_START: this.number(0),
       ROW_END: this.number(2147483647.999999), // this is unix_timestamp value from mariaDB for ROW_END when a record is created new in MariaDB system versioned table.
-
-      // the following fields only exist on client
-      validationClass: this.string(''),
-      isValidationError: this.boolean(false),
     }
   }
 }
