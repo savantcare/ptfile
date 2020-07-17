@@ -119,39 +119,57 @@ class rowStatus extends Model {
                               => add.vue:113:ormRem.getField
                                 => rowStatus.js:97
 
+    Problem?                              
+      When the cache array is update we want vue to react to the change and update add.vue:15:value="mfGetField"
+
+      forceUpdates are not good quality code. With 2 dimensional array if we do not follow right approach then force update will be needed
   */
   static putFieldValueInCache(pEvent, pOrmRowId, pFieldName) {
-    // Ref: https://stackoverflow.com/questions/45644781/update-value-in-multidimensional-array-in-vue
+    /*
+      // Method 1: of updating cache array. Checked by VK and RJ in July 2020 the force update is needed inside add.vue:115:setFieldInOrmOnTimeOut
+      if (typeof this.arOrmRowsCached[pOrmRowId] === 'undefined') {
+        this.arOrmRowsCached[pOrmRowId] = [] // setting this to a blank row since later I do splice. For splice that row needs to exist.
+      }
+      this.arOrmRowsCached[pOrmRowId][pFieldName] = pEvent
+      */
 
+    // Method 2: https://vuejs.org/2016/02/06/common-gotchas/#Why-isn%E2%80%99t-the-DOM-updating
+    // of updating cache array Ref: https://stackoverflow.com/questions/45644781/update-value-in-multidimensional-array-in-vue
     let newRow = []
     if (typeof this.arOrmRowsCached[pOrmRowId] === 'undefined') {
       this.arOrmRowsCached[pOrmRowId] = [] // setting this to a blank row since later I do splice. For splice that row needs to exist.
       console.log('Creating a new blank row')
     } else {
-      /* 
-          From arOrmRowsCached 
-      */
       newRow = this.arOrmRowsCached.slice(pOrmRowId, pOrmRowId + 1) // Existing row may have 5 fields so I need to pull it out before updating 1 field
       console.log('Existing row pulled out is', newRow)
     }
     newRow[pFieldName] = pEvent // Upadted the field value in the new row
-
-    /*  
-        Ref: https://vuejs.org/2016/02/06/common-gotchas/#Why-isn%E2%80%99t-the-DOM-updating
-     */
     this.arOrmRowsCached.splice(pOrmRowId, 1, newRow) // Put the single row back inside the array of a lot of rows.
+    // Problem: A tree structure of elements is getting made and can be verified by doing console.log
     console.log(this.arOrmRowsCached)
 
     /*
-      Option 2:
+      Method 3 of updating cache:
       this.arOrmRowsCached[pOrmRowId] = newRow // vue does not react. Now add.vue:115:setFieldInOrmOnTimeOut needs this.$forceUpdate
-      forceUpdates are not good quality code. This needs fixing TODO
       */
-
     /* 
-      Option 3: Will not work with $set is not available outside vue code
+      Method 4 of updating cache:
+      This will not work since $set is not available outside vue conetxt this is not vue context
       this.$set(this.arOrmRowsCached, pOrmRowId, newRow)
       */
+
+    /* Method 5: Delete old rows and create new row Checked by RJ and VK on 15th July
+    if (typeof this.arOrmRowsCached[pOrmRowId] === 'undefined') {
+      this.arOrmRowsCached[pOrmRowId] = [] // setting this to a blank row since later I do splice. For splice that row needs to exist.
+    }
+    this.arOrmRowsCached[pOrmRowId][pFieldName] = pEvent
+
+    const copyOfOldRow = this.arOrmRowsCached
+    // this.arOrmRowsCached = []
+    this.arOrmRowsCached.length = 0
+    console.log(this.arOrmRowsCached)
+    this.arOrmRowsCached = copyOfOldRow
+    */
   }
 
   static createTimeoutToSave(pEvent, pOrmRowId, pFieldName) {
