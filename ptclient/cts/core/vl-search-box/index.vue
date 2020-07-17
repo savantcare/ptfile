@@ -4,6 +4,7 @@
     <feedSUI></feedSUI>
     <mapSUI></mapSUI>
     <clearSUI></clearSUI>
+    <dxSUI></dxSUI>
     <el-autocomplete
       v-model="searchKeyword"
       class="inline-input"
@@ -22,8 +23,9 @@ import remSUI from '@/cts/spi/rem/search-interfaces' // TODO: this is used by se
 import feedSUI from '@/cts/core/feed/search-interfaces'
 import mapSUI from '@/cts/core/map/search-interfaces'
 import clearSUI from '@/cts/core/clear/search-interfaces'
+import dxSUI from '@/cts/spi/dx/search-interfaces'
 export default {
-  components: { remSUI, feedSUI, clearSUI, mapSUI },
+  components: { remSUI, feedSUI, clearSUI, mapSUI, dxSUI },
   data() {
     return { searchKeyword: '' }
   },

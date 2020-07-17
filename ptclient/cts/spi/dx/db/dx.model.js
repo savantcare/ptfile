@@ -28,7 +28,7 @@ module.exports = (sequelize, Sequelize) => {
       dxOnDate: {
         type: Sequelize.DATE,
       },
-      patientUUId: {
+      ptUUID: {
         type: Sequelize.STRING,
       },
       recordChangedByUUID: {

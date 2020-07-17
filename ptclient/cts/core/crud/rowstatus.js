@@ -238,7 +238,6 @@ class rowStatus extends Model {
   }
 
   static async fnMakeApiCAll(pORMRowArray) {
-    pORMRowArray.uuidOfRemMadeFor = 'bfe041fa-073b-4223-8c69-0540ee678ff8'
     pORMRowArray.recordChangedByUUID = 'bua674fa-073b-4223-8c69-0540ee786kj8'
     try {
       const response = await fetch(this.apiUrl, {

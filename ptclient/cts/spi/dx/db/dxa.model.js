@@ -10,7 +10,7 @@ module.exports = (sequelize, Sequelize) => {
       dxUUID: {
         type: Sequelize.STRING,
       },
-      patientUUID: {
+      ptUUID: {
         type: Sequelize.STRING,
       },
       dxAssessment: {

@@ -8,22 +8,21 @@
           <!-- Prop explaination  Read prop explanation for span=4 on line 19 -->
           <el-col :span="20" :class="ormRow.validationClass">
             <el-input
-              v-model="inputValue"
               type="textarea"
               :class="mfGetCssClassName(ormRow.id)"
               :autosize="{ minRows: 2, maxRows: 10 }"
-              placeholder="Please enter the reminder .."
-              :value="mfGetField(ormRow.id, 'remDesc')"
-              @input="mfSetFieldInOrmOnTimeout($event, ormRow.id, 'remDesc')"
+              placeholder="Please enter the diagnosis .."
+              :value="mfGetField(ormRow.id, 'dxName')"
+              @input="mfSetFieldInOrmOnTimeout($event, ormRow.id, 'dxName')"
             ></el-input>
             <div v-if="ormRow.isValidationError" class="el-form-item__error">
               Please enter minimum 3 characters.
             </div>
           </el-col>
-          <!-- Prop explaination
-            Goal: Show remove button on the RHS of input area. Since element.io divides it into 24 columns. we are giving
+          <!-- Prop explaination 
+            Goal: Show remove button on the RHS of input area. Since element.io divides it into 24 columns. we are giving 
             20 columns to input and 4 columns to remove button
-          -->
+           -->
           <el-col :span="4">
             <el-button
               plain
@@ -43,22 +42,13 @@
         <el-button type="warning" plain @click="mfResetForm">Reset form</el-button>
       </el-form-item>
     </el-form>
-    <!-- Goal: Show data at the time of sending to server -->
-    <el-table
-      v-if="cfGetOrmApiSendingStateRows.length > 0"
-      :data="cfGetOrmApiSendingStateRows"
-      style="width: 100%; background: #f0f9eb;"
-    >
-      <el-table-column prop="remDesc" label="Reminders sending to server"></el-table-column>
-    </el-table>
-
     <!-- Goal: Show data saved successfuly this session -->
     <el-table
       v-if="cfGetOrmApiSuccessStateRows.length > 0"
       :data="cfGetOrmApiSuccessStateRows"
       style="width: 100%; background: #f0f9eb;"
     >
-      <el-table-column prop="remDesc" label="Reminders added this session"></el-table-column>
+      <el-table-column prop="dxName" label="Diagnoses added this session"> </el-table-column>
     </el-table>
     <!-- Goal: Show data of API that failed in this session -->
     <el-table
@@ -66,46 +56,35 @@
       :data="cfGetOrmApiErrorStateRows"
       style="width: 100%; background: #f0f9eb;"
     >
-      <el-table-column
-        prop="remDesc"
-        label="Error: Reminders attempted but failed to save"
-      ></el-table-column>
+      <el-table-column prop="dxName" label="Error: Diagnoses attempted but failed to save">
+      </el-table-column>
     </el-table>
   </div>
 </template>
 <script>
-import ormRem from '../db/vuex-orm/rem.js' // Path without @ can be resolved by vsCode. Hence do not use webpack specific @ sign that represents src folder.
-
+import ormDx from '@/cts/spi/dx/db/vuex-orm/dx.js'
 export default {
   data() {
-    return {
-      inputValue: '',
-    }
+    return {}
   },
-
   computed: {
     cfGetOrmEditStateRows() {
-      return ormRem.getEditStateRows()
+      return ormDx.getEditStateRows()
     },
     cfGetOrmApiSuccessStateRows() {
-      return ormRem.getApiSuccessStateRows()
+      return ormDx.getApiSuccessStateRows()
     },
     cfGetOrmApiErrorStateRows() {
-      return ormRem.getApiErrorStateRows()
-    },
-    cfGetOrmApiSendingStateRows() {
-      return ormRem.getApiSendingStateRows()
+      return ormDx.getApiErrorStateRows()
     },
   },
-
   mounted() {},
-
   methods: {
     mfAddEmptyRowInOrm() {
-      const arFromORM = ormRem.insert({
+      const arFromORM = ormDx.insert({
         data: {
-          remDesc: '',
-          rowStateInThisSession: 2, // For meaning of diff values read ptclient/docs/forms.md
+          dxName: '',
+          rowStateInThisSession: 2, // For meaning of diff values read dx/db/vuex-orm/dx.js:71
           ROW_START: Math.floor(Date.now() / 1000), // Ref: https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
         },
       })
@@ -115,24 +94,27 @@ export default {
     },
     mfGetField(pOrmRowId, pFieldName) {
       console.log('mf get field called')
-      return ormRem.getField(pOrmRowId, pFieldName)
+      return ormDx.getField(pOrmRowId, pFieldName)
     },
+    // state updates are smarter.
     mfSetFieldInOrmOnTimeout(pEvent, pOrmRowId, pFieldName) {
-      ormRem.setField(pEvent, pOrmRowId, pFieldName)
+      ormDx.setField(pEvent, pOrmRowId, pFieldName)
+      this.$forceUpdate() // How to remove this? TODO
     },
     mfGetCssClassName(pOrmRowId) {
-      const arFromORM = ormRem.find(pOrmRowId)
+      const arFromORM = ormDx.find(pOrmRowId)
       if (arFromORM && arFromORM.rowStateInThisSession === 24) {
         // New -> Changed
         return 'unsaved-data'
+      } else {
+        return ''
       }
-      return ''
     },
     mfDeleteRowInOrm(pOrmRowId) {
-      ormRem.delete(pOrmRowId)
+      ormDx.delete(pOrmRowId)
     },
     mfResetForm(formName) {
-      ormRem.deleteEditStateRows()
+      ormDx.deleteEditStateRows()
     },
     async mfOnSubmit() {
       // M8/9
@@ -140,9 +122,9 @@ export default {
       if (arFromORM.length) {
         console.log('unsaved data found', arFromORM)
         for (let i = 0; i < arFromORM.length; i++) {
-          if (arFromORM[i].remDesc.length < 3) {
+          if (arFromORM[i].dxName.length < 3) {
             // Validation check
-            await ormRem.update({
+            ormDx.update({
               where: (record) => record.id === arFromORM[i].id,
               data: {
                 validationClass: 'validaionErrorExist',
@@ -151,13 +133,13 @@ export default {
               },
             })
           } else {
-            await ormRem.update({
+            ormDx.update({
               where: (record) => record.id === arFromORM[i].id,
               data: {
                 validationClass: '',
                 rowStateInThisSession: '2457', // New -> Changed -> Requested save -> Send to server
                 isValidationError: false,
-                uuidOfRemMadeFor: 'bfe041fa-073b-4223-8c69-0540ee678ff8',
+                ptUUID: 'bfe041fa-073b-4223-8c69-0540ee678ff8',
                 // Brought this back from the fn sendToServer() in base class rowStatus to here
                 // Because this field uuidOfRemMadeFor is only valid for reminder component.
                 // Other component e.g. dx have ptUUID in place of uuidOfRemMadeFor
@@ -167,7 +149,7 @@ export default {
         }
       }
       // if there are no records left then I need to add a empty. For goal read docs/forms.md/1.3
-      await ormRem.sendToServer()
+      await ormDx.sendToServer()
     },
   },
 }
