@@ -27,6 +27,7 @@ jobs:
       - name: Build client side
         run: |
           cd ptclient
+          npm install
           npm ci
           npm run build --if-present
         env:
