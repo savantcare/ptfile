@@ -114,7 +114,7 @@ export default {
     },
     mfSetFieldInOrmOnTimeout(pEvent, pOrmRowId, pFieldName) {
       ormRem.setField(pEvent, pOrmRowId, pFieldName)
-      this.$forceUpdate() // How to remove this? TODO
+      // this.$forceUpdate() // How to remove this? TODO
     },
     mfGetCssClassName(pOrmRowId) {
       const arFromORM = ormRem.find(pOrmRowId)

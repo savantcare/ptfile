@@ -103,22 +103,55 @@ class rowStatus extends Model {
     this.createTimeoutToSave(pEvent, pOrmRowId, pFieldName)
   }
 
+  /*  
+    Why? 
+    Put the value of what the user is typing in cache so that the user can see form field has the charecters that he has typed.
+  
+    How? 
+    Step 1: This is called in the form on each key press (@input is invoked on each key press)
+            Ref: The chain is started at cts/spi/rem/cl/add.vue:16 
+            The sequence is: add.vue:16:mfSetFieldInOrmOnTimeout 
+                              => add.vue:116:ormRem.setField 
+                                => rowStatus.js:118:this.putFieldValueInCache
+
+    Step : The work done by this function is used on each key press at:
+                            add.vue:15:value="mfGetField"
+                              => add.vue:113:ormRem.getField
+                                => rowStatus.js:97
+
+  */
   static putFieldValueInCache(pEvent, pOrmRowId, pFieldName) {
-    // Goal: Put the value in the cache so that the form field can update its value very fast
     // Ref: https://stackoverflow.com/questions/45644781/update-value-in-multidimensional-array-in-vue
+
     let newRow = []
     if (typeof this.arOrmRowsCached[pOrmRowId] === 'undefined') {
+      this.arOrmRowsCached[pOrmRowId] = [] // setting this to a blank row since later I do splice. For splice that row needs to exist.
       console.log('Creating a new blank row')
     } else {
-      newRow = this.arOrmRowsCached[pOrmRowId].slice(0)
-      console.log('Pulling out existing row')
+      /* 
+          From arOrmRowsCached 
+      */
+      newRow = this.arOrmRowsCached.slice(pOrmRowId, pOrmRowId + 1) // Existing row may have 5 fields so I need to pull it out before updating 1 field
+      console.log('Existing row pulled out is', newRow)
     }
-    newRow[pFieldName] = pEvent
+    newRow[pFieldName] = pEvent // Upadted the field value in the new row
 
-    /* The goal is to avpid forceUpdate the following line was tried as per vue manual. But in the base class $set is not available
-     this.$set(this.arOrmRowsCached, pOrmRowId, newRow)
-    */
-    this.arOrmRowsCached[pOrmRowId] = newRow // vue does not react. This needs fixing TODO
+    /*  
+        Ref: https://vuejs.org/2016/02/06/common-gotchas/#Why-isn%E2%80%99t-the-DOM-updating
+     */
+    this.arOrmRowsCached.splice(pOrmRowId, 1, newRow) // Put the single row back inside the array of a lot of rows.
+    console.log(this.arOrmRowsCached)
+
+    /*
+      Option 2:
+      this.arOrmRowsCached[pOrmRowId] = newRow // vue does not react. Now add.vue:115:setFieldInOrmOnTimeOut needs this.$forceUpdate
+      forceUpdates are not good quality code. This needs fixing TODO
+      */
+
+    /* 
+      Option 3: Will not work with $set is not available outside vue code
+      this.$set(this.arOrmRowsCached, pOrmRowId, newRow)
+      */
   }
 
   static createTimeoutToSave(pEvent, pOrmRowId, pFieldName) {
