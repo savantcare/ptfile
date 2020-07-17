@@ -10,6 +10,7 @@
 - pAge: Age is a parameter to a function
 - ormAge: Age is ORM created with vuex-orm
 - mc: multi change
+- c: change
 - d: discontinue
 
 ### Data types

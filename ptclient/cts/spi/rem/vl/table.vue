@@ -19,7 +19,9 @@
         style="width: 100%;"
         :stripe="true"
         :row-class-name="mfGetCssClassName"
+        @selection-change="mfHandleSelectionForDiscontinue"
       >
+        <el-table-column type="selection" width="42"> </el-table-column>
         <el-table-column type="expand">
           <template slot-scope="props">
             <p>Created: {{ props.row.createdAt }}</p>
@@ -37,6 +39,15 @@
           -->
         <el-table-column label="Actions" width="60">
           <template slot-scope="props">
+            <!-- 
+              Goal: 
+              I open "add form" and enter "jai kali ma" and then i close the add form by pressign escape. In the table that row should not have change and discontinue
+
+              How: 
+              v-if to check is the 'rowStateInThisSession' not exists in array 'daRowStatesNotHavingCD'
+
+              Ref: https://stackoverflow.com/questions/43881723/can-i-use-vue-js-v-if-to-check-is-the-value-exists-in-array
+            -->
             <el-button-group
               v-if="!daRowStatesNotHavingCD.includes(props.row.rowStateInThisSession)"
             >
@@ -82,7 +93,8 @@ export default {
   data() {
     return {
       tablePageNumber: 1,
-      daRowStatesNotHavingCD: [2, 24, 2456, 2457, 24578],
+      daRowStatesNotHavingCD: [2, 24, 2456, 2457, 24578], // Set of array of 'rowStateInThisSession' should not have change and discontinue button. As per GLOSSARY.md C stands for 'change' and D stands for 'discontinue'.
+      daSelectedRemForDiscontinue: [],
     }
   },
   computed: {
@@ -167,7 +179,27 @@ export default {
       this.$store.commit('mtfShowNewFirstTabInCl', tab)
     },
     mfOpenDDialog() {
-      // console.log('show add dialog')
+      let confirmMessage = 'Are you sure you want to discontinue all the selected reminders?'
+      if (this.daSelectedRemForDiscontinue.length === 0) {
+        confirmMessage = 'No reminder selected. Please select at least one reminder.'
+      }
+
+      this.$confirm(confirmMessage, 'Multi discontinue', {
+        confirmButtonText: 'Discontinue',
+        cancelButtonText: 'Cancel',
+        type: 'warning',
+      })
+        .then(() => {
+          if (this.daSelectedRemForDiscontinue.length > 0) {
+            this.daSelectedRemForDiscontinue.forEach((row) => {
+              ormRem.sendDiscontinueDataToServer(row.id, row.uuid, null)
+            })
+          }
+          console.log('daSelectedRemForDiscontinue=====>', this.daSelectedRemForDiscontinue)
+        })
+        .catch(() => {
+          console.log('multi discontinue cancelled')
+        })
     },
     mfOpenXDialog() {
       // console.log('show add dialog')
@@ -238,11 +270,11 @@ export default {
         cancelButtonText: 'Cancel',
         inputPlaceholder: 'Enter discontinue note',
       })
-        .then(({ descontinuedNotes }) => {
+        .then(({ value }) => {
           const status = ormRem.sendDiscontinueDataToServer(
             pORMDataRowID,
             arResultsFromORM.uuid,
-            descontinuedNotes
+            value
           )
           console.log('discontinue status ======> ', status)
         })
@@ -250,11 +282,14 @@ export default {
           console.log('Discontinue cancelled')
         })
     },
+    mfHandleSelectionForDiscontinue(val) {
+      this.daSelectedRemForDiscontinue = val
+    },
     mfGetCssClassName(pRow, pIndex) {
       const strOfNumber = pRow.row.rowStateInThisSession.toString()
       const lastCharecter = strOfNumber.slice(-1)
       console.log('pRow', pRow, 'pIndex', pIndex, 'Last charecter', lastCharecter)
-      if (lastCharecter === '3' || lastCharecter === '4' || lastCharecter === '6') {
+      if (lastCharecter === '4' || lastCharecter === '6') {
         return 'unsaved-data'
       } else {
         return ''
