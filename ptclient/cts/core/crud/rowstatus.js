@@ -99,11 +99,11 @@ class rowStatus extends Model {
   }
 
   static setField(pEvent, pOrmRowId, pFieldName) {
-    this.putDataInCache(pEvent, pOrmRowId, pFieldName)
+    this.putFieldValueInCache(pEvent, pOrmRowId, pFieldName)
     this.createTimeoutToSave(pEvent, pOrmRowId, pFieldName)
   }
 
-  static putDataInCache(pEvent, pOrmRowId, pFieldName) {
+  static putFieldValueInCache(pEvent, pOrmRowId, pFieldName) {
     // Goal: Put the value in the cache so that the form field can update its value very fast
     // Ref: https://stackoverflow.com/questions/45644781/update-value-in-multidimensional-array-in-vue
     let newRow = []
