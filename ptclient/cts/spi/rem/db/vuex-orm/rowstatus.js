@@ -8,6 +8,12 @@ class rowStatus extends Model {
   static arOrmRowsCached = []
   static vOrmSaveScheduled = ''
 
+  static fields() {
+    return {
+      rowStateInThisSession: this.number(1), // Details read: /ptclient/docs/forms.md
+    }
+  }
+
   static getOrmEditStateRows() {
     const arFromORM = this.query()
       .where('rowStateInThisSession', 2) // New

@@ -13,6 +13,8 @@ export default class reminders extends rowStatus {
 
   static fields() {
     return {
+      ...super.fields(),
+
       id: this.uid(() => intUniqueID()), // if this is not set then update based on primary key will not work
       uuid: this.uid(() => uuidv1()),
       uuidOfRemMadeFor: this.string(null),
@@ -30,7 +32,6 @@ export default class reminders extends rowStatus {
       // the following fields only exist on client
       validationClass: this.string(''),
       isValidationError: this.boolean(false),
-      rowStateInThisSession: this.number(1), // Details read: /ptclient/docs/forms.md
     }
   }
 }
