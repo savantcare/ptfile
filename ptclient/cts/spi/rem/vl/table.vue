@@ -18,7 +18,7 @@
         size="mini"
         style="width: 100%;"
         :stripe="true"
-        :row-class-name="mfGetDirtyClassName"
+        :row-class-name="mfGetCssClassName"
       >
         <el-table-column type="expand">
           <template slot-scope="props">
@@ -86,30 +86,8 @@ export default {
     }
   },
   computed: {
-    cfGetUniqueReminders() {
-      const arFromORM = ormRem.query().where('ROW_END', 2147483647.999999).get()
-
-      const uniqueUUIDReminders = []
-
-      // Goal: Find unique UUIDs since it is possible that some UUID is being changed and now there are 2 records with same UUID
-
-      let breakCheck1 = false
-      for (let i = 0; i < arFromORM.length; i++) {
-        for (let j = 0; j < uniqueUUIDReminders.length; j++) {
-          if (arFromORM[i].uuid === uniqueUUIDReminders[j].uuid) {
-            breakCheck1 = true
-            break
-          }
-        }
-        if (breakCheck1) break
-        uniqueUUIDReminders.push(arFromORM[i])
-      }
-
-      return uniqueUUIDReminders
-    },
-
     cfLengthOfDataArray() {
-      const arFromORM = this.cfGetUniqueReminders
+      const arFromORM = ormRem.getValidUniqueUuidRows()
       return arFromORM.length
     },
 
@@ -118,7 +96,7 @@ export default {
         'cfArOfRemForDisplayInTable called. Whenever ormRem will change this will get called. Even when there are 100 rows in the table when orm rem changes this gets called once'
       )
 
-      const arFromORM = this.cfGetUniqueReminders
+      const arFromORM = ormRem.getValidUniqueUuidRows()
 
       /*  Q) Should this function return the array it gets from ORM or modify the array?
               Option1: Return origianl array
@@ -273,7 +251,7 @@ export default {
           console.log('Discontinue cancelled')
         })
     },
-    mfGetDirtyClassName(pRow, pIndex) {
+    mfGetCssClassName(pRow, pIndex) {
       const strOfNumber = pRow.row.rowStateInThisSession.toString()
       const lastCharecter = strOfNumber.slice(-1)
       console.log('pRow', pRow, 'pIndex', pIndex, 'Last charecter', lastCharecter)

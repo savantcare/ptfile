@@ -17,7 +17,29 @@ class rowStatus extends Model {
     }
   }
 
-  static getOrmEditStateRows() {
+  static getValidUniqueUuidRows() {
+    // Following query makes sure I get valid data and not discontimued data fromm temporal table. Ref: https://mariadb.com/kb/en/temporal-data-tables/
+    const arFromORM = this.query().where('ROW_END', 2147483647.999999).get()
+
+    const uniqueUuidRows = []
+
+    // Goal: From the set of valid data, find unique UUIDs since it is possible that some UUID is being changed and now there are 2 records with same UUID
+    let breakCheck1 = false
+    for (let i = 0; i < arFromORM.length; i++) {
+      for (let j = 0; j < uniqueUuidRows.length; j++) {
+        if (arFromORM[i].uuid === uniqueUuidRows[j].uuid) {
+          breakCheck1 = true
+          break
+        }
+      }
+      if (breakCheck1) break
+      uniqueUuidRows.push(arFromORM[i])
+    }
+
+    return uniqueUuidRows
+  }
+
+  static getEditStateRows() {
     const arFromORM = this.query()
       .where('rowStateInThisSession', 2) // New
       .orWhere('rowStateInThisSession', 24) // New -> Changed
@@ -46,7 +68,7 @@ class rowStatus extends Model {
   }
 
   static deleteEditStateRows() {
-    const arFromORM = this.getOrmEditStateRows()
+    const arFromORM = this.getEditStateRows()
     if (arFromORM.length) {
       console.log('unsaved data found', arFromORM)
       for (let i = 0; i < arFromORM.length; i++) {
