@@ -139,10 +139,6 @@ export default {
                 validationClass: '',
                 rowStateInThisSession: '2457', // New -> Changed -> Requested save -> Send to server
                 isValidationError: false,
-                ptUUID: 'bfe041fa-073b-4223-8c69-0540ee678ff8',
-                // Brought this back from the fn sendToServer() in base class rowStatus to here
-                // Because this field uuidOfRemMadeFor is only valid for reminder component.
-                // Other component e.g. dx have ptUUID in place of uuidOfRemMadeFor
               },
             })
           }

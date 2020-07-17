@@ -9,7 +9,7 @@ module.exports = (io) => {
   router.post("/", async (req, res) => {
     try {
       const { data } = req.body;
-      const patientId = data.uuidOfRemMadeFor;
+      const patientId = data.ptUUID;
 
       const newDiagnosis = await Diagnosis.create(data); // See
 

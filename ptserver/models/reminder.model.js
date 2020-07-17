@@ -7,7 +7,7 @@ module.exports = (sequelize, Sequelize) => {
         primaryKey: true,
         defaultValue: Sequelize.UUIDV4,
       },
-      uuidOfRemMadeFor: {
+      ptUUID: {
         type: Sequelize.STRING,
       },
       remDesc: {
