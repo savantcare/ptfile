@@ -37,7 +37,9 @@
           -->
         <el-table-column label="Actions" width="60">
           <template slot-scope="props">
-            <el-button-group>
+            <el-button-group
+              v-if="!daRowStatesNotHavingCD.includes(props.row.rowStateInThisSession)"
+            >
               <el-button
                 type="primary"
                 size="mini"
@@ -46,7 +48,14 @@
                 @click="mfOpenCDialog(props.row.$id)"
                 >C</el-button
               >
-              <el-button type="warning" size="mini" style="padding: 3px;" plain>D</el-button>
+              <el-button
+                type="warning"
+                size="mini"
+                style="padding: 3px;"
+                plain
+                @click="mfOpenDPrompt(props.row.$id)"
+                >D</el-button
+              >
             </el-button-group>
           </template>
         </el-table-column>
@@ -73,6 +82,7 @@ export default {
   data() {
     return {
       tablePageNumber: 1,
+      daRowStatesNotHavingCD: [2, 24, 2456, 2457, 24578],
     }
   },
   computed: {
@@ -242,6 +252,26 @@ export default {
       }
       // console.log(tab)
       this.$store.commit('mtfShowNewFirstTabInCl', tab)
+    },
+    mfOpenDPrompt(pORMDataRowID) {
+      const arResultsFromORM = ormRem.find(pORMDataRowID)
+
+      this.$prompt(arResultsFromORM.remDesc, 'Discontinue reminder', {
+        confirmButtonText: 'Discontinue',
+        cancelButtonText: 'Cancel',
+        inputPlaceholder: 'Enter discontinue note',
+      })
+        .then(({ descontinuedNotes }) => {
+          const status = ormRem.sendDiscontinueDataToServer(
+            pORMDataRowID,
+            arResultsFromORM.uuid,
+            descontinuedNotes
+          )
+          console.log('discontinue status ======> ', status)
+        })
+        .catch(() => {
+          console.log('Discontinue cancelled')
+        })
     },
     mfGetDirtyClassName(pRow, pIndex) {
       const strOfNumber = pRow.row.rowStateInThisSession.toString()

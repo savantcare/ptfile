@@ -30,6 +30,12 @@ class rowStatus extends Model {
     return arFromORM
   }
 
+  static getApiSendingStateRows() {
+    // New -> Changed -> Requested save -> Sending to server
+    const arFromORM = this.query().where('rowStateInThisSession', 2457).get()
+    return arFromORM
+  }
+
   static deleteEditStateRows() {
     const arFromORM = this.getOrmEditStateRows()
     if (arFromORM.length) {
@@ -150,6 +156,35 @@ class rowStatus extends Model {
       }
     } catch (ex) {
       return 0 // Returns error code when try block gets an exception and fails
+    }
+  }
+
+  static async sendDiscontinueDataToServer(pORMDataRowID, remUUID, descontinuedNotes) {
+    try {
+      const response = await fetch(`${this.apiUrl}/${remUUID}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          // "Authorization": "Bearer " + TOKEN
+        },
+        body: JSON.stringify({
+          dNotes: descontinuedNotes,
+          patientId: 'bfe041fa-073b-4223-8c69-0540ee678ff8',
+        }),
+      })
+      if (!response.ok) {
+        return 0
+      } else {
+        this.update({
+          where: pORMDataRowID,
+          data: {
+            ROW_END: Math.floor(Date.now() / 1000),
+          },
+        })
+        return 1
+      }
+    } catch (ex) {
+      return 0
     }
   }
 }
