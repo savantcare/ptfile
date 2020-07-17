@@ -112,9 +112,8 @@ export default {
       console.log('mf get field called')
       return ormRem.getField(pOrmRowId, pFieldName)
     },
-    // state updates are smarter.
     mfSetFieldInOrmOnTimeout(pEvent, pOrmRowId, pFieldName) {
-      ormRem.setFieldOnTimeout(pEvent, pOrmRowId, pFieldName)
+      ormRem.setField(pEvent, pOrmRowId, pFieldName)
       this.$forceUpdate() // How to remove this? TODO
     },
     mfGetCssClassName(pOrmRowId) {

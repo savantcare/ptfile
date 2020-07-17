@@ -98,7 +98,13 @@ class rowStatus extends Model {
     }
   }
 
-  static setFieldOnTimeout(pEvent, pOrmRowId, pFieldName) {
+  static setField(pEvent, pOrmRowId, pFieldName) {
+    this.putDataInCache(pEvent, pOrmRowId, pFieldName)
+    this.createTimeoutToSave(pEvent, pOrmRowId, pFieldName)
+  }
+
+  static putDataInCache(pEvent, pOrmRowId, pFieldName) {
+    // Goal: Put the value in the cache so that the form field can update its value very fast
     // Ref: https://stackoverflow.com/questions/45644781/update-value-in-multidimensional-array-in-vue
     let newRow = []
     if (typeof this.arOrmRowsCached[pOrmRowId] === 'undefined') {
@@ -109,12 +115,14 @@ class rowStatus extends Model {
     }
     newRow[pFieldName] = pEvent
 
+    /* The goal is to avpid forceUpdate the following line was tried as per vue manual. But in the base class $set is not available
+     this.$set(this.arOrmRowsCached, pOrmRowId, newRow)
+    */
     this.arOrmRowsCached[pOrmRowId] = newRow // vue does not react. This needs fixing TODO
+  }
 
-    // The goal is to avpid forceUpdate the following line was tried as per vue manual. But in the base class $set is not available
-    // this.$set(this.arOrmRowsCached, pOrmRowId, newRow)
-
-    // debouncing. If A and B are pressed quickly. Timeout for "A" keypress will get cancelled and timeout for "B" keypress will get scheduled.
+  static createTimeoutToSave(pEvent, pOrmRowId, pFieldName) {
+    // Goal 2/2: debouncing. If A and B are pressed quickly. Timeout for "A" keypress will get cancelled and timeout for "B" keypress will get scheduled.
     if (this.vOrmSaveScheduled) {
       clearTimeout(this.vOrmSaveScheduled)
     }
