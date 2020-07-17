@@ -45,7 +45,7 @@ dialog
           :lock-scroll="true"
 
         Goal: CL needs to become smaller or bigger depending on the child ct
-          :width="vbldialogWidth"
+          :width="vsDialogWidth"
     -->
   <el-dialog
     custom-class="multi-tab-dialog"
@@ -55,7 +55,7 @@ dialog
     :show-close="false"
     :visible.sync="vblIsdialogHoldingTabsInCLVisible"
     :lock-scroll="true"
-    :width="vbldialogWidth"
+    :width="vsDialogWidth"
   >
     <el-row type="flex">
       <!-- By passing editable we tell element.io to give add and close option Red: https://element.eleme.io/#/en-US/component/tabs#tabs-attributes -->
@@ -156,14 +156,14 @@ export default {
         this.$store.commit('mtfSetTabDialogVisibility', value)
       },
     },
-    vbldialogWidth: {
+    vsDialogWidth: {
       get() {
         /*
         get the Cl dialog width based on tab width
         if tab width is 'large' then dialog width will be 80% 
         for tab width is 'small' dialog width will be 50%
         */
-        const cfDialogWidth = this.$store.state.vstObjTabsInCL.vbldialogWidth
+        const cfDialogWidth = this.$store.state.vstObjTabsInCL.vsDialogWidth
         console.log('cfDialogWidth', cfDialogWidth)
         return cfDialogWidth === '' || cfDialogWidth === 'small' ? '50%' : '80%'
       },
