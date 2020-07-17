@@ -8,6 +8,7 @@
           <!-- Prop explaination  Read prop explanation for span=4 on line 19 -->
           <el-col :span="20" :class="ormRow.validationClass">
             <el-input
+              v-model="inputValue"
               type="textarea"
               :class="mfGetCssClassName(ormRow.id)"
               :autosize="{ minRows: 2, maxRows: 10 }"
@@ -19,10 +20,10 @@
               Please enter minimum 3 characters.
             </div>
           </el-col>
-          <!-- Prop explaination 
-            Goal: Show remove button on the RHS of input area. Since element.io divides it into 24 columns. we are giving 
+          <!-- Prop explaination
+            Goal: Show remove button on the RHS of input area. Since element.io divides it into 24 columns. we are giving
             20 columns to input and 4 columns to remove button
-           -->
+          -->
           <el-col :span="4">
             <el-button
               plain
@@ -48,7 +49,7 @@
       :data="cfGetOrmApiSendingStateRows"
       style="width: 100%; background: #f0f9eb;"
     >
-      <el-table-column prop="remDesc" label="Reminders sending to server"> </el-table-column>
+      <el-table-column prop="remDesc" label="Reminders sending to server"></el-table-column>
     </el-table>
 
     <!-- Goal: Show data saved successfuly this session -->
@@ -57,7 +58,7 @@
       :data="cfGetOrmApiSuccessStateRows"
       style="width: 100%; background: #f0f9eb;"
     >
-      <el-table-column prop="remDesc" label="Reminders added this session"> </el-table-column>
+      <el-table-column prop="remDesc" label="Reminders added this session"></el-table-column>
     </el-table>
     <!-- Goal: Show data of API that failed in this session -->
     <el-table
@@ -65,8 +66,10 @@
       :data="cfGetOrmApiErrorStateRows"
       style="width: 100%; background: #f0f9eb;"
     >
-      <el-table-column prop="remDesc" label="Error: Reminders attempted but failed to save">
-      </el-table-column>
+      <el-table-column
+        prop="remDesc"
+        label="Error: Reminders attempted but failed to save"
+      ></el-table-column>
     </el-table>
   </div>
 </template>
@@ -75,7 +78,9 @@ import ormRem from '../db/vuex-orm/rem.js' // Path without @ can be resolved by 
 
 export default {
   data() {
-    return {}
+    return {
+      inputValue: '',
+    }
   },
 
   computed: {
@@ -114,7 +119,6 @@ export default {
     },
     mfSetFieldInOrmOnTimeout(pEvent, pOrmRowId, pFieldName) {
       ormRem.setField(pEvent, pOrmRowId, pFieldName)
-      this.$forceUpdate() // How to remove this? TODO
     },
     mfGetCssClassName(pOrmRowId) {
       const arFromORM = ormRem.find(pOrmRowId)
