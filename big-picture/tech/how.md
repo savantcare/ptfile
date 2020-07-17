@@ -14,18 +14,21 @@ Step1: Start vue-client
 
 ```
 cd /gt/sc-prog-repos/
-git clone https://github.com/savantcare/patientfile.git
-cd vue-client
-vue-client> npm install
-vue-client> npm run serve              # starts vue server
+git clone https://github.com/savantcare/ptfile.git
+cd ptclient
+ptclient> npm install
+# starts vue server
+vue-client> yarn dev
+# or
+vue-client> npm run dev
 ```
 
 Step2: Start node-server
 
 ```
-cd /gt/sc-prog-repos/patientfile/node-server
-node-server> npm install
-node-server> npm run start             # start node server
+cd /gt/sc-prog-repos/ptfile/ptserver
+ptserver> npm install
+ptserver> npm run start             # start node server
 ```
 
 :::

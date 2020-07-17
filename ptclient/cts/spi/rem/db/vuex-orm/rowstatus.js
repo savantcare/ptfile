@@ -41,6 +41,7 @@ class rowStatus extends Model {
   }
 
   static getField(pOrmRowId, pFieldName) {
+    // first time it will have to find in model. This is needed to show the initial content in the field.
     if (typeof this.arOrmRowsCached[pOrmRowId] === 'undefined') {
       console.log('finding in model')
       const arFromORM = this.find(pOrmRowId)
@@ -48,6 +49,7 @@ class rowStatus extends Model {
         return arFromORM[pFieldName]
       }
     } else {
+      // if caching is removed then typing will update every 1 second when the vuex store gets updated.
       console.log('returning from cache')
       return this.arOrmRowsCached[pOrmRowId][pFieldName]
     }
@@ -64,10 +66,12 @@ class rowStatus extends Model {
     }
     newRow[pFieldName] = pEvent
 
-    this.arOrmRowsCached[pOrmRowId] = newRow
+    this.arOrmRowsCached[pOrmRowId] = newRow // vue does not react. This needs fixing TODO
 
     // The goal is to avpid forceUpdate the following line was tried as per vue manual. But in the base class $set is not available
     // this.$set(this.arOrmRowsCached, pOrmRowId, newRow)
+
+    // debouncing. If A and B are pressed quickly. Timeout for "A" keypress will get cancelled and timeout for "B" keypress will get scheduled.
     if (this.vOrmSaveScheduled) {
       clearTimeout(this.vOrmSaveScheduled)
     }
@@ -104,7 +108,7 @@ class rowStatus extends Model {
     console.log(arFromORM)
 
     for (let i = 0; i < arFromORM.length; i++) {
-      const status = await this.sendDataToServer(arFromORM[i])
+      const status = await this.fnMakeApiCAll(arFromORM[i])
       if (status === 0) {
         // Handle api returned success
         this.update({
@@ -125,7 +129,7 @@ class rowStatus extends Model {
     }
   }
 
-  static async sendDataToServer(pORMRowArray) {
+  static async fnMakeApiCAll(pORMRowArray) {
     pORMRowArray.uuidOfRemMadeFor = 'bfe041fa-073b-4223-8c69-0540ee678ff8'
     pORMRowArray.recordChangedByUUID = 'bua674fa-073b-4223-8c69-0540ee786kj8'
     try {

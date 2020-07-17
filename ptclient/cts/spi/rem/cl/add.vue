@@ -62,11 +62,13 @@
   </div>
 </template>
 <script>
-import ormRem from '@/cts/spi/rem/db/vuex-orm/rem.js'
+import ormRem from '../db/vuex-orm/rem.js' // Path without @ can be resolved by vsCode. Hence do not use webpack specific @ sign that represents src folder.
+
 export default {
   data() {
     return {}
   },
+
   computed: {
     cfGetOrmEditStateRows() {
       return ormRem.getOrmEditStateRows()
@@ -78,7 +80,9 @@ export default {
       return ormRem.getApiErrorStateRows()
     },
   },
+
   mounted() {},
+
   methods: {
     mfAddEmptyRowInOrm() {
       const arFromORM = ormRem.insert({
@@ -106,9 +110,8 @@ export default {
       if (arFromORM && arFromORM.rowStateInThisSession === 24) {
         // New -> Changed
         return 'unsaved-data'
-      } else {
-        return ''
       }
+      return ''
     },
     mfDeleteRowInOrm(pOrmRowId) {
       ormRem.delete(pOrmRowId)
@@ -124,7 +127,7 @@ export default {
         for (let i = 0; i < arFromORM.length; i++) {
           if (arFromORM[i].remDesc.length < 3) {
             // Validation check
-            ormRem.update({
+            await ormRem.update({
               where: (record) => record.id === arFromORM[i].id,
               data: {
                 validationClass: 'validaionErrorExist',
@@ -133,7 +136,7 @@ export default {
               },
             })
           } else {
-            ormRem.update({
+            await ormRem.update({
               where: (record) => record.id === arFromORM[i].id,
               data: {
                 validationClass: '',
