@@ -3,6 +3,7 @@
 import { Model } from '@vuex-orm/core'
 
 class rowStatus extends Model {
+  // For Class syntax https://javascript.info/class
   static entity = 'rowstatus'
 
   static arOrmRowsCached = []
@@ -28,6 +29,11 @@ class rowStatus extends Model {
     for (let i = 0; i < arFromORM.length; i++) {
       for (let j = 0; j < uniqueUuidRows.length; j++) {
         if (arFromORM[i].uuid === uniqueUuidRows[j].uuid) {
+          /* Suppose a row is being changed. Now 2 rows have the same uuid. The old row and the new changed row.
+          In the array that is returned from this Fn I am returning the array with the new data.       
+          Hence in the following line I over write the old row
+          */
+          uniqueUuidRows[j] = arFromORM[i]
           breakCheck1 = true
           break
         }

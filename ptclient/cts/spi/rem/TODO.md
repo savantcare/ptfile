@@ -1,6 +1,6 @@
 1. Saving to DB is slow
 
-2. Exiting row. I click change and then change it. Then press escape. In the table there is no indication whiuch row is being edited.
+2. Exiting row. I click change and then without changing come out. In the table the row becomes yellow.
 
 3. Exiting row. I click change and then change it. Then press save. In the table that row comes in orange.
 
