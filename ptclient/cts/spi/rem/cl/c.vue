@@ -26,6 +26,16 @@
         :type="row.type"
       >
         {{ row.remDesc }}
+        <span
+          v-if="row.rowStateInThisSession == 345"
+          class="api-response-message el-button--warning"
+          >sending to server</span
+        >
+        <span
+          v-if="row.rowStateInThisSession == 34571"
+          class="api-response-message el-button--success"
+          >saved this session</span
+        >
       </el-timeline-item>
     </el-timeline>
   </div>
@@ -94,6 +104,7 @@ export default {
             obj.type = ''
           }
           obj.ROW_START = arFromORM[i].ROW_START
+          obj.rowStateInThisSession = arFromORM[i].rowStateInThisSession
           dataTable.push(obj)
         }
       }
@@ -235,6 +246,13 @@ export default {
 
     async sendDataToServer() {
       try {
+        await ormRem.update({
+          where: this.newRowIDfromORM,
+          data: {
+            rowStateInThisSession: '345',
+          },
+        })
+
         const response = await fetch(`${REMINDER_API_URL}/${this.uuid}`, {
           method: 'PUT',
           headers: {
@@ -246,11 +264,11 @@ export default {
           }),
         })
         if (!response.ok) {
-          /* Goal: Update the value of 'rowStateOfClientSession' to success or failure depending on the api response */
+          /* Goal: Update the value of 'rowStateInThisSession' to success or failure depending on the api response */
           ormRem.update({
             where: this.newRowIDfromORM,
             data: {
-              rowStateOfClientSession: 3458,
+              rowStateInThisSession: 3458,
             },
           })
           console.log('Failed to update')
@@ -270,11 +288,11 @@ export default {
               ROW_END: Math.floor(Date.now() / 1000),
             },
           })
-          /* Goal: Update the value of 'rowStateOfClientSession' to success or failure depending on the api response */
+          /* Goal: Update the value of 'rowStateInThisSession' to success or failure depending on the api response */
           ormRem.update({
             where: this.newRowIDfromORM,
             data: {
-              rowStateOfClientSession: 34571,
+              rowStateInThisSession: 34571,
             },
           })
           console.log('update success')
@@ -286,3 +304,11 @@ export default {
   },
 }
 </script>
+
+<style>
+span.api-response-message {
+  padding: 0px 8px 3px 8px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+</style>

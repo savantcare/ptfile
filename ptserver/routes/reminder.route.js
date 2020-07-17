@@ -20,10 +20,10 @@ module.exports = (io, sequelize) => {
        */
       //console.log(`room-${patientId}-Doctor`)
       //console.log(newReminder)
-      io.to(`room-${patientId}-Doctor`).emit("ADD_REMINDER", newReminder);
+      // io.to(`room-${patientId}-Doctor`).emit("ADD_REMINDER", newReminder);
 
       res.send(
-        newReminder
+        "ok"
       ); /* Fix: Instead of sending the whole object only OK needs to be sent*/
     } catch (err) {
       res.status(500).send({
@@ -102,6 +102,20 @@ module.exports = (io, sequelize) => {
 
   router.patch("/:id", async (req, res) => {
     try {
+      // First update discontinuie notes and then delete row
+      if (req.body.dNotes) {
+        await Reminder.update(
+          {
+            notes: req.body.dNotes,
+          },
+          {
+            where: {
+              uuid: req.params.id,
+            },
+          }
+        );
+      }
+
       const queryResult = await Reminder.destroy({
         where: {
           uuid: req.params.id,
