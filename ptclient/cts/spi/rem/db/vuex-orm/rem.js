@@ -1,5 +1,5 @@
 // For docs read ptclient/docs/models.md
-import rowStatus from '@/cts/spi/rem/db/vuex-orm/rowstatus.js'
+import rowStatus from '@/cts/core/crud/rowstatus.js'
 
 const { v1: uuidv1 } = require('uuid')
 
