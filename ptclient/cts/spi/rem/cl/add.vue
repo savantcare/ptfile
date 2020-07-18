@@ -8,7 +8,6 @@
           <!-- Prop explaination  Read prop explanation for span=4 on line 19 -->
           <el-col :span="20" :class="ormRow.validationClass">
             <el-input
-              v-model="inputValue"
               type="textarea"
               :class="mfGetCssClassName(ormRow.id)"
               :autosize="{ minRows: 2, maxRows: 10 }"
@@ -78,9 +77,7 @@ import ormRem from '../db/vuex-orm/rem.js' // Path without @ can be resolved by 
 
 export default {
   data() {
-    return {
-      inputValue: '',
-    }
+    return {}
   },
 
   computed: {
@@ -119,6 +116,7 @@ export default {
     },
     mfSetFieldInOrmOnTimeout(pEvent, pOrmRowId, pFieldName) {
       ormRem.setField(pEvent, pOrmRowId, pFieldName)
+      this.$forceUpdate() // Not able to remove it. For the different methods tried read: cts/core/rowstatus.js:133/putFieldValueInCache
     },
     mfGetCssClassName(pOrmRowId) {
       const arFromORM = ormRem.find(pOrmRowId)

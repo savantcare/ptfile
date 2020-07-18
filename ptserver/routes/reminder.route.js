@@ -8,7 +8,7 @@ module.exports = (io, sequelize) => {
   router.post("/", async (req, res) => {
     try {
       const { data } = req.body;
-      const patientId = data.uuidOfRemMadeFor;
+      const patientId = data.ptUUID;
       const newReminder = await Reminder.create(data);
       /* Goal: we want to get each record's success and failure response
           So, we are using create and not using bulkCreate and making separate api query for each data */
@@ -38,7 +38,7 @@ module.exports = (io, sequelize) => {
       const { patientId } = req.query;
       const queryResult = await Reminder.findAll({
         where: {
-          uuidOfRemMadeFor: patientId,
+          ptUUID: patientId,
           // discontinue: {
           //   [Op.ne]: 1
           // }

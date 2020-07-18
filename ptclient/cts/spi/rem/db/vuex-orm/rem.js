@@ -17,7 +17,7 @@ export default class reminders extends rowStatus {
 
       id: this.uid(() => intUniqueID()), // if this is not set then update based on primary key will not work
       uuid: this.uid(() => uuidv1()),
-      uuidOfRemMadeFor: this.string(null),
+      ptUUID: this.string(null),
       remDesc: this.string(''),
       notes: this.string(null),
       priority: this.number(0),
