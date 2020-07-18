@@ -5,3 +5,5 @@
 3. Reminders that failed to save on server should show up in red color in the table.
 
 4. Form field focus using v-on
+
+5. In default.json i set config.artificial_delay_in_response_from_node_server=0 but it is not taking effect.

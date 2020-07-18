@@ -1,14 +1,14 @@
-const bodyParser = require('body-parser')
-const jwt = require('jsonwebtoken')
+const bodyParser = require("body-parser");
+const jwt = require("jsonwebtoken");
 
-const http = require('http')
-const app = require('express')()
+const http = require("http");
+const app = require("express")();
 
 const cors = require("cors");
-const config = require('config');
+const config = require("config");
 
 var corsOptions = {
-  origin: "*"
+  origin: "*",
 };
 
 /* 
@@ -20,27 +20,28 @@ How to run the code in production mode?
 export NODE_ENV=production
 npm run start-auth
 */
-var env = process.env.NODE_ENV || 'development'; // Ref: https://stackoverflow.com/questions/8449665/how-do-you-detect-the-environment-in-an-express-js-app
+var env = process.env.NODE_ENV || "development"; // Ref: https://stackoverflow.com/questions/8449665/how-do-you-detect-the-environment-in-an-express-js-app
 console.log(env);
-if (env === 'development') {
-  pause = require('connect-pause');
-  app.use(pause(config.artificial_delay_in_reponse_from_node_server));   // Change this to change the delay time.
+console.log(config.artificial_delay_in_response_from_node_server);
+
+if (env === "development") {
+  pause = require("connect-pause");
+  app.use(pause(config.artificial_delay_in_response_from_node_server)); // Change this to change the delay time.
 }
 /* End of delay section */
 
-
-
 app.use(cors(corsOptions));
 
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
+const SECRET_KEY = "123456789";
 
-const SECRET_KEY = '123456789'
-
-// Verify the token 
+// Verify the token
 function verifyToken(token) {
-  return jwt.verify(token, SECRET_KEY, (err, decode) => decode !== undefined ? decode : err)
+  return jwt.verify(token, SECRET_KEY, (err, decode) =>
+    decode !== undefined ? decode : err
+  );
 }
 
 // app.use(/^(?!\/auth).*$/, (req, res, next) => {
@@ -68,12 +69,10 @@ function verifyToken(token) {
 //   }
 // })
 
-
-
-const server = http.createServer(app)
+const server = http.createServer(app);
 server.listen(8000, () => {
-  console.log("Node.js server is running")
-})
+  console.log("Node.js server is running");
+});
 
 require("./models");
 
@@ -81,17 +80,17 @@ require("./models");
 
 // require("./socket")(server)
 
-const io = require('socket.io')(server)
-io.on("connection", socket => {
-  console.log(`Socket connected: ${socket.id}`)
+const io = require("socket.io")(server);
+io.on("connection", (socket) => {
+  console.log(`Socket connected: ${socket.id}`);
 
-  socket.on("CREATE_ROOM", roomId => {
-    console.log('------------------------')
-    console.log(`join to room ${roomId}`)
-    console.log('------------------------')
-    socket.join(roomId)
-  })
-})
+  socket.on("CREATE_ROOM", (roomId) => {
+    console.log("------------------------");
+    console.log(`join to room ${roomId}`);
+    console.log("------------------------");
+    socket.join(roomId);
+  });
+});
 
-const router = require('./routes')(io)
-app.use(router)
+const router = require("./routes")(io);
+app.use(router);
