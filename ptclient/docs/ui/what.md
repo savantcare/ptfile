@@ -29,3 +29,8 @@ Each component will come with a default set of columns that are displayed. The u
 ## Q5) What does emr UI view
 
 ![dense-view](./elementio-change-analysis/dense-content.png)
+
+# Q6) What other UI projects should I RnD more?
+
+Drag and drop windows: https://jbaysolutions.github.io/vue-grid-layout/examples/01-basic.html
+Infinite scroll: https://github.com/nhn/tui.grid

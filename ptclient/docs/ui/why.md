@@ -39,30 +39,49 @@ Features needed:
 
 1. KB control
    https://xuliangzhan_admin.gitee.io/vxe-table/#/table/advanced/highlight
+   element.io => Alexey was able to implement it
 
-2. Extend to show row details
+2. Infinite scroll as a better form of paging
+   Element.io has it:
+   https://jsfiddle.net/PeachScript/uyjb6z34/
+   https://peachscript.github.io/vue-infinite-loading/guide/use-with-el-table.html
+
+3. Drag and drop rows for priority setting
+   element io may be able to do it.
+
+   - https://www.npmjs.com/package/element-ui-el-table-draggable
+   - https://github.com/ElemeFE/element/issues/5684
+   - https://github.com/WakuwakuP/element-ui-el-table-draggable
+
+   https://sortablejs.github.io/Vue.Draggable/#/table-example
+
+   https://github.com/nhn/tui.grid/ -> No
+
+4. Documentation in english
+
+5. Extend to show row details
    https://xuliangzhan_admin.gitee.io/vxe-table/#/table/advanced/expandAccordion
    https://examples.bootstrap-table.com/#options/detail-view.html
    https://element.eleme.io/#/en-US/component/table#expandable-row
 
-3. Hide header. Since components like Rem have self explanatory column heading like description.
+6. Hide header. Since components like Rem have self explanatory column heading like description.
    https://xuliangzhan_admin.gitee.io/vxe-table/#/table/base/header
    https://examples.bootstrap-table.com/#options/show-header.html
    elelemt.io/table has show-header
 
-4. Mini size
+7. Mini size
    https://xuliangzhan_admin.gitee.io/vxe-table/#/table/base/header
    elelemt.io/table has size=mini
 
-5. Good performance
-   elkement.io with 100 rows is giving bad performance to VK on 10th July 2020
+8. Good performance
+   elkement.io with 100 rows is giving bad performance to VK on 10th July 2020 but paging solves problem
    Ref: https://github.com/ElemeFE/element/issues/6089
    vxe-table implement concept of virtual table.
 
-6. Paging component
+9. Paging component
    vue-easytable
    http://doc.huangsw.com/vue-easytable/app.html#/pagination  
-   element-io: No
+   element-io: Seperate paging componet integrated with tablk.
    vxe-table: Yes
 
 Features not needed:
