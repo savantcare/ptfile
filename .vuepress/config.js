@@ -42,7 +42,7 @@ module.exports = {
       },
       {
         title: "Big picture",
-        path: "/big-picture/",
+        path: "/docs/",
         collapsable: true,
         sidebarDepth: 0,
         // How to do nested sidebar? https://github.com/vuejs/vuepress/issues/287#issuecomment-480805333
@@ -65,22 +65,22 @@ module.exports = {
             ],
           },
           {
-            path: "/big-picture/tech/",
+            path: "/docs/tech/",
             title: "Tech",
             sidebarDepth: 0,
             children: [
               {
-                path: "/big-picture/tech/why",
+                path: "/docs/tech/why",
                 title: "Why",
                 sidebarDepth: 0,
               },
               {
-                path: "/big-picture/tech/what",
+                path: "/docs/tech/what",
                 title: "What",
                 sidebarDepth: 0,
               },
               {
-                path: "/big-picture/tech/how",
+                path: "/docs/tech/how",
                 title: "How",
                 sidebarDepth: 0,
               },
@@ -95,7 +95,7 @@ module.exports = {
         sidebarDepth: 0,
         children: [
           {
-            path: "/ptserver/big-picture.html",
+            path: "/ptserver/docs.html",
             title: "Big picture",
             sidebarDepth: 0,
           },
@@ -263,15 +263,15 @@ module.exports = {
             ],
           },
           {
-            path: "/ptclient/faq",
             title: "FAQ",
+            path: "/ptclient/docs/faq",
             sidebarDepth: 0,
           },
         ],
       },
       {
         title: "Glossary",
-        path: "/GLOSSARY",
+        path: "/docs/GLOSSARY",
         sidebarDepth: 0,
       },
     ],
