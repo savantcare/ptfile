@@ -7,8 +7,10 @@
 3 core concepts:
 
 1. The entrance file is: [search-interfaces.vue](https://github.com/savantcare/ptfile/blob/master/ptclient/cts/spi/rem/search-interfaces.vue)
+   This file comes into the search dropdown by menioning it in 2 places at:
+   /Users/vk-tech/gt/sc-prog-repos/ptfile/ptclient/cts/core/vl-search-box/index.vue
 
-2. Each component will usually have sub components for [vl](https://github.com/savantcare/ptfile/tree/master/ptclient/cts/spi/rem/vl) and [cl](https://github.com/savantcare/ptfile/tree/master/ptclient/cts/spi/rem/cl). Terms like [vl](../../GLOSSARY.html#others) and [cl](../../GLOSSARY.html#others) are explained in [glossary](../../GLOSSARY)
+2. Each component will usually have sub components for [vl](https://github.com/savantcare/ptfile/tree/master/ptclient/cts/spi/rem/vl) and [cl](https://github.com/savantcare/ptfile/tree/master/ptclient/cts/spi/rem/cl). Terms like [vl](../../GLOSSARY.html#others) and [cl](../../GLOSSARY.html#others) are explained in [glossary](../../GLOSSARY). Which subcomponent is invoked is based on the keys inside [search-interfaces.vue](https://github.com/savantcare/ptfile/blob/master/ptclient/cts/spi/rem/search-interfaces.vue)
 
 3. Data in a component is [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) through a [model](https://github.com/savantcare/ptfile/blob/master/ptclient/cts/spi/rem/db/vuex-orm/rem.js)
 
@@ -16,9 +18,9 @@
 
 ### Core components
 
-| #   | Name                                      | Programmer | Status       |
-| --- | ----------------------------------------- | ---------- | ------------ |
-| 1   | [L2 tab manager](./core/cl-tabs-manager/) | Vikas      | Ready to use |
+| #   | Name                                                | Programmer | Status       |
+| --- | --------------------------------------------------- | ---------- | ------------ |
+| 1   | [Change layer tab manager](./core/cl-tabs-manager/) | Vikas      | Ready to use |
 
 ### Health components
 

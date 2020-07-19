@@ -22,7 +22,6 @@ export default {
         value: 'recommendations',
         ctAbbr: 'rex',
         ctToShowInCL: 'spi/',
-        ctToShowInMSVL: 'spi/rec/vl/table.vue', // expands to Ct to show in Musti state of view layer
         ctToShowInCSVL: 'spi/rec/vl/timeline.vue',
         layer: 'view',
       },

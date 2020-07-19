@@ -1,3 +1,3 @@
 module.exports = {
-  BOILERPLATE_API_URL: 'http://localhost:8000/reminders',
+  HELLO_WORLD_API_URL: 'http://localhost:8000/hello-world',
 }

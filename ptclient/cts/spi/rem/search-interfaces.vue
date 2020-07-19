@@ -14,7 +14,6 @@ export default {
       data: {
         value: 'reminders',
         ctAbbr: 'rem',
-        ctToShowInMSVL: 'spi/rem/vl/table.vue', // MSVL -> Multi state view layer
         ctToShowInCSVL: 'spi/rem/vl/timeline.vue', // CSVL -> Current state view layer
         layer: 'view',
       },

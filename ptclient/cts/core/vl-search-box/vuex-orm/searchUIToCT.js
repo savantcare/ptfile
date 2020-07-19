@@ -50,7 +50,6 @@ export default class ormSearchPhraseUiToCT extends Model {
       ctAbbr: this.string(''),
       ctToShowInCL: this.string(''),
       ctToShowInCSVL: this.string(''),
-      ctToShowInMSVL: this.string(''),
       layer: this.string(''),
       usageCountKeptInLS: this.number(0),
       ctWidth: this.string(''),

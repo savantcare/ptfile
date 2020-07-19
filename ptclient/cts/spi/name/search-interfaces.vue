@@ -12,9 +12,9 @@ export default {
   mounted() {
     ormSearchPhraseUiToCT.insert({
       data: {
-        value: 'Hello world',
-        ctAbbr: 'bp',
-        ctToShowInCSVL: 'spi/hello-world/timeline.vue', // CSVL -> Current state view layer
+        value: 'name',
+        ctAbbr: 'name',
+        ctToShowInCSVL: 'spi/name/vl/table.vue', // CSVL -> Current state view layer
         layer: 'view',
       },
     })

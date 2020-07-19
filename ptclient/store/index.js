@@ -11,7 +11,7 @@ import VuexORMAxios from '@vuex-orm/plugin-axios'
 import VueStateOfTabsAndDialogInCLModule from '@/cts/core/cl-tabs-manager/VueStateOfTabsAndDialogInCL'
 
 // Full form: Vue State Of Cards In Current state Of View layer Module
-import VstOfCardsInCSOfVLModule from '@/cts/core/vl-search-box/VstOfCardsInCSOfVL'
+import vstOfCardsInCsOfVlModule from '~/cts/core/vl-search-box/vstOfCardsInCsOfVl'
 
 import VueStateOfFeedDrawerModule from '@/cts/core/feed/VueStateOfFeedDrawer'
 import VueStateOfMapDrawerModule from '@/cts/core/map/VueStateOfMapDrawer'
@@ -43,7 +43,7 @@ const createStore = () => {
       vstObjMapDrawer: VueStateOfMapDrawerModule,
 
       // Full form: view state object cards in current state of view layer
-      vstObjCardsInCSOfVL: VstOfCardsInCSOfVLModule,
+      vstObjCardsInCSOfVL: vstOfCardsInCsOfVlModule,
     },
     plugins: [VuexORM.install(database)],
   })
