@@ -2,7 +2,7 @@
 
 ## Q1) How to run the app locally?
 
-The conventional method is to run the vuejs and node server locally and the mysql DB on a public server.
+The method used by core developers is to run the vuejs and node server locally and the mysql DB on a public server.
 
 VueJS talks to Nodejs running on same computer. Nodejs talks to mysql running on public server.
 
@@ -97,7 +97,8 @@ Ref: https://hackernoon.com/mariadb-phpmyadmin-docker-running-local-database-ok9
 ::: tab Commands
 
 ```
-docs> npm run docs-build            // Generate prod files in .vuepress/dist
+ptfile> npm run docs-in-dev-mode      // Gives hot module reload
+ptfile> npm run docs-build            // Generate prod files in .vuepress/dist
 ```
 
 Then send .vuepress/dist to repo -> [https://github.com/savantcare/savantcare.github.io](https://github.com/savantcare/savantcare.github.io)

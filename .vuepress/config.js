@@ -8,14 +8,11 @@ module.exports = {
       A leading ** followed by a slash means match in all directories. For example, **slashfoo matches file or directory foo anywhere, the same as pattern foo. **slashfoo/bar matches file or directory bar anywhere that is directly under directory foo.
     A trailing /** matches everything inside. For example, abc/** matches all files inside directory abc, relative to the location of the .gitignore file, with infinite depth.
     Ref: https://stackoverflow.com/questions/29820791/git-ignore-node-modules-folder-everywhere
+    Ref: https://github.com/vuejs/vuepress/issues/1700 
+    Version of config after 7ac365ca6ff447513dbd828754c433ea441b4b1f does not include files from node_modules and does not gie ran out of memory error
   */
-  patterns: [
-    "!(**/node_modules/**)",
-    "**/*.md",
-    "!.vuepress",
-    "!node_modules",
-    "!.*",
-  ],
+
+  patterns: ["**/*.md", "!.vuepress", "!node_modules"],
   plugins: ["tabs"],
   themeConfig: {
     sidebar: [
@@ -238,7 +235,21 @@ module.exports = {
       },
     ],
   },
+  /* Commented the 2 plugins in july 2020  Reasons:
   markdown: {
+    
+    > npm run docs-in-dev-mode was taking long time as it was processing all files
+          Language does not exist: console                                                                                                                                                                                                                                                                      
+          Language does not exist: cmd                                                                                                                                                                                                                                                                          
+          Language does not exist: jsonc                                                                                                                                                                                                                                                                        
+          Language does not exist: text                                                                                                                                                                                                                                                                         
+          Language does not exist: dosini     
+          Language does not exist: webidl  
+          Language does not exist: c++                                                                                                                                                                                                                                                                          
+          Language does not exist: html+erb          
+    and it was giving the fatal error:
+      FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory 
+
     extendMarkdown: (md) => {
       var Plugin = require("markdown-it-regexp");
 
@@ -263,8 +274,9 @@ module.exports = {
       md.use(tabpaneLinker);
       md.use(ctLinker);
       md.use(require("markdown-it-vuese"), {
-        /* options */
+        
       });
+      
     },
-  },
+  },*/
 };
