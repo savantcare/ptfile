@@ -264,7 +264,7 @@ module.exports = {
           },
           {
             title: "FAQ",
-            path: "/ptclient/faq",
+            path: "/ptclient/docs/faq",
             sidebarDepth: 0,
           },
         ],
