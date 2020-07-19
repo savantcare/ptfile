@@ -59,7 +59,7 @@ yarn docs:dev
 auto format on save
 default formatter: prettier
 
-![Formatter setting](./docs/images/misc/default-formatter.png)
+![Formatter setting](../docs/images/misc/default-formatter.png)
 
 ## Why
 

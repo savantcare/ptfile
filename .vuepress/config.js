@@ -34,8 +34,8 @@ module.exports = {
         sidebarDepth: 0, // optional, defaults to 1
         children: [
           {
-            path: "/faq",
             title: "FAQ",
+            path: "/docs/faq",
             sidebarDepth: 0,
           },
         ],
@@ -95,12 +95,12 @@ module.exports = {
         sidebarDepth: 0,
         children: [
           {
-            path: "/ptserver/docs.html",
+            path: "/ptserver/docs/big-picture.html",
             title: "Big picture",
             sidebarDepth: 0,
           },
           {
-            path: "/ptserver/faq.html",
+            path: "/ptserver/docs/faq.html",
             title: "Faq",
             sidebarDepth: 0,
           },
@@ -264,7 +264,7 @@ module.exports = {
           },
           {
             title: "FAQ",
-            path: "/ptclient/docs/faq",
+            path: "/ptclient/faq",
             sidebarDepth: 0,
           },
         ],
