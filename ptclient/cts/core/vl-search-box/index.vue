@@ -10,7 +10,7 @@
       v-model="searchKeyword"
       class="inline-input"
       :fetch-suggestions="mfQuerySearchTerms"
-      :placeholder="placeholder"
+      :placeholder="cfSearchBoxPlaceholder"
       style="width: 100%;"
       @select="mfHandleSuggestionSelectedByUser"
     ></el-autocomplete>
@@ -34,7 +34,7 @@ export default {
   },
 
   computed: {
-    placeholder() {
+    cfSearchBoxPlaceholder() {
       let arFromORM = {}
       arFromORM = ormSearchPhraseUiToCT.query().orderBy('usageCountKeptInLS', 'desc').get()
       const objRowFromORM = arFromORM[0]
