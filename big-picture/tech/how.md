@@ -217,12 +217,11 @@ Components are supposed to be kept in components folder.
 
 Views are supposed to use components but not define components.
 
-## Q4) How to get started?
+## Q4) What VS Code extensions are used by core developers?
 
-A new programmer should be able to write a new componet in 5 mins.
-
-Start visual studio code
-make sure vetur VSCode extension is installed.
+1. vetur
+2. prettier - code formatter.
+3. Debugger for chrome.
 
 ## Q5) How to see app behavior when DB server connection is lost?
 
