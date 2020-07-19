@@ -22,6 +22,10 @@ module.exports = {
   patterns: ["**/*.md", "!.vuepress", "!node_modules", "!**/node_modules"],
   plugins: ["tabs"],
   themeConfig: {
+    nav: [
+      { text: "Demo", link: "http://95.217.13.83/pf/abcd" },
+      { text: "Github", link: "https://github.com/savantcare/ptfile" },
+    ],
     sidebar: [
       {
         title: "Home", // required

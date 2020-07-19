@@ -31,7 +31,7 @@ class rowStatus extends Model {
     const uniqueUuidRows = []
 
     // Goal: From the set of valid data, find unique UUIDs since it is possible that some UUID is being changed and now there are 2 records with same UUID
-    let breakCheck1 = false
+    let breakInnerForLoop = false
     for (let i = 0; i < arFromORM.length; i++) {
       for (let j = 0; j < uniqueUuidRows.length; j++) {
         if (arFromORM[i].uuid === uniqueUuidRows[j].uuid) {
@@ -40,11 +40,11 @@ class rowStatus extends Model {
           Hence in the following line I over write the old row
           */
           uniqueUuidRows[j] = arFromORM[i]
-          breakCheck1 = true
+          breakInnerForLoop = true
           break
         }
       }
-      if (breakCheck1) break
+      if (breakInnerForLoop) break
       uniqueUuidRows.push(arFromORM[i])
     }
 
@@ -79,16 +79,6 @@ class rowStatus extends Model {
     return arFromORM
   }
 
-  static deleteEditStateRows() {
-    const arFromORM = this.getEditStateRows()
-    if (arFromORM.length) {
-      console.log('unsaved data found', arFromORM)
-      for (let i = 0; i < arFromORM.length; i++) {
-        this.delete(arFromORM[i].$id)
-      }
-    }
-  }
-
   static getField(pOrmRowId, pFieldName) {
     // first time it will have to find in model. This is needed to show the initial content in the field.
     if (typeof this.arOrmRowsCached[pOrmRowId] === 'undefined') {
@@ -101,6 +91,16 @@ class rowStatus extends Model {
       // if caching is removed then typing will update every 1 second when the vuex store gets updated.
       console.log('returning from cache')
       return this.arOrmRowsCached[pOrmRowId][pFieldName]
+    }
+  }
+
+  static deleteEditStateRows() {
+    const arFromORM = this.getEditStateRows()
+    if (arFromORM.length) {
+      console.log('unsaved data found', arFromORM)
+      for (let i = 0; i < arFromORM.length; i++) {
+        this.delete(arFromORM[i].$id)
+      }
     }
   }
 

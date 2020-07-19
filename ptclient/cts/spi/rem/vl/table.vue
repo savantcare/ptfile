@@ -110,16 +110,14 @@ export default {
       const arFromORM = ormRem.getValidUniqueUuidRows()
 
       /*  Q) Should this function return the array it gets from ORM or modify the array?
-              Option1: Return origianl array
+              Option1: Return ORM array
                   -ves:
-                    Created at needs to be made inside the template
-                    vue will get more data since when I loop here I can send less data to vue
+                    1. Created at needs to be made inside the template
+                    2. Empty row needs to be filtered out in template
                   +ves:
                     No need to run the for loop
       */
 
-      /* Option2 of returning data from this cf:
-       */
       const arRemsForDisplay = []
       let obj = {}
       if (arFromORM.length) {
@@ -140,7 +138,7 @@ export default {
         }
       }
       return arRemsForDisplay
-    }, // end of cfArOfRemForDisplayInTable
+    },
   },
   mounted() {},
   methods: {
