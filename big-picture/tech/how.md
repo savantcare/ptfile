@@ -97,15 +97,16 @@ Ref: https://hackernoon.com/mariadb-phpmyadmin-docker-running-local-database-ok9
 ::: tab Commands
 
 ```
-ptfile> npm run docs-in-dev-mode      // Gives hot module reload
-ptfile> npm run docs-build            // Generate prod files in .vuepress/dist
+ptfile> npm run docs-build     // Generate prod files in .vuepress/dist
 ```
 
 Then send .vuepress/dist to repo -> [https://github.com/savantcare/savantcare.github.io](https://github.com/savantcare/savantcare.github.io)
 
 ```
-savantcare.github.io> git commit -m "deploy"
-savantcare.github.io> git push
+ptfile> cd ..
+vk-tech@vk-mini-layer2-3 ~/g/sc-prog-repos> cd savantcare.github.io
+savantcare.github.io> mv ../ptfile/.vuepress/dist/* .
+savantcare.github.io>  git add .; git commit -m "generated new doc"; git push
 ```
 
 :::

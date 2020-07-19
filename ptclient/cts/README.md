@@ -6,11 +6,11 @@
 
 3 core concepts:
 
-1. The entrance file is: [searchInterface.vue](https://github.com/savantcare/ptfile/blob/master/ptclient/cts/spi/rem/search-interfaces.vue)
+1. The entrance file is: [search-interfaces.vue](https://github.com/savantcare/ptfile/blob/master/ptclient/cts/spi/rem/search-interfaces.vue)
 
-2. Each component will usually have sub components for [vl](https://github.com/savantcare/ptfile/tree/master/ptclient/cts/spi/rem/vl) and [cl](https://github.com/savantcare/ptfile/tree/master/ptclient/cts/spi/rem/cl)
+2. Each component will usually have sub components for [vl](https://github.com/savantcare/ptfile/tree/master/ptclient/cts/spi/rem/vl) and [cl](https://github.com/savantcare/ptfile/tree/master/ptclient/cts/spi/rem/cl). Terms like [vl](../../GLOSSARY.html#others) and [cl](../../GLOSSARY.html#others) are explained in [glossary](../../GLOSSARY)
 
-3. Data in a component is measured through a [model](https://github.com/savantcare/ptfile/blob/master/ptclient/cts/spi/rem/db/vuex-orm/rem.js)
+3. Data in a component is [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) through a [model](https://github.com/savantcare/ptfile/blob/master/ptclient/cts/spi/rem/db/vuex-orm/rem.js)
 
 ## Types of component
 

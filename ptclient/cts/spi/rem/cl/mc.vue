@@ -11,7 +11,7 @@ Inside rem/cl/c.vue:getRemDescUsingCache enable the console.log
 console.log(
         'Inside get desc. Only first time it needs to come from ORM and subsequently it can always come from cache, the value set by setRemDescOn5KeyPress'
       )
-When this Ct is mounted it loads the changeRem 204 times since the above console.log is put on console 204 times. 
+When this Ct is mounted it loads the ctChangeRem 204 times since the above console.log is put on console 204 times. 
 
 Every time the slide is changed the getRemDescUsingCache() is again called 204 times since on console.log I see 204 messages
 
@@ -49,7 +49,7 @@ How to solve this?
         <el-row type="flex" :gutter="20">
           <el-col v-for="remID in getArrayOfRemIDsToShowInThisCard" :key="remID">
             <el-card>
-              <changeRem :first-param="remID"></changeRem>
+              <ctChangeRem :first-param="remID"></ctChangeRem>
             </el-card>
           </el-col>
         </el-row>
@@ -59,9 +59,9 @@ How to solve this?
 </template>
 <script>
 import ormRem from '@/cts/spi/rem/db/vuex-orm/rem.js'
-import changeRem from '@/cts/spi/rem/cl/c.vue'
+import ctChangeRem from '@/cts/spi/rem/cl/c.vue'
 export default {
-  components: { changeRem },
+  components: { ctChangeRem },
   data() {
     return {
       daUniqueIDOfEachRowFromORM: [],

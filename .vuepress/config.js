@@ -9,10 +9,17 @@ module.exports = {
     A trailing /** matches everything inside. For example, abc/** matches all files inside directory abc, relative to the location of the .gitignore file, with infinite depth.
     Ref: https://stackoverflow.com/questions/29820791/git-ignore-node-modules-folder-everywhere
     Ref: https://github.com/vuejs/vuepress/issues/1700 
-    Version of config after 7ac365ca6ff447513dbd828754c433ea441b4b1f does not include files from node_modules and does not gie ran out of memory error
+    Ref: https://forum.vuejs.org/t/vuepress-ignore-node-modules/47219/2
+    Version of config after 7ac365ca6ff447513dbd828754c433ea441b4b1f 
+      in vupress dev command:
+        does not say "language does not exisit c++ etc" and 
+        does not give ran out of memory error
+      In vue-ress build command it still gives language does not exisit errors and fails to build
+          Neded to add "!startstar/node_modules" for vuepress build command to stop complaining.
+
   */
 
-  patterns: ["**/*.md", "!.vuepress", "!node_modules"],
+  patterns: ["**/*.md", "!.vuepress", "!node_modules", "!**/node_modules"],
   plugins: ["tabs"],
   themeConfig: {
     sidebar: [
@@ -25,6 +32,7 @@ module.exports = {
           {
             path: "/faq",
             title: "FAQ",
+            sidebarDepth: 0,
           },
         ],
       },
@@ -85,10 +93,12 @@ module.exports = {
           {
             path: "/ptserver/big-picture.html",
             title: "Big picture",
+            sidebarDepth: 0,
           },
           {
             path: "/ptserver/faq.html",
             title: "Faq",
+            sidebarDepth: 0,
           },
         ],
       },
@@ -101,122 +111,148 @@ module.exports = {
           {
             path: "/ptclient/store/",
             title: "vuex-orm",
+            sidebarDepth: 0,
           },
           {
             path: "/ptclient/cts/",
             title: "Components",
+            sidebarDepth: 0,
             children: [
               {
-                path: "/ptclient/cts/allergies/",
+                path: "/ptclient/cts/spi/allergies/",
                 title: "Allergies",
+                sidebarDepth: 0,
                 children: [
                   {
-                    path: "/ptclient/cts/allergies/design/design",
+                    path: "/ptclient/cts/spi/allergies/design/design",
                     title: "Design",
+                    sidebarDepth: 0,
                   },
                 ],
               },
               {
                 path: "/ptclient/cts/spi/bm/",
                 title: "Body measurements",
+                sidebarDepth: 0,
                 children: [
                   {
                     path: "/ptclient/cts/spi/bm/design/design",
                     title: "Design",
+                    sidebarDepth: 0,
                   },
                 ],
               },
               {
                 path: "/ptclient/cts/contacts/",
                 title: "Contacts",
+                sidebarDepth: 0,
                 children: [
                   {
-                    path: "/ptclient/cts/contacts/design/design",
+                    path: "/ptclient/cts/spi/contacts/design/design",
                     title: "Design",
+                    sidebarDepth: 0,
                   },
                 ],
               },
               {
                 path: "/ptclient/cts/spi/dx/",
                 title: "Diagnosis",
+                sidebarDepth: 0,
                 children: [
                   {
                     path: "/ptclient/cts/spi/dx/design/design",
                     title: "Design",
+                    sidebarDepth: 0,
                   },
                 ],
               },
               {
-                path: "/ptclient/cts/documents/",
+                path: "/ptclient/cts/spi/documents/",
                 title: "Documents",
+                sidebarDepth: 0,
                 children: [
                   {
-                    path: "/ptclient/cts/documents/design/design",
+                    path: "/ptclient/cts/spi/documents/design/design",
                     title: "Design",
+                    sidebarDepth: 0,
                   },
                 ],
               },
               {
-                path: "/ptclient/cts/family-history/",
+                path: "/ptclient/cts/spi/family-history/",
                 title: "Family history",
+                sidebarDepth: 0,
                 children: [
                   {
-                    path: "/ptclient/cts/family-history/design/design",
+                    path: "/ptclient/cts/spi/family-history/design/design",
                     title: "Design",
+                    sidebarDepth: 0,
                   },
                 ],
               },
               {
-                path: "/ptclient/cts/medications/",
+                path: "/ptclient/cts/spi/medications/",
                 title: "Medication",
+                sidebarDepth: 0,
                 children: [
                   {
-                    path: "/ptclient/cts/medications/design/design",
+                    path: "/ptclient/cts/spi/medications/design/design",
                     title: "Design",
+                    sidebarDepth: 0,
                   },
                 ],
               },
               {
-                path: "/ptclient/cts/mental-status-exam/",
+                path: "/ptclient/cts/spi/mse/",
                 title: "Mental status exam",
+                sidebarDepth: 0,
                 children: [
                   {
-                    path: "/ptclient/cts/mental-status-exam/design/design",
+                    path: "/ptclient/cts/spi/mse/design/design",
                     title: "Design",
+                    sidebarDepth: 0,
                   },
                 ],
               },
               {
-                path: "/ptclient/cts/pharmacy/",
+                path: "/ptclient/cts/spi/pharmacy/",
                 title: "Pharmacy",
+                sidebarDepth: 0,
                 children: [
                   {
-                    path: "/ptclient/cts/pharmacy/design/design",
+                    path: "/ptclient/cts/spi/pharmacy/design/design",
                     title: "Design",
+                    sidebarDepth: 0,
                   },
                 ],
               },
               {
-                path: "/ptclient/cts/psych-review-of-systems/",
+                path: "/ptclient/cts/spi/psych-review-of-systems/",
                 title: "Psych review of systems",
+                sidebarDepth: 0,
                 children: [
                   {
-                    path: "/ptclient/cts/psych-review-of-systems/design/design",
+                    path:
+                      "/ptclient/cts/spi/psych-review-of-systems/design/design",
                     title: "Design",
+                    sidebarDepth: 0,
                   },
                 ],
               },
               {
                 path: "/ptclient/cts/spi/rec/",
                 title: "Recommendations",
+                sidebarDepth: 0,
               },
               {
                 path: "/ptclient/cts/spi/scr/",
                 title: "Screening",
+                sidebarDepth: 0,
                 children: [
                   {
                     path: "/ptclient/cts/spi/scr/design/design",
                     title: "Design",
+                    sidebarDepth: 0,
                   },
                 ],
               },
@@ -232,6 +268,7 @@ module.exports = {
       {
         title: "Glossary",
         path: "/GLOSSARY",
+        sidebarDepth: 0,
       },
     ],
   },
