@@ -24,31 +24,56 @@ class rowStatus extends Model {
     }
   }
 
-  static getValidUniqueUuidRows() {
-    // Following query makes sure I get valid data and not discontimued data fromm temporal table. Ref: https://mariadb.com/kb/en/temporal-data-tables/
-    const arFromORM = this.query().where('ROW_END', 2147483647.999999).get()
+  static getApiErrorStateRows() {
+    // C3/3
+    // New -> Changed -> Requested save -> Sent to server -> Failure
+    const arFromORM = this.query().where('rowStateInThisSession', 24578).get()
+    return arFromORM
+  }
 
-    const uniqueUuidRows = []
+  static getApiSendingStateRows() {
+    // New -> Changed -> Requested save -> Sending to server
+    const arFromORM = this.query().where('rowStateInThisSession', 2457).get()
+    return arFromORM
+  }
 
-    // Goal: From the set of valid data, find unique UUIDs since it is possible that some UUID is being changed and now there are 2 records with same UUID
-    let breakInnerForLoop = false
-    for (let i = 0; i < arFromORM.length; i++) {
-      for (let j = 0; j < uniqueUuidRows.length; j++) {
-        if (arFromORM[i].uuid === uniqueUuidRows[j].uuid) {
-          /* Suppose a row is being changed. Now 2 rows have the same uuid. The old row and the new changed row.
-          In the array that is returned from this Fn I am returning the array with the new data.       
-          Hence in the following line I over write the old row
-          */
-          uniqueUuidRows[j] = arFromORM[i]
-          breakInnerForLoop = true
-          break
-        }
+  static getApiSuccessStateRows() {
+    // New -> Changed -> Requested save -> Sent to server -> Success
+    const arFromORM = this.query().where('rowStateInThisSession', 24571).get()
+    return arFromORM
+  }
+
+  static getChangeRowsInEditState() {
+    const arFromORM = this.query()
+      .where('rowStateInThisSession', 3) // Copy
+      .orWhere('rowStateInThisSession', 34) // Copy -> Changed
+      .orWhere('rowStateInThisSession', 3456) // Copy -> Changed -> Requested save -> form error
+      .get()
+    return arFromORM
+  }
+
+  static getField(pOrmRowId, pFieldName) {
+    // first time it will have to find in model. This is needed to show the initial content in the field.
+    if (typeof this.arOrmRowsCached[pOrmRowId] === 'undefined') {
+      console.log('finding in model')
+      const arFromORM = this.find(pOrmRowId)
+      if (arFromORM) {
+        return arFromORM[pFieldName]
       }
-      if (breakInnerForLoop) break
-      uniqueUuidRows.push(arFromORM[i])
+    } else {
+      // if caching is removed then typing will update every 1 second when the vuex store gets updated.
+      console.log('returning from cache')
+      return this.arOrmRowsCached[pOrmRowId][pFieldName]
     }
+  }
 
-    return uniqueUuidRows
+  static getNewRowsInEditState() {
+    const arFromORM = this.query()
+      .where('rowStateInThisSession', 2) // New
+      .orWhere('rowStateInThisSession', 24) // New -> Changed
+      .orWhere('rowStateInThisSession', 2456) // New -> Changed -> Requested save -> form error
+      .get()
+    return arFromORM
   }
 
   static getValidUniqueUuidNotEmptyRows(pFieldForNonEmptyCheck) {
@@ -81,56 +106,31 @@ class rowStatus extends Model {
     return uniqueUuidRows
   }
 
-  static getNewRowsInEditState() {
-    const arFromORM = this.query()
-      .where('rowStateInThisSession', 2) // New
-      .orWhere('rowStateInThisSession', 24) // New -> Changed
-      .orWhere('rowStateInThisSession', 2456) // New -> Changed -> Requested save -> form error
-      .get()
-    return arFromORM
-  }
+  static getValidUniqueUuidRows() {
+    // Following query makes sure I get valid data and not discontimued data fromm temporal table. Ref: https://mariadb.com/kb/en/temporal-data-tables/
+    const arFromORM = this.query().where('ROW_END', 2147483647.999999).get()
 
-  static getChangeRowsInEditState() {
-    const arFromORM = this.query()
-      .where('rowStateInThisSession', 3) // Copy
-      .orWhere('rowStateInThisSession', 34) // Copy -> Changed
-      .orWhere('rowStateInThisSession', 3456) // Copy -> Changed -> Requested save -> form error
-      .get()
-    return arFromORM
-  }
+    const uniqueUuidRows = []
 
-  static getApiSuccessStateRows() {
-    // New -> Changed -> Requested save -> Sent to server -> Success
-    const arFromORM = this.query().where('rowStateInThisSession', 24571).get()
-    return arFromORM
-  }
-
-  static getApiErrorStateRows() {
-    // C3/3
-    // New -> Changed -> Requested save -> Sent to server -> Failure
-    const arFromORM = this.query().where('rowStateInThisSession', 24578).get()
-    return arFromORM
-  }
-
-  static getApiSendingStateRows() {
-    // New -> Changed -> Requested save -> Sending to server
-    const arFromORM = this.query().where('rowStateInThisSession', 2457).get()
-    return arFromORM
-  }
-
-  static getField(pOrmRowId, pFieldName) {
-    // first time it will have to find in model. This is needed to show the initial content in the field.
-    if (typeof this.arOrmRowsCached[pOrmRowId] === 'undefined') {
-      console.log('finding in model')
-      const arFromORM = this.find(pOrmRowId)
-      if (arFromORM) {
-        return arFromORM[pFieldName]
+    // Goal: From the set of valid data, find unique UUIDs since it is possible that some UUID is being changed and now there are 2 records with same UUID
+    let breakInnerForLoop = false
+    for (let i = 0; i < arFromORM.length; i++) {
+      for (let j = 0; j < uniqueUuidRows.length; j++) {
+        if (arFromORM[i].uuid === uniqueUuidRows[j].uuid) {
+          /* Suppose a row is being changed. Now 2 rows have the same uuid. The old row and the new changed row.
+          In the array that is returned from this Fn I am returning the array with the new data.       
+          Hence in the following line I over write the old row
+          */
+          uniqueUuidRows[j] = arFromORM[i]
+          breakInnerForLoop = true
+          break
+        }
       }
-    } else {
-      // if caching is removed then typing will update every 1 second when the vuex store gets updated.
-      console.log('returning from cache')
-      return this.arOrmRowsCached[pOrmRowId][pFieldName]
+      if (breakInnerForLoop) break
+      uniqueUuidRows.push(arFromORM[i])
     }
+
+    return uniqueUuidRows
   }
 
   static deleteEditStateRows() {
