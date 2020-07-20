@@ -20,11 +20,11 @@ How to run the code in production mode?
 export NODE_ENV=production
 npm run start-auth
 */
-var env = process.env.NODE_ENV || "development"; // Ref: https://stackoverflow.com/questions/8449665/how-do-you-detect-the-environment-in-an-express-js-app
+var env = process.env.NODE_ENV || "dev"; // Ref: https://stackoverflow.com/questions/8449665/how-do-you-detect-the-environment-in-an-express-js-app
 console.log(env);
 console.log(config.artificial_delay_in_response_from_node_server);
 
-if (env === "development") {
+if (env === "dev") {
   pause = require("connect-pause");
   app.use(pause(config.artificial_delay_in_response_from_node_server)); // Change this to change the delay time.
 }

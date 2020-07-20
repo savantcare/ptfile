@@ -6,18 +6,18 @@ services:
     ports:
       - 80:80
     working_dir: /gt/sc-prog-repos/ptfile/ptclient
-    command: bash -c "npm install && npm run build && npm run start"
+    command: bash -c "npm install && npm run build && npm run start-prod"
     volumes:
       - /gt/sc-prog-repos/ptfile/ptclient:/gt/sc-prog-repos/ptfile/ptclient # This will allow hot reloading when files are changed on host
   ptserver:
     image: node:14
     tty: true
     environment:
-      - NODE_ENV=development # This is neededed to load the correct override file from /node-server/config/ folder. For more read node-server/config/readme.md
+      - NODE_ENV=dev # This is neededed to load the correct override file from /node-server/config/ folder. For more read node-server/config/readme.md
     ports:
       - 8000:8000
     working_dir: /gt/sc-prog-repos/ptfile/ptserver
-    command: bash -c "export NODE_ENV=production && npm install && npm run start"
+    command: bash -c "export NODE_ENV=prod && npm install && npm run start-prod"
     volumes:
       - /gt/sc-prog-repos/ptfile/ptserver:/gt/sc-prog-repos/ptfile/ptserver # This allows file changes on host to be available inside docker container without recreating docker image.
       # For reasons of this volume mount see the vue: section comments
