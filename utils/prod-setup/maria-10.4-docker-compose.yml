@@ -1,17 +1,6 @@
 version: "3.7"
 
 services:
-  web:
-    image: nginx:1.17
-    ports:
-      - 80:80
-    volumes:
-      - ./php:/var/www/myapp
-      - ./docker/site.conf:/etc/nginx/conf.d/site.conf
-    depends_on:
-      - php
-      - mariadb
-
   php:
     image: php:7.2-fpm
     volumes:
