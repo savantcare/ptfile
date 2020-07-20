@@ -133,6 +133,15 @@ class rowStatus extends Model {
     return uniqueUuidRows
   }
 
+  static findIfDuplicateExists(pUuid) {
+    const num = this.query().where('uuid', pUuid).count()
+    if (num > 1) {
+      return true
+    } else {
+      return false
+    }
+  }
+
   static deleteEditStateRows() {
     const arFromORM = this.getNewRowsInEditState()
     if (arFromORM.length) {

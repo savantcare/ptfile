@@ -55,6 +55,7 @@ export default {
       uuid: '',
       ORMRowIDForPreviousInvocation: 0,
       vOrmSaveScheduled: '',
+      idOfRowBeingEdited: 0,
     }
   },
   computed: {
@@ -104,9 +105,9 @@ export default {
   },
   mounted() {},
   methods: {
-    addEmptyRemToUI(pDesc) {
+    async addEmptyRemToUI(pDesc) {
       console.log('Add rem called')
-      const arFromORM = ormRem.insert({
+      const arFromORM = await ormRem.insert({
         data: {
           remDesc: pDesc,
           uuid: this.uuid,
@@ -114,7 +115,7 @@ export default {
           ROW_START: Math.floor(Date.now() / 1000), // Ref: https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
         },
       })
-      console.log(arFromORM)
+      this.idOfRowBeingEdited = arFromORM.rem[0].id
     },
     getRemDescUsingCache() {
       /* Performance analysis
@@ -136,19 +137,19 @@ export default {
 
       /* States: For the paramters supplied to this Ct.
                  1. Repeat invocatoion => 1.1 no unsaved data 1.2 there is unsaved data
-                 2. First time invocation => 2.1 no unsaved data 2.2 there is unsaved data 
+                 2. First time invocation => 2.1 no unsaved data 2.2 there is unsaved data
 
         What are the different times this function is called?
           1. User types multiple keystrokes. This fn is called for each keystroke
           2. User click C from the table. Uses esc key to closes the tab and then again clicks C
           3. User click C from table clicks cross to exit the tab and then again click C
 
-          1st click on C -> 1 fti / 1 ri 
-                      each keystroke -> ri 2 times   
-                                                    close tab by clicking outside modal -> 
-                                                                                then click same C -> NO  fti / ri                                                                                
+          1st click on C -> 1 fti / 1 ri
+                      each keystroke -> ri 2 times
+                                                    close tab by clicking outside modal ->
+                                                                                then click same C -> NO  fti / ri
                                                                                 then click different C -> 1 fti / 1 ri
-                                                    close tab by clicking cross -> then click same C -> -> 1 fti / 1 ri 
+                                                    close tab by clicking cross -> then click same C -> -> 1 fti / 1 ri
         */
 
       // Goal: decide if it is repeat or first invocation
@@ -165,9 +166,7 @@ export default {
         this.uuid = arFromORM.uuid
         this.reminderDescCached = null
         console.log('Find if there is unsaved data', this.uuid)
-        const arEditRowsFromORM = this.cfRowInEditStateOnClient
-        // console.log(arFromORM)
-        if (!arEditRowsFromORM.length) {
+        if (!ormRem.findIfDuplicateExists(this.uuid)) {
           console.log('adding a new blank record. Since this is temporal DB')
           this.addEmptyRemToUI(arFromORM.remDesc)
         }
@@ -261,7 +260,7 @@ export default {
           })
           console.log('Failed to update')
         } else {
-          /* We are sorting this records by id because all the records have same ROW_END and 
+          /* We are sorting this records by id because all the records have same ROW_END and
           as the latest version of the data has newer id we can sort by id */
           const arResultsFromORM = ormRem
             .query()
