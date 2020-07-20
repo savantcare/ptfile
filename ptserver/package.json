@@ -4,7 +4,7 @@
   "description": "Simple Fake API",
   "main": "main.js",
   "scripts": {
-    "startdev": "export NODE_ENV=dev && sh copy-files-from-component-to-correct-locations.sh && node server.js",
+    "start-dev": "export NODE_ENV=dev && sh copy-files-from-component-to-correct-locations.sh && node server.js",
     "start-prod": "export NODE_ENV=prod && sh copy-files-from-component-to-correct-locations.sh && node server.js"
   },
   "author": "ME:)",
