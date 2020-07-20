@@ -84,49 +84,19 @@ export default {
   mounted() {},
   methods: {
     mfOpenADialog() {
-      console.log('show add dialog')
-      const arFromORM = ormSearchPhrasesOfCt.query().search('add reminder').get()
-      const objRowFromORM = arFromORM[0]
-      console.log(objRowFromORM)
-      const tab = {
-        label: objRowFromORM.value,
-        ctToShow: require('@/cts/' + objRowFromORM.ctToShowInCL).default,
-        ctAbbr: objRowFromORM.ctAbbr,
-        id: objRowFromORM.id,
-        closable: true,
-        ctWidth: objRowFromORM.ctWidth,
-      }
-      this.$store.commit('mtfShowNewFirstTabInCl', tab)
+      this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', {
+        searchTerm: 'add reminder',
+      })
     },
     mfOpenMDialog() {
-      console.log('show add dialog')
-      const arFromORM = ormSearchPhrasesOfCt.query().search('multi change reminder').get()
-      const objRowFromORM = arFromORM[0]
-      console.log(objRowFromORM)
-      const tab = {
-        label: objRowFromORM.value,
-        ctToShow: require('@/cts/' + objRowFromORM.ctToShowInCL).default,
-        ctAbbr: objRowFromORM.ctAbbr,
-        id: objRowFromORM.id,
-        closable: true,
-        ctWidth: objRowFromORM.ctWidth,
-      }
-      this.$store.commit('mtfShowNewFirstTabInCl', tab)
+      this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', {
+        searchTerm: 'multi change reminder',
+      })
     },
     mfOpenXDialog() {
-      console.log('show add dialog')
-      const arFromORM = ormSearchPhrasesOfCt.query().search('discontinued reminders').get()
-      const objRowFromORM = arFromORM[0]
-      console.log(objRowFromORM)
-      const tab = {
-        label: objRowFromORM.value,
-        ctToShow: require('@/cts/' + objRowFromORM.ctToShowInCL).default,
-        ctAbbr: objRowFromORM.ctAbbr,
-        id: objRowFromORM.id,
-        closable: true,
-        ctWidth: objRowFromORM.ctWidth,
-      }
-      this.$store.commit('mtfShowNewFirstTabInCl', tab)
+      this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', {
+        searchTerm: 'discontinued reminders',
+      })
     },
   },
 }
