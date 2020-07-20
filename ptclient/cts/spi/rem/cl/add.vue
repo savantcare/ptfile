@@ -8,6 +8,7 @@
           <!-- Prop explaination  Read prop explanation for span=4 on line 19 -->
           <el-col :span="20" :class="ormRow.validationClass">
             <el-input
+              :ref="'remDesc'"
               type="textarea"
               :class="mfGetCssClassName(ormRow.id)"
               :autosize="{ minRows: 2, maxRows: 10 }"
@@ -37,7 +38,9 @@
       <!-- If there are no edit state rows then create a empty row for faster data input -->
       <p v-else>{{ mfAddEmptyRowInOrm() }}</p>
       <el-form-item>
-        <el-button type="primary" plain @click="mfOnSubmit">Submit</el-button>
+        <el-button type="primary" plain :disabled="dblDisableSubmitButton" @click="mfOnSubmit"
+          >Submit</el-button
+        >
         <el-button type="primary" plain @click="mfAddEmptyRowInOrm">Add more</el-button>
         <el-button type="warning" plain @click="mfResetForm">Reset form</el-button>
       </el-form-item>
@@ -77,11 +80,14 @@ import ormRem from '../db/vuex-orm/rem.js' // Path without @ can be resolved by 
 
 export default {
   data() {
-    return {}
+    return {
+      dblDisableSubmitButton: false,
+    }
   },
 
   computed: {
     cfGetOrmEditStateRows() {
+      console.log('hello, i am here1111...............')
       return ormRem.getNewRowsInEditState()
     },
     cfGetOrmApiSuccessStateRows() {
@@ -94,10 +100,22 @@ export default {
       return ormRem.getApiSendingStateRows()
     },
   },
-
-  mounted() {},
-
+  watch: {},
+  mounted() {
+    this.mfFocusFirstInput()
+  },
   methods: {
+    mfFocusFirstInput() {
+      /*
+        Goal: Apply focus to the first input field on add remider form
+        Ref: https://stackoverflow.com/questions/55764450/apply-v-focus-to-the-first-input-field-on-a-page
+      */
+      this.$nextTick(() => {
+        const index = this.cfGetOrmEditStateRows.length - 1
+        const input = this.$refs.remDesc[index]
+        input.focus()
+      })
+    },
     mfAddEmptyRowInOrm() {
       const arFromORM = ormRem.insert({
         data: {
@@ -106,6 +124,7 @@ export default {
           ROW_START: Math.floor(Date.now() / 1000), // Ref: https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
         },
       })
+      this.mfFocusFirstInput()
       if (!arFromORM) {
         console.log('FATAL ERROR')
       }
@@ -134,6 +153,7 @@ export default {
     },
     async mfOnSubmit() {
       // M8/9
+      this.dblDisableSubmitButton = true
       const arFromORM = this.cfGetOrmEditStateRows
       if (arFromORM.length) {
         console.log('unsaved data found', arFromORM)
@@ -162,6 +182,7 @@ export default {
       }
       // if there are no records left then I need to add a empty. For goal read docs/forms.md/1.3
       await ormRem.sendToServer()
+      this.dblDisableSubmitButton = false
     },
   },
 }
