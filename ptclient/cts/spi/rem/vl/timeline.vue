@@ -50,8 +50,7 @@ export default {
   },
   computed: {
     cfArOfRemForDisplayInTable() {
-      const arFromORM = ormRem.getValidUniqueUuidRows()
-      console.log(arFromORM)
+      const arFromORM = ormRem.getValidUniqueUuidNotEmptyRows()
 
       /*  Q) Should this function return the array it gets from ORM or modify the array?
               Option1: Return ORM array
@@ -79,7 +78,6 @@ export default {
           arRemsForDisplay.push(obj)
         }
       }
-      console.log(arRemsForDisplay)
       return arRemsForDisplay
     },
   },
