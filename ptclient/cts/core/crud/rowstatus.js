@@ -90,6 +90,15 @@ class rowStatus extends Model {
     return arFromORM
   }
 
+  static getChangeRowsInEditState() {
+    const arFromORM = this.query()
+      .where('rowStateInThisSession', 3) // Copy
+      .orWhere('rowStateInThisSession', 34) // Copy -> Changed
+      .orWhere('rowStateInThisSession', 3456) // Copy -> Changed -> Requested save -> form error
+      .get()
+    return arFromORM
+  }
+
   static getApiSuccessStateRows() {
     // New -> Changed -> Requested save -> Sent to server -> Success
     const arFromORM = this.query().where('rowStateInThisSession', 24571).get()

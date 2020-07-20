@@ -59,17 +59,7 @@ export default {
   },
   computed: {
     cfRowInEditStateOnClient() {
-      const arFromORM = ormRem
-        .query()
-        .where('rowStateInThisSession', 3) // Copy -> Changed
-        .orWhere('rowStateInThisSession', 34) // Copy -> Changed
-        .orWhere('rowStateInThisSession', 3456) // Copy -> Changed -> Requested save -> form error
-        .where((_record, query) => {
-          query.where('uuid', this.uuid)
-        })
-        .get()
-      console.log(arFromORM)
-      return arFromORM
+      return ormRem.getChangeRowsInEditState()
     },
     cfTimeLineDataAr() {
       // console.log('inside computed function the UUID is', this.uuid)
