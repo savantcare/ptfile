@@ -23,12 +23,12 @@ Step 8: User sees the desired HTML
 
 ## How is the search term go to a tab in CL?
 
-The state of tabs is in CL (Change layer) is maintained in cts/cl-tabs-manager/VueStateOfTabsAndDialogInCL.js
+The state of tabs is in CL (Change layer) is maintained in cts/cl-tabs-manager/vstOfTabsAndDialogInCl.js
 
 When autocomplete is done by user in cts/vl-search-box/vuex-orm/searchPhrasesOfCt.js:mfHandleSuggestionSelectedByUser
 
-A new object is added to VueStateOfTabsAndDialogInCL.js
+A new object is added to vstOfTabsAndDialogInCl.js
 
 ## How does a click in VL become a tab in CL?
 
-A new object is added to VueStateOfTabsAndDialogInCL.js
+A new object is added to vstOfTabsAndDialogInCl.js

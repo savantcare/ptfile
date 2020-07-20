@@ -78,11 +78,11 @@ dialog
                            └────┬─────┘                           
                                 │                                 
                 ┌───────────────▼─────────────────┐               
-                │  Call state mutation function   │                 VueStateOfTabsAndDialogInCL:36            
+                │  Call state mutation function   │                 vstOfTabsAndDialogInCl:36            
                 └────────────────┬────────────────┘               
                                  │                                
 ┌────────────────────────────────▼───────────────────────────────┐
-│Changes this.$store.state.vstObjTabsInCL.vsSelectedTabId        │  VueStateOfTabsAndDialogInCL:37 
+│Changes this.$store.state.vstObjTabsInCL.vsSelectedTabId        │  vstOfTabsAndDialogInCl:37 
 └────────────────────────────────┬───────────────────────────────┘
                                  │                                
                  ┌───────────────▼────────────────────────────┐               

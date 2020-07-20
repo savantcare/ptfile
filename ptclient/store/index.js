@@ -8,7 +8,7 @@ import axios from 'axios'
 import VuexORMAxios from '@vuex-orm/plugin-axios'
 
 // Ref: https://github.com/eldomagan/vuex-orm-localforage#installation
-import VueStateOfTabsAndDialogInCLModule from '@/cts/core/cl-tabs-manager/VueStateOfTabsAndDialogInCL'
+import vstOfTabsAndDialogInClModule from '~/cts/core/cl-tabs-manager/vstOfTabsAndDialogInCl'
 
 // Full form: Vue State Of Cards In Current state Of View layer Module
 import vstOfCardsInCsOfVlModule from '~/cts/core/vl-search-box/vstOfCardsInCsOfVl'
@@ -36,7 +36,7 @@ const createStore = () => {
   return new Vuex.Store({
     state: () => ({}),
     modules: {
-      vstObjTabsInCL: VueStateOfTabsAndDialogInCLModule,
+      vstObjTabsInCL: vstOfTabsAndDialogInClModule,
 
       // Full form: view state object feed drawer
       vstObjFeedDrawer: VueStateOfFeedDrawerModule,
