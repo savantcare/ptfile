@@ -17,7 +17,7 @@
       </el-form-item>
     </el-form>
 
-    <!-- Goal show history of this reminder -->
+    <!-- Goal: show history of this row -->
     <el-timeline style="padding-inline-start: 20px;">
       <el-timeline-item
         v-for="row in cfTimeLineDataAr"
@@ -61,34 +61,35 @@ export default {
       return ormRem.getChangeRowsInEditState()
     },
     cfTimeLineDataAr() {
-      const dataTable = []
+      const timelineDataArray = []
 
-      // to create timeline the uuid will be same but id will be different.
+      // Insight: to create timeline the uuid will be same but id will be different.
       const arFromORM = ormRem.query().where('uuid', this.uuid).orderBy('ROW_START', 'desc').get()
       console.log('Time line for uuid', this.uuid)
       if (arFromORM.length) {
-        let obj = []
+        let rowInTimeLine = []
         let date = ''
         for (let i = 0; i < arFromORM.length; i++) {
-          obj = {}
-          obj.remDesc = arFromORM[i].remDesc
+          rowInTimeLine = {}
+          rowInTimeLine.remDesc = arFromORM[i].remDesc
           date = new Date(arFromORM[i].ROW_START)
-          obj.createdAt = date.toLocaleString('default', { month: 'long' }) + '-' + date.getDate()
+          rowInTimeLine.createdAt =
+            date.toLocaleString('default', { month: 'long' }) + '-' + date.getDate()
           if (
             arFromORM[i].rowStateInThisSession === 3 ||
             arFromORM[i].rowStateInThisSession === 34 ||
             arFromORM[i].rowStateInThisSession === 3456
           ) {
-            obj.type = 'warning' // row is being edited and is not on server
+            rowInTimeLine.type = 'warning' // row is being edited and is not on server
           } else {
-            obj.type = ''
+            rowInTimeLine.type = ''
           }
-          obj.ROW_START = arFromORM[i].ROW_START
-          obj.rowStateInThisSession = arFromORM[i].rowStateInThisSession
-          dataTable.push(obj)
+          rowInTimeLine.ROW_START = arFromORM[i].ROW_START
+          rowInTimeLine.rowStateInThisSession = arFromORM[i].rowStateInThisSession
+          timelineDataArray.push(rowInTimeLine)
         }
       }
-      return dataTable
+      return timelineDataArray
     },
   },
   mounted() {},
