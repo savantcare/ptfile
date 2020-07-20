@@ -51,10 +51,8 @@ export default {
   props: ['firstParam'], // this is the unique row id created by vuex-orm
   data() {
     return {
-      reminderDescCached: '',
       uuid: '',
       ORMRowIDForPreviousInvocation: 0,
-      vOrmSaveScheduled: '',
       newRowBeingEditedIdfromOrm: 0,
     }
   },
@@ -164,7 +162,6 @@ export default {
         this.ORMRowIDForPreviousInvocation = this.firstParam
         arFromORM = ormRem.find(this.firstParam)
         this.uuid = arFromORM.uuid
-        this.reminderDescCached = null
         console.log('Find if there is unsaved data', this.uuid)
         if (!ormRem.findIfDuplicateExists(this.uuid)) {
           console.log('adding a new blank record. Since this is temporal DB')
