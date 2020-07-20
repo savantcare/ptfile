@@ -59,7 +59,7 @@ export default {
         console.log('failed')
       }
     },
-    mfOpenADialog() {
+    mfOpenACtInCl() {
       console.log('show add dialog')
       const arFromORM = ormSearchPhrasesOfCt.query().search('add goal').get()
       const objRowFromORM = arFromORM[0]

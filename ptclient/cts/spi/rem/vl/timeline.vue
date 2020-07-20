@@ -9,10 +9,10 @@
       <div slot="header" class="clearfix">
         <span>Reminders</span>
         <el-button-group style="float: right;">
-          <el-button style="padding: 3px;" type="success" plain @click="mfOpenADialog">A</el-button>
-          <el-button style="padding: 3px;" type="primary" plain @click="mfOpenMDialog">M</el-button>
+          <el-button style="padding: 3px;" type="success" plain @click="mfOpenACtInCl">A</el-button>
+          <el-button style="padding: 3px;" type="primary" plain @click="mfOpenMCtInCl">M</el-button>
           <el-button style="padding: 3px;" type="warning" plain>D</el-button>
-          <el-button style="padding: 3px;" type="info" plain @click="mfOpenXDialog">X</el-button>
+          <el-button style="padding: 3px;" type="info" plain @click="mfOpenXCtInCl">X</el-button>
         </el-button-group>
       </div>
       <!-- explanation of following params:
@@ -41,7 +41,6 @@
 </template>
 
 <script>
-import ormSearchPhrasesOfCt from '@/cts/core/vl-search-box/vuex-orm/searchPhrasesOfCt'
 import ormRem from '@/cts/spi/rem/db/vuex-orm/rem.js'
 
 export default {
@@ -83,17 +82,17 @@ export default {
   },
   mounted() {},
   methods: {
-    mfOpenADialog() {
+    mfOpenACtInCl() {
       this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', {
         searchTerm: 'add reminder',
       })
     },
-    mfOpenMDialog() {
+    mfOpenMCtInCl() {
       this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', {
         searchTerm: 'multi change reminder',
       })
     },
-    mfOpenXDialog() {
+    mfOpenXCtInCl() {
       this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', {
         searchTerm: 'discontinued reminders',
       })

@@ -7,7 +7,7 @@
           <el-button style="padding: 3px;" type="success" plain @click="mfOpenAllScrGDialog()"
             >G</el-button
           >
-          <el-button style="padding: 3px;" type="primary" plain @click="mfOpenADialog()"
+          <el-button style="padding: 3px;" type="primary" plain @click="mfOpenACtInCl()"
             >A</el-button
           >
         </el-button-group>
@@ -108,7 +108,7 @@ export default {
     mfOpenAllScrGDialog() {
       console.log('show all screen graph popup')
     },
-    mfOpenADialog() {
+    mfOpenACtInCl() {
       console.log('show add screen  in popup')
     },
     mfOpenTDialog(data) {

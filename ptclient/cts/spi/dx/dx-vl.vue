@@ -97,7 +97,7 @@ export default {
 
       // console.log(dxList);
     },
-    mfOpenADialog() {
+    mfOpenACtInCl() {
       console.log('show add dialog')
       const arFromORM = ormSearchPhrasesOfCt.query().search('add diagnosis').get()
       const objRowFromORM = arFromORM[0]
@@ -110,7 +110,7 @@ export default {
       }
       this.$store.commit('mtfShowNewFirstTabInL2', tab)
     },
-    mfOpenMDialog() {
+    mfOpenMCtInCl() {
       console.log('show multi change dialog')
       const arFromORM = ormSearchPhrasesOfCt.query().search('Multichange dx assessment').get()
       const objRowFromORM = arFromORM[0]

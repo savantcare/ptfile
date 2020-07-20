@@ -6,10 +6,10 @@
       <div slot="header" class="clearfix">
         <span>Reminders</span>
         <el-button-group style="float: right;">
-          <el-button style="padding: 3px;" type="success" plain @click="mfOpenADialog">A</el-button>
-          <el-button style="padding: 3px;" type="primary" plain @click="mfOpenMDialog">M</el-button>
+          <el-button style="padding: 3px;" type="success" plain @click="mfOpenACtInCl">A</el-button>
+          <el-button style="padding: 3px;" type="primary" plain @click="mfOpenMCtInCl">M</el-button>
           <el-button style="padding: 3px;" type="warning" plain @click="mfOpenDDialog">D</el-button>
-          <el-button style="padding: 3px;" type="info" plain @click="mfOpenXDialog">X</el-button>
+          <el-button style="padding: 3px;" type="info" plain @click="mfOpenXCtInCl">X</el-button>
         </el-button-group>
       </div>
       <el-table
@@ -56,7 +56,7 @@
                 size="mini"
                 style="padding: 3px;"
                 plain
-                @click="mfOpenCDialog(props.row.$id)"
+                @click="mfOpenCCtInCl(props.row.$id)"
                 >C</el-button
               >
               <el-button
@@ -144,12 +144,12 @@ export default {
       console.log('Page changed', pNewPageNumber)
       this.tablePageNumber = pNewPageNumber
     },
-    mfOpenADialog() {
+    mfOpenACtInCl() {
       this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', {
         searchTerm: 'add reminder',
       })
     },
-    mfOpenMDialog() {
+    mfOpenMCtInCl() {
       this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', {
         searchTerm: 'multi change reminder',
       })
@@ -177,12 +177,12 @@ export default {
           console.log('multi discontinue cancelled')
         })
     },
-    mfOpenXDialog() {
+    mfOpenXCtInCl() {
       this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', {
         searchTerm: 'discontinued reminders',
       })
     },
-    mfOpenCDialog(pORMDataRowID) {
+    mfOpenCCtInCl(pORMDataRowID) {
       /*
        We need rowID of vuexORM inside the change ct. Since change ct needs the exiting Desc of the reminber to change
        Option 1: Send the whole data row
