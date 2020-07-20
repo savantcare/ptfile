@@ -81,7 +81,7 @@ class rowStatus extends Model {
     return uniqueUuidRows
   }
 
-  static getEditStateRows() {
+  static getNewRowsInEditState() {
     const arFromORM = this.query()
       .where('rowStateInThisSession', 2) // New
       .orWhere('rowStateInThisSession', 24) // New -> Changed
@@ -125,7 +125,7 @@ class rowStatus extends Model {
   }
 
   static deleteEditStateRows() {
-    const arFromORM = this.getEditStateRows()
+    const arFromORM = this.getNewRowsInEditState()
     if (arFromORM.length) {
       console.log('unsaved data found', arFromORM)
       for (let i = 0; i < arFromORM.length; i++) {

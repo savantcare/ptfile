@@ -82,7 +82,7 @@ export default {
 
   computed: {
     cfGetOrmEditStateRows() {
-      return ormRem.getEditStateRows()
+      return ormRem.getNewRowsInEditState()
     },
     cfGetOrmApiSuccessStateRows() {
       return ormRem.getApiSuccessStateRows()
