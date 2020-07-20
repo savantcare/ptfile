@@ -64,7 +64,7 @@ export default {
   // https://stackoverflow.com/questions/53993890/how-to-pass-env-variables-to-nuxt-in-production
   env: {
     baseUrl:
-      process.env.NODE_ENV === 'dev' ? 'http://localhost:8000' : 'http://116.203.134.163:8000/',
+      process.env.NODE_ENV === 'dev' ? 'http://localhost:8000' : 'http://116.203.134.163:8000',
   },
   /*
    ** Build configuration
