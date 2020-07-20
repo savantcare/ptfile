@@ -60,6 +60,12 @@ export default {
    ** Nuxt.js modules
    */
   modules: ['vue-scrollto/nuxt'],
+
+  // https://stackoverflow.com/questions/53993890/how-to-pass-env-variables-to-nuxt-in-production
+  env: {
+    baseUrl:
+      process.env.NODE_ENV === 'dev' ? 'http://localhost:8000' : 'http://116.203.134.163:8000/',
+  },
   /*
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
@@ -73,7 +79,7 @@ export default {
       config.module.rules.push(
         {
           /*
-            Q) Why this config needed? 
+            Q) Why is this config needed? 
             - before every build eslint loader check all mention file type (eg: md, js) from source directory and return format errors and warnings.try to fix those errors automattically.
             ** this config try to fix all errors and warnings before build the project
           */
@@ -87,7 +93,7 @@ export default {
         },
         {
           /*
-            Q) Why this config needed? 
+            Q) Why is this config needed? 
             - before every build eslint loader check sql, md, monopic file and throwing console error, console looks very dirty. try to by passing those file types.
             ** before add this config run yarn add ignore-loader if ignore-loader module doesn't exsists
             ** this config put ignore loader for mentioned file type (sql, md, monopic) to stop arise those error.

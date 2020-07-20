@@ -1,3 +1,3 @@
 module.exports = {
-  REMINDER_API_URL: 'http://localhost:8000/reminders',
+  REMINDER_API_URL: process.env.baseUrl + '/reminders',
 }
