@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start-dev": "NODE_ENV=dev nuxt",
+    "start-dev-on-win": "set NODE_ENV=dev & nuxt",
     "build": "NODE_ENV=prod nuxt build",
     "start-prod": "NODE_ENV=prod nuxt start",
     "export": "nuxt export",

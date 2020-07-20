@@ -1,4 +1,4 @@
-// For flow chart see cts/vl-search-box/vuex-orm/searchUIToCT.js:7
+// For flow chart see cts/vl-search-box/vuex-orm/searchPhrasesOfCt.js:7
 export default {
   state: {
     arCards: [], // Template has a for loop running on this.
