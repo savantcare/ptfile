@@ -55,7 +55,7 @@ export default {
       uuid: '',
       ORMRowIDForPreviousInvocation: 0,
       vOrmSaveScheduled: '',
-      idOfRowBeingEdited: 0,
+      newRowBeingEditedIdfromOrm: 0,
     }
   },
   computed: {
@@ -115,7 +115,7 @@ export default {
           ROW_START: Math.floor(Date.now() / 1000), // Ref: https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
         },
       })
-      this.idOfRowBeingEdited = arFromORM.rem[0].id
+      this.newRowBeingEditedIdfromOrm = arFromORM.rem[0].id
     },
     getRemDescUsingCache() {
       /* Performance analysis
@@ -193,7 +193,7 @@ export default {
       console.log(arFromORM, this.uuid)
       if (arFromORM.length > 0) {
         // console.log(arFromORM)
-        this.newRowIDfromORM = arFromORM[0].id
+        this.newRowBeingEditedIdfromOrm = arFromORM[0].id
         return arFromORM[0].remDesc
       } else {
         return 'ERROR: This is not possible'
@@ -223,7 +223,7 @@ export default {
     setRemDescInVst(pEvent) {
       console.log('Inside setRemDesc')
       ormRem.update({
-        where: this.newRowIDfromORM,
+        where: this.newRowBeingEditedIdfromOrm,
         data: {
           remDesc: pEvent,
           rowStateInThisSession: 34,
@@ -234,7 +234,7 @@ export default {
     async sendDataToServer() {
       try {
         await ormRem.update({
-          where: this.newRowIDfromORM,
+          where: this.newRowBeingEditedIdfromOrm,
           data: {
             rowStateInThisSession: '345',
           },
@@ -253,7 +253,7 @@ export default {
         if (!response.ok) {
           /* Goal: Update the value of 'rowStateInThisSession' to success or failure depending on the api response */
           ormRem.update({
-            where: this.newRowIDfromORM,
+            where: this.newRowBeingEditedIdfromOrm,
             data: {
               rowStateInThisSession: 3458,
             },
@@ -277,7 +277,7 @@ export default {
           })
           /* Goal: Update the value of 'rowStateInThisSession' to success or failure depending on the api response */
           ormRem.update({
-            where: this.newRowIDfromORM,
+            where: this.newRowBeingEditedIdfromOrm,
             data: {
               rowStateInThisSession: 34571,
             },

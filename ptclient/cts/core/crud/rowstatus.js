@@ -86,7 +86,7 @@ class rowStatus extends Model {
     const uniqueUuidRows = []
 
     // Goal: From the set of valid data, find unique UUIDs since it is possible that some UUID is being changed and now there are 2 records with same UUID
-    let breakInnerForLoop = false
+    let foundInArToReturn = false
     for (let i = 0; i < arFromORM.length; i++) {
       for (let j = 0; j < uniqueUuidRows.length; j++) {
         if (arFromORM[i].uuid === uniqueUuidRows[j].uuid) {
@@ -95,12 +95,13 @@ class rowStatus extends Model {
           Hence in the following line I over write the old row
           */
           uniqueUuidRows[j] = arFromORM[i]
-          breakInnerForLoop = true
-          break
+          foundInArToReturn = true
         }
       }
-      if (breakInnerForLoop) break
-      uniqueUuidRows.push(arFromORM[i])
+      if (foundInArToReturn) {
+      } else {
+        uniqueUuidRows.push(arFromORM[i])
+      }
     }
 
     return uniqueUuidRows
@@ -109,27 +110,35 @@ class rowStatus extends Model {
   static getValidUniqueUuidRows() {
     // Following query makes sure I get valid data and not discontimued data fromm temporal table. Ref: https://mariadb.com/kb/en/temporal-data-tables/
     const arFromORM = this.query().where('ROW_END', 2147483647.999999).get()
-
     const uniqueUuidRows = []
 
     // Goal: From the set of valid data, find unique UUIDs since it is possible that some UUID is being changed and now there are 2 records with same UUID
-    let breakInnerForLoop = false
     for (let i = 0; i < arFromORM.length; i++) {
+      let foundInArToReturn = false
       for (let j = 0; j < uniqueUuidRows.length; j++) {
         if (arFromORM[i].uuid === uniqueUuidRows[j].uuid) {
           /* Suppose a row is being changed. Now 2 rows have the same uuid. The old row and the new changed row.
           In the array that is returned from this Fn I am returning the array with the new data.       
           Hence in the following line I over write the old row
           */
-          uniqueUuidRows[j] = arFromORM[i]
-          breakInnerForLoop = true
-          break
+          console.log('The IDs are', uniqueUuidRows[j], arFromORM[i])
+          if (arFromORM[i].id > uniqueUuidRows[j].id) {
+            console.log('The existing data is older hence replacing')
+            uniqueUuidRows[j] = arFromORM[i]
+          } else {
+            // The existing data is newer hence not replacing
+          }
+          foundInArToReturn = true
         }
       }
-      if (breakInnerForLoop) break
-      uniqueUuidRows.push(arFromORM[i])
+      if (foundInArToReturn) {
+        // Already found in array to be returned hence no need to add to arary
+      } else {
+        uniqueUuidRows.push(arFromORM[i])
+      }
     }
 
+    // console.log(uniqueUuidRows)
     return uniqueUuidRows
   }
 
