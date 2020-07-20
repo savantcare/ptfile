@@ -24,7 +24,7 @@
         -->
       <el-timeline style="padding-inline-start: 20px;">
         <el-timeline-item
-          v-for="row in dataTable"
+          v-for="row in cfArOfRemForDisplayInTable"
           :key="row.$id"
           :timestamp="row.createdAt"
           :type="row.type"
@@ -46,41 +46,41 @@ import ormRem from '@/cts/spi/rem/db/vuex-orm/rem.js'
 
 export default {
   data() {
-    return {
-      // dataTable: [],
-    }
+    return {}
   },
   computed: {
-    dataTable() {
-      const dataTable = []
-      const arFromORM = ormRem.query().get()
+    cfArOfRemForDisplayInTable() {
+      const arFromORM = ormRem.getValidUniqueUuidRows()
+      console.log(arFromORM)
+
+      /*  Q) Should this function return the array it gets from ORM or modify the array?
+              Option1: Return ORM array
+                  -ves:
+                    1. Created at needs to be made inside the template
+                    2. Empty row needs to be filtered out in template
+                  +ves:
+                    No need to run the for loop
+      */
+
+      const arRemsForDisplay = []
+      let obj = {}
       if (arFromORM.length) {
-        let obj = []
         let date = ''
-        console.log('unsaved data found', arFromORM, arFromORM[0].uuid)
         for (let i = 0; i < arFromORM.length; i++) {
           obj = {}
           obj.remDesc = arFromORM[i].remDesc
-          /*
-          To get the number of the month:
-          obj.createdAt = date.getMonth() + 1 + "-" + date.getDate()
-
-          To get the name of the month:
-          Ref: https://stackoverflow.com/questions/1643320/get-month-name-from-date
-          */
+          // For date format ref: /cts/spi/rem/vl/timeline.vue:53
           date = new Date(arFromORM[i].ROW_START)
           obj.createdAt = date.toLocaleString('default', { month: 'long' }) + '-' + date.getDate()
-          if (arFromORM[i].$isDirty) {
-            obj.type = 'warning'
-          } else {
-            obj.type = ''
-          }
-
-          dataTable.push(obj)
+          obj.rowStateInThisSession = arFromORM[i].rowStateInThisSession
+          obj.uuid = arFromORM[i].uuid
+          obj.$id = arFromORM[i].$id
+          obj.id = arFromORM[i].id
+          arRemsForDisplay.push(obj)
         }
       }
-      console.log(dataTable)
-      return dataTable
+      console.log(arRemsForDisplay)
+      return arRemsForDisplay
     },
   },
   mounted() {},
