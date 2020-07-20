@@ -107,8 +107,7 @@ export default {
       console.log(
         'cfArOfRemForDisplayInTable called. Whenever ormRem will change this will get called. Even when there are 100 rows in the table when orm rem changes this gets called once'
       )
-      const arFromORM = ormRem.getValidUniqueUuidRows()
-
+      const arFromORM = ormRem.getValidUniqueUuidNotEmptyRows('remDesc')
       /*  Q) Should this function return the array it gets from ORM or modify the array?
               Option1: Return ORM array
                   -ves:
