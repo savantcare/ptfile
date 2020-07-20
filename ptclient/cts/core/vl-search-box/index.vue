@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import ormSearchPhraseUiToCT from '@/cts/core/vl-search-box/vuex-orm/searchUIToCT'
+import ormSearchPhrasesOfCt from '@/cts/core/vl-search-box/vuex-orm/searchPhrasesOfCt'
 
 // Goal: Get the search terms from each component
 import feedSUI from '@/cts/core/feed/search-interfaces'
@@ -36,7 +36,7 @@ export default {
   computed: {
     cfSearchBoxPlaceholder() {
       let arFromORM = {}
-      arFromORM = ormSearchPhraseUiToCT.query().orderBy('usageCountKeptInLS', 'desc').get()
+      arFromORM = ormSearchPhrasesOfCt.query().orderBy('usageCountKeptInLS', 'desc').get()
       const objRowFromORM = arFromORM[0]
       if (objRowFromORM) {
         console.log(objRowFromORM)
@@ -52,11 +52,11 @@ export default {
       // pQueryString empty means user did not enter anything
       // to show values in dropdown returning all results
       if (!pQueryString) {
-        const arFromORM = ormSearchPhraseUiToCT.query().orderBy('usageCountKeptInLS', 'desc').get()
+        const arFromORM = ormSearchPhrasesOfCt.query().orderBy('usageCountKeptInLS', 'desc').get()
         console.log('No user input ', pQueryString, arFromORM)
         pCallBack(arFromORM)
       } else {
-        const arFromORM = ormSearchPhraseUiToCT
+        const arFromORM = ormSearchPhrasesOfCt
           .query()
           .search(pQueryString.trim(), {
             // Search comes from vuex-orm plugn https://github.com/vuex-orm/plugin-search#during-query-chain
@@ -97,7 +97,7 @@ export default {
 
       /* Goal: Increase the usageCount of the search term so I can order them better
         Update query ref: https://vuex-orm.org/guide/data/inserting-and-updating.html#updates */
-      ormSearchPhraseUiToCT.update({
+      ormSearchPhrasesOfCt.update({
         where: pSelectedSuggestion.id,
         data: {
           usageCountKeptInLS: pSelectedSuggestion.usageCountKeptInLS + 1,

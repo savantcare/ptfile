@@ -85,7 +85,7 @@
 
 <script>
 import dbInteraction from '../db-interaction'
-import ormSearchPhraseUiToCT from '@/cts/core/vl-search-box/vuex-orm/searchUIToCT'
+import ormSearchPhrasesOfCt from '@/cts/core/vl-search-box/vuex-orm/searchPhrasesOfCt'
 import ormRem from '@/cts/spi/rem/db/vuex-orm/rem.js'
 
 export default {
@@ -147,7 +147,7 @@ export default {
     },
     mfOpenADialog() {
       // console.log('show add dialog')
-      const arFromORM = ormSearchPhraseUiToCT.query().search('add reminder').get()
+      const arFromORM = ormSearchPhrasesOfCt.query().search('add reminder').get()
       const objSearchRowFromORM = arFromORM[0]
       // console.log(objSearchRowFromORM)
       const tab = {
@@ -162,7 +162,7 @@ export default {
     },
     mfOpenMDialog() {
       // console.log('show add dialog')
-      const arFromORM = ormSearchPhraseUiToCT.query().search('multi change reminder').get()
+      const arFromORM = ormSearchPhrasesOfCt.query().search('multi change reminder').get()
       const objSearchRowFromORM = arFromORM[0]
       // console.log(objSearchRowFromORM)
       const tab = {
@@ -200,7 +200,7 @@ export default {
     },
     mfOpenXDialog() {
       // console.log('show add dialog')
-      const arFromORM = ormSearchPhraseUiToCT.query().search('discontinued reminders').get()
+      const arFromORM = ormSearchPhrasesOfCt.query().search('discontinued reminders').get()
       const objSearchRowFromORM = arFromORM[0]
       // console.log(objSearchRowFromORM)
       const tab = {
@@ -217,7 +217,7 @@ export default {
       console.log('Open change rem dialog -> ', pORMDataRowID)
 
       // Goal: Find out which CT will handle this work
-      const arFromORM = ormSearchPhraseUiToCT.query().search('change reminder').get()
+      const arFromORM = ormSearchPhrasesOfCt.query().search('change reminder').get()
       const objSearchRowFromORM = arFromORM[0]
       // console.log(objSearchRowFromORM)
 

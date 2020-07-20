@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import ormSearchPhraseUiToCT from '@/cts/core/vl-search-box/vuex-orm/searchUIToCT'
+import ormSearchPhrasesOfCt from '@/cts/core/vl-search-box/vuex-orm/searchPhrasesOfCt'
 export default {
   data() {
     return {
@@ -28,7 +28,7 @@ export default {
       console.log('value changed', pValue)
       if (pValue === 'assessment-tabset') {
         // cannot hardcode, need to query since dont know the ID created when inserted
-        const resultArFromORM = ormSearchPhraseUiToCT.query().search('add reminder').get()
+        const resultArFromORM = ormSearchPhrasesOfCt.query().search('add reminder').get()
         const objRowFromORM = resultArFromORM[0]
         const objAddTab = {
           label: objRowFromORM.value,
@@ -41,7 +41,7 @@ export default {
         this.$store.commit('mtfShowNewFirstTabInCl', objAddTab)
         this.$store.state.vstObjTabsInCL.vsSelectedTabId = this.$store.state.vstObjTabsInCL.arTabs[0].id
       } else if (pValue === 'plan-tabset') {
-        let resultArFromORM = ormSearchPhraseUiToCT.query().search('multi change reminders').get()
+        let resultArFromORM = ormSearchPhrasesOfCt.query().search('multi change reminders').get()
         let objRowFromORM = resultArFromORM[0]
         let objAddTab = {
           label: objRowFromORM.value,
@@ -52,7 +52,7 @@ export default {
           ctWidth: objRowFromORM.ctWidth,
         }
         this.$store.commit('mtfShowNewFirstTabInCl', objAddTab)
-        resultArFromORM = ormSearchPhraseUiToCT.query().search('add reminder').get()
+        resultArFromORM = ormSearchPhrasesOfCt.query().search('add reminder').get()
         objRowFromORM = resultArFromORM[0]
         objAddTab = {
           label: objRowFromORM.value,

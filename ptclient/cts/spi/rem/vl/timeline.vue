@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import ormSearchPhraseUiToCT from '@/cts/core/vl-search-box/vuex-orm/searchUIToCT'
+import ormSearchPhrasesOfCt from '@/cts/core/vl-search-box/vuex-orm/searchPhrasesOfCt'
 import ormRem from '@/cts/spi/rem/db/vuex-orm/rem.js'
 
 export default {
@@ -85,7 +85,7 @@ export default {
   methods: {
     mfOpenADialog() {
       console.log('show add dialog')
-      const arFromORM = ormSearchPhraseUiToCT.query().search('add reminder').get()
+      const arFromORM = ormSearchPhrasesOfCt.query().search('add reminder').get()
       const objRowFromORM = arFromORM[0]
       console.log(objRowFromORM)
       const tab = {
@@ -100,7 +100,7 @@ export default {
     },
     mfOpenMDialog() {
       console.log('show add dialog')
-      const arFromORM = ormSearchPhraseUiToCT.query().search('multi change reminder').get()
+      const arFromORM = ormSearchPhrasesOfCt.query().search('multi change reminder').get()
       const objRowFromORM = arFromORM[0]
       console.log(objRowFromORM)
       const tab = {
@@ -115,7 +115,7 @@ export default {
     },
     mfOpenXDialog() {
       console.log('show add dialog')
-      const arFromORM = ormSearchPhraseUiToCT.query().search('discontinued reminders').get()
+      const arFromORM = ormSearchPhrasesOfCt.query().search('discontinued reminders').get()
       const objRowFromORM = arFromORM[0]
       console.log(objRowFromORM)
       const tab = {

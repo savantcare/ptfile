@@ -3,14 +3,14 @@
 </template>
 
 <script>
-import ormSearchPhraseUiToCT from '@/cts/core/vl-search-box/vuex-orm/searchUIToCT'
+import ormSearchPhrasesOfCt from '@/cts/core/vl-search-box/vuex-orm/searchPhrasesOfCt'
 
 export default {
   data() {
     return {}
   },
   mounted() {
-    ormSearchPhraseUiToCT.insert({
+    ormSearchPhrasesOfCt.insert({
       data: {
         value: 'reminders',
         ctAbbr: 'rem',
@@ -19,7 +19,7 @@ export default {
       },
     })
 
-    ormSearchPhraseUiToCT.insert({
+    ormSearchPhrasesOfCt.insert({
       data: {
         value: 'add reminder',
         ctAbbr: 'arem',
@@ -28,7 +28,7 @@ export default {
         ctWidth: 'small',
       },
     })
-    ormSearchPhraseUiToCT.insert({
+    ormSearchPhrasesOfCt.insert({
       data: {
         value: 'change reminder',
         ctAbbr: 'crem',
@@ -37,7 +37,7 @@ export default {
         ctWidth: 'small',
       },
     })
-    ormSearchPhraseUiToCT.insert({
+    ormSearchPhrasesOfCt.insert({
       data: {
         value: 'multi change reminders',
         ctAbbr: 'mcrem',
@@ -46,7 +46,7 @@ export default {
         ctWidth: 'large',
       },
     })
-    ormSearchPhraseUiToCT.insert({
+    ormSearchPhrasesOfCt.insert({
       data: {
         value: 'discontinued reminders',
         ctAbbr: 'drem',

@@ -25,7 +25,7 @@ Features needed in search
 </template>
 
 <script>
-import ormSearchPhraseUiToCT from '@/cts/core/vl-search-box/vuex-orm/searchUIToCT'
+import ormSearchPhrasesOfCt from '@/cts/core/vl-search-box/vuex-orm/searchPhrasesOfCt'
 
 export default {
   data() {
@@ -72,7 +72,7 @@ export default {
     },
 
     mfQuerySearchTerms(pQueryString, pCallBack) {
-      let arFromORM = ormSearchPhraseUiToCT
+      let arFromORM = ormSearchPhrasesOfCt
         .query()
         .where('layer', 'change')
         .search(pQueryString.trim())

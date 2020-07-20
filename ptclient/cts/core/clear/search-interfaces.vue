@@ -3,14 +3,14 @@
 </template>
 
 <script>
-import ormSearchPhraseUiToCT from '@/cts/core/vl-search-box/vuex-orm/searchUIToCT'
+import ormSearchPhrasesOfCt from '@/cts/core/vl-search-box/vuex-orm/searchPhrasesOfCt'
 
 export default {
   data() {
     return {}
   },
   mounted() {
-    ormSearchPhraseUiToCT.insert({
+    ormSearchPhrasesOfCt.insert({
       data: {
         value: 'clear',
         ctAbbr: 'clr',

@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import ormSearchPhraseUiToCT from '@/cts/core/vl-search-box/vuex-orm/searchUIToCT'
+import ormSearchPhrasesOfCt from '@/cts/core/vl-search-box/vuex-orm/searchPhrasesOfCt'
 import ormDx from '@/models/Dx'
 import ormDxa from '@/models/Dxa'
 
@@ -99,7 +99,7 @@ export default {
     },
     mfOpenADialog() {
       console.log('show add dialog')
-      const arFromORM = ormSearchPhraseUiToCT.query().search('add diagnosis').get()
+      const arFromORM = ormSearchPhrasesOfCt.query().search('add diagnosis').get()
       const objRowFromORM = arFromORM[0]
       const tab = {
         label: objRowFromORM.value,
@@ -112,7 +112,7 @@ export default {
     },
     mfOpenMDialog() {
       console.log('show multi change dialog')
-      const arFromORM = ormSearchPhraseUiToCT.query().search('Multichange dx assessment').get()
+      const arFromORM = ormSearchPhrasesOfCt.query().search('Multichange dx assessment').get()
       const objRowFromORM = arFromORM[0]
       const tab = {
         label: objRowFromORM.value,

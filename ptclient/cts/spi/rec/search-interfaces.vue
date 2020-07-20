@@ -1,5 +1,5 @@
 <script>
-import ormSearchPhraseUiToCT from '@/cts/core/vl-search-box/vuex-orm/searchUIToCT'
+import ormSearchPhrasesOfCt from '@/cts/core/vl-search-box/vuex-orm/searchPhrasesOfCt'
 import ormCTLifeCycle from '@/cts/core/ctMaster/ormCtLifeCycle'
 
 export default {
@@ -17,7 +17,7 @@ export default {
     })
 
     // Step 2/3: Inserting Search interfaces to this component
-    ormSearchPhraseUiToCT.insert({
+    ormSearchPhrasesOfCt.insert({
       data: {
         value: 'recommendations',
         ctAbbr: 'rex',
@@ -27,7 +27,7 @@ export default {
       },
     })
 
-    ormSearchPhraseUiToCT.insert({
+    ormSearchPhrasesOfCt.insert({
       data: {
         value: 'add recommendations',
         ctAbbr: 'arex',

@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import ormSearchPhraseUiToCT from '@/cts/core/vl-search-box/vuex-orm/searchUIToCT'
+import ormSearchPhrasesOfCt from '@/cts/core/vl-search-box/vuex-orm/searchPhrasesOfCt'
 
 export default {
   data() {
@@ -13,7 +13,7 @@ export default {
   },
   mounted() {
     // Search interfaces to this component
-    ormSearchPhraseUiToCT.insert({
+    ormSearchPhrasesOfCt.insert({
       data: {
         value: 'add diagnosis',
         ctAbbr: 'adddx',
@@ -21,7 +21,7 @@ export default {
         layer: 'change',
       },
     })
-    ormSearchPhraseUiToCT.insert({
+    ormSearchPhrasesOfCt.insert({
       data: {
         value: 'diagnosis',
         ctAbbr: 'dx',
@@ -29,7 +29,7 @@ export default {
         layer: 'view',
       },
     })
-    ormSearchPhraseUiToCT.insert({
+    ormSearchPhrasesOfCt.insert({
       data: {
         value: 'multichange dx assessment',
         ctAbbr: 'mcdxa',
