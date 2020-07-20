@@ -14,7 +14,7 @@ export default {
       data: {
         value: 'feed',
         ctAbbr: 'fd',
-        ctToShowInCSVL: 'core/feed/invoke.vue',
+        ctToShowInCsOfVl: 'core/feed/invoke.vue',
         layer: 'view',
       },
     })

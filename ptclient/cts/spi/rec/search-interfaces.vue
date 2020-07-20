@@ -22,7 +22,7 @@ export default {
         value: 'recommendations',
         ctAbbr: 'rex',
         ctToShowInCL: 'spi/',
-        ctToShowInCSVL: 'spi/rec/vl/timeline.vue',
+        ctToShowInCsOfVl: 'spi/rec/vl/timeline.vue',
         layer: 'view',
       },
     })

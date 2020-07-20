@@ -14,7 +14,7 @@ export default {
       data: {
         value: 'clear',
         ctAbbr: 'clr',
-        ctToShowInCSVL: 'core/clear/index.vue',
+        ctToShowInCsOfVl: 'core/clear/index.vue',
         layer: 'view',
       },
     })

@@ -77,7 +77,7 @@ export default {
       let vsCtToShow = ''
 
       if (pSelectedSuggestion.layer === 'view') {
-        vsCtToShow = pSelectedSuggestion.ctToShowInCSVL
+        vsCtToShow = pSelectedSuggestion.ctToShowInCsOfVl
       } else {
         vsCtToShow = pSelectedSuggestion.ctToShowInCL
       }

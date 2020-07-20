@@ -14,7 +14,7 @@ export default {
       data: {
         value: 'name',
         ctAbbr: 'name',
-        ctToShowInCSVL: 'spi/name/vl/table.vue', // CSVL -> Current state view layer
+        ctToShowInCsOfVl: 'spi/name/vl/table.vue', // CSVL -> Current state view layer
         layer: 'view',
       },
     })
