@@ -85,7 +85,6 @@
 
 <script>
 import dbInteraction from '../db-interaction'
-import ormSearchPhrasesOfCt from '@/cts/core/vl-search-box/vuex-orm/searchPhrasesOfCt'
 import ormRem from '@/cts/spi/rem/db/vuex-orm/rem.js'
 
 export default {
@@ -146,10 +145,14 @@ export default {
       this.tablePageNumber = pNewPageNumber
     },
     mfOpenADialog() {
-      this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', 'add reminder')
+      this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', {
+        searchTerm: 'add reminder',
+      })
     },
     mfOpenMDialog() {
-      this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', 'multi change reminder')
+      this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', {
+        searchTerm: 'multi change reminder',
+      })
     },
     mfOpenDDialog() {
       let confirmMessage = 'Are you sure you want to discontinue all the selected reminders?'
@@ -175,19 +178,11 @@ export default {
         })
     },
     mfOpenXDialog() {
-      this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', 'discontinued reminders')
+      this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', {
+        searchTerm: 'discontinued reminders',
+      })
     },
     mfOpenCDialog(pORMDataRowID) {
-      console.log('Open change rem dialog -> ', pORMDataRowID)
-
-      // Goal: Find out which CT will handle this work
-      const arFromORM = ormSearchPhrasesOfCt.query().search('change reminder').get()
-      const objSearchRowFromORM = arFromORM[0]
-      // console.log(objSearchRowFromORM)
-
-      // Goal: Create the obj Tab that will be worked upon by for loop in
-      // /cts/core/cl-tabs-manager/ctShowAddAndRemoveTabsInDialog.vue: 76
-
       /*
        We need rowID of vuexORM inside the change ct. Since change ct needs the exiting Desc of the reminber to change
        Option 1: Send the whole data row
@@ -199,29 +194,8 @@ export default {
           2. When I send a paramter it is like calling a function. Sending the whole data row
           is like working on a gloal variable. So other Cts can also modify this global variable.
       */
-
-      const tab = {
-        label: objSearchRowFromORM.value, // TODO: Should be called vsLabel
-        /*
-        import and require are similar
-        require can use a variable.
-        import cannot use a variable. Benefits: webpack optimization
-        How optimize? Webpack can remove that module completely if module is not used
-
-        What does .default do?
-        Related to webpack and HMR (Hot module reload)
-        Ref: https://stackoverflow.com/questions/46215705/why-need-default-after-require-method-in-vue
-
-        */
-        ctToShow: require('@/cts/' + objSearchRowFromORM.ctToShowInCL).default,
-        ctAbbr: objSearchRowFromORM.ctAbbr, // TODO: Should be called vsCtAbbr
-        id: objSearchRowFromORM.id, // This id comes from search phrases UI to Ct. TODO: should be called vnID
-        vstPropsToGiveToCt: pORMDataRowID, // This holds all the data for the record we want to change in cl
-        closable: true, // TODO: Should be called blClosable
-        ctWidth: objSearchRowFromORM.ctWidth,
-      }
-      // console.log(tab)
-      this.$store.commit('mtfShowNewFirstTabInCl', tab)
+      const payload = { searchTerm: 'change reminder', pPropsToGiveToCt: pORMDataRowID }
+      this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', payload)
     },
     mfOpenDPrompt(pORMDataRowID) {
       const arResultsFromORM = ormRem.find(pORMDataRowID)

@@ -62,18 +62,38 @@ export default {
 
       console.log('state-> ', state.arTabs)
     },
-    mtfShowNewFirstTabInClFromSearchPhrase(state, pSearchPhrase) {
-      const arFromORM = ormSearchPhrasesOfCt.query().search(pSearchPhrase).get()
+    mtfShowNewFirstTabInClFromSearchPhrase(state, pPayload) {
+      // Goal: Find out which CT will handle this work
+      const arFromORM = ormSearchPhrasesOfCt.query().search(pPayload.searchTerm).get()
       const objSearchRowFromORM = arFromORM[0]
-      // console.log(objSearchRowFromORM)
+
+      // Goal: Create the obj Tab that will be worked upon by for loop in
+      // /cts/core/cl-tabs-manager/ctShowAddAndRemoveTabsInDialog.vue: 76
       const tab = {
-        label: objSearchRowFromORM.value,
+        label: objSearchRowFromORM.value, // TODO: Should be called vsLabel
+
+        /*
+        import and require are similar
+        require can use a variable.
+        import cannot use a variable. Benefits: webpack optimization
+        How optimize? Webpack can remove that module completely if module is not used
+
+        What does .default do?
+        Related to webpack and HMR (Hot module reload)
+        Ref: https://stackoverflow.com/questions/46215705/why-need-default-after-require-method-in-vue
+
+        */
+
         ctToShow: require('@/cts/' + objSearchRowFromORM.ctToShowInCL).default,
-        ctAbbr: objSearchRowFromORM.ctAbbr,
-        id: objSearchRowFromORM.id,
-        closable: true,
+        ctAbbr: objSearchRowFromORM.ctAbbr, // TODO: Should be called vsCtAbbr
+        id: objSearchRowFromORM.id, // This id comes from search phrases UI to Ct. TODO: should be called vnID
+        vstPropsToGiveToCt: pPayload.pPropsToGiveToCt, // This holds all the data for the record we want to change in cl
+        closable: true, // TODO: Should be called blClosable
         ctWidth: objSearchRowFromORM.ctWidth,
       }
+
+      console.log(tab)
+
       this.commit('mtfShowNewFirstTabInCl', tab)
     },
   },
