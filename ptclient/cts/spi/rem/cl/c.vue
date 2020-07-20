@@ -169,66 +169,25 @@ export default {
         if (!ormRem.findIfDuplicateExists(this.uuid)) {
           console.log('adding a new blank record. Since this is temporal DB')
           this.addEmptyRemToUI(arFromORM.remDesc)
+        } else {
+          const arFromORM = ormRem.query().where('uuid', this.uuid).orderBy('id', 'desc').get()
+          this.newRowBeingEditedIdfromOrm = arFromORM[0].id
+          if (arFromORM.length > 0) {
+            this.newRowBeingEditedIdfromOrm = arFromORM[0].id
+          } else {
+            return 'ERROR: This is not possible'
+          }
         }
       }
 
       // From this point on the state is the same.
-
-      if (!this.reminderDescCached) {
-        console.log(
-          'Going to run query on vuexORM since for this parameter data has never been fetched from vuex-orm'
-        )
-        return this.getRemDescFromVst()
-      } else {
-        console.log('Better perf: Returning without running query on vuexORM')
-        return this.reminderDescCached
-      }
-    },
-
-    getRemDescFromVst() {
-      // Full form: Get reminder description from view state.
-
-      // Goal: Get the latest data with this UUID. Since there can be 2 rows with the same UUID hence important to get latest row with the same UUID
-      const arFromORM = ormRem.query().where('uuid', this.uuid).orderBy('id', 'desc').get()
-      console.log(arFromORM, this.uuid)
-      if (arFromORM.length > 0) {
-        // console.log(arFromORM)
-        this.newRowBeingEditedIdfromOrm = arFromORM[0].id
-        return arFromORM[0].remDesc
-      } else {
-        return 'ERROR: This is not possible'
-      }
+      return ormRem.getField(this.newRowBeingEditedIdfromOrm, 'remDesc')
     },
 
     // state updates are smarter.
     setRemDescInVstOnDelay(pEvent) {
-      // Full form: Set reminder in vue state on delay
-      if (this.vOrmSaveScheduled) {
-        console.log('clearing timeout')
-        clearTimeout(this.vOrmSaveScheduled)
-      }
-
-      /* Ref: https://stackoverflow.com/questions/38399050/vue-equivalent-of-settimeout */
-      this.vOrmSaveScheduled = setTimeout(
-        function (scope) {
-          scope.setRemDescInVst(pEvent)
-        },
-        1000,
-        this
-      )
-
-      this.reminderDescCached = pEvent
-    },
-
-    setRemDescInVst(pEvent) {
-      console.log('Inside setRemDesc')
-      ormRem.update({
-        where: this.newRowBeingEditedIdfromOrm,
-        data: {
-          remDesc: pEvent,
-          rowStateInThisSession: 34,
-        },
-      })
+      ormRem.setField(pEvent, this.newRowBeingEditedIdfromOrm, 'remDesc')
+      this.$forceUpdate() // Not able to remove it. For the different methods tried read: cts/core/rowstatus.js:133/putFieldValueInCache
     },
 
     async sendDataToServer() {
