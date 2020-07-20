@@ -201,17 +201,9 @@ export default {
           })
           console.log('Failed to update')
         } else {
-          /* We are sorting this records by id because all the records have same ROW_END and
-          as the latest version of the data has newer id we can sort by id */
-          const arResultsFromORM = ormRem
-            .query()
-            .where('uuid', this.uuid)
-            .where('ROW_END', 2147483647.999999)
-            .orderBy('id', 'desc')
-            .get()
           /* Goal: Update old version of the reminder's ROW_END to current timestamp if change is successful */
           ormRem.update({
-            where: arResultsFromORM[1].$id,
+            where: this.OrmRowIDForPreviousInvocation,
             data: {
               ROW_END: Math.floor(Date.now() / 1000),
             },
