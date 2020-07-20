@@ -236,7 +236,7 @@ class rowStatus extends Model {
   }
 
   static createTimeoutToSave(pEvent, pOrmRowId, pFieldName) {
-    // Goal 2/2: debouncing. If A and B are pressed quickly. Timeout for "A" keypress will get cancelled and timeout for "B" keypress will get scheduled.
+    // Goal: debouncing. If A and B are pressed quickly. Timeout for "A" keypress will get cancelled and timeout for "B" keypress will get scheduled.
     if (this.vOrmSaveScheduled) {
       clearTimeout(this.vOrmSaveScheduled)
     }

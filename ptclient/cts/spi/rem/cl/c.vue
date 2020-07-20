@@ -52,7 +52,7 @@ export default {
   data() {
     return {
       uuid: '',
-      ORMRowIDForPreviousInvocation: 0,
+      OrmRowIDForPreviousInvocation: 0,
       newRowBeingEditedIdfromOrm: 0,
     }
   },
@@ -61,7 +61,6 @@ export default {
       return ormRem.getChangeRowsInEditState()
     },
     cfTimeLineDataAr() {
-      // console.log('inside computed function the UUID is', this.uuid)
       const dataTable = []
 
       // to create timeline the uuid will be same but id will be different.
@@ -70,17 +69,9 @@ export default {
       if (arFromORM.length) {
         let obj = []
         let date = ''
-        // console.log('sending this to timeline', arFromORM, arFromORM[0].uuid)
         for (let i = 0; i < arFromORM.length; i++) {
           obj = {}
           obj.remDesc = arFromORM[i].remDesc
-          /*
-          To get the number of the month:
-          obj.createdAt = date.getMonth() + 1 + "-" + date.getDate()
-
-          To get the name of the month:
-          Ref: https://stackoverflow.com/questions/1643320/get-month-name-from-date
-          */
           date = new Date(arFromORM[i].ROW_START)
           obj.createdAt = date.toLocaleString('default', { month: 'long' }) + '-' + date.getDate()
           if (
@@ -97,7 +88,6 @@ export default {
           dataTable.push(obj)
         }
       }
-      // console.log(dataTable)
       return dataTable
     },
   },
@@ -116,7 +106,8 @@ export default {
       this.newRowBeingEditedIdfromOrm = arFromORM.rem[0].id
     },
     getRemDescUsingCache() {
-      /* Performance analysis
+      /* 
+        Q) Why is this called twice when this page is loaded?
          When C is first clicked and the control comes here. This fn is called twice
          Since following console.log is written twice.
          If I remove :value="getRemDescUsingCache()" then this fn is called 0 times
@@ -127,17 +118,14 @@ export default {
 
          This fn is fired once when the property is first defined with undefined value and then is fired twice when a value is assigned to it.
 
-        */
-
-      /* When to get from ORM and when from cache?
+        Q) When to get from ORM and when from cache?
          Inside get desc. 1st time it comes from ORM from then on it always come from cache. The cache value is set by setRemDesc
-        */
-
-      /* States: For the paramters supplied to this Ct.
+      
+        Q) WHat are the states for the paramters supplied to this Ct?
                  1. Repeat invocatoion => 1.1 no unsaved data 1.2 there is unsaved data
                  2. First time invocation => 2.1 no unsaved data 2.2 there is unsaved data
 
-        What are the different times this function is called?
+        Q) What are the different times this function is called?
           1. User types multiple keystrokes. This fn is called for each keystroke
           2. User click C from the table. Uses esc key to closes the tab and then again clicks C
           3. User click C from table clicks cross to exit the tab and then again click C
@@ -152,14 +140,13 @@ export default {
 
       // Goal: decide if it is repeat or first invocation
       let arFromORM = []
-      if (this.ORMRowIDForPreviousInvocation === this.firstParam) {
+      if (this.OrmRowIDForPreviousInvocation === this.firstParam) {
         console.log('this is repeat invocation')
-        // this.uuid is already existing
-        // the new empty row where the user can type is already existing
+        // Inferences: 1. this.uuid is already existing 2. New empty row where the user can type is already existing
       } else {
-        // this is first time this Ct has been called with this parameter
+        // Inference: This is first time in this Ct lifetimes that it has been called with this parameter
         console.log('this is first time invocation')
-        this.ORMRowIDForPreviousInvocation = this.firstParam
+        this.OrmRowIDForPreviousInvocation = this.firstParam
         arFromORM = ormRem.find(this.firstParam)
         this.uuid = arFromORM.uuid
         console.log('Find if there is unsaved data', this.uuid)
@@ -176,12 +163,10 @@ export default {
           }
         }
       }
-
       // From this point on the state is the same.
       return ormRem.getField(this.newRowBeingEditedIdfromOrm, 'remDesc')
     },
 
-    // state updates are smarter.
     setRemDescInVstOnDelay(pEvent) {
       ormRem.setField(pEvent, this.newRowBeingEditedIdfromOrm, 'remDesc')
       this.$forceUpdate() // Not able to remove it. For the different methods tried read: cts/core/rowstatus.js:133/putFieldValueInCache
