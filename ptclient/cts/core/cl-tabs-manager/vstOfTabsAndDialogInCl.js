@@ -1,3 +1,5 @@
+import ormSearchPhrasesOfCt from '@/cts/core/vl-search-box/vuex-orm/searchPhrasesOfCt'
+
 export default {
   state: {
     // #region state
@@ -59,6 +61,20 @@ export default {
       state.arTabs.push(objNewTab)
 
       console.log('state-> ', state.arTabs)
+    },
+    mtfShowNewFirstTabInClFromSearchPhrase(state, pSearchPhrase) {
+      const arFromORM = ormSearchPhrasesOfCt.query().search(pSearchPhrase).get()
+      const objSearchRowFromORM = arFromORM[0]
+      // console.log(objSearchRowFromORM)
+      const tab = {
+        label: objSearchRowFromORM.value,
+        ctToShow: require('@/cts/' + objSearchRowFromORM.ctToShowInCL).default,
+        ctAbbr: objSearchRowFromORM.ctAbbr,
+        id: objSearchRowFromORM.id,
+        closable: true,
+        ctWidth: objSearchRowFromORM.ctWidth,
+      }
+      this.commit('mtfShowNewFirstTabInCl', tab)
     },
   },
 }

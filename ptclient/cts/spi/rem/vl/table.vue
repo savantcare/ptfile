@@ -146,34 +146,10 @@ export default {
       this.tablePageNumber = pNewPageNumber
     },
     mfOpenADialog() {
-      // console.log('show add dialog')
-      const arFromORM = ormSearchPhrasesOfCt.query().search('add reminder').get()
-      const objSearchRowFromORM = arFromORM[0]
-      // console.log(objSearchRowFromORM)
-      const tab = {
-        label: objSearchRowFromORM.value,
-        ctToShow: require('@/cts/' + objSearchRowFromORM.ctToShowInCL).default,
-        ctAbbr: objSearchRowFromORM.ctAbbr,
-        id: objSearchRowFromORM.id,
-        closable: true,
-        ctWidth: objSearchRowFromORM.ctWidth,
-      }
-      this.$store.commit('mtfShowNewFirstTabInCl', tab)
+      this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', 'add reminder')
     },
     mfOpenMDialog() {
-      // console.log('show add dialog')
-      const arFromORM = ormSearchPhrasesOfCt.query().search('multi change reminder').get()
-      const objSearchRowFromORM = arFromORM[0]
-      // console.log(objSearchRowFromORM)
-      const tab = {
-        label: objSearchRowFromORM.value,
-        ctToShow: require('@/cts/' + objSearchRowFromORM.ctToShowInCL).default,
-        ctAbbr: objSearchRowFromORM.ctAbbr,
-        id: objSearchRowFromORM.id,
-        closable: true,
-        ctWidth: objSearchRowFromORM.ctWidth,
-      }
-      this.$store.commit('mtfShowNewFirstTabInCl', tab)
+      this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', 'multi change reminder')
     },
     mfOpenDDialog() {
       let confirmMessage = 'Are you sure you want to discontinue all the selected reminders?'
@@ -199,19 +175,7 @@ export default {
         })
     },
     mfOpenXDialog() {
-      // console.log('show add dialog')
-      const arFromORM = ormSearchPhrasesOfCt.query().search('discontinued reminders').get()
-      const objSearchRowFromORM = arFromORM[0]
-      // console.log(objSearchRowFromORM)
-      const tab = {
-        label: objSearchRowFromORM.value,
-        ctToShow: require('@/cts/' + objSearchRowFromORM.ctToShowInCL).default,
-        ctAbbr: objSearchRowFromORM.ctAbbr,
-        id: objSearchRowFromORM.id,
-        closable: true,
-        ctWidth: objSearchRowFromORM.ctWidth,
-      }
-      this.$store.commit('mtfShowNewFirstTabInCl', tab)
+      this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', 'discontinued reminders')
     },
     mfOpenCDialog(pORMDataRowID) {
       console.log('Open change rem dialog -> ', pORMDataRowID)
