@@ -5,6 +5,7 @@ const http = require("http");
 const app = require("express")();
 
 const cors = require("cors");
+
 const config = require("config");
 
 var corsOptions = {
@@ -21,8 +22,6 @@ export NODE_ENV=production
 npm run start-auth
 */
 var env = process.env.NODE_ENV || "dev"; // Ref: https://stackoverflow.com/questions/8449665/how-do-you-detect-the-environment-in-an-express-js-app
-console.log(env);
-console.log(config.artificial_delay_in_response_from_node_server);
 
 if (env === "dev") {
   pause = require("connect-pause");

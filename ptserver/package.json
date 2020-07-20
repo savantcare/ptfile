@@ -4,8 +4,8 @@
   "description": "Simple Fake API",
   "main": "main.js",
   "scripts": {
-    "start-dev": "NODE_ENV=dev && sh copy-files-from-component-to-correct-locations.sh && node server.js",
-    "start-prod": "NODE_ENV=prod && sh copy-files-from-component-to-correct-locations.sh && node server.js"
+    "startdev": "export NODE_ENV=dev && sh copy-files-from-component-to-correct-locations.sh && node server.js",
+    "start-prod": "export NODE_ENV=prod && sh copy-files-from-component-to-correct-locations.sh && node server.js"
   },
   "author": "ME:)",
   "license": "ISC",
