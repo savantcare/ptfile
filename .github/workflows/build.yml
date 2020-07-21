@@ -23,9 +23,7 @@ jobs:
 
       - name: Getting env info - 1
         run: |
-          ls -aR /
-          pwd
-          docker ps -a
+          ls /
 
       - name: start ptserver ptclient and mariadb
         run: |
