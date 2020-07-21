@@ -1,7 +1,6 @@
-# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Patient file CI
+name: Patient file CI # https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#name
 
 on:
   push:
@@ -9,15 +8,24 @@ on:
   pull_request:
     branches: [master]
 
-jobs:
-  build:
+jobs: # A workflow run is made up of one or more jobs. Jobs run in parallel by default.
+  dbserver: # This is the first job https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobs
     runs-on: ubuntu-18.04
-    services:
-      mysql:
-        image: mysql:8.0
-      ptserver:
-        image: node:14
-        tty: true
-      ptclient:
-        image: node:14
-        tty: true
+    defaults:
+      run:
+        shell: bash
+        working-directory: scripts
+
+  ptserver: # This is the 2nd job Ref: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#example-6
+    runs-on: node:14
+    defaults:
+      run:
+        shell: bash
+        working-directory: scripts
+
+  ptclient: # Ref: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#example-8
+    runs-on: node:14
+    defaults:
+      run:
+        shell: bash
+        working-directory: scripts
