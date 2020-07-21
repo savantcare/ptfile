@@ -11,6 +11,8 @@ on:
 jobs: # A workflow run is made up of one or more jobs. Jobs run in parallel by default.
   dbserver: # This is the first job https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobs
     runs-on: ubuntu-18.04
+    services:
+      image: mariadb:10.4
     defaults:
       run:
         shell: bash
