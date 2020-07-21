@@ -59,7 +59,11 @@ class rowStatus extends Model {
       .orWhere('rowStateInThisSession', 34) // Copy -> Changed
       .orWhere('rowStateInThisSession', 3456) // Copy -> Changed -> Requested save -> form error
       .get()
-    return arFromORM.length
+    if (arFromORM.length) {
+      return arFromORM[length - 1].id
+    } else {
+      return false
+    }
   }
 
   static getField(pOrmRowId, pFieldName) {

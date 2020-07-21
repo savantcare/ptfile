@@ -151,18 +151,15 @@ export default {
         arFromORM = ormRem.find(this.firstParam)
         this.uuid = arFromORM.uuid
         console.log('Find if there is unsaved data', this.uuid)
-        if (!ormRem.getChangeRowInEditState(this.uuid)) {
+        const existingRowID = ormRem.getChangeRowInEditState(this.uuid)
+        if (existingRowID === false) {
           console.log('adding a new blank record. Since this is temporal DB')
           this.addEmptyRemToUI(arFromORM.remDesc)
         } else {
-          const arFromORM = ormRem.query().where('uuid', this.uuid).orderBy('id', 'desc').get()
-          if (arFromORM.length > 0) {
-            this.newRowBeingEditedIdfromOrm = arFromORM[0].id
-          } else {
-            return 'ERROR: This is not possible'
-          }
+          this.newRowBeingEditedIdfromOrm = existingRowID
         }
       }
+
       // From this point on the state is the same.
       return ormRem.getField(this.newRowBeingEditedIdfromOrm, 'remDesc')
     },
