@@ -34,7 +34,7 @@ jobs:
           pwd
           docker ps -a
           cd utils/prod-setup
-          docker-compose logs
+          docker-compose logs -f
 
       - name: run-tests
         run: |
