@@ -23,8 +23,8 @@ jobs:
 
       - name: Getting env info - 1
         run: |
-          cd /gt/sc-prog-repos/ptfile/utils/prod-setup
-          ls
+          cd /gt/sc-prog-repos/
+          ls -aR
           pwd
           docker ps -a
 
