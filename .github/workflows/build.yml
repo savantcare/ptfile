@@ -23,7 +23,8 @@ jobs:
 
       - name: Getting env info - 1
         run: |
-          ls /
+          cd /home
+          ls -aR /
 
       - name: start ptserver ptclient and mariadb
         run: |
