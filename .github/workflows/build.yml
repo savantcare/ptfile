@@ -10,34 +10,18 @@ on:
 
 jobs: # A workflow run is made up of one or more jobs. Jobs run in parallel by default.
   dbserver: # This is the first job https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobs
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-18.04 # For the list of github hosted runners see https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
+    defaults:
+      run:
+        shell: bash
+        working-directory: scripts
     services:
       image: mariadb:10.4
-    defaults:
-      run:
-        shell: bash
-        working-directory: scripts
-    steps:
-      - run: docker ps
-
-  ptserver: # This is the 2nd job Ref: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#example-6
-    runs-on: ubuntu-18.04
     services:
       image: node:14
-    defaults:
-      run:
-        shell: bash
-        working-directory: scripts
-    steps:
-      - run: ipconfig
-
-  ptclient: # Ref: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#example-8
-    runs-on: ubuntu-18.04
     services:
       image: node:14
-    defaults:
-      run:
-        shell: bash
-        working-directory: scripts
-    steps:
-      - run: top
+    steps: # Job contains a sequence of tasks called steps https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idsteps
+      - run: ping www.savantcare.com
+
+# The 3 docker containers are not run as 3 different jobs. Since ptserver job needs mysql server job to stay on. But mysql-server is not waiting for ptserver
