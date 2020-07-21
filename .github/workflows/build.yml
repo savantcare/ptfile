@@ -14,14 +14,8 @@ jobs: # A workflow run is made up of one or more jobs. Jobs run in parallel by d
     defaults:
       run:
         shell: bash
-        working-directory: scripts
-    services:
-      dbserver:
-        image: mariadb:10.4
-      ptserver:
-        image: node:14
-      ptclient:
-        image: node:14
+    image: mariadb:10.4
+      options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
     steps: # Job contains a sequence of tasks called steps https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idsteps
       # Downloads a copy of the code before running CI tests Ref: https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-postgresql-service-containers
       - name: Check out repository code
@@ -31,19 +25,26 @@ jobs: # A workflow run is made up of one or more jobs. Jobs run in parallel by d
       # For more information, see https://docs.npmjs.com/cli/ci.html
       - name: Install dependencies
         run: npm ci
+#
 # Q1) What is the tree structure?
 # The tree strcuture is
 #  -- Workflow
 #    -- Jobs
-#      ---- Services
-#      ---- Steps
-
+#       -- Services
+#       -- Steps
+#          -- name
+#          -- uses
+#          -- run
+#
 # Q2) Why have 3 services and not 3 jobs?
 # The 3 docker containers are not run as 3 different jobs.
 # Since ptserver job needs mysql server job to stay on. But mysql-server is not waiting for ptserver
-
+# Future RnD:
+# https://github.community/t/keep-jobs-services-alive/118912
+# https://github.community/t/mariadb-mysql-service-is-unealthy/17390
+#
 # Q3) How to get source code inside ptserver and ptclient images?
-# Option1: On github I can create a custom docker image at each commit and then say
+# Option1: On github I can create a custom docker image at each commit and then inside build.yml I can say:
 # ptserver:
 #  image: ptserver-node:14 Ref: https://www.learncloudnative.com/blog/2020-02-20-github-action-build-push-docker-images/
 

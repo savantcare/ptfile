@@ -1,4 +1,10 @@
-# Alexey Todo:
+# 21st July 2020
+
+1. 6 steps of hello world record 1 hour tutorial with 3 developers and then record Q&A
+2. Automated testing github CI
+3. rowstatus.js works with multiple fields.
+
+# Older:
 
 1. Body measurement component
 
