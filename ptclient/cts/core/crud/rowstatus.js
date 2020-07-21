@@ -60,7 +60,8 @@ class rowStatus extends Model {
       .orWhere('rowStateInThisSession', 3456) // Copy -> Changed -> Requested save -> form error
       .get()
     if (arFromORM.length) {
-      return arFromORM[length - 1].id
+      const idx = arFromORM.length - 1
+      return arFromORM[idx].id
     } else {
       return false
     }
