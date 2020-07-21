@@ -97,7 +97,7 @@ export default {
   },
   mounted() {
     console.log('In mounted function')
-    const resultArFromORM = ormRem.query().get()
+    const resultArFromORM = ormRem.getValidUniqueUuidNotEmptyRows('remDesc')
     if (resultArFromORM.length) {
       for (let i = 0; i < resultArFromORM.length; i++) {
         this.daUniqueIDOfEachRowFromORM.push(resultArFromORM[i].$id)
