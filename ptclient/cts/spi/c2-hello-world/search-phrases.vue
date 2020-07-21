@@ -1,3 +1,4 @@
+<template> <div></div> </template>
 <script>
 import ormSearchPhrasesOfCt from '@/cts/core/vl-search-box/vuex-orm/searchPhrasesOfCt'
 
