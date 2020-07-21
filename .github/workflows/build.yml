@@ -16,12 +16,12 @@ jobs: # A workflow run is made up of one or more jobs. Jobs run in parallel by d
         shell: bash
         working-directory: scripts
     services:
-      image: mariadb:10.4
-    services:
-      image: node:14
-    services:
-      image: node:14
+      dbserver:
+        image: mariadb:10.4
+      ptserver:
+        image: node:14
+      ptclient:
+        image: node:14
     steps: # Job contains a sequence of tasks called steps https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idsteps
       - run: ping www.savantcare.com
-
 # The 3 docker containers are not run as 3 different jobs. Since ptserver job needs mysql server job to stay on. But mysql-server is not waiting for ptserver
