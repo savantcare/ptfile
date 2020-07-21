@@ -8,7 +8,7 @@ on:
   pull_request:
     branches: [master]
 
-jobs: # A workflow run is made up of one or more jobs. Jobs run in parallel by default.
+jobs: # A workflow run is made up of one or more jobs. Jobs run in parallel by default. Each job runs in a fresh version of the virtual environment,
   dbserver: # This is the first job https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobs
     runs-on: ubuntu-18.04 # For the list of github hosted runners see https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
     defaults:
@@ -23,7 +23,7 @@ jobs: # A workflow run is made up of one or more jobs. Jobs run in parallel by d
       ptclient:
         image: node:14
     steps: # Job contains a sequence of tasks called steps https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idsteps
-      # Downloads a copy of the code in your repository before running CI tests Ref: https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-postgresql-service-containers
+      # Downloads a copy of the code before running CI tests Ref: https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-postgresql-service-containers
       - name: Check out repository code
         uses: actions/checkout@v2
 
@@ -31,9 +31,19 @@ jobs: # A workflow run is made up of one or more jobs. Jobs run in parallel by d
       # For more information, see https://docs.npmjs.com/cli/ci.html
       - name: Install dependencies
         run: npm ci
-# The 3 docker containers are not run as 3 different jobs.
-# Since ptserver job needs mysql server job to stay on. But mysql-server is not waiting for ptserver
+# Q1) What is the tree structure?
 # The tree strcuture is
 #  -- Workflow
 #    -- Jobs
+#      ---- Services
 #      ---- Steps
+
+# Q2) Why have 3 services and not 3 jobs?
+# The 3 docker containers are not run as 3 different jobs.
+# Since ptserver job needs mysql server job to stay on. But mysql-server is not waiting for ptserver
+
+# Q3) How to get source code inside ptserver and ptclient images?
+# Option1: On github I can create a custom docker image at each commit and then say
+# ptserver:
+#  image: ptserver-node:14 Ref: https://www.learncloudnative.com/blog/2020-02-20-github-action-build-push-docker-images/
+
