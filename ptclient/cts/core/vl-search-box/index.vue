@@ -1,15 +1,14 @@
 <template>
   <div id="vl-search-box">
     <!-- Mount the Cts so I can get the search terms inside the ORM -->
-    <feedSUI></feedSUI>
-    <mapSUI></mapSUI>
-    <clearSUI></clearSUI>
-    <remSUI></remSUI>
-    <dxSUI></dxSUI>
-    <nameSUI></nameSUI>
-    <helloWorldC1SUI></helloWorldC1SUI>
-    <helloWorldC2SUI></helloWorldC2SUI>
-    <helloWorldC3SUI></helloWorldC3SUI>
+    <feedSPhrases></feedSPhrases>
+    <mapSPhrases></mapSPhrases>
+    <clearSPhrases></clearSPhrases>
+    <remSPhrases></remSPhrases>
+    <nameSPhrases></nameSPhrases>
+    <helloWorldC1SPhrases></helloWorldC1SPhrases>
+    <helloWorldC2SPhrases></helloWorldC2SPhrases>
+    <helloWorldC3SPhrases></helloWorldC3SPhrases>
     <el-autocomplete
       v-model="searchKeyword"
       class="inline-input"
@@ -25,27 +24,25 @@
 import ormSearchPhrasesOfCt from '@/cts/core/vl-search-box/vuex-orm/searchPhrasesOfCt'
 
 // Goal: Get the search terms from each component
-import feedSUI from '@/cts/core/feed/search-interfaces'
-import mapSUI from '@/cts/core/map/search-interfaces'
-import clearSUI from '@/cts/core/clear/search-interfaces'
-import nameSUI from '@/cts/spi/name/search-interfaces'
-import remSUI from '@/cts/spi/rem/search-interfaces'
-import helloWorldC1SUI from '@/cts/spi/c1-hello-world/search-interfaces'
-import helloWorldC2SUI from '@/cts/spi/c2-hello-world/search-interfaces'
-import helloWorldC3SUI from '@/cts/spi/c3-hello-world/search-interfaces'
-import dxSUI from '@/cts/spi/dx/search-interfaces'
+import feedSPhrases from '@/cts/core/feed/search-phrases'
+import mapSPhrases from '@/cts/core/map/search-phrases'
+import clearSPhrases from '@/cts/core/clear/search-phrases'
+import nameSPhrases from '@/cts/spi/name/search-phrases'
+import remSPhrases from '@/cts/spi/rem/search-phrases'
+import helloWorldC1SPhrases from '@/cts/spi/c1-hello-world/search-phrases'
+import helloWorldC2SPhrases from '@/cts/spi/c2-hello-world/search-phrases'
+import helloWorldC3SPhrases from '@/cts/spi/c3-hello-world/search-phrases'
 
 export default {
   components: {
-    remSUI,
-    feedSUI,
-    clearSUI,
-    mapSUI,
-    nameSUI,
-    helloWorldC1SUI,
-    helloWorldC2SUI,
-    helloWorldC3SUI,
-    dxSUI,
+    remSPhrases,
+    feedSPhrases,
+    clearSPhrases,
+    mapSPhrases,
+    nameSPhrases,
+    helloWorldC1SPhrases,
+    helloWorldC2SPhrases,
+    helloWorldC3SPhrases,
   },
   data() {
     return { searchKeyword: '' }
