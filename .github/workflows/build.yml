@@ -19,10 +19,10 @@ jobs:
         image: mariadb:10.4
       ptserver:
         image: node:14
-        volumes: /home/runner/work/ptfile/ptfile/:/gt/sc-prog-repos/ptfile/
+        volumes: - /home/runner/work/ptfile/ptfile/:/gt/sc-prog-repos/ptfile/
       ptclient:
         image: node:14
-        volumes: /home/runner/work/ptfile/ptfile/:/gt/sc-prog-repos/ptfile/
+        volumes: - /home/runner/work/ptfile/ptfile/:/gt/sc-prog-repos/ptfile/
     steps:
       # Downloads a copy of the code before running CI tests Ref: https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-postgresql-service-containers
       - name: Check out repository code
