@@ -42,7 +42,7 @@ jobs:
 
       - name: wait for ptclient to start listening
         run: |
-          while ! echo exit | nc localhost 13000; do sleep 10; done
+          while ! echo exit | nc localhost 80; do sleep 10; done  # in docker-compose ptclient listens on port 80
 
       - name: See docker logs
         run: |
