@@ -27,7 +27,7 @@ import mapSUI from '@/cts/core/map/search-interfaces'
 import clearSUI from '@/cts/core/clear/search-interfaces'
 import nameSUI from '@/cts/spi/name/search-interfaces'
 import remSUI from '@/cts/spi/rem/search-interfaces'
-import helloWorldSUI from '@/cts/spi/hello-world/search-interfaces'
+import helloWorldSUI from '@/cts/spi/c1-hello-world/search-interfaces'
 
 export default {
   components: { remSUI, feedSUI, clearSUI, mapSUI, nameSUI, helloWorldSUI },
