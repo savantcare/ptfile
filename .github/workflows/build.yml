@@ -16,7 +16,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2 # This is bringing source code to ubuntu server defined in line 13 Localtion of checkout is /home/runner/work/ptfile/ptfile
 
-      - name: Setting up env
+      - name: Getting env info - 1
         run: |
           ls
           pwd
@@ -27,6 +27,13 @@ jobs:
           cd utils/prod-setup
           docker-compose up -d
           docker-compose -f maria-10.4-docker-compose.yml up -d
+
+      - name: Getting env info - 2
+        run: |
+          ls
+          pwd
+          docker ps -a
+          docker-compose logs -f
 
       - name: run-tests
         run: |
