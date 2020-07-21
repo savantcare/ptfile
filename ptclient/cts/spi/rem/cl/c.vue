@@ -151,12 +151,11 @@ export default {
         arFromORM = ormRem.find(this.firstParam)
         this.uuid = arFromORM.uuid
         console.log('Find if there is unsaved data', this.uuid)
-        if (!ormRem.findIfDuplicateExists(this.uuid)) {
+        if (!ormRem.getChangeRowInEditState(this.uuid)) {
           console.log('adding a new blank record. Since this is temporal DB')
           this.addEmptyRemToUI(arFromORM.remDesc)
         } else {
           const arFromORM = ormRem.query().where('uuid', this.uuid).orderBy('id', 'desc').get()
-          this.newRowBeingEditedIdfromOrm = arFromORM[0].id
           if (arFromORM.length > 0) {
             this.newRowBeingEditedIdfromOrm = arFromORM[0].id
           } else {

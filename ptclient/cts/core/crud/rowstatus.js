@@ -52,6 +52,16 @@ class rowStatus extends Model {
     return arFromORM
   }
 
+  static getChangeRowInEditState(pUuid) {
+    const arFromORM = this.query()
+      .where('uuid', pUuid)
+      .where('rowStateInThisSession', 3) // Copy
+      .orWhere('rowStateInThisSession', 34) // Copy -> Changed
+      .orWhere('rowStateInThisSession', 3456) // Copy -> Changed -> Requested save -> form error
+      .get()
+    return arFromORM.length
+  }
+
   static getField(pOrmRowId, pFieldName) {
     // first time it will have to find in model. This is needed to show the initial content in the field.
     if (typeof this.arOrmRowsCached[pOrmRowId] === 'undefined') {
