@@ -20,11 +20,12 @@ jobs:
         run: |
           sudo mkdir -p /gt/sc-prog-repos/ptfile
           sudo mv /home/runner/work/ptfile/ptfile/ptserver /gt/sc-prog-repos/ptfile/ptserver
+          sudo mv /home/runner/work/ptfile/ptfile/ptclient /gt/sc-prog-repos/ptfile/ptclient
 
       - name: Getting env info - 1
         run: |
           cd /home
-          ls -aR /
+          ls -aR /gt/sc-prog-repos
 
       - name: start ptserver ptclient and mariadb
         run: |
