@@ -12,7 +12,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" size="mini" plain @click="sendDataToServer"
-          >Submit<!-- firstpapram is {{ this.firstParam }}--></el-button
+          >Submit firstpapram is {{ this.firstParam }}</el-button
         >
       </el-form-item>
     </el-form>
@@ -107,7 +107,7 @@ export default {
       this.newRowBeingEditedIdfromOrm = arFromORM.rem[0].id
     },
     getRemDescUsingCache() {
-      /* 
+      /*
         Q) Why is this called twice when this page is loaded?
          When C is first clicked and the control comes here. This fn is called twice
          Since following console.log is written twice.
@@ -121,7 +121,7 @@ export default {
 
         Q) When to get from ORM and when from cache?
          Inside get desc. 1st time it comes from ORM from then on it always come from cache. The cache value is set by setRemDesc
-      
+
         Q) WHat are the states for the paramters supplied to this Ct?
                  1. Repeat invocatoion => 1.1 no unsaved data 1.2 there is unsaved data
                  2. First time invocation => 2.1 no unsaved data 2.2 there is unsaved data
@@ -169,7 +169,8 @@ export default {
     },
 
     setRemDescInVstOnDelay(pEvent) {
-      ormRem.setField(pEvent, this.newRowBeingEditedIdfromOrm, 'remDesc')
+      const rowStatus = 34
+      ormRem.setField(pEvent, this.newRowBeingEditedIdfromOrm, 'remDesc', rowStatus)
       this.$forceUpdate() // Not able to remove it. For the different methods tried read: cts/core/rowstatus.js:133/putFieldValueInCache
     },
 

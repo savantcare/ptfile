@@ -115,7 +115,8 @@ export default {
       return ormRem.getField(pOrmRowId, pFieldName)
     },
     mfSetFieldInOrmOnTimeout(pEvent, pOrmRowId, pFieldName) {
-      ormRem.setField(pEvent, pOrmRowId, pFieldName)
+      const rowStatus = 24
+      ormRem.setField(pEvent, pOrmRowId, pFieldName, rowStatus)
       this.$forceUpdate() // Not able to remove it. For the different methods tried read: cts/core/rowstatus.js:133/putFieldValueInCache
     },
     mfGetCssClassName(pOrmRowId) {

@@ -161,9 +161,9 @@ class rowStatus extends Model {
     }
   }
 
-  static setField(pEvent, pOrmRowId, pFieldName) {
+  static setField(pEvent, pOrmRowId, pFieldName, pRowStatus) {
     this.putFieldValueInCache(pEvent, pOrmRowId, pFieldName)
-    this.createTimeoutToSave(pEvent, pOrmRowId, pFieldName)
+    this.createTimeoutToSave(pEvent, pOrmRowId, pFieldName, pRowStatus)
   }
 
   /*  
@@ -235,7 +235,7 @@ class rowStatus extends Model {
     */
   }
 
-  static createTimeoutToSave(pEvent, pOrmRowId, pFieldName) {
+  static createTimeoutToSave(pEvent, pOrmRowId, pFieldName, pRowStatus) {
     // Goal: debouncing. If A and B are pressed quickly. Timeout for "A" keypress will get cancelled and timeout for "B" keypress will get scheduled.
     if (this.vOrmSaveScheduled) {
       clearTimeout(this.vOrmSaveScheduled)
@@ -243,20 +243,21 @@ class rowStatus extends Model {
     /* Ref: https://stackoverflow.com/questions/38399050/vue-equivalent-of-settimeout */
     this.vOrmSaveScheduled = setTimeout(
       function (scope) {
-        scope.setFieldInVuex(pEvent, pOrmRowId, pFieldName)
+        scope.setFieldInVuex(pEvent, pOrmRowId, pFieldName, pRowStatus)
       },
       1000,
       this
     )
   }
 
-  static setFieldInVuex(pEvent, pOrmRowId, pFieldName) {
+  static setFieldInVuex(pEvent, pOrmRowId, pFieldName, pRowStatus) {
     const row = {
       [pFieldName]: pEvent,
-      rowStateInThisSession: 24,
+      rowStateInThisSession: pRowStatus,
       validationClass: '',
       isValidationError: false,
     }
+
     const arFromORM = this.update({
       where: pOrmRowId,
       data: row,
