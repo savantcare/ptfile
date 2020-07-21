@@ -200,17 +200,19 @@ export default {
           console.log('Failed to update')
         } else {
           /* Goal: Update old version of the reminder's ROW_END to current timestamp if change is successful */
-          ormRem.update({
-            where: this.OrmRowIDForPreviousInvocation,
+          await ormRem.update({
+            where: (record) => record.uuid === this.uuid,
             data: {
               ROW_END: Math.floor(Date.now() / 1000),
             },
           })
+
           /* Goal: Update the value of 'rowStateInThisSession' to success or failure depending on the api response */
           ormRem.update({
             where: this.newRowBeingEditedIdfromOrm,
             data: {
               rowStateInThisSession: 34571,
+              ROW_END: 2147483647.999999,
             },
           })
           console.log('update success')
