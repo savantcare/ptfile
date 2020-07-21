@@ -37,8 +37,12 @@ jobs:
 
       - name: Get env info - 2
         run: |
-          ls -a /gt/sc-prog-repos
+          ls -a /gt/sc-prog-repos/ptfile
           docker ps -a
+
+      - name: wait for ptclient to start listening
+        run: |
+          while ! echo exit | nc localhost 13000; do sleep 10; done
 
       - name: See docker logs
         run: |
