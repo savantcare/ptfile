@@ -1,8 +1,8 @@
 {
-  "HOST": "127.0.0.1",
+  "HOST": "116.203.134.163",
   "USER": "stanford2008",
-  "PASSWORD": "jaidurgama",
-  "DB_PORT": "3306",
+  "PASSWORD": "jaidurgama99",
+  "DB_PORT": "4000",
   "DB": "health_brain",
   "dialect": "mysql",
   "pool": {
@@ -14,7 +14,7 @@
   "DB_RECOMMENDATION": "sc_recommendation",
   "DB_REMINDER": "sc_rem",
   "DB_GOAL": "sc_goal",
-  "DB_DIAGNOSIS": "DB_SC_Diagnosis_CT_V20",
+  "DB_DIAGNOSIS": "sc_dx",
   "DB_SERVICE_STATEMENT": "sc_serviceStatement",
   "DB_USER": "sc_user",
   "DB_SETTING": "sc_setting",

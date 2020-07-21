@@ -8,9 +8,10 @@ const { Op } = require("sequelize");
 module.exports = (io) => {
   router.post("/", async (req, res) => {
     try {
-      const data = req.body;
+      const { data } = req.body;
+      /* const patientId = data.ptUUID; */
 
-      const newDiagnosis = await Diagnosis.bulkCreate(data); // See
+      const newDiagnosis = await Diagnosis.create(data); // See
 
       /* this informs all the clients.
        -doctor is added so that DA does not get high security messages on their socket. 
@@ -34,18 +35,24 @@ module.exports = (io) => {
 
   router.get("/", async (req, res) => {
     try {
-      const { patientId } = req.query;
+      const getAll = await Diagnosis.sequelize.query(
+        "SELECT *,UNIX_TIMESTAMP(ROW_START) as ROW_START, UNIX_TIMESTAMP(ROW_END) as ROW_END FROM dx FOR SYSTEM_TIME ALL order by ROW_START desc",
+        {
+          type: Diagnosis.sequelize.QueryTypes.SELECT,
+        }
+      );
+      res.send(getAll);
+
+      /* const { patientId } = req.query;
 
       const diagnoses = await Diagnosis.findAll({
         where: {
           patientUUId: patientId,
         },
-      });
-
+      }); */
       /**
        *
        */
-
       /*const promises = diagnoses.map(async (diagnosis,index) => {
         const { uuid, diagnosisName, diagnosedOnDate, recordChangedByUUID, recordChangedOnDateTime} = diagnosis
         
@@ -109,9 +116,8 @@ module.exports = (io) => {
        *  }
        *
        */
-
-      //const result = await Promise.all(promises)
-      res.send(diagnoses);
+      // const result = await Promise.all(promises)
+      // res.send(diagnoses);
     } catch (err) {
       res.status(500).send({
         message:

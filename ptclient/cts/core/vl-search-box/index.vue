@@ -5,6 +5,7 @@
     <mapSUI></mapSUI>
     <clearSUI></clearSUI>
     <remSUI></remSUI>
+    <dxSUI></dxSUI>
     <nameSUI></nameSUI>
     <helloWorldC1SUI></helloWorldC1SUI>
     <helloWorldC2SUI></helloWorldC2SUI>
@@ -32,6 +33,7 @@ import remSUI from '@/cts/spi/rem/search-interfaces'
 import helloWorldC1SUI from '@/cts/spi/c1-hello-world/search-interfaces'
 import helloWorldC2SUI from '@/cts/spi/c2-hello-world/search-interfaces'
 import helloWorldC3SUI from '@/cts/spi/c3-hello-world/search-interfaces'
+import dxSUI from '@/cts/spi/dx/search-interfaces'
 
 export default {
   components: {
@@ -43,6 +45,7 @@ export default {
     helloWorldC1SUI,
     helloWorldC2SUI,
     helloWorldC3SUI,
+    dxSUI,
   },
   data() {
     return { searchKeyword: '' }
