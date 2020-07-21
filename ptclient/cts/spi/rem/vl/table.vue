@@ -16,7 +16,7 @@
         :data="cfArOfRemForDisplayInTable"
         :show-header="false"
         size="mini"
-        style="width: 100%;"
+        style="width: 100%; padding-bottom: 1px;"
         :stripe="true"
         :row-class-name="mfGetCssClassName"
         @selection-change="mfHandleSelectionForDiscontinue"
@@ -227,6 +227,8 @@ export default {
       console.log('pRow', pRow, 'pIndex', pIndex, 'Last charecter', lastCharecter)
       if (lastCharecter === '4' || lastCharecter === '6') {
         return 'unsaved-data'
+      } else if (lastCharecter === '8') {
+        return 'unsaved-data-failed-to-save'
       } else {
         return ''
       }
@@ -241,5 +243,15 @@ tr.el-table__row.unsaved-data {
 }
 .el-table--striped .el-table__body tr.el-table__row--striped.unsaved-data td {
   background: #f9d399;
+}
+tr.el-table__row.unsaved-data-failed-to-save > td {
+  border-top: 2px solid #ff0000;
+  border-bottom: 2px solid #ff0000;
+}
+tr.el-table__row.unsaved-data-failed-to-save > td:first-child {
+  border-left: 2px solid #ff0000;
+}
+tr.el-table__row.unsaved-data-failed-to-save > td:last-child {
+  border-right: 2px solid #ff0000;
 }
 </style>
