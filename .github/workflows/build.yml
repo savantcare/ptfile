@@ -23,7 +23,14 @@ jobs: # A workflow run is made up of one or more jobs. Jobs run in parallel by d
       ptclient:
         image: node:14
     steps: # Job contains a sequence of tasks called steps https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idsteps
-      - run: ls
+      # Downloads a copy of the code in your repository before running CI tests Ref: https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-postgresql-service-containers
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      # Performs a clean installation of all dependencies in the `package.json` file
+      # For more information, see https://docs.npmjs.com/cli/ci.html
+      - name: Install dependencies
+        run: npm ci
 # The 3 docker containers are not run as 3 different jobs.
 # Since ptserver job needs mysql server job to stay on. But mysql-server is not waiting for ptserver
 # The tree strcuture is
