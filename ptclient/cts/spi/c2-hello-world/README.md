@@ -1,3 +1,4 @@
+c1 +
 Display a Ct in Change layer
--- invoked from view layer
--- invoiekd from search in change layer
+-- invoked from search in view layer
+-- invoked from search in change layer
