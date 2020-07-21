@@ -8,42 +8,82 @@ on:
   pull_request:
     branches: [master]
 
-jobs: # A workflow run is made up of one or more jobs. Jobs run in parallel by default. Each job runs in a fresh version of the virtual environment,
-  dbserver: # This is the first job https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobs
+jobs:
+  ptclient-app: # This is the first job https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobs
     runs-on: ubuntu-18.04 # For the list of github hosted runners see https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
     defaults:
       run:
         shell: bash
-        working-directory: scripts
+        uses: actions/checkout@v2 # This is bringing source code to ubuntu server defined in line 13 Localtion of checkout is /home/runner/work/ptfile/ptfile
     services:
       dbserver:
         image: mariadb:10.4
       ptserver:
         image: node:14
+        volumes:
+          - /home/runner/work/ptfile/ptfile/:/gt/sc-prog-repos/ptfile/ # e.g of volume mount https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#example-14
       ptclient:
         image: node:14
-    steps: # Job contains a sequence of tasks called steps https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idsteps
+        volumes:
+          - /home/runner/work/ptfile/ptfile/:/gt/sc-prog-repos/ptfile/
+    steps:
       # Downloads a copy of the code before running CI tests Ref: https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-postgresql-service-containers
       - name: Check out repository code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2 # This is bringing source code to ubuntu server defined in line 13 Localtion of checkout is /home/runner/work/ptfile/ptfile
 
       # Performs a clean installation of all dependencies in the `package.json` file
       # For more information, see https://docs.npmjs.com/cli/ci.html
       - name: Install dependencies
         run: npm ci
+
+      - name: Setting up env
+        run: |
+          ls
+          pwd
+          docker ps -a
+
+      - name: Dump mariadb logs
+        uses: jwalton/gh-docker-logs@v1
+        with:
+          images: "mariadb:10.4"
+          # Only show last 100 lines of each
+          tail: "100"
+#
+#
+#
+#
 # Q1) What is the tree structure?
 # The tree strcuture is
-#  -- Workflow
-#    -- Jobs
-#      ---- Services
-#      ---- Steps
-
+#  -- Workflow (Made up of 1 or more jobs)
+#    -- Jobs (Jobs run in parallel by default. Each job runs in a fresh version of the virtual environment)
+#       -- Services
+#       -- Steps # Job contains a sequence of tasks called steps https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idsteps
+#          -- name
+#          -- uses
+#          -- run
+#
+#
+#
+#
 # Q2) Why have 3 services and not 3 jobs?
 # The 3 docker containers are not run as 3 different jobs.
-# Since ptserver job needs mysql server job to stay on. But mysql-server is not waiting for ptserver
-
+# A. Since ptserver job needs mysql server job to stay on. But mysql-server is not waiting for ptserver
+# Future RnD:
+# https://github.community/t/keep-jobs-services-alive/118912
+# https://github.community/t/mariadb-mysql-service-is-unealthy/17390
+# B. When run as 3 services each can ping the other with the hostname of the service given by docker.
+#
+#
+#
+#
 # Q3) How to get source code inside ptserver and ptclient images?
-# Option1: On github I can create a custom docker image at each commit and then say
+# Option1: On github I can create a custom docker image at each commit and then inside build.yml I can say:
 # ptserver:
 #  image: ptserver-node:14 Ref: https://www.learncloudnative.com/blog/2020-02-20-github-action-build-push-docker-images/
-
+#
+# Option 2:
+# volume mount for e.g at:
+# https://github.community/t/keep-jobs-services-alive/118912
+# https://github.community/t/custom-docker-action-mounted-volumes/17013
+#
+# Preferred: Option 2
