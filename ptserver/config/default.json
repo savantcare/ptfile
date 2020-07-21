@@ -1,8 +1,8 @@
 {
-  "HOST": "116.203.134.163",
+  "HOST": "127.0.0.1",
   "USER": "stanford2008",
-  "PASSWORD": "jaidurgama99",
-  "DB_PORT": "4000",
+  "PASSWORD": "jaidurgama",
+  "DB_PORT": "3306",
   "DB": "health_brain",
   "dialect": "mysql",
   "pool": {
