@@ -24,12 +24,15 @@ jobs:
     steps:
       # Downloads a copy of the code before running CI tests Ref: https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-postgresql-service-containers
       - name: Check out repository code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2 # This is bringing source code to ubuntu server defined in line 13
 
       # Performs a clean installation of all dependencies in the `package.json` file
       # For more information, see https://docs.npmjs.com/cli/ci.html
       - name: Install dependencies
         run: npm ci
+
+      - name: Install dependencies
+        run: ls
 #
 #
 #
