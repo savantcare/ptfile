@@ -1,33 +1,23 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Node.js CI
+name: Patient file CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
-
-    runs-on: macOS-latest
-
-    strategy:
-      matrix:
-        node-version: [12.x]
-
-    steps:
-      - uses: actions/checkout@v1
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: Build client side
-        run: |
-          cd ptclient
-          npm install
-          npm run build --if-present
-        env:
-          CI: true
+    runs-on: ubuntu-18.04
+    services:
+      mysql:
+        image: mysql:8.0
+      ptserver:
+        image: node:14
+        tty: true
+      ptclient:
+        image: node:14
+        tty: true
