@@ -22,10 +22,15 @@ jobs:
           pwd
           docker ps -a
 
-      - name: run docker-compose
+      - name: start ptserver ptclient and mariadb
         run: |
           cd utils/prod-setup
           docker-compose up -d
+          docker-compose -f maria-10.4-docker-compose up -d
+
+      - name: run-tests
+        run: |
+          wget www.google.com
 
 #
 #
