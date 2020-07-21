@@ -28,7 +28,7 @@ jobs:
     steps:
       # Downloads a copy of the code before running CI tests Ref: https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-postgresql-service-containers
       - name: Check out repository code
-        uses: actions/checkout@v2 # This is bringing source code to ubuntu server defined in line 13
+        uses: actions/checkout@v2 # This is bringing source code to ubuntu server defined in line 13 Localtion of checkout is /home/runner/work/ptfile/ptfile
 
       # Performs a clean installation of all dependencies in the `package.json` file
       # For more information, see https://docs.npmjs.com/cli/ci.html
@@ -41,12 +41,12 @@ jobs:
           pwd
           docker ps
 
-       - name: Dump mariadb logs
+      - name: Dump mariadb logs
         uses: jwalton/gh-docker-logs@v1
         with:
-          images: 'mariadb:10.4'
+          images: "mariadb:10.4"
           # Only show last 100 lines of each
-          tail: '100'
+          tail: "100"
 #
 #
 #
