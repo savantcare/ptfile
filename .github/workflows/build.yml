@@ -20,7 +20,7 @@ jobs:
       ptserver:
         image: node:14
         volumes:
-          - /home/runner/work/ptfile/ptfile/:/gt/sc-prog-repos/ptfile/
+          - /home/runner/work/ptfile/ptfile/:/gt/sc-prog-repos/ptfile/ # e.g of volume mount https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#example-14
       ptclient:
         image: node:14
         volumes:
@@ -41,6 +41,12 @@ jobs:
           pwd
           docker ps
 
+       - name: Dump mariadb logs
+        uses: jwalton/gh-docker-logs@v1
+        with:
+          images: 'mariadb:10.4'
+          # Only show last 100 lines of each
+          tail: '100'
 #
 #
 #
