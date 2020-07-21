@@ -15,6 +15,7 @@ jobs: # A workflow run is made up of one or more jobs. Jobs run in parallel by d
       run:
         shell: bash
         working-directory: scripts
+    steps: echo "jai kali ma"
 
   ptserver: # This is the 2nd job Ref: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#example-6
     runs-on: node:14
@@ -22,6 +23,7 @@ jobs: # A workflow run is made up of one or more jobs. Jobs run in parallel by d
       run:
         shell: bash
         working-directory: scripts
+    steps: echo "jai kali ma"
 
   ptclient: # Ref: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#example-8
     runs-on: node:14
@@ -29,3 +31,4 @@ jobs: # A workflow run is made up of one or more jobs. Jobs run in parallel by d
       run:
         shell: bash
         working-directory: scripts
+    steps: echo "jai kali ma"
