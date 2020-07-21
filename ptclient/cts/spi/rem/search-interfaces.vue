@@ -18,7 +18,6 @@ export default {
         layer: 'view',
       },
     })
-
     ormSearchPhrasesOfCt.insert({
       data: {
         value: 'add reminder',

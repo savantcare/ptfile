@@ -5,7 +5,7 @@ export default {
   mounted() {
     ormSearchPhrasesOfCt.insert({
       data: {
-        value: 'Hello world (C1)',
+        value: 'Hello world C1',
         ctAbbr: 'bp',
         ctToShowInCsOfVl: 'spi/c1-hello-world/vl/table.vue', // CSVL -> Current state view layer
         layer: 'view',

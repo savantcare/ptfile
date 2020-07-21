@@ -6,7 +6,8 @@
     <clearSUI></clearSUI>
     <remSUI></remSUI>
     <nameSUI></nameSUI>
-    <helloWorldSUI></helloWorldSUI>
+    <helloWorldC1SUI></helloWorldC1SUI>
+    <helloWorldC2SUI></helloWorldC2SUI>
     <el-autocomplete
       v-model="searchKeyword"
       class="inline-input"
@@ -27,10 +28,11 @@ import mapSUI from '@/cts/core/map/search-interfaces'
 import clearSUI from '@/cts/core/clear/search-interfaces'
 import nameSUI from '@/cts/spi/name/search-interfaces'
 import remSUI from '@/cts/spi/rem/search-interfaces'
-import helloWorldSUI from '@/cts/spi/c1-hello-world/search-interfaces'
+import helloWorldC1SUI from '@/cts/spi/c1-hello-world/search-interfaces'
+import helloWorldC2SUI from '@/cts/spi/c2-hello-world/search-interfaces'
 
 export default {
-  components: { remSUI, feedSUI, clearSUI, mapSUI, nameSUI, helloWorldSUI },
+  components: { remSUI, feedSUI, clearSUI, mapSUI, nameSUI, helloWorldC1SUI, helloWorldC2SUI },
   data() {
     return { searchKeyword: '' }
   },
