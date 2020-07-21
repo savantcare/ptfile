@@ -19,7 +19,7 @@ jobs:
       - name: Move coce to expected folder
         run: |
           sudo mkdir -p /gt/sc-prog-repos
-          sudo mv /home/runner/work/ptfile/ptfile /gt/sc-prog-repos
+          # sudo mv /home/runner/work/ptfile/ptfile /gt/sc-prog-repos
 
       - name: Getting env info - 1
         run: |
