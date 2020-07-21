@@ -39,7 +39,7 @@ jobs:
         run: |
           ls
           pwd
-          docker ps
+          docker ps -a
 
       - name: Dump mariadb logs
         uses: jwalton/gh-docker-logs@v1
