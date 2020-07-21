@@ -41,6 +41,7 @@ jobs:
           docker ps -a
 
       - name: See docker logs
+        run: |
           cd /gt/sc-prog-repos/ptfile/utils/prod-setup
           docker-compose logs -f
 
