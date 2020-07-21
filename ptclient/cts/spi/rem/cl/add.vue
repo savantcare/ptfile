@@ -37,7 +37,9 @@
       <!-- If there are no edit state rows then create a empty row for faster data input -->
       <p v-else>{{ mfAddEmptyRowInOrm() }}</p>
       <el-form-item>
-        <el-button type="primary" plain @click="mfOnSubmit">Submit</el-button>
+        <el-button type="primary" plain :disabled="dblDisableSubmitButton" @click="mfOnSubmit"
+          >Submit</el-button
+        >
         <el-button type="primary" plain @click="mfAddEmptyRowInOrm">Add more</el-button>
         <el-button type="warning" plain @click="mfResetForm">Reset form</el-button>
       </el-form-item>
@@ -77,7 +79,9 @@ import ormRem from '../db/vuex-orm/rem.js' // Path without @ can be resolved by 
 
 export default {
   data() {
-    return {}
+    return {
+      dblDisableSubmitButton: false,
+    }
   },
 
   computed: {
@@ -135,6 +139,7 @@ export default {
     },
     async mfOnSubmit() {
       // M8/9
+      this.dblDisableSubmitButton = true
       const arFromORM = this.cfGetOrmEditStateRows
       if (arFromORM.length) {
         console.log('unsaved data found', arFromORM)
@@ -163,6 +168,7 @@ export default {
       }
       // if there are no records left then I need to add a empty. For goal read docs/forms.md/1.3
       await ormRem.sendToServer()
+      this.dblDisableSubmitButton = false
     },
   },
 }
