@@ -11,13 +11,10 @@ on:
 jobs:
   ptclient-app: # This is the first job https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobs
     runs-on: ubuntu-18.04 # For the list of github hosted runners see https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
-    steps:
-      # Downloads a copy of the code before running CI tests Ref: https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-postgresql-service-containers
-      - name: Check out repository code
-        uses: actions/checkout@v2 # This is bringing source code to ubuntu server defined in line 13 Localtion of checkout is /home/runner/work/ptfile/ptfile
     defaults:
       run:
         shell: bash
+        uses: actions/checkout@v2 # This is bringing source code to ubuntu server defined in line 13 Localtion of checkout is /home/runner/work/ptfile/ptfile
     services:
       dbserver:
         image: mariadb:10.4
