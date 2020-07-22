@@ -8,7 +8,7 @@ import axios from 'axios'
 import VuexORMAxios from '@vuex-orm/plugin-axios'
 
 // Ref: https://github.com/eldomagan/vuex-orm-localforage#installation
-import vstOfTabsAndDialogInClModule from '~/cts/core/cl-tabs-manager/vstOfTabsAndDialogInCl'
+import vstOfTabsAndDialogInClModule from '~/cts/core/cl-tabs-manager/vst-of-tabs-and-dialog-in-cl'
 
 // Full form: Vue State Of Cards In Current state Of View layer Module
 import vstOfCardsInCsOfVlModule from '~/cts/core/vl-search-box/vst-of-cards-in-cs-of-vl'
