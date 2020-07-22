@@ -200,24 +200,34 @@ export default {
           })
           console.log('Failed to update')
         } else {
-          /* Goal: Update old version of the reminder's ROW_END to current timestamp if change is successful 
+          /* Goal: Update old version of the reminder's ROW_END to current timestamp if change is successful
             Edge case: Say id 2 is changed that created id 3. User then closes the change layer. The table now displays id 3. Now when user clicks change for id 3 firstParam is 3.
             OrmRowIDForPreviousInvocation is = firstParam. So OrmRowIDForPreviousInvocation is also 3. But 3 is the new changed row. And we want to set ROW_END for id 2 and not id 3
             How to update the ROW_END for id = 2?
               option 1: update that row that has state = "I am from DB" and UUID = UUID of current row
               option 2: This requires adding another state ->  "I am being changed" -> and then -> update that row that has state = "I am being changed" and UUID = UUID of current row
                         Option 2 is rejected. Since ID2 will now require update in following 3 cases:
-                          1. When ID 3 is created it will require changing state of id 2. 
-                          2. Also when id3 is deleted without saving to DB. 
-                          3. Or ID 3 is saved to DB. 
+                          1. When ID 3 is created it will require changing state of id 2.
+                          2. Also when id3 is deleted without saving to DB.
+                          3. Or ID 3 is saved to DB.
 
           */
-          ormRem.update({
-            where: this.OrmRowIDForPreviousInvocation,
+          await ormRem.update({
+            where: (record) => {
+              return (
+                record.uuid === this.uuid &&
+                (record.rowStateInThisSession === 1 /* Got from DB */ ||
+                record.rowStateInThisSession ===
+                  34571 /* Created as copy on client -> Changed -> Requested save -> Send to server -> API Success */ ||
+                  record.rowStateInThisSession ===
+                    24571) /* New -> Changed -> Requested save -> Send to server -> API Success */
+              )
+            },
             data: {
               ROW_END: Math.floor(Date.now() / 1000),
             },
           })
+
           /* Goal: Update the value of 'rowStateInThisSession' to success or failure depending on the api response */
           ormRem.update({
             where: this.newRowBeingEditedIdfromOrm,
