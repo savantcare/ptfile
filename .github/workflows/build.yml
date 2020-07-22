@@ -42,6 +42,12 @@ jobs:
           ls -a /gt/sc-prog-repos/ptfile
           docker ps -a
           
+      # Comment this when running tests. Since docker logs command does not exit.
+      - name: See docker logs
+        run: |
+          cd /gt/sc-prog-repos/ptfile/utils/prod-setup
+          docker-compose logs -f docker-compose-test.yml
+          
       # https://stackoverflow.com/questions/61078178/github-action-how-to-ensure-that-server-is-running-properly
       # in docker-compose ptclient listens on port 80 Ref: https://unix.stackexchange.com/questions/5277/how-do-i-tell-a-script-to-wait-for-a-process-to-start-accepting-requests-on-a-po
       - name: wait for ptclient to start listening
