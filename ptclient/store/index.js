@@ -11,7 +11,7 @@ import VuexORMAxios from '@vuex-orm/plugin-axios'
 import vstOfTabsAndDialogInClModule from '~/cts/core/cl-tabs-manager/vstOfTabsAndDialogInCl'
 
 // Full form: Vue State Of Cards In Current state Of View layer Module
-import vstOfCardsInCsOfVlModule from '~/cts/core/vl-search-box/vstOfCardsInCsOfVl'
+import vstOfCardsInCsOfVlModule from '~/cts/core/vl-search-box/vst-of-cards-in-cs-of-vl'
 
 import VueStateOfFeedDrawerModule from '@/cts/core/feed/VueStateOfFeedDrawer'
 import VueStateOfMapDrawerModule from '@/cts/core/map/VueStateOfMapDrawer'
