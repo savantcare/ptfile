@@ -1,6 +1,6 @@
 module.exports = {
     launch: {
-        headless: process.env.HEADLESS !== 'false',
+        headless: 'true',
         slowMo: process.env.SLOWMO ? process.env.SLOWMO : 30,
         defaultViewport: {width: 1440, height: 900},
         devtools: false,
