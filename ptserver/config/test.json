@@ -1,8 +1,9 @@
-const env = process.env.DB_PASSWORD
+const dotenv = require('dotenv');
+dotenv.config();
 {
   "HOST": "prod-setup_mariadb_1",
   "USER": "stanford2008",
-  "PASSWORD": env,
+  "PASSWORD": process.env.DB_PASSWORD,
   "DB_PORT": "4000",
   "artificial_delay_in_response_from_node_server": "0"
 }
