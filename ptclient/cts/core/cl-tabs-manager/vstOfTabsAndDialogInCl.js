@@ -1,4 +1,4 @@
-import ormSearchPhrasesOfCt from '~/cts/core/vl-search-box/ormSearchPhrasesOfCt'
+import ormSearchPhrasesOfCt from '~/cts/core/vl-search-box/orm-search-phrases-of-ct'
 
 export default {
   state: {

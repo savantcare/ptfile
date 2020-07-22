@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import ormSearchPhrasesOfCt from '@/cts/core/vl-search-box/ormSearchPhrasesOfCt'
+import ormSearchPhrasesOfCt from '@/cts/core/vl-search-box/orm-search-phrases-of-ct'
 import ormDx from '@/models/Dx'
 import ormDxa from '@/models/Dxa'
 

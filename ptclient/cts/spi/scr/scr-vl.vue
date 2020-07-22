@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import ormSearchPhrasesOfCt from '@/cts/core/vl-search-box/ormSearchPhrasesOfCt'
+import ormSearchPhrasesOfCt from '@/cts/core/vl-search-box/orm-search-phrases-of-ct'
 import ormCTLifeCycle from '@/cts/core/ctMaster/ormCtLifeCycle'
 import ormScr from '@/models/Screening'
 export default {
