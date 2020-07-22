@@ -1,4 +1,4 @@
-var env = process.env.DB_PASSWORD
+const env = process.env.DB_PASSWORD
 {
   "HOST": "prod-setup_mariadb_1",
   "USER": "stanford2008",
