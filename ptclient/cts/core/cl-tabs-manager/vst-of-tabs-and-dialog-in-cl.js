@@ -53,7 +53,7 @@ export default {
       const objNewTab = {
         label: '+',
         closable: false,
-        ctToShow: require('./ctSearchToAddTabInCL').default,
+        ctToShow: require('./ct-search-to-add-tab-in-cl').default,
         id: '0',
         ctWidth: 'small', // Provide ct width in CL
       }
