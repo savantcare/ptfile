@@ -120,7 +120,7 @@ dialog
 //#endregion template
 
 <script>
-import ctSetOfTabs from './ctSetOfTabs'
+import ctSetOfTabs from './ct-set-of-tabs'
 
 export default {
   name: 'CLTabsInDialogManager',
@@ -160,7 +160,7 @@ export default {
       get() {
         /*
         get the Cl dialog width based on tab width
-        if tab width is 'large' then dialog width will be 80% 
+        if tab width is 'large' then dialog width will be 80%
         for tab width is 'small' dialog width will be 50%
         */
         const cfDialogWidth = this.$store.state.vstObjTabsInCL.vsDialogWidth
