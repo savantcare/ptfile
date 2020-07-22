@@ -1,7 +1,7 @@
 const timeout = process.env.SLOWMO ? 30000 : 10000;
 
 beforeAll(async () => {
-    await page.goto('http://172.18.0.2:80/pf/abcd', {waitUntil: 'domcontentloaded'}); // Goto the patient file link and wait for loading
+    await page.goto('http://prod-setup_ptclient_1/pf/abcd', {waitUntil: 'domcontentloaded'}); // Goto the patient file link and wait for loading
 });
 
 describe('Test header and title of the page', () => {
