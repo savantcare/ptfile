@@ -1,7 +1,8 @@
+var env = process.env.DB_PASSWORD
 {
   "HOST": "prod-setup_mariadb_1",
   "USER": "stanford2008",
-  "PASSWORD": process.env.['DB_PASSWORD'],
+  "PASSWORD": env,
   "DB_PORT": "4000",
   "artificial_delay_in_response_from_node_server": "0"
 }
