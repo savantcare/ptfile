@@ -5,7 +5,13 @@
 
 3. Discontniue and multi discontinue need a response if it was success or not.
 
-4. Form field focus and arrow keys to traverse the sytem using v-on a system that is common like rowstatus.js
+4. roving tabindex
+   https://www.youtube.com/watch?v=uCIC2LNt0bk
+   https://developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets#Managing_focus_inside_groups
+   https://www.stefanjudis.com/today-i-learned/roving-tabindex/
+   https://github.com/fork/vue-roving-tabindex#readme
+   https://github.com/tajakobsen/vue-mixin-roving-tabindex
+   https://github.com/stevejay/react-roving-tabindex
 
 Step 1: Every ct when they are invoked in search an entry is made in vst-of-cards-in-cs-of-vl:arCards
 
