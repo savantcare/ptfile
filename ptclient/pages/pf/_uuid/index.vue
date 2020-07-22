@@ -83,7 +83,7 @@ import ctBMVl from '@/cts/spi/bm/bm-vl'
 import ctDXVl from '@/cts/spi/dx/dx-vl'
 import ctGVl from '@/cts/spi/goal/g-vl'
 import ctScrVl from '@/cts/spi/scr/scr-vl.vue'
-import ctTabsInDialogInCL from '@/cts/core/cl-tabs-manager/ctShowAddAndRemoveTabsInDialog'
+import ctTabsInDialogInCL from '@/cts/core/cl-tabs-manager/ct-show-add-and-remove-tabs-in-dialog'
 import ctFeedDrawer from '@/cts/core/feed/drawer.vue'
 import ctMapDrawer from '@/cts/core/map/drawer.vue'
 
