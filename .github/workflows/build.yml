@@ -47,7 +47,7 @@ jobs:
           sleep 120
       - name: run-tests
         run: |
-          docker network inspect prod-setup_ptclient_1
+          sudo netstat -tulpn | grep :80
           docker exec -i prod-setup_ptclient_1 /bin/bash
           ifconfig
           cd /gt/sc-prog-repos/ptfile/ptclient
