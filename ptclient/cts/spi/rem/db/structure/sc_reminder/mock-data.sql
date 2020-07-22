@@ -1,3 +1,5 @@
+use sc_rem;
+
 INSERT INTO `rems` (`uuid`, `ptUUID`, `remDesc`, `notes`, `priority`, `isAutoRem`, `recordChangedByUUID`, `recordChangedFromIPAddress`, `recordChangedFromSection`) VALUES
 ('01817fb0-c1ef-11ea-a3a5-f36fe4d74da4', 'bfe041fa-073b-4223-8c69-0540ee678ff8', 'This is my second reminder change 123 - changed', NULL, 1, 1, 'bfe041fa-073b-4223-8c69-0540ee678ff8', NULL, 'patientFile'),
 ('084e11a0-c1ef-11ea-a3a5-f36fe4d74da4', 'bfe041fa-073b-4223-8c69-0540ee678ff8', 'Third reminder for the patient', NULL, 1, 1, 'bfe041fa-073b-4223-8c69-0540ee678ff8', NULL, 'patientFile'),
