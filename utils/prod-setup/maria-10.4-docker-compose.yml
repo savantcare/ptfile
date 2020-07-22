@@ -19,8 +19,6 @@ services:
       - 4000:3306
     environment:
       MYSQL_ROOT_PASSWORD: qwerty
-    networks:
-      - ptfile
       
 
   phpmyadmin:
@@ -35,8 +33,3 @@ services:
 
 volumes:
   mariadb-data:
-
-networks:
-  ptfile:
-    external:
-      name: ptfile_default
