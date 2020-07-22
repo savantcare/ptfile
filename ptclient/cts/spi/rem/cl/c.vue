@@ -102,6 +102,7 @@ export default {
           uuid: this.uuid,
           rowStateInThisSession: 3, // For meaning of diff values read rem/db/vuex-orm/rems.js:71
           ROW_START: Math.floor(Date.now() / 1000), // Ref: https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
+          // ROW_END: already has a default value inside vuex-orm/rem.js
         },
       })
       this.newRowBeingEditedIdfromOrm = arFromORM.rem[0].id

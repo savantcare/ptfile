@@ -92,9 +92,9 @@ export default {
       let vsCtToShow = ''
 
       if (pSelectedSuggestion.layer === 'view') {
-        vsCtToShow = pSelectedSuggestion.ctToShowInCsOfVl
+        vsCtToShow = pSelectedSuggestion.ctToShowInCsOfVl // Ct to show in current state of view layer
       } else {
-        vsCtToShow = pSelectedSuggestion.ctToShowInCL
+        vsCtToShow = pSelectedSuggestion.ctToShowInCL // Ct to show in change layer
       }
 
       const objCtToAdd = {

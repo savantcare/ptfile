@@ -76,7 +76,7 @@
 <script>
 import Vue from 'vue'
 import VueSplit from 'vue-split-panel'
-import ctVLSearchBox from '@/cts/core/vl-search-box'
+import ctVLSearchBox from '@/cts/core/vl-search-box/load-search-phrases-and-handle-selection'
 import ctRexVl from '@/cts/spi/rec/vl/table'
 import ctRemVL from '@/cts/spi/rem/vl/table'
 import ctBMVl from '@/cts/spi/bm/bm-vl'
