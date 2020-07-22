@@ -1,0 +1,21 @@
+version: "3"
+services:
+  ptclient:
+    image: node:14
+    tty: true
+    ports:
+      - 80:80
+    working_dir: /gt/sc-prog-repos/ptfile/ptclient
+    command: bash -c "npm install && npm run build && npm run start-nuxt-in-test-env"
+    volumes:
+      - /gt/sc-prog-repos/ptfile/ptclient:/gt/sc-prog-repos/ptfile/ptclient # This will allow hot reloading when files are changed on host
+  ptserver:
+    image: node:14
+    tty: true
+    ports:
+      - 8000:8000
+    working_dir: /gt/sc-prog-repos/ptfile/ptserver
+    command: bash -c "npm install && npm run start-test"
+    volumes:
+      - /gt/sc-prog-repos/ptfile/ptserver:/gt/sc-prog-repos/ptfile/ptserver # This allows file changes on host to be available inside docker container without recreating docker image.
+      # For reasons of this volume mount see the vue: section comments

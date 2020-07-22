@@ -32,7 +32,7 @@ jobs:
       - name: Start ptserver ptclient and mariadb
         run: |
           cd /gt/sc-prog-repos/ptfile/utils/prod-setup
-          docker-compose up -d
+          docker-compose -f docker-compose-test.yml up -d
           docker-compose -f maria-10.4-docker-compose.yml up -d
 
       - name: Get env info - 2
