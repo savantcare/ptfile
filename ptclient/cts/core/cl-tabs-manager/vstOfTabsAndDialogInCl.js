@@ -1,4 +1,4 @@
-import ormSearchPhrasesOfCt from '@/cts/core/vl-search-box/vuex-orm/searchPhrasesOfCt'
+import ormSearchPhrasesOfCt from '~/cts/core/vl-search-box/ormSearchPhrasesOfCt'
 
 export default {
   state: {

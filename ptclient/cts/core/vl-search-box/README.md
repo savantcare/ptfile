@@ -25,7 +25,7 @@ Step 8: User sees the desired HTML
 
 The state of tabs is in CL (Change layer) is maintained in cts/cl-tabs-manager/vstOfTabsAndDialogInCl.js
 
-When autocomplete is done by user in cts/vl-search-box/vuex-orm/searchPhrasesOfCt.js:mfHandleSuggestionSelectedByUser
+When autocomplete is done by user in cts/vl-search-box/ormSearchPhrasesOfCt.js:mfHandleSuggestionSelectedByUser
 
 A new object is added to vstOfTabsAndDialogInCl.js
 
