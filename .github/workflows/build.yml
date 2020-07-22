@@ -25,7 +25,6 @@ jobs:
 
       - name: Get env info - 1
         run: |
-          lsof -i tcp:80
           ifconfig
           ls
           pwd
