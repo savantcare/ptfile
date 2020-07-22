@@ -34,7 +34,7 @@ services:
     ipc: host
     restart: always
     volumes:
-      - mariadb-data:/var/lib/mysql
+      - /var/lib/mysql:/var/lib/mysql
       - /gt/sc-prog-repos/ptfile/:/gt/sc-prog-repos/ptfile/
     ports:
       - 4000:3306
