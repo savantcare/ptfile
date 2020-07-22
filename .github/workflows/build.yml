@@ -49,7 +49,7 @@ jobs:
       # Comment this when running tests. Since docker logs command does not exit.
       - name: See docker logs
         run: |
-          cd /gt/sc-prog-repos/ptfile/utils/prod-setup
+          cd /gt/sc-prog-repos/ptfile/utils/run-on-docker
           docker-compose -f docker-compose-test.yml logs
 
       # https://stackoverflow.com/questions/61078178/github-action-how-to-ensure-that-server-is-running-properly
