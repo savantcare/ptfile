@@ -40,16 +40,6 @@ jobs:
         run: |
           ls -a /gt/sc-prog-repos/ptfile
           docker ps -a
- 
-      #https://www.digitalocean.com/community/questions/how-to-ping-docker-container-from-another-container-by-name
-      - name: attcah all docker in a network
-        run: |
-          docker network create ptfile_network
-          docker network connect ptfile_network prod-setup_mariadb_1
-          docker network connect ptfile_network prod-setup_ptserver_1
-          docker network connect ptfile_network prod-setup_ptclient_1   
-          docker network inspect ptfile_network
-          docker exec -i prod-setup_ptserver_1 /bin/bash && ping prod-setup_mariadb_1
           
       # Comment this when running tests. Since docker logs command does not exit.
       - name: See docker logs
