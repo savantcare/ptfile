@@ -1,9 +1,9 @@
 1. When I hit submit the form and the form was submittingf and then i entered and saved again. The system got confused.
    Ref: https://github.com/axios/axios/issues/1010
 
-2. Change id 2 that creates id 3 and then change id 3 line 203 of c.vue
+2. Change id 2 that creates id 3 and then change id 3 line 203 of c.vue - DONE
 
-3. Discontniue and multi discontinue need a response if it was success or not.
+3. Discontniue and multi discontinue need a response if it was success or not. - DONE
 
 4. Form field focus and arrow keys to traverse the sytem using v-on a system that is common like rowstatus.js
 

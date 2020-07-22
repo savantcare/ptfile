@@ -334,9 +334,9 @@ class rowStatus extends Model {
     }
   }
 
-  static async sendDiscontinueDataToServer(pORMDataRowID, remUUID, descontinuedNotes) {
+  static async sendDiscontinueDataToServer(pORMDataRowID, rowUUID, descontinuedNotes) {
     try {
-      const response = await fetch(`${this.apiUrl}/${remUUID}`, {
+      const response = await fetch(`${this.apiUrl}/${rowUUID}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
@@ -361,6 +361,29 @@ class rowStatus extends Model {
     } catch (ex) {
       return 0
     }
+  }
+
+  static async sendMultiDiscontinueDataToServer(dataRow) {
+    let success = 0
+    let failed = 0
+    const promises = dataRow.map(async (row) => {
+      try {
+        const status = await this.sendDiscontinueDataToServer(row.id, row.uuid, null)
+        if (status === 1) {
+          success++
+        } else {
+          failed++
+        }
+      } catch (err) {
+        return err.message || 'Some error occured while get user info'
+      }
+    })
+
+    await Promise.all(promises)
+    const response = []
+    response.success = success
+    response.failed = failed
+    return response
   }
 }
 
