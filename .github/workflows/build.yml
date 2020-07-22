@@ -49,7 +49,7 @@ jobs:
           docker network connect dockernetwork prod-setup_mariadb_1
           docker network connect dockernetwork prod-setup_ptserver_1
           docker network connect dockernetwork prod-setup_ptclient_1    
-          docker network inspect myNetwork
+          docker network inspect dockernetwork
  
       # Comment this when running tests. Since docker logs command does not exit.
       - name: See docker logs
