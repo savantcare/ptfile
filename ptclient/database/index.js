@@ -2,7 +2,7 @@
 
 import { Database } from '@vuex-orm/core'
 import CtSearch from '~/cts/core/vl-search-box/orm-search-phrases-of-ct'
-import CtLifeCycle from '@/cts/core/ctMaster/ormCtLifeCycle'
+import CtLifeCycle from '@/cts/core/ctMaster/orm-ct-life-cycle'
 import User from '@/models/user'
 import Patient from '@/models/patient'
 import Rex from '@/cts/spi/rec/vuex-orm/model.js'

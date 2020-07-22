@@ -28,7 +28,7 @@
 
 <script>
 import ormSearchPhrasesOfCt from '@/cts/core/vl-search-box/orm-search-phrases-of-ct'
-import ormCTLifeCycle from '@/cts/core/ctMaster/ormCtLifeCycle'
+import ormCTLifeCycle from '@/cts/core/ctMaster/orm-ct-life-cycle'
 import ormScr from '@/models/Screening'
 export default {
   data() {
