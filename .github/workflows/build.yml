@@ -47,10 +47,8 @@ jobs:
           sleep 120
       - name: run-tests
         run: |
-          sudo netstat -tulpn | grep :80
           docker exec -i prod-setup_ptclient_1 /bin/bash
           ifconfig
-          while ! echo exit | nc localhost 80; do sleep 10; done
           cd /gt/sc-prog-repos/ptfile/ptclient
           npm run test
 
