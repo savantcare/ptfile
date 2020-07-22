@@ -11,6 +11,7 @@ services:
 
   mariadb:
     image: mariadb:10.4
+    ipc: host
     restart: always
     volumes:
       - mariadb-data:/var/lib/mysql
