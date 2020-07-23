@@ -5,8 +5,10 @@ module.exports = {
         defaultViewport: {width: 1440, height: 900},
         devtools: false,
         args: [
+             "--no-sandbox",
             "--start-maximized", // --start-fullscreen --start-maximized
             "--ignore-certificate-errors"
+           
         ]
     }
 }
