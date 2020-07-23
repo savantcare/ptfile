@@ -1,6 +1,6 @@
 #!/bin/bash
-DB_USER="root"
-DB_PASS="qwerty"
+DB_USER="stanford2008"
+DB_PASS="jaidurgama"
 
 /gt/sc-prog-repos/ptfile/utils/db/create-first-user.sh
 
