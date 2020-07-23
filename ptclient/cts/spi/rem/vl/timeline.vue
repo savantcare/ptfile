@@ -60,7 +60,12 @@ export default {
   },
   computed: {
     cfPosInArCards() {
-      return 1
+      const arCards = this.$store.state.vstObjCardsInCSOfVL.arCards
+      console.log(arCards)
+      const obj = arCards.find((x) => x.label === 'reminders')
+      const idx = arCards.indexOf(obj)
+      console.log(idx)
+      return idx
     },
     cfArOfRemForDisplayInTable() {
       const arFromORM = ormRem.getValidUniqueUuidNotEmptyRows('remDesc')
