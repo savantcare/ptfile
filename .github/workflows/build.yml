@@ -35,6 +35,7 @@ jobs:
         run: |
           cd /gt/sc-prog-repos/ptfile/utils/run-on-docker
           docker-compose -f docker-compose-test.yml up -d
+          service mysql start
       - name: Get env info - 2
         run: |
           ls -a /gt/sc-prog-repos/ptfile
