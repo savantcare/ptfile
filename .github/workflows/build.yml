@@ -60,14 +60,14 @@ jobs:
 
       - name: Goal init the mariadb with database, tables and mock data
         run: |
-          docker exec -i run-on-docker_mariadb_1> /gt/sc-prog-repos/ptfile/utils/db/create-db-tables-mock-data-in-db.sh 
+          docker exec -i run-on-docker_mariadb_1 /bin/sh> /gt/sc-prog-repos/ptfile/utils/db/create-db-tables-mock-data-in-db.sh 
           # Ref: https://stackoverflow.com/questions/31578446/running-a-script-inside-a-docker-container-using-shell-script
           
       # Comment this when running tests. Since docker logs command does not exit.
       - name: See docker logs
         run: |
           cd /gt/sc-prog-repos/ptfile/utils/run-on-docker
-          docker logs --follow run-on-docker_ptserver_1
+          docker logs --follow run-on-docker_mariadb_1
 
       # https://stackoverflow.com/questions/61078178/github-action-how-to-ensure-that-server-is-running-properly
       # in docker-compose ptclient listens on port 80 Ref: https://unix.stackexchange.com/questions/5277/how-do-i-tell-a-script-to-wait-for-a-process-to-start-accepting-requests-on-a-po
