@@ -1,5 +1,5 @@
 {
-  "HOST": "prod-setup_mariadb_1",
+  "HOST": "127.0.0.1",
   "USER": "stanford2008",
   "PASSWORD": "jaidurgama",
   "DB_PORT": "3306",
