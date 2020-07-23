@@ -21,6 +21,8 @@ services:
     volumes:
       - /gt/sc-prog-repos/ptfile/ptserver:/gt/sc-prog-repos/ptfile/ptserver # This allows file changes on host to be available inside docker container without recreating docker image.
       # For reasons of this volume mount see the vue: section comments
+    depends_on:
+      - mariadb  
   php:
     image: php:7.2-fpm
     volumes:
@@ -38,7 +40,6 @@ services:
       - /gt/sc-prog-repos/ptfile/:/gt/sc-prog-repos/ptfile/
     ports:
       - 4000:3306
-    options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3  
     environment:
       MYSQL_ROOT_PASSWORD: qwerty
 
