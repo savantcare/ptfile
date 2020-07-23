@@ -7,18 +7,12 @@
     -->
     <el-card class="box-card" :body-style="{ paddingLeft: '3px' }">
       <div slot="header" class="clearfix">
-        <span>Reminders</span>
+        <span :tabindex="posInArCards * 100 + 1">Reminders</span>
         <el-button-group style="float: right;">
-          <el-button style="padding: 3px;" type="success" plain tabindex="1" @click="mfOpenACtInCl"
-            >A</el-button
-          >
-          <el-button style="padding: 3px;" type="primary" plain tabindex="2" @click="mfOpenMCtInCl"
-            >M</el-button
-          >
-          <el-button style="padding: 3px;" type="warning" plain tabindex="3">D</el-button>
-          <el-button style="padding: 3px;" type="info" plain tabindex="4" @click="mfOpenXCtInCl"
-            >X</el-button
-          >
+          <el-button style="padding: 3px;" type="success" plain @click="mfOpenACtInCl">A</el-button>
+          <el-button style="padding: 3px;" type="primary" plain @click="mfOpenMCtInCl">M</el-button>
+          <el-button style="padding: 3px;" type="warning" plain>D</el-button>
+          <el-button style="padding: 3px;" type="info" plain @click="mfOpenXCtInCl">X</el-button>
         </el-button-group>
       </div>
       <!-- explanation of following params:
@@ -34,6 +28,7 @@
           :key="row.$id"
           :timestamp="row.createdAt"
           :type="row.type"
+          :tabindex="posInArCards * 100 + 2"
         >
           {{ row.remDesc }}
           <el-button-group style="float: right;">
@@ -51,7 +46,9 @@ import ormRem from '@/cts/spi/rem/db/vuex-orm/rem.js'
 
 export default {
   data() {
-    return {}
+    return {
+      posInArCards: 1,
+    }
   },
   computed: {
     cfArOfRemForDisplayInTable() {
