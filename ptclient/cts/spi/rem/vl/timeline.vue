@@ -9,10 +9,16 @@
       <div slot="header" class="clearfix">
         <span :tabindex="posInArCards * 100 + 1">Reminders</span>
         <el-button-group style="float: right;">
-          <el-button style="padding: 3px;" type="success" plain @click="mfOpenACtInCl">A</el-button>
-          <el-button style="padding: 3px;" type="primary" plain @click="mfOpenMCtInCl">M</el-button>
-          <el-button style="padding: 3px;" type="warning" plain>D</el-button>
-          <el-button style="padding: 3px;" type="info" plain @click="mfOpenXCtInCl">X</el-button>
+          <el-button style="padding: 3px;" type="success" plain tabindex="-1" @click="mfOpenACtInCl"
+            >A</el-button
+          >
+          <el-button style="padding: 3px;" type="primary" plain tabindex="-1" @click="mfOpenMCtInCl"
+            >M</el-button
+          >
+          <el-button style="padding: 3px;" type="warning" plain tabindex="-1">D</el-button>
+          <el-button style="padding: 3px;" type="info" plain tabindex="-1" @click="mfOpenXCtInCl"
+            >X</el-button
+          >
         </el-button-group>
       </div>
       <!-- explanation of following params:
@@ -32,8 +38,12 @@
         >
           {{ row.remDesc }}
           <el-button-group style="float: right;">
-            <el-button type="primary" size="mini" style="padding: 3px;" plain>C</el-button>
-            <el-button type="warning" size="mini" style="padding: 3px;" plain>D</el-button>
+            <el-button type="primary" size="mini" style="padding: 3px;" plain tabindex="-1"
+              >C</el-button
+            >
+            <el-button type="warning" size="mini" style="padding: 3px;" plain tabindex="-1"
+              >D</el-button
+            >
           </el-button-group>
         </el-timeline-item>
       </el-timeline>
