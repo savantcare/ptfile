@@ -6,10 +6,18 @@
       <div slot="header" class="clearfix">
         <span>Reminders</span>
         <el-button-group style="float: right;">
-          <el-button style="padding: 3px;" type="success" plain @click="mfOpenACtInCl">A</el-button>
-          <el-button style="padding: 3px;" type="primary" plain @click="mfOpenMCtInCl">M</el-button>
-          <el-button style="padding: 3px;" type="warning" plain @click="mfOpenDDialog">D</el-button>
-          <el-button style="padding: 3px;" type="info" plain @click="mfOpenXCtInCl">X</el-button>
+          <el-button style="padding: 3px;" type="success" plain tabindex="-1" @click="mfOpenACtInCl"
+            >A</el-button
+          >
+          <el-button style="padding: 3px;" type="primary" plain tabindex="-1" @click="mfOpenMCtInCl"
+            >M</el-button
+          >
+          <el-button style="padding: 3px;" type="warning" plain tabindex="-1" @click="mfOpenDDialog"
+            >D</el-button
+          >
+          <el-button style="padding: 3px;" type="info" plain tabindex="-1" @click="mfOpenXCtInCl"
+            >X</el-button
+          >
         </el-button-group>
       </div>
       <el-table
@@ -56,6 +64,7 @@
                 size="mini"
                 style="padding: 3px;"
                 plain
+                tabindex="-1"
                 @click="mfOpenCCtInCl(props.row.$id)"
                 >C</el-button
               >
@@ -64,6 +73,7 @@
                 size="mini"
                 style="padding: 3px;"
                 plain
+                tabindex="-1"
                 @click="mfOpenDPrompt(props.row.$id)"
                 >D</el-button
               >

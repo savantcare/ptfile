@@ -7,7 +7,7 @@
     -->
     <el-card class="box-card" :body-style="{ paddingLeft: '3px' }">
       <div slot="header" class="clearfix">
-        <span :tabindex="posInArCards * 100 + 1">Reminders</span>
+        <span :tabindex="cfPosInArCards * 100 + 1">Reminders</span>
         <el-button-group style="float: right;">
           <el-button style="padding: 3px;" type="success" plain tabindex="-1" @click="mfOpenACtInCl"
             >A</el-button
@@ -34,7 +34,7 @@
           :key="row.$id"
           :timestamp="row.createdAt"
           :type="row.type"
-          :tabindex="posInArCards * 100 + 2"
+          :tabindex="cfPosInArCards * 100 + 2"
         >
           {{ row.remDesc }}
           <el-button-group style="float: right;">
@@ -56,11 +56,12 @@ import ormRem from '@/cts/spi/rem/db/vuex-orm/rem.js'
 
 export default {
   data() {
-    return {
-      posInArCards: 1,
-    }
+    return {}
   },
   computed: {
+    cfPosInArCards() {
+      return 1
+    },
     cfArOfRemForDisplayInTable() {
       const arFromORM = ormRem.getValidUniqueUuidNotEmptyRows('remDesc')
 

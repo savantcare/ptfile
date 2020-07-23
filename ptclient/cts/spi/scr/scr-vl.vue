@@ -4,10 +4,20 @@
       <div slot="header" class="clearfix">
         <span>Screening</span>
         <el-button-group style="float: right;">
-          <el-button style="padding: 3px;" type="success" plain @click="mfOpenAllScrGDialog()"
+          <el-button
+            style="padding: 3px;"
+            type="success"
+            plain
+            tabindex="-1"
+            @click="mfOpenAllScrGDialog()"
             >G</el-button
           >
-          <el-button style="padding: 3px;" type="primary" plain @click="mfOpenACtInCl()"
+          <el-button
+            style="padding: 3px;"
+            type="primary"
+            plain
+            tabindex="-1"
+            @click="mfOpenACtInCl()"
             >A</el-button
           >
         </el-button-group>
