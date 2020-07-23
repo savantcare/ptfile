@@ -49,7 +49,7 @@ jobs:
       - name: See docker logs
         run: |
           cd /gt/sc-prog-repos/ptfile/utils/run-on-docker
-          docker-compose logsdocker logs --follow run-on-docker_ptserver_1
+          docker logs --follow run-on-docker_ptserver_1
 
       # https://stackoverflow.com/questions/61078178/github-action-how-to-ensure-that-server-is-running-properly
       # in docker-compose ptclient listens on port 80 Ref: https://unix.stackexchange.com/questions/5277/how-do-i-tell-a-script-to-wait-for-a-process-to-start-accepting-requests-on-a-po
