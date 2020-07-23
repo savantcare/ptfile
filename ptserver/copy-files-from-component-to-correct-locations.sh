@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Why?
+# the goal is to keep server and client side files all in one folder
+
 printf "== Copying 3 files from recommendation component "
 printf "." && cp ../ptclient/src/cts/patient/Recommendations/db/recommendation.database.js ./models/database/
 printf "." && cp ../ptclient/src/cts/patient/Recommendations/db/recommendation.model.js ./models/
