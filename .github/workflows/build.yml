@@ -52,8 +52,7 @@ jobs:
 
       - name: Goal init the mariadb with database, tables and mock data
         run: |
-          sh /gt/sc-prog-repos/ptfile/utils/db/create-db-tables-mock-data-in-db.sh
-          #sudo docker exec run-on-docker_mariadb_1 /bin/sh -c "/gt/sc-prog-repos/ptfile/utils/db/create-db-tables-mock-data-in-db.sh"
+          sudo docker exec run-on-docker_mariadb_1 /bin/sh -c "/gt/sc-prog-repos/ptfile/utils/db/create-db-tables-mock-data-in-db.sh" > result.txt
           # Ref: https://stackoverflow.com/questions/31578446/running-a-script-inside-a-docker-container-using-shell-script
           
       # Comment this when running tests. Since docker logs command does not exit.
@@ -70,7 +69,13 @@ jobs:
       - name: run-tests
         run: |
           docker exec run-on-docker_ptclient_1 /bin/sh -c "cd /gt/sc-prog-repos/ptfile/ptclient;apt-get update -y;apt-get install -y libnss3-dev gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget;npm install;npm run start-testing"
-
+      
+      # https://docs.github.com/en/actions/configuring-and-managing-workflows/persisting-workflow-data-using-artifacts
+      - name: Upload result of job
+        uses: actions/upload-artifact@v2
+        with:
+          name: result
+          path: result.txt
 #
 #
 #
