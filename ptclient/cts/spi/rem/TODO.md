@@ -5,25 +5,9 @@
 
 3. Discontniue and multi discontinue need a response if it was success or not.
 
-4. roving tabindex
-   https://www.youtube.com/watch?v=uCIC2LNt0bk
-   https://developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets#Managing_focus_inside_groups
-   https://www.stefanjudis.com/today-i-learned/roving-tabindex/
-   https://github.com/fork/vue-roving-tabindex#readme
-   https://github.com/tajakobsen/vue-mixin-roving-tabindex
-   https://github.com/stevejay/react-roving-tabindex
-
-Step 1: Every ct when they are invoked in search an entry is made in vst-of-cards-in-cs-of-vl:arCards
-
-Each component when mounted will ask vl-search-box about its sequence in the arCards
-
-baseNumber = arrayPosition \* 100 = 0
-
-then internally each box gets tabIdex as basenumber+1,basenumber+2,basenumber+3,basenumber+4
-
-Support rex is arrayPosition = 1
-baseNumber = arrayPosition \* 100 = 100
-then internally each box gets tabIdex as basenumber+1,basenumber+2,basenumber+3,basenumber+4
+4. KB control
+   Remove tabindex from checkmark of reminder table Line 33 of table.vue
+   on tab the control should not go to browser back forward and address bar
 
 Low priority:
 

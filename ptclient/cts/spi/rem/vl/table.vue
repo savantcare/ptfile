@@ -29,7 +29,12 @@
         :row-class-name="mfGetCssClassName"
         @selection-change="mfHandleSelectionForDiscontinue"
       >
-        <el-table-column type="selection" width="42"> </el-table-column>
+        <el-table-column type="selection" width="42" tabindex="-1"> </el-table-column>
+        <!-- From developer console if I set:
+<input type="checkbox" aria-hidden="false" class="el-checkbox__original" value="" tabindex="-1">
+as tabindex=-1 then the KB tab key does not take user to the checkbox.
+Setting the <el-table-column as tabindex=-1 does not help -->
+
         <el-table-column type="expand">
           <template slot-scope="props">
             <p>Created: {{ props.row.createdAt }}</p>
