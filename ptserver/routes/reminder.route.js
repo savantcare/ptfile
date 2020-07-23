@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const db = require('../../../../../../ptserver/models')
+const db = require('/gt/sc-prog-repos/ptfile/ptserver/models')
 const Reminder = db.reminderDB.rems
 const User = db.userDB.users
 const { Op } = require('sequelize')
