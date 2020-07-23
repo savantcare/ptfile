@@ -5,6 +5,7 @@
     <mapSPhrases></mapSPhrases>
     <clearSPhrases></clearSPhrases>
     <remSPhrases></remSPhrases>
+    <scrSPhrases></scrSPhrases>
     <nameSPhrases></nameSPhrases>
     <helloWorldC1SPhrases></helloWorldC1SPhrases>
     <helloWorldC2SPhrases></helloWorldC2SPhrases>
@@ -29,6 +30,7 @@ import mapSPhrases from '@/cts/core/map/search-phrases'
 import clearSPhrases from '@/cts/core/clear/search-phrases'
 import nameSPhrases from '@/cts/spi/name/search-phrases'
 import remSPhrases from '@/cts/spi/rem/search-phrases'
+import scrSPhrases from '@/cts/spi/scr/search-phrases'
 import helloWorldC1SPhrases from '@/cts/spi/c1-hello-world/search-phrases'
 import helloWorldC2SPhrases from '@/cts/spi/c2-hello-world/search-phrases'
 import helloWorldC3SPhrases from '@/cts/spi/c3-hello-world/search-phrases'
@@ -36,6 +38,7 @@ import helloWorldC3SPhrases from '@/cts/spi/c3-hello-world/search-phrases'
 export default {
   components: {
     remSPhrases,
+    scrSPhrases,
     feedSPhrases,
     clearSPhrases,
     mapSPhrases,
