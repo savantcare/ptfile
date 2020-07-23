@@ -1,5 +1,5 @@
 {
-  "HOST": "localhost",
+  "HOST": "run-on-docker_mariadb_1",
   "USER": "stanford2008",
   "PASSWORD": "jaidurgama",
   "DB_PORT": "4000",
