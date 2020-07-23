@@ -212,12 +212,46 @@ export default {
                           3. Or ID 3 is saved to DB. 
 
           */
-          ormRem.update({
-            where: this.OrmRowIDForPreviousInvocation,
+
+          /*
+            Q): Why following where clause needed?
+            A): 
+                Whenever we change a record and hit save button, we get two records in ormRem with the same uuid and old one needs to be marked as histry by updating ROW_END to current timestamp. 
+                In real time 3 cases may happen. 
+                  1. User changes an existing record. i.e. rowState = 1
+                  2. User already changed a record and then again changes that record i.e. rowState = 34571
+                  3. User adds a record and then changes that newly added record again i.e. rowState = 24571
+
+            Following logic of where clause deals with these 3 types of cases.
+
+            Q) What we have done to deal with the above mentioned problem?
+            A)
+                We are following below mentioned logic in where clause of ormRem update:
+                -- The expression looks like: "exp A" && ("exp B1" || "exp B2" || "exp B3")
+                  "exp A" -> search record from ormRem whose uuid = this.uuid
+                  "exp B1" -> "rowStateInThisSession === 1",
+                      ormRem record that came from database (Case: User changes an existing record)
+                  "exp B2" -> "rowStateInThisSession === 34571", 
+                      ormRem record that once changed successfully ie: API Success and than going to be change again (Case: User already changed a record and then again changes that record) 
+                  "exp B3" -> "rowStateInThisSession === 24571", 
+                      ormRem record that once added successfully ie: API Success and than going to be change (Case: User adds a record and then changes that newly added record again)
+         */
+          await ormRem.update({
+            where: (record) => {
+              return (
+                record.uuid === this.uuid &&
+                (record.rowStateInThisSession === 1 /* Came from DB */ ||
+                record.rowStateInThisSession ===
+                  34571 /* Created as copy on client -> Changed -> Requested save -> Send to server -> API Success */ ||
+                  record.rowStateInThisSession ===
+                    24571) /* New -> Changed -> Requested save -> Send to server -> API Success */
+              )
+            },
             data: {
               ROW_END: Math.floor(Date.now() / 1000),
             },
           })
+
           /* Goal: Update the value of 'rowStateInThisSession' to success or failure depending on the api response */
           ormRem.update({
             where: this.newRowBeingEditedIdfromOrm,
