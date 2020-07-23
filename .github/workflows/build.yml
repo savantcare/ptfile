@@ -49,9 +49,9 @@ jobs:
       - name: attcah all docker in a network
         run: |
           docker network create ptfile_network
-          docker network connect ptfile_network prod-setup_mariadb_1
-          docker network connect ptfile_network prod-setup_ptserver_1
-          docker network connect ptfile_network prod-setup_ptclient_1   
+          docker network connect ptfile_network run-on-docker_mariadb_1
+          docker network connect ptfile_network run-on-docker_ptclient_1
+          docker network connect ptfile_network run-on-docker_ptserver_1   
           docker network inspect ptfile_network
           
       # Comment this when running tests. Since docker logs command does not exit.
