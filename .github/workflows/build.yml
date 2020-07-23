@@ -59,7 +59,7 @@ jobs:
           sleep 120
       - name: run-tests
         run: |
-          docker exec run-on-docker_ptclient_1 /bin/sh -c "cd /gt/sc-prog-repos/ptfile/ptclient;apt-get install libnss3-dev;npm install;npm run start-testing"
+          docker exec run-on-docker_ptclient_1 /bin/sh -c "cd /gt/sc-prog-repos/ptfile/ptclient;apt-get update -y;apt-get install -y libnss3-dev;npm install;npm run start-testing"
 
 #
 #
