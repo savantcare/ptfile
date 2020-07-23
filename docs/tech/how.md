@@ -18,9 +18,9 @@ git clone https://github.com/savantcare/ptfile.git
 cd ptclient
 ptclient> npm install
 # starts vue server
-vue-client> yarn dev
+vue-client> yarn start-dev
 # or
-vue-client> npm run dev
+vue-client> npm run start-dev
 ```
 
 Step2: Start node-server
@@ -28,7 +28,7 @@ Step2: Start node-server
 ```
 cd /gt/sc-prog-repos/ptfile/ptserver
 ptserver> npm install
-ptserver> npm run start             # start node server
+ptserver> npm run start-dev             # start node server
 ```
 
 :::
@@ -46,11 +46,11 @@ ptserver> npm run start             # start node server
 
 In 3 incognito tabs open:
 
-To access phpmyadmin -> http://138.68.233.185:81/ stanford : jaidurgama
+To access phpmyadmin -> http://116.203.134.163:81/ stanford : jaidurgama
 
-Login as doctor -> http://localhost:8080/login user1@gmail.com : 123
+Login as doctor -> http://localhost/login user1@gmail.com : 123
 
-Login as doctor admin assistant -> http://localhost:8080/login user1@gmail.com : 123
+Login as doctor admin assistant -> http://localhost/login user1@gmail.com : 123
 
 ### How to run mysql server?
 

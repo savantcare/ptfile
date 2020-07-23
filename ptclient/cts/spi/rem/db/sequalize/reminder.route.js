@@ -1,41 +1,38 @@
-const router = require("express").Router();
-const db = require("../models");
-const Reminder = db.reminderDB.rems;
-const User = db.userDB.users;
-const { Op } = require("sequelize");
+const router = require('express').Router()
+const db = require('../../../../../../ptserver/models')
+const Reminder = db.reminderDB.rems
+const User = db.userDB.users
+const { Op } = require('sequelize')
 
 module.exports = (io, sequelize) => {
-  router.post("/", async (req, res) => {
+  router.post('/', async (req, res) => {
     try {
-      const { data } = req.body;
-      const patientId = data.ptUUID;
-      const newReminder = await Reminder.create(data);
+      const { data } = req.body
+      const patientId = data.ptUUID
+      const newReminder = await Reminder.create(data)
       /* Goal: we want to get each record's success and failure response
           So, we are using create and not using bulkCreate and making separate api query for each data */
-      //console.log(newReminder)
+      // console.log(newReminder)
       /* this informs all the clients.
        -doctor is added so that DA does not get high security messages on their socket. 
        So components that DA does not have access to they will not get the message
        Question: What is inside newReminder?
        */
-      //console.log(`room-${patientId}-Doctor`)
-      //console.log(newReminder)
+      // console.log(`room-${patientId}-Doctor`)
+      // console.log(newReminder)
       // io.to(`room-${patientId}-Doctor`).emit("ADD_REMINDER", newReminder);
 
-      res.send(
-        "ok"
-      ); /* Fix: Instead of sending the whole object only OK needs to be sent*/
+      res.send('ok') /* Fix: Instead of sending the whole object only OK needs to be sent */
     } catch (err) {
       res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating the Recommenation",
-      });
+        message: err.message || 'Some error occurred while creating the Recommenation',
+      })
     }
-  });
+  })
 
-  router.get("/", async (req, res) => {
+  router.get('/', async (req, res) => {
     try {
-      const { patientId } = req.query;
+      const { patientId } = req.query
       const queryResult = await Reminder.findAll({
         where: {
           ptUUID: patientId,
@@ -43,34 +40,32 @@ module.exports = (io, sequelize) => {
           //   [Op.ne]: 1
           // }
         },
-      });
-      res.send(queryResult);
+      })
+      res.send(queryResult)
     } catch (err) {
       res.status(500).send({
-        message:
-          err.message || "Some error occurred while fetching the Recommenation",
-      });
+        message: err.message || 'Some error occurred while fetching the Recommenation',
+      })
     }
-  });
+  })
 
-  router.get("/getAll/", async (req, res) => {
+  router.get('/getAll/', async (req, res) => {
     try {
       const getAll = await Reminder.sequelize.query(
-        "SELECT *,UNIX_TIMESTAMP(ROW_START) as ROW_START, UNIX_TIMESTAMP(ROW_END) as ROW_END FROM rems FOR SYSTEM_TIME ALL order by ROW_START desc",
+        'SELECT *,UNIX_TIMESTAMP(ROW_START) as ROW_START, UNIX_TIMESTAMP(ROW_END) as ROW_END FROM rems FOR SYSTEM_TIME ALL order by ROW_START desc',
         {
           type: Reminder.sequelize.QueryTypes.SELECT,
         }
-      );
-      res.send(getAll);
+      )
+      res.send(getAll)
     } catch (err) {
       res.status(500).send({
-        message:
-          err.message || "Some error occurred while fetching the Recommenation",
-      });
+        message: err.message || 'Some error occurred while fetching the Recommenation',
+      })
     }
-  });
+  })
 
-  router.put("/:id", async (req, res) => {
+  router.put('/:id', async (req, res) => {
     // Replace existing row with new row
     try {
       // Update the existing object to discontinue.
@@ -84,23 +79,21 @@ module.exports = (io, sequelize) => {
             uuid: req.params.id,
           },
         }
-      );
+      )
 
       /* io.to(`room-${req.body.patientId}-Doctor`).emit(
         "UPDATE_REMINDER",
         req.body
       ); */
-      res.send(
-        "ok"
-      ); /* Fix: Instead of sending the whole object only OK needs to be sent*/
+      res.send('ok') /* Fix: Instead of sending the whole object only OK needs to be sent */
     } catch (err) {
       res.status(500).send({
-        message: err.message || "Some error occured while update the Reminder",
-      });
+        message: err.message || 'Some error occured while update the Reminder',
+      })
     }
-  });
+  })
 
-  router.patch("/:id", async (req, res) => {
+  router.patch('/:id', async (req, res) => {
     try {
       // First update discontinuie notes and then delete row
       if (req.body.dNotes) {
@@ -113,37 +106,32 @@ module.exports = (io, sequelize) => {
               uuid: req.params.id,
             },
           }
-        );
+        )
       }
 
       const queryResult = await Reminder.destroy({
         where: {
           uuid: req.params.id,
         },
-      });
-      io.to(`room-${req.body.patientId}-Doctor`).emit(
-        "DISCONTINUE_REMINDER",
-        req.params.id
-      );
-      res.send(
-        "ok"
-      ); /* Fix: Instead of sending the whole objefct only OK needs to be sent*/
+      })
+      io.to(`room-${req.body.patientId}-Doctor`).emit('DISCONTINUE_REMINDER', req.params.id)
+      res.send('ok') /* Fix: Instead of sending the whole objefct only OK needs to be sent */
     } catch (err) {
       res.status(500).send({
-        message: err.message || "Some error occured while patch the Reminder",
-      });
+        message: err.message || 'Some error occured while patch the Reminder',
+      })
     }
-  });
+  })
 
-  router.get("/getHistory/:id", async (req, res) => {
+  router.get('/getHistory/:id', async (req, res) => {
     try {
       const histories = await Reminder.sequelize.query(
-        "SELECT *,ROW_START, ROW_END FROM reminder_news FOR SYSTEM_TIME ALL where uuid = :uuid order by ROW_START desc",
+        'SELECT *,ROW_START, ROW_END FROM reminder_news FOR SYSTEM_TIME ALL where uuid = :uuid order by ROW_START desc',
         {
           replacements: { uuid: req.params.id },
           type: Reminder.sequelize.QueryTypes.SELECT,
         }
-      );
+      )
       /**
        * Expect result:
        *  {
@@ -153,62 +141,59 @@ module.exports = (io, sequelize) => {
        *
        */
       const promises = histories.map(async (history, index) => {
-        const { description, recordChangedByUUID, ROW_START } = history;
+        const { description, recordChangedByUUID, ROW_START } = history
 
         if (histories.length - 1 == index) {
           // The case which there is no update history
           try {
             const user = await User.findOne({
-              attributes: ["name"],
+              attributes: ['name'],
               where: { id: recordChangedByUUID },
-            });
-            const { name } = user;
+            })
+            const { name } = user
             const data = {
               content: `${description}`,
               info: `Added by ${name} on ${new Date(ROW_START).toDateString()}`,
               type: `success`,
-            };
-            //console.log(data)
-            return data;
+            }
+            // console.log(data)
+            return data
           } catch (err) {
-            return err.message || "Some error occured while get user info";
+            return err.message || 'Some error occured while get user info'
           }
         } else {
           // The case which there is an update history
           try {
             const user = await User.findOne({
-              attributes: ["name"],
+              attributes: ['name'],
               where: { id: recordChangedByUUID },
-            });
+            })
 
-            const { name } = user;
+            const { name } = user
             const data = {
               content: `${description}`,
-              info: `Changed by ${name} on ${new Date(
-                ROW_START
-              ).toDateString()}`,
+              info: `Changed by ${name} on ${new Date(ROW_START).toDateString()}`,
               type: `primary`,
-            };
-            //console.log(data)
-            return data;
+            }
+            // console.log(data)
+            return data
           } catch (err) {
-            return err.message || "Some error occured while get user info";
+            return err.message || 'Some error occured while get user info'
           }
         }
-      });
+      })
 
-      const result = await Promise.all(promises);
-      res.send(result);
+      const result = await Promise.all(promises)
+      res.send(result)
     } catch (err) {
       res.status(500).send({
-        message:
-          err.message || "Some error occured while get the reminder history",
-      });
+        message: err.message || 'Some error occured while get the reminder history',
+      })
     }
-  });
+  })
 
-  router.post("/getHistoryByDate", async (req, res) => {
-    const { startDate, endDate } = req.body;
+  router.post('/getHistoryByDate', async (req, res) => {
+    const { startDate, endDate } = req.body
     try {
       const history = await Reminder.findAll({
         where: {
@@ -223,14 +208,14 @@ module.exports = (io, sequelize) => {
             ],
           },
         },
-      });
-      res.send(history);
+      })
+      res.send(history)
     } catch (err) {
       res.status(500).send({
-        message: err.message || "Some error occured while get historical data",
-      });
+        message: err.message || 'Some error occured while get historical data',
+      })
     }
-  });
+  })
 
-  return router;
-};
+  return router
+}
