@@ -1,5 +1,5 @@
 {
-  "HOST": "127.0.0.1",
+  "HOST": "172.18.0.4",
   "USER": "stanford2008",
   "PASSWORD": "jaidurgama",
   "DB_PORT": "3306",
