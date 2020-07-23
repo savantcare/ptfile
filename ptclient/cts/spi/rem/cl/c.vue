@@ -212,12 +212,31 @@ export default {
                           3. Or ID 3 is saved to DB. 
 
           */
-          ormRem.update({
-            where: this.OrmRowIDForPreviousInvocation,
+
+          /*
+            Logic for where clause in following ormRem update:
+            -- The expression looks like: "exp A" && ("exp B1" || "exp B2" || "exp B3")
+            "exp A" -> search record from ormRem whose uuid = this.uuid
+            "exp B1" -> ormRem record that came from database
+            "exp B2" -> ormRem record that once changed successfully ie: API Success and than going to be change again (two consicutive edit case)
+            "exp B3" -> ormRem record that once added successfully ie: API Success and than going to be change
+         */
+          await ormRem.update({
+            where: (record) => {
+              return (
+                record.uuid === this.uuid &&
+                (record.rowStateInThisSession === 1 /* Came from DB */ ||
+                record.rowStateInThisSession ===
+                  34571 /* Created as copy on client -> Changed -> Requested save -> Send to server -> API Success */ ||
+                  record.rowStateInThisSession ===
+                    24571) /* New -> Changed -> Requested save -> Send to server -> API Success */
+              )
+            },
             data: {
               ROW_END: Math.floor(Date.now() / 1000),
             },
           })
+
           /* Goal: Update the value of 'rowStateInThisSession' to success or failure depending on the api response */
           ormRem.update({
             where: this.newRowBeingEditedIdfromOrm,
