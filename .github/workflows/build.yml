@@ -33,6 +33,8 @@ jobs:
         env:
           DB_PASSWORD: ${{ secrets.TEST_DB_PASSWORD }}
         run: |
+          sudo systemctl enable mysql.service
+          sudo systemctl start mysql.service
           cd /gt/sc-prog-repos/ptfile/utils/run-on-docker
           docker-compose -f docker-compose-test.yml up -d
           
