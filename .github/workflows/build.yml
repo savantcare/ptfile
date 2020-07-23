@@ -42,7 +42,7 @@ jobs:
 
       - name: Goal init the mariadb with database, tables and mock data
         run: |
-          docker exec run-on-docker_mariadb_1 /bin/bash < /gt/sc-prog-repos/ptfile/utils/db/create-db-tables-mock-data-in-db.sh
+          docker exec run-on-docker_mariadb_1 /bin/sh -c "/gt/sc-prog-repos/ptfile/utils/db/create-db-tables-mock-data-in-db.sh"
           # Ref: https://stackoverflow.com/questions/31578446/running-a-script-inside-a-docker-container-using-shell-script
 
       #https://www.digitalocean.com/community/questions/how-to-ping-docker-container-from-another-container-by-name
