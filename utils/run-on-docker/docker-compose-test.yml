@@ -33,6 +33,7 @@ services:
     image: mariadb:10.4
     ipc: host
     restart: always
+    command: bash -c "/gt/sc-prog-repos/ptfile/utils/db/create-db-tables-mock-data-in-db.sh"
     volumes:
       - /tmp/var/lib/mysql:/var/lib/mysql
       - /gt/sc-prog-repos/ptfile/:/gt/sc-prog-repos/ptfile/
