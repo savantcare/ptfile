@@ -41,8 +41,7 @@ services:
     ports:
       - 4000:3306
     environment:
-      MYSQL_ROOT_PASSWORD: qwerty
-    options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10  
+      MYSQL_ROOT_PASSWORD: qwerty  
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
