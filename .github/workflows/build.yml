@@ -48,11 +48,11 @@ jobs:
           docker network connect ptfile_network run-on-docker_ptclient_1
           docker network connect ptfile_network run-on-docker_ptserver_1   
           docker network inspect ptfile_network
-          docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' run-on-docker_mariadb_1
+          docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' run-on-docker_mariadb_1 > result.txt
 
       - name: Goal init the mariadb with database, tables and mock data
         run: |
-          sudo docker exec run-on-docker_mariadb_1 /bin/sh -c "/gt/sc-prog-repos/ptfile/utils/db/create-db-tables-mock-data-in-db.sh" > result.txt
+          # sudo docker exec run-on-docker_mariadb_1 /bin/sh -c "/gt/sc-prog-repos/ptfile/utils/db/create-db-tables-mock-data-in-db.sh" 
           # Ref: https://stackoverflow.com/questions/31578446/running-a-script-inside-a-docker-container-using-shell-script
           
       # Comment this when running tests. Since docker logs command does not exit.
