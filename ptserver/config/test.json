@@ -2,6 +2,6 @@
   "HOST": "localhost",
   "USER": "stanford2008",
   "PASSWORD": "jaidurgama",
-  "DB_PORT": "4000",
+  "DB_PORT": "3306",
   "artificial_delay_in_response_from_node_server": "0"
 }
