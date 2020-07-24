@@ -10,7 +10,6 @@ export default {
   },
 
   async mounted() {
-    console.log('mounted function called')
     // check length and only load if its empty
     // Also need to restrict the load to current patient
     const proRemsFromDB = await ormRem.api().get(`${REMINDER_API_URL}/getAll`)
