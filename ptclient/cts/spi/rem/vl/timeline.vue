@@ -25,11 +25,11 @@
       <el-timeline style="padding-inline-start: 20px;">
         <el-timeline-item
           v-for="row in cfArOfRemForDisplayInTable"
-          :key="row.$id"
+          :key="row.id"
           :timestamp="row.createdAt"
           :type="row.type"
           :tabindex="cfPosInArCards * 100 + 2"
-          @keyup.native="mfKeyPress(row.id)"
+          @keyup.native="mfKeyPress($event, row.id, row.remDesc)"
         >
           {{ row.remDesc }}
           <el-button-group style="float: right;">
@@ -59,7 +59,6 @@ export default {
       console.log(arCards)
       const obj = arCards.find((x) => x.label === 'reminders')
       const idx = arCards.indexOf(obj)
-      console.log(idx)
       return idx
     },
     cfArOfRemForDisplayInTable() {
@@ -95,8 +94,25 @@ export default {
   },
   mounted() {},
   methods: {
-    mfKeyPress(e) {
-      console.log('key pressed', e)
+    mfKeyPress(e, rowId, pRemDesc) {
+      if (e.code === 'KeyC') {
+        const payload = { searchTerm: 'change reminder', pPropsToGiveToCt: rowId }
+        this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', payload)
+      }
+      if (e.code === 'KeyD') {
+        this.$prompt(pRemDesc, 'Discontinue reminder', {
+          confirmButtonText: 'Discontinue',
+          cancelButtonText: 'Cancel',
+          inputPlaceholder: 'Enter discontinue note',
+        })
+          .then(({ value }) => {
+            const status = ormRem.sendDiscontinueDataToServer(rowId, arResultsFromORM.uuid, value)
+            console.log('discontinue status ======> ', status)
+          })
+          .catch(() => {
+            console.log('Discontinue cancelled')
+          })
+      }
     },
     mfOpenACtInCl() {
       this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', {
