@@ -31,26 +31,14 @@ jobs:
 
       - name: Start ptserver ptclient and mariadb
         run: |
-          sudo systemctl stop mysql.service
           cd /gt/sc-prog-repos/ptfile/utils/run-on-docker
-          docker-compose -f docker-compose-test.yml rm -v
           docker-compose -f docker-compose-test.yml up -d
 
       - name: Get env info - 2
         run: |
           ls -a /gt/sc-prog-repos/ptfile
           docker ps -a
-
-      # https://www.digitalocean.com/community/questions/how-to-ping-docker-container-from-another-container-by-name
-      # All containers are started from docker-compose so why is this needed? Write better doc.
-      - name: attach all docker in a network
-        run: |
-          docker network create ptfile_network
-          docker network connect ptfile_network run-on-docker_mariadb_1
-          docker network connect ptfile_network run-on-docker_ptclient_1
-          docker network connect ptfile_network run-on-docker_ptserver_1   
-          docker network inspect ptfile_network
-          docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' run-on-docker_mariadb_1 > result.txt
+          docker network ls
 
       # https://docs.github.com/en/actions/configuring-and-managing-workflows/persisting-workflow-data-using-artifacts
       - name: Upload result of job
