@@ -3,7 +3,7 @@
   "USER": "stanford2008",
   "PASSWORD": "jaidurgama",
   "DB_PORT": "3306",
-  "DB": "health_brain",
+  "DB": "sc_rem",
   "dialect": "mysql",
   "pool": {
     "max": 5,
