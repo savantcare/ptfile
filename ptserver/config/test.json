@@ -1,7 +1,6 @@
 {
-  "HOST": "localhost",
-  "USER": "stanford2008",
-  "PASSWORD": "jaidurgama",
+  "HOST": "run-on-docker_mariadb_1",
+  "USER": "root",
   "DB_PORT": "3306",
   "artificial_delay_in_response_from_node_server": "0"
 }
