@@ -1,7 +1,7 @@
 {
   "HOST": "run-on-docker_mariadb_1",
-  "USER": "stanford2008",
-  "PASSWORD": "jaidurgama",
-  "DB_PORT": "4000",
+  "USER": "root",
+  "PASSWORD": "qwerty",
+  "DB_PORT": "3306",
   "artificial_delay_in_response_from_node_server": "0"
 }
