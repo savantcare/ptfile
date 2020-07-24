@@ -58,6 +58,7 @@ jobs:
 
       - name: Goal 10 -> Get confitmation that ptserver is running
         run: |
+          docker logs --follow run-on-docker_ptserver_1
           wget run-on-docker_ptserver_1:8000/
 
       # Comment this when running tests. Since docker logs command does not exit.
