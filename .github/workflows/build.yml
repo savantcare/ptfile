@@ -17,8 +17,8 @@ jobs:
           ifconfig
           ls
           pwd
-          docker-compose -v
-          docker -v
+          docker-compose -v   # github runner in July 2020 had 1.26.2
+          docker -v           # github runner in July 2020 had 19.03.12
 
       - name: Goal 2 -> Check out repository code
         uses: actions/checkout@v2 # This is bringing source code to ubuntu server defined in line 13 Location of checkout is /home/runner/work/ptfile/ptfile
@@ -48,7 +48,7 @@ jobs:
 
       - name: Goal 7 -> A. Get confitmation that mariaDB is responding to queries
         run: |
-          docker exec -i run-on-docker_mariadb_1 mysql -uroot -pqwerty -e "show databases"
+          docker exec -i run-on-docker_mariadb_1 mysql -uroot -e "show databases"
 
       - name: Goal 8 -> A. init mariadb with 1. Database 2. Tables and 3. Mock data
         run: |
@@ -57,7 +57,7 @@ jobs:
 
       - name: Goal 9 -> Get confitmation that mariaDB has the databases/tables/mock data
         run: |
-          docker exec -i run-on-docker_mariadb_1 mysql -u root -pqwerty -e "show databases"
+          docker exec -i run-on-docker_mariadb_1 mysql -u root -e "show databases"
 
       - name: Goal 10 -> Get confitmation that ptserver is running
         run: |

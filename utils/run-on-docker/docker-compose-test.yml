@@ -34,7 +34,7 @@ services:
     ipc: host
     restart: always
     volumes:
-      - /tmp/var/lib/mysql:/var/lib/mysql
+      - /tmp/var/lib/mysql:/var/lib/mysql # if the source folder exists then root pwd is qwerty. If source folder does not exist then root password is empty
       - /gt/sc-prog-repos/ptfile/:/gt/sc-prog-repos/ptfile/
     ports:
       - 4000:3306
