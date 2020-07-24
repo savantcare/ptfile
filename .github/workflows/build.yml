@@ -67,7 +67,7 @@ jobs:
 
       - name: Goal 11 -> Get confirmation that ptclient is running
         run: |
-          wget run-on-docker_ptclient_1/
+          wget localhost/
 
       # Comment this when running tests. Since docker logs command does not exit.
       # - name: See docker logs
