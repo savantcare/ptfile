@@ -1,6 +1,5 @@
 #!/bin/bash
 DB_USER="root"
-DB_PASS="qwerty"
 
 /gt/sc-prog-repos/ptfile/utils/db/create-first-user.sh
 
@@ -13,19 +12,19 @@ DB_PASS="qwerty"
 for file in $(find /gt/sc-prog-repos/ptfile/ptclient/cts/ -type f -name "create-db-*.sql" -print)
 do
     echo "== executing create DB $file";
-    mysql -u $DB_USER --password=$DB_PASS < $file 
+    mysql -u $DB_USER < $file 
 done
 
 ## Step 2: structure of tables
 for file in $(find /gt/sc-prog-repos/ptfile/ptclient/cts/ -type f -name "structure-gen-*.sql" -print)
 do
     echo "== executing create DB $file";
-    mysql -u $DB_USER --password=$DB_PASS < $file 
+    mysql -u $DB_USER < $file 
 done
 
 ## Mock data
 for file in $(find /gt/sc-prog-repos/ptfile/ptclient/cts/ -type f -name "mock-data*.sql" -print)
 do
     echo "== executing create DB $file";
-    mysql -u $DB_USER --password=$DB_PASS < $file 
+    mysql -u $DB_USER < $file 
 done
