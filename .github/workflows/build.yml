@@ -43,12 +43,16 @@ jobs:
           docker network ls
           docker network inspect run-on-docker_default
 
-      - name: Goal 7 -> A. init mariadb with 1. Database 2. Tables and 3. Mock data
+      - name: Goal 7 -> A. Get confitmation that mariaDB is responding to queries
+        run: |
+          docker exec -i runondocker_mariadb_1 mysql -u root -pqwerty -e "show databases"
+
+      - name: Goal 8 -> A. init mariadb with 1. Database 2. Tables and 3. Mock data
         run: |
           docker exec -i run-on-docker_mariadb_1 /gt/sc-prog-repos/ptfile/utils/db/create-db-tables-mock-data-in-db.sh 
           # Ref: https://stackoverflow.com/questions/31578446/running-a-script-inside-a-docker-container-using-shell-script
 
-      - name: Goal 8 -> A. Get confitmation that mariaDB has the databases/tables/mock data
+      - name: Goal 9 -> A. Get confitmation that mariaDB has the databases/tables/mock data
         run: |
           docker exec -i runondocker_mariadb_1 mysql -u root -pqwerty -e "show databases"
 
