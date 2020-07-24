@@ -1,7 +1,7 @@
 const timeout = process.env.SLOWMO ? 30000 : 10000;
 
 beforeAll(async () => {
-    await page.goto('http://run-on-docker_ptclient_1:80/pf/abcd', {waitUntil: 'domcontentloaded'}); // Goto the patient file link and wait for loading
+    await page.goto('http://localhost:80/pf/abcd', {waitUntil: 'domcontentloaded'}); // Goto the patient file link and wait for loading
 });
 
 describe('Test header and title of the page', () => {
