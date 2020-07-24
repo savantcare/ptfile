@@ -53,7 +53,7 @@ export default {
   data() {
     return {
       uuid: '',
-      OrmRowIDForPreviousInvocation: 0,
+      ormRowIDForPreviousInvocation: 0,
       newRowBeingEditedIdfromOrm: 0,
     }
   },
@@ -156,14 +156,14 @@ export default {
 
       // Goal: decide if it is repeat or first invocation
       let arFromORM = []
-      if (this.OrmRowIDForPreviousInvocation === this.firstParam) {
+      if (this.ormRowIDForPreviousInvocation === this.firstParam) {
         // this is repeat invocation
         this.mfManageFocus()
         // Inferences: 1. this.uuid is already existing 2. New empty row where the user can type is already existing
       } else {
         // Inference: This is first time in this Ct lifetimes that it has been called with this parameter
         // this is first time invocation
-        this.OrmRowIDForPreviousInvocation = this.firstParam
+        this.ormRowIDForPreviousInvocation = this.firstParam
         arFromORM = ormRem.find(this.firstParam)
         this.uuid = arFromORM.uuid
         // Find if there is unsaved data for this.uuid
@@ -217,7 +217,7 @@ export default {
         } else {
           /* Goal: Update old version of the reminder's ROW_END to current timestamp if change is successful 
             Edge case: Say id 2 is changed that created id 3. User then closes the change layer. The table now displays id 3. Now when user clicks change for id 3 firstParam is 3.
-            OrmRowIDForPreviousInvocation is = firstParam. So OrmRowIDForPreviousInvocation is also 3. But 3 is the new changed row. And we want to set ROW_END for id 2 and not id 3
+            ormRowIDForPreviousInvocation is = firstParam. So ormRowIDForPreviousInvocation is also 3. But 3 is the new changed row. And we want to set ROW_END for id 2 and not id 3
             How to update the ROW_END for id = 2?
               option 1: update that row that has state = "I am from DB" and UUID = UUID of current row
               option 2: This requires adding another state ->  "I am being changed" -> and then -> update that row that has state = "I am being changed" and UUID = UUID of current row
