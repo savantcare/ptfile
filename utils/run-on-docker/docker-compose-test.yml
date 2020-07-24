@@ -8,8 +8,11 @@ services:
       - 80:80
     working_dir: /gt/sc-prog-repos/ptfile/ptclient
     command: bash -c "npm install && npm run build && npm run start-nuxt-in-test-env"
+    depends_on:
+      - ptserver
     volumes:
       - /gt/sc-prog-repos/ptfile/ptclient:/gt/sc-prog-repos/ptfile/ptclient # This will allow hot reloading when files are changed on host
+
   ptserver:
     image: node:14.1.0
     ipc: host
@@ -18,17 +21,11 @@ services:
       - 8000:8000
     working_dir: /gt/sc-prog-repos/ptfile/ptserver
     command: bash -c "npm install && npm run start-test"
+    depends_on:
+      - mariadb
     volumes:
       - /gt/sc-prog-repos/ptfile/:/gt/sc-prog-repos/ptfile/ # This allows file changes on host to be available inside docker container without recreating docker image.
       # For reasons of this volume mount see the vue: section comments
-  php:
-    image: php:7.2-fpm
-    volumes:
-      - ./php:/var/www/myapp
-      - ./docker/php.ini:/usr/local/etc/php/php.ini
-    depends_on:
-      - mariadb
-
   mariadb:
     image: mariadb:10.4
     ipc: host
