@@ -8,6 +8,7 @@
           <!-- Prop explaination  Read prop explanation for span=4 on line 19 -->
           <el-col :span="20" :class="ormRow.validationClass">
             <el-input
+              ref="remDesc"
               type="textarea"
               :class="mfGetCssClassName(ormRow.id)"
               :autosize="{ minRows: 2, maxRows: 10 }"
@@ -98,8 +99,8 @@ export default {
   mounted() {},
 
   methods: {
-    mfAddEmptyRowInOrm() {
-      const arFromORM = ormRem.insert({
+    async mfAddEmptyRowInOrm() {
+      const arFromORM = await ormRem.insert({
         data: {
           remDesc: '',
           rowStateInThisSession: 2, // For meaning of diff values read ptclient/docs/forms.md
@@ -108,6 +109,16 @@ export default {
       })
       if (!arFromORM) {
         console.log('FATAL ERROR')
+      }
+      this.mfManageFocus()
+    },
+    mfManageFocus() {
+      // Ref: https://stackoverflow.com/questions/60291308/vue-js-this-refs-empty-due-to-v-if
+      console.log(this.$refs)
+      if (this.$refs.remDesc) {
+        const lastElement = this.$refs.remDesc.length
+        console.log('setting focus of', lastElement - 1, 'length is', lastElement)
+        this.$refs.remDesc[lastElement - 1].focus()
       }
     },
     mfGetField(pOrmRowId, pFieldName) {
@@ -126,8 +137,9 @@ export default {
       }
       return ''
     },
-    mfDeleteRowInOrm(pOrmRowId) {
-      ormRem.delete(pOrmRowId)
+    async mfDeleteRowInOrm(pOrmRowId) {
+      await ormRem.delete(pOrmRowId)
+      this.mfManageFocus()
     },
     mfResetForm(formName) {
       ormRem.deleteEditStateRows()
