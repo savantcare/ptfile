@@ -119,9 +119,7 @@ export default {
     },
 
     cfArOfRemForDisplayInTable() {
-      console.log(
-        'cfArOfRemForDisplayInTable called. Whenever ormRem will change this will get called. Even when there are 100 rows in the table when orm rem changes this gets called once'
-      )
+      // Whenever ormRem will change this will get called. Even when there are 100 rows in the table when orm rem changes this gets called once'
       const arFromORM = ormRem.getValidUniqueUuidNotEmptyRows('remDesc')
       /*  Q) Should this function return the array it gets from ORM or modify the array?
               Option1: Return ORM array
@@ -131,8 +129,6 @@ export default {
                   +ves:
                     No need to run the for loop
       */
-
-      console.log(arFromORM)
       const arRemsForDisplay = []
       let obj = {}
       if (arFromORM.length) {
@@ -158,7 +154,6 @@ export default {
   mounted() {},
   methods: {
     mfTablePageChanged(pNewPageNumber) {
-      console.log('Page changed', pNewPageNumber)
       this.tablePageNumber = pNewPageNumber
     },
     mfHandleSelectionForDiscontinue(val) {

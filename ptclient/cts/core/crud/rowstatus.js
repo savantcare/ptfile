@@ -70,14 +70,14 @@ class rowStatus extends Model {
   static getField(pOrmRowId, pFieldName) {
     // first time it will have to find in model. This is needed to show the initial content in the field.
     if (typeof this.arOrmRowsCached[pOrmRowId] === 'undefined') {
-      console.log('finding in model')
+      // finding in model
       const arFromORM = this.find(pOrmRowId)
       if (arFromORM) {
         return arFromORM[pFieldName]
       }
     } else {
       // if caching is removed then typing will update every 1 second when the vuex store gets updated.
-      console.log('returning from cache')
+      // returning from cache
       return this.arOrmRowsCached[pOrmRowId][pFieldName]
     }
   }
@@ -97,7 +97,6 @@ class rowStatus extends Model {
       .where('ROW_END', 2147483647.999999)
       .where(pFieldForNonEmptyCheck, (value) => value.length > 0)
       .get()
-    console.log(arFromORM)
     const uniqueUuidRows = []
 
     // Goal: From the set of valid data, find unique UUIDs since it is possible that some UUID is being changed and now there are 2 records with same UUID
@@ -167,7 +166,6 @@ class rowStatus extends Model {
   static deleteEditStateRows() {
     const arFromORM = this.getNewRowsInEditState()
     if (arFromORM.length) {
-      console.log('unsaved data found', arFromORM)
       for (let i = 0; i < arFromORM.length; i++) {
         this.delete(arFromORM[i].$id)
       }
@@ -283,8 +281,6 @@ class rowStatus extends Model {
   static async sendToServer() {
     // API will return 1 (Success) or 0 (Failure)
     const arFromORM = this.query().where('rowStateInThisSession', 2457).get()
-
-    console.log(arFromORM)
 
     for (let i = 0; i < arFromORM.length; i++) {
       const status = await this.fnMakeApiCAll(arFromORM[i])

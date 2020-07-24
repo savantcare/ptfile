@@ -54,7 +54,6 @@ export default {
       arFromORM = ormSearchPhrasesOfCt.query().orderBy('usageCountKeptInLS', 'desc').get()
       const objRowFromORM = arFromORM[0]
       if (objRowFromORM) {
-        console.log(objRowFromORM)
         return 'e.g. ' + objRowFromORM.value
       } else {
         return 'e.g. screening'
@@ -68,7 +67,6 @@ export default {
       // to show values in dropdown returning all results
       if (!pQueryString) {
         const arFromORM = ormSearchPhrasesOfCt.query().orderBy('usageCountKeptInLS', 'desc').get()
-        console.log('No user input ', pQueryString, arFromORM)
         pCallBack(arFromORM)
       } else {
         const arFromORM = ormSearchPhrasesOfCt
@@ -79,14 +77,11 @@ export default {
           })
           .orderBy('usageCountKeptInLS', 'desc')
           .get() // trim is needed for "goal " to match "goal"
-        console.log('search result from orm model', pQueryString, arFromORM)
         pCallBack(arFromORM)
       }
     },
 
     mfHandleSuggestionSelectedByUser(pSelectedSuggestion) {
-      console.log('Selected suggestion is', pSelectedSuggestion)
-
       // Goal: Add the card in CSVL (Current state in View layer) or tab in CL (Change layer)
 
       let vsCtToShow = ''
