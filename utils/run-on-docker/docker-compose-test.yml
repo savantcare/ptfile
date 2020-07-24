@@ -21,8 +21,6 @@ services:
     volumes:
       - /gt/sc-prog-repos/ptfile/:/gt/sc-prog-repos/ptfile/ # This allows file changes on host to be available inside docker container without recreating docker image.
       # For reasons of this volume mount see the vue: section comments
-    depends_on:
-      - mariadb
   php:
     image: php:7.2-fpm
     volumes:
