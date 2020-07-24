@@ -1,5 +1,5 @@
 {
-  "HOST": "run-on-docker_mariadb_1",
+  "HOST": "mariadb",
   "USER": "root",
   "PASSWORD": "qwerty",
   "DB_PORT": "3306",
