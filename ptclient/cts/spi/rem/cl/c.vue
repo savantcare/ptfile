@@ -3,6 +3,7 @@
     <el-form>
       <el-form-item>
         <el-input
+          ref="remDesc"
           type="textarea"
           :autosize="{ minRows: 2, maxRows: 4 }"
           :value="getRemDescUsingCache()"
@@ -65,7 +66,7 @@ export default {
 
       // Insight: to create timeline the uuid will be same but id will be different.
       const arFromORM = ormRem.query().where('uuid', this.uuid).orderBy('ROW_START', 'desc').get()
-      console.log('Time line for uuid', this.uuid)
+      // console.log('Time line for uuid', this.uuid)
       if (arFromORM.length) {
         let rowInTimeLine = []
         let date = ''
@@ -95,7 +96,6 @@ export default {
   mounted() {},
   methods: {
     async addEmptyRemToUI(pDesc) {
-      console.log('Add rem called')
       const arFromORM = await ormRem.insert({
         data: {
           remDesc: pDesc,
@@ -106,6 +106,20 @@ export default {
         },
       })
       this.newRowBeingEditedIdfromOrm = arFromORM.rem[0].id
+      this.mfManageFocus()
+    },
+    mfManageFocus() {
+      // Ref: https://stackoverflow.com/questions/60291308/vue-js-this-refs-empty-due-to-v-if
+      if (this.$refs.remDesc) {
+        const lastElement = this.$refs.remDesc.length
+        // this if is needed since when there is only 1 element then remDesc is not an array of objects.
+        // with a single form remdesc is just an object.
+        if (!lastElement) {
+          this.$refs.remDesc.focus()
+        } else {
+          this.$refs.remDesc[lastElement - 1].focus()
+        }
+      }
     },
     getRemDescUsingCache() {
       /*
@@ -143,28 +157,29 @@ export default {
       // Goal: decide if it is repeat or first invocation
       let arFromORM = []
       if (this.OrmRowIDForPreviousInvocation === this.firstParam) {
-        console.log('this is repeat invocation')
+        // this is repeat invocation
+        this.mfManageFocus()
         // Inferences: 1. this.uuid is already existing 2. New empty row where the user can type is already existing
       } else {
         // Inference: This is first time in this Ct lifetimes that it has been called with this parameter
-        console.log('this is first time invocation')
+        // this is first time invocation
         this.OrmRowIDForPreviousInvocation = this.firstParam
         arFromORM = ormRem.find(this.firstParam)
         this.uuid = arFromORM.uuid
-        console.log('Find if there is unsaved data', this.uuid)
+        // Find if there is unsaved data for this.uuid
         const existingRowID = ormRem.getChangeRowInEditState(this.uuid)
         if (existingRowID === false) {
-          console.log('adding a new blank record. Since this is temporal DB')
+          // Adding a new blank record. Since this is temporal DB
           this.addEmptyRemToUI(arFromORM.remDesc)
+          this.mfManageFocus()
         } else {
           this.newRowBeingEditedIdfromOrm = existingRowID
         }
       }
 
-      // From this point on the state is the same.
+      // From this point on the state is same for same and add
       return ormRem.getField(this.newRowBeingEditedIdfromOrm, 'remDesc')
     },
-
     setRemDescInVstOnDelay(pEvent) {
       const rowStatus = 34
       ormRem.setField(pEvent, this.newRowBeingEditedIdfromOrm, 'remDesc', rowStatus)
