@@ -13,6 +13,7 @@
               :autosize="{ minRows: 2, maxRows: 10 }"
               placeholder="Please enter the reminder .."
               :value="mfGetField(ormRow.id, 'remDesc')"
+              tabindex="1"
               @input="mfSetFieldInOrmOnTimeout($event, ormRow.id, 'remDesc')"
             ></el-input>
             <div v-if="ormRow.isValidationError" class="el-form-item__error">
@@ -111,7 +112,6 @@ export default {
       }
     },
     mfGetField(pOrmRowId, pFieldName) {
-      console.log('mf get field called')
       return ormRem.getField(pOrmRowId, pFieldName)
     },
     mfSetFieldInOrmOnTimeout(pEvent, pOrmRowId, pFieldName) {
@@ -134,7 +134,6 @@ export default {
       ormRem.deleteEditStateRows()
     },
     async mfOnSubmit() {
-      // M8/9
       const arFromORM = this.cfGetOrmEditStateRows
       if (arFromORM.length) {
         console.log('unsaved data found', arFromORM)
