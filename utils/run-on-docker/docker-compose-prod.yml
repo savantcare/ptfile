@@ -37,7 +37,7 @@ services:
     ports:
       - 4000:3306
     environment:
-      MYSQL_ROOT_PASSWORD: qwerty
+      MYSQL_ROOT_PASSWORD: qwerty # Ref: https://hub.docker.com/_/mariadb
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest

@@ -46,9 +46,10 @@ jobs:
           docker network ls
           docker network inspect run-on-docker_default
 
+      # For some time without password works and later it works with password
       - name: Goal 7 -> A. Get confitmation that mariaDB is responding to queries
         run: |
-          docker exec -i run-on-docker_mariadb_1 mysql -uroot -e "show databases"
+          docker exec -i run-on-docker_mariadb_1 mysql -u root -e "show databases"
 
       - name: Goal 8 -> A. init mariadb with 1. Database 2. Tables and 3. Mock data
         run: |
