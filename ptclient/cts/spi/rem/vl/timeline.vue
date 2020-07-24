@@ -9,16 +9,10 @@
       <div slot="header" class="clearfix">
         <span :tabindex="cfPosInArCards * 100 + 1">Reminders</span>
         <el-button-group style="float: right;">
-          <el-button style="padding: 3px;" type="success" plain tabindex="-1" @click="mfOpenACtInCl"
-            >A</el-button
-          >
-          <el-button style="padding: 3px;" type="primary" plain tabindex="-1" @click="mfOpenMCtInCl"
-            >M</el-button
-          >
+          <el-button style="padding: 3px;" type="success" plain tabindex="-11">A</el-button>
+          <el-button style="padding: 3px;" type="primary" plain tabindex="-1">M</el-button>
           <el-button style="padding: 3px;" type="warning" plain tabindex="-1">D</el-button>
-          <el-button style="padding: 3px;" type="info" plain tabindex="-1" @click="mfOpenXCtInCl"
-            >X</el-button
-          >
+          <el-button style="padding: 3px;" type="info" plain tabindex="-1">X</el-button>
         </el-button-group>
       </div>
       <!-- explanation of following params:
@@ -35,6 +29,7 @@
           :timestamp="row.createdAt"
           :type="row.type"
           :tabindex="cfPosInArCards * 100 + 2"
+          @keyup.native="mfKeyPress(row.id)"
         >
           {{ row.remDesc }}
           <el-button-group style="float: right;">
@@ -91,7 +86,6 @@ export default {
           obj.createdAt = date.toLocaleString('default', { month: 'long' }) + '-' + date.getDate()
           obj.rowStateInThisSession = arFromORM[i].rowStateInThisSession
           obj.uuid = arFromORM[i].uuid
-          obj.$id = arFromORM[i].$id
           obj.id = arFromORM[i].id
           arRemsForDisplay.push(obj)
         }
@@ -101,6 +95,9 @@ export default {
   },
   mounted() {},
   methods: {
+    mfKeyPress(e) {
+      console.log('key pressed', e)
+    },
     mfOpenACtInCl() {
       this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', {
         searchTerm: 'add reminder',

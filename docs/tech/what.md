@@ -2,7 +2,7 @@
 
 ## Q1) What is needed to write a new component?
 
-For the model component Recommendations the following files are needed:
+For the model component Reminders the following files are needed:
 
 Total loc: 991
 
@@ -10,27 +10,25 @@ Total loc: 991
 
 ### Layer 1
 
-**HTML/CSS/JS (122 loc)** -> [/cts/composition-layer1/RecommendationsCard.vue](https://github.com/savantcare/patientfile/blob/master/vue-client/src/cts/composition-layer1/RecommendationsCard.vue) -> This has the presentation layer (html), styling layer (css), JS to change the state. This file is compiled into seperate html js and css by [vue-cli](https://cli.vuejs.org/)
+**HTML/CSS/JS (122 loc)** -> /cts/rem/vl/table.vue -> This has the presentation layer (html), styling layer (css), JS to change the state. This file is compiled into seperate html js and css by [vue-cli](https://cli.vuejs.org/)
 
 ### Layer 2
 
-1. **Add (123 loc)** [/cts/composition-layer2/recommendation/AddRecommendation.vue](https://github.com/savantcare/patientfile/blob/master/vue-client/src/cts/composition-layer2/recommendation/AddRecommendation.vue)
+1. **Add (123 loc)** /cts/rem/cl/add.vue
 
-2. **Multi change (86 loc)** [/cts/composition-layer2/recommendation/MultiChangeRecommendation.vue](https://github.com/savantcare/patientfile/blob/master/vue-client/src/cts/composition-layer2/recommendation/MultiChangeRecommendation.vue)
-
-3. **Recommendation history (56 loc)** [/cts/composition-layer2/recommendation/RecommendationHistoryItem.vue](https://github.com/savantcare/patientfile/blob/master/vue-client/src/cts/composition-layer2/recommendation/RecommendationHistoryItem.vue)
+2. **Multi change (86 loc)** /cts/rem/cl/mc.vue
 
 ### Common between layer 1 and layer 2
 
-**Local State (267 loc)** -> [/store/modules/recommendation.js](https://github.com/savantcare/patientfile/blob/master/vue-client/src/store/modules/recommendation.js) -> State of this component. Functions to mutate state. Socket functions to change state.
+State (267 loc) -> Maintained inside vuex-orm. see /cts/rem/db/vuex-orm/rem.js
 
 ## Server side
 
-1. **Connection details (27 loc)** -> [/models/database/recommendation.database.js](https://github.com/savantcare/patientfile/blob/master/node-server/models/database/recommendation.database.js)
+1. **Connection details (27 loc)** -> [/models/database/recommendation.database.js](https://github.com/savantcare/ptfile/blob/master/node-server/models/database/recommendation.database.js)
 
-2. **Sql structure (41 loc)** -> [/models/recommendation.model.js](https://github.com/savantcare/patientfile/blob/master/node-server/models/recommendation.model.js)
+2. **Sql structure (41 loc)** -> [/models/recommendation.model.js](https://github.com/savantcare/ptfile/blob/master/node-server/models/recommendation.model.js)
 
-3. **Routes (174 loc)** and emit socket messages -> [/routes/recommendation.route.js](https://github.com/savantcare/patientfile/blob/master/node-server/routes/recommendation.route.js)
+3. **Routes (174 loc)** and emit socket messages -> [/routes/recommendation.route.js](https://github.com/savantcare/ptfile/blob/master/node-server/routes/recommendation.route.js)
 
 ## Q2) What code-formatter is used?
 
