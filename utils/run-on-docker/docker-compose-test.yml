@@ -40,6 +40,7 @@ services:
       - 4000:3306
     environment:
       MYSQL_ROOT_PASSWORD: "" # https://hub.docker.com/_/mariadb
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
