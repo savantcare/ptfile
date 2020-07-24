@@ -13,8 +13,7 @@
               :autosize="{ minRows: 2, maxRows: 10 }"
               placeholder="Please enter the reminder .."
               :value="mfGetField(ormRow.id, 'remDesc')"
-              tabindex="1"
-              @input="mfSetFieldInOrmOnTimeout($event, ormRow.id, 'remDesc')"
+              @input="mfSetFieldUsingCache($event, ormRow.id, 'remDesc')"
             ></el-input>
             <div v-if="ormRow.isValidationError" class="el-form-item__error">
               Please enter minimum 3 characters.
@@ -114,7 +113,7 @@ export default {
     mfGetField(pOrmRowId, pFieldName) {
       return ormRem.getField(pOrmRowId, pFieldName)
     },
-    mfSetFieldInOrmOnTimeout(pEvent, pOrmRowId, pFieldName) {
+    mfSetFieldUsingCache(pEvent, pOrmRowId, pFieldName) {
       const rowStatus = 24
       ormRem.setField(pEvent, pOrmRowId, pFieldName, rowStatus)
       this.$forceUpdate() // Not able to remove it. For the different methods tried read: cts/core/rowstatus.js:133/putFieldValueInCache
