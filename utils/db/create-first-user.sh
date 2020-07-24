@@ -5,5 +5,5 @@
 
 echo "Creating the user which ptclient will use to connect to ptserver"
 
-mysql -u root -e "CREATE USER 'stanford2008'@'%' IDENTIFIED BY 'jaidurgama';"
-mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'stanford2008'@'%';"
+mysql -u root -pqwerty -e "CREATE USER 'stanford2008'@'%' IDENTIFIED BY 'jaidurgama';"
+mysql -u root -pqwerty -e "GRANT ALL PRIVILEGES ON *.* TO 'stanford2008'@'%';"
