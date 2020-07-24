@@ -3,5 +3,6 @@
   "USER": "stanford2008",
   "PASSWORD": "jaidurgama",
   "DB_PORT": "4000",
+  "socketPath": '/var/lib/mysql/mysql.sock'
   "artificial_delay_in_response_from_node_server": "0"
 }
