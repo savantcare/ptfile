@@ -2,7 +2,7 @@
   <div></div>
 </template>
 <script>
-import { REMINDER_API_URL } from './const.js'
+import { REMINDER_API_URL } from '../const.js'
 import ormRem from '@/cts/spi/rem/db/vuex-orm/rem.js'
 export default {
   data() {

@@ -99,7 +99,7 @@ Setting the <el-table-column as tabindex=-1 does not help -->
 </template>
 
 <script>
-import dbInteraction from '../db-interaction'
+import dbInteraction from '../db/load-initial-data'
 import clInvokeMixin from './cl-invoke-mixin.js'
 import ormRem from '@/cts/spi/rem/db/vuex-orm/rem.js'
 export default {

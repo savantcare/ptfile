@@ -1,3 +1,4 @@
+<!-- To understand how this works read vl-search-box/load-search-phrases-and-handle-selection.vue -->
 <template>
   <div></div>
 </template>
