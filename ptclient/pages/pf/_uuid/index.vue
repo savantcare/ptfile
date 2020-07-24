@@ -76,7 +76,7 @@
 <script>
 import Vue from 'vue'
 import VueSplit from 'vue-split-panel'
-import ctVLSearchBox from '@/cts/core/vl-search-box/load-search-phrases-and-handle-selection'
+import ctVLSearchBox from '@/cts/core/vl-search/load-search-phrases-and-handle-selection'
 import ctRexVl from '@/cts/spi/rec/vl/table'
 import ctRemVL from '@/cts/spi/rem/vl/table'
 import ctBMVl from '@/cts/spi/bm/bm-vl'
@@ -90,7 +90,7 @@ import ctMapDrawer from '@/cts/core/map/drawer.vue'
 // The name above expands to Component tabs in dialog in change layer
 
 // say the user enter the rex command 10 times. I need to scroll to the bottom of the cards
-// so search box is given a ID and then #vl-search-box is used to scroll down.
+// so search box is given a ID and then #vl-search is used to scroll down.
 const VueScrollTo = require('vue-scrollto') // Ref: https://github.com/rigor789/vue-scrollto#as-a-vue-directive
 
 Vue.use(VueSplit)

@@ -1,5 +1,5 @@
 <template>
-  <div id="vl-search-box">
+  <div id="vl-search">
     <!-- Mount the Cts so I can get the search terms inside the ORM -->
     <feedSPhrases></feedSPhrases>
     <mapSPhrases></mapSPhrases>
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import ormSearchPhrasesOfCt from '@/cts/core/vl-search-box/orm-search-phrases-of-ct'
+import ormSearchPhrasesOfCt from '@/cts/core/vl-search/orm-search-phrases-of-ct'
 
 // Goal: Get the search terms from each component
 import feedSPhrases from '@/cts/core/feed/search-phrases'
@@ -130,7 +130,7 @@ export default {
         force: true,
         cancelable: true,
       }
-      this.$scrollTo('#vl-search-box', 500, options)
+      this.$scrollTo('#vl-search', 500, options)
     },
   },
 }
