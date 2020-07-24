@@ -67,7 +67,7 @@ jobs:
 
       - name: Goal 11 -> Get confirmation that ptclient is running
         run: |
-          # wget localhost/
+          wget localhost/
 
       # Comment this when running tests. Since docker logs command does not exit.
       # - name: See docker logs
@@ -86,7 +86,7 @@ jobs:
           path: result.txt
       - name: run-tests
         run: |
-          docker exec -i run-on-docker_ptclient_1 "cd /gt/sc-prog-repos/ptfile/ptclient && npm run start-testing"
+          docker exec -i run-on-docker_ptclient_1 /bin/bash "cd /gt/sc-prog-repos/ptfile/ptclient;npm run start-testing"
 
 #
 #
