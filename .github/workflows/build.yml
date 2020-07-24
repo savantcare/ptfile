@@ -55,12 +55,12 @@ jobs:
 
       - name: Goal 9 -> Get confitmation that mariaDB has the databases/tables/mock data
         run: |
-          docker exec -i run-on-docker_mariadb_1 mysql -u root -e "show databases"
+          docker exec -i run-on-docker_mariadb_1 mysql -u root -pqwerty -e "show databases"
 
       - name: Goal 10 -> Get confitmation that ptserver is running
         run: |
           docker logs --follow run-on-docker_ptserver_1
-          wget run-on-docker_ptserver_1:8000/
+          #wget run-on-docker_ptserver_1:8000/
 
       # Comment this when running tests. Since docker logs command does not exit.
       # - name: See docker logs
