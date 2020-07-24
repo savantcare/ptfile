@@ -12,43 +12,45 @@ jobs:
   ptclient-app: # This is the first job https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobs
     runs-on: ubuntu-18.04 # For the list of github hosted runners see https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
     steps:
-      # Downloads a copy of the code before running CI tests Ref: https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-postgresql-service-containers
-      - name: Check out repository code
-        uses: actions/checkout@v2 # This is bringing source code to ubuntu server defined in line 13 Localtion of checkout is /home/runner/work/ptfile/ptfile
+      - name: Goal 1 -> Get env info
+        run: |
+          ifconfig
+          ls
+          pwd
 
-      - name: Move code to expected folder
+      - name: Goal 2 -> Check out repository code
+        uses: actions/checkout@v2 # This is bringing source code to ubuntu server defined in line 13 Location of checkout is /home/runner/work/ptfile/ptfile
+
+      - name: Goal 3 -> Move code to expected folder
         run: |
           sudo mkdir -p /gt/sc-prog-repos/ptfile
           sudo mv /home/runner/work/ptfile/ptfile/ptserver /gt/sc-prog-repos/ptfile/ptserver
           sudo mv /home/runner/work/ptfile/ptfile/ptclient /gt/sc-prog-repos/ptfile/ptclient
           sudo mv /home/runner/work/ptfile/ptfile/utils /gt/sc-prog-repos/ptfile/utils
 
-      - name: Get env info - 1
+      - name: Goal 4 -> Make sure /gt/sc-prog-repos has the code
         run: |
-          ifconfig
-          ls
-          pwd
+          ls -a /gt/sc-prog-repos/ptfile
 
-      - name: Start ptserver ptclient and mariadb
+      - name: Goal 5 -> Start docker containers, ptserver ptclient and mariadb
         run: |
           cd /gt/sc-prog-repos/ptfile/utils/run-on-docker
           docker-compose -f docker-compose-test.yml up -d
 
-      - name: Get env info - 2
-        run: |
-          ls -a /gt/sc-prog-repos/ptfile
-
-      - name: Goal - Make sure docker containers can ping each other. They have to be on the same network
+      - name: Goal 6 -> Make sure docker containers can ping each other. They have to be on the same network
         run: |
           docker ps -a
           docker network ls
           docker network inspect run-on-docker_default
 
-      - name: Goal A. init mariadb with 1. Database 2. Tables and 3. Mock data B. Get confitmation that mariaDB has the databases/tables/mock data
+      - name: Goal 7 -> A. init mariadb with 1. Database 2. Tables and 3. Mock data
         run: |
           docker exec -i run-on-docker_mariadb_1 /bin/sh> /gt/sc-prog-repos/ptfile/utils/db/create-db-tables-mock-data-in-db.sh 
           # Ref: https://stackoverflow.com/questions/31578446/running-a-script-inside-a-docker-container-using-shell-script
-          docker exec -i run-on-docker_mariadb_1 'mysql -u root -pqwerty show databases'
+
+      - name: Goal 8 -> A. Get confitmation that mariaDB has the databases/tables/mock data
+        run: |
+          docker exec -i run-on-docker_mariadb_1 /bin/sh> mysql -u root -pqwerty show databases
 
       # https://docs.github.com/en/actions/configuring-and-managing-workflows/persisting-workflow-data-using-artifacts
       - name: Upload result of job
