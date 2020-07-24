@@ -7,7 +7,9 @@
     -->
     <el-card class="box-card" :body-style="{ paddingLeft: '3px' }">
       <div slot="header" class="clearfix">
-        <span :tabindex="cfPosInArCards * 100 + 1">Reminders</span>
+        <span :tabindex="cfPosInArCards * 100 + 1" @keyup="mfKeyPress($event, 'header')"
+          >Reminders</span
+        >
         <el-button-group style="float: right;">
           <el-button style="padding: 3px;" type="success" plain tabindex="-11">A</el-button>
           <el-button style="padding: 3px;" type="primary" plain tabindex="-1">M</el-button>
@@ -95,23 +97,32 @@ export default {
   mounted() {},
   methods: {
     mfKeyPress(e, rowId, pRemDesc) {
-      if (e.code === 'KeyC') {
-        const payload = { searchTerm: 'change reminder', pPropsToGiveToCt: rowId }
-        this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', payload)
-      }
-      if (e.code === 'KeyD') {
-        this.$prompt(pRemDesc, 'Discontinue reminder', {
-          confirmButtonText: 'Discontinue',
-          cancelButtonText: 'Cancel',
-          inputPlaceholder: 'Enter discontinue note',
-        })
-          .then(({ value }) => {
-            const status = ormRem.sendDiscontinueDataToServer(rowId, arResultsFromORM.uuid, value)
-            console.log('discontinue status ======> ', status)
+      console.log(e, rowId)
+      if (rowId === 'header') {
+        if (e.code === 'KeyA') {
+          this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', {
+            searchTerm: 'add reminder',
           })
-          .catch(() => {
-            console.log('Discontinue cancelled')
+        }
+      } else {
+        if (e.code === 'KeyC') {
+          const payload = { searchTerm: 'change reminder', pPropsToGiveToCt: rowId }
+          this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', payload)
+        }
+        if (e.code === 'KeyD') {
+          this.$prompt(pRemDesc, 'Discontinue reminder', {
+            confirmButtonText: 'Discontinue',
+            cancelButtonText: 'Cancel',
+            inputPlaceholder: 'Enter discontinue note',
           })
+            .then(({ value }) => {
+              const status = ormRem.sendDiscontinueDataToServer(rowId, arResultsFromORM.uuid, value)
+              console.log('discontinue status ======> ', status)
+            })
+            .catch(() => {
+              console.log('Discontinue cancelled')
+            })
+        }
       }
     },
     mfOpenACtInCl() {
