@@ -18,10 +18,14 @@ connect-pause module is explained at https://github.com/flesler/connect-pause
 
 In production mode delay is disabled.
 How to run the code in production mode?
-export NODE_ENV=production
-npm run start-auth
+export NODE_ENV=prod
+npm run start-dev
 */
+
 var env = process.env.NODE_ENV || "dev"; // Ref: https://stackoverflow.com/questions/8449665/how-do-you-detect-the-environment-in-an-express-js-app
+
+console.log(config);
+console.log(env);
 
 if (env === "dev") {
   pause = require("connect-pause");
