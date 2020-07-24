@@ -136,9 +136,7 @@ class rowStatus extends Model {
           In the array that is returned from this Fn I am returning the array with the new data.       
           Hence in the following line I over write the old row
           */
-          console.log('The IDs are', uniqueUuidRows[j], arFromORM[i])
           if (arFromORM[i].id > uniqueUuidRows[j].id) {
-            console.log('The existing data is older hence replacing')
             uniqueUuidRows[j] = arFromORM[i]
           } else {
             // The existing data is newer hence not replacing

@@ -6,16 +6,16 @@
       <div slot="header" class="clearfix">
         <span>Reminders</span>
         <el-button-group style="float: right;">
-          <el-button style="padding: 3px;" type="success" plain tabindex="-1" @click="mfOpenACtInCl"
+          <el-button style="padding: 3px;" type="success" plain tabindex="-1" @click="mxOpenACtInCl"
             >A</el-button
           >
-          <el-button style="padding: 3px;" type="primary" plain tabindex="-1" @click="mfOpenMCtInCl"
+          <el-button style="padding: 3px;" type="primary" plain tabindex="-1" @click="mxOpenMCtInCl"
             >M</el-button
           >
-          <el-button style="padding: 3px;" type="warning" plain tabindex="-1" @click="mfOpenDDialog"
+          <el-button style="padding: 3px;" type="warning" plain tabindex="-1" @click="mxOpenDDialog"
             >D</el-button
           >
-          <el-button style="padding: 3px;" type="info" plain tabindex="-1" @click="mfOpenXCtInCl"
+          <el-button style="padding: 3px;" type="info" plain tabindex="-1" @click="mxOpenXCtInCl"
             >X</el-button
           >
         </el-button-group>
@@ -70,7 +70,7 @@ Setting the <el-table-column as tabindex=-1 does not help -->
                 style="padding: 3px;"
                 plain
                 tabindex="-1"
-                @click="mfOpenCCtInCl(props.row.$id)"
+                @click="mxOpenCCtInCl(props.row.id)"
                 >C</el-button
               >
               <el-button
@@ -79,7 +79,7 @@ Setting the <el-table-column as tabindex=-1 does not help -->
                 style="padding: 3px;"
                 plain
                 tabindex="-1"
-                @click="mfOpenDPrompt(props.row.$id)"
+                @click="mxOpenDPrompt(props.row.id)"
                 >D</el-button
               >
             </el-button-group>
@@ -100,10 +100,11 @@ Setting the <el-table-column as tabindex=-1 does not help -->
 
 <script>
 import dbInteraction from '../db-interaction'
+import clInvokeMixin from './cl-invoke-mixin.js'
 import ormRem from '@/cts/spi/rem/db/vuex-orm/rem.js'
-
 export default {
   components: { dbInteraction },
+  mixins: [clInvokeMixin],
   data() {
     return {
       tablePageNumber: 1,
@@ -160,86 +161,12 @@ export default {
       console.log('Page changed', pNewPageNumber)
       this.tablePageNumber = pNewPageNumber
     },
-    mfOpenACtInCl() {
-      this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', {
-        searchTerm: 'add reminder',
-      })
-    },
-    mfOpenMCtInCl() {
-      this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', {
-        searchTerm: 'multi change reminder',
-      })
-    },
-    mfOpenDDialog() {
-      let confirmMessage = 'Are you sure you want to discontinue all the selected reminders?'
-      if (this.daSelectedRemForDiscontinue.length === 0) {
-        confirmMessage = 'No reminder selected. Please select at least one reminder.'
-      }
-
-      this.$confirm(confirmMessage, 'Multi discontinue', {
-        confirmButtonText: 'Discontinue',
-        cancelButtonText: 'Cancel',
-        type: 'warning',
-      })
-        .then(() => {
-          if (this.daSelectedRemForDiscontinue.length > 0) {
-            this.daSelectedRemForDiscontinue.forEach((row) => {
-              ormRem.sendDiscontinueDataToServer(row.id, row.uuid, null)
-            })
-          }
-          console.log('daSelectedRemForDiscontinue=====>', this.daSelectedRemForDiscontinue)
-        })
-        .catch(() => {
-          console.log('multi discontinue cancelled')
-        })
-    },
-    mfOpenXCtInCl() {
-      this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', {
-        searchTerm: 'discontinued reminders',
-      })
-    },
-    mfOpenCCtInCl(pORMDataRowID) {
-      /*
-       We need rowID of vuexORM inside the change ct. Since change ct needs the exiting Desc of the reminber to change
-       Option 1: Send the whole data row
-       Option 2: Send just the ID in a prop.
-        +ves:
-          1. At some places I may need to call change where I have the reminder ID but
-          i do not have the remainder of the data row. Hence this makes the Change Ct possible
-          to use at other places
-          2. When I send a paramter it is like calling a function. Sending the whole data row
-          is like working on a gloal variable. So other Cts can also modify this global variable.
-      */
-      const payload = { searchTerm: 'change reminder', pPropsToGiveToCt: pORMDataRowID }
-      this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', payload)
-    },
-    mfOpenDPrompt(pORMDataRowID) {
-      const arResultsFromORM = ormRem.find(pORMDataRowID)
-
-      this.$prompt(arResultsFromORM.remDesc, 'Discontinue reminder', {
-        confirmButtonText: 'Discontinue',
-        cancelButtonText: 'Cancel',
-        inputPlaceholder: 'Enter discontinue note',
-      })
-        .then(({ value }) => {
-          const status = ormRem.sendDiscontinueDataToServer(
-            pORMDataRowID,
-            arResultsFromORM.uuid,
-            value
-          )
-          console.log('discontinue status ======> ', status)
-        })
-        .catch(() => {
-          console.log('Discontinue cancelled')
-        })
-    },
     mfHandleSelectionForDiscontinue(val) {
       this.daSelectedRemForDiscontinue = val
     },
     mfGetCssClassName(pRow, pIndex) {
       const strOfNumber = pRow.row.rowStateInThisSession.toString()
       const lastCharecter = strOfNumber.slice(-1)
-      console.log('pRow', pRow, 'pIndex', pIndex, 'Last charecter', lastCharecter)
       if (lastCharecter === '4' || lastCharecter === '6') {
         return 'unsaved-data'
       } else {

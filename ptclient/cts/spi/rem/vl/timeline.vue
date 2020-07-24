@@ -11,16 +11,16 @@
           >Reminders</span
         >
         <el-button-group style="float: right;">
-          <el-button style="padding: 3px;" type="success" plain tabindex="-1" @click="mfOpenACtInCl"
+          <el-button style="padding: 3px;" type="success" plain tabindex="-1" @click="mxOpenACtInCl"
             >A</el-button
           >
-          <el-button style="padding: 3px;" type="primary" plain tabindex="-1" @click="mfOpenMCtInCl"
+          <el-button style="padding: 3px;" type="primary" plain tabindex="-1" @click="mxOpenMCtInCl"
             >M</el-button
           >
-          <el-button style="padding: 3px;" type="warning" plain tabindex="-1" @click="mfOpenDDialog"
+          <el-button style="padding: 3px;" type="warning" plain tabindex="-1" @click="mxOpenDDialog"
             >D</el-button
           >
-          <el-button style="padding: 3px;" type="info" plain tabindex="-1" @click="mfOpenXCtInCl"
+          <el-button style="padding: 3px;" type="info" plain tabindex="-1" @click="mxOpenXCtInCl"
             >X</el-button
           >
         </el-button-group>
@@ -43,7 +43,13 @@
         >
           {{ row.remDesc }}
           <el-button-group style="float: right;">
-            <el-button type="primary" size="mini" style="padding: 3px;" plain tabindex="-1"
+            <el-button
+              type="primary"
+              size="mini"
+              style="padding: 3px;"
+              plain
+              tabindex="-1"
+              @click="mxOpenCCtInCl(row.id)"
               >C</el-button
             >
             <el-button
@@ -52,7 +58,7 @@
               style="padding: 3px;"
               plain
               tabindex="-1"
-              @click="mfOpenDPrompt(row.id)"
+              @click="mxOpenDPrompt(row.id)"
               >D</el-button
             >
           </el-button-group>
@@ -63,9 +69,11 @@
 </template>
 
 <script>
+import clInvokeMixin from './cl-invoke-mixin.js'
 import ormRem from '@/cts/spi/rem/db/vuex-orm/rem.js'
 
 export default {
+  mixins: [clInvokeMixin],
   data() {
     return {}
   },
@@ -114,84 +122,25 @@ export default {
       console.log(e, rowId)
       if (rowId === 'header') {
         if (e.code === 'KeyA') {
-          this.mfOpenACtInCl()
+          this.mxOpenACtInCl()
         }
         if (e.code === 'KeyM') {
-          this.mfOpenMCtInCl()
+          this.mxOpenMCtInCl()
         }
         if (e.code === 'KeyD') {
-          this.mfOpenDDialog()
+          this.mxOpenDDialog()
         }
         if (e.code === 'KeyX') {
-          this.mfOpenXCtInCl()
+          this.mxOpenXCtInCl()
         }
       } else {
         if (e.code === 'KeyC') {
-          const payload = { searchTerm: 'change reminder', pPropsToGiveToCt: rowId }
-          this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', payload)
+          this.mxOpenCCtInCl(rowId)
         }
         if (e.code === 'KeyD') {
-          this.mfOpenDPrompt(rowId)
+          this.mxOpenDPrompt(rowId)
         }
       }
-    },
-    mfOpenACtInCl() {
-      this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', {
-        searchTerm: 'add reminder',
-      })
-    },
-    mfOpenMCtInCl() {
-      this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', {
-        searchTerm: 'multi change reminder',
-      })
-    },
-    mfOpenDPrompt(pORMDataRowID) {
-      const arResultsFromORM = ormRem.find(pORMDataRowID)
-
-      this.$prompt(arResultsFromORM.remDesc, 'Discontinue reminder', {
-        confirmButtonText: 'Discontinue',
-        cancelButtonText: 'Cancel',
-        inputPlaceholder: 'Enter discontinue note',
-      })
-        .then(({ value }) => {
-          const status = ormRem.sendDiscontinueDataToServer(
-            pORMDataRowID,
-            arResultsFromORM.uuid,
-            value
-          )
-          console.log('discontinue status ======> ', status)
-        })
-        .catch(() => {
-          console.log('Discontinue cancelled')
-        })
-    },
-    mfOpenXCtInCl() {
-      this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', {
-        searchTerm: 'discontinued reminders',
-      })
-    },
-    mfOpenDDialog() {
-      let confirmMessage = 'Are you sure you want to discontinue all the selected reminders?'
-      if (this.daSelectedRemForDiscontinue.length === 0) {
-        confirmMessage = 'No reminder selected. Please select at least one reminder.'
-      }
-
-      this.$confirm(confirmMessage, 'Multi discontinue', {
-        confirmButtonText: 'Discontinue',
-        cancelButtonText: 'Cancel',
-        type: 'warning',
-      })
-        .then(() => {
-          if (this.daSelectedRemForDiscontinue.length > 0) {
-            this.daSelectedRemForDiscontinue.forEach((row) => {
-              ormRem.sendDiscontinueDataToServer(row.id, row.uuid, null)
-            })
-          }
-          console.log('daSelectedRemForDiscontinue=====>', this.daSelectedRemForDiscontinue)
-        })
-        .catch(() => {
-          console.log('multi discontinue cancelled')
-        })
     },
   },
 }
