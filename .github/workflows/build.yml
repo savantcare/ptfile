@@ -42,6 +42,8 @@ jobs:
           docker ps -a
           docker network ls
           docker network inspect run-on-docker_default
+          sysctl net.ipv4.conf.all.forwarding=1
+          sudo iptables -P FORWARD ACCEPT
 
       - name: Goal 7 -> A. Get confitmation that mariaDB is responding to queries
         run: |
