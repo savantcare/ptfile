@@ -37,6 +37,9 @@ jobs:
       - name: Get env info - 2
         run: |
           ls -a /gt/sc-prog-repos/ptfile
+
+      - name: Goal - Make sure docker containers can ping each other. They have to be on the same network
+        run: |
           docker ps -a
           docker network ls
           docker network inspect run-on-docker_default
@@ -45,7 +48,7 @@ jobs:
         run: |
           docker exec -i run-on-docker_mariadb_1 /bin/sh> /gt/sc-prog-repos/ptfile/utils/db/create-db-tables-mock-data-in-db.sh 
           # Ref: https://stackoverflow.com/questions/31578446/running-a-script-inside-a-docker-container-using-shell-script
-          docker exec -ti run-on-docker_mariadb_1 'mysql -u root -pqwerty show databases'
+          docker exec -i run-on-docker_mariadb_1 'mysql -u root -pqwerty show databases'
 
       # https://docs.github.com/en/actions/configuring-and-managing-workflows/persisting-workflow-data-using-artifacts
       - name: Upload result of job
