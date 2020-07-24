@@ -11,10 +11,18 @@
           >Reminders</span
         >
         <el-button-group style="float: right;">
-          <el-button style="padding: 3px;" type="success" plain tabindex="-11">A</el-button>
-          <el-button style="padding: 3px;" type="primary" plain tabindex="-1">M</el-button>
-          <el-button style="padding: 3px;" type="warning" plain tabindex="-1">D</el-button>
-          <el-button style="padding: 3px;" type="info" plain tabindex="-1">X</el-button>
+          <el-button style="padding: 3px;" type="success" plain tabindex="-1" @click="mfOpenACtInCl"
+            >A</el-button
+          >
+          <el-button style="padding: 3px;" type="primary" plain tabindex="-1" @click="mfOpenMCtInCl"
+            >M</el-button
+          >
+          <el-button style="padding: 3px;" type="warning" plain tabindex="-1" @click="mfOpenDDialog"
+            >D</el-button
+          >
+          <el-button style="padding: 3px;" type="info" plain tabindex="-1" @click="mfOpenXCtInCl"
+            >X</el-button
+          >
         </el-button-group>
       </div>
       <!-- explanation of following params:
@@ -38,7 +46,13 @@
             <el-button type="primary" size="mini" style="padding: 3px;" plain tabindex="-1"
               >C</el-button
             >
-            <el-button type="warning" size="mini" style="padding: 3px;" plain tabindex="-1"
+            <el-button
+              type="warning"
+              size="mini"
+              style="padding: 3px;"
+              plain
+              tabindex="-1"
+              @click="mfOpenDPrompt(row.id)"
               >D</el-button
             >
           </el-button-group>
@@ -100,9 +114,16 @@ export default {
       console.log(e, rowId)
       if (rowId === 'header') {
         if (e.code === 'KeyA') {
-          this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', {
-            searchTerm: 'add reminder',
-          })
+          this.mfOpenACtInCl()
+        }
+        if (e.code === 'KeyM') {
+          this.mfOpenMCtInCl()
+        }
+        if (e.code === 'KeyD') {
+          this.mfOpenDDialog()
+        }
+        if (e.code === 'KeyX') {
+          this.mfOpenXCtInCl()
         }
       } else {
         if (e.code === 'KeyC') {
@@ -110,18 +131,7 @@ export default {
           this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', payload)
         }
         if (e.code === 'KeyD') {
-          this.$prompt(pRemDesc, 'Discontinue reminder', {
-            confirmButtonText: 'Discontinue',
-            cancelButtonText: 'Cancel',
-            inputPlaceholder: 'Enter discontinue note',
-          })
-            .then(({ value }) => {
-              const status = ormRem.sendDiscontinueDataToServer(rowId, arResultsFromORM.uuid, value)
-              console.log('discontinue status ======> ', status)
-            })
-            .catch(() => {
-              console.log('Discontinue cancelled')
-            })
+          this.mfOpenDPrompt(rowId)
         }
       }
     },
@@ -135,10 +145,53 @@ export default {
         searchTerm: 'multi change reminder',
       })
     },
+    mfOpenDPrompt(pORMDataRowID) {
+      const arResultsFromORM = ormRem.find(pORMDataRowID)
+
+      this.$prompt(arResultsFromORM.remDesc, 'Discontinue reminder', {
+        confirmButtonText: 'Discontinue',
+        cancelButtonText: 'Cancel',
+        inputPlaceholder: 'Enter discontinue note',
+      })
+        .then(({ value }) => {
+          const status = ormRem.sendDiscontinueDataToServer(
+            pORMDataRowID,
+            arResultsFromORM.uuid,
+            value
+          )
+          console.log('discontinue status ======> ', status)
+        })
+        .catch(() => {
+          console.log('Discontinue cancelled')
+        })
+    },
     mfOpenXCtInCl() {
       this.$store.commit('mtfShowNewFirstTabInClFromSearchPhrase', {
         searchTerm: 'discontinued reminders',
       })
+    },
+    mfOpenDDialog() {
+      let confirmMessage = 'Are you sure you want to discontinue all the selected reminders?'
+      if (this.daSelectedRemForDiscontinue.length === 0) {
+        confirmMessage = 'No reminder selected. Please select at least one reminder.'
+      }
+
+      this.$confirm(confirmMessage, 'Multi discontinue', {
+        confirmButtonText: 'Discontinue',
+        cancelButtonText: 'Cancel',
+        type: 'warning',
+      })
+        .then(() => {
+          if (this.daSelectedRemForDiscontinue.length > 0) {
+            this.daSelectedRemForDiscontinue.forEach((row) => {
+              ormRem.sendDiscontinueDataToServer(row.id, row.uuid, null)
+            })
+          }
+          console.log('daSelectedRemForDiscontinue=====>', this.daSelectedRemForDiscontinue)
+        })
+        .catch(() => {
+          console.log('multi discontinue cancelled')
+        })
     },
   },
 }
