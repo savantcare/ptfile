@@ -14,3 +14,7 @@ docker login --username=savantcare
 docker build -t savanatcare/emrmysql . # this creates a image with the name emrmysql
 
 docker push savantcare/emrmysql:latest
+
+https://stackoverflow.com/a/35809320
+vk-tech@vk-mini-layer2-3 ~/g/s/p/u/c/db> docker tag 8bab8a4ea48d docker.io/savantcare/emrmysql
+vk-tech@vk-mini-layer2-3 ~/g/s/p/u/c/db> docker push docker.io/savantcare/emrmysql:latest
