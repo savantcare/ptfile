@@ -47,7 +47,9 @@ jobs:
           docker network ls
           docker network inspect run-on-docker_default
 
-      # For some time without password works and later it works with password
+      # For some time without password works and later it works with password.
+      # Reason: MariaDB first creates a temp DB and then shuts down and creates the proper DB
+      # Need to wait for this command to succed before going further. The time needed to wait changes at every run
       - name: Goal 7 -> A. Get confitmation that mariaDB is responding to queries
         run: |
           docker exec -i run-on-docker_mariadb_1 mysql -u root -e "show databases"

@@ -44,6 +44,8 @@
           <!--  Why not use keep-alive before <component v-bind:is="card.ctToShow"></component> 
                 Sorrounding component with keepAlive does not help. Since previous rendering of rex
                 is not hidden. When user types rex 2 times, rex is being displayed 2 times
+
+                This component <component /> acts as a placeholder for another component and accepts a special :is prop with the name of the component it should render.                
             -->
           <component :is="card.ctToShow"></component>
         </el-card>
