@@ -18,13 +18,13 @@ done
 ## Step 2: structure of tables
 for file in $(find /gt/sc-prog-repos/ptfile/ptclient/cts/ -type f -name "structure-gen-*.sql" -print)
 do
-    echo "== executing create DB $file";
+    echo "== executing create structure $file";
     mysql -u $DB_USER  < $file 
 done
 
 ## Mock data
 for file in $(find /gt/sc-prog-repos/ptfile/ptclient/cts/ -type f -name "mock-data*.sql" -print)
 do
-    echo "== executing create DB $file";
+    echo "== executing insert mock data $file";
     mysql -u $DB_USER  < $file 
 done
