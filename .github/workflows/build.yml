@@ -50,6 +50,7 @@ jobs:
       # For some time without password works and later it works with password.
       # Reason: MariaDB first creates a temp DB and then shuts down and creates the proper DB
       # Need to wait for this command to succed before going further. The time needed to wait changes at every run
+      # blank root password is set in docker-compose-test.yml file
       - name: Goal 7 -> A. Get confitmation that mariaDB is responding to queries
         run: |
           docker exec -i run-on-docker_mariadb_1 mysql -u root -e "show databases"
