@@ -62,7 +62,6 @@ jobs:
 
        # wget run-on-docker_ptserver_1:8000/ will not work as 
        # hostname run-on-docker_ptserver_1 is not known to host. 
-       # This hostname is only known inside docker network
        - name: Goal 10 -> Get confitmation that ptserver is running
         run: |
           wget localhost:8000/reminders/getAll 
