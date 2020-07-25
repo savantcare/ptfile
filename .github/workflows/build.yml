@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: Goal 1 -> Get env info
         run: |
-          ifconfig
+          # ifconfig # Commented this since local runner act does not have ifconfig in ubuntu full
           ls
           pwd
           docker-compose -v   # github runner in July 2020 had 1.26.2
@@ -25,10 +25,11 @@ jobs:
 
       - name: Goal 3 -> Move code to expected folder
         run: |
-          sudo mkdir -p /gt/sc-prog-repos/ptfile
-          sudo mv /home/runner/work/ptfile/ptfile/ptserver /gt/sc-prog-repos/ptfile/ptserver
-          sudo mv /home/runner/work/ptfile/ptfile/ptclient /gt/sc-prog-repos/ptfile/ptclient
-          sudo mv /home/runner/work/ptfile/ptfile/utils /gt/sc-prog-repos/ptfile/utils
+          ls
+          sudo mkdir -p /gt/sc-prog-repos/ptfile              
+          sudo mv ptserver /gt/sc-prog-repos/ptfile/ptserver     # In source part of move not giving complete path so it runs on act and github
+          sudo mv ptclient /gt/sc-prog-repos/ptfile/ptclient
+          sudo mv utils /gt/sc-prog-repos/ptfile/utils
 
       - name: Goal 4 -> Make sure /gt/sc-prog-repos has the code
         run: |
