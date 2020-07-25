@@ -79,17 +79,6 @@ jobs:
         run: |
           more index.html
 
-      # Comment this when running tests. Since docker logs command does not exit.
-      # - name: See docker logs
-      #  run: |
-      #    cd /gt/sc-prog-repos/ptfile/utils/run-on-docker
-      #    docker logs --follow run-on-docker_ptserver_1
-
-      # https://stackoverflow.com/questions/61078178/github-action-how-to-ensure-that-server-is-running-properly
-      # in docker-compose ptclient listens on port 80 Ref: https://unix.stackexchange.com/questions/5277/how-do-i-tell-a-script-to-wait-for-a-process-to-start-accepting-requests-on-a-po
-
-      # https://docs.github.com/en/actions/configuring-and-managing-workflows/persisting-workflow-data-using-artifacts
-
       - name: Goal 14 -> run-tests
         run: |
           docker exec run-on-docker_ptclient_1 /bin/sh -c "cd /gt/sc-prog-repos/ptfile/ptclient;apt-get update -y;apt-get install -y libnss3-dev gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget;npm install;npm run start-testing"
@@ -138,3 +127,13 @@ jobs:
 # https://github.community/t/custom-docker-action-mounted-volumes/17013
 #
 # Preferred: Option 2
+#
+# Q4) How to see dockler logs
+# Comment this when running tests. Since docker logs command does not exit.
+# - name: See docker logs
+#  run: |
+#    cd /gt/sc-prog-repos/ptfile/utils/run-on-docker
+#    docker logs --follow run-on-docker_ptserver_1
+# https://stackoverflow.com/questions/61078178/github-action-how-to-ensure-that-server-is-running-properly
+# in docker-compose ptclient listens on port 80 Ref: https://unix.stackexchange.com/questions/5277/how-do-i-tell-a-script-to-wait-for-a-process-to-start-accepting-requests-on-a-po
+# https://docs.github.com/en/actions/configuring-and-managing-workflows/persisting-workflow-data-using-artifacts
