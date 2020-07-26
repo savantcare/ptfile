@@ -1,0 +1,17 @@
+{
+  "name": "patient-file",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start-testing": "jest"
+  },
+  "dependencies": {
+    "jest-puppeteer": "^4.4.0"
+  },
+  "devDependencies": {
+    "jest": "^26.1.0",
+    "nuxt-jest-puppeteer": "^0.3.8",
+    "puppeteer": "^5.2.1",
+    "vue-jest": "^3.0.6"
+  }
+}
