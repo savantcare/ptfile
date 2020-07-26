@@ -74,7 +74,7 @@ jobs:
 
       - name: Goal 11 -> Make sure that ptserver is returning right results
         run: |
-          cat getAll.1
+          cat getAll
 
       - name: Goal 12 -> Get confirmation that ptclient is running. Wget default is retry 20 times.
         run: |
