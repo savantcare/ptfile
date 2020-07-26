@@ -100,15 +100,18 @@ jobs:
           docker exec -i puppet whoami
 
       # In ptserver and ptclient supervisor runs npm install.
-      # Why not run this npm install from supervisor or from build.yml?
+      # Why puppeteer is installed from dockerfile and not installed from npm install inside supervisor or build.yml?
       # If run from supervisor -> npm install is taking long time and node simple-puppet-test-run.js was starting before npm install finished
-      # Also the packages will not change often. So better to install the puppeteer packages inside Dockerfike
-      - name: Goal 17 -> Creating virtual display for puppeteer
+      # Also the packages will not change often. So better to install the puppeteer packages inside Dockerfile. This makes each CI/CD run faster.
+
+      # The env must have the display variable set.
+      - name: Goal 17 -> Creating virtual display for puppeteer Ref https://stackoverflow.com/a/56202410
         run: |
-          docker exec -i puppet Xvfb :10 -ac &    # This is a virtual display, needed so that screenshots can be taken. Ref: https://stackoverflow.com/a/56202410
+          docker exec -i puppet env
 
       - name: Goal 18 -> Running a very simple puppeteer program
         run: |
+          docker exec -i puppet Xvfb :10 -ac &  
           docker exec -i puppet node simple-puppet-test-run.js
 
       # This cannot be run from supervisor since then the pipleline will finish. Hence tests need to be run in the pipeline.
