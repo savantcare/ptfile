@@ -46,6 +46,7 @@ services:
     ipc: host
     restart: always
     working_dir: /gt/sc-prog-repos/ptfile/puppet
+    command: "/usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf"
     volumes:
       - /gt/sc-prog-repos/ptfile/.github/docker/puppet/etc-supervisor-conf.d-services.conf:/etc/supervisor/conf.d/services.conf
       - /gt/sc-prog-repos/ptfile/:/gt/sc-prog-repos/ptfile/
