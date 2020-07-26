@@ -29,6 +29,7 @@ jobs:
           sudo mkdir -p /gt/sc-prog-repos/ptfile              
           sudo mv ptserver /gt/sc-prog-repos/ptfile/ptserver     # In source part of move not giving complete path so it runs on act and github
           sudo mv ptclient /gt/sc-prog-repos/ptfile/ptclient
+          sudo mv puppet /gt/sc-prog-repos/ptfile/puppet
           sudo mv utils /gt/sc-prog-repos/ptfile/utils
           sudo mv .github /gt/sc-prog-repos/ptfile/.github
 
