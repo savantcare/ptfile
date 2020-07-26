@@ -1,9 +1,5 @@
 ## Custom Dockerfile
-FROM consol/ubuntu-xfce-vnc
-ENV REFRESHED_AT 2018-03-18
-
-# Switch to root user to install additional software
-USER 0
+FROM dorowu/ubuntu-desktop-lxde-vnc
 
 # node install instructions are from https://github.com/nodesource/distributions/blob/master/README.md#debinstall
 RUN apt update
@@ -14,5 +10,4 @@ RUN apt-get install -y nodejs
 
 RUN apt install -y supervisor
 
-## switch back to default user
-USER 0
+RUN npm i yarn npx jest puppeteer-core puppeteer jest-puppeteer nuxt-jest-puppeteer vue-jest

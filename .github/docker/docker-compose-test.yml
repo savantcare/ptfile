@@ -45,11 +45,15 @@ services:
     image: savantcare/emrpuppet
     environment:
       - VNC_RESOLUTION=1440x900
+      - VNC_PASSWORD=jai
+      - NODE_PATH=/root/node_modules
     user: "0"
     ipc: host
     restart: always
     working_dir: /gt/sc-prog-repos/ptfile/puppet
     command: "/usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf"
+    ports:
+      - 5901:5900
     volumes:
       - /gt/sc-prog-repos/ptfile/.github/docker/puppet/etc-supervisor-conf.d-services.conf:/etc/supervisor/conf.d/services.conf
       - /gt/sc-prog-repos/ptfile/:/gt/sc-prog-repos/ptfile/
