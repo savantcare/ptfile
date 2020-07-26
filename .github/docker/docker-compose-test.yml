@@ -40,15 +40,16 @@ services:
     ports:
       - 4000:3306
 
-  mariadb:
+  puppet:
     container_name: puppet
     image: savantcare/emrpuppet
     ipc: host
     restart: always
+    working_dir: /gt/sc-prog-repos/ptfile/puppet
     volumes:
       - /gt/sc-prog-repos/ptfile/.github/docker/puppet/etc-supervisor-conf.d-services.conf:/etc/supervisor/conf.d/services.conf
       - /gt/sc-prog-repos/ptfile/:/gt/sc-prog-repos/ptfile/
-    
+
   phpmyadmin:
     container_name: phpmyadmin
     image: phpmyadmin/phpmyadmin:latest

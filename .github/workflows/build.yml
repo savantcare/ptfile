@@ -94,7 +94,7 @@ jobs:
 
       - name: Goal 16 -> run-tests
         run: |
-          docker exec -i ptclient npm run start-testing
+          docker exec -i puppet npm run start-testing
 
       - name: Goal 17 -> Upload result of tests
         uses: actions/upload-artifact@v2
