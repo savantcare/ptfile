@@ -47,6 +47,7 @@ services:
       - VNC_RESOLUTION=1440x900
       - VNC_PASSWORD=jai
       - NODE_PATH=/root/node_modules
+      - DISPLAY=:10
     user: "0"
     ipc: host
     restart: always

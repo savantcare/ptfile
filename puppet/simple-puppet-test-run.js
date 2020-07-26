@@ -6,7 +6,7 @@ const puppeteer = require("puppeteer");
 async function helloWorld() {
   const browser = await puppeteer.launch({
     args: ["--no-sandbox"],
-    headless: true,
+    headless: false,
     timeout: 10000,
   });
 

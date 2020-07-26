@@ -105,7 +105,8 @@ jobs:
       # Also the packages will not change often. So better to install the puppeteer packages inside Dockerfike
       - name: Goal 17 -> Make sure puppeteer got installed correctly
         run: |
-          docker exec -i puppet node simple-puppet-test-run.js
+          docker exec -i puppet Xvfb :10 -ac &    # Ref: https://stackoverflow.com/a/56202410
+          docker exec -i puppet node simple-puppet-test-run.js    # needed so that screenshots can be taken. This is a virtual display
 
       # This cannot be run from supervisor since then the pipleline will finish. Hence tests need to be run in the pipeline.
       # Programs run inside docker with supervisor are not in the pipeline. Even if program started from supervisor keeps running it will not stop the pipeline
