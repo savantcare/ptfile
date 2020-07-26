@@ -1,6 +1,6 @@
 {
-  "HOST": "run-on-docker_mariadb_1",
-  "USER": "root",
-  "PASSWORD": "",
+  "HOST": "mariadb",
+  "USER": "stanford2008",
+  "PASSWORD": "jaidurgama",
   "DB_PORT": "3306"
 }

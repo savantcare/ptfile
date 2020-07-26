@@ -21,12 +21,13 @@
               Q) Why not make this dynamic and have this come from vuex-orm or Maria DB?
                 This will change on average once in 1 year. Hence there is no advantage of doing this.
           -->
-        <ctRexVl> </ctRexVl><br />
-        <ctRemVL> </ctRemVL><br />
+        <!--        <ctRexVl> </ctRexVl><br />
         <ctBMVl> </ctBMVl><br />
         <ctDXVl> </ctDXVl><br />
         <ctGVl> </ctGVl><br />
         <ctScrVl> </ctScrVl><br />
+-->
+        <ctRemVL> </ctRemVL><br />
       </SplitArea>
       <SplitArea id="csvl" :size="25">
         <!-- Why not use <keep-alive> before el-card ?

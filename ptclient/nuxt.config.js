@@ -67,7 +67,7 @@ export default {
       process.env.NODE_ENV === 'dev'
         ? 'http://localhost:8000'
         : process.env.NODE_ENV === 'test'
-        ? 'http://prod-setup_ptserver_1:8000'
+        ? 'http://ptserver:8000'
         : 'http://116.203.134.163:8000',
   },
   /*

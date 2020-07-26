@@ -30,6 +30,7 @@ jobs:
           sudo mv ptserver /gt/sc-prog-repos/ptfile/ptserver     # In source part of move not giving complete path so it runs on act and github
           sudo mv ptclient /gt/sc-prog-repos/ptfile/ptclient
           sudo mv utils /gt/sc-prog-repos/ptfile/utils
+          sudo mv .github /gt/sc-prog-repos/ptfile/.github
 
       - name: Goal 4 -> Make sure /gt/sc-prog-repos has the code
         run: |
@@ -37,7 +38,7 @@ jobs:
 
       - name: Goal 5 -> Start docker containers, ptserver ptclient and mariadb
         run: |
-          cd /gt/sc-prog-repos/ptfile/utils/run-on-docker
+          cd /gt/sc-prog-repos/ptfile/.github/docker
           docker-compose -f docker-compose-test.yml up -d
           sleep 30
 
@@ -53,16 +54,16 @@ jobs:
       # blank root password is set in docker-compose-test.yml file
       - name: Goal 7 -> A. Get confitmation that mariaDB is responding to queries
         run: |
-          docker exec -i run-on-docker_mariadb_1 mysql -u root -e "show databases"
+          docker exec -i mariadb mysql -u root -e "show databases"
 
       - name: Goal 8 -> A. init mariadb with 1. Database 2. Tables and 3. Mock data
         run: |
-          docker exec -i run-on-docker_mariadb_1 /gt/sc-prog-repos/ptfile/utils/db/create-db-tables-mock-data-in-db.sh 
+          docker exec -i mariadb /gt/sc-prog-repos/ptfile/utils/db/create-db-tables-mock-data-in-db.sh 
           # Ref: https://stackoverflow.com/questions/31578446/running-a-script-inside-a-docker-container-using-shell-script
 
       - name: Goal 9 -> Get confitmation that mariaDB has the databases/tables/mock data
         run: |
-          docker exec -i run-on-docker_mariadb_1 mysql -u root -e "show databases"
+          docker exec -i mariadb mysql -u root -e "show databases"
 
       # wget run-on-docker_ptserver_1:8000/ will not work as
       # hostname run-on-docker_ptserver_1 is not known to host.
@@ -73,7 +74,7 @@ jobs:
 
       - name: Goal 11 -> Make sure that ptserver is returning right results
         run: |
-          more getAll.1
+          cat getAll.1
 
       - name: Goal 12 -> Get confirmation that ptclient is running. Wget default is retry 20 times.
         run: |
