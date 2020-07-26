@@ -103,18 +103,21 @@ jobs:
       # Why not run this npm install from supervisor or from build.yml?
       # If run from supervisor -> npm install is taking long time and node simple-puppet-test-run.js was starting before npm install finished
       # Also the packages will not change often. So better to install the puppeteer packages inside Dockerfike
-      - name: Goal 17 -> Make sure puppeteer got installed correctly
+      - name: Goal 17 -> Creating virtual display for puppeteer
         run: |
           docker exec -i puppet Xvfb :10 -ac &    # This is a virtual display, needed so that screenshots can be taken. Ref: https://stackoverflow.com/a/56202410
+
+      - name: Goal 18 -> Running a very simple puppeteer program
+        run: |
           docker exec -i puppet node simple-puppet-test-run.js
 
       # This cannot be run from supervisor since then the pipleline will finish. Hence tests need to be run in the pipeline.
       # Programs run inside docker with supervisor are not in the pipeline. Even if program started from supervisor keeps running it will not stop the pipeline
-      - name: Goal 18 -> run-tests
+      - name: Goal 19 -> run-tests
         run: |
           docker exec -i puppet npm run start-test
 
-      - name: Goal 19 -> Upload result of tests
+      - name: Goal 20 -> Upload result of tests
         uses: actions/upload-artifact@v2
         with:
           name: result
