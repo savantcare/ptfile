@@ -109,15 +109,15 @@ jobs:
       # Try1: docker exec -i puppet sudo npm install  -> Does not work. Says sudo is not a executable.
       # Try2: sudo docker exec -i puppet npm install -> does not work
       # Try3: Line 35 giving chmod -R 777
-      - name: Goal 17 -> Install packages required by puppeteer 
+      - name: Goal 17 -> Install packages required by puppeteer
         run: |
           docker exec -i puppet npm install -g
 
       - name: Goal 18 -> Make sure puppeteer got installed correctly
-       run: |
+        run: |
           docker exec -i puppet node simple-puppet-test-run.js
 
-     # This cannot be run from supervisor since then the pipleline will finish. Hence tests need to be run inside the pipeline.
+      # This cannot be run from supervisor since then the pipleline will finish. Hence tests need to be run inside the pipeline.
       - name: Goal 19 -> run-tests
         run: |
           docker exec -i puppet npm run start-test
