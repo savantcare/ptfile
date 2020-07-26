@@ -46,7 +46,7 @@ jobs:
         run: |
           docker ps -a
           docker network ls
-          docker network inspect run-on-docker_default
+          docker network inspect docker_default
 
       # For some time without password works and later it works with password.
       # Reason: MariaDB first creates a temp DB and then shuts down and creates the proper DB
@@ -82,13 +82,21 @@ jobs:
 
       - name: Goal 13 -> Make sure that ptclient is returning right results
         run: |
-          more index.html
+          cat index.html
 
-      - name: Goal 14 -> run-tests
+      - name: Goal 14 -> Make sure that a patient file opens
         run: |
-          docker exec run-on-docker_ptclient_1 /bin/sh -c "cd /gt/sc-prog-repos/ptfile/ptclient;apt-get update -y;apt-get install -y libnss3-dev gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget;npm install;npm run start-testing"
+          wget localhost/pf/abcd
 
-      - name: Goal 15 -> Upload result of tests
+      - name: Goal 15 -> Make sure that patient file gave correct results
+        run: |
+          cat abcd
+
+      - name: Goal 16 -> run-tests
+        run: |
+          docker exec ptclient /bin/sh -c "cd /gt/sc-prog-repos/ptfile/ptclient;apt-get update -y;apt-get install -y libnss3-dev gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget;npm install;npm run start-testing"
+
+      - name: Goal 17 -> Upload result of tests
         uses: actions/upload-artifact@v2
         with:
           name: result
