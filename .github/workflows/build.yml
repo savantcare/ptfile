@@ -103,7 +103,7 @@ jobs:
       # In this case npm install is taking long time and node simple-puppet-test-run.js was starting before npm install finished
       - name: Goal 17 -> Confirm that puppeteer is running
         run: |
-          docker exec -i puppet npm install 
+          docker exec -i puppet sudo npm install 
           docker exec -i puppet node simple-puppet-test-run.js
 
       # This cannot be run from supervisor since then the pipleline will finish. Hence tests need to be run inside the pipeline.
