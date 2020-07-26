@@ -14,6 +14,6 @@ RUN apt-get install -y nodejs
 
 RUN apt-get install -y supervisor
 
-COPY etc-supervisor-conf.d-services.conf /etc/supervisor/conf.d/services.conf
+# COPY etc-supervisor-conf.d-services.conf /etc/supervisor/conf.d/services.conf
 
 CMD ["/usr/bin/supervisord", "-n","-c","/etc/supervisor/supervisord.conf"]

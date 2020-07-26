@@ -15,6 +15,6 @@ RUN apt-get install -y nodejs
 RUN apt-get install -y supervisor
 
 
-COPY etc-supervisor-conf.d-services.conf /etc/supervisor/conf.d/services.conf
+# COPY etc-supervisor-conf.d-services.conf /etc/supervisor/conf.d/services.conf coming from docker-compose easier to change since new image does not need to be pushed
 
 CMD ["/usr/bin/supervisord", "-n","-c","/etc/supervisor/supervisord.conf"]

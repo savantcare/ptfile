@@ -11,6 +11,7 @@ services:
     depends_on:
       - ptserver
     volumes:
+      - /gt/sc-prog-repos/ptfile/.github/ptclient/etc-supervisor-conf.d-services.conf:/etc/supervisor/conf.d/services.conf
       - /gt/sc-prog-repos/ptfile/ptclient:/gt/sc-prog-repos/ptfile/ptclient
 
   ptserver:
@@ -25,7 +26,8 @@ services:
     depends_on:
       - mariadb
     volumes:
-      - /gt/sc-prog-repos/ptfile/:/gt/sc-prog-repos/ptfile/ #
+      - /gt/sc-prog-repos/ptfile/.github/ptserver/etc-supervisor-conf.d-services.conf:/etc/supervisor/conf.d/services.conf
+      - /gt/sc-prog-repos/ptfile/:/gt/sc-prog-repos/ptfile/
 
   mariadb:
     container_name: mariadb
@@ -33,6 +35,7 @@ services:
     ipc: host
     restart: always
     volumes:
+      - /gt/sc-prog-repos/ptfile/.github/db/etc-supervisor-conf.d-services.conf:/etc/supervisor/conf.d/services.conf
       - /gt/sc-prog-repos/ptfile/:/gt/sc-prog-repos/ptfile/
     ports:
       - 4000:3306
