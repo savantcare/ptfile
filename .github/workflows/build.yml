@@ -101,17 +101,17 @@ jobs:
       # In ptserver and ptclient supervisor runs npm install.
       # Why not run this npm install from supervisor?
       # In this case npm install is taking long time and node simple-puppet-test-run.js was starting before npm install finished
-      - name: Goal 16 -> Confirm that puppeteer is running
+      - name: Goal 17 -> Confirm that puppeteer is running
         run: |
           docker exec -i puppet npm install 
           docker exec -i puppet node simple-puppet-test-run.js
 
       # This cannot be run from supervisor since then the pipleline will finish. Hence tests need to be run inside the pipeline.
-      - name: Goal 17 -> run-tests
+      - name: Goal 18 -> run-tests
         run: |
           docker exec -i puppet npm run start-test
 
-      - name: Goal 18 -> Upload result of tests
+      - name: Goal 19 -> Upload result of tests
         uses: actions/upload-artifact@v2
         with:
           name: result
