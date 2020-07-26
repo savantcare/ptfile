@@ -105,7 +105,7 @@ jobs:
       # Also the packages will not change often. So better to install the puppeteer packages inside Dockerfile. This makes each CI/CD run faster.
 
       # The env must have the display variable set.
-      - name: Goal 17 -> Creating virtual display for puppeteer Ref https://stackoverflow.com/a/56202410
+      - name: Goal 17 -> Checking env for virtual display for puppeteer Ref https://stackoverflow.com/a/56202410
         run: |
           docker exec -i puppet env
 
