@@ -100,9 +100,9 @@ jobs:
           docker exec -i puppet whoami
 
       # In ptserver and ptclient supervisor runs npm install.
-      # Why not run this npm install from supervisor?
-      # In this case npm install is taking long time and node simple-puppet-test-run.js was starting before npm install finished
-
+      # Why not run this npm install from supervisor or from build.yml?
+      # If run from supervisor -> npm install is taking long time and node simple-puppet-test-run.js was starting before npm install finished
+      # Also the packages will not change often. So better to install the puppeteer packages inside Dockerfike
       - name: Goal 17 -> Make sure puppeteer got installed correctly
         run: |
           docker exec -i puppet node simple-puppet-test-run.js
