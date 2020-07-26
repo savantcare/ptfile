@@ -102,14 +102,16 @@ jobs:
       # In ptserver and ptclient supervisor runs npm install.
       # Why not run this npm install from supervisor?
       # In this case npm install is taking long time and node simple-puppet-test-run.js was starting before npm install finished
-      #
-      # docker exec -i puppet sudo npm install  -> Does not work. Says sudo is not a executable.
-      # sudo docker exec -i puppet npm install -> does not work
+
+      # docker exec -i puppet npm install
       # ERROR: Failed to download Chromium r686378! Set "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD" env variable to skip download.
       # Error: EACCES: permission denied, mkdir '/gt/sc-prog-repos/ptfile/puppet/node_modules/nuxt-jest-puppeteer/node_modules/puppeteer/.local-chromium'
+      # Try1: docker exec -i puppet sudo npm install  -> Does not work. Says sudo is not a executable.
+      # Try2: sudo docker exec -i puppet npm install -> does not work
+      # Try3: Line 35 giving chmod -R 777
       - name: Goal 17 -> Confirm that puppeteer is running
         run: |
-          docker exec -i puppet npm install 
+          docker exec -i puppet npm install -g
           docker exec -i puppet node simple-puppet-test-run.js
 
       # This cannot be run from supervisor since then the pipleline will finish. Hence tests need to be run inside the pipeline.
