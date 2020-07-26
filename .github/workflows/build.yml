@@ -93,7 +93,9 @@ jobs:
         run: |
           cat abcd
 
-      # in ptserver and ptclient supervisor runs npm install. In this case npm install is taking long time and node simple-puppet-test-run.js was starting before npm install finished
+      # In ptserver and ptclient supervisor runs npm install.
+      # Why not run this npm install from supervisor?
+      # In this case npm install is taking long time and node simple-puppet-test-run.js was starting before npm install finished
       - name: Goal 16 -> Confirm that puppeteer is running
         run: |
           docker exec -i puppet npm install 
