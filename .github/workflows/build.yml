@@ -92,11 +92,15 @@ jobs:
         run: |
           cat abcd
 
-      - name: Goal 16 -> run-tests
+      - name: Goal 16 -> Confirm that puppeteer is running
+        run: |
+          docker exec -i puppet node simple-puppet-test-run.js
+
+      - name: Goal 17 -> run-tests
         run: |
           docker exec -i puppet npm run start-test
 
-      - name: Goal 17 -> Upload result of tests
+      - name: Goal 18 -> Upload result of tests
         uses: actions/upload-artifact@v2
         with:
           name: result
