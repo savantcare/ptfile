@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start-testing": "jest"
+    "start-test": "jest"
   },
   "dependencies": {
-    "jest-puppeteer": "^4.4.0"
+    "jest-puppeteer": "^4.4.0",
+    "npx": "^10.2.2",
+    "yarn": "^1.22.4"
   },
   "devDependencies": {
     "jest": "^26.1.0",
