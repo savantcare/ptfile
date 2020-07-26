@@ -93,6 +93,11 @@ jobs:
         run: |
           cat abcd
 
+      # this used a public docker that by default logs into userid 1000
+      - name: Goal 16 -> get the logged in user in puppet
+        run: |
+          docker exec -i puppet whoami
+
       # In ptserver and ptclient supervisor runs npm install.
       # Why not run this npm install from supervisor?
       # In this case npm install is taking long time and node simple-puppet-test-run.js was starting before npm install finished
