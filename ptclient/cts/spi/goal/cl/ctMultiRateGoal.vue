@@ -1,8 +1,8 @@
 <template>
   <el-row :gutter="12">
     <el-carousel :interval="5000" arrow="always" :autoplay="false">
-      <el-carousel-item v-for="(goalList, index) in carouselList" :key="`carouse-${index}`">
-        <el-col v-for="(goal, index) in goalList" :key="`goal-${index}`" :span="8">
+      <el-carousel-item v-for="(goalList, pIndex) in carouselList" :key="`carouse-${pIndex}`">
+        <el-col v-for="(goal, cIndex) in goalList" :key="`goal-${cIndex}`" :span="8">
           <el-card class="box-card" shadow="hover">
             <el-form ref="form" label-position="top">
               <el-form-item style="font-weight: bold;" label="Description:">

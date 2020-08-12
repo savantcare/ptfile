@@ -1,8 +1,8 @@
 <template>
   <el-row :gutter="12">
     <el-carousel :interval="5000" arrow="always" :autoplay="false">
-      <el-carousel-item v-for="(dxList, index) in sliderSet" :key="`dxCarousel-${index}`">
-        <el-col v-for="(dx, index) in dxList" :key="index" :span="8">
+      <el-carousel-item v-for="(dxlist, index) in sliderSet" :key="`dxCarousel-${index}`">
+        <el-col v-for="(dx, cindex) in dxlist" :key="cindex" :span="8">
           <el-card class="box-card" shadow="hover" style="font-family: Helvetica;">
             <div><b>Name:</b> {{ dx.dxName }}</div>
             <div><b>Diagnosed On:</b> {{ dx.dxOnDate }}</div>
@@ -23,7 +23,7 @@
                 >
               </el-form-item>
             </el-form>
-            <DxaHistoryItem :dx="dx"></DxaHistoryItem>
+            <dxa-history-item :dx="dx" />
           </el-card>
         </el-col>
       </el-carousel-item>
@@ -31,19 +31,14 @@
   </el-row>
 </template>
 <script>
-import DxaHistoryItem from './ctDxaHistory'
+import DxaHistoryItem from './ctDxaHistory.vue'
 import ormDx from '@/models/Dx'
 export default {
   components: {
     DxaHistoryItem,
   },
-  data() {
-    return {}
-  },
   computed: {
-    dxList() {
-      return ormDx.query().get()
-    },
+    dxList: () => ormDx.query().get(),
     sliderSet() {
       const result = []
       let temp = []
