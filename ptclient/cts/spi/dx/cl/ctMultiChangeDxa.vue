@@ -1,8 +1,8 @@
 <template>
   <el-row :gutter="12">
     <el-carousel :interval="5000" arrow="always" :autoplay="false">
-      <el-carousel-item v-for="(dxlist, index) in sliderSet" :key="`dxCarousel-${index}`">
-        <el-col v-for="(dx, cindex) in dxlist" :key="cindex" :span="8">
+      <el-carousel-item v-for="(dxlist, pIndex) in sliderSet" :key="`dxCarousel-${pIndex}`">
+        <el-col v-for="(dx, cIndex) in dxlist" :key="cIndex" :span="8">
           <el-card class="box-card" shadow="hover" style="font-family: Helvetica;">
             <div><b>Name:</b> {{ dx.dxName }}</div>
             <div><b>Diagnosed On:</b> {{ dx.dxOnDate }}</div>
