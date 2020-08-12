@@ -23,8 +23,14 @@
 
 <script>
 import { GOAL_API_URL } from '@/static/others.js'
+import ormGoal from '@/models/Goal'
 export default {
-  props: ['goal'],
+  props: {
+    goal: {
+      type: ormGoal,
+      required: true,
+    },
+  },
   data() {
     return {
       histories: [],

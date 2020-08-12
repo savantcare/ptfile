@@ -24,7 +24,12 @@
 <script>
 import ormDx from '@/models/Dx'
 export default {
-  props: ['dx'],
+  props: {
+    dx: {
+      type: ormDx,
+      default: undefined,
+    },
+  },
   data() {
     return {
       histories: [],
