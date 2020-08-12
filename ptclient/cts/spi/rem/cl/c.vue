@@ -13,7 +13,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" size="mini" plain @click="sendDataToServer"
-          >Submit firstpapram is {{ this.firstParam }}</el-button
+          >Submit firstparam is {{ firstParam }}</el-button
         >
       </el-form-item>
     </el-form>
@@ -45,11 +45,19 @@
 import { REMINDER_API_URL } from '../const.js'
 import ormRem from '@/cts/spi/rem/db/vuex-orm/rem.js'
 export default {
-  /* Why is this called firstParam
-        This Ct is called in a for loop. In the same for loop other Ct are also called.
-        So the param name has to be generic and cannot be unique to each Ct
-    */
-  props: ['firstParam'], // this is the unique row id created by vuex-orm
+  props: {
+    /**
+     * This is the unique row id created by vuex-orm.
+     *
+     * Why is this called firstParam?
+     * This Ct is called in a for loop. In the same for loop other Ct are also called.
+     * So the param name has to be generic and cannot be unique to each Ct.
+     */
+    firstParam: {
+      type: Number,
+      required: true,
+    },
+  },
   data() {
     return {
       uuid: '',
@@ -215,24 +223,24 @@ export default {
           })
           console.log('Failed to update')
         } else {
-          /* Goal: Update old version of the reminder's ROW_END to current timestamp if change is successful 
+          /* Goal: Update old version of the reminder's ROW_END to current timestamp if change is successful
             Edge case: Say id 2 is changed that created id 3. User then closes the change layer. The table now displays id 3. Now when user clicks change for id 3 firstParam is 3.
             ormRowIDForPreviousInvocation is = firstParam. So ormRowIDForPreviousInvocation is also 3. But 3 is the new changed row. And we want to set ROW_END for id 2 and not id 3
             How to update the ROW_END for id = 2?
               option 1: update that row that has state = "I am from DB" and UUID = UUID of current row
               option 2: This requires adding another state ->  "I am being changed" -> and then -> update that row that has state = "I am being changed" and UUID = UUID of current row
                         Option 2 is rejected. Since ID2 will now require update in following 3 cases:
-                          1. When ID 3 is created it will require changing state of id 2. 
-                          2. Also when id3 is deleted without saving to DB. 
-                          3. Or ID 3 is saved to DB. 
+                          1. When ID 3 is created it will require changing state of id 2.
+                          2. Also when id3 is deleted without saving to DB.
+                          3. Or ID 3 is saved to DB.
 
           */
 
           /*
             Q): Why following where clause needed?
-            A): 
-                Whenever we change a record and hit save button, we get two records in ormRem with the same uuid and old one needs to be marked as histry by updating ROW_END to current timestamp. 
-                In real time 3 cases may happen. 
+            A):
+                Whenever we change a record and hit save button, we get two records in ormRem with the same uuid and old one needs to be marked as histry by updating ROW_END to current timestamp.
+                In real time 3 cases may happen.
                   1. User changes an existing record. i.e. rowState = 1
                   2. User already changed a record and then again changes that record i.e. rowState = 34571
                   3. User adds a record and then changes that newly added record again i.e. rowState = 24571
@@ -246,9 +254,9 @@ export default {
                   "exp A" -> search record from ormRem whose uuid = this.uuid
                   "exp B1" -> "rowStateInThisSession === 1",
                       ormRem record that came from database (Case: User changes an existing record)
-                  "exp B2" -> "rowStateInThisSession === 34571", 
-                      ormRem record that once changed successfully ie: API Success and than going to be change again (Case: User already changed a record and then again changes that record) 
-                  "exp B3" -> "rowStateInThisSession === 24571", 
+                  "exp B2" -> "rowStateInThisSession === 34571",
+                      ormRem record that once changed successfully ie: API Success and than going to be change again (Case: User already changed a record and then again changes that record)
+                  "exp B3" -> "rowStateInThisSession === 24571",
                       ormRem record that once added successfully ie: API Success and than going to be change (Case: User adds a record and then changes that newly added record again)
          */
           await ormRem.update({
