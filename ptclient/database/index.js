@@ -10,7 +10,7 @@ import rowStatus from '@/cts/core/crud/rowstatus.js'
 import Rem from '@/cts/spi/rem/db/vuex-orm/rem.js'
 import Dx from '@/models/Dx'
 import Goal from '@/models/Goal'
-import Scr from '@/models/Screening'
+import Scr from '@/cts/spi/scr/db/vuex-orm/scr.js'
 import Dxa from '@/models/Dxa'
 
 const database = new Database()
